@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lunii Qt-Manager</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QComboBox" name="combo_device">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>Select your Lunii</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>D:\</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>F:\</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="le_filter">
+        <property name="placeholderText">
+         <string>Type to filter</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTreeWidget" name="tree_stories">
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="defaultDropAction">
+       <enum>Qt::MoveAction</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="rootIsDecorated">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Story Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">UUID</string>
+       </property>
+      </column>
+      <item>
+       <property name="text">
+        <string>Suzanne et Gaston</string>
+       </property>
+       <property name="text">
+        <string>C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
+       </property>
+       <property name="font">
+        <font>
+         <family>Consolas</family>
+        </font>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Panique aux 6 Royaumes</string>
+       </property>
+       <property name="text">
+        <string>03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
+       </property>
+       <property name="font">
+        <font>
+         <family>Consolas</family>
+        </font>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Au Pays des Loups</string>
+       </property>
+       <property name="text">
+        <string>22137B29-8646-4335-8069-4A4C9A2D7E89</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sur les bancs de l'école</string>
+       </property>
+       <property name="text">
+        <string>29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="lbl_picture">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>95</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Pic</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="te_story_details">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Story description</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>combo_device</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>tree_stories</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tree_stories</sender>
+   <signal>itemChanged(QTreeWidgetItem*,int)</signal>
+   <receiver>te_story_details</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
