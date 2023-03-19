@@ -1,5 +1,7 @@
 from pathlib import WindowsPath
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem
+from uuid import UUID
+
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog
 from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
 from pkg.api.device import feed_stories, find_devices
@@ -17,6 +19,7 @@ TODO :
  * drag n drop to reorder list
  * F5 to refresh devices, no selection
 """
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
@@ -59,13 +62,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
         QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
 
-
     # WIDGETS UPDATES
     def cb_dev_refresh(self):
         dev_list = find_devices()
         self.combo_device.clear()
 
-        dev : WindowsPath
+        dev: WindowsPath
         for dev in dev_list:
             dev_name = str(dev)
             print(dev_name)
@@ -109,15 +111,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = QTreeWidgetItem()
             item.setText(0, story_name(story))
             item.setText(1, str(story).upper())
-            item.setFont(1, console_font);
+            item.setFont(1, console_font)
             self.tree_stories.addTopLevelItem(item)
 
     def sb_update_summary(self):
         # displayed items
         count_items = self.tree_stories.topLevelItemCount()
 
-        self.sb_message = f" {count_items}/{len(self.stories)}"
-        self.statusbar.showMessage(self.sb_message)
+        sb_message = f" {count_items}/{len(self.stories)}"
+        self.statusbar.showMessage(sb_message)
 
     def ts_move_up(self):
         # print("ts_move_up")
@@ -148,6 +150,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stories[index + offset] = self.stories[index]
         self.stories[index] = prev
 
+        # update Lunii device (.pi)
+        # TODO: update Lunii device (.pi)
+
         # refresh stories
         self.ts_update()
 
@@ -155,10 +160,64 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setCurrentItem(self.tree_stories.topLevelItem(index+offset))
 
     def ts_remove(self):
-        print("ts_remove")
+
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        if len(selection) == 0:
+            print("no selection")
+            return
+
+        # processing selection
+        for item in selection:
+            uuid = item.text(1)
+            self.stories.remove(UUID(uuid))
+
+        # update Lunii device (.pi)
+        # TODO: update Lunii device (.pi)
+
+        # refresh stories
+        self.ts_update()
 
     def ts_export(self):
         print("ts_export")
 
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        if len(selection) == 0:
+            return
+
+        # depending on how many files selected
+        if len(selection) == 1:
+            # save one file only
+
+            # preparing filename
+            save_fn = f"{selection[0].text(0)}.({selection[0].text(1)[-8:]}).zip"
+
+            # creating dialog box
+            filename = QFileDialog.getSaveFileName(self, "Save Story", save_fn, "Zip files (*.zip)")
+            print(filename)
+
+            # TODO: Save current file
+        else:
+            # picking an output directory
+            out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
+                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+            print(out_dir)
+
+            # TODO: Save all files
+
+
+        # update Lunii device (.pi)
+        #
+
     def ts_import(self):
         print("ts_import")
+
+        filenames = QFileDialog.getOpenFileName(self, "Open Stories", "", "Zip files (*.zip)")
+        print(filenames)
+
+        # update Lunii device (.pi)
+        #
+
+        # refresh stories
+        self.ts_update()
