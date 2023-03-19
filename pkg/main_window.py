@@ -1,6 +1,7 @@
 from pathlib import WindowsPath
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QShortcut, QKeySequence
+
 from pkg.api.device import feed_stories, find_devices
 from pkg.api.stories import story_name
 
@@ -39,16 +40,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.btn_abort.setVisible(False)
         # self.pgb_total.setVisible(False)
         self.tree_stories.setColumnWidth(0, 300)
+        self.lbl_picture.setVisible(False)
+        self.te_story_details.setVisible(False)
 
         # Connect the context menu
         # self.tw_assets.setContextMenuPolicy(QtCore.Qt.Cus)
         # self.tw_assets.customContextMenuRequested.connect(self.tw_context_menu)
-        pass
 
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
+
+        # story list shortcuts
+        QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
+        QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
+        QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
+        QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
+        QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
+
 
     # WIDGETS UPDATES
     def cb_dev_refresh(self):
@@ -108,3 +118,47 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.sb_message = f" {count_items}/{len(self.stories)}"
         self.statusbar.showMessage(self.sb_message)
+
+    def ts_move_up(self):
+        # print("ts_move_up")
+        self.ts_move(-1)
+
+    def ts_move_down(self):
+        # print("ts_move_down")
+        self.ts_move(1)
+
+    def ts_move(self, offset):
+        # no moves under filters
+        if self.le_filter.text():
+            self.statusbar.showMessage("Remove filters before moving...")
+            return
+
+        index = self.tree_stories.currentIndex().row()
+
+        # top reached ?
+        if offset < 0 and index <= 0:
+            return
+
+        # bottom reached ?
+        if offset > 0 and index >= len(self.stories)-1:
+            return
+
+        # swapping with previous element
+        prev = self.stories[index + offset]
+        self.stories[index + offset] = self.stories[index]
+        self.stories[index] = prev
+
+        # refresh stories
+        self.ts_update()
+
+        # update selection
+        self.tree_stories.setCurrentItem(self.tree_stories.topLevelItem(index+offset))
+
+    def ts_remove(self):
+        print("ts_remove")
+
+    def ts_export(self):
+        print("ts_export")
+
+    def ts_import(self):
+        print("ts_import")
