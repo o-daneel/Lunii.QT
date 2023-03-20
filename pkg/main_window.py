@@ -169,7 +169,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # moving items
         for i in range(len(new_idx)):
-            print(f"{old_idx[i]} -> {new_idx[i]}")
+            # depending on offset (up / down), list must be updated in specific order
+            if offset > 0:
+                i = len(new_idx) - 1 - i
+
+            # print(f"{old_idx[i]} -> {new_idx[i]}")
             if old_idx[i] != new_idx[i]:
                 self.stories.insert(new_idx[i], self.stories.pop(old_idx[i]))
 
