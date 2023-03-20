@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
 
         # class instance vars init
-        self.lunii_device = None
+        self.lunii_device: LuniiDevice = None
 
         # UI init
         self.init_ui()
@@ -230,7 +230,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # depending on how many files selected
-        if len(selection) == 1:
+        if len(selection) == -1:
             # save one file only
 
             # preparing filename
@@ -247,19 +247,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                        QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
             print(out_dir)
 
-            # TODO: Save all files
-
-        # update Lunii device (.pi)
-        #
+            # Save all files
+            for item in selection:
+                self.lunii_device.export_story(item.text(COL_UUID), out_dir)
 
     def ts_import(self):
         print("ts_import")
 
-        filenames = QFileDialog.getOpenFileName(self, "Open Stories", "", "Zip files (*.zip)")
-        print(filenames)
+        if not self.lunii_device:
+            return
 
-        # update Lunii device (.pi)
-        #
+        filename = QFileDialog.getOpenFileName(self, "Open Stories", "", "Zip files (*.zip)")
+        print(filename)
+
+        # importing selected files
+        self.lunii_device.import_story(filename[0])
 
         # refresh stories
         self.ts_update()
