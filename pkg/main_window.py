@@ -1,6 +1,7 @@
 from pathlib import WindowsPath
 from uuid import UUID
 
+from PySide6.QtCore import QItemSelectionModel, QItemSelection
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog
 from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
@@ -19,6 +20,9 @@ TODO :
  * drag n drop to reorder list
  * F5 to refresh devices, no selection
 """
+
+COL_NAME = 0
+COL_UUID = 1
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -76,7 +80,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_dev_select(self):
         # getting current device
         dev_name = self.combo_device.currentText()
- 
+
         if dev_name:
             # feeding stories and display
             self.stories = feed_stories(dev_name)
@@ -109,9 +113,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # create and add item to treeWidget
             item = QTreeWidgetItem()
-            item.setText(0, story_name(story))
-            item.setText(1, str(story).upper())
-            item.setFont(1, console_font)
+            item.setText(COL_NAME, story_name(story))
+            item.setText(COL_UUID, str(story).upper())
+            item.setFont(COL_UUID, console_font)
             self.tree_stories.addTopLevelItem(item)
 
     def sb_update_summary(self):
@@ -130,25 +134,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ts_move(1)
 
     def ts_move(self, offset):
-        # no moves under filters
-        if self.le_filter.text():
-            self.statusbar.showMessage("Remove filters before moving...")
+        # # no moves under filters
+        # if self.le_filter.text():
+        #     self.statusbar.showMessage("Remove filters before moving...")
+        #     return
+
+        # getting selection
+        selected = self.tree_stories.selectionModel().selection()
+        selected_items = self.tree_stories.selectedItems()
+        if len(selected_items) == 0:
             return
 
-        index = self.tree_stories.currentIndex().row()
+        old_idx = set()
+        # getting all indexes to move (sorted)
+        for item in selected_items:
+            old_idx.add(self.stories.index(UUID(item.text(COL_UUID))))
 
-        # top reached ?
-        if offset < 0 and index <= 0:
-            return
+        old_idx = sorted(old_idx)
 
-        # bottom reached ?
-        if offset > 0 and index >= len(self.stories)-1:
-            return
+        # updating new indexes
+        new_idx = list()
+        for pos, idx in enumerate(old_idx):
+            # top reached ?
+            if offset < 0 and idx <= pos:
+                new_idx.append(idx)
+                continue
 
-        # swapping with previous element
-        prev = self.stories[index + offset]
-        self.stories[index + offset] = self.stories[index]
-        self.stories[index] = prev
+            # bottom reached ?
+            if offset > 0 and idx >= len(self.stories) - 1 - (len(old_idx) - 1 - pos):
+                new_idx.append(idx)
+                continue
+
+            new_idx.append(idx + offset)
+
+        # moving items
+        for i in range(len(new_idx)):
+            print(f"{old_idx[i]} -> {new_idx[i]}")
+            if old_idx[i] != new_idx[i]:
+                self.stories.insert(new_idx[i], self.stories.pop(old_idx[i]))
 
         # update Lunii device (.pi)
         # TODO: update Lunii device (.pi)
@@ -157,19 +180,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ts_update()
 
         # update selection
-        self.tree_stories.setCurrentItem(self.tree_stories.topLevelItem(index+offset))
+        sel_model = self.tree_stories.selectionModel()
+        # sel_model.select(selected, QItemSelectionModel.Select)
+        for idx in new_idx:
+            item: QTreeWidgetItem = self.tree_stories.topLevelItem(idx)
+            sel_model.select(self.tree_stories.indexFromItem(item, COL_NAME), QItemSelectionModel.Select)
+            sel_model.select(self.tree_stories.indexFromItem(item, COL_UUID), QItemSelectionModel.Select)
 
     def ts_remove(self):
-
         # getting selection
         selection = self.tree_stories.selectedItems()
         if len(selection) == 0:
-            print("no selection")
             return
 
         # processing selection
         for item in selection:
-            uuid = item.text(1)
+            uuid = item.text(COL_UUID)
             self.stories.remove(UUID(uuid))
 
         # update Lunii device (.pi)
@@ -191,7 +217,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # save one file only
 
             # preparing filename
-            save_fn = f"{selection[0].text(0)}.({selection[0].text(1)[-8:]}).zip"
+            save_fn = f"{selection[0].text(COL_NAME)}.({selection[0].text(COL_UUID)[-8:]}).zip"
 
             # creating dialog box
             filename = QFileDialog.getSaveFileName(self, "Save Story", save_fn, "Zip files (*.zip)")
@@ -201,11 +227,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             # picking an output directory
             out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
-                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+                                                       QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
             print(out_dir)
 
             # TODO: Save all files
-
 
         # update Lunii device (.pi)
         #
