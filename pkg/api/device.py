@@ -185,22 +185,17 @@ class LuniiDevice:
 
     def remove_story(self, short_uuid):
         if short_uuid not in self.stories:
-            print("ERROR: This story is not present on your storyteller")
+            # print("ERROR: This story is not present on your storyteller")
             return False
 
         ulist = self.stories.full_uuid(short_uuid)
         if len(ulist) > 1:
-            print(f"ERROR: at least {len(ulist)} match your pattern. Try a longer UUID.")
-            # return False
+            # print(f"ERROR: at least {len(ulist)} match your pattern. Try a longer UUID.")
+            return False
         uuid = str(ulist[0])
 
-        print(f"Removing {uuid[28:]} - {self.stories.name(uuid)}...")
+        # print(f"Removing {uuid[28:]} - {self.stories.name(uuid)}...")
         self.stories.remove(ulist[0])
-
-        # asking for confirmation
-        answer = input("Are you sure ? [y/N] ")
-        if answer.lower() not in ["y", "yes"]:
-            return False
 
         # removing story contents
         st_path = Path(self.mount_point).joinpath(f".content/{uuid[28:]}")

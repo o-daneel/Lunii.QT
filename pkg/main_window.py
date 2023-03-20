@@ -2,10 +2,10 @@ from pathlib import WindowsPath
 from uuid import UUID
 
 from PySide6.QtCore import QItemSelectionModel, QItemSelection
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox
 from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
-from pkg.api.device import feed_stories, find_devices
+from pkg.api.device import feed_stories, find_devices, LuniiDevice
 from pkg.api.stories import story_name
 
 from pkg.ui.ui_main import Ui_MainWindow
@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
 
         # class instance vars init
-        self.stories = []
+        self.lunii_device = None
 
         # UI init
         self.init_ui()
@@ -82,8 +82,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-            # feeding stories and display
-            self.stories = feed_stories(dev_name)
+            self.lunii_device = LuniiDevice(dev_name)
             self.ts_update()
 
     def ts_update(self):
@@ -95,7 +94,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_populate(self):
         # empty device
-        if self.stories is None or len(self.stories) == 0:
+        if self.lunii_device.stories is None or len(self.lunii_device.stories) == 0:
             return
 
         # creating font
@@ -106,7 +105,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         le_filter = self.le_filter.text()
 
         # adding items
-        for story in self.stories:
+        for story in self.lunii_device.stories:
             # filtering 
             if le_filter is not None and le_filter.lower() not in story_name(story).lower():
                 continue
@@ -122,7 +121,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # displayed items
         count_items = self.tree_stories.topLevelItemCount()
 
-        sb_message = f" {count_items}/{len(self.stories)}"
+        sb_message = f" {count_items}/{len(self.lunii_device.stories)}"
         self.statusbar.showMessage(sb_message)
 
     def ts_move_up(self):
@@ -148,7 +147,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         old_idx = set()
         # getting all indexes to move (sorted)
         for item in selected_items:
-            old_idx.add(self.stories.index(UUID(item.text(COL_UUID))))
+            old_idx.add(self.lunii_device.stories.index(UUID(item.text(COL_UUID))))
 
         old_idx = sorted(old_idx)
 
@@ -161,7 +160,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 continue
 
             # bottom reached ?
-            if offset > 0 and idx >= len(self.stories) - 1 - (len(old_idx) - 1 - pos):
+            if offset > 0 and idx >= len(self.lunii_device.stories) - 1 - (len(old_idx) - 1 - pos):
                 new_idx.append(idx)
                 continue
 
@@ -175,7 +174,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # print(f"{old_idx[i]} -> {new_idx[i]}")
             if old_idx[i] != new_idx[i]:
-                self.stories.insert(new_idx[i], self.stories.pop(old_idx[i]))
+                self.lunii_device.stories.insert(new_idx[i], self.lunii_device.stories.pop(old_idx[i]))
 
         # update Lunii device (.pi)
         # TODO: update Lunii device (.pi)
@@ -197,13 +196,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(selection) == 0:
             return
 
+        # preparing validation window
+        dlg = QMessageBox(self)
+        dlg.setWindowTitle("Delete stories")
+        message = "You are requesting to delete : \n"
+        for item in selection:
+            message += f"- {item.text(COL_NAME)}\n"
+        message += "\nDo you want to proceed ?"
+        dlg.setText(message)
+        dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        dlg.setIcon(QMessageBox.Warning)
+        button = dlg.exec_()
+
+        if button != QMessageBox.Ok:
+            return
+
         # processing selection
         for item in selection:
+            # remove UUID from pi file
             uuid = item.text(COL_UUID)
-            self.stories.remove(UUID(uuid))
-
-        # update Lunii device (.pi)
-        # TODO: update Lunii device (.pi)
+            # remove story contents from device
+            self.lunii_device.remove_story(uuid)
 
         # refresh stories
         self.ts_update()
