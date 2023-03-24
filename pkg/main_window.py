@@ -1,24 +1,23 @@
 from pathlib import WindowsPath
 from uuid import UUID
 
+from PySide6 import QtWidgets, QtCore
 from PySide6.QtCore import QItemSelectionModel, QItemSelection
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox
 from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
-from pkg.api.device import feed_stories, find_devices, LuniiDevice
+from pkg.api.device import find_devices, LuniiDevice
 from pkg.api.stories import story_name
 
 from pkg.ui.ui_main import Ui_MainWindow
 
 """
 TODO : 
- * create menu handler to export
+ * add icon to context menu
+ * add icon to app
+ * add icon to refresh button
  * support Drop to load
- * SUPR to remove
- * ALT + UP to move up
- * ALT + DOWN to move down
  * drag n drop to reorder list
- * F5 to refresh devices, no selection
 """
 
 COL_NAME = 0
@@ -32,6 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # class instance vars init
         self.lunii_device: LuniiDevice = None
+        self.worker = None
 
         # UI init
         self.init_ui()
@@ -51,13 +51,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.te_story_details.setVisible(False)
 
         # Connect the context menu
-        # self.tw_assets.setContextMenuPolicy(QtCore.Qt.Cus)
-        # self.tw_assets.customContextMenuRequested.connect(self.tw_context_menu)
+        self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.tree_stories.customContextMenuRequested.connect(self.ts_context_menu)
 
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
+        self.btn_refresh.clicked.connect(self.cb_dev_refresh)
+
 
         # story list shortcuts
         QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
@@ -65,6 +67,57 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
         QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
         QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
+        QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
+
+     # TREE WIDGET MANAGEMENT
+    def ts_context_menu(self, point):
+        # about the selected node.
+        index = self.tree_stories.indexAt(point)
+
+        # We build the menu.
+        menu = QtWidgets.QMenu()
+        act_mv_up = menu.addAction("Move Up")
+        act_mv_down = menu.addAction("Move Down")
+        menu.addSeparator()
+        act_import  = menu.addAction("Import")
+        act_export = menu.addAction("Export")
+        menu.addSeparator()
+        act_token = menu.addAction("Generate Token")
+
+        act_mv_up.setToolTip("Move item upper (ATL + UP)")
+        act_mv_down.setToolTip("Move item upper (ATL + DOWN)")
+        act_import.setToolTip("Export story to Zip")
+        act_export.setToolTip("Import story from Zip")
+        act_token.setToolTip("Rebuild authorization token")
+
+        # not pointing to an item
+        if not index.isValid():
+            act_mv_up.setEnabled(False)
+            act_mv_down.setEnabled(False)
+            act_export.setEnabled(False)
+            act_token.setEnabled(False)
+
+        if not self.lunii_device or self.worker:
+            # during download or no device selected, no action possible
+            act_mv_up.setEnabled(False)
+            act_mv_down.setEnabled(False)
+            act_import.setEnabled(False)
+            act_export.setEnabled(False)
+            act_token.setEnabled(False)
+
+        # Checking action
+        picked_action = menu.exec_(self.tree_stories.mapToGlobal(point))
+        if picked_action == act_mv_up:
+            self.ts_move_up()
+        elif picked_action == act_mv_down:
+            self.ts_move_down()
+        elif picked_action == act_import:
+            self.ts_import()
+        elif picked_action == act_export:
+            self.ts_export()
+        elif picked_action == act_token:
+            # TODO : force auth token generation
+            pass
 
     # WIDGETS UPDATES
     def cb_dev_refresh(self):
@@ -76,6 +129,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             dev_name = str(dev)
             print(dev_name)
             self.combo_device.addItem(dev_name)
+
+        if self.combo_device.count():
+            self.combo_device.setPlaceholderText("Select your Lunii")
+
+            # automatic select if only one device
+            if self.combo_device.count() == 1:
+                self.combo_device.setCurrentIndex(0)
+        else:
+            self.combo_device.setPlaceholderText("No Lunii detected :(")
 
     def cb_dev_select(self):
         # getting current device
