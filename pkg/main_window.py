@@ -49,6 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnWidth(0, 300)
         self.lbl_picture.setVisible(False)
         self.te_story_details.setVisible(False)
+        self.progress_bar.setVisible(False)
 
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -81,6 +82,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         menu.addSeparator()
         act_import  = menu.addAction("Import")
         act_export = menu.addAction("Export")
+        act_remove = menu.addAction("Remove")
         menu.addSeparator()
         act_token = menu.addAction("Generate Token")
 
@@ -88,6 +90,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_mv_down.setToolTip("Move item upper (ATL + DOWN)")
         act_import.setToolTip("Export story to Zip")
         act_export.setToolTip("Import story from Zip")
+        act_remove.setToolTip("Remove story")
         act_token.setToolTip("Rebuild authorization token")
 
         # not pointing to an item
@@ -95,6 +98,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_mv_up.setEnabled(False)
             act_mv_down.setEnabled(False)
             act_export.setEnabled(False)
+            act_remove.setEnabled(False)
             act_token.setEnabled(False)
 
         if not self.lunii_device or self.worker:
@@ -103,6 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_mv_down.setEnabled(False)
             act_import.setEnabled(False)
             act_export.setEnabled(False)
+            act_remove.setEnabled(False)
             act_token.setEnabled(False)
 
         # Checking action
@@ -115,6 +120,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_import()
         elif picked_action == act_export:
             self.ts_export()
+        elif picked_action == act_remove:
+            self.ts_remove()
         elif picked_action == act_token:
             # TODO : force auth token generation
             pass
@@ -153,6 +160,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ts_populate()
         # update status in status bar
         self.sb_update_summary()
+
+        self.progress_bar.setVisible(False)
 
     def ts_populate(self):
         # empty device
@@ -285,6 +294,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_export(self):
         print("ts_export")
+        self.progress_bar.setVisible(True)
 
         # getting selection
         selection = self.tree_stories.selectedItems()
@@ -313,8 +323,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for item in selection:
                 self.lunii_device.export_story(item.text(COL_UUID), out_dir)
 
+        self.progress_bar.setVisible(False)
+
     def ts_import(self):
         print("ts_import")
+        self.progress_bar.setVisible(True)
 
         if not self.lunii_device:
             return
