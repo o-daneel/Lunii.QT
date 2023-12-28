@@ -110,6 +110,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_remove.setEnabled(False)
             act_token.setEnabled(False)
 
+        if self.lunii_device.lunii_version == LUNII_V3:
+            act_token.setEnabled(False)
+
         # Checking action
         picked_action = menu.exec_(self.tree_stories.mapToGlobal(point))
         if picked_action == act_mv_up:
@@ -152,6 +155,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if dev_name:
             self.lunii_device = LuniiDevice(dev_name)
+            if self.lunii_device.lunii_version == LUNII_V2:
+                self.lbl_version.setText("v2")
+            elif self.lunii_device.lunii_version == LUNII_V3:
+                self.lbl_version.setText("v3")
             self.ts_update()
 
     def ts_update(self):

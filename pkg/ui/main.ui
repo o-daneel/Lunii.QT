@@ -50,6 +50,28 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="lbl_version">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btn_refresh">
         <property name="maximumSize">
          <size>
@@ -100,11 +122,14 @@
     </item>
     <item>
      <widget class="QTreeWidget" name="tree_stories">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="dragEnabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="dragDropMode">
-       <enum>QAbstractItemView::NoDragDrop</enum>
+       <enum>QAbstractItemView::DragDrop</enum>
       </property>
       <property name="defaultDropAction">
        <enum>Qt::MoveAction</enum>
@@ -115,7 +140,16 @@
       <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
+      <property name="indentation">
+       <number>20</number>
+      </property>
       <property name="rootIsDecorated">
+       <bool>true</bool>
+      </property>
+      <property name="itemsExpandable">
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus">
        <bool>true</bool>
       </property>
       <column>
@@ -190,6 +224,9 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="details_layout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item>
        <widget class="QLabel" name="lbl_picture">
         <property name="sizePolicy">
@@ -198,13 +235,22 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>192</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="font">
          <font>
-          <pointsize>95</pointsize>
+          <pointsize>65</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Pic</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
