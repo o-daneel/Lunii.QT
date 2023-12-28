@@ -17,3 +17,21 @@ lunii_generic_key = vectkey_to_bytes(raw_key_generic)
 # lunii_generic_key = binascii.unhexlify(b'00112233445566770011223344556677')
 
 TQDM_BAR_FORMAT = "{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]"
+
+LUNII_V2 = 2
+LUNII_V3 = 3
+
+TYPE_UNK    = 0
+TYPE_PLAIN  = 1
+TYPE_V2     = 2
+TYPE_V3     = 3
+TYPE_ZIP    = 10
+TYPE_7Z     = 11
+
+EXT_PK_PLAIN = ".plain.pk"
+EXT_PK_V2    = ".v2.pk"
+EXT_PK_V1    = ".v1.pk"
+EXT_ZIP      = ".zip"
+EXT_7z       = ".7z"
+
+SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_V1, EXT_PK_V2, EXT_PK_PLAIN]
