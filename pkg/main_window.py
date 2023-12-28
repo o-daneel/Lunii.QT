@@ -1,3 +1,4 @@
+import os
 from pathlib import WindowsPath
 from uuid import UUID
 
@@ -8,6 +9,7 @@ from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
 from pkg.api.device import find_devices, LuniiDevice
 from pkg.api.stories import story_name
+from pkg.api.constants import *
 
 from pkg.ui.ui_main import Ui_MainWindow
 
@@ -18,6 +20,7 @@ TODO :
  * add icon to refresh button
  * support Drop to load
  * drag n drop to reorder list
+ * select move up/down reset screen display
 """
 
 COL_NAME = 0
@@ -60,6 +63,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
         self.btn_refresh.clicked.connect(self.cb_dev_refresh)
+        self.tree_stories.installEventFilter(self)
 
 
         # story list shortcuts
@@ -70,7 +74,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
 
-     # TREE WIDGET MANAGEMENT
+    def eventFilter(self, obj, event):
+        if obj.objectName() == "tree_stories":
+            if event.type() == QtCore.QEvent.DragEnter:
+                self.ts_dragenter_action(event)
+                return True
+            elif event.type() == QtCore.QEvent.Drop:
+                self.ts_drop_action(event)
+                return True
+        return False
+
+    # TREE WIDGET MANAGEMENT
     def ts_context_menu(self, point):
         # about the selected node.
         index = self.tree_stories.indexAt(point)
@@ -135,6 +149,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.clear()
 
         dev: WindowsPath
+        self.combo_device.setPlaceholderText("Select your Lunii")
+
         for dev in dev_list:
             dev_name = str(dev)
             print(dev_name)
@@ -335,15 +351,71 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_import(self):
         print("ts_import")
         self.progress_bar.setVisible(True)
+        self.progress_bar.setValue(1)
 
         if not self.lunii_device:
             return
 
-        filename = QFileDialog.getOpenFileName(self, "Open Stories", "", "Zip files (*.zip)")
-        print(filename)
+        file_filter = "PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All supported (*.pk *.7z *.zip);;All files (*)"
+        filename, _ = QFileDialog.getOpenFileName(self, "Open Stories", "", file_filter)
+
+        if not filename:
+            self.progress_bar.setVisible(False)
+            return
 
         # importing selected files
-        self.lunii_device.import_story(filename[0])
+        print(filename)
+        self.lunii_device.import_story(filename)
 
         # refresh stories
         self.ts_update()
+
+
+    def slot_zip_progress(self, message, progress):
+        # handling progress bar
+        if not self.progress_bar.isVisible() and progress != 100:
+            self.progress_bar.setVisible(True)
+
+        if progress >= 100:
+            self.progress_bar.setVisible(False)
+
+        # putting message
+        self.statusbar.showMessage(message)
+
+    def ts_dragenter_action(self, event):
+        print("Drag Enter")
+
+        # a Lunii must be selected
+        if not self.lunii_device:
+            event.ignore()
+            return
+
+        # must be files
+        if event.mimeData().hasUrls():
+            # getting path for dropped files
+            file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
+
+            # checking if dropped files are ending with expected extensions
+            if all(any(file.endswith(ext) for ext in SUPPORTED_EXT) for file in file_paths):
+                event.acceptProposedAction()
+            else:
+                event.ignore()
+
+    def ts_drop_action(self, event):
+        print("Drop")
+        # getting path for dropped files
+        file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
+
+        # updating UI for progress
+        self.progress_bar.setVisible(True)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setRange(0, len(file_paths))
+
+        # importing selected files
+        for index, file in enumerate(file_paths):
+            self.progress_bar.setValue(index)
+            self.lunii_device.import_story(file)
+
+        # refresh stories
+        self.ts_update()
+
