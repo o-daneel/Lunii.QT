@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 
 
 def vectkey_to_bytes(key_vect):
@@ -16,7 +18,11 @@ lunii_generic_key = vectkey_to_bytes(raw_key_generic)
 # import binascii
 # lunii_generic_key = binascii.unhexlify(b'00112233445566770011223344556677')
 
-TQDM_BAR_FORMAT = "{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]"
+OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
+
+CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
+CACHE_DIR = os.path.join(CFG_DIR, "cache")
+OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 
 LUNII_V2 = 2
 LUNII_V3 = 3

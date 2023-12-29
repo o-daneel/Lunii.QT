@@ -1,3 +1,4 @@
+import os.path
 from pathlib import WindowsPath
 from uuid import UUID
 
@@ -8,7 +9,7 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice
-from pkg.api.stories import story_name, story_desc, story_pict, DESC_NOT_FOUND
+from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_db, story_load_pict
 from pkg.api.constants import *
 
 from pkg.ui.main_ui import Ui_MainWindow
@@ -22,8 +23,8 @@ TODO :
  * drag n drop to reorder list
  * select move up/down reset screen display
  * create a dedicated thread for import / export / delete
- * add cache mgmt in home dir (or local)
 DONE
+ * add cache mgmt in home dir (or local)
  * download story icon
  * display picture
 """
@@ -40,6 +41,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # class instance vars init
         self.lunii_device: LuniiDevice = None
         self.worker = None
+
+        # loading DB
+        story_load_db()
 
         # UI init
         self.init_ui()
@@ -177,8 +181,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.combo_device.setCurrentIndex(0)
         else:
             self.combo_device.setPlaceholderText("No Lunii detected :(")
-        self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v2/")
-        self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v3/")
+        if os.path.isdir("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/"):
+            self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v2/")
+            self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v3/")
 
     def cb_dev_select(self):
         # getting current device
@@ -205,10 +210,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             uuid = item.text(COL_UUID)
 
             one_story_desc = story_desc(uuid)
-            one_story_imageURL = story_pict(uuid)
+            one_story_image = story_load_pict(uuid)
 
             # nothing to display
-            if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_imageURL:
+            if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_image:
                 self.te_story_details.setVisible(False)
                 self.lbl_picture.setVisible(False)
                 return
@@ -216,25 +221,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # Update story description
             self.te_story_details.setText(one_story_desc)
 
-            # Fetch image from URL and display
-            try:
-                # Set the timeout for the request
-                response = requests.get(one_story_imageURL, timeout=1)
-                if response.status_code == 200:
-                    # Load image from bytes
-                    image_data = response.content
-                    pixmap = QPixmap()
-                    pixmap.loadFromData(image_data)
+            # Display image from URL or cache
+            if one_story_image:
+                pixmap = QPixmap()
+                pixmap.loadFromData(one_story_image)
 
-                    scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                    self.lbl_picture.setPixmap(scaled_pixmap)
-                else:
-                    self.lbl_picture.setText("Failed to fetch BMP file.")
-
-            except requests.exceptions.Timeout:
-                self.lbl_picture.setText("Failed to fetch BMP file.")
-
-            except requests.exceptions.RequestException as e:
+                scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
+                self.lbl_picture.setPixmap(scaled_pixmap)
+            else:
                 self.lbl_picture.setText("Failed to fetch BMP file.")
 
     def ts_update(self):

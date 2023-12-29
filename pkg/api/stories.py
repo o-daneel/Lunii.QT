@@ -1,16 +1,82 @@
 import json
 import os
+from pathlib import Path
 from uuid import UUID
+
+import requests
+
+from pkg.api.constants import OFFICIAL_DB, OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
 
 # https://server-data-prod.lunii.com/v2/packs
 UUID_DB = {}
-if os.path.isfile("packs/official.json"):
-    with open("packs/official.json", encoding='utf-8') as fp_db:
-        db_stories = json.load(fp_db).get('response')
-        UUID_DB = {db_stories[key]["uuid"].upper():value for (key, value) in db_stories.items()}
+
+
+def story_load_db(reload=False):
+    global UUID_DB
+    # fetching db if necessary
+    if not os.path.isfile(OFFICIAL_DB) or reload:
+        # creating dir if not there
+        if not os.path.isdir(CFG_DIR):
+            Path(CFG_DIR).mkdir(parents=True, exist_ok=True)
+
+        try:
+            # Set the timeout for the request
+            response = requests.get(OFFICIAL_DB_URL, timeout=1)
+            if response.status_code == 200:
+                # Load image from bytes
+                with open(OFFICIAL_DB, "wb") as fp:
+                    fp.write(response.content)
+
+        except requests.exceptions.Timeout:
+            pass
+        except requests.exceptions.RequestException as e:
+            pass
+
+    # trying to load DB
+    if os.path.isfile(OFFICIAL_DB):
+        with open(OFFICIAL_DB, encoding='utf-8') as fp_db:
+            db_stories = json.load(fp_db).get('response')
+            UUID_DB = {db_stories[key]["uuid"].upper():value for (key, value) in db_stories.items()}
+
+
+def story_load_pict(story_uuid: UUID, reload=False):
+    image_data = None
+
+    # creating cache dir if necessary
+    if not os.path.isdir(CACHE_DIR):
+        Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
+
+    # checking if present in cache
+    one_uuid = str(story_uuid).upper()
+    res_file = os.path.join(CACHE_DIR, one_uuid)
+
+    if os.path.isfile(res_file):
+        # print(f"in cache {res_file}")
+        # returning file content
+        with open(res_file, "rb") as fp:
+            image_data = fp.read()
+    else:
+        # downloading the image to a file
+        one_story_imageURL = story_pict_URL(story_uuid)
+        # print(f"Downloading for {one_uuid} to {res_file}")
+        try:
+            # Set the timeout for the request
+            response = requests.get(one_story_imageURL, timeout=1)
+            if response.status_code == 200:
+                # Load image from bytes
+                image_data = response.content
+                with open(res_file, "wb") as fp:
+                    fp.write(image_data)
+            else:
+                pass
+        except requests.exceptions.Timeout:
+            pass
+        except requests.exceptions.RequestException as e:
+            pass
+    return image_data
 
 
 def story_name(story_uuid: UUID):
@@ -36,7 +102,7 @@ def story_desc(story_uuid: UUID):
     return DESC_NOT_FOUND
 
 
-def story_pict(story_uuid: UUID):
+def story_pict_URL(story_uuid: UUID):
     one_uuid = str(story_uuid).upper()
     if one_uuid in UUID_DB:
         locale = list(UUID_DB[one_uuid]["locales_available"].keys())[0]
