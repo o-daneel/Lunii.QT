@@ -11,3 +11,10 @@ A Python QT app to manage Lunii Storyteller
 | "Ctrl+S"   | Export the selection           |
 | "Ctrl+I"   | Import new story               |
 | "F5"       | Refresh devices                |
+
+
+### Trick
+#### ICO creation
+```bash
+magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.ico
+```

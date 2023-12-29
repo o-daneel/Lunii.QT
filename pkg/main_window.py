@@ -42,9 +42,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lunii_device: LuniiDevice = None
         self.worker = None
 
-        # loading DB
-        story_load_db()
-
         # UI init
         self.init_ui()
 
