@@ -1,6 +1,8 @@
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller
 
+![Main Window](./res/screenshot.png)
+
 ### Shortcuts
 
 | Keys       | Actions                        |
