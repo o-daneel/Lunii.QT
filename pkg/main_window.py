@@ -3,7 +3,7 @@ from pathlib import WindowsPath
 from uuid import UUID
 
 import requests
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
@@ -17,9 +17,6 @@ from pkg.ui.main_ui import Ui_MainWindow
 """
 TODO : 
  * Add free space
- * add icon to context menu
- * add icon to app
- * add icon to refresh button
  * drag n drop to reorder list
  * select move up/down reset screen display
  * create a dedicated thread for import / export / delete
@@ -27,6 +24,9 @@ DONE
  * add cache mgmt in home dir (or local)
  * download story icon
  * display picture
+ * add icon to app
+ * add icon to refresh button
+ * add icon to context menu
 """
 
 COL_NAME = 0
@@ -114,12 +114,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         menu.addSeparator()
         act_token = menu.addAction("Generate Token")
 
+        # config Tooltips
         act_mv_up.setToolTip("Move item upper (ATL + UP)")
         act_mv_down.setToolTip("Move item upper (ATL + DOWN)")
         act_import.setToolTip("Export story to Archive")
         act_export.setToolTip("Import story from Archive")
         act_remove.setToolTip("Remove story")
         act_token.setToolTip("Rebuild authorization token")
+
+        # Loading icons
+        icon = QtGui.QIcon()
+
+        icon.addPixmap(QtGui.QPixmap(":/icon/res/up.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        act_mv_up.setIcon(icon)
+        icon.addPixmap(QtGui.QPixmap(":/icon/res/down.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        act_mv_down.setIcon(icon)
+        icon.addPixmap(QtGui.QPixmap(":/icon/res/import.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        act_import.setIcon(icon)
+        icon.addPixmap(QtGui.QPixmap(":/icon/res/export.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        act_export.setIcon(icon)
+        icon.addPixmap(QtGui.QPixmap(":/icon/res/remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        act_remove.setIcon(icon)
 
         # not pointing to an item
         if not index.isValid():
@@ -287,6 +302,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #     self.statusbar.showMessage("Remove filters before moving...")
         #     return
 
+        sb_pos = self.tree_stories.verticalScrollBar().value()
+
         # getting selection
         selected = self.tree_stories.selectionModel().selection()
         selected_items = self.tree_stories.selectedItems()
@@ -338,6 +355,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item: QTreeWidgetItem = self.tree_stories.topLevelItem(idx)
             sel_model.select(self.tree_stories.indexFromItem(item, COL_NAME), QItemSelectionModel.Select)
             sel_model.select(self.tree_stories.indexFromItem(item, COL_UUID), QItemSelectionModel.Select)
+
+        self.tree_stories.verticalScrollBar().setValue(sb_pos)
 
     def ts_remove(self):
         # getting selection
