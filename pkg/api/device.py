@@ -218,7 +218,7 @@ class LuniiDevice:
     def export_all(self, out_path):
         archives = []
         for count, story in enumerate(self.stories):
-            print(f"{count+1:>2}/{len(self.stories)} ", end="")
+            # print(f"{count+1:>2}/{len(self.stories)} ", end="")
             one_zip = self.export_story(str(story)[28:], out_path)
             if one_zip:
                 archives.append(one_zip)
@@ -322,13 +322,13 @@ class LuniiDevice:
         return file
 
     def import_dir(self, story_path):
-        print(story_path + "**/*.plain.pk")
+        # print(story_path + "**/*.plain.pk")
         pk_list = []
         for ext in SUPPORTED_EXT:
             pk_list += glob.glob(os.path.join(story_path, "**/*" + ext), recursive=True)
-        print(f"Importing {len(pk_list)} archives...")
+        # print(f"Importing {len(pk_list)} archives...")
         for index, pk in enumerate(pk_list):
-            print(f"{index+1:>2}/{len(pk_list)} > {pk}")
+            # print(f"{index+1:>2}/{len(pk_list)} > {pk}")
             self.import_story(pk)
         
         return True
@@ -339,7 +339,7 @@ class LuniiDevice:
         archive_size = os.path.getsize(story_path)
         free_space = psutil.disk_usage(str(self.mount_point)).free
         if archive_size >= free_space:
-            print(f"   ERROR: Not enough space left on Lunii (only {free_space//1024//1024}MB)")
+            # print(f"   ERROR: Not enough space left on Lunii (only {free_space//1024//1024}MB)")
             return False
         
         # identifying based on filename
@@ -443,7 +443,7 @@ class LuniiDevice:
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        print("   INFO : Authorization file creation...")
+        # print("   INFO : Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -483,7 +483,7 @@ class LuniiDevice:
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -521,7 +521,7 @@ class LuniiDevice:
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        print("   INFO : Authorization file creation...")
+        # print("   INFO : Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -562,7 +562,7 @@ class LuniiDevice:
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
                 return False
             
             # decompressing story contents
@@ -613,7 +613,7 @@ class LuniiDevice:
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        print("   INFO : Authorization file creation...")
+        # print("   INFO : Authorization file creation...")
         bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -655,7 +655,7 @@ class LuniiDevice:
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -707,7 +707,7 @@ class LuniiDevice:
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        print("   INFO : Authorization file creation...")
+        # print("   INFO : Authorization file creation...")
         bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -757,7 +757,7 @@ class LuniiDevice:
         if not story_path.is_dir():
             return None
         
-        print(f"[{uuid} - {self.stories.name(uuid)}]")
+        # print(f"[{uuid} - {self.stories.name(uuid)}]")
 
         # for Lunii v3, checking keys (original or trick)
         if self.lunii_version == LUNII_V3:
@@ -774,7 +774,7 @@ class LuniiDevice:
 
         zip_path = Path(out_path).joinpath(f"{sname}.{uuid}.plain.pk")
         if os.path.isfile(zip_path):
-            print(f"   WARN: Already exported")
+            # print(f"   WARN: Already exported")
             return None
         
         # preparing file list
@@ -787,7 +787,7 @@ class LuniiDevice:
 
         try:
             with zipfile.ZipFile(zip_path, 'w') as zip_out:
-                print("> Zipping story ...")
+                # print("> Zipping story ...")
                 for file in story_flist:
                     target_name = Path(file).relative_to(story_path)
 
@@ -798,7 +798,7 @@ class LuniiDevice:
                     zip_out.writestr(file_newname, data_plain)
 
                 # adding uuid file
-                print("> Adding UUID ...")
+                # print("> Adding UUID ...")
                 zip_out.writestr("uuid.bin", full_uuid.bytes)
         except PermissionError as e:
             print(f"   ERROR: failed to create ZIP - {e}")
