@@ -25,7 +25,6 @@ if __name__ == "__main__":
     window = MainWindow(app)
     window.show()
 
-    time.sleep(2)
     splash.finish(window)
 
     sys.exit(app.exec())

@@ -111,8 +111,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_import = menu.addAction("Import")
         act_export = menu.addAction("Export")
         act_remove = menu.addAction("Remove")
-        menu.addSeparator()
-        act_token = menu.addAction("Generate Token")
 
         # config Tooltips
         act_mv_up.setToolTip("Move item upper (ATL + UP)")
@@ -120,7 +118,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_import.setToolTip("Export story to Archive")
         act_export.setToolTip("Import story from Archive")
         act_remove.setToolTip("Remove story")
-        act_token.setToolTip("Rebuild authorization token")
 
         # Loading icons
         icon = QtGui.QIcon()
@@ -142,7 +139,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_mv_down.setEnabled(False)
             act_export.setEnabled(False)
             act_remove.setEnabled(False)
-            act_token.setEnabled(False)
 
         if not self.lunii_device or self.worker:
             # during download or no device selected, no action possible
@@ -151,10 +147,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_import.setEnabled(False)
             act_export.setEnabled(False)
             act_remove.setEnabled(False)
-            act_token.setEnabled(False)
 
         if self.lunii_device.lunii_version == LUNII_V3:
-            act_token.setEnabled(False)
+            act_export.setEnabled(False)
 
         # Checking action
         picked_action = menu.exec_(self.tree_stories.mapToGlobal(point))
@@ -168,9 +163,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_export()
         elif picked_action == act_remove:
             self.ts_remove()
-        elif picked_action == act_token:
-            # TODO : force auth token generation
-            pass
 
     # WIDGETS UPDATES
     def cb_dev_refresh(self):
@@ -182,7 +174,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         for dev in dev_list:
             dev_name = str(dev)
-            print(dev_name)
+            # print(dev_name)
             self.combo_device.addItem(dev_name)
 
         if self.combo_device.count():
@@ -370,6 +362,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         message = "You are requesting to delete : \n"
         for item in selection:
             message += f"- {item.text(COL_NAME)}\n"
+
+        if len(message) > 512:
+            message = message[:768] + "..."
+            message += "\n(and too many others)\n"
+
         message += "\nDo you want to proceed ?"
         dlg.setText(message)
         dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
@@ -381,7 +378,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.pbar_total.setVisible(True)
         self.pbar_total.setRange(0, len(selection))
-        self.lbl_total.setVisible(True)
+        # self.lbl_total.setVisible(True)
+        self.tree_stories.setEnabled(False)
 
         # processing selection
         for index, item in enumerate(selection):
@@ -392,45 +390,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lunii_device.remove_story(uuid)
 
         # refresh stories
+        self.tree_stories.setEnabled(True)
         self.ts_update()
 
     def ts_export(self):
-        print("ts_export")
-        self.pbar_total.setVisible(True)
-
         # getting selection
         selection = self.tree_stories.selectedItems()
         if len(selection) == 0:
             return
 
-        # depending on how many files selected
-        if len(selection) == -1:
-            # save one file only
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setRange(0, len(selection))
 
-            # TODO : review output filename
+        out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
+                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+        # print(out_dir)
 
-            # preparing filename
-            save_fn = f"{selection[0].text(COL_NAME)}.({selection[0].text(COL_UUID)[-8:]}).plain.pk"
-
-            # creating dialog box
-            filename = QFileDialog.getSaveFileName(self, "Save Story", save_fn, "Plain pk files (*.plain.pk)")
-            print(filename)
-
-            # TODO: Save current file
-        else:
-            # picking an output directory
-            out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
-                                                       QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
-            print(out_dir)
-
+        # if ok pressed
+        if out_dir:
             # Save all files
-            for item in selection:
+            for index, item in enumerate(selection):
+                self.pbar_total.setValue(index)
                 self.lunii_device.export_story(item.text(COL_UUID), out_dir)
 
         self.pbar_total.setVisible(False)
 
     def ts_import(self):
-        print("ts_import")
         self.pbar_total.setVisible(True)
         self.pbar_total.setValue(0)
 
@@ -438,17 +423,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         file_filter = "PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All supported (*.pk *.7z *.zip);;All files (*)"
-        filename, _ = QFileDialog.getOpenFileName(self, "Open Stories", "", file_filter)
+        files, _ = QFileDialog.getOpenFileNames(self, "Open Stories", "", file_filter)
 
-        if not filename:
+        if not files:
             self.pbar_total.setVisible(False)
             return
 
+        self.pbar_total.setRange(0, len(files))
+        self.tree_stories.setEnabled(False)
+
         # importing selected files
-        print(filename)
-        self.lunii_device.import_story(filename)
+        for index, file in enumerate(files):
+            print(file)
+            self.pbar_total.setValue(index)
+            self.lunii_device.import_story(file)
 
         # refresh stories
+        self.tree_stories.setEnabled(True)
         self.ts_update()
 
     def slot_zip_progress(self, message, progress):
@@ -463,8 +454,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage(message)
 
     def ts_dragenter_action(self, event):
-        print("Drag Enter")
-
         # a Lunii must be selected
         if not self.lunii_device:
             event.ignore()
@@ -482,17 +471,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 event.ignore()
 
     def ts_drop_action(self, event):
-        print("Drop")
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
         # updating UI for progress
-        self.lbl_total.setVisible(True)
+        # self.lbl_total.setVisible(True)
         self.pbar_total.setVisible(True)
         self.pbar_total.setValue(0)
         self.pbar_total.setRange(0, len(file_paths))
-        self.lbl_story.setVisible(True)
-        self.pbar_story.setVisible(True)
+        # self.lbl_story.setVisible(True)
+        # self.pbar_story.setVisible(True)
+        self.tree_stories.setEnabled(False)
 
         # importing selected files
         for index, file in enumerate(file_paths):
@@ -500,4 +489,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lunii_device.import_story(file)
 
         # refresh stories
+        self.tree_stories.setEnabled(True)
         self.ts_update()

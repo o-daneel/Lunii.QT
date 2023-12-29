@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
         self.lbl_version = QLabel(self.centralwidget)
         self.lbl_version.setObjectName(u"lbl_version")
         self.lbl_version.setMinimumSize(QSize(20, 0))
-        self.lbl_version.setFrameShape(QFrame.Box)
+        self.lbl_version.setFrameShape(QFrame.NoFrame)
         self.lbl_version.setFrameShadow(QFrame.Sunken)
         self.lbl_version.setAlignment(Qt.AlignCenter)
 
