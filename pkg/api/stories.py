@@ -13,7 +13,6 @@ if os.path.isfile("packs/official.json"):
         UUID_DB = {db_stories[key]["uuid"].upper():value for (key, value) in db_stories.items()}
 
 
-
 def story_name(story_uuid: UUID):
     one_uuid = str(story_uuid).upper()
     if one_uuid in UUID_DB:
@@ -24,13 +23,29 @@ def story_name(story_uuid: UUID):
         return title
     return STORY_UNKNOWN
 
+
 def story_desc(story_uuid: UUID):
     one_uuid = str(story_uuid).upper()
     if one_uuid in UUID_DB:
         locale = list(UUID_DB[one_uuid]["locales_available"].keys())[0]
-        desc = UUID_DB[one_uuid]["localized_infos"][locale].get("description")
+        desc :str = UUID_DB[one_uuid]["localized_infos"][locale].get("description")
+        if desc.startswith("<link href"):
+            pos = desc.find(">")
+            desc = desc[pos+1:]
         return desc
     return DESC_NOT_FOUND
+
+
+def story_pict(story_uuid: UUID):
+    one_uuid = str(story_uuid).upper()
+    if one_uuid in UUID_DB:
+        locale = list(UUID_DB[one_uuid]["locales_available"].keys())[0]
+        image = UUID_DB[one_uuid]["localized_infos"][locale].get("image")
+        if image:
+            url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
+            return url
+    return None
+
 
 def _uuid_match(uuid: UUID, key_part: str):
     uuid = str(uuid).upper()
@@ -62,5 +77,3 @@ class StoryList(list):
             if str(uuid).upper().endswith(short_uuid):
                 return story_name(uuid)
         return None
-
-

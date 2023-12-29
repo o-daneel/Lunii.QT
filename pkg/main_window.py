@@ -1,14 +1,14 @@
-import os
 from pathlib import WindowsPath
 from uuid import UUID
 
+import requests
 from PySide6 import QtWidgets, QtCore
-from PySide6.QtCore import QItemSelectionModel, QItemSelection
+from PySide6.QtCore import QItemSelectionModel
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox
-from PySide6.QtGui import QFont, QShortcut, QKeySequence
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice
-from pkg.api.stories import story_name, story_desc
+from pkg.api.stories import story_name, story_desc, story_pict, DESC_NOT_FOUND
 from pkg.api.constants import *
 
 from pkg.ui.main_ui import Ui_MainWindow
@@ -21,8 +21,11 @@ TODO :
  * add icon to refresh button
  * drag n drop to reorder list
  * select move up/down reset screen display
- * download story icon
  * create a dedicated thread for import / export / delete
+ * add cache mgmt in home dir (or local)
+DONE
+ * download story icon
+ * display picture
 """
 
 COL_NAME = 0
@@ -104,7 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_mv_up = menu.addAction("Move Up")
         act_mv_down = menu.addAction("Move Down")
         menu.addSeparator()
-        act_import  = menu.addAction("Import")
+        act_import = menu.addAction("Import")
         act_export = menu.addAction("Export")
         act_remove = menu.addAction("Remove")
         menu.addSeparator()
@@ -112,8 +115,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         act_mv_up.setToolTip("Move item upper (ATL + UP)")
         act_mv_down.setToolTip("Move item upper (ATL + DOWN)")
-        act_import.setToolTip("Export story to Zip")
-        act_export.setToolTip("Import story from Zip")
+        act_import.setToolTip("Export story to Archive")
+        act_export.setToolTip("Import story from Archive")
         act_remove.setToolTip("Remove story")
         act_token.setToolTip("Rebuild authorization token")
 
@@ -195,11 +198,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         only_one = len(selection) == 1
         # self.lbl_picture.setVisible(only_one)
         self.te_story_details.setVisible(only_one)
+        self.lbl_picture.setVisible(only_one)
 
         if only_one:
             item = selection[0]
             uuid = item.text(COL_UUID)
-            self.te_story_details.setText(story_desc(uuid))
+
+            one_story_desc = story_desc(uuid)
+            one_story_imageURL = story_pict(uuid)
+
+            # nothing to display
+            if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_imageURL:
+                self.te_story_details.setVisible(False)
+                self.lbl_picture.setVisible(False)
+                return
+
+            # Update story description
+            self.te_story_details.setText(one_story_desc)
+
+            # Fetch image from URL and display
+            try:
+                # Set the timeout for the request
+                response = requests.get(one_story_imageURL, timeout=1)
+                if response.status_code == 200:
+                    # Load image from bytes
+                    image_data = response.content
+                    pixmap = QPixmap()
+                    pixmap.loadFromData(image_data)
+
+                    scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
+                    self.lbl_picture.setPixmap(scaled_pixmap)
+                else:
+                    self.lbl_picture.setText("Failed to fetch BMP file.")
+
+            except requests.exceptions.Timeout:
+                self.lbl_picture.setText("Failed to fetch BMP file.")
+
+            except requests.exceptions.RequestException as e:
+                self.lbl_picture.setText("Failed to fetch BMP file.")
 
     def ts_update(self):
         # clear previous story list
@@ -350,7 +386,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_export(self):
         print("ts_export")
-        self.progress_bar.setVisible(True)
+        self.pbar_total.setVisible(True)
 
         # getting selection
         selection = self.tree_stories.selectedItems()
@@ -361,11 +397,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(selection) == -1:
             # save one file only
 
+            # TODO : review output filename
+
             # preparing filename
-            save_fn = f"{selection[0].text(COL_NAME)}.({selection[0].text(COL_UUID)[-8:]}).zip"
+            save_fn = f"{selection[0].text(COL_NAME)}.({selection[0].text(COL_UUID)[-8:]}).plain.pk"
 
             # creating dialog box
-            filename = QFileDialog.getSaveFileName(self, "Save Story", save_fn, "Zip files (*.zip)")
+            filename = QFileDialog.getSaveFileName(self, "Save Story", save_fn, "Plain pk files (*.plain.pk)")
             print(filename)
 
             # TODO: Save current file
@@ -379,7 +417,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for item in selection:
                 self.lunii_device.export_story(item.text(COL_UUID), out_dir)
 
-        self.progress_bar.setVisible(False)
+        self.pbar_total.setVisible(False)
 
     def ts_import(self):
         print("ts_import")
@@ -403,14 +441,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # refresh stories
         self.ts_update()
 
-
     def slot_zip_progress(self, message, progress):
         # handling progress bar
-        if not self.progress_bar.isVisible() and progress != 100:
-            self.progress_bar.setVisible(True)
+        if not self.pbar_total.isVisible() and progress != 100:
+            self.pbar_total.setVisible(True)
 
         if progress >= 100:
-            self.progress_bar.setVisible(False)
+            self.pbar_total.setVisible(False)
 
         # putting message
         self.statusbar.showMessage(message)
@@ -454,4 +491,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # refresh stories
         self.ts_update()
-

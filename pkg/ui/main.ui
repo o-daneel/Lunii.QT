@@ -122,6 +122,12 @@
     </item>
     <item>
      <widget class="QTreeWidget" name="tree_stories">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>150</height>
+       </size>
+      </property>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
@@ -318,13 +324,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>128</width>
+          <width>192</width>
           <height>0</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -346,7 +352,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>128</height>
+          <height>192</height>
          </size>
         </property>
         <property name="placeholderText">
