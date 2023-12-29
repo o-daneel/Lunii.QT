@@ -2,7 +2,8 @@ import json
 import os
 from uuid import UUID
 
-STORY_UNKNOWN = "Unknown story (maybe a User created story)..."
+STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
+DESC_NOT_FOUND = "No description found."
 
 # https://server-data-prod.lunii.com/v2/packs
 UUID_DB = {}
@@ -23,6 +24,13 @@ def story_name(story_uuid: UUID):
         return title
     return STORY_UNKNOWN
 
+def story_desc(story_uuid: UUID):
+    one_uuid = str(story_uuid).upper()
+    if one_uuid in UUID_DB:
+        locale = list(UUID_DB[one_uuid]["locales_available"].keys())[0]
+        desc = UUID_DB[one_uuid]["localized_infos"][locale].get("description")
+        return desc
+    return DESC_NOT_FOUND
 
 def _uuid_match(uuid: UUID, key_part: str):
     uuid = str(uuid).upper()

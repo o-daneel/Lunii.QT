@@ -207,25 +207,106 @@
      </widget>
     </item>
     <item>
-     <widget class="QProgressBar" name="progress_bar">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>10</height>
-       </size>
+     <layout class="QVBoxLayout" name="progressLayout">
+      <property name="spacing">
+       <number>0</number>
       </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="textVisible">
-       <bool>false</bool>
-      </property>
-     </widget>
+      <item>
+       <layout class="QHBoxLayout" name="totalLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lbl_total">
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="text">
+           <string>Total</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="pbar_total">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="storyLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lbl_story">
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="text">
+           <string>8B_UUID</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="pbar_story">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="details_layout">
       <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
+       <enum>QLayout::SetMinimumSize</enum>
       </property>
       <item>
        <widget class="QLabel" name="lbl_picture">
@@ -237,13 +318,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>192</width>
+          <width>128</width>
           <height>0</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <pointsize>65</pointsize>
+          <pointsize>25</pointsize>
          </font>
         </property>
         <property name="text">
@@ -255,18 +336,27 @@
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="te_story_details">
+       <widget class="QTextBrowser" name="te_story_details">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="readOnly">
-         <bool>true</bool>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>128</height>
+         </size>
         </property>
         <property name="placeholderText">
          <string>Story description</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+        <property name="openLinks">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -284,7 +374,6 @@
   <tabstop>combo_device</tabstop>
   <tabstop>le_filter</tabstop>
   <tabstop>tree_stories</tabstop>
-  <tabstop>te_story_details</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -301,22 +390,6 @@
     <hint type="destinationlabel">
      <x>236</x>
      <y>141</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tree_stories</sender>
-   <signal>itemChanged(QTreeWidgetItem*,int)</signal>
-   <receiver>te_story_details</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>236</x>
-     <y>141</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>239</x>
-     <y>353</y>
     </hint>
    </hints>
   </connection>

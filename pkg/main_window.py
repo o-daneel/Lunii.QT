@@ -8,19 +8,21 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 from PySide6.QtGui import QFont, QShortcut, QKeySequence
 
 from pkg.api.device import find_devices, LuniiDevice
-from pkg.api.stories import story_name
+from pkg.api.stories import story_name, story_desc
 from pkg.api.constants import *
 
-from pkg.ui.ui_main import Ui_MainWindow
+from pkg.ui.main_ui import Ui_MainWindow
 
 """
 TODO : 
+ * Add free space
  * add icon to context menu
  * add icon to app
  * add icon to refresh button
- * support Drop to load
  * drag n drop to reorder list
  * select move up/down reset screen display
+ * download story icon
+ * create a dedicated thread for import / export / delete
 """
 
 COL_NAME = 0
@@ -52,7 +54,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnWidth(0, 300)
         self.lbl_picture.setVisible(False)
         self.te_story_details.setVisible(False)
-        self.progress_bar.setVisible(False)
+
+        # clean progress bars
+        self.lbl_total.setVisible(False)
+        self.pbar_total.setVisible(False)
+        self.lbl_story.setVisible(False)
+        self.pbar_story.setVisible(False)
 
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -63,8 +70,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
         self.btn_refresh.clicked.connect(self.cb_dev_refresh)
+        self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
+        # signals connections
+        # LuniiDevice.signal_zip_progress.connect(self.slot_zip_progress)
 
         # story list shortcuts
         QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
@@ -164,6 +174,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.combo_device.setCurrentIndex(0)
         else:
             self.combo_device.setPlaceholderText("No Lunii detected :(")
+        self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v2/")
+        self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v3/")
 
     def cb_dev_select(self):
         # getting current device
@@ -177,6 +189,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.lbl_version.setText("v3")
             self.ts_update()
 
+    def cb_tree_select(self):
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        only_one = len(selection) == 1
+        # self.lbl_picture.setVisible(only_one)
+        self.te_story_details.setVisible(only_one)
+
+        if only_one:
+            item = selection[0]
+            uuid = item.text(COL_UUID)
+            self.te_story_details.setText(story_desc(uuid))
+
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
@@ -184,7 +208,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # update status in status bar
         self.sb_update_summary()
 
-        self.progress_bar.setVisible(False)
+        # clean progress bars
+        self.lbl_total.setVisible(False)
+        self.pbar_total.setVisible(False)
+        self.lbl_story.setVisible(False)
+        self.pbar_story.setVisible(False)
 
     def ts_populate(self):
         # empty device
@@ -305,8 +333,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if button != QMessageBox.Ok:
             return
 
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setRange(0, len(selection))
+        self.lbl_total.setVisible(True)
+
         # processing selection
-        for item in selection:
+        for index, item in enumerate(selection):
+            self.pbar_total.setValue(index)
             # remove UUID from pi file
             uuid = item.text(COL_UUID)
             # remove story contents from device
@@ -350,8 +383,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_import(self):
         print("ts_import")
-        self.progress_bar.setVisible(True)
-        self.progress_bar.setValue(1)
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setValue(0)
 
         if not self.lunii_device:
             return
@@ -360,7 +393,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         filename, _ = QFileDialog.getOpenFileName(self, "Open Stories", "", file_filter)
 
         if not filename:
-            self.progress_bar.setVisible(False)
+            self.pbar_total.setVisible(False)
             return
 
         # importing selected files
@@ -407,13 +440,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
         # updating UI for progress
-        self.progress_bar.setVisible(True)
-        self.progress_bar.setValue(0)
-        self.progress_bar.setRange(0, len(file_paths))
+        self.lbl_total.setVisible(True)
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setValue(0)
+        self.pbar_total.setRange(0, len(file_paths))
+        self.lbl_story.setVisible(True)
+        self.pbar_story.setVisible(True)
 
         # importing selected files
         for index, file in enumerate(file_paths):
-            self.progress_bar.setValue(index)
+            self.pbar_total.setValue(index)
             self.lunii_device.import_story(file)
 
         # refresh stories
