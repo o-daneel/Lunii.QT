@@ -13,7 +13,6 @@ from uuid import UUID
 from Crypto.Cipher import AES
 
 from PySide6.QtCore import Signal
-from tqdm import tqdm
 
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
@@ -419,13 +418,9 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            count = 0
-            pbar = tqdm(iterable=zip_contents, total=len(zip_contents), bar_format=TQDM_BAR_FORMAT)
-            for file in pbar:
-                count += 1
+            for file in zip_contents:
                 if file == "uuid.bin":
                     continue
-                pbar.set_description(f"Processing {file}")
 
                 # Extract each zip file
                 data_plain = zip_file.read(file)
@@ -497,13 +492,9 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            count = 0
-            pbar = tqdm(iterable=zip_contents, total=len(zip_contents), bar_format=TQDM_BAR_FORMAT)
-            for file in pbar:
-                count += 1
+            for file in zip_contents:
                 if file == "uuid.bin" or file.endswith("bt"):
                     continue
-                pbar.set_description(f"Processing {file}")
 
                 # Extract each zip file
                 data_v2 = zip_file.read(file)
@@ -581,15 +572,10 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            count = 0
             contents = zip.readall().items()
-            pbar = tqdm(iterable=contents, total=len(contents), bar_format=TQDM_BAR_FORMAT)
-            for fname, bio in pbar:
-                count += 1
-                pbar.set_description(f"Processing {fname}")
+            for fname, bio in contents:
                 if fname.endswith("bt"):
                     continue
-
 
                 # Extract each zip file
                 data_v2 = bio.read()
@@ -679,11 +665,7 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            count = 0
-            pbar = tqdm(iterable=zip_contents, total=len(zip_contents), bar_format=TQDM_BAR_FORMAT)
-            for file in pbar:
-                count += 1
-                pbar.set_description(f"Processing {file}")
+            for file in zip_contents:
                 if zip_file.getinfo(file).is_dir():
                     continue
                 if file.endswith("bt"):
@@ -806,10 +788,8 @@ class LuniiDevice:
         try:
             with zipfile.ZipFile(zip_path, 'w') as zip_out:
                 print("> Zipping story ...")
-                pbar = tqdm(iterable=story_flist, total=len(story_flist), bar_format=TQDM_BAR_FORMAT)
-                for file in pbar:
+                for file in story_flist:
                     target_name = Path(file).relative_to(story_path)
-                    pbar.set_description(f"Processing {target_name}")
 
                     # Extract each file to another directory
                     # decipher if necessary (mp3 / bmp / li / ri / si)
