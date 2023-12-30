@@ -1,29 +1,33 @@
 import glob
-import os
 import shutil
+import time
+
 import unicodedata
 import zipfile
 import psutil
 import py7zr
 import xxtea
 import binascii
-from pathlib import Path
 from uuid import UUID
 
 from Crypto.Cipher import AES
+from PySide6 import QtCore
 
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, QObject
 
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api.stories import StoryList, story_name
 
 
-class LuniiDevice:
+class LuniiDevice(QObject):
+    signal_story_progress = QtCore.Signal(str, int, int)
+
     stories: StoryList
     signal_zip_progress: Signal = Signal(str, int)
 
     def __init__(self, mount_point, keyfile=None):
+        super().__init__()
         self.mount_point = mount_point
 
         # dummy values
@@ -419,12 +423,15 @@ class LuniiDevice:
                 return False
 
             # decompressing story contents
-            output_path = Path(self.mount_point).joinpath(f".content/{str(new_uuid).upper()[28:]}")
+            short_uuid = str(new_uuid).upper()[28:]
+            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            for file in zip_contents:
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+
                 if file == "uuid.bin":
                     continue
 
@@ -493,12 +500,14 @@ class LuniiDevice:
                 return False
 
             # decompressing story contents
-            output_path = Path(self.mount_point).joinpath(f".content/{str(new_uuid).upper()[28:]}")
+            short_uuid = str(new_uuid).upper()[28:]
+            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            for file in zip_contents:
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
                 if file == "uuid.bin" or file.endswith("bt"):
                     continue
 
@@ -578,8 +587,11 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
+            short_uuid = str(new_uuid).upper()[28:]
             contents = zip.readall().items()
-            for fname, bio in contents:
+            for index, (fname, bio) in enumerate(contents):
+                self.signal_story_progress.emit(short_uuid, index, len(contents))
+
                 if fname.endswith("bt"):
                     continue
 
@@ -671,7 +683,9 @@ class LuniiDevice:
                 output_path.mkdir(parents=True)
 
             # Loop over each file
-            for file in zip_contents:
+            short_uuid = str(new_uuid).upper()[28:]
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
                 if zip_file.getinfo(file).is_dir():
                     continue
                 if file.endswith("bt"):
@@ -794,7 +808,9 @@ class LuniiDevice:
         try:
             with zipfile.ZipFile(zip_path, 'w') as zip_out:
                 # print("> Zipping story ...")
-                for file in story_flist:
+                for index, file in enumerate(story_flist):
+                    self.signal_story_progress.emit(uuid, index, len(story_flist))
+
                     target_name = Path(file).relative_to(story_path)
 
                     # Extract each file to another directory
@@ -824,15 +840,22 @@ class LuniiDevice:
         uuid = str(ulist[0])
 
         # print(f"Removing {uuid[28:]} - {self.stories.name(uuid)}...")
-  
+
+        short_uuid = uuid[28:].upper()
+        self.signal_story_progress.emit(short_uuid, 0, 3)
+
         # removing story contents
-        st_path = Path(self.mount_point).joinpath(f".content/{uuid[28:]}")
+        st_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
         shutil.rmtree(st_path)
+
+        self.signal_story_progress.emit(short_uuid, 1, 3)
 
         # removing story from class
         self.stories.remove(ulist[0])
         # updating pack index file
         self.update_pack_index()
+
+        self.signal_story_progress.emit(short_uuid, 2, 3)
 
         return True
 

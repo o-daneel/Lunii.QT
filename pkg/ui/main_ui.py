@@ -122,8 +122,8 @@ class Ui_MainWindow(object):
         self.totalLayout.setObjectName(u"totalLayout")
         self.lbl_total = QLabel(self.centralwidget)
         self.lbl_total.setObjectName(u"lbl_total")
-        self.lbl_total.setMinimumSize(QSize(70, 0))
-        self.lbl_total.setFrameShape(QFrame.Box)
+        self.lbl_total.setMinimumSize(QSize(80, 0))
+        self.lbl_total.setFrameShape(QFrame.Panel)
         self.lbl_total.setFrameShadow(QFrame.Sunken)
         self.lbl_total.setAlignment(Qt.AlignCenter)
 
@@ -145,8 +145,8 @@ class Ui_MainWindow(object):
         self.storyLayout.setObjectName(u"storyLayout")
         self.lbl_story = QLabel(self.centralwidget)
         self.lbl_story.setObjectName(u"lbl_story")
-        self.lbl_story.setMinimumSize(QSize(70, 0))
-        self.lbl_story.setFrameShape(QFrame.Box)
+        self.lbl_story.setMinimumSize(QSize(80, 0))
+        self.lbl_story.setFrameShape(QFrame.Panel)
         self.lbl_story.setFrameShadow(QFrame.Sunken)
         self.lbl_story.setAlignment(Qt.AlignCenter)
 

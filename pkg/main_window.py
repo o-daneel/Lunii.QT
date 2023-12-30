@@ -11,6 +11,7 @@ from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 from pkg.api.device import find_devices, LuniiDevice
 from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_db, story_load_pict
 from pkg.api.constants import *
+from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT
 
 from pkg.ui.main_ui import Ui_MainWindow
 
@@ -19,7 +20,6 @@ TODO :
  * Add free space
  * drag n drop to reorder list
  * select move up/down reset screen display
- * create a dedicated thread for import / export / delete
 DONE
  * add cache mgmt in home dir (or local)
  * download story icon
@@ -27,6 +27,8 @@ DONE
  * add icon to app
  * add icon to refresh button
  * add icon to context menu
+ * supporting entry for lunii path
+ * create a dedicated thread for import / export / delete
 """
 
 COL_NAME = 0
@@ -40,7 +42,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # class instance vars init
         self.lunii_device: LuniiDevice = None
-        self.worker = None
+        self.worker: ierWorker = None
+        self.thread: QtCore.QThread = None
 
         # UI init
         self.init_ui()
@@ -267,10 +270,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update_summary()
 
         # clean progress bars
-        self.lbl_total.setVisible(False)
-        self.pbar_total.setVisible(False)
-        self.lbl_story.setVisible(False)
-        self.pbar_story.setVisible(False)
+        # self.lbl_total.setVisible(False)
+        # self.pbar_total.setVisible(False)
+        # self.lbl_story.setVisible(False)
+        # self.pbar_story.setVisible(False)
 
     def ts_populate(self):
         # empty device
@@ -400,22 +403,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if button != QMessageBox.Ok:
             return
 
-        self.pbar_total.setVisible(True)
-        self.pbar_total.setRange(0, len(selection))
-        # self.lbl_total.setVisible(True)
-        self.tree_stories.setEnabled(False)
-
         # processing selection
-        for index, item in enumerate(selection):
-            self.pbar_total.setValue(index)
-            # remove UUID from pi file
-            uuid = item.text(COL_UUID)
-            # remove story contents from device
-            self.lunii_device.remove_story(uuid)
-
-        # refresh stories
-        self.tree_stories.setEnabled(True)
-        self.ts_update()
+        to_remove = [item.text(COL_UUID) for item in selection]
+        self.worker_launch(ACTION_REMOVE, to_remove)
 
     def ts_export(self):
         # getting selection
@@ -423,26 +413,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(selection) == 0:
             return
 
-        self.pbar_total.setVisible(True)
-        self.pbar_total.setRange(0, len(selection))
-
         out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
                                                    QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
-        # print(out_dir)
 
         # if ok pressed
         if out_dir:
-            # Save all files
-            for index, item in enumerate(selection):
-                self.pbar_total.setValue(index)
-                self.lunii_device.export_story(item.text(COL_UUID), out_dir)
-
-        self.pbar_total.setVisible(False)
+            to_export = [item.text(COL_UUID) for item in selection]
+            self.worker_launch(ACTION_EXPORT, to_export, out_dir)
 
     def ts_import(self):
-        self.pbar_total.setVisible(True)
-        self.pbar_total.setValue(0)
-
         if not self.lunii_device:
             return
 
@@ -450,32 +429,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         files, _ = QFileDialog.getOpenFileNames(self, "Open Stories", "", file_filter)
 
         if not files:
-            self.pbar_total.setVisible(False)
             return
 
-        self.pbar_total.setRange(0, len(files))
-        self.tree_stories.setEnabled(False)
-
-        # importing selected files
-        for index, file in enumerate(files):
-            print(file)
-            self.pbar_total.setValue(index)
-            self.lunii_device.import_story(file)
-
-        # refresh stories
-        self.tree_stories.setEnabled(True)
-        self.ts_update()
-
-    def slot_zip_progress(self, message, progress):
-        # handling progress bar
-        if not self.pbar_total.isVisible() and progress != 100:
-            self.pbar_total.setVisible(True)
-
-        if progress >= 100:
-            self.pbar_total.setVisible(False)
-
-        # putting message
-        self.statusbar.showMessage(message)
+        self.worker_launch(ACTION_IMPORT, files)
 
     def ts_dragenter_action(self, event):
         # a Lunii must be selected
@@ -498,20 +454,68 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
-        # updating UI for progress
-        # self.lbl_total.setVisible(True)
-        self.pbar_total.setVisible(True)
-        self.pbar_total.setValue(0)
-        self.pbar_total.setRange(0, len(file_paths))
-        # self.lbl_story.setVisible(True)
-        # self.pbar_story.setVisible(True)
+        self.worker_launch(ACTION_IMPORT, file_paths)
+
+    def worker_launch(self, action, item_list, out_dir = None):
+        if self.worker:
+            return
+
+        # setting up the thread
+        self.worker = ierWorker(self.lunii_device, action, item_list, out_dir)
+        self.thread = QtCore.QThread()
+        self.worker.moveToThread(self.thread)
+
+        # connecting slots
+        self.thread.started.connect(self.worker.process)
+        self.worker.signal_finished.connect(self.thread.quit)
+        self.worker.signal_total_progress.connect(self.slot_total_progress)
+        self.lunii_device.signal_story_progress.connect(self.slot_story_progress)
+        self.worker.signal_finished.connect(self.slot_finished)
+        self.worker.signal_refresh.connect(self.ts_update)
+        self.worker.signal_message.connect(self.statusbar.showMessage)
+
+        # running
+        self.thread.start()
+
+    def slot_total_progress(self, current, max_val):
+        # updating UI
         self.tree_stories.setEnabled(False)
+        self.lbl_total.setVisible(True)
+        self.lbl_total.setText(f"Total {current+1}/{max_val}")
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setRange(0, max_val)
+        self.pbar_total.setValue(current+1)
 
-        # importing selected files
-        for index, file in enumerate(file_paths):
-            self.pbar_total.setValue(index)
-            self.lunii_device.import_story(file)
+    def slot_story_progress(self, uuid, current, max_val):
+        # updating UI
+        self.lbl_story.setVisible(True)
+        self.lbl_story.setText(uuid)
 
-        # refresh stories
+        self.pbar_story.setVisible(True)
+        self.pbar_story.setRange(0, max_val)
+        self.pbar_story.setValue(current+1)
+
+    def slot_finished(self):
+        # print("SLOT FINISHED")
+        # updating UI
         self.tree_stories.setEnabled(True)
-        self.ts_update()
+
+        self.lbl_total.setVisible(False)
+        self.pbar_total.setVisible(False)
+        self.lbl_story.setVisible(False)
+        self.pbar_story.setVisible(False)
+
+        self.worker = None
+        self.thread = None
+
+
+    def slot_zip_progress(self, message, progress):
+        # handling progress bar
+        if not self.pbar_total.isVisible() and progress != 100:
+            self.pbar_total.setVisible(True)
+
+        if progress >= 100:
+            self.pbar_total.setVisible(False)
+
+        # putting message
+        self.statusbar.showMessage(message)
