@@ -171,23 +171,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
+        self.lbl_version.setText("")
+        self.statusbar.showMessage("")
 
         for dev in dev_list:
             dev_name = str(dev)
             # print(dev_name)
             self.combo_device.addItem(dev_name)
 
+        if os.path.isdir("C:/Work/dev/lunii-packs/test/"):
+            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v2/")
+            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v3/")
+
         if self.combo_device.count():
-            self.combo_device.setPlaceholderText("Select your Lunii")
+            self.combo_device.lineEdit().setText("Select your Lunii")
 
             # automatic select if only one device
             if self.combo_device.count() == 1:
                 self.combo_device.setCurrentIndex(0)
         else:
-            self.combo_device.setPlaceholderText("No Lunii detected :(")
-        if os.path.isdir("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/"):
-            self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v2/")
-            self.combo_device.addItem("C:/Work/reverse/Lunii.RE/tools/lunii-packs/test/_v3/")
+            self.statusbar.showMessage("No Lunii detected 😥, try to copy paste a path")
+            self.combo_device.lineEdit().setText("Enter a path here")
 
     def cb_dev_select(self):
         # getting current device
@@ -195,6 +199,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if dev_name:
             self.lunii_device = LuniiDevice(dev_name)
+
+            # creation failed ?
+            if not self.lunii_device.snu:
+                self.statusbar.showMessage(f"ERROR : {dev_name} is not a recognized Lunii.")
+
+                # removing the new entry
+                cur_index = self.combo_device.currentIndex()
+                self.combo_device.removeItem(cur_index)
+
+                # picking another existing entry
+                if self.combo_device.count() > 0:
+                    self.combo_device.setCurrentIndex(0)
+                else:
+                    self.combo_device.lineEdit().setText("Enter a path here")
+
+                return
+
+            self.statusbar.showMessage(f"")
+
+            # updating UI to indicate version
             if self.lunii_device.lunii_version == LUNII_V2:
                 self.lbl_version.setText("v2")
             elif self.lunii_device.lunii_version == LUNII_V3:

@@ -42,7 +42,8 @@ class LuniiDevice:
         self.bt = b""
 
         # internal device details
-        self.__feed_device()
+        if not self.__feed_device():
+            return
 
         # internal stories
         self.stories = feed_stories(self.mount_point)
@@ -53,6 +54,10 @@ class LuniiDevice:
         mount_path = Path(self.mount_point)
         md_path = mount_path.joinpath(".md")
 
+        # checking if specified path is acceptable
+        if not os.path.isfile(md_path):
+            return False
+
         with open(md_path, "rb") as fp_md:
             md_version = int.from_bytes(fp_md.read(2), 'little')
 
@@ -60,6 +65,7 @@ class LuniiDevice:
                 self.__v3_parse(fp_md)
             elif md_version == 3:
                 self.__v2_parse(fp_md)
+        return True
 
     def __v2_parse(self, fp_md):
         self.lunii_version = LUNII_V2

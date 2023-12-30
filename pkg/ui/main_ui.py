@@ -60,7 +60,8 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.combo_device.sizePolicy().hasHeightForWidth())
         self.combo_device.setSizePolicy(sizePolicy)
-        self.combo_device.setMaximumSize(QSize(120, 16777215))
+        self.combo_device.setMaximumSize(QSize(200, 16777215))
+        self.combo_device.setEditable(True)
 
         self.top_layout.addWidget(self.combo_device)
 
@@ -219,6 +220,9 @@ class Ui_MainWindow(object):
         self.combo_device.setItemText(0, QCoreApplication.translate("MainWindow", u"D:\\", None))
         self.combo_device.setItemText(1, QCoreApplication.translate("MainWindow", u"F:\\", None))
 
+#if QT_CONFIG(tooltip)
+        self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
+#endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
         self.lbl_version.setText("")
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type to filter", None))

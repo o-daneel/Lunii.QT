@@ -65,9 +65,15 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
+          <width>200</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Select your Lunii</string>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
         </property>
         <property name="placeholderText">
          <string>Select your Lunii</string>
