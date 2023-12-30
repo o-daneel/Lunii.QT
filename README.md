@@ -3,6 +3,9 @@ A Python QT app to manage Lunii Storyteller
 
 ![Main Window](./res/screenshot.png)
 
+## TODO
+* Create dedicated thread & slots to avoid interface freeze during import/export
+
 ### Shortcuts
 
 | Keys       | Actions                        |
