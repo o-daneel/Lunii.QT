@@ -267,7 +267,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.clear()
         self.ts_populate()
         # update status in status bar
-        self.sb_update_summary()
+        # self.sb_update_summary()
 
         # clean progress bars
         # self.lbl_total.setVisible(False)

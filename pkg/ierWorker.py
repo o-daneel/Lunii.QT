@@ -48,31 +48,45 @@ class ierWorker(QObject):
         # importing selected files
         for index, file in enumerate(self.items):
             self.signal_total_progress.emit(index, len(self.items))
-            self.lunii.import_story(file)
+            if self.lunii.import_story(file):
+                self.signal_message.emit(f"👍 New story imported : '{file}'")
+            else:
+                self.signal_message.emit(f"🛑 Failed to import : '{file}'")
             self.signal_refresh.emit()
 
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
+        self.signal_message.emit(f"✅ Import done")
 
     def _task_export(self):
         # Save all files
         for index, file in enumerate(self.items):
             self.signal_total_progress.emit(index, len(self.items))
-            self.lunii.export_story(file, self.out_dir)
+            res = self.lunii.export_story(file, self.out_dir)
+            if res:
+                self.signal_message.emit(f"👍 Story exported to '{res}'")
+            else:
+                self.signal_message.emit(f"🛑 Failed to export : '{file}'")
             self.signal_refresh.emit()
 
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
+        self.signal_message.emit(f"✅ Export done")
 
     def _task_remove(self):
         for index, item in enumerate(self.items):
             self.signal_total_progress.emit(index, len(self.items))
             # remove story contents from device
-            self.lunii.remove_story(item)
+            res = self.lunii.remove_story(item)
+            if res:
+                self.signal_message.emit(f"👍 Story removed: '{res}'")
+            else:
+                self.signal_message.emit(f"🛑 Failed to remove : '{item}'")
             self.signal_refresh.emit()
 
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
+        self.signal_message.emit(f"✅ Remove done")
