@@ -921,15 +921,16 @@ def find_devices(extra_path=None):
     elif current_os == "Linux":
         # Iterate through all partitions
         for part in psutil.disk_partitions():
-            if (('usb' in part.opts or 'removable' in part.opts) and
-                    part.fstype == "msdosfs" and
+            if (part.device.startswith("/dev/sd") and
+                    (part.fstype == "msdosfs" or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
                 lunii_dev.append(part.mountpoint)
+                
     elif current_os == "Darwin":
         # Iterate through all partitions
         for part in psutil.disk_partitions():
             if (part.device.startswith("/dev/disk") and
-                    part.fstype == "msdosfs" and
+                    (part.fstype == "msdosfs" or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
                 lunii_dev.append(part.mountpoint)
 
