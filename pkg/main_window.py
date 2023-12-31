@@ -8,7 +8,7 @@ from PySide6.QtCore import QItemSelectionModel
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
-from pkg.api.device import find_devices, LuniiDevice
+from pkg.api.device import find_devices, LuniiDevice, is_device
 from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_db, story_load_pict
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT
@@ -201,10 +201,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-            self.lunii_device = LuniiDevice(dev_name, V3_KEYS)
 
-            # creation failed ?
-            if not self.lunii_device.snu:
+            if not is_device(dev_name):
                 self.statusbar.showMessage(f"ERROR : {dev_name} is not a recognized Lunii.")
 
                 # removing the new entry
@@ -219,6 +217,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 return
 
+            self.lunii_device = LuniiDevice(dev_name, V3_KEYS)
             self.statusbar.showMessage(f"")
 
             # updating UI to indicate version

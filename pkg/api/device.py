@@ -1,4 +1,5 @@
 import glob
+import platform
 import shutil
 import time
 
@@ -899,20 +900,38 @@ def feed_stories(root_path) -> StoryList[UUID]:
 def find_devices(extra_path=None):
     lunii_dev = []
 
-    # checking all drive letters
-    for drive in range(ord('A'), ord('Z')+1):
-        drv_str = f"{chr(drive)}:/"
-        lunii_path = Path(drv_str)
-        
-        if is_device(lunii_path):
-            lunii_dev.append(lunii_path)
+    current_os = platform.system()
 
-    # checking for extra path
-    if extra_path:
-        lunii_path = Path(extra_path)
-        
-        if is_device(lunii_path):
-            lunii_dev.append(lunii_path)
+    if current_os == "Windows":
+        # checking all drive letters
+        for drive in range(ord('A'), ord('Z')+1):
+            drv_str = f"{chr(drive)}:/"
+            lunii_path = Path(drv_str)
+
+            if is_device(lunii_path):
+                lunii_dev.append(lunii_path)
+
+        # checking for extra path
+        if extra_path:
+            lunii_path = Path(extra_path)
+
+            if is_device(lunii_path):
+                lunii_dev.append(lunii_path)
+
+    elif current_os == "Linux":
+        # Iterate through all partitions
+        for part in psutil.disk_partitions():
+            if (('usb' in part.opts or 'removable' in part.opts) and
+                    part.fstype == "msdosfs" and
+                    is_device(part.mountpoint)):
+                lunii_dev.append(part.mountpoint)
+    elif current_os == "Darwin":
+        # Iterate through all partitions
+        for part in psutil.disk_partitions():
+            if (part.device.startswith("/dev/disk") and
+                    part.fstype == "msdosfs" and
+                    is_device(part.mountpoint)):
+                lunii_dev.append(part.mountpoint)
 
     # done
     return lunii_dev

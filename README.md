@@ -7,6 +7,7 @@ A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
 * improve story move up/down
 * save new story order on lunii
 * add button for official db refresh
+* ~~improve lunii detection for Linux/MacOs~~
 * ~~check for v3 keys for export~~
 * ~~more debug messages~~ 
 * ~~Create dedicated thread & slots to avoid interface freeze during import/export~~
