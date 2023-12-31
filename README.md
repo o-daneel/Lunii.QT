@@ -1,12 +1,13 @@
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller
+A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
 
 ![Main Window](./res/screenshot.png)
 
 ### TODO
 * improve story move up/down
 * save new story order on lunii
-* check for v3 keys for export
+* add button for official db refresh
+* ~~check for v3 keys for export~~
 * ~~more debug messages~~ 
 * ~~Create dedicated thread & slots to avoid interface freeze during import/export~~
 * ~~support Linux / Mac (path entry)~~
@@ -57,6 +58,20 @@ $ dist\lunii-qt
 
 
 ## Trick
+### Cache management
+This application will download once for all the official story database and any request pictures to the application dedicated folder
+* `%HOME%.lunii-qt\official.db`
+* `%HOME%.lunii-qt\cache\*`
+
+In case of any trouble, just remove this file and directory to force refresh
+
+### V3 export
+In order to suport story export from Lunii v3 hardware, you must place your device keys in here :
+```bash
+%HOME%\.lunii-qt\v3.keys
+$HOME/.lunii-qt/v3.keys
+```
+It is a binary file with 0x10 bytes for Key and 0x10 bytes for IV
 ### ICO creation
 ```bash
 magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.ico

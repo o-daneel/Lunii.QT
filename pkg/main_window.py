@@ -151,7 +151,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             act_export.setEnabled(False)
             act_remove.setEnabled(False)
 
-        if self.lunii_device.lunii_version == LUNII_V3:
+        if self.lunii_device.lunii_version == LUNII_V3 and not self.lunii_device.device_key:
             act_export.setEnabled(False)
 
         # Checking action
@@ -201,7 +201,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-            self.lunii_device = LuniiDevice(dev_name)
+            self.lunii_device = LuniiDevice(dev_name, V3_KEYS)
 
             # creation failed ?
             if not self.lunii_device.snu:

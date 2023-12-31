@@ -23,6 +23,7 @@ OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
 CACHE_DIR = os.path.join(CFG_DIR, "cache")
 OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
+V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
 
 LUNII_V2 = 2
 LUNII_V3 = 3
