@@ -67,7 +67,7 @@ class LuniiDevice(QObject):
 
             if md_version == 6:
                 self.__v3_parse(fp_md)
-            elif md_version == 3:
+            else:
                 self.__v2_parse(fp_md)
         return True
 
