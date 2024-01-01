@@ -3,7 +3,18 @@ A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
 
 ![Main Window](./res/screenshot.png)
 
-### TODO
+## Shortcuts
+
+| Keys       | Actions                        |
+|------------|--------------------------------|
+| "Alt+Up"   | Move the selected item(s) Up   |
+| "Alt+Down" | Move the selected item(s) Down |
+| "Delete"   | Remove the selected item(s)    |
+| "Ctrl+S"   | Export the selection           |
+| "Ctrl+I"   | Import new story               |
+| "F5"       | Refresh devices                |
+
+## TODO
 * add button for official db refresh
 * ~~improve story move up/down~~
 * ~~save new story order on lunii~~
@@ -45,18 +56,6 @@ $ pyinstaller lunii-qt.spec
 ...
 $ dist\lunii-qt
 ```
-
-## Shortcuts
-
-| Keys       | Actions                        |
-|------------|--------------------------------|
-| "Alt+Up"   | Move the selected item(s) Up   |
-| "Alt+Down" | Move the selected item(s) Down |
-| "Delete"   | Remove the selected item(s)    |
-| "Ctrl+S"   | Export the selection           |
-| "Ctrl+I"   | Import new story               |
-| "F5"       | Refresh devices                |
-
 
 ## Trick
 ### Cache management

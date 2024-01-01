@@ -79,7 +79,7 @@ class ierWorker(QObject):
             # remove story contents from device
             res = self.lunii.remove_story(item)
             if res:
-                self.signal_message.emit(f"👍 Story removed: '{res}'")
+                self.signal_message.emit(f"👍 Story removed: '{item}'")
             else:
                 self.signal_message.emit(f"🛑 Failed to remove : '{item}'")
             self.signal_refresh.emit()

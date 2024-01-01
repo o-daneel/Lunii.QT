@@ -1,6 +1,6 @@
 PySide6~=6.6.1
 psutil~=5.9.7
 py7zr~=0.20.8
-xxtea
+xxtea~=3.2.0
 requests~=2.31.0
-pycryptodome
+pycryptodome~=3.19.1

@@ -34,6 +34,7 @@ DONE
 
 COL_NAME = 0
 COL_UUID = 1
+APP_VERSION = "v2.0.4"
 
 
 class VLine(QFrame):
@@ -64,6 +65,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
+        self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
+
         # self.btn_abort.setVisible(False)
         # self.pgb_total.setVisible(False)
         self.tree_stories.setColumnWidth(0, 300)
@@ -226,11 +229,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_dev_refresh(self):
         dev_list = find_devices()
         self.combo_device.clear()
+        self.lunii_device = None
 
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
-        self.lbl_version.setText("")
-        self.statusbar.showMessage("")
+        self.sb_update("")
 
         for dev in dev_list:
             dev_name = str(dev)
@@ -345,10 +348,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tree_stories.addTopLevelItem(item)
 
     def sb_update(self, message):
-        self.lbl_snu.clear()
-        self.lbl_version.clear()
-        self.lbl_fs.clear()
-        self.lbl_count.clear()
+        self.lbl_snu.setText("")
+        self.lbl_version.setText("")
+        self.lbl_fs.setText("")
+        self.lbl_count.setText("")
         self.statusbar.showMessage(message)
 
         if not self.lunii_device:
@@ -356,6 +359,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # SNU
         self.lbl_snu.setText(self.lunii_device.snu.hex())
+        # self.lbl_snu.setText("23023030012345")
 
         # Version
         version = ""
