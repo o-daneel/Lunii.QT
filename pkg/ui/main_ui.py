@@ -65,15 +65,6 @@ class Ui_MainWindow(object):
 
         self.top_layout.addWidget(self.combo_device)
 
-        self.lbl_version = QLabel(self.centralwidget)
-        self.lbl_version.setObjectName(u"lbl_version")
-        self.lbl_version.setMinimumSize(QSize(20, 0))
-        self.lbl_version.setFrameShape(QFrame.NoFrame)
-        self.lbl_version.setFrameShadow(QFrame.Sunken)
-        self.lbl_version.setAlignment(Qt.AlignCenter)
-
-        self.top_layout.addWidget(self.lbl_version)
-
         self.horizontalSpacer = QSpacerItem(80, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
         self.top_layout.addItem(self.horizontalSpacer)
@@ -224,7 +215,6 @@ class Ui_MainWindow(object):
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
-        self.lbl_version.setText("")
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type to filter", None))
         ___qtreewidgetitem = self.tree_stories.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
