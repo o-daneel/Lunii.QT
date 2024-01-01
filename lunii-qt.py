@@ -5,7 +5,6 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QApplication, QSplashScreen
 
-from pkg.api.stories import story_load_db
 from pkg.main_window import MainWindow
 
 
@@ -18,12 +17,11 @@ if __name__ == "__main__":
     splash.setWindowFlag(Qt.SplashScreen | Qt.WindowStaysOnTopHint)
     splash.show()
 
-    # loading DB
-    story_load_db(True)
-
     window = MainWindow(app)
     window.show()
 
+    # killing splash
+    app.processEvents()
     time.sleep(1)
     splash.finish(window)
 

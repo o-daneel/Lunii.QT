@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
-from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_pict
+from pkg.api.stories import story_load_db, story_name, story_desc, DESC_NOT_FOUND, story_load_pict
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT
 
@@ -55,7 +55,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread: QtCore.QThread = None
 
         # UI init
+        app.processEvents()
         self.init_ui()
+        app.processEvents()
+
+        # loading DB
+        story_load_db(True)
+
 
     def init_ui(self):
         self.setupUi(self)
