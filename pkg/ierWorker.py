@@ -1,5 +1,3 @@
-import time
-
 from PySide6 import QtCore
 from PySide6.QtCore import QObject
 
@@ -20,7 +18,7 @@ class ierWorker(QObject):
     signal_finished = QtCore.Signal()
     signal_message = QtCore.Signal(str)
 
-    def __init__(self, device: LuniiDevice, action, story_list, out_dir = None):
+    def __init__(self, device: LuniiDevice, action, story_list, out_dir=None):
         super().__init__()
 
         self.early_exit = False

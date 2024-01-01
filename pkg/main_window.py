@@ -1,17 +1,16 @@
-import binascii
 import os.path
+# import time
 from pathlib import WindowsPath
 from uuid import UUID
 
 import psutil
-import requests
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
-from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_db, story_load_pict
+from pkg.api.stories import story_name, story_desc, DESC_NOT_FOUND, story_load_pict
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT
 
@@ -35,6 +34,7 @@ DONE
 
 COL_NAME = 0
 COL_UUID = 1
+
 
 class VLine(QFrame):
     def __init__(self):
@@ -137,7 +137,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # v3 without keys cannot export
             if (self.lunii_device.lunii_version == LUNII_V2 or
-                (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
+                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
                 self.act_export.setEnabled(True)
 
     def __sb_create(self):
@@ -319,12 +319,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # update status in status bar
         # self.sb_update_summary()
 
-        # clean progress bars
-        # self.lbl_total.setVisible(False)
-        # self.pbar_total.setVisible(False)
-        # self.lbl_story.setVisible(False)
-        # self.pbar_story.setVisible(False)
-
     def ts_populate(self):
         # empty device
         if self.lunii_device.stories is None or len(self.lunii_device.stories) == 0:
@@ -364,6 +358,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_snu.setText(self.lunii_device.snu.hex())
 
         # Version
+        version = ""
         if self.lunii_device.lunii_version == LUNII_V2:
             version = "v2"
         elif self.lunii_device.lunii_version == LUNII_V3:
@@ -402,10 +397,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #     self.statusbar.showMessage("Remove filters before moving...")
         #     return
 
-        sb_pos = self.tree_stories.verticalScrollBar().value()
+        # start = time.time()
 
         # getting selection
-        selected = self.tree_stories.selectionModel().selection()
+        # selected = self.tree_stories.selectionModel().selection()
         selected_items = self.tree_stories.selectedItems()
         if len(selected_items) == 0:
             return
@@ -456,7 +451,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             sel_model.select(self.tree_stories.indexFromItem(item, COL_NAME), QItemSelectionModel.Select)
             sel_model.select(self.tree_stories.indexFromItem(item, COL_UUID), QItemSelectionModel.Select)
 
-        self.tree_stories.verticalScrollBar().setValue(sb_pos)
+        # update scroll bar pos
+        selected_items = self.tree_stories.selectedItems()
+        self.tree_stories.scrollToItem(selected_items[0])
+
+        # end = time.time()
+        # print(f"took {end-start:02.2}s")
 
     def ts_remove(self):
         # getting selection
@@ -537,7 +537,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.worker_launch(ACTION_IMPORT, file_paths)
 
-    def worker_launch(self, action, item_list, out_dir = None):
+    def worker_launch(self, action, item_list, out_dir=None):
         if self.worker:
             return
 

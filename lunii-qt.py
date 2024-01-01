@@ -7,7 +7,6 @@ from PySide6.QtWidgets import QApplication, QSplashScreen
 
 from pkg.api.stories import story_load_db
 from pkg.main_window import MainWindow
-import resources_rc
 
 
 if __name__ == "__main__":
@@ -25,6 +24,7 @@ if __name__ == "__main__":
     window = MainWindow(app)
     window.show()
 
+    time.sleep(1)
     splash.finish(window)
 
     sys.exit(app.exec())

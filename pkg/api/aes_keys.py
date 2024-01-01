@@ -1,7 +1,8 @@
 import os
 
+
 def reverse_bytes(input_bytes):
-    if len(input_bytes) %4 != 0:
+    if len(input_bytes) % 4 != 0:
         print("Input buffer must be modulo 4")
         return None
 
@@ -10,6 +11,7 @@ def reverse_bytes(input_bytes):
     final_key = b''.join(reversed_groups)
 
     return final_key
+
 
 def fetch_keys(keyfile):
     key = None

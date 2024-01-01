@@ -1,7 +1,6 @@
 import glob
 import platform
 import shutil
-import time
 
 import unicodedata
 import zipfile
@@ -165,8 +164,8 @@ class LuniiDevice(QObject):
         if offset + enc_len > len(buffer):
             enc_len = len(buffer) - offset
         # checking padding
-        if enc_len%16 != 0:
-            padlen = 16 - len(buffer)%16
+        if enc_len % 16 != 0:
+            padlen = 16 - len(buffer) % 16
             buffer += b"\x00" * padlen
             enc_len += padlen
         # if something to be done
@@ -194,7 +193,7 @@ class LuniiDevice(QObject):
             self.story_iv = reverse_bytes(plain[0x10:0x20])
         else:
             # forging keys based on md ciphered part
-             self.load_fakestory_keys()
+            self.load_fakestory_keys()
 
     def load_fakestory_keys(self):
         # forging keys based on md ciphered part
@@ -214,7 +213,7 @@ class LuniiDevice(QObject):
         if self.device_iv:
             dev_iv = binascii.hexlify(self.device_iv, ' ')
 
-        repr_str  = f"Lunii device on \"{self.mount_point}\"\n"
+        repr_str = f"Lunii device on \"{self.mount_point}\"\n"
         if self.lunii_version == LUNII_V2:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
         else:
@@ -254,6 +253,7 @@ class LuniiDevice(QObject):
 
         # selecting key
         key = None
+        iv = None
         if self.lunii_version == LUNII_V2:
             key = lunii_generic_key
             iv = None
@@ -320,7 +320,7 @@ class LuniiDevice(QObject):
         # upcasing filename
         bn = os.path.basename(file)
         if len(bn) >= 8:
-            file = os.path.join(os.path.dirname(file),bn.upper())
+            file = os.path.join(os.path.dirname(file), bn.upper())
 
         # upcasing uuid dir if present
         dn = os.path.dirname(file)
@@ -345,7 +345,7 @@ class LuniiDevice(QObject):
         return True
     
     def import_story(self, story_path):
-        type = TYPE_UNK
+        archive_type = TYPE_UNK
 
         archive_size = os.path.getsize(story_path)
         free_space = psutil.disk_usage(str(self.mount_point)).free
@@ -355,15 +355,15 @@ class LuniiDevice(QObject):
         
         # identifying based on filename
         if story_path.lower().endswith(EXT_PK_PLAIN):
-            type = TYPE_PLAIN
+            archive_type = TYPE_PLAIN
         elif story_path.lower().endswith(EXT_PK_V2):
-            type = TYPE_V2
+            archive_type = TYPE_V2
         elif story_path.lower().endswith(EXT_PK_V1):
-            type = TYPE_V2
+            archive_type = TYPE_V2
         elif story_path.lower().endswith(EXT_ZIP):
-            type = TYPE_ZIP
+            archive_type = TYPE_ZIP
         elif story_path.lower().endswith(EXT_7z):
-            type = TYPE_7Z
+            archive_type = TYPE_7Z
         else:
             # trying to figure out based on zip contents
             with zipfile.ZipFile(file=story_path) as zip_file:
@@ -375,23 +375,23 @@ class LuniiDevice(QObject):
                 if bt_files:
                     bt_size = zip_file.getinfo(bt_files[0]).file_size
                     if bt_size == 0x20:
-                        type = TYPE_V3
+                        archive_type = TYPE_V3
                     else:
-                        type = TYPE_V2
+                        archive_type = TYPE_V2
                 
                 # based on ri decipher with xxtea
-                        # type = TYPE_V2
+                        # archive_type = TYPE_V2
 
         # processing story
-        if type == TYPE_PLAIN:
+        if archive_type == TYPE_PLAIN:
             return self.import_story_plain(story_path)
-        elif type == TYPE_ZIP:
+        elif archive_type == TYPE_ZIP:
             return self.import_story_zip(story_path)
-        elif type == TYPE_7Z:
+        elif archive_type == TYPE_7Z:
             return self.import_story_7z(story_path)
-        elif type == TYPE_V2:
+        elif archive_type == TYPE_V2:
             return self.import_story_v2(story_path)
-        elif type == TYPE_V3:
+        elif archive_type == TYPE_V3:
             return self.import_story_v3(story_path)
 
     def import_story_plain(self, story_path):
@@ -752,7 +752,7 @@ class LuniiDevice(QObject):
         with open(ri_path, "rb") as fp_ri:
             ri_content = fp_ri.read()
 
-        plain = self.decipher(ri_content, self.story_key, self.story_iv)
+        plain = self.decipher(ri_content, key, iv)
         return plain[:3] == b"000"
 
     def export_story(self, uuid, out_path):
@@ -812,8 +812,6 @@ class LuniiDevice(QObject):
                 for index, file in enumerate(story_flist):
                     self.signal_story_progress.emit(uuid, index, len(story_flist))
 
-                    target_name = Path(file).relative_to(story_path)
-
                     # Extract each file to another directory
                     # decipher if necessary (mp3 / bmp / li / ri / si)
                     data_plain = self.__get_plain_data(file)
@@ -862,7 +860,7 @@ class LuniiDevice(QObject):
 
 
 def secure_filename(filename):
-    INVALID_FILE_CHARS = '/\\?%*:|"<>' # https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+    INVALID_FILE_CHARS = '/\\?%*:|"<>'  # https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
 
     # keep only valid ascii chars
     output = list(unicodedata.normalize("NFKD", filename))
