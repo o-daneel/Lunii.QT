@@ -4,9 +4,9 @@ A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
 ![Main Window](./res/screenshot.png)
 
 ### TODO
-* improve story move up/down
-* save new story order on lunii
 * add button for official db refresh
+* ~~improve story move up/down~~
+* ~~save new story order on lunii~~
 * ~~improve lunii detection for Linux/MacOs~~
 * ~~check for v3 keys for export~~
 * ~~more debug messages~~ 

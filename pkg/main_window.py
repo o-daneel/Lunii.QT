@@ -18,9 +18,7 @@ from pkg.ui.main_ui import Ui_MainWindow
 
 """
 TODO : 
- * Add free space
  * drag n drop to reorder list
- * select move up/down reset screen display
 DONE
  * add cache mgmt in home dir (or local)
  * download story icon
@@ -30,6 +28,8 @@ DONE
  * add icon to context menu
  * supporting entry for lunii path
  * create a dedicated thread for import / export / delete
+ * Add free space
+ * select move up/down reset screen display
 """
 
 COL_NAME = 0
@@ -401,6 +401,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # getting selection
         # selected = self.tree_stories.selectionModel().selection()
+        if self.worker or not self.lunii_device:
+            return
+
         selected_items = self.tree_stories.selectedItems()
         if len(selected_items) == 0:
             return
@@ -438,7 +441,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.lunii_device.stories.insert(new_idx[i], self.lunii_device.stories.pop(old_idx[i]))
 
         # update Lunii device (.pi)
-        # TODO: update Lunii device (.pi)
+        self.lunii_device.update_pack_index()
 
         # refresh stories
         self.ts_update()
