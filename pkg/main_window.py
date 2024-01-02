@@ -34,7 +34,7 @@ DONE
 
 COL_NAME = 0
 COL_UUID = 1
-APP_VERSION = "v2.0.4"
+APP_VERSION = "v2.0.5"
 
 
 class VLine(QFrame):

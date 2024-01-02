@@ -1,10 +1,9 @@
-name: Build Executables
+name: Build release assets
 
 on:
-  workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main  # Change to your main branch if different
+  push:
+    tags:
+      - v*.*.*
 
 jobs:
   build_linux:
@@ -13,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v5.0.0
@@ -24,10 +25,11 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
 
-    - name: Build Linux Executable
+    - name: Build Exec & Create Archive
       run: |
         pyinstaller lunii-qt.spec
         mv ./dist/lunii-qt .
+        zip -9 -j Linux-x86_64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
@@ -36,13 +38,20 @@ jobs:
         path: |
           ./lunii-qt
 
-
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: Linux-x86_64.zip
+      
   build_win:
     runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v5.0.0
@@ -54,10 +63,11 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
 
-    - name: Build Windows Executable
+    - name: Build Exec & Create Archive
       run: |
         pyinstaller lunii-qt.spec
         move ./dist/lunii-qt.exe .
+        Compress-Archive -DestinationPath Windows-x86_64.zip -CompressionLevel Optimal -Path lunii-qt.exe
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
@@ -66,12 +76,20 @@ jobs:
         path: |
           ./lunii-qt.exe
 
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: Windows-x86_64.zip
+
   build_mac:
     runs-on: macos-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v5.0.0
@@ -83,44 +101,24 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
 
-    - name: Build MacOs Executable
+    - name: Build Exec & Create Archive
       run: |
         pyinstaller lunii-qt.spec
         mv ./dist/lunii-qt .
+        zip -9 -j Darwin-x86_64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: MacOs-x86_64
+        name: Darwin-x86_64
         path: |
           ./lunii-qt
 
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: Darwin-x86_64.zip
+
   # build_mac_arm:
   #   runs-on: macos-latest-large
-
-  #   steps:
-  #   - name: Checkout repository
-  #     uses: actions/checkout@v4.1.1
-
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v5.0.0
-  #     with:
-  #       python-version: 3.12
-
-  #   - name: Install dependencies
-  #     run: |
-  #       pip install -r requirements.txt
-  #       pip install pyinstaller
-
-  #   - name: Build MacOs (ARM) Executable
-  #     run: |
-  #       pyinstaller lunii-qt.spec
-  #       mv ./dist/lunii-qt .
-  #       uname -a
-
-  #   - name: Upload Artefact
-  #     uses: actions/upload-artifact@v4.0.0
-  #     with:
-  #       name: MacOs-aarch64
-  #       path: |
-  #         ./lunii-qt
