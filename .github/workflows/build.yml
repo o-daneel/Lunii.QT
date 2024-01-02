@@ -7,7 +7,7 @@ on:
   #     - main  # Change to your main branch if different
 
 jobs:
-  build:
+  build_linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +28,44 @@ jobs:
       run: |
         pyinstaller lunii-qt.spec
 
+  build_win:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Build Windows Executable
+      run: |
+        pyinstaller lunii-qt.spec
+
+  build_mac:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Build MacOs Executable
+      run: |
+        pyinstaller lunii-qt.spec
