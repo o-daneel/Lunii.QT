@@ -1,0 +1,30 @@
+name: Build Executables
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main  # Change to your main branch if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Build Linux Executable
+      run: |
+        pyinstaller lunii-qt.spec
+
