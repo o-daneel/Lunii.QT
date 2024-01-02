@@ -12,12 +12,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.1.1
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5.0.0
       with:
-        python-version: 3.11
+        python-version: 3.12
 
     - name: Install dependencies
       run: |
@@ -27,18 +27,27 @@ jobs:
     - name: Build Linux Executable
       run: |
         pyinstaller lunii-qt.spec
+        mv ./dist/lunii-qt .
+
+    - name: Upload Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Linux-x86_64
+        path: |
+          ./lunii-qt
+
 
   build_win:
     runs-on: windows-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.1.1
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5.0.0
       with:
-        python-version: 3.11
+        python-version: 3.12
 
     - name: Install dependencies
       run: |
@@ -48,18 +57,26 @@ jobs:
     - name: Build Windows Executable
       run: |
         pyinstaller lunii-qt.spec
+        move ./dist/lunii-qt.exe .
+
+    - name: Upload Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Windows-x86_64
+        path: |
+          ./lunii-qt.exe
 
   build_mac:
     runs-on: macos-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.1.1
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5.0.0
       with:
-        python-version: 3.11
+        python-version: 3.12
 
     - name: Install dependencies
       run: |
@@ -69,3 +86,41 @@ jobs:
     - name: Build MacOs Executable
       run: |
         pyinstaller lunii-qt.spec
+        mv ./dist/lunii-qt .
+
+    - name: Upload Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: MacOs-x86_64
+        path: |
+          ./lunii-qt
+
+  # build_mac_arm:
+  #   runs-on: macos-latest-large
+
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v4.1.1
+
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v5.0.0
+  #     with:
+  #       python-version: 3.12
+
+  #   - name: Install dependencies
+  #     run: |
+  #       pip install -r requirements.txt
+  #       pip install pyinstaller
+
+  #   - name: Build MacOs (ARM) Executable
+  #     run: |
+  #       pyinstaller lunii-qt.spec
+  #       mv ./dist/lunii-qt .
+  #       uname -a
+
+  #   - name: Upload Artefact
+  #     uses: actions/upload-artifact@v4.0.0
+  #     with:
+  #       name: MacOs-aarch64
+  #       path: |
+  #         ./lunii-qt
