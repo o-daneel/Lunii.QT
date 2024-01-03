@@ -154,7 +154,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_hsnu = QLabel("SNU:")
         self.lbl_snu = QLabel()
         self.lbl_version = QLabel()
-        self.lbl_hfs = QLabel("Free Space:")
+        self.lbl_hfs = QLabel("Free :")
         self.lbl_fs = QLabel()
         self.lbl_count = QLabel()
         self.lbl_hsnu.setStyleSheet('border: 0; color:  grey;')
@@ -370,10 +370,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Version
         version = ""
         if self.lunii_device.lunii_version == LUNII_V2:
-            version = "v2"
+            HW_version = "v2"
+            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
         elif self.lunii_device.lunii_version == LUNII_V3:
-            version = "v3"
-        self.lbl_version.setText(version)
+            HW_version = "v3"
+            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}.{self.lunii_device.fw_vers_subminor}"
+        self.lbl_version.setText(f"Lunii {HW_version}, FW: {SW_version}")
 
         # Free Space
         free_space = psutil.disk_usage(str(self.lunii_device.mount_point)).free

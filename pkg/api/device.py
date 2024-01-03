@@ -845,7 +845,8 @@ class LuniiDevice(QObject):
 
         # removing story contents
         st_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
-        shutil.rmtree(st_path)
+        if os.path.isdir(st_path):
+            shutil.rmtree(st_path)
 
         self.signal_story_progress.emit(short_uuid, 1, 3)
 
