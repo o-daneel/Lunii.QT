@@ -94,7 +94,7 @@ class Ui_MainWindow(object):
         self.tree_stories.setMinimumSize(QSize(0, 150))
         self.tree_stories.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tree_stories.setDragEnabled(True)
-        self.tree_stories.setDragDropMode(QAbstractItemView.DragDrop)
+        self.tree_stories.setDragDropMode(QAbstractItemView.DropOnly)
         self.tree_stories.setDefaultDropAction(Qt.MoveAction)
         self.tree_stories.setAlternatingRowColors(True)
         self.tree_stories.setSelectionMode(QAbstractItemView.ExtendedSelection)
