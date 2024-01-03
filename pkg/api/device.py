@@ -236,7 +236,7 @@ class LuniiDevice(QObject):
 
     def update_pack_index(self):
         pi_path = Path(self.mount_point).joinpath(".pi")
-        pi_path.unlink()
+        pi_path.unlink(missing_ok=True)
         with open(pi_path, "wb") as fp:
             st_uuid: UUID
             for st_uuid in self.stories:
@@ -927,7 +927,7 @@ def find_devices(extra_path=None):
     elif current_os == "Darwin":
         # Iterate through all partitions
         for part in psutil.disk_partitions():
-            if (part.device.startswith("/dev/disk") and
+            if (any(part.mountpoint.lower().startswith(mnt_pt) for mnt_pt in ["/mnt", "/media", "/volume"]) and
                     (part.fstype == "msdosfs" or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
                 lunii_dev.append(part.mountpoint)
@@ -938,11 +938,12 @@ def find_devices(extra_path=None):
 
 def is_device(root_path):
     root_path = Path(root_path)
-    pi_path = root_path.joinpath(".pi")
     md_path = root_path.joinpath(".md")
-    cfg_path = root_path.joinpath(".cfg")
-    content_path = root_path.joinpath(".content")
+    # pi_path = root_path.joinpath(".pi")
+    # cfg_path = root_path.joinpath(".cfg")
+    # content_path = root_path.joinpath(".content")
 
-    if pi_path.is_file() and md_path.is_file() and cfg_path.is_file() and content_path.is_dir():
+    if md_path.is_file():
+        # and pi_path.is_file() and cfg_path.is_file() and content_path.is_dir():
         return True
     return False

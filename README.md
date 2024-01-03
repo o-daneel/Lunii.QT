@@ -15,9 +15,11 @@ A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
 | "F5"       | Refresh devices                |
 
 ## TODO
+* add FW version
 * add button for official db refresh
 * fecth studio db
 * support studio stories
+* add picture to tree list
 * ~~improve story move up/down~~
 * ~~save new story order on lunii~~
 * ~~improve lunii detection for Linux/MacOs~~
