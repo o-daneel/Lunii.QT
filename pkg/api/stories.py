@@ -24,7 +24,7 @@ def story_load_db(reload=False):
 
         try:
             # Set the timeout for the request
-            response = requests.get(OFFICIAL_DB_URL, timeout=1)
+            response = requests.get(OFFICIAL_DB_URL, timeout=5)
             if response.status_code == 200:
                 # Load image from bytes
                 with open(OFFICIAL_DB, "wb") as fp:

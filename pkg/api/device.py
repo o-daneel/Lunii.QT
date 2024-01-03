@@ -1,4 +1,5 @@
 import glob
+import os.path
 import platform
 import shutil
 
@@ -68,16 +69,20 @@ class LuniiDevice(QObject):
             if md_version == 6:
                 self.__v3_parse(fp_md)
             else:
-                self.__v2_parse(fp_md)
+                self.__v1v2_parse(fp_md)
         return True
 
-    def __v2_parse(self, fp_md):
-        self.lunii_version = LUNII_V2
+    def __v1v2_parse(self, fp_md):
         fp_md.seek(6)
         self.fw_vers_major = int.from_bytes(fp_md.read(2), 'little')
         self.fw_vers_minor = int.from_bytes(fp_md.read(2), 'little')
         self.snu = fp_md.read(8)
-        
+
+        if self.snu[:3] == b"\x00\x00\x20":
+            self.lunii_version = LUNII_V2
+        else:
+            self.lunii_version = LUNII_V1
+
         fp_md.seek(0x100)
         self.raw_devkey = fp_md.read(0x100)
         dec = xxtea.decrypt(self.raw_devkey, lunii_generic_key, padding=False, rounds=lunii_tea_rounds(self.raw_devkey))
@@ -104,7 +109,7 @@ class LuniiDevice(QObject):
         # real keys if available
         self.device_key, self.device_iv = fetch_keys(self.dev_keyfile)
 
-    def __v2_decipher(self, buffer, key, offset, dec_len):
+    def __v1v2_decipher(self, buffer, key, offset, dec_len):
         # checking offset
         if offset > len(buffer):
             offset = len(buffer)
@@ -136,12 +141,12 @@ class LuniiDevice(QObject):
         return buffer
 
     def decipher(self, buffer, key, iv=None, offset=0, dec_len=512):
-        if self.lunii_version == LUNII_V2:
-            return self.__v2_decipher(buffer, key, offset, dec_len)
-        else:
+        if self.lunii_version == LUNII_V3:
             return self.__v3_decipher(buffer, key, iv, offset, dec_len)
+        else:
+            return self.__v1v2_decipher(buffer, key, offset, dec_len)
 
-    def __v2_cipher(self, buffer, key, offset, enc_len):
+    def __v1v2_cipher(self, buffer, key, offset, enc_len):
         # checking offset
         if offset > len(buffer):
             offset = len(buffer)
@@ -178,10 +183,10 @@ class LuniiDevice(QObject):
         return buffer
 
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
-        if self.lunii_version == LUNII_V2:
-            return self.__v2_cipher(buffer, key, offset, enc_len)
-        else:
+        if self.lunii_version == LUNII_V3:
             return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+        else:
+            return self.__v1v2_cipher(buffer, key, offset, enc_len)
 
     def load_story_keys(self, bt_file_path):
         if self.device_key and self.device_iv and bt_file_path and os.path.isfile(bt_file_path):
@@ -518,7 +523,7 @@ class LuniiDevice(QObject):
                 if file.endswith("ni") or file.endswith("nm"):
                     data_plain = data_v2
                 else:
-                    data_plain = self.__v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                    data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                 # updating filename, and ciphering header if necessary
                 data = self.__get_ciphered_data(file, data_plain)
                 file_newname = self.__get_ciphered_name(file)
@@ -613,7 +618,7 @@ class LuniiDevice(QObject):
                     if file.endswith("ni") or file.endswith("nm"):
                         data_plain = data_v2
                     else:
-                        data_plain = self.__v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
 
@@ -709,7 +714,7 @@ class LuniiDevice(QObject):
                     if file.endswith("ni") or file.endswith("nm"):
                         data_plain = data_v2
                     else:
-                        data_plain = self.__v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
 

@@ -145,7 +145,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
-            if (self.lunii_device.lunii_version == LUNII_V2 or
+            if (self.lunii_device.lunii_version < LUNII_V3 or
                     (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
                 self.act_export.setEnabled(True)
 
@@ -247,6 +247,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.combo_device.addItem(dev_name)
 
         if os.path.isdir("C:/Work/dev/lunii-packs/test/"):
+            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v1/")
             self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v2/")
             self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v3/")
 
@@ -364,12 +365,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # SNU
-        self.lbl_snu.setText(self.lunii_device.snu.hex())
+        self.lbl_snu.setText(self.lunii_device.snu.hex().upper().lstrip("0"))
         # self.lbl_snu.setText("23023030012345")
 
         # Version
         version = ""
-        if self.lunii_device.lunii_version == LUNII_V2:
+        if self.lunii_device.lunii_version == LUNII_V1:
+            HW_version = "v1"
+            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
+        elif self.lunii_device.lunii_version == LUNII_V2:
             HW_version = "v2"
             SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
         elif self.lunii_device.lunii_version == LUNII_V3:

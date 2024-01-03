@@ -1,5 +1,6 @@
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller (supporting v2 and v3)
+A Python QT app to manage Lunii Storyteller (supporting v1, v2 and v3)  
+(compatibility with STUdio archive to come soon)
 
 ![Main Window](./res/screenshot.png)
 
@@ -53,6 +54,16 @@ or
 $ pip install -r requirements.txt
 ```
 
+### Build UI files
+```
+$ pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
+$ pyside6-rcc resources.qrc -o resources_rc.py
+```
+### Run
+```
+$ python lunii-Qt.py
+```
+
 ### Build GUI executable
 ```
 $ pip install pyinstaller
@@ -80,3 +91,5 @@ It is a binary file with 0x10 bytes for Key and 0x10 bytes for IV
 ```bash
 magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.ico
 ```
+
+## Credits

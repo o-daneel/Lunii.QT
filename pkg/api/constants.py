@@ -25,6 +25,7 @@ CACHE_DIR = os.path.join(CFG_DIR, "cache")
 OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
 
+LUNII_V1 = 1
 LUNII_V2 = 2
 LUNII_V3 = 3
 
