@@ -67,21 +67,24 @@ class LuniiDevice(QObject):
             md_version = int.from_bytes(fp_md.read(2), 'little')
 
             if md_version == 6:
-                self.__v3_parse(fp_md)
+                self.__md6_parse(fp_md)
             else:
-                self.__v1v2_parse(fp_md)
+                self.__md1to5_parse(fp_md)
         return True
 
-    def __v1v2_parse(self, fp_md):
+    def __md1to5_parse(self, fp_md):
         fp_md.seek(6)
         self.fw_vers_major = int.from_bytes(fp_md.read(2), 'little')
         self.fw_vers_minor = int.from_bytes(fp_md.read(2), 'little')
         self.snu = fp_md.read(8)
 
-        if self.snu[:3] == b"\x00\x00\x20":
-            self.lunii_version = LUNII_V2
-        else:
+        vid = int.from_bytes(fp_md.read(2), 'little')
+        pid = int.from_bytes(fp_md.read(2), 'little')
+
+        if (vid, pid) == FAH_V1_USB_VID_PID or (vid, pid) == FAH_V1_FW_2_USB_VID_PID:
             self.lunii_version = LUNII_V1
+        elif (vid, pid) == FAH_V2_V3_USB_VID_PID:
+            self.lunii_version = LUNII_V2
 
         fp_md.seek(0x100)
         self.raw_devkey = fp_md.read(0x100)
@@ -89,7 +92,7 @@ class LuniiDevice(QObject):
         # Reordering Key components
         self.device_key = dec[8:16] + dec[0:8]
 
-    def __v3_parse(self, fp_md):
+    def __md6_parse(self, fp_md):
         self.lunii_version = LUNII_V3
         fp_md.seek(2)
         # reading fw version
@@ -101,6 +104,7 @@ class LuniiDevice(QObject):
         # reading SNU
         fp_md.seek(0x1A)
         self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
+
         # getting candidated for story bt file
         fp_md.seek(0x40)
         self.bt = fp_md.read(0x20)
