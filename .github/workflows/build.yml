@@ -27,6 +27,8 @@ jobs:
 
     - name: Build Exec & Create Archive
       run: |
+        pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
+        pyside6-rcc resources.qrc -o resources_rc.py
         pyinstaller lunii-qt.spec
         mv ./dist/lunii-qt .
         zip -9 -j Linux-x86_64.zip ./lunii-qt
@@ -65,6 +67,8 @@ jobs:
 
     - name: Build Exec & Create Archive
       run: |
+        pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
+        pyside6-rcc resources.qrc -o resources_rc.py
         pyinstaller lunii-qt.spec
         move ./dist/lunii-qt.exe .
         Compress-Archive -DestinationPath Windows-x86_64.zip -CompressionLevel Optimal -Path lunii-qt.exe
@@ -103,6 +107,8 @@ jobs:
 
     - name: Build Exec & Create Archive
       run: |
+        pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
+        pyside6-rcc resources.qrc -o resources_rc.py
         pyinstaller lunii-qt.spec
         mv ./dist/lunii-qt .
         zip -9 -j Darwin-x86_64.zip ./lunii-qt
