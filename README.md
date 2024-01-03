@@ -1,5 +1,8 @@
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller (supporting v1, v2 and v3)  
+A Python QT app to manage Lunii Storyteller supporting:
+* **v1, v2**  (full Support)
+* **v3**  (export requires device key file)  
+
 (compatibility with STUdio archive to come soon)
 
 ![Main Window](./res/screenshot.png)
@@ -16,10 +19,11 @@ A Python QT app to manage Lunii Storyteller (supporting v1, v2 and v3)
 | "F5"       | Refresh devices                |
 
 ## TODO
-* add button for official db refresh
-* fecth studio db
+* fecth STUdio db
 * support studio stories
 * add picture to tree list
+* ~~add button for official db refresh~~
+* ~~fix Lunii v1 key issue~~
 * ~~add FW version~~
 * ~~improve story move up/down~~
 * ~~save new story order on lunii~~

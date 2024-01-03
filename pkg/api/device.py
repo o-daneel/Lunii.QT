@@ -223,7 +223,7 @@ class LuniiDevice(QObject):
             dev_iv = binascii.hexlify(self.device_iv, ' ')
 
         repr_str = f"Lunii device on \"{self.mount_point}\"\n"
-        if self.lunii_version == LUNII_V2:
+        if self.lunii_version <= LUNII_V2:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
         else:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
@@ -263,7 +263,7 @@ class LuniiDevice(QObject):
         # selecting key
         key = None
         iv = None
-        if self.lunii_version == LUNII_V2:
+        if self.lunii_version <= LUNII_V2:
             key = lunii_generic_key
             iv = None
         elif self.lunii_version == LUNII_V3:
@@ -271,7 +271,7 @@ class LuniiDevice(QObject):
             iv = self.story_iv
            
         if file.endswith("bt"):
-            if self.lunii_version == LUNII_V2:
+            if self.lunii_version <= LUNII_V2:
                 key = self.device_key
                 iv = None
             elif self.lunii_version == LUNII_V3:
@@ -303,7 +303,7 @@ class LuniiDevice(QObject):
 
     def __get_ciphered_data(self, file, data):
         # selecting key
-        if self.lunii_version == LUNII_V2:
+        if self.lunii_version <= LUNII_V2:
             key = lunii_generic_key
             iv = None
         else:
@@ -462,7 +462,7 @@ class LuniiDevice(QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version == LUNII_V2 and file.endswith("ri.plain"):
+                if self.lunii_version <= LUNII_V2 and file.endswith("ri.plain"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -542,7 +542,7 @@ class LuniiDevice(QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version == LUNII_V2 and file.endswith("ri"):
+                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -614,7 +614,7 @@ class LuniiDevice(QObject):
                 else:
                     file = fname[28:]
 
-                if self.lunii_version == LUNII_V2:
+                if self.lunii_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
@@ -637,7 +637,7 @@ class LuniiDevice(QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version == LUNII_V2 and file.endswith("ri"):
+                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -710,7 +710,7 @@ class LuniiDevice(QObject):
                 else:
                     file = file[28:]
 
-                if self.lunii_version == LUNII_V2:
+                if self.lunii_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
@@ -733,7 +733,7 @@ class LuniiDevice(QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version == LUNII_V2 and file.endswith("ri"):
+                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
