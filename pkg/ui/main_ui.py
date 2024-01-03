@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         icon1.addFile(u":/icon/res/refresh.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_refresh.setIcon(icon1)
         self.btn_refresh.setIconSize(QSize(22, 22))
-        self.btn_refresh.setFlat(False)
+        self.btn_refresh.setFlat(True)
 
         self.top_layout.addWidget(self.btn_refresh)
 
@@ -74,6 +74,29 @@ class Ui_MainWindow(object):
         self.le_filter.setClearButtonEnabled(True)
 
         self.top_layout.addWidget(self.le_filter)
+
+        self.btn_db = QPushButton(self.centralwidget)
+        self.btn_db.setObjectName(u"btn_db")
+        self.btn_db.setMaximumSize(QSize(25, 25))
+        icon2 = QIcon()
+        icon2.addFile(u":/icon/res/refresh_db.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_db.setIcon(icon2)
+        self.btn_db.setIconSize(QSize(22, 22))
+        self.btn_db.setFlat(True)
+
+        self.top_layout.addWidget(self.btn_db)
+
+        self.btn_about = QPushButton(self.centralwidget)
+        self.btn_about.setObjectName(u"btn_about")
+        self.btn_about.setEnabled(False)
+        self.btn_about.setMaximumSize(QSize(25, 25))
+        icon3 = QIcon()
+        icon3.addFile(u":/icon/res/about.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_about.setIcon(icon3)
+        self.btn_about.setIconSize(QSize(20, 20))
+        self.btn_about.setFlat(True)
+
+        self.top_layout.addWidget(self.btn_about)
 
 
         self.verticalLayout_2.addLayout(self.top_layout)
@@ -207,6 +230,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Lunii Qt-Manager", None))
+#if QT_CONFIG(tooltip)
+        self.btn_refresh.setToolTip(QCoreApplication.translate("MainWindow", u"Refresh connected devices", None))
+#endif // QT_CONFIG(tooltip)
         self.btn_refresh.setText("")
         self.combo_device.setItemText(0, QCoreApplication.translate("MainWindow", u"D:\\", None))
         self.combo_device.setItemText(1, QCoreApplication.translate("MainWindow", u"F:\\", None))
@@ -216,6 +242,14 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type to filter", None))
+#if QT_CONFIG(tooltip)
+        self.btn_db.setToolTip(QCoreApplication.translate("MainWindow", u"Force official Lunii DB to be refreshed", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_db.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_about.setToolTip(QCoreApplication.translate("MainWindow", u"About", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_about.setText("")
         ___qtreewidgetitem = self.tree_stories.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
 

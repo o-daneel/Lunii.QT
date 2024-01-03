@@ -34,7 +34,7 @@ DONE
 
 COL_NAME = 0
 COL_UUID = 1
-APP_VERSION = "v2.0.6"
+APP_VERSION = "v2.0.7"
 
 
 class VLine(QFrame):
@@ -53,14 +53,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lunii_device: LuniiDevice = None
         self.worker: ierWorker = None
         self.thread: QtCore.QThread = None
+        self.app = app
 
         # UI init
-        app.processEvents()
+        self.app.processEvents()
         self.init_ui()
-        app.processEvents()
+        self.app.processEvents()
 
         # loading DB
-        story_load_db(True)
+        story_load_db(False)
 
 
     def init_ui(self):
@@ -73,7 +74,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def modify_widgets(self):
         self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
 
-        # self.btn_abort.setVisible(False)
+        self.btn_about.setVisible(False)
         # self.pgb_total.setVisible(False)
         self.tree_stories.setColumnWidth(0, 300)
         self.lbl_picture.setVisible(False)
@@ -187,6 +188,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
         self.btn_refresh.clicked.connect(self.cb_dev_refresh)
+        self.btn_db.clicked.connect(self.cb_db_refresh)
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
@@ -322,6 +324,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 self.lbl_picture.setText("Failed to fetch BMP file.")
 
+    def cb_db_refresh(self):
+        self.sb_update("Fetching official Lunii DB...")
+        self.pbar_total.setVisible(True)
+        self.pbar_total.setRange(0,100)
+        self.pbar_total.setValue(10)
+        self.app.processEvents()
+
+        retVal = story_load_db(True)
+
+        self.pbar_total.setValue(90)
+        self.app.processEvents()
+
+        self.ts_update()
+
+        self.pbar_total.setValue(100)
+        self.app.processEvents()
+
+        self.pbar_total.setVisible(False)
+        if retVal:
+            self.sb_update("👍 Lunii DB refreshed.")
+        else:
+            self.sb_update("🛑 Lunii DB failed.")
+
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
@@ -331,7 +356,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_populate(self):
         # empty device
-        if self.lunii_device.stories is None or len(self.lunii_device.stories) == 0:
+        if not self.lunii_device or not self.lunii_device.stories or len(self.lunii_device.stories) == 0:
             return
 
         # creating font
@@ -565,6 +590,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread = QtCore.QThread()
         self.worker.moveToThread(self.thread)
 
+        # UI limitations
+        self.btn_db.setEnabled(False)
+        self.tree_stories.setEnabled(False)
+
         # connecting slots
         self.thread.started.connect(self.worker.process)
         self.worker.signal_finished.connect(self.thread.quit)
@@ -579,7 +608,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def slot_total_progress(self, current, max_val):
         # updating UI
-        self.tree_stories.setEnabled(False)
         self.lbl_total.setVisible(True)
         self.lbl_total.setText(f"Total {current+1}/{max_val}")
         self.pbar_total.setVisible(True)
@@ -599,6 +627,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # print("SLOT FINISHED")
         # updating UI
         self.tree_stories.setEnabled(True)
+        self.btn_db.setEnabled(True)
 
         self.lbl_total.setVisible(False)
         self.pbar_total.setVisible(False)

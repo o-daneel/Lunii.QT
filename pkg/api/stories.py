@@ -16,6 +16,8 @@ UUID_DB = {}
 
 def story_load_db(reload=False):
     global UUID_DB
+    retVal = True
+
     # fetching db if necessary
     if not os.path.isfile(OFFICIAL_DB) or reload:
         # creating dir if not there
@@ -24,16 +26,16 @@ def story_load_db(reload=False):
 
         try:
             # Set the timeout for the request
-            response = requests.get(OFFICIAL_DB_URL, timeout=5)
+            response = requests.get(OFFICIAL_DB_URL, timeout=30)
             if response.status_code == 200:
                 # Load image from bytes
                 with open(OFFICIAL_DB, "wb") as fp:
                     fp.write(response.content)
 
         except requests.exceptions.Timeout:
-            pass
+            retVal = False
         except requests.exceptions.RequestException:
-            pass
+            retVal = False
 
     # trying to load DB
     if os.path.isfile(OFFICIAL_DB):
@@ -41,6 +43,7 @@ def story_load_db(reload=False):
             db_stories = json.load(fp_db).get('response')
             UUID_DB = {db_stories[key]["uuid"].upper(): value for (key, value) in db_stories.items()}
 
+    return retVal
 
 def story_load_pict(story_uuid: UUID, reload=False):
     image_data = None
