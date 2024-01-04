@@ -97,3 +97,13 @@ magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.
 ```
 
 ## Credits
+Thanks to :
+* **olup** for STUdio archive format 
+* **sniperflo** for v1 support & debug 
+
+# Links / Similar repos
+* [Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
+* [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
+* [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
+* [Lunii Admin](https://github.com/olup/lunii-admin) (a GO implementation of a STUdio alternative)
+* [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as previous but from a browser)

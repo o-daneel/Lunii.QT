@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 from pathlib import Path
 from uuid import UUID
 
@@ -29,8 +30,10 @@ def story_load_db(reload=False):
             response = requests.get(OFFICIAL_DB_URL, timeout=30)
             if response.status_code == 200:
                 # Load image from bytes
-                with open(OFFICIAL_DB, "wb") as fp:
-                    fp.write(response.content)
+                j_resp = json.loads(response.content)
+                with (open(OFFICIAL_DB, "w") as fp):
+                    db = j_resp.get('response')
+                    json.dump(db, fp)
 
         except requests.exceptions.Timeout:
             retVal = False
@@ -39,10 +42,13 @@ def story_load_db(reload=False):
 
     # trying to load DB
     if os.path.isfile(OFFICIAL_DB):
-        with open(OFFICIAL_DB, encoding='utf-8') as fp_db:
-            db_stories = json.load(fp_db).get('response')
-            UUID_DB = {db_stories[key]["uuid"].upper(): value for (key, value) in db_stories.items()}
-
+        try:
+            with open(OFFICIAL_DB, encoding='utf-8') as fp_db:
+                db_stories = json.load(fp_db)
+                UUID_DB = {db_stories[key]["uuid"].upper(): value for (key, value) in db_stories.items()}
+        except:
+            db = Path(OFFICIAL_DB)
+            db.unlink(OFFICIAL_DB)
     return retVal
 
 def story_load_pict(story_uuid: UUID, reload=False):
