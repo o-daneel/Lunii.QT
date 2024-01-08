@@ -20,12 +20,12 @@ A Python QT app to manage Lunii Storyteller supporting:
 
 ## TODO
 * Export All to be implemented
-* selection lost on key up / down after move
-* +10 on width
-* issue on filter
 * fecth STUdio db
 * support studio stories
 * add picture to tree list
+* dedicated menu to allow story details
+* config file to backup menu config (sizes / details)
+* ~~selection lost on key up / down after move~~
 * ~~display story size~~
 * ~~Add menu File / Tools / About~~
   * ~~File : Move Up, Move Down, Import, Export, Export All, Quit~~

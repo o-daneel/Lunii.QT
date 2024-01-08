@@ -16,12 +16,12 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
-    QHBoxLayout, QHeaderView, QLabel, QLayout,
-    QLineEdit, QMainWindow, QMenu, QMenuBar,
-    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
-    QStatusBar, QTextBrowser, QTreeWidget, QTreeWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
+    QFrame, QHBoxLayout, QHeaderView, QLabel,
+    QLayout, QLineEdit, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QStatusBar, QTextBrowser, QTreeWidget,
+    QTreeWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(665, 600)
+        MainWindow.setMinimumSize(QSize(500, 0))
         icon = QIcon()
         icon.addFile(u":/icon/res/logo.ico", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -157,6 +158,8 @@ class Ui_MainWindow(object):
         QTreeWidgetItem(self.tree_stories)
         self.tree_stories.setObjectName(u"tree_stories")
         self.tree_stories.setMinimumSize(QSize(0, 150))
+        self.tree_stories.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.tree_stories.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.tree_stories.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tree_stories.setDragEnabled(True)
         self.tree_stories.setDragDropMode(QAbstractItemView.DropOnly)

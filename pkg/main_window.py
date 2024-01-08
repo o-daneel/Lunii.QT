@@ -6,7 +6,7 @@ from uuid import UUID
 import psutil
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
@@ -36,6 +36,10 @@ COL_NAME = 0
 COL_DB = 1
 COL_UUID = 2
 COL_SIZE = 3
+
+COL_DB_SIZE = 20
+COL_SIZE_SIZE = 90
+
 APP_VERSION = "v2.0.8"
 
 
@@ -82,12 +86,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.menuTools.setEnabled(False)
 
         # self.pgb_total.setVisible(False)
-        self.tree_stories.setColumnWidth(COL_NAME, 300)
-        self.tree_stories.setColumnWidth(COL_DB, 20)
+
+        # QTreeWidget for stories
+        self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.ResizeToContents)
+        # self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
         # self.tree_stories.setColumnHidden(COL_DB, True)
-        self.tree_stories.setColumnWidth(COL_UUID, 250)
-        self.tree_stories.setColumnWidth(COL_SIZE, 50)
+        # self.tree_stories.setColumnWidth(COL_UUID, 250)
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
+        # self.tree_stories.setColumnWidth(COL_SIZE, 50)
+
         self.lbl_picture.setVisible(False)
         self.te_story_details.setVisible(False)
 
@@ -143,6 +152,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             elif event.type() == QtCore.QEvent.Drop:
                 self.ts_drop_action(event)
                 return True
+            elif event.type() == QtCore.QEvent.Resize:
+                # Ajuster la largeur de la dernière colonne (par exemple, 100 pixels)
+                col_size_width = self.tree_stories.width() - COL_DB_SIZE - self.tree_stories.columnWidth(COL_UUID) - COL_SIZE_SIZE
+
+                self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
+                self.tree_stories.setColumnWidth(COL_SIZE, COL_SIZE_SIZE-30)
+
         return False
 
     def cb_show_context_menu(self, point):
@@ -337,7 +353,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # adding items
         for story in self.lunii_device.stories:
             # filtering 
-            if le_filter is not None and le_filter.lower() not in story.name:
+            if le_filter and not le_filter.lower() in story.name.lower():
                 continue
 
             # create and add item to treeWidget
@@ -499,7 +515,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # update selection
         sel_model = self.tree_stories.selectionModel()
         # sel_model.select(selected, QItemSelectionModel.Select)
-        for idx in new_idx:
+
+        # setting FIRST item select
+        self.tree_stories.setCurrentItem(self.tree_stories.topLevelItem(new_idx[0]))
+        # if other item to be selected
+        for idx in new_idx[1:]:
             item: QTreeWidgetItem = self.tree_stories.topLevelItem(idx)
             for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
