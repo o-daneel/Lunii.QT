@@ -18,14 +18,13 @@ from PySide6.QtCore import Signal, QObject
 
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
-from pkg.api.stories import StoryList, story_name
+from pkg.api import stories
+from pkg.api.stories import StoryList, Story, _uuid_match
 
 
 class LuniiDevice(QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
-
     stories: StoryList
-    signal_zip_progress: Signal = Signal(str, int)
 
     def __init__(self, mount_point, keyfile=None):
         super().__init__()
@@ -247,9 +246,8 @@ class LuniiDevice(QObject):
         pi_path = Path(self.mount_point).joinpath(".pi")
         pi_path.unlink(missing_ok=True)
         with open(pi_path, "wb") as fp:
-            st_uuid: UUID
-            for st_uuid in self.stories:
-                fp.write(st_uuid.bytes)
+            for story in self.stories:
+                fp.write(story.uuid.bytes)
         return
 
     def __get_plain_data(self, file):
@@ -429,7 +427,7 @@ class LuniiDevice(QObject):
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                print(f"   WARN: '{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -472,7 +470,7 @@ class LuniiDevice(QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(new_uuid)
+        self.stories.append(Story(new_uuid))
         self.update_pack_index()
 
         return True
@@ -552,7 +550,7 @@ class LuniiDevice(QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(new_uuid)
+        self.stories.append(Story(new_uuid))
         self.update_pack_index()
 
         return True
@@ -647,7 +645,7 @@ class LuniiDevice(QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(new_uuid)
+        self.stories.append(Story(new_uuid))
         self.update_pack_index()
 
         return True
@@ -743,7 +741,7 @@ class LuniiDevice(QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(new_uuid)
+        self.stories.append(Story(new_uuid))
         self.update_pack_index()
 
         return True
@@ -769,15 +767,15 @@ class LuniiDevice(QObject):
         if uuid not in self.stories:
             return None
 
-        ulist = self.stories.full_uuid(uuid)
-        if len(ulist) > 1:
-            print(f"   ERROR: at least {len(ulist)} match your pattern. Try a longer UUID.")
-            for st in ulist:
-                print(f"[{st} - {self.stories.name(str(st))}]")
+        slist = self.stories.matching_stories(uuid)
+        if len(slist) > 1:
+            print(f"   ERROR: at least {len(slist)} match your pattern. Try a longer UUID.")
+            for st in slist:
+                print(f"[{st.str_uuid} - {st.name}]")
             return None
 
-        full_uuid = ulist[0]
-        uuid = str(full_uuid).upper()[28:]
+        one_story = slist[0]
+        uuid = one_story.str_uuid[28:]
 
         # checking that .content dir exist
         content_path = Path(self.mount_point).joinpath(".content")
@@ -799,7 +797,7 @@ class LuniiDevice(QObject):
                 return None
 
         # Preparing zip file
-        sname = self.stories.name(uuid)
+        sname = one_story.name
         sname = secure_filename(sname)
 
         zip_path = Path(out_path).joinpath(f"{sname}.{uuid}.plain.pk")
@@ -841,15 +839,15 @@ class LuniiDevice(QObject):
             # print("ERROR: This story is not present on your storyteller")
             return False
 
-        ulist = self.stories.full_uuid(short_uuid)
-        if len(ulist) > 1:
+        slist = self.stories.matching_stories(short_uuid)
+        if len(slist) > 1:
             # print(f"ERROR: at least {len(ulist)} match your pattern. Try a longer UUID.")
             return False
-        uuid = str(ulist[0])
+        uuid = slist[0].str_uuid
 
         # print(f"Removing {uuid[28:]} - {self.stories.name(uuid)}...")
 
-        short_uuid = uuid[28:].upper()
+        short_uuid = uuid[28:]
         self.signal_story_progress.emit(short_uuid, 0, 3)
 
         # removing story contents
@@ -860,7 +858,7 @@ class LuniiDevice(QObject):
         self.signal_story_progress.emit(short_uuid, 1, 3)
 
         # removing story from class
-        self.stories.remove(ulist[0])
+        self.stories.remove(slist[0])
         # updating pack index file
         self.update_pack_index()
 
@@ -899,9 +897,23 @@ def feed_stories(root_path) -> StoryList[UUID]:
         while loop_again:
             next_uuid = fp_pi.read(16)
             if next_uuid:
-                story_list.append(UUID(bytes=next_uuid))
+                story_list.append(Story(UUID(bytes=next_uuid)))
             else:
                 loop_again = False
+
+    # # try to recover from .content directory
+    # if not story_list:
+    #     content_dir = os.path.join(mount_path, ".content")
+    #     stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+    #
+    #     if stories_dir:
+    #         for story in stories_dir:
+    #             for uuid in stories.DB_OFFICIAL:
+    #                 if story in uuid.upper():
+    #                     found_uuid = UUID(uuid.upper())
+    #                     print(f"Recovered {found_uuid.hex}")
+    #                     story_list.append(Story(found_uuid))
+
     return story_list
 
 
