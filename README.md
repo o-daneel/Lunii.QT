@@ -19,9 +19,17 @@ A Python QT app to manage Lunii Storyteller supporting:
 | "F5"       | Refresh devices                |
 
 ## TODO
+* Export All to be implemented
+* selection lost on key up / down after move
+* +10 on width
+* issue on filter
 * fecth STUdio db
 * support studio stories
 * add picture to tree list
+* ~~display story size~~
+* ~~Add menu File / Tools / About~~
+  * ~~File : Move Up, Move Down, Import, Export, Export All, Quit~~
+  * ~~Tools : Check Update / Get current FW / Story Sizes / (Refresh Official DB)~~
 * ~~add button for official db refresh~~
 * ~~fix Lunii v1 key issue~~
 * ~~add FW version~~

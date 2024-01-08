@@ -10,9 +10,9 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
-from pkg.api.stories import story_load_db, story_name, story_desc, DESC_NOT_FOUND, story_load_pict
+from pkg.api.stories import story_load_db, DESC_NOT_FOUND
 from pkg.api.constants import *
-from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT
+from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 
 from pkg.ui.main_ui import Ui_MainWindow
 
@@ -33,8 +33,10 @@ DONE
 """
 
 COL_NAME = 0
-COL_UUID = 1
-APP_VERSION = "v2.0.7"
+COL_DB = 1
+COL_UUID = 2
+COL_SIZE = 3
+APP_VERSION = "v2.0.8"
 
 
 class VLine(QFrame):
@@ -54,6 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker: ierWorker = None
         self.thread: QtCore.QThread = None
         self.app = app
+        self.sizes_hidden = False
 
         # UI init
         self.app.processEvents()
@@ -62,7 +65,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # loading DB
         story_load_db(False)
-
 
     def init_ui(self):
         self.setupUi(self)
@@ -75,8 +77,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
 
         self.btn_about.setVisible(False)
+
+        self.menuBar.setVisible(False)
+        # self.menuTools.setEnabled(False)
+
         # self.pgb_total.setVisible(False)
-        self.tree_stories.setColumnWidth(0, 300)
+        self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.setColumnWidth(COL_DB, 20)
+        # self.tree_stories.setColumnHidden(COL_DB, True)
+        self.tree_stories.setColumnWidth(COL_UUID, 250)
+        self.tree_stories.setColumnWidth(COL_SIZE, 50)
+        self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
         self.lbl_picture.setVisible(False)
         self.te_story_details.setVisible(False)
 
@@ -86,102 +97,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
 
+        # finding menu actions
+        s_actions = self.menuStory.actions()
+        self.act_mv_up = next(act for act in s_actions if act.objectName() == "actionMove_Up")
+        self.act_mv_down = next(act for act in s_actions if act.objectName() == "actionMove_Down")
+        self.act_import = next(act for act in s_actions if act.objectName() == "actionImport")
+        self.act_export = next(act for act in s_actions if act.objectName() == "actionExport")
+        self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
+        self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
+
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tree_stories.customContextMenuRequested.connect(self.ts_context_menu)
-        self.__ctxmenu_create()
+        self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
+
+        self.menuStory.triggered.connect(self.cb_menu_story)
+        self.menuTools.triggered.connect(self.cb_menu_tools)
+        self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
 
         # Update statusbar
-        self.__sb_create()
-
-    def __ctxmenu_create(self):
-        # We build the menu.
-        self.menu = QtWidgets.QMenu()
-        self.act_mv_up = self.menu.addAction("Move Up")
-        self.act_mv_down = self.menu.addAction("Move Down")
-        self.menu.addSeparator()
-        self.act_import = self.menu.addAction("Import")
-        self.act_export = self.menu.addAction("Export")
-        self.act_remove = self.menu.addAction("Remove")
-
-        # config Tooltips
-        self.act_mv_up.setToolTip("Move item upper (ATL + UP)")
-        self.act_mv_down.setToolTip("Move item upper (ATL + DOWN)")
-        self.act_import.setToolTip("Export story to Archive")
-        self.act_export.setToolTip("Import story from Archive")
-        self.act_remove.setToolTip("Remove story")
-
-        # Loading icons
-        icon = QtGui.QIcon()
-
-        icon.addPixmap(QtGui.QPixmap(":/icon/res/up.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.act_mv_up.setIcon(icon)
-        icon.addPixmap(QtGui.QPixmap(":/icon/res/down.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.act_mv_down.setIcon(icon)
-        icon.addPixmap(QtGui.QPixmap(":/icon/res/import.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.act_import.setIcon(icon)
-        icon.addPixmap(QtGui.QPixmap(":/icon/res/export.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.act_export.setIcon(icon)
-        icon.addPixmap(QtGui.QPixmap(":/icon/res/remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.act_remove.setIcon(icon)
-
-    def __ctxmenu_update(self, index):
-        self.act_mv_up.setEnabled(False)
-        self.act_mv_down.setEnabled(False)
-        self.act_import.setEnabled(False)
-        self.act_export.setEnabled(False)
-        self.act_remove.setEnabled(False)
-
-        # during download or no device selected, no action possible
-        if not self.lunii_device or self.worker:
-            return
-
-        # always possible to import in an empty device
-        self.act_import.setEnabled(True)
-
-        # pointing to an item
-        if index.isValid():
-            self.act_mv_up.setEnabled(True)
-            self.act_mv_down.setEnabled(True)
-            self.act_remove.setEnabled(True)
-
-            # v3 without keys cannot export
-            if (self.lunii_device.lunii_version < LUNII_V3 or
-                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
-                self.act_export.setEnabled(True)
-
-    def __sb_create(self):
-        self.statusBar().showMessage("bla-bla bla")
-        self.lbl_hsnu = QLabel("SNU:")
-        self.lbl_snu = QLabel()
-        self.lbl_version = QLabel()
-        self.lbl_hfs = QLabel("Free :")
-        self.lbl_fs = QLabel()
-        self.lbl_count = QLabel()
-        self.lbl_hsnu.setStyleSheet('border: 0; color:  grey;')
-        self.lbl_snu.setStyleSheet('border: 0; color:  grey;')
-        self.lbl_version.setStyleSheet('border: 0; color:  grey;')
-        self.lbl_hfs.setStyleSheet('border: 0; color:  grey;')
-        self.lbl_fs.setStyleSheet('border: 0; color:  grey;')
-        self.lbl_count.setStyleSheet('border: 0; color:  grey;')
-
-        self.statusBar().reformat()
-        self.statusBar().setStyleSheet('border: 0; background-color: #FFF8DC;')
-        self.statusBar().setStyleSheet("QStatusBar::item {border: none;}")
-
-        self.statusBar().addPermanentWidget(VLine())    # <---
-        self.statusBar().addPermanentWidget(self.lbl_hsnu)
-        self.statusBar().addPermanentWidget(self.lbl_snu)
-        self.statusBar().addPermanentWidget(VLine())    # <---
-        self.statusBar().addPermanentWidget(self.lbl_version)
-        self.statusBar().addPermanentWidget(VLine())    # <---
-        self.statusBar().addPermanentWidget(self.lbl_hfs)
-        self.statusBar().addPermanentWidget(self.lbl_fs)
-        self.statusBar().addPermanentWidget(VLine())    # <---
-        self.statusBar().addPermanentWidget(self.lbl_count)
-
-        # self.lbl_snu.setText("2302303012345")
-        # self.lbl_fs.setText("1234 MB")
+        self.sb_create()
 
     # connecting slots and signals
     def setup_connections(self):
@@ -192,9 +126,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
-        # signals connections
-        # LuniiDevice.signal_zip_progress.connect(self.slot_zip_progress)
-
         # story list shortcuts
         QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
         QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
@@ -203,6 +134,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
 
+    # TREE WIDGET MANAGEMENT
     def eventFilter(self, obj, event):
         if obj.objectName() == "tree_stories":
             if event.type() == QtCore.QEvent.DragEnter:
@@ -213,25 +145,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return True
         return False
 
-    # TREE WIDGET MANAGEMENT
-    def ts_context_menu(self, point):
-        # about the selected node.
-        index = self.tree_stories.indexAt(point)
+    def cb_show_context_menu(self, point):
+        # change active menu based on selection
+        self.cb_menu_story_update()
 
-        self.__ctxmenu_update(index)
-
-        # Checking action
-        picked_action = self.menu.exec_(self.tree_stories.mapToGlobal(point))
-        if picked_action == self.act_mv_up:
-            self.ts_move_up()
-        elif picked_action == self.act_mv_down:
-            self.ts_move_down()
-        elif picked_action == self.act_import:
-            self.ts_import()
-        elif picked_action == self.act_export:
-            self.ts_export()
-        elif picked_action == self.act_remove:
-            self.ts_remove()
+        self.menuStory.exec_(self.tree_stories.mapToGlobal(point))
 
     # WIDGETS UPDATES
     def cb_dev_refresh(self):
@@ -268,7 +186,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-
             if not is_device(dev_name):
                 self.statusbar.showMessage(f"ERROR : {dev_name} is not a recognized Lunii.")
 
@@ -290,6 +207,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_update()
             self.sb_update("")
 
+            # computing sizes if necessary
+            if not self.sizes_hidden and any(story for story in self.lunii_device.stories if story.size == -1):
+                self.worker_launch(ACTION_SIZE)
+
     def cb_tree_select(self):
         # getting selection
         selection = self.tree_stories.selectedItems()
@@ -302,8 +223,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = selection[0]
             uuid = item.text(COL_UUID)
 
-            one_story_desc = story_desc(uuid)
-            one_story_image = story_load_pict(uuid)
+            one_story = self.lunii_device.stories.get_story(uuid)
+            one_story_desc = one_story.desc
+            one_story_image = one_story.get_picture()
 
             # nothing to display
             if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_image:
@@ -347,6 +269,52 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.sb_update("🛑 Lunii DB failed.")
 
+    def cb_menu_story(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionMove_Up":
+            self.ts_move_up()
+        elif act_name == "actionMove_Down":
+            self.ts_move_down()
+        elif act_name == "actionImport":
+            self.ts_import()
+        elif act_name == "actionExport":
+            self.ts_export()
+        elif act_name == "actionRemove":
+            self.ts_remove()
+
+    def cb_menu_tools(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionShow_size":
+            self.sizes_hidden = not action.isChecked()
+            self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
+
+            # # do we need to compute sizes ?
+            if not self.sizes_hidden:
+                self.worker_launch(ACTION_SIZE)
+
+    def cb_menu_story_update(self):
+        # all disabled
+        for action in self.menuStory.actions():
+            action.setEnabled(False)
+
+        # during download or no device selected, no action possible
+        if not self.lunii_device or self.worker:
+            return
+
+        # always possible to import in an empty device
+        self.act_import.setEnabled(True)
+
+        # pointing to an item
+        if self.tree_stories.selectedItems():
+            self.act_mv_up.setEnabled(True)
+            self.act_mv_down.setEnabled(True)
+            self.act_remove.setEnabled(True)
+
+            # v3 without keys cannot export
+            if (self.lunii_device.lunii_version < LUNII_V3 or
+                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
+                self.act_export.setEnabled(True)
+
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
@@ -369,15 +337,56 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # adding items
         for story in self.lunii_device.stories:
             # filtering 
-            if le_filter is not None and le_filter.lower() not in story_name(story).lower():
+            if le_filter is not None and le_filter.lower() not in story.name:
                 continue
 
             # create and add item to treeWidget
             item = QTreeWidgetItem()
-            item.setText(COL_NAME, story_name(story))
-            item.setText(COL_UUID, str(story).upper())
+            item.setText(COL_NAME, story.name)
+            if story.is_official():
+                item.setText(COL_DB, "O")
+            else:
+                item.setText(COL_DB, "T")
+            item.setTextAlignment(COL_DB, Qt.AlignCenter)
+            item.setText(COL_UUID, story.str_uuid)
             item.setFont(COL_UUID, console_font)
+            if story.size != -1:
+                item.setText(COL_SIZE, f"{round(story.size/1024/1024, 1)}MB")
+            item.setTextAlignment(COL_SIZE, Qt.AlignRight)
             self.tree_stories.addTopLevelItem(item)
+
+    def sb_create(self):
+        self.statusBar().showMessage("bla-bla bla")
+        self.lbl_hsnu = QLabel("SNU:")
+        self.lbl_snu = QLabel()
+        self.lbl_version = QLabel()
+        self.lbl_hfs = QLabel("Free :")
+        self.lbl_fs = QLabel()
+        self.lbl_count = QLabel()
+        self.lbl_hsnu.setStyleSheet('border: 0; color:  grey;')
+        self.lbl_snu.setStyleSheet('border: 0; color:  grey;')
+        self.lbl_version.setStyleSheet('border: 0; color:  grey;')
+        self.lbl_hfs.setStyleSheet('border: 0; color:  grey;')
+        self.lbl_fs.setStyleSheet('border: 0; color:  grey;')
+        self.lbl_count.setStyleSheet('border: 0; color:  grey;')
+
+        self.statusBar().reformat()
+        self.statusBar().setStyleSheet('border: 0; background-color: #FFF8DC;')
+        self.statusBar().setStyleSheet("QStatusBar::item {border: none;}")
+
+        self.statusBar().addPermanentWidget(VLine())    # <---
+        self.statusBar().addPermanentWidget(self.lbl_hsnu)
+        self.statusBar().addPermanentWidget(self.lbl_snu)
+        self.statusBar().addPermanentWidget(VLine())    # <---
+        self.statusBar().addPermanentWidget(self.lbl_version)
+        self.statusBar().addPermanentWidget(VLine())    # <---
+        self.statusBar().addPermanentWidget(self.lbl_hfs)
+        self.statusBar().addPermanentWidget(self.lbl_fs)
+        self.statusBar().addPermanentWidget(VLine())    # <---
+        self.statusBar().addPermanentWidget(self.lbl_count)
+
+        # self.lbl_snu.setText("2302303012345")
+        # self.lbl_fs.setText("1234 MB")
 
     def sb_update(self, message):
         self.lbl_snu.setText("")
@@ -492,8 +501,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # sel_model.select(selected, QItemSelectionModel.Select)
         for idx in new_idx:
             item: QTreeWidgetItem = self.tree_stories.topLevelItem(idx)
-            sel_model.select(self.tree_stories.indexFromItem(item, COL_NAME), QItemSelectionModel.Select)
-            sel_model.select(self.tree_stories.indexFromItem(item, COL_UUID), QItemSelectionModel.Select)
+            for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
+                sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
         # update scroll bar pos
         selected_items = self.tree_stories.selectedItems()
@@ -581,8 +590,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.worker_launch(ACTION_IMPORT, file_paths)
 
-    def worker_launch(self, action, item_list, out_dir=None):
+    def worker_launch(self, action, item_list=None, out_dir=None):
         if self.worker:
+            return
+
+        if not self.lunii_device:
             return
 
         # setting up the thread

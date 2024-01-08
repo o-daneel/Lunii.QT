@@ -11,25 +11,65 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
     QHBoxLayout, QHeaderView, QLabel, QLayout,
-    QLineEdit, QMainWindow, QProgressBar, QPushButton,
-    QSizePolicy, QSpacerItem, QStatusBar, QTextBrowser,
-    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
+    QStatusBar, QTextBrowser, QTreeWidget, QTreeWidgetItem,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(640, 600)
+        MainWindow.resize(665, 600)
         icon = QIcon()
         icon.addFile(u":/icon/res/logo.ico", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        self.actionExit = QAction(MainWindow)
+        self.actionExit.setObjectName(u"actionExit")
+        self.actionImport = QAction(MainWindow)
+        self.actionImport.setObjectName(u"actionImport")
+        icon1 = QIcon()
+        icon1.addFile(u":/icon/res/import.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionImport.setIcon(icon1)
+        self.actionExport = QAction(MainWindow)
+        self.actionExport.setObjectName(u"actionExport")
+        icon2 = QIcon()
+        icon2.addFile(u":/icon/res/export.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionExport.setIcon(icon2)
+        self.actionExport_All = QAction(MainWindow)
+        self.actionExport_All.setObjectName(u"actionExport_All")
+        self.actionExport_All.setIcon(icon2)
+        self.actionMove_Up = QAction(MainWindow)
+        self.actionMove_Up.setObjectName(u"actionMove_Up")
+        icon3 = QIcon()
+        icon3.addFile(u":/icon/res/up.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionMove_Up.setIcon(icon3)
+        self.actionMove_Down = QAction(MainWindow)
+        self.actionMove_Down.setObjectName(u"actionMove_Down")
+        icon4 = QIcon()
+        icon4.addFile(u":/icon/res/down.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionMove_Down.setIcon(icon4)
+        self.actionRemove = QAction(MainWindow)
+        self.actionRemove.setObjectName(u"actionRemove")
+        icon5 = QIcon()
+        icon5.addFile(u":/icon/res/remove.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionRemove.setIcon(icon5)
+        self.actionShow_size = QAction(MainWindow)
+        self.actionShow_size.setObjectName(u"actionShow_size")
+        self.actionShow_size.setCheckable(True)
+        self.actionShow_size.setChecked(False)
+        self.actionShow_size.setEnabled(True)
+        self.actionGet_firmware = QAction(MainWindow)
+        self.actionGet_firmware.setObjectName(u"actionGet_firmware")
+        self.actionGet_firmware.setEnabled(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -43,9 +83,9 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(9)
         self.btn_refresh.setFont(font)
-        icon1 = QIcon()
-        icon1.addFile(u":/icon/res/refresh.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_refresh.setIcon(icon1)
+        icon6 = QIcon()
+        icon6.addFile(u":/icon/res/refresh.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_refresh.setIcon(icon6)
         self.btn_refresh.setIconSize(QSize(22, 22))
         self.btn_refresh.setFlat(True)
 
@@ -78,9 +118,9 @@ class Ui_MainWindow(object):
         self.btn_db = QPushButton(self.centralwidget)
         self.btn_db.setObjectName(u"btn_db")
         self.btn_db.setMaximumSize(QSize(25, 25))
-        icon2 = QIcon()
-        icon2.addFile(u":/icon/res/refresh_db.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_db.setIcon(icon2)
+        icon7 = QIcon()
+        icon7.addFile(u":/icon/res/refresh_db.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_db.setIcon(icon7)
         self.btn_db.setIconSize(QSize(22, 22))
         self.btn_db.setFlat(True)
 
@@ -90,9 +130,9 @@ class Ui_MainWindow(object):
         self.btn_about.setObjectName(u"btn_about")
         self.btn_about.setEnabled(False)
         self.btn_about.setMaximumSize(QSize(25, 25))
-        icon3 = QIcon()
-        icon3.addFile(u":/icon/res/about.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_about.setIcon(icon3)
+        icon8 = QIcon()
+        icon8.addFile(u":/icon/res/about.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_about.setIcon(icon8)
         self.btn_about.setIconSize(QSize(20, 20))
         self.btn_about.setFlat(True)
 
@@ -103,14 +143,16 @@ class Ui_MainWindow(object):
 
         self.tree_stories = QTreeWidget(self.centralwidget)
         __qtreewidgetitem = QTreeWidgetItem()
-        __qtreewidgetitem.setText(1, u"UUID");
+        __qtreewidgetitem.setTextAlignment(3, Qt.AlignLeading|Qt.AlignVCenter);
+        __qtreewidgetitem.setText(2, u"UUID");
+        __qtreewidgetitem.setTextAlignment(1, Qt.AlignCenter);
         self.tree_stories.setHeaderItem(__qtreewidgetitem)
         font1 = QFont()
         font1.setFamilies([u"Consolas"])
         __qtreewidgetitem1 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem1.setFont(1, font1);
+        __qtreewidgetitem1.setFont(2, font1);
         __qtreewidgetitem2 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem2.setFont(1, font1);
+        __qtreewidgetitem2.setFont(2, font1);
         QTreeWidgetItem(self.tree_stories)
         QTreeWidgetItem(self.tree_stories)
         self.tree_stories.setObjectName(u"tree_stories")
@@ -219,17 +261,59 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(u"statusbar")
         self.statusbar.setLayoutDirection(Qt.LeftToRight)
         MainWindow.setStatusBar(self.statusbar)
+        self.menuBar = QMenuBar(MainWindow)
+        self.menuBar.setObjectName(u"menuBar")
+        self.menuBar.setEnabled(True)
+        self.menuBar.setGeometry(QRect(0, 0, 665, 22))
+        self.menuFile = QMenu(self.menuBar)
+        self.menuFile.setObjectName(u"menuFile")
+        self.menuTools = QMenu(self.menuBar)
+        self.menuTools.setObjectName(u"menuTools")
+        self.menuStory = QMenu(self.menuBar)
+        self.menuStory.setObjectName(u"menuStory")
+        MainWindow.setMenuBar(self.menuBar)
         QWidget.setTabOrder(self.combo_device, self.le_filter)
         QWidget.setTabOrder(self.le_filter, self.tree_stories)
 
+        self.menuBar.addAction(self.menuFile.menuAction())
+        self.menuBar.addAction(self.menuStory.menuAction())
+        self.menuBar.addAction(self.menuTools.menuAction())
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionExit)
+        self.menuTools.addAction(self.actionShow_size)
+        self.menuTools.addAction(self.actionGet_firmware)
+        self.menuStory.addAction(self.actionMove_Up)
+        self.menuStory.addAction(self.actionMove_Down)
+        self.menuStory.addSeparator()
+        self.menuStory.addAction(self.actionImport)
+        self.menuStory.addAction(self.actionExport)
+        self.menuStory.addAction(self.actionExport_All)
+        self.menuStory.addAction(self.actionRemove)
+
         self.retranslateUi(MainWindow)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
+        self.actionExit.triggered.connect(MainWindow.close)
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Lunii Qt-Manager", None))
+        self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
+        self.actionImport.setText(QCoreApplication.translate("MainWindow", u"Import", None))
+        self.actionExport.setText(QCoreApplication.translate("MainWindow", u"Export", None))
+        self.actionExport_All.setText(QCoreApplication.translate("MainWindow", u"Export All", None))
+        self.actionMove_Up.setText(QCoreApplication.translate("MainWindow", u"Move Up", None))
+        self.actionMove_Down.setText(QCoreApplication.translate("MainWindow", u"Move Down", None))
+        self.actionRemove.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.actionShow_size.setText(QCoreApplication.translate("MainWindow", u"Show size", None))
+#if QT_CONFIG(tooltip)
+        self.actionShow_size.setToolTip(QCoreApplication.translate("MainWindow", u"Show size for each stories", None))
+#endif // QT_CONFIG(tooltip)
+        self.actionGet_firmware.setText(QCoreApplication.translate("MainWindow", u"Get FW Update", None))
+#if QT_CONFIG(tooltip)
+        self.actionGet_firmware.setToolTip(QCoreApplication.translate("MainWindow", u"Get firmaware update for current Lunii", None))
+#endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.btn_refresh.setToolTip(QCoreApplication.translate("MainWindow", u"Refresh connected devices", None))
 #endif // QT_CONFIG(tooltip)
@@ -251,21 +335,31 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.btn_about.setText("")
         ___qtreewidgetitem = self.tree_stories.headerItem()
+        ___qtreewidgetitem.setText(3, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"DB", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
 
         __sortingEnabled = self.tree_stories.isSortingEnabled()
         self.tree_stories.setSortingEnabled(False)
         ___qtreewidgetitem1 = self.tree_stories.topLevelItem(0)
-        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"C4139D59-872A-4D15-8CF1-76D34CDF38C6", None));
+        ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"75MB", None));
+        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"C4139D59-872A-4D15-8CF1-76D34CDF38C6", None));
+        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Suzanne et Gaston", None));
         ___qtreewidgetitem2 = self.tree_stories.topLevelItem(1)
-        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9", None));
+        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"65MB", None));
+        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9", None));
+        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
         ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Panique aux 6 Royaumes", None));
         ___qtreewidgetitem3 = self.tree_stories.topLevelItem(2)
-        ___qtreewidgetitem3.setText(1, QCoreApplication.translate("MainWindow", u"22137B29-8646-4335-8069-4A4C9A2D7E89", None));
+        ___qtreewidgetitem3.setText(3, QCoreApplication.translate("MainWindow", u"124MB", None));
+        ___qtreewidgetitem3.setText(2, QCoreApplication.translate("MainWindow", u"22137B29-8646-4335-8069-4A4C9A2D7E89", None));
+        ___qtreewidgetitem3.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
         ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Au Pays des Loups", None));
         ___qtreewidgetitem4 = self.tree_stories.topLevelItem(3)
-        ___qtreewidgetitem4.setText(1, QCoreApplication.translate("MainWindow", u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C", None));
+        ___qtreewidgetitem4.setText(3, QCoreApplication.translate("MainWindow", u"25MB", None));
+        ___qtreewidgetitem4.setText(2, QCoreApplication.translate("MainWindow", u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C", None));
+        ___qtreewidgetitem4.setText(1, QCoreApplication.translate("MainWindow", u"C", None));
         ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Sur les bancs de l'\u00e9cole", None));
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
@@ -273,5 +367,8 @@ class Ui_MainWindow(object):
         self.lbl_story.setText(QCoreApplication.translate("MainWindow", u"8B_UUID", None))
         self.lbl_picture.setText(QCoreApplication.translate("MainWindow", u"Pic", None))
         self.te_story_details.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Story description", None))
+        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
+        self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"Tools", None))
+        self.menuStory.setTitle(QCoreApplication.translate("MainWindow", u"Stories", None))
     # retranslateUi
 

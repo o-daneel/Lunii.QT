@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
+    <width>665</width>
     <height>600</height>
    </rect>
   </property>
@@ -227,12 +227,31 @@
       </column>
       <column>
        <property name="text">
+        <string>DB</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string notr="true">UUID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Size</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignLeading|AlignVCenter</set>
        </property>
       </column>
       <item>
        <property name="text">
         <string>Suzanne et Gaston</string>
+       </property>
+       <property name="text">
+        <string>O</string>
        </property>
        <property name="text">
         <string>C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
@@ -242,10 +261,16 @@
          <family>Consolas</family>
         </font>
        </property>
+       <property name="text">
+        <string>75MB</string>
+       </property>
       </item>
       <item>
        <property name="text">
         <string>Panique aux 6 Royaumes</string>
+       </property>
+       <property name="text">
+        <string>O</string>
        </property>
        <property name="text">
         <string>03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
@@ -255,13 +280,22 @@
          <family>Consolas</family>
         </font>
        </property>
+       <property name="text">
+        <string>65MB</string>
+       </property>
       </item>
       <item>
        <property name="text">
         <string>Au Pays des Loups</string>
        </property>
        <property name="text">
+        <string>O</string>
+       </property>
+       <property name="text">
         <string>22137B29-8646-4335-8069-4A4C9A2D7E89</string>
+       </property>
+       <property name="text">
+        <string>124MB</string>
        </property>
       </item>
       <item>
@@ -269,7 +303,13 @@
         <string>Sur les bancs de l'école</string>
        </property>
        <property name="text">
+        <string>C</string>
+       </property>
+       <property name="text">
         <string>29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+       </property>
+       <property name="text">
+        <string>25MB</string>
        </property>
       </item>
      </widget>
@@ -437,6 +477,135 @@
     <enum>Qt::LeftToRight</enum>
    </property>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>665</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionShow_size"/>
+    <addaction name="actionGet_firmware"/>
+   </widget>
+   <widget class="QMenu" name="menuStory">
+    <property name="title">
+     <string>Stories</string>
+    </property>
+    <addaction name="actionMove_Up"/>
+    <addaction name="actionMove_Down"/>
+    <addaction name="separator"/>
+    <addaction name="actionImport"/>
+    <addaction name="actionExport"/>
+    <addaction name="actionExport_All"/>
+    <addaction name="actionRemove"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuStory"/>
+   <addaction name="menuTools"/>
+  </widget>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/import.png</normaloff>:/icon/res/import.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/export.png</normaloff>:/icon/res/export.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionExport_All">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/export.png</normaloff>:/icon/res/export.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export All</string>
+   </property>
+  </action>
+  <action name="actionMove_Up">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/up.png</normaloff>:/icon/res/up.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Up</string>
+   </property>
+  </action>
+  <action name="actionMove_Down">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/down.png</normaloff>:/icon/res/down.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Down</string>
+   </property>
+  </action>
+  <action name="actionRemove">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/remove.png</normaloff>:/icon/res/remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+  </action>
+  <action name="actionShow_size">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show size</string>
+   </property>
+   <property name="toolTip">
+    <string>Show size for each stories</string>
+   </property>
+  </action>
+  <action name="actionGet_firmware">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Get FW Update</string>
+   </property>
+   <property name="toolTip">
+    <string>Get firmaware update for current Lunii</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>combo_device</tabstop>
@@ -460,6 +629,22 @@
     <hint type="destinationlabel">
      <x>236</x>
      <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>

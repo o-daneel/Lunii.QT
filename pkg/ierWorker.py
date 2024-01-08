@@ -1,3 +1,5 @@
+import os
+
 from PySide6 import QtCore
 from PySide6.QtCore import QObject
 
@@ -6,6 +8,7 @@ from pkg.api.device import LuniiDevice
 ACTION_IMPORT = 1
 ACTION_EXPORT = 2
 ACTION_REMOVE = 3
+ACTION_SIZE = 4
 
 
 class ExitException(Exception):
@@ -18,7 +21,7 @@ class ierWorker(QObject):
     signal_finished = QtCore.Signal()
     signal_message = QtCore.Signal(str)
 
-    def __init__(self, device: LuniiDevice, action, story_list, out_dir=None):
+    def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None):
         super().__init__()
 
         self.early_exit = False
@@ -35,6 +38,8 @@ class ierWorker(QObject):
                 self._task_export()
             elif self.action == ACTION_REMOVE:
                 self._task_remove()
+            elif self.action == ACTION_SIZE:
+                self._task_size()
 
         except ExitException:
             # Abort requested
@@ -51,6 +56,8 @@ class ierWorker(QObject):
             else:
                 self.signal_message.emit(f"🛑 Failed to import : '{file}'")
             self.signal_refresh.emit()
+
+        self._task_size()
 
         # done
         self.signal_finished.emit()
@@ -88,3 +95,28 @@ class ierWorker(QObject):
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit(f"✅ Remove done")
+
+    def _task_size(self):
+
+        # processing all stories
+        for index, story in enumerate(self.lunii.stories):
+            self.signal_total_progress.emit(index, len(self.lunii.stories))
+
+            # is the size already known ?
+            if story.size != -1:
+                continue
+
+            # processing all files in a story
+            story.size = 0
+            all_files = list()
+            for parent_dir, _, files in os.walk(f"{self.lunii.mount_point}/.content/{story.short_uuid}"):
+                for file in files:
+                    story.size += os.path.getsize(os.path.join(parent_dir, file))
+
+            # updating to display story size
+            self.signal_refresh.emit()
+
+        # done
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit(f"✅ Stories parsed, sizes updated")
