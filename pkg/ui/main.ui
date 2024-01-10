@@ -513,14 +513,17 @@
      <string>Tools</string>
     </property>
     <addaction name="actionShow_size"/>
+    <addaction name="actionShow_story_details"/>
     <addaction name="actionGet_firmware"/>
    </widget>
    <widget class="QMenu" name="menuStory">
     <property name="title">
      <string>Stories</string>
     </property>
+    <addaction name="actionMove_Top"/>
     <addaction name="actionMove_Up"/>
     <addaction name="actionMove_Down"/>
+    <addaction name="actionMove_Bottom"/>
     <addaction name="separator"/>
     <addaction name="actionImport"/>
     <addaction name="actionExport"/>
@@ -544,6 +547,9 @@
    <property name="text">
     <string>Import</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
   </action>
   <action name="actionExport">
    <property name="icon">
@@ -552,6 +558,9 @@
    </property>
    <property name="text">
     <string>Export</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionExport_All">
@@ -562,6 +571,9 @@
    <property name="text">
     <string>Export All</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
   </action>
   <action name="actionMove_Up">
    <property name="icon">
@@ -570,6 +582,9 @@
    </property>
    <property name="text">
     <string>Move Up</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Up</string>
    </property>
   </action>
   <action name="actionMove_Down">
@@ -580,6 +595,9 @@
    <property name="text">
     <string>Move Down</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+Down</string>
+   </property>
   </action>
   <action name="actionRemove">
    <property name="icon">
@@ -589,13 +607,16 @@
    <property name="text">
     <string>Remove</string>
    </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
   </action>
   <action name="actionShow_size">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="enabled">
     <bool>true</bool>
@@ -616,6 +637,41 @@
    </property>
    <property name="toolTip">
     <string>Get firmaware update for current Lunii</string>
+   </property>
+  </action>
+  <action name="actionShow_story_details">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show story details</string>
+   </property>
+  </action>
+  <action name="actionMove_Top">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/top.png</normaloff>:/icon/res/top.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Top</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Up</string>
+   </property>
+  </action>
+  <action name="actionMove_Bottom">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/bottom.png</normaloff>:/icon/res/bottom.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Bottom</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Down</string>
    </property>
   </action>
  </widget>

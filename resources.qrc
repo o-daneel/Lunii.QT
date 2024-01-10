@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icon">
+    <file>res/bottom.png</file>
+    <file>res/top.png</file>
     <file>res/about.png</file>
     <file>res/refresh_db.png</file>
     <file>res/logo.ico</file>

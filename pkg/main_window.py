@@ -1,36 +1,19 @@
 import os.path
 # import time
 from pathlib import WindowsPath
-from uuid import UUID
 
 import psutil
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
-from pkg.api.stories import story_load_db, DESC_NOT_FOUND
+from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 
 from pkg.ui.main_ui import Ui_MainWindow
-
-"""
-TODO : 
- * drag n drop to reorder list
-DONE
- * add cache mgmt in home dir (or local)
- * download story icon
- * display picture
- * add icon to app
- * add icon to refresh button
- * add icon to context menu
- * supporting entry for lunii path
- * create a dedicated thread for import / export / delete
- * Add free space
- * select move up/down reset screen display
-"""
 
 COL_NAME = 0
 COL_DB = 1
@@ -40,7 +23,7 @@ COL_SIZE = 3
 COL_DB_SIZE = 20
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.0.8"
+APP_VERSION = "v2.0.9"
 
 
 class VLine(QFrame):
@@ -60,7 +43,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker: ierWorker = None
         self.thread: QtCore.QThread = None
         self.app = app
+        # app config
         self.sizes_hidden = False
+        self.details_hidden = False
+        self.details_last_uuid = None
 
         # UI init
         self.app.processEvents()
@@ -82,7 +68,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.btn_about.setVisible(False)
 
-        self.menuBar.setVisible(False)
+        # self.menuBar.setVisible(False)
         # self.menuTools.setEnabled(False)
 
         # self.pgb_total.setVisible(False)
@@ -108,8 +94,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # finding menu actions
         s_actions = self.menuStory.actions()
+        self.act_mv_top = next(act for act in s_actions if act.objectName() == "actionMove_Top")
         self.act_mv_up = next(act for act in s_actions if act.objectName() == "actionMove_Up")
         self.act_mv_down = next(act for act in s_actions if act.objectName() == "actionMove_Down")
+        self.act_mv_bottom = next(act for act in s_actions if act.objectName() == "actionMove_Bottom")
         self.act_import = next(act for act in s_actions if act.objectName() == "actionImport")
         self.act_export = next(act for act in s_actions if act.objectName() == "actionExport")
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
@@ -136,11 +124,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.installEventFilter(self)
 
         # story list shortcuts
-        QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
-        QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
-        QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
-        QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
-        QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
 
     # TREE WIDGET MANAGEMENT
@@ -153,9 +136,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                # Ajuster la largeur de la dernière colonne (par exemple, 100 pixels)
+                # Adjusting cols based on widget size
                 col_size_width = self.tree_stories.width() - COL_DB_SIZE - self.tree_stories.columnWidth(COL_UUID) - COL_SIZE_SIZE
-
                 self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
                 self.tree_stories.setColumnWidth(COL_SIZE, COL_SIZE_SIZE-30)
 
@@ -239,6 +221,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = selection[0]
             uuid = item.text(COL_UUID)
 
+            # early exit if no changes on story
+            if uuid == self.details_last_uuid:
+                return
+
+            # keeping track of currently displayed story
+            self.details_last_uuid = uuid
+
+            # feeding story image and desc
             one_story = self.lunii_device.stories.get_story(uuid)
             one_story_desc = one_story.desc
             one_story_image = one_story.get_picture()
@@ -287,14 +277,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def cb_menu_story(self, action: QtGui.QAction):
         act_name = action.objectName()
-        if act_name == "actionMove_Up":
-            self.ts_move_up()
+        if act_name == "actionMove_Top":
+            self.ts_move(-10)
+        elif act_name == "actionMove_Up":
+            self.ts_move(-1)
         elif act_name == "actionMove_Down":
-            self.ts_move_down()
+            self.ts_move(1)
+        elif act_name == "actionMove_Bottom":
+            self.ts_move(10)
         elif act_name == "actionImport":
             self.ts_import()
         elif act_name == "actionExport":
             self.ts_export()
+        elif act_name == "actionExport_All":
+            self.ts_export_all()
         elif act_name == "actionRemove":
             self.ts_remove()
 
@@ -322,8 +318,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # pointing to an item
         if self.tree_stories.selectedItems():
+            self.act_mv_top.setEnabled(True)
             self.act_mv_up.setEnabled(True)
             self.act_mv_down.setEnabled(True)
+            self.act_mv_bottom.setEnabled(True)
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
@@ -449,64 +447,60 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.lbl_count.setText("")
 
-    def ts_move_up(self):
-        # print("ts_move_up")
-        self.ts_move(-1)
-
-    def ts_move_down(self):
-        # print("ts_move_down")
-        self.ts_move(1)
-
     def ts_move(self, offset):
-        # # no moves under filters
-        # if self.le_filter.text():
-        #     self.statusbar.showMessage("Remove filters before moving...")
-        #     return
-
-        # start = time.time()
-
-        # getting selection
-        # selected = self.tree_stories.selectionModel().selection()
         if self.worker or not self.lunii_device:
             return
 
+        # start = time.time()
+
+        # shifting to be right is shifting to the left the reverse list
+        if offset >= 1:
+            self.lunii_device.stories.reverse()
+
+        working_list = [[story, index+1] for index, story in enumerate(self.lunii_device.stories)]
+
+        # getting selection
         selected_items = self.tree_stories.selectedItems()
         if len(selected_items) == 0:
             return
+        items_to_move = [item.text(COL_UUID) for item in selected_items]
 
-        old_idx = set()
-        # getting all indexes to move (sorted)
-        for item in selected_items:
-            old_idx.add(self.lunii_device.stories.index(UUID(item.text(COL_UUID))))
+        # computing new index for each item in working_list
+        prev_index = -1
+        first_index = -1
+        for list_index, s_tuple in enumerate(working_list):
+            # current item is to be moved
+            if s_tuple[0].str_uuid in items_to_move:
+                # if not already on top of list
+                if prev_index != -1:
+                    # move top / bottom requested ?
+                    if abs(offset) > 1:
+                        ref = working_list[first_index][1]
+                    else:
+                        ref = working_list[prev_index][1]
+                    # updating its new index
+                    working_list[list_index][1] = ref - ref / working_list[list_index][1]
+            else:
+                # this element is not moved, to be kept as the next to be used for shifting
+                prev_index = list_index
 
-        old_idx = sorted(old_idx)
+                # first value moved
+                if first_index == -1:
+                    first_index = prev_index
 
-        # updating new indexes
-        new_idx = list()
-        for pos, idx in enumerate(old_idx):
-            # top reached ?
-            if offset < 0 and idx <= pos:
-                new_idx.append(idx)
-                continue
+        # sorting item based on new index
+        working_list.sort(key= lambda x: x[1])
 
-            # bottom reached ?
-            if offset > 0 and idx >= len(self.lunii_device.stories) - 1 - (len(old_idx) - 1 - pos):
-                new_idx.append(idx)
-                continue
+        # updating story list
+        self.lunii_device.stories = StoryList()
+        for story, index in working_list:
+            self.lunii_device.stories.append(story)
 
-            new_idx.append(idx + offset)
+        # we shifted the reverse list, we need to reverse it one last time
+        if offset >= 1:
+            self.lunii_device.stories.reverse()
 
-        # moving items
-        for i in range(len(new_idx)):
-            # depending on offset (up / down), list must be updated in specific order
-            if offset > 0:
-                i = len(new_idx) - 1 - i
-
-            # print(f"{old_idx[i]} -> {new_idx[i]}")
-            if old_idx[i] != new_idx[i]:
-                self.lunii_device.stories.insert(new_idx[i], self.lunii_device.stories.pop(old_idx[i]))
-
-        # update Lunii device (.pi)
+        # # update Lunii device (.pi)
         self.lunii_device.update_pack_index()
 
         # refresh stories
@@ -514,22 +508,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # update selection
         sel_model = self.tree_stories.selectionModel()
-        # sel_model.select(selected, QItemSelectionModel.Select)
 
-        # setting FIRST item select
-        self.tree_stories.setCurrentItem(self.tree_stories.topLevelItem(new_idx[0]))
-        # if other item to be selected
-        for idx in new_idx[1:]:
-            item: QTreeWidgetItem = self.tree_stories.topLevelItem(idx)
-            for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
-                sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
-
-        # update scroll bar pos
-        selected_items = self.tree_stories.selectedItems()
-        self.tree_stories.scrollToItem(selected_items[0])
+        # selecting moved items
+        moved = None
+        for index in range(0, self.tree_stories.topLevelItemCount()):
+            item = self.tree_stories.topLevelItem(index)
+            if item.text(COL_UUID) in items_to_move:
+                # first item moved, need to set selection
+                if not moved:
+                    self.tree_stories.setCurrentItem(item)
+                # keeping last moved
+                moved = item
+                # selecting the whole line
+                for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
+                    sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
         # end = time.time()
-        # print(f"took {end-start:02.2}s")
+        # print(f"took {end-start:02.3}s")
 
     def ts_remove(self):
         # getting selection
@@ -574,6 +569,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if out_dir:
             to_export = [item.text(COL_UUID) for item in selection]
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
+
+    def ts_export_all(self):
+        pass
 
     def ts_import(self):
         if not self.lunii_device:
