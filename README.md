@@ -24,8 +24,8 @@ A Python QT app to manage Lunii Storyteller, including **reorder** / **import** 
 * fecth STUdio db
 * support studio stories
 * add picture to tree list
-* dedicated menu to allow story details
 * config file to backup menu config (sizes / details)
+* ~~dedicated menu to allow story details~~
 * ~~Move Top / Bottom, Export All to be implemented~~
 * ~~selection lost on key up / down after move~~
 * ~~display story size~~

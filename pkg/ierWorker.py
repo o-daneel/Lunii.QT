@@ -47,11 +47,21 @@ class ierWorker(QObject):
 
         self.signal_refresh.emit()
 
+
+    def exit_requested(self):
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit("🛑 Aborted")
+
     def _task_import(self):
         success = 0
 
         # importing selected files
         for index, file in enumerate(self.items):
+            if self.early_exit:
+                self.exit_requested()
+                return
+
             self.signal_total_progress.emit(index, len(self.items))
             if self.lunii.import_story(file):
                 self.signal_message.emit(f"👍 New story imported : '{file}'")
@@ -72,6 +82,10 @@ class ierWorker(QObject):
 
         # Save all files
         for index, file in enumerate(self.items):
+            if self.early_exit:
+                self.exit_requested()
+                return
+
             self.signal_total_progress.emit(index, len(self.items))
             res = self.lunii.export_story(file, self.out_dir)
             if res:
@@ -88,6 +102,10 @@ class ierWorker(QObject):
 
     def _task_remove(self):
         for index, item in enumerate(self.items):
+            if self.early_exit:
+                self.exit_requested()
+                return
+
             self.signal_total_progress.emit(index, len(self.items))
             # remove story contents from device
             res = self.lunii.remove_story(item)
@@ -106,6 +124,10 @@ class ierWorker(QObject):
 
         # processing all stories
         for index, story in enumerate(self.lunii.stories):
+            if self.early_exit:
+                self.exit_requested()
+                return
+
             self.signal_total_progress.emit(index, len(self.lunii.stories))
 
             # is the size already known ?
@@ -118,6 +140,10 @@ class ierWorker(QObject):
             for parent_dir, _, files in os.walk(f"{self.lunii.mount_point}/.content/{story.short_uuid}"):
                 for file in files:
                     story.size += os.path.getsize(os.path.join(parent_dir, file))
+
+                    if self.early_exit:
+                        self.exit_requested()
+                        return
 
             # updating to display story size
             self.signal_refresh.emit()

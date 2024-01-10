@@ -1,5 +1,5 @@
 import os.path
-# import time
+import time
 from pathlib import WindowsPath
 
 import psutil
@@ -21,6 +21,7 @@ COL_UUID = 2
 COL_SIZE = 3
 
 COL_DB_SIZE = 20
+COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
 APP_VERSION = "v2.0.9"
@@ -68,8 +69,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.btn_about.setVisible(False)
 
-        # self.menuBar.setVisible(False)
         # self.menuTools.setEnabled(False)
+        # shortcuts lost if not visible
+        self.menuBar.setVisible(False)
+        QShortcut(QKeySequence("Ctrl+Up"), self.tree_stories, self.ts_move_top)
+        QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
+        QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
+        QShortcut(QKeySequence("Ctrl+Down"), self.tree_stories, self.ts_move_bottom)
+        QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
+        QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
+        QShortcut(QKeySequence("Ctrl+Shift+S"), self.tree_stories, self.ts_export_all)
+        QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
 
         # self.pgb_total.setVisible(False)
 
@@ -108,8 +118,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
 
         self.menuStory.triggered.connect(self.cb_menu_story)
-        self.menuTools.triggered.connect(self.cb_menu_tools)
         self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
+        self.menuTools.triggered.connect(self.cb_menu_tools)
 
         # Update statusbar
         self.sb_create()
@@ -137,9 +147,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return True
             elif event.type() == QtCore.QEvent.Resize:
                 # Adjusting cols based on widget size
-                col_size_width = self.tree_stories.width() - COL_DB_SIZE - self.tree_stories.columnWidth(COL_UUID) - COL_SIZE_SIZE
-                self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
-                self.tree_stories.setColumnWidth(COL_SIZE, COL_SIZE_SIZE-30)
+                if not self.sizes_hidden:
+                    col_size_width = self.tree_stories.width() - COL_DB_SIZE - self.tree_stories.columnWidth(COL_UUID) - COL_SIZE_SIZE
+                    self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
+                    self.tree_stories.setColumnWidth(COL_SIZE, COL_SIZE_SIZE - 30)
+                else:
+                    col_size_width = self.tree_stories.width() - COL_DB_SIZE - COL_UUID_SIZE
+                    self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
+                    self.tree_stories.setColumnWidth(COL_NAME, col_size_width - 30)
 
         return False
 
@@ -199,6 +214,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 return
 
+            # in case of a worker, abort it
+            if self.worker:
+                self.worker.early_exit = True
+                while self.worker:
+                    self.app.processEvents()
+                    time.sleep(0.05)
+
             self.lunii_device = LuniiDevice(dev_name, V3_KEYS)
             self.statusbar.showMessage(f"")
 
@@ -212,12 +234,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_tree_select(self):
         # getting selection
         selection = self.tree_stories.selectedItems()
-        only_one = len(selection) == 1
-        # self.lbl_picture.setVisible(only_one)
-        self.te_story_details.setVisible(only_one)
-        self.lbl_picture.setVisible(only_one)
+        show_details = len(selection) == 1 and not self.details_hidden
+        self.te_story_details.setVisible(show_details)
+        self.lbl_picture.setVisible(show_details)
 
-        if only_one:
+        if show_details:
             item = selection[0]
             uuid = item.text(COL_UUID)
 
@@ -230,6 +251,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # feeding story image and desc
             one_story = self.lunii_device.stories.get_story(uuid)
+            if not one_story:
+                return
             one_story_desc = one_story.desc
             one_story_image = one_story.get_picture()
 
@@ -303,6 +326,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # # do we need to compute sizes ?
             if not self.sizes_hidden:
                 self.worker_launch(ACTION_SIZE)
+            else:
+                self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
+
+        elif act_name == "actionShow_story_details":
+            self.details_hidden = not action.isChecked()
+
+            selection = self.tree_stories.selectedItems()
+            show_details = len(selection) == 1 and not self.details_hidden
+            self.te_story_details.setVisible(show_details)
+            self.lbl_picture.setVisible(show_details)
 
     def cb_menu_story_update(self):
         # all disabled
@@ -328,6 +361,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if (self.lunii_device.lunii_version < LUNII_V3 or
                     (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
                 self.act_export.setEnabled(True)
+
+        # are there story loaded ?
+        if self.lunii_device.stories:
+            if (self.lunii_device.lunii_version < LUNII_V3 or
+                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
+                self.act_exportall.setEnabled(True)
 
     def ts_update(self):
         # clear previous story list
@@ -447,6 +486,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.lbl_count.setText("")
 
+    def ts_move_top(self):
+        self.ts_move(-10)
+    def ts_move_up(self):
+        self.ts_move(-1)
+    def ts_move_down(self):
+        self.ts_move(1)
+    def ts_move_bottom(self):
+        self.ts_move(10)
     def ts_move(self, offset):
         if self.worker or not self.lunii_device:
             return
