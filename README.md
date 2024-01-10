@@ -1,5 +1,7 @@
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller supporting:
+A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export**   
+
+### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
 
@@ -19,12 +21,12 @@ A Python QT app to manage Lunii Storyteller supporting:
 | "F5"       | Refresh devices                |
 
 ## TODO
-* Export All to be implemented
 * fecth STUdio db
 * support studio stories
 * add picture to tree list
 * dedicated menu to allow story details
 * config file to backup menu config (sizes / details)
+* ~~Move Top / Bottom, Export All to be implemented~~
 * ~~selection lost on key up / down after move~~
 * ~~display story size~~
 * ~~Add menu File / Tools / About~~

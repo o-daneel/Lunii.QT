@@ -827,7 +827,7 @@ class LuniiDevice(QObject):
 
                 # adding uuid file
                 # print("> Adding UUID ...")
-                zip_out.writestr("uuid.bin", full_uuid.bytes)
+                zip_out.writestr("uuid.bin", one_story.uuid.bytes)
         except PermissionError as e:
             print(f"   ERROR: failed to create ZIP - {e}")
             return None

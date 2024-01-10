@@ -562,16 +562,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(selection) == 0:
             return
 
-        out_dir = QFileDialog.getExistingDirectory(self, "Ouput Directory for Stories", "",
+        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {len(selection)} stories", "",
                                                    QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
 
         # if ok pressed
         if out_dir:
             to_export = [item.text(COL_UUID) for item in selection]
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
+        else:
+            self.sb_update("🛑 Export cancelled")
 
     def ts_export_all(self):
-        pass
+        # getting selection
+        if self.tree_stories.topLevelItemCount() == 0:
+            return
+
+        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {self.tree_stories.topLevelItemCount()} stories", "",
+                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+
+        # if ok pressed
+        if out_dir:
+            to_export = list()
+            for index in range(self.tree_stories.topLevelItemCount()):
+                item = self.tree_stories.topLevelItem(index)
+                to_export.append(item.text(COL_UUID))
+            self.worker_launch(ACTION_EXPORT, to_export, out_dir)
+        else:
+            self.sb_update("🛑 Export All cancelled")
 
     def ts_import(self):
         if not self.lunii_device:

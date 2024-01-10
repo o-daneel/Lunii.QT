@@ -48,11 +48,14 @@ class ierWorker(QObject):
         self.signal_refresh.emit()
 
     def _task_import(self):
+        success = 0
+
         # importing selected files
         for index, file in enumerate(self.items):
             self.signal_total_progress.emit(index, len(self.items))
             if self.lunii.import_story(file):
                 self.signal_message.emit(f"👍 New story imported : '{file}'")
+                success += 1
             else:
                 self.signal_message.emit(f"🛑 Failed to import : '{file}'")
             self.signal_refresh.emit()
@@ -62,15 +65,18 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Import done")
+        self.signal_message.emit(f"✅ Import done : {success}/{len(self.items)}")
 
     def _task_export(self):
+        success = 0
+
         # Save all files
         for index, file in enumerate(self.items):
             self.signal_total_progress.emit(index, len(self.items))
             res = self.lunii.export_story(file, self.out_dir)
             if res:
                 self.signal_message.emit(f"👍 Story exported to '{res}'")
+                success += 1
             else:
                 self.signal_message.emit(f"🛑 Failed to export : '{file}'")
             self.signal_refresh.emit()
@@ -78,7 +84,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Export done")
+        self.signal_message.emit(f"✅ Export done : {success}/{len(self.items)}")
 
     def _task_remove(self):
         for index, item in enumerate(self.items):
