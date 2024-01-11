@@ -11,14 +11,19 @@ A Python QT app to manage Lunii Storyteller, including **reorder** / **import** 
 
 ## Shortcuts
 
-| Keys       | Actions                        |
-|------------|--------------------------------|
-| "Alt+Up"   | Move the selected item(s) Up   |
-| "Alt+Down" | Move the selected item(s) Down |
-| "Delete"   | Remove the selected item(s)    |
-| "Ctrl+S"   | Export the selection           |
-| "Ctrl+I"   | Import new story               |
-| "F5"       | Refresh devices                |
+| Keys           | Actions                          |
+|----------------|----------------------------------|
+| `Ctrl+Up`      | Move the selected item(s) Top    |
+| `Alt+Up`       | Move the selected item(s) Up     |
+| `Alt+Down`     | Move the selected item(s) Down   |
+| `Ctrl+Down`    | Move the selected item(s) Bottom |
+|                |                                  |
+| `Ctrl+I`       | Import new story                 |
+| `Ctrl+S`       | Export the selection             |
+| `Ctrl+Shift+S` | Export all the stories           |
+| `Delete`       | Remove the selected item(s)      |
+|                |                                  |
+| `F5`           | Refresh devices                  |
 
 ## TODO
 * fecth STUdio db
