@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 from pathlib import Path
 from typing import List
 from uuid import UUID
@@ -14,6 +15,167 @@ DESC_NOT_FOUND = "No description found."
 # https://server-data-prod.lunii.com/v2/packs
 DB_OFFICIAL = {}
 DB_THIRD_PARTY = {}
+
+NODE_SIZE = 0x2C
+NI_HEADER_SIZE = 0x200
+
+
+class StudioStory:
+    def __init__(self, story_json=None):
+        self.format_version = 0
+        self.pack_version = 0
+        self.title = ""
+        self.description = ""
+        self.factory_pack = 1
+        self.uuid = None
+
+        self.js_snodes = None
+        self.js_anodes = None
+        self.ri = list()
+        self.si = list()
+        self.li = list()
+
+        self.compatible = False
+
+        if story_json:
+            self.load(story_json)
+
+    def load(self, story_json):
+        self.format_version = story_json.get('format')
+        self.pack_version = story_json.get('version')
+        self.title = story_json.get('title')
+        self.description = story_json.get('description')
+
+        # looping stage nodes
+        self.js_snodes = story_json.get('stageNodes')
+        for snode in self.js_snodes:
+            n_uuid = UUID(snode.get('uuid'))
+            if not self.uuid:
+                self.uuid = n_uuid
+
+            image = snode.get('image')
+            if image:
+                if image.lower().endswith('.bmp') and image not in self.ri:
+                    self.ri.append(image)
+                else:
+                    self.compatible = False
+
+            audio = snode.get('audio')
+            if audio:
+                if audio.lower().endswith('.mp3') and audio not in self.ri:
+                    self.si.append(audio)
+                else:
+                    self.compatible = False
+
+        # looping action nodes
+        absolute_index = 0
+        self.js_anodes = story_json.get('actionNodes')
+        for anode in self.js_anodes:
+            anode["global_index"] = absolute_index
+            absolute_index += len(anode.get("options"))
+            for option in anode.get("options"):
+                option_index = next((index for index, snode in enumerate(self.js_snodes) if snode.get('uuid') == option), -1)
+                self.li.append(option_index)
+
+        self.compatible = True
+
+    def get_ri_data(self):
+        data_ri = ""
+        for file in self.ri:
+            data_ri += f"000\\{file[32:-4].upper()}"
+        return data_ri.encode('utf-8')
+    
+    def get_si_data(self):
+        data_si = ""
+        for file in self.si:
+            data_si += f"000\\{file[32:-4].upper()}"
+        return data_si.encode('utf-8')
+    
+    def get_ni_data(self):
+        ni_buffer = b""
+
+        # header section
+        ni_buffer += int(self.format_version[1:]).to_bytes(2, byteorder='little')
+        ni_buffer += int(self.pack_version).to_bytes(2, byteorder='little')
+        ni_buffer += int(NI_HEADER_SIZE).to_bytes(4, byteorder='little')
+        ni_buffer += int(NODE_SIZE).to_bytes(4, byteorder='little')
+        ni_buffer += len(self.js_snodes).to_bytes(4, byteorder='little')
+        ni_buffer += len(self.ri).to_bytes(4, byteorder='little')
+        ni_buffer += len(self.si).to_bytes(4, byteorder='little')
+        ni_buffer += int(1).to_bytes(1, byteorder='little')
+
+        # padding the header with 00
+        ni_buffer += b"\x00" * (NI_HEADER_SIZE - len(ni_buffer))
+
+        # node section
+        for snode in self.js_snodes:
+            current_node = b""
+
+            # image / audio for nodes
+            ri_index = -1
+            si_index = -1
+            if snode.get('image') in self.ri:
+                ri_index = self.ri.index(snode.get('image'))
+            if snode.get('audio') in self.si:
+                si_index = self.si.index(snode.get('audio'))
+            current_node += ri_index.to_bytes(4, byteorder='little', signed=True)
+            current_node += si_index.to_bytes(4, byteorder='little', signed=True)
+            
+            # ok transition
+            trans_node = snode.get("okTransition")
+            if trans_node:
+                # looking for action node
+                anode_uuid = trans_node.get("actionNode")
+                anode = next((one_node for one_node in self.js_anodes if one_node.get('id') == anode_uuid), -1)
+                li_index = anode.get("global_index")
+                # transition settings
+                current_node += li_index.to_bytes(4, byteorder='little', signed=True)
+                current_node += len(anode.get('options')).to_bytes(4, byteorder='little', signed=True)
+                current_node += trans_node.get('optionIndex').to_bytes(4, byteorder='little', signed=True)
+            else:
+                current_node += b"\xFF\xFF\xFF\xFF" * 3
+
+            # home transition
+            trans_node = snode.get("homeTransition")
+            if trans_node:
+                # looking for action node
+                anode_uuid = trans_node.get("actionNode")
+                anode = next((one_node for one_node in self.js_anodes if one_node.get('id') == anode_uuid), -1)
+                li_index = anode.get("global_index")
+                # transition settings
+                current_node += li_index.to_bytes(4, byteorder='little', signed=True)
+                current_node += len(anode.get('options')).to_bytes(4, byteorder='little', signed=True)
+                current_node += trans_node.get('optionIndex').to_bytes(4, byteorder='little', signed=True)
+            else:
+                current_node += b"\xFF\xFF\xFF\xFF" * 3
+
+            # control section
+            controls = snode.get("controlSettings")
+            if controls:
+                current_node += controls.get("wheel").to_bytes(2, byteorder="little")
+                current_node += controls.get("ok").to_bytes(2, byteorder="little")
+                current_node += controls.get("home").to_bytes(2, byteorder="little")
+                current_node += controls.get("pause").to_bytes(2, byteorder="little")
+                current_node += controls.get("autoplay").to_bytes(2, byteorder="little")
+                current_node += b"\x00\x00"
+
+            # FINAL : adding current node to list
+            ni_buffer += current_node
+            ni_buffer += b"\xAA" * (NODE_SIZE - len(current_node))
+
+        return ni_buffer
+
+    def get_li_data(self):
+        li_buffer = b""
+
+        # parsing list node index
+        for index in self.li:
+            li_buffer += index.to_bytes(4, byteorder='little')
+
+        return li_buffer
+
+    def write_bt(self, path_ni):
+        pass
 
 
 def story_load_db(reload=False):

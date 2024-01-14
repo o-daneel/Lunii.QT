@@ -41,6 +41,8 @@ TYPE_V2     = 2
 TYPE_V3     = 3
 TYPE_ZIP    = 10
 TYPE_7Z     = 11
+TYPE_STUDIO_ZIP = 20
+TYPE_STUDIO_7Z  = 21
 
 EXT_PK_PLAIN = ".plain.pk"
 EXT_PK_V2    = ".v2.pk"
