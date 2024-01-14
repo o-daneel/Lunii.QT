@@ -388,13 +388,21 @@ class LuniiDevice(QObject):
                 # checking for STUdio format
                 if 'story.json' in zip_contents and  'assets/' in zip_contents:
                     archive_type = TYPE_STUDIO_ZIP
-                    if not any(one_file.lower().endswith(".mp3") for one_file in zip_contents):
-                        print("   ERROR: STUdio story with wrong song format (not MP3)")
+
+                    # checking for unsupported file extensions
+                    ext = set()
+                    for one_file in zip_contents:
+                        one_ext = os.path.splitext(one_file.lower())[1]
+                        if one_ext:
+                            ext.add(one_ext)
+
+                    supported_ext = ('.bmp', '.json', '.mp3')
+                    unsupported_ext = [one_ext for one_ext in ext if one_ext not in supported_ext]
+
+                    if unsupported_ext:
+                        print(f"   ERROR: STUdio story with unsupported format ({unsupported_ext})")
                         archive_type = TYPE_UNK
-                    if not any(one_file.lower().endswith(".bmp") for one_file in zip_contents):
-                        print("   ERROR: STUdio story with wrong image format (not BMP)")
-                        archive_type = TYPE_UNK
-                
+
                 # checking for pk version v2 / v3 ?
                 else:
                     # based on bt file
@@ -839,12 +847,18 @@ class LuniiDevice(QObject):
                 # Extract each zip file
                 data = zip_file.read(file)
 
-                # stripping extra "assets/lower_uuid_part" chars
-                file = file[7 + 32:]
+                # stripping extra "assets/" chars
+                file = file[7:]
+                if file in self.ri:
+                    file_newname = self.ri[file][0]
+                elif file in self.ri:
+                    file_newname = self.ri[file][0]
+                else:
+                    # unexpected file, skipping
+                    continue
 
                 # updating filename, and ciphering header if necessary
                 data_ciphered = self.__get_ciphered_data(file, data)
-                file_newname = self.__get_ciphered_name(file, True)
                 target: Path = output_path.joinpath(file_newname)
 
                 # create target directory
@@ -868,13 +882,12 @@ class LuniiDevice(QObject):
         self.__write(one_story.get_ni_data(), output_path, "ni")
 
         # creating authorization file : bt
-        print("   INFO : Authorization file creation...")
+        # print("   INFO : Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
         # # updating .pi file to add new UUID
-        print(one_story.uuid)
         self.stories.append(Story(one_story.uuid))
         self.update_pack_index()
 

@@ -35,6 +35,7 @@ class StudioStory:
         self.si = dict()
         self.li = list()
 
+        #TODO : TO BE REMOVE with PNG
         self.compatible = False
 
         if story_json:
@@ -54,22 +55,28 @@ class StudioStory:
                 self.uuid = n_uuid
 
             image = snode.get('image')
-            if image and image.lower().endswith('.bmp'):
+            if image:
+                if not image.lower().endswith('.bmp'):
+                    print(image)
+                    self.compatible = False
+                    return
+
                 if image not in self.ri:
                     normalized_name = os.path.splitext(image)[0]
                     normalized_name = normalized_name[-8:].upper()
                     self.ri[image]=(normalized_name, len(self.ri))
-                else:
-                    self.compatible = False
 
             audio = snode.get('audio')
-            if audio and audio.lower().endswith('.mp3'):
+            if audio:
+                if not audio.lower().endswith('.mp3'):
+                    print(audio)
+                    self.compatible = False
+                    return
+
                 if audio not in self.ri:
                     normalized_name = os.path.splitext(audio)[0]
                     normalized_name = normalized_name[-8:].upper()
                     self.si[audio]=(normalized_name, len(self.si))
-                else:
-                    self.compatible = False
 
         # looping action nodes
         absolute_index = 0
