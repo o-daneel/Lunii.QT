@@ -101,6 +101,8 @@ class ierWorker(QObject):
         self.signal_message.emit(f"✅ Export done : {success}/{len(self.items)}")
 
     def _task_remove(self):
+        success = 0
+
         for index, item in enumerate(self.items):
             if self.early_exit:
                 self.exit_requested()
@@ -111,6 +113,7 @@ class ierWorker(QObject):
             res = self.lunii.remove_story(item)
             if res:
                 self.signal_message.emit(f"👍 Story removed: '{item}'")
+                success += 1
             else:
                 self.signal_message.emit(f"🛑 Failed to remove : '{item}'")
             self.signal_refresh.emit()
@@ -118,7 +121,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Remove done")
+        self.signal_message.emit(f"✅ {success} stories removed")
 
     def _task_size(self):
 
