@@ -827,6 +827,8 @@ class LuniiDevice(QObject):
             if not one_story.compatible:
                 return False
 
+            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
             # checking if UUID already loaded
             if str(one_story.uuid) in self.stories:
                 # print(f"   WARN: '{story_name(one_story.uuid)}' is already loaded, aborting !")
@@ -844,6 +846,11 @@ class LuniiDevice(QObject):
                 if zip_file.getinfo(file).is_dir():
                     continue
                 if file.endswith("story.json"):
+                    continue
+                if file.endswith("thumbnail.png"):
+                    # adding thumb to DB
+                    data = zip_file.read(file)
+                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
                     continue
                 if not file.startswith("assets"):
                     continue

@@ -231,6 +231,44 @@ def story_load_db(reload=False):
     return retVal
 
 
+def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
+    # creating cache dir if necessary
+    if not os.path.isdir(CACHE_DIR):
+        Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
+
+    # checking if present in cache
+    one_uuid = str(uuid).upper()
+    res_file = os.path.join(CACHE_DIR, one_uuid)
+
+    if not os.path.isfile(res_file):
+        # write data to file
+        with open(res_file, "wb") as fp:
+            fp.write(image_data)
+
+
+def thirdparty_db_add_story(uuid: UUID, title: str, desc: str):
+    db_stories = dict()
+
+    # trying to load third-party DB
+    if os.path.isfile(FILE_THIRD_PARTY_DB):
+        try:
+            with open(FILE_THIRD_PARTY_DB, encoding='utf-8') as fp_db:
+                db_stories = json.load(fp_db)
+        except:
+            db = Path(FILE_THIRD_PARTY_DB)
+            db.unlink(FILE_THIRD_PARTY_DB)
+
+    # creating new entry
+    db_stories[uuid.hex] = { 'uuid': str(uuid), 'title': title, 'description': desc}
+
+    # saving updated db
+    with open(FILE_THIRD_PARTY_DB, "w", encoding='utf-8') as fp_db:
+        json.dump(db_stories, fp_db)
+
+    # reloading DBs
+    story_load_db()
+
+
 def _uuid_match(uuid: UUID, key_part: str):
     uuid = uuid.hex.upper()
     key_part = key_part.replace("-", "").upper()
