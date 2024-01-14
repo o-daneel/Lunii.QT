@@ -47,7 +47,6 @@ class ierWorker(QObject):
 
         self.signal_refresh.emit()
 
-
     def exit_requested(self):
         self.signal_finished.emit()
         self.signal_refresh.emit()
@@ -81,18 +80,25 @@ class ierWorker(QObject):
         success = 0
 
         # Save all files
-        for index, file in enumerate(self.items):
+        for index, str_uuid in enumerate(self.items):
             if self.early_exit:
                 self.exit_requested()
                 return
 
+            # TODO: fix and remove - Thirdparty stories export not supported
+            story_to_remove = self.lunii.stories.get_story(str_uuid)
+            if not story_to_remove.is_official():
+                self.signal_message.emit(f"🛑 Failed to export : '{story_to_remove.name}'")
+                self.signal_refresh.emit()
+                continue
+
             self.signal_total_progress.emit(index, len(self.items))
-            res = self.lunii.export_story(file, self.out_dir)
+            res = self.lunii.export_story(str_uuid, self.out_dir)
             if res:
                 self.signal_message.emit(f"👍 Story exported to '{res}'")
                 success += 1
             else:
-                self.signal_message.emit(f"🛑 Failed to export : '{file}'")
+                self.signal_message.emit(f"🛑 Failed to export : '{story_to_remove.name}'")
             self.signal_refresh.emit()
 
         # done

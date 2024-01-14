@@ -362,6 +362,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
                 self.act_export.setEnabled(True)
 
+            # TODO : fix and remove - Thirdparty story export not supported
+            selected = self.tree_stories.selectedItems()
+            if len(selected) == 1:
+                one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
+                if not one_story.is_official():
+                    self.act_export.setEnabled(False)
+
+
         # are there story loaded ?
         if self.lunii_device.stories:
             if (self.lunii_device.lunii_version < LUNII_V3 or

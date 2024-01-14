@@ -1,11 +1,17 @@
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export**   
+(compatible with STUdio archive, no audio transcoding yet...)
+
 
 ### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
 
-(compatibility with STUdio archive to come soon)
+### Limitations
+* Some STUdio stories might be rejected due to audio format not supported (example .ogg)
+* Only ZIP STUdio archives are supported
+
+## User Interface
 
 ![Main Window](./res/screenshot.png)
 
@@ -26,10 +32,10 @@ A Python QT app to manage Lunii Storyteller, including **reorder** / **import** 
 | `F5`           | Refresh devices                  |
 
 ## TODO
-* fecth STUdio db
-* support studio stories
+* support studio stories (7Zip + audio transcoding)
 * add picture to tree list
 * config file to backup menu config (sizes / details)
+* ~~fecth STUdio db~~
 * ~~dedicated menu to allow story details~~
 * ~~Move Top / Bottom, Export All to be implemented~~
 * ~~selection lost on key up / down after move~~
