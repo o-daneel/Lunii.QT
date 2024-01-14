@@ -20,6 +20,7 @@ from PySide6.QtCore import Signal, QObject
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api import stories
+from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import StoryList, Story, StudioStory
 
 
@@ -45,6 +46,8 @@ class LuniiDevice(QObject):
         self.fw_vers_subminor = 0
         self.memory_left = 0
         self.bt = b""
+
+        self.debug_plain = False
 
         # internal device details
         if not self.__feed_device():
@@ -187,6 +190,9 @@ class LuniiDevice(QObject):
         return buffer
 
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
+        if self.debug_plain:
+            return buffer
+
         if self.lunii_version == LUNII_V3:
             return self.__v3_cipher(buffer, key, iv, offset, enc_len)
         else:
@@ -320,15 +326,13 @@ class LuniiDevice(QObject):
 
         return data
 
-    def __get_ciphered_name(self, file: str, studio=False):
+    def __get_ciphered_name(self, file: str, studio_ri=False, studio_si=False):
         file = file.removesuffix('.plain')
 
-        if studio and file.lower().endswith('.bmp'):
+        if studio_ri:
             file = f"rf/000/{file}"
-            file = file.lower().removesuffix('.bmp')
-        if studio and file.lower().endswith('.mp3'):
+        if studio_si:
             file = f"sf/000/{file}"
-            file = file.lower().removesuffix('.mp3')
 
         # upcasing filename
         bn = os.path.basename(file)
@@ -396,7 +400,7 @@ class LuniiDevice(QObject):
                         if one_ext:
                             ext.add(one_ext)
 
-                    supported_ext = ('.bmp', '.json', '.mp3')
+                    supported_ext = ('.bmp', '.json', '.mp3', '.png', '.jpg')
                     unsupported_ext = [one_ext for one_ext in ext if one_ext not in supported_ext]
 
                     if unsupported_ext:
@@ -849,10 +853,13 @@ class LuniiDevice(QObject):
 
                 # stripping extra "assets/" chars
                 file = file[7:]
-                if file in self.ri:
-                    file_newname = self.ri[file][0]
-                elif file in self.ri:
-                    file_newname = self.ri[file][0]
+                if file in one_story.ri:
+                    file_newname = self.__get_ciphered_name(one_story.ri[file][0], studio_ri=True)
+                    # transcode image if necessary
+                    data = image_to_bitmap_rle4(data)
+                elif file in one_story.si:
+                    file_newname = self.__get_ciphered_name(one_story.si[file][0], studio_si=True)
+                    # transcode audio if necessary
                 else:
                     # unexpected file, skipping
                     continue
@@ -1020,7 +1027,14 @@ class LuniiDevice(QObject):
         # removing story contents
         st_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
         if os.path.isdir(st_path):
-            shutil.rmtree(st_path)
+            try:
+                shutil.rmtree(st_path)
+            except OSError as e:
+                print(e)
+                return False
+            except PermissionError as e:
+                print(e)
+                return False
 
         self.signal_story_progress.emit(short_uuid, 1, 3)
 

@@ -1,6 +1,5 @@
 import json
 import os
-import pathlib
 from pathlib import Path
 from typing import List
 from uuid import UUID
@@ -8,6 +7,7 @@ from uuid import UUID
 import requests
 
 from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB
+from pkg.api.convert_image import image_to_bitmap_rle4
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -18,7 +18,6 @@ DB_THIRD_PARTY = {}
 
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
-
 
 class StudioStory:
     def __init__(self, story_json=None):
@@ -56,11 +55,6 @@ class StudioStory:
 
             image = snode.get('image')
             if image:
-                if not image.lower().endswith('.bmp'):
-                    print(image)
-                    self.compatible = False
-                    return
-
                 if image not in self.ri:
                     normalized_name = os.path.splitext(image)[0]
                     normalized_name = normalized_name[-8:].upper()
@@ -187,7 +181,6 @@ class StudioStory:
 
     def write_bt(self, path_ni):
         pass
-
 
 def story_load_db(reload=False):
     global DB_OFFICIAL
