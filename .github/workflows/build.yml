@@ -44,6 +44,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
+        draft: true
         files: Linux-x86_64.zip
       
   build_win:
@@ -84,6 +85,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
+        draft: true
         files: Windows-x86_64.zip
 
   build_mac:
@@ -124,6 +126,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
+        draft: true
         files: Darwin-x86_64.zip
 
   # build_mac_arm:
