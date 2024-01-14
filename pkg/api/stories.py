@@ -31,8 +31,8 @@ class StudioStory:
 
         self.js_snodes = None
         self.js_anodes = None
-        self.ri = list()
-        self.si = list()
+        self.ri = dict()
+        self.si = dict()
         self.li = list()
 
         self.compatible = False
@@ -54,16 +54,20 @@ class StudioStory:
                 self.uuid = n_uuid
 
             image = snode.get('image')
-            if image:
-                if image.lower().endswith('.bmp') and image not in self.ri:
-                    self.ri.append(image)
+            if image and image.lower().endswith('.bmp'):
+                if image not in self.ri:
+                    normalized_name = os.path.splitext(image)[0]
+                    normalized_name = normalized_name[-8:].upper()
+                    self.ri[image]=(normalized_name, len(self.ri))
                 else:
                     self.compatible = False
 
             audio = snode.get('audio')
-            if audio:
-                if audio.lower().endswith('.mp3') and audio not in self.ri:
-                    self.si.append(audio)
+            if audio and audio.lower().endswith('.mp3'):
+                if audio not in self.ri:
+                    normalized_name = os.path.splitext(audio)[0]
+                    normalized_name = normalized_name[-8:].upper()
+                    self.si[audio]=(normalized_name, len(self.si))
                 else:
                     self.compatible = False
 
@@ -82,13 +86,13 @@ class StudioStory:
     def get_ri_data(self):
         data_ri = ""
         for file in self.ri:
-            data_ri += f"000\\{file[32:-4].upper()}"
+            data_ri += f"000\\{self.ri[file][0]}"
         return data_ri.encode('utf-8')
     
     def get_si_data(self):
         data_si = ""
         for file in self.si:
-            data_si += f"000\\{file[32:-4].upper()}"
+            data_si += f"000\\{self.si[file][0]}"
         return data_si.encode('utf-8')
     
     def get_ni_data(self):
@@ -115,9 +119,9 @@ class StudioStory:
             ri_index = -1
             si_index = -1
             if snode.get('image') in self.ri:
-                ri_index = self.ri.index(snode.get('image'))
+                ri_index = self.ri[snode.get('image')][1]
             if snode.get('audio') in self.si:
-                si_index = self.si.index(snode.get('audio'))
+                si_index = self.si[snode.get('audio')][1]
             current_node += ri_index.to_bytes(4, byteorder='little', signed=True)
             current_node += si_index.to_bytes(4, byteorder='little', signed=True)
             

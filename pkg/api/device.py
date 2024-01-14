@@ -812,7 +812,7 @@ class LuniiDevice(QObject):
                 return False
 
             one_story = StudioStory(story_json)
-            if one_story.compatible:
+            if not one_story.compatible:
                 return False
 
             # checking if UUID already loaded
