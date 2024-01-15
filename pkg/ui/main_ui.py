@@ -31,7 +31,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(665, 600)
         MainWindow.setMinimumSize(QSize(500, 0))
         icon = QIcon()
-        icon.addFile(u":/icon/res/logo.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icon/res/lunii.ico", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.actionExit = QAction(MainWindow)
         self.actionExit.setObjectName(u"actionExit")

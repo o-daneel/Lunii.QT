@@ -52,5 +52,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='res/logo.ico'
+    icon='res/lunii.ico'
 )

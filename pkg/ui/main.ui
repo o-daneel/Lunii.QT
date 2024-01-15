@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../resources.qrc">
-    <normaloff>:/icon/res/logo.ico</normaloff>:/icon/res/logo.ico</iconset>
+    <normaloff>:/icon/res/lunii.ico</normaloff>:/icon/res/lunii.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
