@@ -431,7 +431,7 @@
       <item>
        <widget class="QLabel" name="lbl_picture">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -506,22 +506,25 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_Lunii"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Tools</string>
+     <string>&amp;Tools</string>
     </property>
     <addaction name="actionShow_size"/>
     <addaction name="actionShow_story_details"/>
+    <addaction name="separator"/>
     <addaction name="actionGet_firmware"/>
    </widget>
    <widget class="QMenu" name="menuStory">
     <property name="title">
-     <string>Stories</string>
+     <string>&amp;Stories</string>
     </property>
     <addaction name="actionMove_Top"/>
     <addaction name="actionMove_Up"/>
@@ -675,6 +678,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Down</string>
+   </property>
+  </action>
+  <action name="actionOpen_Lunii">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/open.png</normaloff>:/icon/res/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Lunii</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>

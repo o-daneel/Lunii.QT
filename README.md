@@ -9,11 +9,18 @@ A Python QT app to manage Lunii Storyteller, including **reorder** / **import** 
 
 ### Limitations
 * Some STUdio stories might be rejected due to audio format not supported (example .ogg)
-* Only ZIP STUdio archives are supported
+* Only ZIP STUdio archives are supported (7z to be supported soon)
 
 ## User Interface
 
 ![Main Window](./res/screenshot.png)
+
+### Description
+* **DB** stands for **Database**. This application supports two different databases
+  1. **O** - Lunii **O**fficial Database  
+     _(all metadata are fed from Lunii servers)_
+  2. **T** - **T**hirdparty Database, also known as Unofficial or Custom Stories  
+     _(Those metadata can't be fetched. They are completed upon story import)_
 
 ## Shortcuts
 
@@ -29,6 +36,7 @@ A Python QT app to manage Lunii Storyteller, including **reorder** / **import** 
 | `Ctrl+Shift+S` | Export all the stories           |
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
+| `Ctrl+O`       | Open a Lunii device              |
 | `F5`           | Refresh devices                  |
 
 ## TODO

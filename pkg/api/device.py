@@ -390,7 +390,7 @@ class LuniiDevice(QObject):
                 # reading all available files
                 zip_contents = zip_file.namelist()
                 # checking for STUdio format
-                if 'story.json' in zip_contents and  'assets/' in zip_contents:
+                if 'story.json' in zip_contents and any(True for entry in zip_contents if entry.startswith('assets/')):
                     archive_type = TYPE_STUDIO_ZIP
 
                     # checking for unsupported file extensions
@@ -400,7 +400,7 @@ class LuniiDevice(QObject):
                         if one_ext:
                             ext.add(one_ext)
 
-                    supported_ext = ('.bmp', '.json', '.mp3', '.png', '.jpg')
+                    supported_ext = ('.bmp', '.json', '.mp3', '.png', '.jpg', '.jpeg')
                     unsupported_ext = [one_ext for one_ext in ext if one_ext not in supported_ext]
 
                     if unsupported_ext:

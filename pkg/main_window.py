@@ -24,7 +24,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.1.0"
+APP_VERSION = "v2.1.1"
 
 
 class VLine(QFrame):
@@ -45,7 +45,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread: QtCore.QThread = None
         self.app = app
         # app config
-        self.sizes_hidden = False
+        self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
 
@@ -71,15 +71,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # self.menuTools.setEnabled(False)
         # shortcuts lost if not visible
-        self.menuBar.setVisible(False)
-        QShortcut(QKeySequence("Ctrl+Up"), self.tree_stories, self.ts_move_top)
-        QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
-        QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
-        QShortcut(QKeySequence("Ctrl+Down"), self.tree_stories, self.ts_move_bottom)
-        QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
-        QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
-        QShortcut(QKeySequence("Ctrl+Shift+S"), self.tree_stories, self.ts_export_all)
-        QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
+        # self.menuBar.setVisible(False)
+        # QShortcut(QKeySequence("Ctrl+Up"), self.tree_stories, self.ts_move_top)
+        # QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
+        # QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
+        # QShortcut(QKeySequence("Ctrl+Down"), self.tree_stories, self.ts_move_bottom)
+        # QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
+        # QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
+        # QShortcut(QKeySequence("Ctrl+Shift+S"), self.tree_stories, self.ts_export_all)
+        # QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
 
         # self.pgb_total.setVisible(False)
 
@@ -117,12 +117,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
 
+        self.menuFile.triggered.connect(self.cb_menu_file)
         self.menuStory.triggered.connect(self.cb_menu_story)
         self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
         self.menuTools.triggered.connect(self.cb_menu_tools)
 
         # Update statusbar
         self.sb_create()
+
+        # Update Menu tools based on config
+        t_actions = self.menuTools.actions()
+        act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
+        act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
+        act_details.setChecked(not self.details_hidden)
+        act_size.setChecked(not self.sizes_hidden)
+
 
     # connecting slots and signals
     def setup_connections(self):
@@ -336,6 +345,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             show_details = len(selection) == 1 and not self.details_hidden
             self.te_story_details.setVisible(show_details)
             self.lbl_picture.setVisible(show_details)
+
+    def cb_menu_file(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionOpen_Lunii":
+
+            file_filter = "Lunii Metadata (.md);;All files (*)"
+            file, _ = QFileDialog.getOpenFileName(self, "Open Lunii device", "", file_filter)
+
+            if not file:
+                return
+
+            # check if path is a recognized device
+            dev_name = os.path.dirname(file)
+            if not is_device(dev_name):
+                self.sb_update("Not a Lunii or unsupported one 😥")
+
+            # add device to list
+            device_list = [self.combo_device.itemText(i) for i in range(self.combo_device.count())]
+            if dev_name not in device_list:
+                self.combo_device.addItem(dev_name)
+                index = self.combo_device.findText(dev_name)
+                self.combo_device.setCurrentIndex(index)
 
     def cb_menu_story_update(self):
         # all disabled
