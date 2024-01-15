@@ -20,6 +20,15 @@ a = Analysis(
     noarchive=False,
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+splash = Splash(
+    '.\\res\\lunii_splash_pyinst.png',
+    binaries=a.binaries,
+    datas=a.datas,
+    text_pos=(80, 480),
+    text_size=8,
+    minify_script=True,
+    always_on_top=True,
+)
 
 exe = EXE(
     pyz,
@@ -27,6 +36,8 @@ exe = EXE(
     a.binaries,
     a.zipfiles,
     a.datas,
+    splash,
+    splash.binaries,
     [],
     name='lunii-qt',
     debug=False,

@@ -71,19 +71,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
 
         self.btn_about.setVisible(False)
-
-        # self.menuTools.setEnabled(False)
-        # shortcuts lost if not visible
-        # self.menuBar.setVisible(False)
-        # QShortcut(QKeySequence("Ctrl+Up"), self.tree_stories, self.ts_move_top)
-        # QShortcut(QKeySequence("Alt+Up"), self.tree_stories, self.ts_move_up)
-        # QShortcut(QKeySequence("Alt+Down"), self.tree_stories, self.ts_move_down)
-        # QShortcut(QKeySequence("Ctrl+Down"), self.tree_stories, self.ts_move_bottom)
-        # QShortcut(QKeySequence("Delete"), self.tree_stories, self.ts_remove)
-        # QShortcut(QKeySequence("Ctrl+S"), self.tree_stories, self.ts_export)
-        # QShortcut(QKeySequence("Ctrl+Shift+S"), self.tree_stories, self.ts_export_all)
-        # QShortcut(QKeySequence("Ctrl+I"), self.tree_stories, self.ts_import)
-
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
@@ -557,14 +544,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.lbl_count.setText("")
 
-    def ts_move_top(self):
-        self.ts_move(-10)
-    def ts_move_up(self):
-        self.ts_move(-1)
-    def ts_move_down(self):
-        self.ts_move(1)
-    def ts_move_bottom(self):
-        self.ts_move(10)
     def ts_move(self, offset):
         if self.worker or not self.lunii_device:
             return

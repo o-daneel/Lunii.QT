@@ -114,8 +114,8 @@ $ dist\lunii-qt
 ## Trick
 ### Cache management
 This application will download once for all the official story database and any request pictures to the application dedicated folder
-* `%HOME%.lunii-qt\official.db`
-* `%HOME%.lunii-qt\cache\*`
+* `$HOME/.lunii-qt/official.db`
+* `$HOME/.lunii-qt/cache/*`
 
 In case of any trouble, just remove this file and directory to force refresh
 

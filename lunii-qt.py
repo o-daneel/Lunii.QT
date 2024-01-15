@@ -11,18 +11,16 @@ from pkg.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication([])
 
-    # splashscreen
-    pixmap = QPixmap(":/img/res/lunii_splash.png").scaledToWidth(256, Qt.SmoothTransformation)
-    splash = QSplashScreen(pixmap)
-    splash.setWindowFlag(Qt.SplashScreen | Qt.WindowStaysOnTopHint)
-    splash.show()
-
     window = MainWindow(app)
     window.show()
 
     # killing splash
-    app.processEvents()
-    time.sleep(1)
-    splash.finish(window)
+    try:
+        import pyi_splash
+        pyi_splash.update_text('Lunii.QT Ready ...')
+        time.sleep(0.5)
+        pyi_splash.close()
+    except:
+        pass
 
     sys.exit(app.exec())
