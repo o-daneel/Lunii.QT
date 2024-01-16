@@ -86,9 +86,9 @@ class ierWorker(QObject):
                 return
 
             # TODO: fix and remove - Thirdparty stories export not supported
-            story_to_remove = self.lunii.stories.get_story(str_uuid)
-            if not story_to_remove.is_official():
-                self.signal_message.emit(f"🛑 Failed to export : '{story_to_remove.name}'")
+            story_to_export = self.lunii.stories.get_story(str_uuid)
+            if not story_to_export.is_official():
+                self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
                 self.signal_refresh.emit()
                 continue
 
@@ -98,7 +98,7 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"👍 Story exported to '{res}'")
                 success += 1
             else:
-                self.signal_message.emit(f"🛑 Failed to export : '{story_to_remove.name}'")
+                self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
             self.signal_refresh.emit()
 
         # done
@@ -109,19 +109,20 @@ class ierWorker(QObject):
     def _task_remove(self):
         success = 0
 
-        for index, item in enumerate(self.items):
+        for index, str_uuid in enumerate(self.items):
             if self.early_exit:
                 self.exit_requested()
                 return
 
             self.signal_total_progress.emit(index, len(self.items))
             # remove story contents from device
-            res = self.lunii.remove_story(item)
+            story_to_remove = self.lunii.stories.get_story(str_uuid)
+            res = self.lunii.remove_story(str_uuid)
             if res:
-                self.signal_message.emit(f"👍 Story removed: '{item}'")
+                self.signal_message.emit(f"👍 Story removed: '{story_to_remove.name}'")
                 success += 1
             else:
-                self.signal_message.emit(f"🛑 Failed to remove : '{item}'")
+                self.signal_message.emit(f"🛑 Failed to remove : '{story_to_remove.name}'")
             self.signal_refresh.emit()
 
         # done
