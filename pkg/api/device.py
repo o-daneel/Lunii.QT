@@ -412,7 +412,7 @@ class LuniiDevice(QObject):
                 else:
                     archive_type = TYPE_UNK
 
-        # supplementary verification for zip / 7z
+        # supplementary verification for zip
         if archive_type == TYPE_ZIP:
             # trying to figure out based on zip contents
             with zipfile.ZipFile(file=story_path) as zip_file:
@@ -420,19 +420,18 @@ class LuniiDevice(QObject):
                 zip_contents = zip_file.namelist()
 
                 # checking for STUdio format
-                if 'story.json' in zip_contents and any(True for entry in zip_contents if entry.startswith('assets/')):
+                if 'story.json' in zip_contents and any('assets/' in entry for entry in zip_contents):
                     archive_type = TYPE_STUDIO_ZIP
-
-
+        # supplementary verification for 7z
         elif archive_type == TYPE_7Z:
-            # checking for STUdio format
-                # archive_type = TYPE_STUDIO_7Z
-            # checking for pk version v2 / v3 ?
-            #         if 
-            #             archive_type = TYPE_V3
-            #         else:
-            #             archive_type = TYPE_7Z
-            pass
+            # trying to figure out based on 7z contents
+            with py7zr.SevenZipFile(story_path, 'r') as archive:
+                # reading all available files
+                contents = archive.getnames()
+
+                # checking for STUdio format
+                if 'story.json' in contents and any('assets/' in entry for entry in contents):
+                    archive_type = TYPE_STUDIO_7Z
 
         # processing story
         if archive_type == TYPE_PLAIN:
@@ -846,8 +845,8 @@ class LuniiDevice(QObject):
                 return False
 
             # decompressing story contents
-            short_uuid = str(one_story.uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f".content/{one_story.uuid.hex[24:].upper()}")
+            short_uuid = one_story.short_uuid
+            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -930,9 +929,105 @@ class LuniiDevice(QObject):
         # opening zip file
         with py7zr.SevenZipFile(story_path, mode='r') as zip:
             # reading all available files
-            archive_contents = zip.list()
+            zip_contents = zip.readall()
+            if "uuid.bin" in zip_contents:
+                # print("   ERROR: plain.pk format detected ! Unable to add this story.")
+                return False
+            if "story.json" not in zip_contents:
+                # print("   ERROR: missing 'story.json'. Unable to add this story.")
+                return False
   
-        return False
+            # getting UUID file
+            try:
+                story_json=json.loads(zip_contents["story.json"].read())
+            except ValueError as e:
+                print(f"   ERROR: {e}")
+                return False
+
+            one_story = StudioStory(story_json)
+            if not one_story.compatible:
+                print("   ERROR: STUdio story with unsupported format.")
+                return False
+
+            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
+            # checking if UUID already loaded
+            if str(one_story.uuid) in self.stories:
+                # print(f"   WARN: '{story_name(one_story.uuid)}' is already loaded, aborting !")
+                return False
+
+            # decompressing story contents
+            short_uuid = one_story.short_uuid
+            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            contents = zip_contents.items()
+            for index, (fname, bio) in enumerate(contents):
+                self.signal_story_progress.emit(short_uuid, index, len(contents))
+
+                if fname.endswith("story.json"):
+                    continue
+                if fname.endswith("thumbnail.png"):
+                    # adding thumb to DB
+                    data = bio.read()
+                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    continue
+                if not fname.startswith("assets"):
+                    continue
+
+                # Extract each zip file
+                data = bio.read()
+
+                # stripping extra "assets/" chars
+                fname = fname[7:]
+                if fname in one_story.ri:
+                    file_newname = self.__get_ciphered_name(one_story.ri[fname][0], studio_ri=True)
+                    # transcode image if necessary
+                    data = image_to_bitmap_rle4(data)
+                elif fname in one_story.si:
+                    file_newname = self.__get_ciphered_name(one_story.si[fname][0], studio_si=True)
+                    # transcode audio if necessary
+                else:
+                    # unexpected file, skipping
+                    continue
+
+                # updating filename, and ciphering header if necessary
+                data_ciphered = self.__get_ciphered_data(fname, data)
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                with open(target, "wb") as f_dst:
+                    f_dst.write(data_ciphered)
+
+        # creating lunii index files : ri
+        ri_data = one_story.get_ri_data()
+        self.__write(ri_data, output_path, "ri")
+        # in case of v2 device, we need to prepare bt file
+        if self.lunii_version <= LUNII_V2:
+            ri_ciph = self.__get_ciphered_data("ri", ri_data)
+            self.bt = self.cipher(ri_ciph[0:0x40], self.device_key)
+
+        # creating lunii index files : si, ni, li
+        self.__write(one_story.get_si_data(), output_path, "si")
+        self.__write(one_story.get_li_data(), output_path, "li")
+        self.__write(one_story.get_ni_data(), output_path, "ni")
+
+        # creating authorization file : bt
+        # print("   INFO : Authorization file creation...")
+        bt_path = output_path.joinpath("bt")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.bt)
+
+        # # updating .pi file to add new UUID
+        self.stories.append(Story(one_story.uuid))
+        self.update_pack_index()
+
+        return True
 
     def __write(self, data_plain, output_path, file):
         path_file = os.path.join(output_path, file)

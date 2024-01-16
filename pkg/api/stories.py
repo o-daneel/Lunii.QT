@@ -40,6 +40,18 @@ class StudioStory:
         if story_json:
             self.load(story_json)
 
+    @property
+    def str_uuid(self):
+        if self.uuid:
+            return str(self.uuid).upper()
+        return None
+
+    @property
+    def short_uuid(self):
+        if self.uuid:
+            return self.uuid.hex[24:].upper()
+        return None
+    
     def load(self, story_json):
         self.format_version = story_json.get('format')
         self.pack_version = story_json.get('version')
