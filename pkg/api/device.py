@@ -389,23 +389,10 @@ class LuniiDevice(QObject):
             with zipfile.ZipFile(file=story_path) as zip_file:
                 # reading all available files
                 zip_contents = zip_file.namelist()
+
                 # checking for STUdio format
                 if 'story.json' in zip_contents and any(True for entry in zip_contents if entry.startswith('assets/')):
                     archive_type = TYPE_STUDIO_ZIP
-
-                    # checking for unsupported file extensions
-                    ext = set()
-                    for one_file in zip_contents:
-                        one_ext = os.path.splitext(one_file.lower())[1]
-                        if one_ext:
-                            ext.add(one_ext)
-
-                    supported_ext = ('.bmp', '.json', '.mp3', '.png', '.jpg', '.jpeg')
-                    unsupported_ext = [one_ext for one_ext in ext if one_ext not in supported_ext]
-
-                    if unsupported_ext:
-                        print(f"   ERROR: STUdio story with unsupported format ({unsupported_ext})")
-                        archive_type = TYPE_UNK
 
                 # checking for pk version v2 / v3 ?
                 else:
@@ -417,10 +404,9 @@ class LuniiDevice(QObject):
                             archive_type = TYPE_V3
                         else:
                             archive_type = TYPE_V2
+                    else:
+                        archive_type = TYPE_UNK
 
-            #     # based on ri decipher with xxtea
-            #             # archive_type = TYPE_V2
-            pass
         elif archive_type == TYPE_7Z:
             # checking for STUdio format
                 # archive_type = TYPE_STUDIO_7Z
@@ -825,6 +811,7 @@ class LuniiDevice(QObject):
 
             one_story = StudioStory(story_json)
             if not one_story.compatible:
+                print("   ERROR: STUdio story with unsupported format.")
                 return False
 
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)

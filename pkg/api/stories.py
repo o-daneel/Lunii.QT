@@ -34,7 +34,7 @@ class StudioStory:
         self.si = dict()
         self.li = list()
 
-        #TODO : TO BE REMOVE with PNG
+        #TODO : TO BE REMOVE with FFMPEG
         self.compatible = False
 
         if story_json:
@@ -62,6 +62,7 @@ class StudioStory:
 
             audio = snode.get('audio')
             if audio:
+                #TODO : REMOVE when ready to transcode with FFMPEG
                 if not audio.lower().endswith('.mp3'):
                     print(audio)
                     self.compatible = False
