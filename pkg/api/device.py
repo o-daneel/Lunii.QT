@@ -381,7 +381,36 @@ class LuniiDevice(QObject):
             archive_type = TYPE_ZIP
         elif story_path.lower().endswith(EXT_7z):
             archive_type = TYPE_7Z
+        elif story_path.lower().endswith(EXT_PK_VX):
+            # trying to guess version v1/2 or v3 based on bt contents
+            with zipfile.ZipFile(file=story_path) as zip_file:
+                # reading all available files
+                zip_contents = zip_file.namelist()
 
+                # based on bt file
+                bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
+                if bt_files:
+                    bt_size = zip_file.getinfo(bt_files[0]).file_size
+                    if bt_size == 0x20:
+                        archive_type = TYPE_V3
+                    else:
+                        archive_type = TYPE_V2
+                # based on ri
+                elif (any(file.endswith("ri") for file in zip_contents) and
+                      any(file.endswith("si") for file in zip_contents) and
+                      any(file.endswith("ni") for file in zip_contents) and
+                      any(file.endswith("li") for file in zip_contents)) :
+                    # trying to decipher ri with v2
+
+                    ri_file = next(file for file in zip_contents if file.endswith("ri"))
+                    ri_ciphered = zip_file.read(ri_file)
+                    ri_plain = self.decipher(ri_ciphered, lunii_generic_key)
+                    if ri_plain[:4] == b"000\\":
+                        archive_type = TYPE_V2
+                    else:
+                        archive_type = TYPE_V3
+                else:
+                    archive_type = TYPE_UNK
 
         # supplementary verification for zip / 7z
         if archive_type == TYPE_ZIP:
@@ -394,18 +423,6 @@ class LuniiDevice(QObject):
                 if 'story.json' in zip_contents and any(True for entry in zip_contents if entry.startswith('assets/')):
                     archive_type = TYPE_STUDIO_ZIP
 
-                # checking for pk version v2 / v3 ?
-                else:
-                    # based on bt file
-                    bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
-                    if bt_files:
-                        bt_size = zip_file.getinfo(bt_files[0]).file_size
-                        if bt_size == 0x20:
-                            archive_type = TYPE_V3
-                        else:
-                            archive_type = TYPE_V2
-                    else:
-                        archive_type = TYPE_UNK
 
         elif archive_type == TYPE_7Z:
             # checking for STUdio format
@@ -419,18 +436,25 @@ class LuniiDevice(QObject):
 
         # processing story
         if archive_type == TYPE_PLAIN:
+            # print("Archive => TYPE_PLAIN")
             return self.import_story_plain(story_path)
         elif archive_type == TYPE_ZIP:
+            # print("Archive => TYPE_ZIP")
             return self.import_story_zip(story_path)
         elif archive_type == TYPE_7Z:
+            # print("Archive => TYPE_7Z")
             return self.import_story_7z(story_path)
         elif archive_type == TYPE_V2:
+            # print("Archive => TYPE_V2")
             return self.import_story_v2(story_path)
         elif archive_type == TYPE_V3:
+            # print("Archive => TYPE_V3")
             return self.import_story_v3(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
+            # print("Archive => TYPE_STUDIO_ZIP")
             return self.import_story_studio_zip(story_path)
         elif archive_type == TYPE_STUDIO_7Z:
+            # print("Archive => TYPE_STUDIO_7Z")
             return self.import_story_studio_7z(story_path)
 
     def import_story_plain(self, story_path):

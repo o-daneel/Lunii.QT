@@ -47,7 +47,8 @@ TYPE_STUDIO_7Z  = 21
 EXT_PK_PLAIN = ".plain.pk"
 EXT_PK_V2    = ".v2.pk"
 EXT_PK_V1    = ".v1.pk"
+EXT_PK_VX    = ".pk"
 EXT_ZIP      = ".zip"
 EXT_7z       = ".7z"
 
-SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_V1, EXT_PK_V2, EXT_PK_PLAIN]
+SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_V1, EXT_PK_V2, EXT_PK_PLAIN, EXT_PK_VX]
