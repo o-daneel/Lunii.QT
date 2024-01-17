@@ -1,4 +1,3 @@
-import binascii
 import os.path
 import platform
 import time
@@ -7,7 +6,8 @@ from pathlib import WindowsPath
 import psutil
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
+    QDialog
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
@@ -15,6 +15,7 @@ from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_dow
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
+from pkg.ui.login_ui import LoginDialog
 
 from pkg.ui.main_ui import Ui_MainWindow
 
@@ -339,8 +340,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionGet_firmware":
-            auth_token = lunii_get_authtoken("", "")
+            # prompt for Luniistore connection
+            login_dialog = LoginDialog()
+            if login_dialog.exec_() != QDialog.Accepted:
+                return
 
+            login, password = login_dialog.get_login_password()
+            print("Login:", login)
+            print("Password:", password)
+
+            auth_token = lunii_get_authtoken(login, password)
+            if not auth_token:
+                self.sb_update(f"⚠️ Login failed, please check your credentials")
+                return
+
+            self.sb_update(f"Login success...")
             version = lunii_fw_version(self.lunii_device.lunii_version, auth_token)
 
             if version:
@@ -350,8 +364,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print(backup_fw_fn)
 
             options = QFileDialog.Options()
-            # options |= QFileDialog.DontUseNativeDialog  # Use PySide6 native file dialog
-
             file_dialog = QFileDialog(self, options=options)
             file_dialog.setAcceptMode(QFileDialog.AcceptSave)
             file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
@@ -365,7 +377,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                 else:
                     self.sb_update(f"🛑 Fail to download update")
+            else:
+                return
 
+            if self.lunii_device.lunii_version == LUNII_V1:
+                version = lunii_fw_version(self.lunii_device.lunii_version, auth_token, True)
+                backup_fw_fn = f"fu.v{version}.bin"
+
+                options = QFileDialog.Options()
+                file_dialog = QFileDialog(self, options=options)
+                file_dialog.setAcceptMode(QFileDialog.AcceptSave)
+                file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
+
+                # Preconfigure a default name
+                file_dialog.selectFile(backup_fw_fn)
+
+                if file_dialog.exec_() == QFileDialog.Accepted:
+                    selected_file = file_dialog.selectedFiles()[0]
+                    if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file, True):
+                        self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
+                    else:
+                        self.sb_update(f"🛑 Fail to download update")
 
     def cb_menu_file(self, action: QtGui.QAction):
         act_name = action.objectName()

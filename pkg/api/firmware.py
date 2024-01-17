@@ -6,11 +6,26 @@ from pkg.api.constants import *
 V1V2_FAHID = "-NnUun90mQ56GosDyA3R"
 
 
-def lunii_get_authtoken(login, password):
-    user_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOiItTHgya3dWeFdvRmY1STJteEVTTyIsInJvbGUiOiJDVVNUT01FUiIsImNvdW50cnlDb2RlIjoiZnIiLCJleHAiOjE3MDU2MTA4MDMuNDc0fQ.jMGz__wGv3c-_LBMdAxeyB-FegO3KcXfjn0Lf4kBxq3IFPDi_s2ldhQ04L9QHZb9p1LFqXL5H_PN14Ctks4d714ih1iH70eMd0VhSihSX1G9mJ5yiczVXN2x3Q1HHcwKCTDBaQd-iMVtldqRDNkph97DBKrjT7CKfRcPI5eXKqai6O-rLPSCM_kCOw-ST89Q96PlJaxSIU7p489UAFXQmZXQrBC14m-4sflfKInvnAcNxXTJzmJH5Rztj-OlSsyQPT-9z_Rc6NK_bJvzGUWwCN5LEzUAgA75YnCILTHl9WZT7597WiaiTJiauYLpSfA9n6Hvb6oS_JUs1zUZB1_L4w"
-    header_auth = {'x-auth-token':user_token,
-                   'authorization': f'Bearer {user_token}'
+def lunii_get_authtoken(login, pwd):
+    url1 = "https://server-auth-prod.lunii.com/auth/signin"
+    args1 = {'application':"luniistore_mobile",
+            'email':login,
+            'password':pwd
+            }
+    auth = requests.post(url1, json = args1)
+    if auth.status_code != 200:
+        return None
+
+    token = auth.json()['response']['tokens']['access_tokens']['user']['server']
+    user_id = auth.json()['response']['user_id']
+
+    print("\nToken: {0}".format(token))
+    print("\nUser ID: {0}".format(user_id))
+
+    header_auth = {'x-auth-token':auth.json()['response']['tokens']['access_tokens']['user']['server'],
+                   'authorization': 'Bearer {0}'.format(auth.json()['response']['tokens']['access_tokens']['user']['server'])
                   }
+
     return header_auth
 
 
