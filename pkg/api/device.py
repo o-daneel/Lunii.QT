@@ -56,6 +56,10 @@ class LuniiDevice(QObject):
         # internal stories
         self.stories = feed_stories(self.mount_point)
 
+    @property
+    def snu_str(self):
+        return self.snu.hex().upper().lstrip("0")
+
     # opens the .pi file to read all installed stories
     def __feed_device(self):
         
@@ -1216,6 +1220,11 @@ def feed_stories(root_path) -> StoryList[UUID]:
     pi_path = mount_path.joinpath(".pi")
 
     story_list = StoryList()
+
+    # no pi file, done
+    if not os.path.isfile(pi_path):
+        return
+
     with open(pi_path, "rb") as fp_pi:
         loop_again = True
         while loop_again:

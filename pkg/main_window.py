@@ -1,4 +1,6 @@
+import binascii
 import os.path
+import platform
 import time
 from pathlib import WindowsPath
 
@@ -9,6 +11,7 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
+from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
@@ -121,12 +124,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuStory.triggered.connect(self.cb_menu_story)
         self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
         self.menuTools.triggered.connect(self.cb_menu_tools)
+        self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
 
         # Update statusbar
         self.sb_create()
 
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
+        self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_details.setChecked(not self.details_hidden)
@@ -346,6 +351,35 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.te_story_details.setVisible(show_details)
             self.lbl_picture.setVisible(show_details)
 
+        elif act_name == "actionGet_firmware":
+            auth_token = lunii_get_authtoken("", "")
+
+            version = lunii_fw_version(self.lunii_device.lunii_version, auth_token)
+
+            if version:
+                backup_fw_fn = f"fa.v{version}.bin"
+            else:
+                backup_fw_fn = f"fa.v3.bin"
+            print(backup_fw_fn)
+
+            options = QFileDialog.Options()
+            # options |= QFileDialog.DontUseNativeDialog  # Use PySide6 native file dialog
+
+            file_dialog = QFileDialog(self, options=options)
+            file_dialog.setAcceptMode(QFileDialog.AcceptSave)
+            file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
+
+            # Preconfigure a default name
+            file_dialog.selectFile(backup_fw_fn)
+
+            if file_dialog.exec_() == QFileDialog.Accepted:
+                selected_file = file_dialog.selectedFiles()[0]
+                if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file):
+                    self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
+                else:
+                    self.sb_update(f"🛑 Fail to download update")
+
+
     def cb_menu_file(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionOpen_Lunii":
@@ -398,6 +432,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if (self.lunii_device.lunii_version < LUNII_V3 or
                     (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
                 self.act_exportall.setEnabled(True)
+
+    def cb_menu_tools_update(self):
+        self.act_getfw.setEnabled(False)
+
+        if self.lunii_device and platform.system() == "Windows":
+            self.act_getfw.setEnabled(True)
 
     def ts_update(self):
         # clear previous story list
@@ -483,7 +523,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # SNU
-        self.lbl_snu.setText(self.lunii_device.snu.hex().upper().lstrip("0"))
+        self.lbl_snu.setText(self.lunii_device.snu_str)
         # self.lbl_snu.setText("23023030012345")
 
         # Version
