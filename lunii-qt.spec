@@ -24,7 +24,7 @@ splash = Splash(
     '.\\res\\lunii_splash_pyinst.png',
     binaries=a.binaries,
     datas=a.datas,
-    text_pos=(80, 480),
+    text_pos=(42, 405),
     text_size=8,
     minify_script=True,
     always_on_top=True,
