@@ -334,6 +334,9 @@ class LuniiDevice(QObject):
         if studio_si:
             file = f"sf/000/{file}"
 
+        file = file.lower().removesuffix('.mp3')
+        file = file.lower().removesuffix('.bmp')
+
         # upcasing filename
         bn = os.path.basename(file)
         if len(bn) >= 8:
