@@ -28,7 +28,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.1.2"
+APP_VERSION = "v2.2.0"
 
 
 class VLine(QFrame):
@@ -344,11 +344,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             login_dialog = LoginDialog()
             if login_dialog.exec_() != QDialog.Accepted:
                 return
-
             login, password = login_dialog.get_login_password()
-            print("Login:", login)
-            print("Password:", password)
 
+            # getting auth token
             auth_token = lunii_get_authtoken(login, password)
             if not auth_token:
                 self.sb_update(f"⚠️ Login failed, please check your credentials")
@@ -378,6 +376,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     self.sb_update(f"🛑 Fail to download update")
             else:
+                self.sb_update("")
                 return
 
             if self.lunii_device.lunii_version == LUNII_V1:

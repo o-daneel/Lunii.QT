@@ -339,9 +339,9 @@ class Story:
         if one_uuid in DB_OFFICIAL:
             locale = list(DB_OFFICIAL[one_uuid]["locales_available"].keys())[0]
             desc: str = DB_OFFICIAL[one_uuid]["localized_infos"][locale].get("description")
-            if desc.startswith("<link href"):
+            while desc.lstrip().startswith("<"):
                 pos = desc.find(">")
-                desc = desc[pos+1:]
+                desc = desc[pos+1:].lstrip()
             return desc
 
         # checking third-party DB

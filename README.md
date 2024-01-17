@@ -1,5 +1,5 @@
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export**   
+A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
 for Windows / Linux / MacOs 
 (compatible with STUdio archive, no audio transcoding yet...)
 
@@ -44,9 +44,9 @@ for Windows / Linux / MacOs
 * support studio stories
   * ~~7Zip archives~~
   * audio transcoding with FFMPEG
-* support Lunii FW download (requires auth token or Login / Passwd)
 * about window with credits / url to github
 * add picture to tree list ?
+* ~~support Lunii FW download (requires auth token or Login / Passwd)~~
 * ~~add support for export of Thirdparty stories (thumbnail + metadata)~~
 * ~~adding support for ThirdParty stories~~
 * ~~fecth STUdio db~~

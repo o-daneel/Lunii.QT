@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-
+import sys
 
 block_cipher = None
 
@@ -20,15 +20,20 @@ a = Analysis(
     noarchive=False,
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
-splash = Splash(
-    '.\\res\\lunii_splash_pyinst.png',
-    binaries=a.binaries,
-    datas=a.datas,
-    text_pos=(42, 405),
-    text_size=8,
-    minify_script=True,
-    always_on_top=True,
-)
+
+# Exclude splash screen for MacOS
+if sys.platform != 'darwin':
+    splash = Splash(
+        './res/lunii_splash_pyinst.png',
+        binaries=a.binaries,
+        datas=a.datas,
+        text_pos=(42, 405),
+        text_size=8,
+        minify_script=True,
+        always_on_top=True,
+    )
+else:
+    splash = []
 
 exe = EXE(
     pyz,
@@ -37,7 +42,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     splash,
-    splash.binaries,
+    splash.binaries if hasattr(splash, 'binaries') else [],
     [],
     name='lunii-qt',
     debug=False,

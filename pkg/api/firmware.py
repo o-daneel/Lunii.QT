@@ -19,8 +19,8 @@ def lunii_get_authtoken(login, pwd):
     token = auth.json()['response']['tokens']['access_tokens']['user']['server']
     user_id = auth.json()['response']['user_id']
 
-    print("\nToken: {0}".format(token))
-    print("\nUser ID: {0}".format(user_id))
+    # print("\nToken: {0}".format(token))
+    # print("\nUser ID: {0}".format(user_id))
 
     header_auth = {'x-auth-token':auth.json()['response']['tokens']['access_tokens']['user']['server'],
                    'authorization': 'Bearer {0}'.format(auth.json()['response']['tokens']['access_tokens']['user']['server'])

@@ -7,10 +7,11 @@ class LoginDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle("Luniistore connection")
+        self.setWindowTitle("LuniiStore credentials")
         icon = QIcon()
         icon.addFile(u":/icon/res/logo.ico", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
+        self.setMinimumSize(QSize(200, 0))
 
         layout = QVBoxLayout(self)
 
