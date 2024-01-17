@@ -19,6 +19,12 @@ DB_THIRD_PARTY = {}
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
 
+FILE_THUMB = "_thumbnail.png"
+FILE_META  = "_metadata.json"
+FILE_UUID  = "uuid.bin"
+FILE_STUDIO_JSON  = "story.json"
+FILE_STUDIO_THUMB = "thumbnail.png"
+
 class StudioStory:
     def __init__(self, story_json=None):
         self.format_version = 0
@@ -393,6 +399,16 @@ class Story:
             if image:
                 url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
                 return url
+        return None
+
+    def get_meta(self):
+        one_uuid = self.str_uuid
+
+        # checking third-party DB
+        if one_uuid in DB_THIRD_PARTY:
+            meta = DB_THIRD_PARTY[one_uuid]
+            return json.dumps(meta)
+
         return None
 
     def is_official(self):

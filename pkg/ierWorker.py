@@ -85,14 +85,9 @@ class ierWorker(QObject):
                 self.exit_requested()
                 return
 
-            # TODO: fix and remove - Thirdparty stories export not supported
             story_to_export = self.lunii.stories.get_story(str_uuid)
-            if not story_to_export.is_official():
-                self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
-                self.signal_refresh.emit()
-                continue
-
             self.signal_total_progress.emit(index, len(self.items))
+            
             res = self.lunii.export_story(str_uuid, self.out_dir)
             if res:
                 self.signal_message.emit(f"👍 Story exported to '{res}'")

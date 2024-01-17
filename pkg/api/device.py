@@ -21,7 +21,7 @@ from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import StoryList, Story, StudioStory
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
 class LuniiDevice(QObject):
@@ -420,7 +420,7 @@ class LuniiDevice(QObject):
                 zip_contents = zip_file.namelist()
 
                 # checking for STUdio format
-                if 'story.json' in zip_contents and any('assets/' in entry for entry in zip_contents):
+                if FILE_STUDIO_JSON in zip_contents and any('assets/' in entry for entry in zip_contents):
                     archive_type = TYPE_STUDIO_ZIP
         # supplementary verification for 7z
         elif archive_type == TYPE_7Z:
@@ -430,7 +430,7 @@ class LuniiDevice(QObject):
                 contents = archive.getnames()
 
                 # checking for STUdio format
-                if 'story.json' in contents and any('assets/' in entry for entry in contents):
+                if FILE_STUDIO_JSON in contents and any('assets/' in entry for entry in contents):
                     archive_type = TYPE_STUDIO_7Z
 
         # processing story
@@ -469,13 +469,13 @@ class LuniiDevice(QObject):
         with zipfile.ZipFile(file=story_path) as zip_file:
             # reading all available files
             zip_contents = zip_file.namelist()
-            if "uuid.bin" not in zip_contents:
+            if FILE_UUID not in zip_contents:
                 print("   ERROR: No UUID file found in archive. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
-                new_uuid = UUID(bytes=zip_file.read("uuid.bin"))
+                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
                 print(f"   ERROR: {e}")
                 return False
@@ -484,6 +484,19 @@ class LuniiDevice(QObject):
             if str(new_uuid) in self.stories:
                 print(f"   WARN: '{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
+
+            # thirdparty story ?
+            if FILE_META in zip_contents:
+                # creating story entry in thirdparty db
+                meta = zip_file.read(FILE_META)
+                s_meta = json.loads(meta)
+                if s_meta.get("uuid").upper() != str(new_uuid).upper():
+                    return False
+                stories.thirdparty_db_add_story(new_uuid, s_meta.get("title"), s_meta.get("description"))
+            if FILE_THUMB in zip_contents:
+                # creating story picture in cache
+                image_data = zip_file.read(FILE_THUMB)
+                stories.thirdparty_db_add_thumb(new_uuid, image_data)
 
             # decompressing story contents
             short_uuid = str(new_uuid).upper()[28:]
@@ -495,7 +508,8 @@ class LuniiDevice(QObject):
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
 
-                if file == "uuid.bin":
+                # skipping .plain.pk specific files 
+                if file in [FILE_UUID, FILE_META, FILE_THUMB]:
                     continue
 
                 # Extract each zip file
@@ -543,16 +557,16 @@ class LuniiDevice(QObject):
         with zipfile.ZipFile(file=story_path) as zip_file:
             # reading all available files
             zip_contents = zip_file.namelist()
-            if "uuid.bin" not in zip_contents:
+            if FILE_UUID not in zip_contents:
                 print("   ERROR: No UUID file found in archive. Unable to add this story.")
                 return False
-            if "story.json" in zip_contents:
+            if FILE_STUDIO_JSON in zip_contents:
                 print("   ERROR: Studio story format is not supported. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
-                new_uuid = UUID(bytes=zip_file.read("uuid.bin"))
+                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
                 print(f"   ERROR: {e}")
                 return False
@@ -571,7 +585,7 @@ class LuniiDevice(QObject):
             # Loop over each file
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
-                if file == "uuid.bin" or file.endswith("bt"):
+                if file == FILE_UUID or file.endswith("bt"):
                     continue
 
                 # Extract each zip file
@@ -818,16 +832,16 @@ class LuniiDevice(QObject):
         with zipfile.ZipFile(file=story_path) as zip_file:
             # reading all available files
             zip_contents = zip_file.namelist()
-            if "uuid.bin" in zip_contents:
+            if FILE_UUID in zip_contents:
                 # print("   ERROR: plain.pk format detected ! Unable to add this story.")
                 return False
-            if "story.json" not in zip_contents:
+            if FILE_STUDIO_JSON not in zip_contents:
                 # print("   ERROR: missing 'story.json'. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
-                story_json=json.loads(zip_file.read("story.json"))
+                story_json=json.loads(zip_file.read(FILE_STUDIO_JSON))
             except ValueError as e:
                 print(f"   ERROR: {e}")
                 return False
@@ -855,9 +869,9 @@ class LuniiDevice(QObject):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
                 if zip_file.getinfo(file).is_dir():
                     continue
-                if file.endswith("story.json"):
+                if file.endswith(FILE_STUDIO_JSON):
                     continue
-                if file.endswith("thumbnail.png"):
+                if file.endswith(FILE_STUDIO_THUMB):
                     # adding thumb to DB
                     data = zip_file.read(file)
                     stories.thirdparty_db_add_thumb(one_story.uuid, data)
@@ -930,16 +944,16 @@ class LuniiDevice(QObject):
         with py7zr.SevenZipFile(story_path, mode='r') as zip:
             # reading all available files
             zip_contents = zip.readall()
-            if "uuid.bin" in zip_contents:
+            if FILE_UUID in zip_contents:
                 # print("   ERROR: plain.pk format detected ! Unable to add this story.")
                 return False
-            if "story.json" not in zip_contents:
+            if FILE_STUDIO_JSON not in zip_contents:
                 # print("   ERROR: missing 'story.json'. Unable to add this story.")
                 return False
   
             # getting UUID file
             try:
-                story_json=json.loads(zip_contents["story.json"].read())
+                story_json=json.loads(zip_contents[FILE_STUDIO_JSON].read())
             except ValueError as e:
                 print(f"   ERROR: {e}")
                 return False
@@ -967,9 +981,9 @@ class LuniiDevice(QObject):
             for index, (fname, bio) in enumerate(contents):
                 self.signal_story_progress.emit(short_uuid, index, len(contents))
 
-                if fname.endswith("story.json"):
+                if fname.endswith(FILE_STUDIO_JSON):
                     continue
-                if fname.endswith("thumbnail.png"):
+                if fname.endswith(FILE_STUDIO_THUMB):
                     # adding thumb to DB
                     data = bio.read()
                     stories.thirdparty_db_add_thumb(one_story.uuid, data)
@@ -1088,9 +1102,9 @@ class LuniiDevice(QObject):
         sname = secure_filename(sname)
 
         zip_path = Path(out_path).joinpath(f"{sname}.{uuid}.plain.pk")
-        if os.path.isfile(zip_path):
-            # print(f"   WARN: Already exported")
-            return None
+        # if os.path.isfile(zip_path):
+        #     # print(f"   WARN: Already exported")
+        #     return None
         
         # preparing file list
         story_flist = []
@@ -1114,7 +1128,20 @@ class LuniiDevice(QObject):
 
                 # adding uuid file
                 # print("> Adding UUID ...")
-                zip_out.writestr("uuid.bin", one_story.uuid.bytes)
+                zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
+
+                # more files to be added for thirdparty stories
+                if not one_story.is_official():
+                    # print("> Adding thumbnail ...")
+                    pict_data = one_story.get_picture()
+                    if pict_data:
+                        zip_out.writestr(FILE_THUMB, pict_data)
+
+                    # print("> Adding metadata ...")
+                    meta = one_story.get_meta()
+                    if meta:
+                        zip_out.writestr(FILE_META, meta)
+
         except PermissionError as e:
             print(f"   ERROR: failed to create ZIP - {e}")
             return None

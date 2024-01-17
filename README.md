@@ -40,11 +40,15 @@ for Windows / Linux / MacOs
 | `F5`           | Refresh devices                  |
 
 ## TODO
-* review UI
-* support studio stories (audio transcoding)
-* add picture to tree list
 * config file to backup menu config (sizes / details)
-* ~~support studio 7z stories~~
+* support studio stories
+  * ~~7Zip archives~~
+  * audio transcoding with FFMPEG
+* support Lunii FW download (requires auth token or Login / Passwd)
+* about window with credits / url to github
+* add picture to tree list ?
+* ~~add support for export of Thirdparty stories (thumbnail + metadata)~~
+* ~~adding support for ThirdParty stories~~
 * ~~fecth STUdio db~~
 * ~~dedicated menu to allow story details~~
 * ~~Move Top / Bottom, Export All to be implemented~~
