@@ -13,9 +13,9 @@ your latest Lunii firmware (to eventually restore from a broken device).<br />
 <br />Powered by Python 3.11, PySide 6<br />
 <br />
 
-Icons are provided freely by <a href="www.icons8.com">icon8</a> and <a href="www.flaticon.com">flaticon</a><br />
+Icons are provided freely by <a href="www.icons8.com">icon8</a><br />
  
-Logo are provided by <b>malexxx</b><br /><br />
+Logos are provided by <b>malexxx</b><br /><br />
 
 <b>URL : </b><a href="https://github.com/o-daneel/Lunii.QT">https://github.com/o-daneel/Lunii.QT</a>
 """

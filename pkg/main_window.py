@@ -1,5 +1,4 @@
 import os.path
-import platform
 import time
 from pathlib import WindowsPath
 
@@ -138,6 +137,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
+        act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
+        act_log.setVisible(False)
 
         # Help Menu
         t_actions = self.menuHelp.actions()
@@ -348,6 +349,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # check if path is a recognized device
             if not is_device(dev_dir):
                 self.sb_update("Not a Lunii or unsupported one 😥")
+                return
 
             # add device to list
             device_list = [self.combo_device.itemText(i) for i in range(self.combo_device.count())]
