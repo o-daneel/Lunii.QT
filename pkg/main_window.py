@@ -4,17 +4,19 @@ import time
 from pathlib import WindowsPath
 
 import psutil
+import requests
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel
+from PySide6.QtCore import QItemSelectionModel, QUrl
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
 
 from pkg.api.device import find_devices, LuniiDevice, is_device
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
+from pkg.ui.about_ui import about_dlg
 from pkg.ui.login_ui import LoginDialog
 
 from pkg.ui.main_ui import Ui_MainWindow
@@ -28,7 +30,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.2.0"
+APP_VERSION = "v2.3.0"
 
 
 class VLine(QFrame):
@@ -52,6 +54,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
+        self.last_version = None
+        # actions local storage
+        self.act_mv_top = None
+        self.act_mv_up = None
+        self.act_mv_down = None
+        self.act_mv_bottom = None
+        self.act_import = None
+        self.act_export = None
+        self.act_exportall = None
+        self.act_remove = None
+        self.act_getfw = None
+        self.act_update = None
 
         # UI init
         self.app.processEvents()
@@ -60,6 +74,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # loading DB
         story_load_db(False)
+
+        # fetching last app version on Github
+        try:
+            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", timeout=1)
+            self.last_version = response.url.split("/").pop()
+        except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
+            pass
+        self.cb_menu_help_update()
 
     def init_ui(self):
         self.setupUi(self)
@@ -71,7 +93,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def modify_widgets(self):
         self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
 
-        self.btn_about.setVisible(False)
+        self.menuUpdate.setVisible(False)
+        self.menuUpdate.setTitle("")
+
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
@@ -104,16 +128,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
 
-        # Connect the context menu
-        self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
-
-        self.menuFile.triggered.connect(self.cb_menu_file)
-        self.menuStory.triggered.connect(self.cb_menu_story)
-        self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
-        self.menuTools.triggered.connect(self.cb_menu_tools)
-        self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
-
         # Update statusbar
         self.sb_create()
 
@@ -125,18 +139,38 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
 
+        # Help Menu
+        t_actions = self.menuHelp.actions()
+        self.act_update = next(act for act in t_actions if act.objectName() == "actionUpdate")
+        self.act_update.setVisible(False)
 
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
+
         self.btn_refresh.clicked.connect(self.cb_dev_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
+
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
+        # Connect the context menu
+        self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
+
+        # connect menu callbacks
+        self.menuFile.triggered.connect(self.cb_menu_file)
+        self.menuStory.triggered.connect(self.cb_menu_story)
+        self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
+        self.menuTools.triggered.connect(self.cb_menu_tools)
+        self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
+        self.menuHelp.aboutToShow.connect(self.cb_menu_help_update)
+        self.menuHelp.triggered.connect(self.cb_menu_help)
+
         # story list shortcuts
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
+        QShortcut(QKeySequence("F1"), self, about_dlg)
 
     # TREE WIDGET MANAGEMENT
     def eventFilter(self, obj, event):
@@ -300,6 +334,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.sb_update("🛑 Lunii DB failed.")
 
+    def cb_menu_file(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionOpen_Lunii":
+
+            # file_filter = "Lunii Metadata (.md);;All files (*)"
+            # file, _ = QFileDialog.getOpenFileName(self, "Open Lunii device", "", file_filter)
+            dev_dir = QFileDialog.getExistingDirectory(self, "Open Lunii device", "",
+                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+            if not dev_dir:
+                return
+
+            # check if path is a recognized device
+            if not is_device(dev_dir):
+                self.sb_update("Not a Lunii or unsupported one 😥")
+
+            # add device to list
+            device_list = [self.combo_device.itemText(i) for i in range(self.combo_device.count())]
+            if dev_dir not in device_list:
+                self.combo_device.addItem(dev_dir)
+                index = self.combo_device.findText(dev_dir)
+                self.combo_device.setCurrentIndex(index)
+
     def cb_menu_story(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionMove_Top":
@@ -346,42 +402,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return
             login, password = login_dialog.get_login_password()
 
-            # getting auth token
-            auth_token = lunii_get_authtoken(login, password)
-            if not auth_token:
-                self.sb_update(f"⚠️ Login failed, please check your credentials")
-                return
+            try:
+                # getting auth token
+                auth_token = lunii_get_authtoken(login, password)
+                if not auth_token:
+                    self.sb_update(f"⚠️ Login failed, please check your credentials")
+                    return
 
-            self.sb_update(f"Login success...")
-            version = lunii_fw_version(self.lunii_device.lunii_version, auth_token)
+                self.sb_update(f"Login success...")
+                version = lunii_fw_version(self.lunii_device.lunii_version, auth_token)
 
-            if version:
-                backup_fw_fn = f"fa.v{version}.bin"
-            else:
-                backup_fw_fn = f"fa.v3.bin"
-            print(backup_fw_fn)
-
-            options = QFileDialog.Options()
-            file_dialog = QFileDialog(self, options=options)
-            file_dialog.setAcceptMode(QFileDialog.AcceptSave)
-            file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
-
-            # Preconfigure a default name
-            file_dialog.selectFile(backup_fw_fn)
-
-            if file_dialog.exec_() == QFileDialog.Accepted:
-                selected_file = file_dialog.selectedFiles()[0]
-                if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file):
-                    self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
+                if version:
+                    backup_fw_fn = f"fa.v{version}.bin"
                 else:
-                    self.sb_update(f"🛑 Fail to download update")
-            else:
-                self.sb_update("")
-                return
-
-            if self.lunii_device.lunii_version == LUNII_V1:
-                version = lunii_fw_version(self.lunii_device.lunii_version, auth_token, True)
-                backup_fw_fn = f"fu.v{version}.bin"
+                    backup_fw_fn = f"fa.v3.bin"
+                print(backup_fw_fn)
 
                 options = QFileDialog.Options()
                 file_dialog = QFileDialog(self, options=options)
@@ -393,32 +428,43 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 if file_dialog.exec_() == QFileDialog.Accepted:
                     selected_file = file_dialog.selectedFiles()[0]
-                    if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file, True):
+                    if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file):
                         self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                     else:
                         self.sb_update(f"🛑 Fail to download update")
+                else:
+                    self.sb_update("")
+                    return
 
-    def cb_menu_file(self, action: QtGui.QAction):
+                if self.lunii_device.lunii_version == LUNII_V1:
+                    version = lunii_fw_version(self.lunii_device.lunii_version, auth_token, True)
+                    backup_fw_fn = f"fu.v{version}.bin"
+
+                    options = QFileDialog.Options()
+                    file_dialog = QFileDialog(self, options=options)
+                    file_dialog.setAcceptMode(QFileDialog.AcceptSave)
+                    file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
+
+                    # Preconfigure a default name
+                    file_dialog.selectFile(backup_fw_fn)
+
+                    if file_dialog.exec_() == QFileDialog.Accepted:
+                        selected_file = file_dialog.selectedFiles()[0]
+                        if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file, True):
+                            self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
+                        else:
+                            self.sb_update(f"🛑 Fail to download update")
+            except requests.exceptions.ConnectionError:
+                self.sb_update(f"🛑 Network error...")
+
+    def cb_menu_help(self, action: QtGui.QAction):
         act_name = action.objectName()
-        if act_name == "actionOpen_Lunii":
-
-            file_filter = "Lunii Metadata (.md);;All files (*)"
-            file, _ = QFileDialog.getOpenFileName(self, "Open Lunii device", "", file_filter)
-
-            if not file:
-                return
-
-            # check if path is a recognized device
-            dev_name = os.path.dirname(file)
-            if not is_device(dev_name):
-                self.sb_update("Not a Lunii or unsupported one 😥")
-
-            # add device to list
-            device_list = [self.combo_device.itemText(i) for i in range(self.combo_device.count())]
-            if dev_name not in device_list:
-                self.combo_device.addItem(dev_name)
-                index = self.combo_device.findText(dev_name)
-                self.combo_device.setCurrentIndex(index)
+        if act_name == "actionAbout":
+            about_dlg()
+        elif act_name == "actionUpdate":
+            website_url = QUrl('https://github.com/o-daneel/Lunii.QT/releases/latest')
+            # Open the URL in the default web browser
+            QDesktopServices.openUrl(website_url)
 
     def cb_menu_story_update(self):
         # all disabled
@@ -456,6 +502,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if self.lunii_device and platform.system() == "Windows":
             self.act_getfw.setEnabled(True)
+
+    def cb_menu_help_update(self):
+        if self.last_version and self.last_version != APP_VERSION:
+            self.menuHelp.setTitle("[ Help ]")
+            self.menuUpdate.setTitle("New update is available")
+            self.act_update.setText(f"Update to {self.last_version}")
+            self.act_update.setVisible(True)
+        else:
+            self.act_update.setVisible(False)
 
     def ts_update(self):
         # clear previous story list

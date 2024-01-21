@@ -10,10 +10,15 @@ for Windows / Linux / MacOs
 
 ### Limitations
 * Some STUdio stories might be rejected due to audio format not supported (example .ogg)
+* **Flam** not yet supported (next update might)
 
 ## User Interface
 
-![Main Window](./res/screenshot.png)
+<img src="./res/screenshot_about.png" width="450">  
+
+ .  
+<img src="./res/screenshot_main.png" width="600">  
+
 
 ### Description
 * **DB** stands for **Database**. This application supports two different databases

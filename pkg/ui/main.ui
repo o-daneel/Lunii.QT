@@ -154,38 +154,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="btn_about">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>About</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../../resources.qrc">
-          <normaloff>:/icon/res/about.png</normaloff>:/icon/res/about.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
@@ -520,6 +488,7 @@
     <addaction name="actionShow_size"/>
     <addaction name="actionShow_story_details"/>
     <addaction name="separator"/>
+    <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
    </widget>
    <widget class="QMenu" name="menuStory">
@@ -536,9 +505,27 @@
     <addaction name="actionExport_All"/>
     <addaction name="actionRemove"/>
    </widget>
+   <widget class="QMenu" name="menuUpdate">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Update 2.2.X is released</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionUpdate"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuStory"/>
    <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuUpdate"/>
   </widget>
   <action name="actionExit">
    <property name="text">
@@ -690,6 +677,25 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionShow_Log">
+   <property name="text">
+    <string>Show Log</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/about.png</normaloff>:/icon/res/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="text">
+    <string>Update to v2.X.X</string>
    </property>
   </action>
  </widget>
