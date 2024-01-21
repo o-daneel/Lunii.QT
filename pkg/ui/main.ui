@@ -625,6 +625,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/fw.png</normaloff>:/icon/res/fw.png</iconset>
+   </property>
    <property name="text">
     <string>Get FW Update</string>
    </property>
@@ -680,6 +684,10 @@
    </property>
   </action>
   <action name="actionShow_Log">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/debug_log.png</normaloff>:/icon/res/debug_log.png</iconset>
+   </property>
    <property name="text">
     <string>Show Log</string>
    </property>
@@ -694,6 +702,10 @@
    </property>
   </action>
   <action name="actionUpdate">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/fw.png</normaloff>:/icon/res/fw.png</iconset>
+   </property>
    <property name="text">
     <string>Update to v2.X.X</string>
    </property>

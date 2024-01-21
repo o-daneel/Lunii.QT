@@ -17,6 +17,7 @@ from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 from pkg.ui.about_ui import about_dlg
+from pkg.ui.debug_ui import DebugDialog
 from pkg.ui.login_ui import LoginDialog
 
 from pkg.ui.main_ui import Ui_MainWindow
@@ -30,7 +31,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.3.0"
+APP_VERSION = "v2.3.x"
 
 
 class VLine(QFrame):
@@ -139,8 +140,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
-        act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
-        act_log.setVisible(False)
+        # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
+        # act_log.setVisible(False)
 
         # Help Menu
         t_actions = self.menuHelp.actions()
@@ -399,6 +400,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             show_details = len(selection) == 1 and not self.details_hidden
             self.te_story_details.setVisible(show_details)
             self.lbl_picture.setVisible(show_details)
+
+        elif act_name == "actionShow_Log":
+            debug_dialog = DebugDialog()
+            debug_dialog.exec_()
 
         elif act_name == "actionGet_firmware":
             # prompt for Luniistore connection

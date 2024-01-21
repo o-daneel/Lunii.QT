@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icon">
+    <file>res/fw.png</file>
     <file>res/bottom.png</file>
     <file>res/top.png</file>
     <file>res/about.png</file>
@@ -7,6 +8,7 @@
     <file>res/logo.ico</file>
     <file>res/lunii.ico</file>
     <file>res/refresh.png</file>
+    <file>res/debug_log.png</file>
     <file>res/down.png</file>
     <file>res/export.png</file>
     <file>res/import.png</file>
