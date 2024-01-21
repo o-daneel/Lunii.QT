@@ -9,6 +9,7 @@ for Windows / Linux / MacOs
 * **v3**  (export requires device key file)  
 
 ### Limitations
+* Application <u>no longer</u> allows Official stories to be exported
 * Some STUdio stories might be rejected due to audio format not supported (example .ogg)
 * **Flam** not yet supported (next update might)
 

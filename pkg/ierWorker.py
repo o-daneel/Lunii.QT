@@ -85,7 +85,13 @@ class ierWorker(QObject):
                 self.exit_requested()
                 return
 
+            # Official story export is forbidden
             story_to_export = self.lunii.stories.get_story(str_uuid)
+            if story_to_export.is_official():
+                self.signal_message.emit(f"🛑 Forbidden to export : '{story_to_export.name}'")
+                self.signal_refresh.emit()
+                continue
+
             self.signal_total_progress.emit(index, len(self.items))
             
             res = self.lunii.export_story(str_uuid, self.out_dir)
