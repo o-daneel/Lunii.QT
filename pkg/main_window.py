@@ -500,7 +500,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_menu_tools_update(self):
         self.act_getfw.setEnabled(False)
 
-        if self.lunii_device and platform.system() == "Windows":
+        if self.lunii_device:
             self.act_getfw.setEnabled(True)
 
     def cb_menu_help_update(self):
