@@ -10,6 +10,7 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
     QDialog
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
 
+from pkg.api import constants
 from pkg.api.device import find_devices, LuniiDevice, is_device
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
@@ -54,6 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.details_hidden = False
         self.details_last_uuid = None
         self.last_version = None
+
         # actions local storage
         self.act_mv_top = None
         self.act_mv_up = None
@@ -171,6 +173,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # story list shortcuts
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
+        QShortcut(QKeySequence("F2"), self, toggle_refresh_cache)
         QShortcut(QKeySequence("F1"), self, about_dlg)
 
     # TREE WIDGET MANAGEMENT
@@ -494,11 +497,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.act_export.setEnabled(True)
 
             # Official story export is forbidden
-            selected = self.tree_stories.selectedItems()
-            if len(selected) == 1:
-                one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
-                if one_story.is_official():
-                    self.act_export.setEnabled(False)
+            if not constants.REFRESH_CACHE:
+                selected = self.tree_stories.selectedItems()
+                if len(selected) == 1:
+                    one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
+                    if one_story.is_official():
+                        self.act_export.setEnabled(False)
 
         # are there story loaded ?
         if self.lunii_device.stories:
