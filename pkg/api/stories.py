@@ -222,9 +222,7 @@ def story_load_db(reload=False):
                     db = j_resp.get('response')
                     json.dump(db, fp)
 
-        except requests.exceptions.Timeout:
-            retVal = False
-        except requests.exceptions.RequestException:
+        except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             retVal = False
 
     # trying to load official DB
@@ -369,7 +367,7 @@ class Story:
             # print(f"Downloading for {one_uuid} to {res_file}")
             try:
                 # Set the timeout for the request
-                response = requests.get(one_story_imageURL, timeout=1)
+                response = requests.get(one_story_imageURL, timeout=2)
                 if response.status_code == 200:
                     # Load image from bytes
                     image_data = response.content

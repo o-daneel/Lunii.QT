@@ -41,7 +41,7 @@ def lunii_fw_version(hw_version, json_auth, fu_upgrade=False):
 
     if hw_version <= LUNII_V2:
         json_auth["user-agent"]="unirest-java/3.1.00"
-        fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update/current?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth)
+        fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update/current?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth, timeout=10)
         if fw.status_code == 200:
             # print(fw.json())
             print("Last FW version :")
@@ -59,14 +59,14 @@ def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=Fals
 
     json_auth["user-agent"]="unirest-java/3.1.00"
     if hw_version <= LUNII_V2:
-        fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth)
+        fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth, timeout=10)
         if fw.status_code == 200:
 
             # getting FU.BIN
             if fw.json()['response']['update'].get('fu_file') and fu_upgrade:
                 url = fw.json()['response']['update']['fu_file']['url']
                 # print(url)
-                fw_file = requests.get(url)
+                fw_file = requests.get(url, timeout=10)
                 if fw_file.status_code == 200:
                     with open(filepath, "wb") as fu:
                         fu.write(fw_file.content)
@@ -76,14 +76,14 @@ def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=Fals
             if fw.json()['response']['update'].get('fa_file') and not fu_upgrade:
                 url = fw.json()['response']['update']['fa_file']['url']
                 # print(url)
-                fw_file = requests.get(url)
+                fw_file = requests.get(url, timeout=10)
                 if fw_file.status_code == 200:
                     with open(filepath, "wb") as fa:
                         fa.write(fw_file.content)
                         return fa.tell()
 
     elif hw_version == LUNII_V3:
-        fw = requests.get(f"https://server-backend-prod.lunii.com/devices/{snu}/firmware?installed=3.1.2", headers=json_auth)
+        fw = requests.get(f"https://server-backend-prod.lunii.com/devices/{snu}/firmware?installed=3.1.2", headers=json_auth, timeout=10)
 
         # getting FA.BIN
         if fw.status_code == 200:
