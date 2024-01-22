@@ -10,8 +10,37 @@ for Windows / Linux / MacOs
 
 ### Limitations
 * Application <u>no longer</u> allows Official stories to be exported
-* Some STUdio stories might be rejected due to audio format not supported (example .ogg)
+* Audio transcoding requires FFMPEG v6 to be present (link to section)
 * **Flam** not yet supported (next update might)
+
+### Table of contents
+<!-- TOC -->
+* [Lunii.QT](#luniiqt)
+  * [User Interface](#user-interface)
+    * [Description](#description)
+  * [Shortcuts](#shortcuts)
+  * [Audio Transcoding](#audio-transcoding)
+  * [Supported archive formats](#supported-archive-formats)
+    * [.plain.pk](#plainpk)
+    * [.v1.pk / .v2.pk](#v1pk--v2pk)
+    * [ZIP (old Lunii.QT)](#zip-old-luniiqt)
+    * [ZIP (alternate)](#zip-alternate)
+    * [7z](#7z)
+    * [STUdio (ZIP / 7z)](#studio-zip--7z)
+  * [TODO](#todo)
+  * [HowTo](#howto)
+    * [Prepare env](#prepare-env)
+    * [Build UI files](#build-ui-files)
+    * [Run](#run)
+    * [Build GUI executable](#build-gui-executable)
+  * [Trick](#trick)
+    * [Cache management](#cache-management)
+    * [V3 export](#v3-export)
+    * [ICO creation](#ico-creation)
+  * [Credits](#credits)
+* [Links / Similar repos](#links--similar-repos)
+<!-- TOC -->
+
 
 ## User Interface
 
@@ -45,34 +74,97 @@ for Windows / Linux / MacOs
 | `Ctrl+O`       | Open a Lunii device              |
 | `F5`           | Refresh devices                  |
 
+## Audio Transcoding
+To be completed  
+https://github.com/eugeneware/ffmpeg-static/releases/latest  
+
+where to copy file ?
+
+## Supported archive formats
+### .plain.pk
+**Filename** :  `story_name.8B_UUID.plain.pk`  
+**Ciphering** : None / Plain  
+**Structure** :  
+
+      uuid.bin
+      ni
+      li.plain
+      ri.plain
+      si.plain
+      rf/000/XXYYXXYY.bmp
+      sf/000/XXYYXXYY.mp3
+### .v1.pk / .v2.pk
+**Filename** :  
+* `LONG_UUID.v2.pk`  
+* `LONG_UUID.v2.pk`  
+* `LONG_UUID.pk`  
+  
+**Ciphering** : Generic Key  
+**Structure** :  
+
+      00000000000000000000000000000000/ni
+      00000000000000000000000000000000/li
+      00000000000000000000000000000000/ri
+      00000000000000000000000000000000/si
+      00000000000000000000000000000000/rf/000/XXYYXXYY
+      00000000000000000000000000000000/sf/000/XXYYXXYY
+### ZIP (old Lunii.QT)
+**Filename** :  `8B_UUID - story_name.zip`  
+**Ciphering** : Generic Key  
+**Structure** :  
+
+      uuid.bin
+      ni
+      li
+      ri
+      si
+      rf/000/XXYYXXYY
+      sf/000/XXYYXXYY
+
+### ZIP (alternate)
+**Filename** :  `AGE+] story_title DASHED_UUID.zip`  
+**Ciphering** : Generic Key  
+**Structure** :  
+
+      00000000-0000-0000-0000-000000000000/ni
+      00000000-0000-0000-0000-000000000000/li
+      00000000-0000-0000-0000-000000000000/ri
+      00000000-0000-0000-0000-000000000000/si
+      00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
+      00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
+
+### 7z
+**Filename** : `AGE+] story_title DASHED_UUID.7z`  
+**Ciphering** : Generic Key  
+**Structure** :  
+
+      00000000-0000-0000-0000-000000000000/ni
+      00000000-0000-0000-0000-000000000000/li
+      00000000-0000-0000-0000-000000000000/ri
+      00000000-0000-0000-0000-000000000000/si
+      00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
+      00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
+
+### STUdio (ZIP / 7z)
+**Filename** : `AGE+] story_title DASHED_UUID.zip .7z`  
+**Ciphering** : None  
+
+**Structure** :  
+
+        assets/
+        stroy.json
+        thumbnail.png
+
 ## TODO
 * config file to backup menu config (sizes / details)
-* support studio stories
-  * ~~7Zip archives~~
-  * audio transcoding with FFMPEG
-* about window with credits / url to github
 * add picture to tree list ?
+* support studio stories
+  * one more zip format to be added
+  * ~~7Zip archives~~
+  * ~~audio transcoding with FFMPEG~~
+* ~~about window with credits / url to github~~
 * ~~support Lunii FW download (requires auth token or Login / Passwd)~~
-* ~~add support for export of Thirdparty stories (thumbnail + metadata)~~
-* ~~adding support for ThirdParty stories~~
-* ~~fecth STUdio db~~
-* ~~dedicated menu to allow story details~~
-* ~~Move Top / Bottom, Export All to be implemented~~
-* ~~selection lost on key up / down after move~~
-* ~~display story size~~
-* ~~Add menu File / Tools / About~~
-  * ~~File : Move Up, Move Down, Import, Export, Export All, Quit~~
-  * ~~Tools : Check Update / Get current FW / Story Sizes / (Refresh Official DB)~~
-* ~~add button for official db refresh~~
-* ~~fix Lunii v1 key issue~~
-* ~~add FW version~~
-* ~~improve story move up/down~~
-* ~~save new story order on lunii~~
-* ~~improve lunii detection for Linux/MacOs~~
-* ~~check for v3 keys for export~~
-* ~~more debug messages~~ 
-* ~~Create dedicated thread & slots to avoid interface freeze during import/export~~
-* ~~support Linux / Mac (path entry)~~
+
 
 
 ## HowTo
