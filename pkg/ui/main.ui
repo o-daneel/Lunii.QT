@@ -490,6 +490,8 @@
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
+    <addaction name="separator"/>
+    <addaction name="actionTranscode"/>
    </widget>
    <widget class="QMenu" name="menuStory">
     <property name="title">
@@ -696,6 +698,20 @@
   <action name="actionUpdate">
    <property name="text">
     <string>Update to v2.X.X</string>
+   </property>
+  </action>
+  <action name="actionTranscode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>FFMPEG detected</string>
    </property>
   </action>
  </widget>

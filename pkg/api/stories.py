@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from pathlib import Path
 from typing import List
 from uuid import UUID
@@ -25,6 +26,9 @@ FILE_UUID  = "uuid.bin"
 FILE_STUDIO_JSON  = "story.json"
 FILE_STUDIO_THUMB = "thumbnail.png"
 
+STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
+
+
 class StudioStory:
     def __init__(self, story_json=None):
         self.format_version = 0
@@ -40,7 +44,7 @@ class StudioStory:
         self.si = dict()
         self.li = list()
 
-        #TODO : TO BE REMOVE with FFMPEG
+        # depends on ffmpeg presence on host system
         self.compatible = False
 
         if story_json:
@@ -80,9 +84,7 @@ class StudioStory:
 
             audio = snode.get('audio')
             if audio:
-                #TODO : REMOVE when ready to transcode with FFMPEG
-                if not audio.lower().endswith('.mp3'):
-                    print(audio)
+                if not STORY_TRANSCODING_SUPPORTED and not audio.lower().endswith('.mp3'):
                     self.compatible = False
                     return
 

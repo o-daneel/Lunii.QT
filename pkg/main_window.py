@@ -1,4 +1,5 @@
 import os.path
+import shutil
 import time
 from pathlib import WindowsPath
 
@@ -54,6 +55,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.details_hidden = False
         self.details_last_uuid = None
         self.last_version = None
+        self.ffmpeg_present = shutil.which("ffmpeg") is not None
+
         # actions local storage
         self.act_mv_top = None
         self.act_mv_up = None
@@ -133,6 +136,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
+        act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
+        act_transcode.setChecked(self.ffmpeg_present)
+        act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing")
+
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_details.setChecked(not self.details_hidden)
