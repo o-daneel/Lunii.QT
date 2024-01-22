@@ -46,6 +46,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
 
+        self.debug_dialog = DebugDialog()
         # class instance vars init
         self.lunii_device: LuniiDevice = None
         self.worker: ierWorker = None
@@ -402,8 +403,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionShow_Log":
-            debug_dialog = DebugDialog()
-            debug_dialog.exec_()
+            self.debug_dialog.show()
 
         elif act_name == "actionGet_firmware":
             # prompt for Luniistore connection

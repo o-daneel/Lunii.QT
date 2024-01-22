@@ -20,8 +20,7 @@ from PySide6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogBu
 import resources_rc
 
 
-
-class DebugDialog(QDialog):
+class DebugDialog(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -38,6 +37,7 @@ class DebugDialog(QDialog):
         self.textEdit.setObjectName(u"textEdit")
         self.textEdit.setLineWrapMode(QTextEdit.NoWrap)
         self.textEdit.setReadOnly(True)
+        self.textEdit.setPlaceholderText("Application Log Empty ...")
 
         self.verticalLayout.addWidget(self.textEdit)
 
@@ -45,9 +45,20 @@ class DebugDialog(QDialog):
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Close|QDialogButtonBox.Reset|QDialogButtonBox.Save)
+        # callbacks on butttons
+        self.buttonBox.clicked.connect(self.button_clicked)
 
         self.verticalLayout.addWidget(self.buttonBox)
 
-        self.textEdit.setPlaceholderText("Application Log Empty ...")
 
+    def button_clicked(self, button: QAbstractButton):
+        button_role = self.sender().buttonRole(button)
 
+        if button_role == QDialogButtonBox.RejectRole:
+            # print("close")
+            self.hide()
+        elif button_role == QDialogButtonBox.ResetRole:
+            self.textEdit.clear()
+            # print("reset")
+        elif button_role == QDialogButtonBox.AcceptRole:
+            print("save")
