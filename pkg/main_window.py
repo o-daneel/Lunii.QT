@@ -1,3 +1,4 @@
+import logging
 import os.path
 import time
 from pathlib import WindowsPath
@@ -6,20 +7,19 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
 
 from pkg.api import constants
+from pkg.api.constants import *
 from pkg.api.device import find_devices, LuniiDevice, is_device
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
-from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 from pkg.ui.about_ui import about_dlg
-from pkg.ui.debug_ui import DebugDialog
+from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
-
 from pkg.ui.main_ui import Ui_MainWindow
 
 COL_NAME = 0
@@ -45,6 +45,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+
+        self.logger = logging.getLogger(LUNII_LOGGER)
 
         self.debug_dialog = DebugDialog()
         # self.debug_dialog.show()
@@ -85,6 +87,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             headers = {'Referer': f"Lunii.QT {APP_VERSION}"}
             response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", headers=headers, timeout=1)
             self.last_version = response.url.split("/").pop()
+            self.logger.log(logging.INFO, f"Latest Github release {self.last_version}")
         except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             pass
         self.cb_menu_help_update()
@@ -122,6 +125,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+
+        # self.pbar_story.setStyleSheet("""
+        #     QProgressBar::chunk {
+        #         background-color: #3498db; /* Couleur de la barre de progression */
+        #     }
+        # """)
 
         # finding menu actions
         s_actions = self.menuStory.actions()
@@ -628,6 +637,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_fs.setText("")
         self.lbl_count.setText("")
         self.statusbar.showMessage(message)
+        if message:
+            self.logger.log(logging.INFO, message)
 
         if not self.lunii_device:
             return

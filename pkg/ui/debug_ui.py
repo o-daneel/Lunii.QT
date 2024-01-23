@@ -6,6 +6,8 @@ from PySide6.QtWidgets import (QAbstractButton, QDialogButtonBox,
                                QVBoxLayout, QHBoxLayout, QWidget, QComboBox, QLineEdit,
                                QPlainTextEdit, QFileDialog)
 
+LUNII_LOGGER = "lunii-qt"
+
 
 class QTextEditHandler(logging.Handler):
     def __init__(self, text_edit):
@@ -21,7 +23,7 @@ class DebugDialog(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.logger = logging.getLogger("lunii-qt")
+        self.logger = logging.getLogger(LUNII_LOGGER)
         self.logger.setLevel(logging.DEBUG)
 
         # window config
