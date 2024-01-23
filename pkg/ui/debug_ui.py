@@ -1,29 +1,30 @@
-# -*- coding: utf-8 -*-
+import logging
 
-################################################################################
-## Form generated from reading UI file 'debug.ui'
-##
-## Created by: Qt User Interface Compiler version 6.6.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
+from PySide6.QtCore import (QSize, Qt)
+from PySide6.QtGui import (QIcon)
+from PySide6.QtWidgets import (QAbstractButton, QDialogButtonBox,
+                               QVBoxLayout, QHBoxLayout, QWidget, QComboBox, QLineEdit,
+                               QPlainTextEdit, QFileDialog)
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
-    QSizePolicy, QTextEdit, QVBoxLayout, QWidget)
-import resources_rc
+
+class QTextEditHandler(logging.Handler):
+    def __init__(self, text_edit):
+        super(QTextEditHandler, self).__init__()
+        self.text_edit = text_edit
+
+    def emit(self, record):
+        msg = self.format(record)
+        self.text_edit.appendPlainText(msg)
 
 
 class DebugDialog(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        self.logger = logging.getLogger("lunii-qt")
+        self.logger.setLevel(logging.DEBUG)
+
+        # window config
         self.setWindowTitle("Debug Log")
         icon = QIcon()
         icon.addFile(u":/icon/res/debug_log.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -31,34 +32,65 @@ class DebugDialog(QWidget):
         self.setMinimumSize(QSize(500, 0))
         self.resize(500, 300)
 
+        # contents
+        self.cb_level = QComboBox(self)
+        self.le_filter = QLineEdit(self)
+
+        upper_layout = QHBoxLayout()
+        upper_layout.addWidget(self.cb_level)
+        upper_layout.addWidget(self.le_filter)
+
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.textEdit = QTextEdit(self)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setLineWrapMode(QTextEdit.NoWrap)
-        self.textEdit.setReadOnly(True)
-        self.textEdit.setPlaceholderText("Application Log Empty ...")
+        self.te_Logger = QPlainTextEdit(self)
+        self.te_Logger.setObjectName(u"textEdit")
+        self.te_Logger.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.te_Logger.setReadOnly(True)
+        self.te_Logger.setPlaceholderText("Application Log Empty ...")
 
-        self.verticalLayout.addWidget(self.textEdit)
+        # adding contents to vertical layout
+        self.verticalLayout.addLayout(upper_layout)
+        self.verticalLayout.addWidget(self.te_Logger)
 
+        # buttons at bottom
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Close|QDialogButtonBox.Reset|QDialogButtonBox.Save)
-        # callbacks on butttons
+        # callbacks on buttons
         self.buttonBox.clicked.connect(self.button_clicked)
 
         self.verticalLayout.addWidget(self.buttonBox)
 
+        # next UI inits
+        self.init_ui()
+
+    def init_ui(self):
+        self.modify_widgets()
+        self.setup_connections()
+
+    def modify_widgets(self):
+        self.cb_level.setVisible(False)
+        self.le_filter.setVisible(False)
+
+    def setup_connections(self):
+        # connecting logger handler
+        handler = QTextEditHandler(self.te_Logger)
+        handler.setFormatter(logging.Formatter('[%(levelname)s] %(message)s'))
+        self.logger.addHandler(handler)
 
     def button_clicked(self, button: QAbstractButton):
         button_role = self.sender().buttonRole(button)
 
         if button_role == QDialogButtonBox.RejectRole:
-            # print("close")
             self.hide()
         elif button_role == QDialogButtonBox.ResetRole:
-            self.textEdit.clear()
-            # print("reset")
+            self.te_Logger.clear()
         elif button_role == QDialogButtonBox.AcceptRole:
-            print("save")
+            self.save_log()
+
+    def save_log(self):
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Log", "", "Text Files (*.txt);;All Files (*)")
+        if filename:
+            with open(filename, 'wb') as file:
+                file.write(self.te_Logger.toPlainText().encode('utf-8'))
