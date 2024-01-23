@@ -82,7 +82,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # fetching last app version on Github
         try:
-            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", timeout=1)
+            headers = {'Referer': f"Lunii.QT {APP_VERSION}"}
+            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", headers=headers, timeout=1)
             self.last_version = response.url.split("/").pop()
         except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             pass
