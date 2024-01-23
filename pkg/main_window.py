@@ -47,6 +47,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
 
         self.debug_dialog = DebugDialog()
+        # self.debug_dialog.show()
+
         # class instance vars init
         self.lunii_device: LuniiDevice = None
         self.worker: ierWorker = None
@@ -403,6 +405,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionShow_Log":
+            main_geometry = self.geometry()
+            debug_geometry = self.debug_dialog.geometry()
+
+            # computing log geometry
+            child_x = main_geometry.x() + main_geometry.width() + 5
+            child_y = main_geometry.y()
+            child_width = debug_geometry.width()
+            child_height = main_geometry.height()
+
+            # apply new geo
+            self.debug_dialog.setGeometry(child_x, child_y, child_width, child_height)
             self.debug_dialog.show()
 
         elif act_name == "actionGet_firmware":
