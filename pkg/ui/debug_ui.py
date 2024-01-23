@@ -4,7 +4,7 @@ from PySide6.QtCore import (QSize, Qt)
 from PySide6.QtGui import (QIcon)
 from PySide6.QtWidgets import (QAbstractButton, QDialogButtonBox,
                                QVBoxLayout, QHBoxLayout, QWidget, QComboBox, QLineEdit,
-                               QPlainTextEdit, QFileDialog)
+                               QPlainTextEdit, QFileDialog, QSpacerItem, QSizePolicy)
 
 LUNII_LOGGER = "lunii-qt"
 
@@ -37,9 +37,14 @@ class DebugDialog(QWidget):
         # contents
         self.cb_level = QComboBox(self)
         self.le_filter = QLineEdit(self)
+        self.le_filter.setClearButtonEnabled(True)
+        self.le_filter.setPlaceholderText("(Log filter text)")
+
+        horizontalSpacer = QSpacerItem(80, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
         upper_layout = QHBoxLayout()
         upper_layout.addWidget(self.cb_level)
+        upper_layout.addItem(horizontalSpacer)
         upper_layout.addWidget(self.le_filter)
 
         self.verticalLayout = QVBoxLayout(self)
@@ -72,14 +77,36 @@ class DebugDialog(QWidget):
         self.setup_connections()
 
     def modify_widgets(self):
-        self.cb_level.setVisible(False)
-        self.le_filter.setVisible(False)
+        self.cb_level.setVisible(True)
+        self.cb_level.addItem("DEBUG")
+        self.cb_level.addItem("INFO")
+        self.cb_level.addItem("WARNING")
+        self.cb_level.addItem("ERROR")
+
+        self.cb_level.setCurrentIndex(1)
+        self.logger.setLevel(logging.INFO)
+
+        self.le_filter.setVisible(True)
+        self.le_filter.setEnabled(False)
 
     def setup_connections(self):
+        # log level selector
+        self.cb_level.currentIndexChanged.connect(self.cb_level_selected)
+
         # connecting logger handler
         handler = QTextEditHandler(self.te_Logger)
         handler.setFormatter(logging.Formatter('[%(levelname)s] %(message)s'))
         self.logger.addHandler(handler)
+
+    def cb_level_selected(self):
+        # getting current device
+        dict_level = { "DEBUG": logging.DEBUG,
+                       "INFO": logging.INFO,
+                       "WARNING": logging.WARNING,
+                       "ERROR": logging.ERROR}
+
+        level = self.cb_level.currentText()
+        self.logger.setLevel(dict_level[level])
 
     def button_clicked(self, button: QAbstractButton):
         button_role = self.sender().buttonRole(button)
