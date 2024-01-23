@@ -202,6 +202,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         return False
 
+    def closeEvent(self, event):
+        # Explicitly close the log window when the main window is closed
+        self.debug_dialog.close()
+        event.accept()
+
     def cb_show_context_menu(self, point):
         # change active menu based on selection
         self.cb_menu_story_update()
