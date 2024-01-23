@@ -691,6 +691,9 @@
    <property name="text">
     <string>Show Log</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
