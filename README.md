@@ -1,6 +1,6 @@
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
-for Windows / Linux / MacOs 
+for Windows / Linux / MacOs 11  
 (compatible with STUdio archive, **with** transcoding)
 
 
@@ -66,7 +66,7 @@ for Windows / Linux / MacOs
 Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool available here :  
 https://github.com/eugeneware/ffmpeg-static/releases/latest  
 
-**WARNING** : transcoding is <u>very long</u>, you should be patient. That's why you should prefer the [.plain.pk](#plainpk) format that relies on compatible audio.
+**WARNING** : transcoding is <u>very long</u>, you should be patient. That's why you should prefer the [.plain.pk](#plainpk) format that use compatible audio.
 
 ### Installation
 You must ensure that `ffmpeg` command is in your path.  

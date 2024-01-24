@@ -1,21 +1,39 @@
-# import io
+import subprocess
 import ffmpeg
 
 def audio_to_mp3(audio_data):
-    audio_mp3, err = (
+    # Construct the ffmpeg command using the ffmpeg-python syntax
+    ffmpeg_cmd = (
         ffmpeg.input('pipe:0')
         .output('pipe:', format='mp3', codec='libmp3lame',
-                    map='0:a',
-                    ar='44100',
-                    ac='1',
-                    # aq='9',
-                    ab='64k',
-                    map_metadata='-1',
-                    write_xing='0',
-                    id3v2_version='0'
-                )
-        .run(input=audio_data, capture_stdout=True, capture_stderr=True)
+                map='0:a',
+                ar='44100',
+                ac='1',
+                # aq='9',
+                ab='64k',
+                map_metadata='-1',
+                write_xing='0',
+                id3v2_version='0'
+            )
+        .compile()
     )
+
+    # Run the ffmpeg command using subprocess with stdin and stdout pipes
+    process = subprocess.Popen(ffmpeg_cmd,
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               creationflags=subprocess.CREATE_NO_WINDOW)
+
+    # Feed the audio data to the stdin of the subprocess
+    stdout, stderr = process.communicate(input=audio_data)
+
+    # Check for errors
+    if process.returncode != 0:
+        print(f"Error: {stderr.decode('utf-8')}")
+    else:
+        # 'stdout' now contains the MP3 audio data
+        audio_mp3 = stdout
 
     # print(f"{len(audio_mp3)//1024}K")
     return audio_mp3
