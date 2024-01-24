@@ -78,12 +78,13 @@ class DebugDialog(QWidget):
 
     def modify_widgets(self):
         self.cb_level.setVisible(True)
+        self.cb_level.addItem("NONE")
         self.cb_level.addItem("DEBUG")
         self.cb_level.addItem("INFO")
         self.cb_level.addItem("WARNING")
         self.cb_level.addItem("ERROR")
 
-        self.cb_level.setCurrentIndex(1)
+        self.cb_level.setCurrentIndex(2)
         self.logger.setLevel(logging.INFO)
 
         self.le_filter.setVisible(True)
@@ -100,7 +101,8 @@ class DebugDialog(QWidget):
 
     def cb_level_selected(self):
         # getting current device
-        dict_level = { "DEBUG": logging.DEBUG,
+        dict_level = { "NONE": logging.NOTSET,
+                       "DEBUG": logging.DEBUG,
                        "INFO": logging.INFO,
                        "WARNING": logging.WARNING,
                        "ERROR": logging.ERROR}
