@@ -9,6 +9,7 @@ import psutil
 import py7zr
 import xxtea
 import binascii
+import logging
 from pathlib import Path
 from uuid import UUID
 
@@ -27,6 +28,7 @@ from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE
 
 class LuniiDevice(QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
+    signal_logger = QtCore.Signal(int, str)
     stories: StoryList
 
     def __init__(self, mount_point, keyfile=None):
@@ -248,7 +250,7 @@ class LuniiDevice(QObject):
     def export_all(self, out_path):
         archives = []
         for count, story in enumerate(self.stories):
-            # print(f"{count+1:>2}/{len(self.stories)} ", end="")
+            self.signal_logger.emit(logging.INFO, f"{count+1:>2}/{len(self.stories)} ")
             one_zip = self.export_story(str(story)[28:], out_path)
             if one_zip:
                 archives.append(one_zip)
@@ -354,7 +356,7 @@ class LuniiDevice(QObject):
             if "/" not in dir_head and "\\" not in dir_head:
                 file = dir_head.upper() + file[8:]
 
-        # print(file)
+        # self.signal_logger.emit(logging.DEBUG, file)
         return file
 
     def import_dir(self, story_path):
@@ -362,9 +364,9 @@ class LuniiDevice(QObject):
         pk_list = []
         for ext in SUPPORTED_EXT:
             pk_list += glob.glob(os.path.join(story_path, "**/*" + ext), recursive=True)
-        # print(f"Importing {len(pk_list)} archives...")
+        self.signal_logger.emit(logging.INFO, f"Importing {len(pk_list)} archives...")
         for index, pk in enumerate(pk_list):
-            # print(f"{index+1:>2}/{len(pk_list)} > {pk}")
+            self.signal_logger.emit(logging.INFO, f"{index+1:>2}/{len(pk_list)} > {pk}")
             self.import_story(pk)
         
         return True
@@ -372,12 +374,14 @@ class LuniiDevice(QObject):
     def import_story(self, story_path):
         archive_type = TYPE_UNK
 
+        self.signal_logger.emit(logging.INFO, f"🚧 Loading {story_path}...")
+
         archive_size = os.path.getsize(story_path)
         free_space = psutil.disk_usage(str(self.mount_point)).free
         if archive_size >= free_space:
-            # print(f"   ERROR: Not enough space left on Lunii (only {free_space//1024//1024}MB)")
+            self.signal_logger.emit(logging.ERROR, f"Not enough space left on Lunii (only {free_space//1024//1024}MB)")
             return False
-        
+
         # identifying based on filename
         if story_path.lower().endswith(EXT_PK_PLAIN):
             archive_type = TYPE_PLAIN
@@ -443,25 +447,25 @@ class LuniiDevice(QObject):
 
         # processing story
         if archive_type == TYPE_PLAIN:
-            # print("Archive => TYPE_PLAIN")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
             return self.import_story_plain(story_path)
         elif archive_type == TYPE_ZIP:
-            # print("Archive => TYPE_ZIP")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_ZIP")
             return self.import_story_zip(story_path)
         elif archive_type == TYPE_7Z:
-            # print("Archive => TYPE_7Z")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_7Z")
             return self.import_story_7z(story_path)
         elif archive_type == TYPE_V2:
-            # print("Archive => TYPE_V2")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2")
             return self.import_story_v2(story_path)
         elif archive_type == TYPE_V3:
-            # print("Archive => TYPE_V3")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V3")
             return self.import_story_v3(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
-            # print("Archive => TYPE_STUDIO_ZIP")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
             return self.import_story_studio_zip(story_path)
         elif archive_type == TYPE_STUDIO_7Z:
-            # print("Archive => TYPE_STUDIO_7Z")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
             return self.import_story_studio_7z(story_path)
 
     def import_story_plain(self, story_path):
@@ -470,7 +474,7 @@ class LuniiDevice(QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
         
         # opening zip file
@@ -478,19 +482,19 @@ class LuniiDevice(QObject):
             # reading all available files
             zip_contents = zip_file.namelist()
             if FILE_UUID not in zip_contents:
-                print("   ERROR: No UUID file found in archive. Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "No UUID file found in archive. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
                 new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
-                print(f"   ERROR: {e}")
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                print(f"   WARN: '{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
 
             # thirdparty story ?
@@ -541,7 +545,7 @@ class LuniiDevice(QObject):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -558,7 +562,7 @@ class LuniiDevice(QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
         
         # opening zip file
@@ -566,22 +570,22 @@ class LuniiDevice(QObject):
             # reading all available files
             zip_contents = zip_file.namelist()
             if FILE_UUID not in zip_contents:
-                print("   ERROR: No UUID file found in archive. Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "No UUID file found in archive. Unable to add this story.")
                 return False
             if FILE_STUDIO_JSON in zip_contents:
-                print("   ERROR: Studio story format is not supported. Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "Studio story format is not supported. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
                 new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
-                print(f"   ERROR: {e}")
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -621,7 +625,7 @@ class LuniiDevice(QObject):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -638,7 +642,7 @@ class LuniiDevice(QObject):
             with py7zr.SevenZipFile(story_path, mode='r'):
                 pass  # If opening succeeds, the archive is valid
         except py7zr.exceptions.Bad7zFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
 
         # opening zip file
@@ -648,7 +652,7 @@ class LuniiDevice(QObject):
 
             # getting UUID from first dir
             if not archive_contents[0].is_directory:
-                print("   ERROR: UUID directory is missing in archive !")
+                self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
                 return False
 
             try:
@@ -657,12 +661,12 @@ class LuniiDevice(QObject):
                 else:
                     new_uuid = UUID(archive_contents[0].filename)
             except ValueError as e:
-                print(f"   ERROR: {e}")
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
             
             # decompressing story contents
@@ -716,7 +720,7 @@ class LuniiDevice(QObject):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -733,7 +737,7 @@ class LuniiDevice(QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
         
         # opening zip file
@@ -743,22 +747,22 @@ class LuniiDevice(QObject):
 
             # getting UUID from path
             if zip_file.getinfo(zip_contents[0]).is_dir():
-                # print(zip_contents[0][:-1])
+                # self.signal_logger.emit(logging.DEBUG, zip_contents[0][:-1])
                 try:
                     if "-" not in zip_contents[0]:
                         new_uuid = UUID(bytes=binascii.unhexlify(zip_contents[0][:-1]))
                     else:
                         new_uuid = UUID(zip_contents[0][:-1])
                 except ValueError as e:
-                    print(f"   ERROR: {e}")
+                    self.signal_logger.emit(logging.ERROR, e)
                     return False
             else:
-                print("   ERROR: UUID directory is missing in archive !")
+                self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
                 return False
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                # print(f"   WARN: '{story_name(new_uuid)}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -812,7 +816,7 @@ class LuniiDevice(QObject):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -824,7 +828,7 @@ class LuniiDevice(QObject):
         return True
 
     def import_story_v3(self, story_path):
-        print("   ERROR : unsupported story format")
+        self.signal_logger.emit(logging.ERROR, "unsupported story format")
         return False
 
     def import_story_studio_zip(self, story_path):
@@ -833,7 +837,7 @@ class LuniiDevice(QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
         
         # opening zip file
@@ -841,29 +845,29 @@ class LuniiDevice(QObject):
             # reading all available files
             zip_contents = zip_file.namelist()
             if FILE_UUID in zip_contents:
-                # print("   ERROR: plain.pk format detected ! Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "plain.pk format detected ! Unable to add this story.")
                 return False
             if FILE_STUDIO_JSON not in zip_contents:
-                # print("   ERROR: missing 'story.json'. Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "missing 'story.json'. Unable to add this story.")
                 return False
 
             # getting UUID file
             try:
                 story_json=json.loads(zip_file.read(FILE_STUDIO_JSON))
             except ValueError as e:
-                print(f"   ERROR: {e}")
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
 
             one_story = StudioStory(story_json)
             if not one_story.compatible:
-                print("   ERROR: STUdio story with unsupported format.")
+                self.signal_logger.emit(logging.ERROR, "STUdio story with unsupported format.")
                 return False
 
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
             # checking if UUID already loaded
             if str(one_story.uuid) in self.stories:
-                # print(f"   WARN: '{story_name(one_story.uuid)}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -900,6 +904,7 @@ class LuniiDevice(QObject):
                     file_newname = self.__get_ciphered_name(one_story.si[file][0], studio_si=True)
                     # transcode audio if necessary
                     if not file.lower().endswith('.mp3'):
+                        self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         data = audio_to_mp3(data)
                 else:
                     # unexpected file, skipping
@@ -930,7 +935,7 @@ class LuniiDevice(QObject):
         self.__write(one_story.get_ni_data(), output_path, "ni")
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -947,7 +952,7 @@ class LuniiDevice(QObject):
             with py7zr.SevenZipFile(story_path, mode='r'):
                 pass  # If opening succeeds, the archive is valid
         except py7zr.exceptions.Bad7zFile as e:
-            print(f"   ERROR: {e}")
+            self.signal_logger.emit(logging.ERROR, e)
             return False
 
         # opening zip file
@@ -955,29 +960,29 @@ class LuniiDevice(QObject):
             # reading all available files
             zip_contents = zip.readall()
             if FILE_UUID in zip_contents:
-                # print("   ERROR: plain.pk format detected ! Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "plain.pk format detected ! Unable to add this story.")
                 return False
             if FILE_STUDIO_JSON not in zip_contents:
-                # print("   ERROR: missing 'story.json'. Unable to add this story.")
+                self.signal_logger.emit(logging.ERROR, "missing 'story.json'. Unable to add this story.")
                 return False
   
             # getting UUID file
             try:
                 story_json=json.loads(zip_contents[FILE_STUDIO_JSON].read())
             except ValueError as e:
-                print(f"   ERROR: {e}")
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
 
             one_story = StudioStory(story_json)
             if not one_story.compatible:
-                print("   ERROR: STUdio story with unsupported format.")
+                self.signal_logger.emit(logging.ERROR, "STUdio story with unsupported format.")
                 return False
 
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
             # checking if UUID already loaded
             if str(one_story.uuid) in self.stories:
-                # print(f"   WARN: '{story_name(one_story.uuid)}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded, aborting !")
                 return False
 
             # decompressing story contents
@@ -1042,7 +1047,7 @@ class LuniiDevice(QObject):
         self.__write(one_story.get_ni_data(), output_path, "ni")
 
         # creating authorization file : bt
-        # print("   INFO : Authorization file creation...")
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
         bt_path = output_path.joinpath("bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
@@ -1080,9 +1085,9 @@ class LuniiDevice(QObject):
 
         slist = self.stories.matching_stories(uuid)
         if len(slist) > 1:
-            print(f"   ERROR: at least {len(slist)} match your pattern. Try a longer UUID.")
+            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
             for st in slist:
-                print(f"[{st.str_uuid} - {st.name}]")
+                self.signal_logger.emit(logging.ERROR, f"[{st.str_uuid} - {st.name}]")
             return None
 
         one_story = slist[0]
@@ -1096,7 +1101,7 @@ class LuniiDevice(QObject):
         if not story_path.is_dir():
             return None
         
-        # print(f"[{uuid} - {self.stories.name(uuid)}]")
+        self.signal_logger.emit(logging.INFO, f"🚧 Exporting {uuid} - {one_story.name}")
 
         # for Lunii v3, checking keys (original or trick)
         if self.lunii_version == LUNII_V3:
@@ -1104,7 +1109,7 @@ class LuniiDevice(QObject):
             self.load_story_keys(str(story_path.joinpath("bt")))
             # are keys usable ?
             if not self.__story_check_key(story_path, self.story_key, self.story_iv):
-                print("   ERROR: Lunii v3 requires Device Key for genuine story export.")
+                self.signal_logger.emit(logging.ERROR, "Lunii v3 requires Device Key for genuine story export.")
                 return None
 
         # Preparing zip file
@@ -1113,7 +1118,7 @@ class LuniiDevice(QObject):
 
         zip_path = Path(out_path).joinpath(f"{sname}.{uuid}.plain.pk")
         # if os.path.isfile(zip_path):
-        #     # print(f"   WARN: Already exported")
+        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
         #     return None
         
         # preparing file list
@@ -1126,7 +1131,7 @@ class LuniiDevice(QObject):
 
         try:
             with zipfile.ZipFile(zip_path, 'w') as zip_out:
-                # print("> Zipping story ...")
+                self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
                 for index, file in enumerate(story_flist):
                     self.signal_story_progress.emit(uuid, index, len(story_flist))
 
@@ -1137,39 +1142,39 @@ class LuniiDevice(QObject):
                     zip_out.writestr(file_newname, data_plain)
 
                 # adding uuid file
-                # print("> Adding UUID ...")
+                self.signal_logger.emit(logging.DEBUG, "> Adding UUID ...")
                 zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
 
                 # more files to be added for thirdparty stories
                 if not one_story.is_official():
-                    # print("> Adding thumbnail ...")
+                    self.signal_logger.emit(logging.DEBUG, "> Adding thumbnail ...")
                     pict_data = one_story.get_picture()
                     if pict_data:
                         zip_out.writestr(FILE_THUMB, pict_data)
 
-                    # print("> Adding metadata ...")
+                    self.signal_logger.emit(logging.DEBUG, "> Adding metadata ...")
                     meta = one_story.get_meta()
                     if meta:
                         zip_out.writestr(FILE_META, meta)
 
         except PermissionError as e:
-            print(f"   ERROR: failed to create ZIP - {e}")
+            self.signal_logger.emit(logging.ERROR, f"failed to create ZIP - {e}")
             return None
         
         return zip_path
     
     def remove_story(self, short_uuid):
         if short_uuid not in self.stories:
-            # print("ERROR: This story is not present on your storyteller")
+            self.signal_logger.emit(logging.ERROR, "This story is not present on your storyteller")
             return False
 
         slist = self.stories.matching_stories(short_uuid)
         if len(slist) > 1:
-            # print(f"ERROR: at least {len(ulist)} match your pattern. Try a longer UUID.")
+            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
             return False
         uuid = slist[0].str_uuid
 
-        # print(f"Removing {uuid[28:]} - {self.stories.name(uuid)}...")
+        self.signal_logger.emit(logging.INFO, f"🚧 Removing {uuid[28:]} - {self.stories.get_story(uuid).name}...")
 
         short_uuid = uuid[28:]
         self.signal_story_progress.emit(short_uuid, 0, 3)
@@ -1180,10 +1185,10 @@ class LuniiDevice(QObject):
             try:
                 shutil.rmtree(st_path)
             except OSError as e:
-                print(e)
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
             except PermissionError as e:
-                print(e)
+                self.signal_logger.emit(logging.ERROR, e)
                 return False
 
         self.signal_story_progress.emit(short_uuid, 1, 3)
@@ -1218,11 +1223,14 @@ def secure_filename(filename):
 
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
-    
+    logger = logging.getLogger(LUNII_LOGGER)
+
     mount_path = Path(root_path)
     pi_path = mount_path.joinpath(".pi")
 
     story_list = StoryList()
+
+    logger.log(logging.INFO, f"Reading Lunii loaded stories...")
 
     # no pi file, done
     if not os.path.isfile(pi_path):
@@ -1233,7 +1241,9 @@ def feed_stories(root_path) -> StoryList[UUID]:
         while loop_again:
             next_uuid = fp_pi.read(16)
             if next_uuid:
-                story_list.append(Story(UUID(bytes=next_uuid)))
+                one_uuid = UUID(bytes=next_uuid)
+                logger.log(logging.DEBUG, f"- {str(one_uuid)}")
+                story_list.append(Story(one_uuid))
             else:
                 loop_again = False
 
@@ -1250,14 +1260,18 @@ def feed_stories(root_path) -> StoryList[UUID]:
     #                     print(f"Recovered {found_uuid.hex}")
     #                     story_list.append(Story(found_uuid))
 
+    logger.log(logging.INFO, f"Read {len(story_list)} stories")
     return story_list
 
 
 def find_devices(extra_path=None):
+    logger = logging.getLogger(LUNII_LOGGER)
+
     lunii_dev = []
 
     current_os = platform.system()
-
+    logger.log(logging.INFO, f"Finding Lunii devices...")
+    
     if current_os == "Windows":
         # checking all drive letters
         for drive in range(ord('A'), ord('Z')+1):
@@ -1265,6 +1279,7 @@ def find_devices(extra_path=None):
             lunii_path = Path(drv_str)
 
             if is_device(lunii_path):
+                logger.log(logging.DEBUG, f"- {lunii_path} : Device found")
                 lunii_dev.append(lunii_path)
 
         # checking for extra path
@@ -1277,19 +1292,24 @@ def find_devices(extra_path=None):
     elif current_os == "Linux":
         # Iterate through all partitions
         for part in psutil.disk_partitions():
+            logger.log(logging.DEBUG, f"- {part}")
             if (part.device.startswith("/dev/sd") and
                     (part.fstype == "msdosfs" or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
+                logger.log(logging.DEBUG, "  Device found")
                 lunii_dev.append(part.mountpoint)
                 
     elif current_os == "Darwin":
         # Iterate through all partitions
         for part in psutil.disk_partitions():
+            logger.log(logging.DEBUG, f"- {part}")
             if (any(part.mountpoint.lower().startswith(mnt_pt) for mnt_pt in ["/mnt", "/media", "/volume"]) and
                     (part.fstype == "msdosfs" or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
+                logger.log(logging.DEBUG, "  Device found")
                 lunii_dev.append(part.mountpoint)
 
+    logger.log(logging.INFO, f"> found {len(lunii_dev)} devices")
     # done
     return lunii_dev
 

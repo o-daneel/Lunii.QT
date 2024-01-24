@@ -907,6 +907,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
         self.lunii_device.signal_story_progress.connect(self.slot_story_progress)
+        self.lunii_device.signal_logger.connect(self.logger.log)
         self.worker.signal_finished.connect(self.slot_finished)
         self.worker.signal_refresh.connect(self.ts_update)
         self.worker.signal_message.connect(self.sb_update)
@@ -941,6 +942,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+
+        try:
+            self.lunii_device.signal_story_progress.disconnect()
+        except: pass
+        try:
+            self.lunii_device.signal_logger.disconnect()
+        except: pass
 
         self.worker = None
         self.thread = None
