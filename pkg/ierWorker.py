@@ -3,6 +3,7 @@ import os
 from PySide6 import QtCore
 from PySide6.QtCore import QObject
 
+from pkg.api import constants
 from pkg.api.device import LuniiDevice
 
 ACTION_IMPORT = 1
@@ -87,7 +88,7 @@ class ierWorker(QObject):
 
             # Official story export is forbidden
             story_to_export = self.lunii.stories.get_story(str_uuid)
-            if story_to_export.is_official():
+            if not constants.REFRESH_CACHE and story_to_export.is_official():
                 self.signal_message.emit(f"🛑 Forbidden to export : '{story_to_export.name}'")
                 self.signal_refresh.emit()
                 continue

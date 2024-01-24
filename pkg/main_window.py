@@ -1,3 +1,4 @@
+import logging
 import os.path
 import shutil
 import time
@@ -7,18 +8,19 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
+    QDialog, QApplication
 
+from pkg.api import constants
+from pkg.api.constants import *
 from pkg.api.device import find_devices, LuniiDevice, is_device
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
-from pkg.api.constants import *
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 from pkg.ui.about_ui import about_dlg
+from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
-
 from pkg.ui.main_ui import Ui_MainWindow
 
 COL_NAME = 0
@@ -30,7 +32,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.3.0"
+APP_VERSION = "v2.3.x"
 
 
 class VLine(QFrame):
@@ -44,6 +46,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+
+        self.logger = logging.getLogger(LUNII_LOGGER)
+
+        self.debug_dialog = DebugDialog()
+        # self.debug_dialog.show()
 
         # class instance vars init
         self.lunii_device: LuniiDevice = None
@@ -79,10 +86,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # fetching last app version on Github
         try:
-            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", timeout=1)
+            headers = {'Referer': f"Lunii.QT {APP_VERSION}"}
+            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", headers=headers, timeout=1)
             self.last_version = response.url.split("/").pop()
+            self.logger.log(logging.INFO, f"Latest Github release {self.last_version}")
         except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             pass
+
         self.cb_menu_help_update()
 
     def init_ui(self):
@@ -119,6 +129,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
 
+        # self.pbar_story.setStyleSheet("""
+        #     QProgressBar::chunk {
+        #         background-color: #3498db; /* Couleur de la barre de progression */
+        #     }
+        # """)
+
         # finding menu actions
         s_actions = self.menuStory.actions()
         self.act_mv_top = next(act for act in s_actions if act.objectName() == "actionMove_Top")
@@ -144,13 +160,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
-        act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
-        act_log.setVisible(False)
+        # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
+        # act_log.setVisible(False)
 
         # Help Menu
         t_actions = self.menuHelp.actions()
         self.act_update = next(act for act in t_actions if act.objectName() == "actionUpdate")
         self.act_update.setVisible(False)
+
+       # Connect the main window's moveEvent to the custom slot
+        self.moveEvent = self.customMoveEvent
 
     # connecting slots and signals
     def setup_connections(self):
@@ -162,6 +181,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
+
+        QApplication.instance().focusChanged.connect(self.onFocusChanged)
 
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -178,6 +199,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # story list shortcuts
         QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
+        QShortcut(QKeySequence("F2"), self, toggle_refresh_cache)
         QShortcut(QKeySequence("F1"), self, about_dlg)
 
     # TREE WIDGET MANAGEMENT
@@ -201,6 +223,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.tree_stories.setColumnWidth(COL_NAME, col_size_width - 30)
 
         return False
+
+
+    def customMoveEvent(self, event):
+        # This custom slot is called when the main window is moved
+        if self.debug_dialog.isVisible():
+            # Move the sub-window alongside the main window
+            main_window_rect = self.geometry()
+            sub_window_rect = self.debug_dialog.geometry()
+
+            sub_window_rect.moveTopLeft(main_window_rect.topRight() + QtCore.QPoint(5, 0))
+            self.debug_dialog.setGeometry(sub_window_rect)
+
+        # Call the default moveEvent implementation
+        super().moveEvent(event)
+
+    def onFocusChanged(self, old, now):
+        if not self.debug_dialog.isHidden() and not old and now:
+            self.debug_dialog.raise_()
+
+    def closeEvent(self, event):
+        # Explicitly close the log window when the main window is closed
+        self.debug_dialog.close()
+        event.accept()
 
     def cb_show_context_menu(self, point):
         # change active menu based on selection
@@ -404,6 +449,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.te_story_details.setVisible(show_details)
             self.lbl_picture.setVisible(show_details)
 
+        elif act_name == "actionShow_Log":
+            main_geometry = self.geometry()
+            debug_geometry = self.debug_dialog.geometry()
+
+            # computing log geometry
+            child_x = main_geometry.x() + main_geometry.width() + 5
+            child_y = main_geometry.y()
+            child_width = debug_geometry.width()
+            child_height = main_geometry.height()
+
+            # apply new geo
+            self.debug_dialog.setGeometry(child_x, child_y, child_width, child_height)
+            self.debug_dialog.show()
+
         elif act_name == "actionGet_firmware":
             # prompt for Luniistore connection
             login_dialog = LoginDialog()
@@ -501,11 +560,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.act_export.setEnabled(True)
 
             # Official story export is forbidden
-            selected = self.tree_stories.selectedItems()
-            if len(selected) == 1:
-                one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
-                if one_story.is_official():
-                    self.act_export.setEnabled(False)
+            if not constants.REFRESH_CACHE:
+                selected = self.tree_stories.selectedItems()
+                if len(selected) == 1:
+                    one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
+                    if one_story.is_official():
+                        self.act_export.setEnabled(False)
 
         # are there story loaded ?
         if self.lunii_device.stories:
@@ -607,6 +667,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_fs.setText("")
         self.lbl_count.setText("")
         self.statusbar.showMessage(message)
+        if message:
+            self.logger.log(logging.INFO, message)
 
         if not self.lunii_device:
             return

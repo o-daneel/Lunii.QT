@@ -1,6 +1,13 @@
 import os
 from pathlib import Path
 
+REFRESH_CACHE = False
+
+
+def toggle_refresh_cache():
+    global REFRESH_CACHE
+    REFRESH_CACHE = True
+
 
 def vectkey_to_bytes(key_vect):
     joined = [k.to_bytes(4, 'little') for k in key_vect]
@@ -52,3 +59,4 @@ EXT_ZIP      = ".zip"
 EXT_7z       = ".7z"
 
 SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_V1, EXT_PK_V2, EXT_PK_PLAIN, EXT_PK_VX]
+
