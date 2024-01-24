@@ -1018,6 +1018,9 @@ class LuniiDevice(QObject):
                 elif fname in one_story.si:
                     file_newname = self.__get_ciphered_name(one_story.si[fname][0], studio_si=True)
                     # transcode audio if necessary
+                    if not fname.lower().endswith('.mp3'):
+                        self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
+                        data = audio_to_mp3(data)
                 else:
                     # unexpected file, skipping
                     continue
