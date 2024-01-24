@@ -16,34 +16,12 @@ for Windows / Linux / MacOs
 ### Table of contents
 <!-- TOC -->
 - [Lunii.QT](#luniiqt)
-    - [Hardware supported:](#hardware-supported)
-    - [Limitations](#limitations)
-    - [Table of contents](#table-of-contents)
   - [User Interface](#user-interface)
-    - [Description](#description)
   - [Shortcuts](#shortcuts)
   - [Audio Transcoding](#audio-transcoding)
-    - [Installation](#installation)
-    - [Checking](#checking)
-      - [Not found](#not-found)
-      - [Found](#found)
   - [Supported archive formats](#supported-archive-formats)
-    - [.plain.pk](#plainpk)
-    - [.v1.pk / .v2.pk](#v1pk--v2pk)
-    - [ZIP (old Lunii.QT)](#zip-old-luniiqt)
-    - [ZIP (alternate)](#zip-alternate)
-    - [7z](#7z)
-    - [STUdio (ZIP / 7z)](#studio-zip--7z)
-  - [TODO](#todo)
   - [HowTo](#howto)
-    - [Prepare env](#prepare-env)
-    - [Build UI files](#build-ui-files)
-    - [Run](#run)
-    - [Build GUI executable](#build-gui-executable)
   - [Trick](#trick)
-    - [Cache management](#cache-management)
-    - [V3 export](#v3-export)
-    - [ICO creation](#ico-creation)
   - [Credits](#credits)
 - [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
@@ -55,6 +33,7 @@ for Windows / Linux / MacOs
 
  .  
 <img src="./res/screenshot_main.png" width="600">  
+<img src="./res/screenshot_debug.png" width="600">  
 
 
 ### Description
