@@ -1,4 +1,5 @@
 import os
+import time
 
 from PySide6 import QtCore
 from PySide6.QtCore import QObject
@@ -63,11 +64,15 @@ class ierWorker(QObject):
                 return
 
             self.signal_total_progress.emit(index, len(self.items))
+            ts_start = time.time()
             if self.lunii.import_story(file):
+                ts_end = time.time()
+                self.signal_message.emit(f"Time to import : {round(ts_end-ts_start, 3)}s'")
                 self.signal_message.emit(f"👍 New story imported : '{file}'")
                 success += 1
             else:
                 self.signal_message.emit(f"🛑 Failed to import : '{file}'")
+
             self.signal_refresh.emit()
 
         self._task_size()
