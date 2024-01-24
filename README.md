@@ -1,7 +1,7 @@
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
 for Windows / Linux / MacOs 
-(compatible with STUdio archive, no audio transcoding yet...)
+(compatible with STUdio archive, **with** transcoding)
 
 
 ### Hardware supported:
@@ -15,30 +15,37 @@ for Windows / Linux / MacOs
 
 ### Table of contents
 <!-- TOC -->
-* [Lunii.QT](#luniiqt)
-  * [User Interface](#user-interface)
-    * [Description](#description)
-  * [Shortcuts](#shortcuts)
-  * [Audio Transcoding](#audio-transcoding)
-  * [Supported archive formats](#supported-archive-formats)
-    * [.plain.pk](#plainpk)
-    * [.v1.pk / .v2.pk](#v1pk--v2pk)
-    * [ZIP (old Lunii.QT)](#zip-old-luniiqt)
-    * [ZIP (alternate)](#zip-alternate)
-    * [7z](#7z)
-    * [STUdio (ZIP / 7z)](#studio-zip--7z)
-  * [TODO](#todo)
-  * [HowTo](#howto)
-    * [Prepare env](#prepare-env)
-    * [Build UI files](#build-ui-files)
-    * [Run](#run)
-    * [Build GUI executable](#build-gui-executable)
-  * [Trick](#trick)
-    * [Cache management](#cache-management)
-    * [V3 export](#v3-export)
-    * [ICO creation](#ico-creation)
-  * [Credits](#credits)
-* [Links / Similar repos](#links--similar-repos)
+- [Lunii.QT](#luniiqt)
+    - [Hardware supported:](#hardware-supported)
+    - [Limitations](#limitations)
+    - [Table of contents](#table-of-contents)
+  - [User Interface](#user-interface)
+    - [Description](#description)
+  - [Shortcuts](#shortcuts)
+  - [Audio Transcoding](#audio-transcoding)
+    - [Installation](#installation)
+    - [Checking](#checking)
+      - [Not found](#not-found)
+      - [Found](#found)
+  - [Supported archive formats](#supported-archive-formats)
+    - [.plain.pk](#plainpk)
+    - [.v1.pk / .v2.pk](#v1pk--v2pk)
+    - [ZIP (old Lunii.QT)](#zip-old-luniiqt)
+    - [ZIP (alternate)](#zip-alternate)
+    - [7z](#7z)
+    - [STUdio (ZIP / 7z)](#studio-zip--7z)
+  - [TODO](#todo)
+  - [HowTo](#howto)
+    - [Prepare env](#prepare-env)
+    - [Build UI files](#build-ui-files)
+    - [Run](#run)
+    - [Build GUI executable](#build-gui-executable)
+  - [Trick](#trick)
+    - [Cache management](#cache-management)
+    - [V3 export](#v3-export)
+    - [ICO creation](#ico-creation)
+  - [Credits](#credits)
+- [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
 
 
@@ -72,13 +79,34 @@ for Windows / Linux / MacOs
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
 | `Ctrl+O`       | Open a Lunii device              |
+| `Ctrl+L`       | Open debug log window            |
+| `F1`           | About the app                    |
 | `F5`           | Refresh devices                  |
 
 ## Audio Transcoding
-To be completed  
+Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool available here :  
 https://github.com/eugeneware/ffmpeg-static/releases/latest  
 
-where to copy file ?
+### Installation
+You must ensure that `ffmpeg` command is in your path.  
+If you're lost, just can grab a standalone binary on the previous link, for you platform (Win/Linux/MacOs), and copy it beside this app, like this :
+```
+- 
+ |- lunii-qt.exe
+ |- ffmpeg.exe
+```
+
+1) Grab your ffmpeg release
+2) Rename it to `ffmpeg.exe` or `ffmpeg` (depending on your host OS)
+3) Copy beside lunii-qt.exe 
+
+### Checking 
+Within the application, the Tools menu will display the status of detection.
+#### Not found
+![Not available](res/ffmpeg_off.png)  
+#### Found
+![Available](./res/ffmpeg_on.png)
+
 
 ## Supported archive formats
 ### .plain.pk

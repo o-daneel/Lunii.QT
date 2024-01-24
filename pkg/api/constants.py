@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-# this logger MUST not be used from worker thread. 
+# this logger MUST not be used from worker thread.
 LUNII_LOGGER = "lunii-qt"
 REFRESH_CACHE = False
 

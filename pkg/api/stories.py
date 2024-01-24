@@ -8,7 +8,7 @@ from uuid import UUID
 import requests
 
 from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB
-from pkg.api.convert_image import image_to_bitmap_rle4
+
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -49,6 +49,10 @@ class StudioStory:
 
         if story_json:
             self.load(story_json)
+
+    @property
+    def name(self):
+        return self.title
 
     @property
     def str_uuid(self):

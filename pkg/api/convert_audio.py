@@ -1,7 +1,6 @@
 # import io
 import ffmpeg
 
-
 def audio_to_mp3(audio_data):
     audio_mp3, err = (
         ffmpeg.input('pipe:0')
@@ -18,7 +17,7 @@ def audio_to_mp3(audio_data):
         .run(input=audio_data, capture_stdout=True, capture_stderr=True)
     )
 
-    print(f"{len(audio_mp3)//1024}K")
+    # print(f"{len(audio_mp3)//1024}K")
     return audio_mp3
 #
 # INPUT = 'C:/Work/dev/lunii-packs/test/packs/transcode/2d1a50ec4800416d935d4ef04805a115cbe0e85f.ogg'

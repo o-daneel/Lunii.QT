@@ -16,8 +16,6 @@ from uuid import UUID
 from Crypto.Cipher import AES
 from PySide6 import QtCore
 
-from PySide6.QtCore import Signal, QObject
-
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api import stories
@@ -26,7 +24,7 @@ from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
-class LuniiDevice(QObject):
+class LuniiDevice(QtCore.QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
