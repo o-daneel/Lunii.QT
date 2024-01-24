@@ -9,7 +9,7 @@ from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog
+    QDialog, QApplication
 
 from pkg.api import constants
 from pkg.api.constants import *
@@ -90,6 +90,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.logger.log(logging.INFO, f"Latest Github release {self.last_version}")
         except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             pass
+
         self.cb_menu_help_update()
 
     def init_ui(self):
@@ -161,6 +162,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_update = next(act for act in t_actions if act.objectName() == "actionUpdate")
         self.act_update.setVisible(False)
 
+       # Connect the main window's moveEvent to the custom slot
+        self.moveEvent = self.customMoveEvent
+
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
@@ -171,6 +175,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
+
+        QApplication.instance().focusChanged.connect(self.onFocusChanged)
 
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -211,6 +217,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.tree_stories.setColumnWidth(COL_NAME, col_size_width - 30)
 
         return False
+
+
+    def customMoveEvent(self, event):
+        # This custom slot is called when the main window is moved
+        if self.debug_dialog.isVisible():
+            # Move the sub-window alongside the main window
+            main_window_rect = self.geometry()
+            sub_window_rect = self.debug_dialog.geometry()
+
+            sub_window_rect.moveTopLeft(main_window_rect.topRight() + QtCore.QPoint(5, 0))
+            self.debug_dialog.setGeometry(sub_window_rect)
+
+        # Call the default moveEvent implementation
+        super().moveEvent(event)
+
+    def onFocusChanged(self, old, now):
+        if not self.debug_dialog.isHidden() and not old and now:
+            self.debug_dialog.raise_()
 
     def closeEvent(self, event):
         # Explicitly close the log window when the main window is closed
