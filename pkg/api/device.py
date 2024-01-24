@@ -24,6 +24,35 @@ from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
+class FlamDevice():
+    def __init__(self, mount_point, keyfile=None):
+        super().__init__()
+        self.mount_point = mount_point
+
+    @property
+    def snu_str(self):
+        return self.snu.hex().upper().lstrip("0")
+
+    # opens the .pi file to read all installed stories
+    def __feed_device(self):
+
+        mount_path = Path(self.mount_point)
+        md_path = mount_path.joinpath(".mdf")
+
+        # checking if specified path is acceptable
+        if not os.path.isfile(md_path):
+            return False
+
+        with open(md_path, "rb") as fp_md:
+            md_version = int.from_bytes(fp_md.read(2), 'little')
+            #
+            # if md_version == 6:
+            #     self.__md6_parse(fp_md)
+            # else:
+            #     self.__md1to5_parse(fp_md)
+        return True
+
+
 class LuniiDevice(QtCore.QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
