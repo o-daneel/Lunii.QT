@@ -66,6 +66,8 @@ for Windows / Linux / MacOs
 Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool available here :  
 https://github.com/eugeneware/ffmpeg-static/releases/latest  
 
+**WARNING** : transcoding is <u>very long</u>, you should be patient. That's why you should prefer the [.plain.pk](#plainpk) format that relies on compatible audio.
+
 ### Installation
 You must ensure that `ffmpeg` command is in your path.  
 If you're lost, just can grab a standalone binary on the previous link, for you platform (Win/Linux/MacOs), and copy it beside this app, like this :
