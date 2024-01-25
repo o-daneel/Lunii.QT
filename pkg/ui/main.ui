@@ -82,7 +82,7 @@
          <string>Select your Lunii</string>
         </property>
         <property name="editable">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="placeholderText">
          <string>Select your Lunii</string>

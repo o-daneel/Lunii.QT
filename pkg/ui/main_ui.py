@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.combo_device.sizePolicy().hasHeightForWidth())
         self.combo_device.setSizePolicy(sizePolicy)
         self.combo_device.setMaximumSize(QSize(200, 16777215))
-        self.combo_device.setEditable(True)
+        self.combo_device.setEditable(False)
 
         self.top_layout.addWidget(self.combo_device)
 

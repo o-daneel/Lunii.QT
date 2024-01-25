@@ -32,7 +32,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.5.0"
+APP_VERSION = "v2.5.1"
 
 
 class VLine(QFrame):
@@ -274,14 +274,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.combo_device.addItem("C:/Work/dev/lunii-sd/_v3/")
 
         if self.combo_device.count():
-            self.combo_device.lineEdit().setText("Select your Lunii")
+            self.combo_device.setPlaceholderText("Select your Lunii")
 
             # automatic select if only one device
             if self.combo_device.count() == 1:
                 self.combo_device.setCurrentIndex(0)
         else:
-            self.statusbar.showMessage("No Lunii detected 😥, try to copy paste a path")
-            self.combo_device.lineEdit().setText("Enter a path here")
+            self.statusbar.showMessage("No Lunii detected 😥, try File/Open")
+            self.combo_device.setPlaceholderText("No Lunii detected 😥")
 
     def cb_dev_select(self):
         # getting current device
