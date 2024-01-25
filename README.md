@@ -133,7 +133,7 @@ Within the application, the Tools menu will display the status of detection.
 ### ZIP (alternate)
 **Filename** :  `AGE+] story_title DASHED_UUID.zip`  
 **Ciphering** : Generic Key  
-**Structure** :  
+**Structure** : (same as [.v1.pk / .v2.pk](#v1pk--v2pk))
 
       00000000-0000-0000-0000-000000000000/ni
       00000000-0000-0000-0000-000000000000/li
@@ -165,15 +165,10 @@ Within the application, the Tools menu will display the status of detection.
         thumbnail.png
 
 ## TODO
+* add Flam support ?
+* improve 7z archive processing
 * config file to backup menu config (sizes / details)
 * add picture to tree list ?
-* support studio stories
-  * one more zip format to be added
-  * ~~7Zip archives~~
-  * ~~audio transcoding with FFMPEG~~
-* ~~about window with credits / url to github~~
-* ~~support Lunii FW download (requires auth token or Login / Passwd)~~
-
 
 
 ## HowTo

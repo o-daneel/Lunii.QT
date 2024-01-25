@@ -268,10 +268,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # print(dev_name)
             self.combo_device.addItem(dev_name)
 
-        if os.path.isdir("C:/Work/dev/lunii-packs/test/"):
-            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v1/")
-            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v2/")
-            self.combo_device.addItem("C:/Work/dev/lunii-packs/test/_v3/")
+        if os.path.isdir("C:/Work/dev/lunii-sd/"):
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v1/")
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v2/")
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v3/")
 
         if self.combo_device.count():
             self.combo_device.lineEdit().setText("Select your Lunii")

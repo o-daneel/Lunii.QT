@@ -100,6 +100,15 @@ class LuniiDevice(QtCore.QObject):
         # Reordering Key components
         self.device_key = dec[8:16] + dec[0:8]
 
+        logger = logging.getLogger(LUNII_LOGGER)
+        logger.log(logging.DEBUG, f"\n"
+                                       f"SNU : {self.snu_str}\n"
+                                       f"HW  : v{self.lunii_version}\n"
+                                       f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
+                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
+                                       f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}")
+
+
     def __md6_parse(self, fp_md):
         self.lunii_version = LUNII_V3
         fp_md.seek(2)
@@ -120,6 +129,16 @@ class LuniiDevice(QtCore.QObject):
         self.load_fakestory_keys()
         # real keys if available
         self.device_key, self.device_iv = fetch_keys(self.dev_keyfile)
+
+        vid, pid = FAH_V2_V3_USB_VID_PID
+        logger = logging.getLogger(LUNII_LOGGER)
+        logger.log(logging.DEBUG, f"\n"
+                                       f"SNU : {self.snu_str}\n"
+                                       f"HW  : v3\n"
+                                       f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
+                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
+                                       f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}\n"
+                                       f"Dev IV  : {binascii.hexlify(self.device_iv, ' ', 1).upper()}")
 
     def __v1v2_decipher(self, buffer, key, offset, dec_len):
         # checking offset
@@ -353,8 +372,9 @@ class LuniiDevice(QtCore.QObject):
             dir_head = file[0:8]
             if "/" not in dir_head and "\\" not in dir_head:
                 file = dir_head.upper() + file[8:]
+        file = file.replace("\\", "/")
 
-        # self.signal_logger.emit(logging.DEBUG, file)
+        self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
         return file
 
     def import_dir(self, story_path):
@@ -432,6 +452,10 @@ class LuniiDevice(QtCore.QObject):
                 # checking for STUdio format
                 if FILE_STUDIO_JSON in zip_contents and any('assets/' in entry for entry in zip_contents):
                     archive_type = TYPE_STUDIO_ZIP
+                elif FILE_UUID in zip_contents:
+                    archive_type = TYPE_ZIP
+                else:
+                    archive_type = TYPE_V2
         # supplementary verification for 7z
         elif archive_type == TYPE_7Z:
             # trying to figure out based on 7z contents
