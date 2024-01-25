@@ -768,13 +768,14 @@ class LuniiDevice(QtCore.QObject):
             zip_contents = zip_file.namelist()
 
             # getting UUID from path
-            if zip_file.getinfo(zip_contents[0]).is_dir():
-                # self.signal_logger.emit(logging.DEBUG, zip_contents[0][:-1])
+            dir_name = os.path.dirname(zip_contents[0])
+            if len(dir_name) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, dir_name)
                 try:
-                    if "-" not in zip_contents[0]:
-                        new_uuid = UUID(bytes=binascii.unhexlify(zip_contents[0][:-1]))
+                    if "-" not in dir_name:
+                        new_uuid = UUID(bytes=binascii.unhexlify(dir_name))
                     else:
-                        new_uuid = UUID(zip_contents[0][:-1])
+                        new_uuid = UUID(dir_name)
                 except ValueError as e:
                     self.signal_logger.emit(logging.ERROR, e)
                     return False
