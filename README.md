@@ -194,7 +194,11 @@ or
 ```
 $ pip install -r requirements.txt
 ```
+ and
 
+```bash
+apt-get install libxcb-cursor0
+```
 ### Build UI files
 ```
 $ pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
