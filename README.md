@@ -197,7 +197,7 @@ $ pip install -r requirements.txt
 
 ### Build UI files
 ```
-$ pyside6-uic src/ui/main.ui -o pkg/ui/main_ui.py
+$ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
 ### Run
