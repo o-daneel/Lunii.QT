@@ -188,16 +188,13 @@ Switch to your venv
 
 Install dependencies
 ```
-$ python -m pip install -r requirements.txt
-```
-or
-```
 $ pip install -r requirements.txt
 ```
- and
+
+**Linux** has one more extra dependency to be installed  
 
 ```bash
-apt-get install libxcb-cursor0
+$ apt install libxcb-cursor0
 ```
 ### Build UI files
 ```
