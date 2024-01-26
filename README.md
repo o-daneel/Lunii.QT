@@ -182,9 +182,9 @@ $ python -m venv venv
 
 Switch to your venv 
 * on Linux   
-   `$ source venv/bin/activate`
+   `source venv/bin/activate`
 * on Windows   
-  `$ .\venv\Scripts\activate.bat`
+  `.\venv\Scripts\activate.bat`
 
 Install dependencies
 ```
@@ -197,12 +197,12 @@ $ pip install -r requirements.txt
 
 ### Build UI files
 ```
-$ pyside6-uic src/ui/main.ui -o src/ui/main_ui.py
+$ pyside6-uic src/ui/main.ui -o pkg/ui/main_ui.py
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
 ### Run
 ```
-$ python lunii-Qt.py
+$ python lunii-qt.py
 ```
 
 ### Build GUI executable
