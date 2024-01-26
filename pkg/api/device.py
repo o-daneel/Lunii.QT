@@ -93,6 +93,8 @@ class LuniiDevice(QtCore.QObject):
             self.lunii_version = LUNII_V1
         elif (vid, pid) == FAH_V2_V3_USB_VID_PID:
             self.lunii_version = LUNII_V2
+        else:
+            self.lunii_version = LUNII_V1or2_UNK
 
         fp_md.seek(0x100)
         self.raw_devkey = fp_md.read(0x100)
@@ -137,8 +139,8 @@ class LuniiDevice(QtCore.QObject):
                                        f"HW  : v3\n"
                                        f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
-                                       f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}\n"
-                                       f"Dev IV  : {binascii.hexlify(self.device_iv, ' ', 1).upper()}")
+                                       f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper() if self.device_key else 'N/A'}\n"
+                                       f"Dev IV  : {binascii.hexlify(self.device_iv, ' ', 1).upper() if self.device_iv else 'N/A'}")
 
     def __v1v2_decipher(self, buffer, key, offset, dec_len):
         # checking offset
@@ -1347,7 +1349,10 @@ def is_device(root_path):
     # cfg_path = root_path.joinpath(".cfg")
     # content_path = root_path.joinpath(".content")
 
-    if md_path.is_file():
-        # and pi_path.is_file() and cfg_path.is_file() and content_path.is_dir():
-        return True
+    try:
+        if md_path.is_file():
+            # and pi_path.is_file() and cfg_path.is_file() and content_path.is_dir():
+            return True
+    except PermissionError as e:
+        pass
     return False

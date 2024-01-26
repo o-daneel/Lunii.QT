@@ -1,3 +1,4 @@
+import platform
 import subprocess
 import ffmpeg
 
@@ -18,12 +19,18 @@ def audio_to_mp3(audio_data):
         .compile()
     )
 
+    current_os = platform.system()
+    if current_os == "Windows":
+        flags = subprocess.CREATE_NO_WINDOW;
+    else:
+        flags = 0
+
     # Run the ffmpeg command using subprocess with stdin and stdout pipes
     process = subprocess.Popen(ffmpeg_cmd,
                                stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE,
-                               creationflags=subprocess.CREATE_NO_WINDOW)
+                               creationflags=flags)
 
     # Feed the audio data to the stdin of the subprocess
     stdout, stderr = process.communicate(input=audio_data)

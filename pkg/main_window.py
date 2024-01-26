@@ -32,7 +32,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.5.2"
+APP_VERSION = "v2.5.3"
 
 
 class VLine(QFrame):
@@ -76,13 +76,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = None
         self.act_update = None
 
+        # loading DB
+        story_load_db(False)
+
         # UI init
         self.app.processEvents()
         self.init_ui()
         self.app.processEvents()
-
-        # loading DB
-        story_load_db(False)
 
         # fetching last app version on Github
         try:
@@ -688,6 +688,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif self.lunii_device.lunii_version == LUNII_V3:
             HW_version = "v3"
             SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}.{self.lunii_device.fw_vers_subminor}"
+        else:
+            HW_version = "?v1/v2?"
+            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
         self.lbl_version.setText(f"Lunii {HW_version}, FW: {SW_version}")
 
         # Free Space
