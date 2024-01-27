@@ -2,60 +2,65 @@
 
 # Lunii.QT
 
-C'est une application, écrite en Python QT, compatible Linux, Windows et Mac OS 11, permettant la gestion de vos appareils Lunii Storyteller.
+Une application Python QT pour gérer Lunii Storyteller, y compris **la commande** / **l'importation** / **l'exportation** / **le téléchargement du firmware**   
+pour Windows / Linux / MacOs 11  
+(compatible avec l'archive STUdio, **avec** transcodage)
 
-Elle permet de réorganiser, importer, exporter vos histoires, mais aussi de télécharger et installer le dernier firmware **#####Choix du firmware ou seulement le dernier ?#####**.
+### Matériels pris en charge :
+* Ma fabrique à histoire **V1** et **V2** (support complet)
+* Ma fabrique à histoire **V3** (l'exportation nécessite un fichier clé de l'appareil)
 
-**Matériels pris en charge :**
-* Ma fabrique à histoire V1 et V2 (support complet)
-* Ma fabrique à histoire V3 (l'exportation nécessite un fichier clé de l'appareil)
-
-**Limitations :**
-* L'application ne permet plus d'exporter les histoires officielles.
+### Limitations :
+* L'application *ne permet plus* d'exporter les histoires officielles.
 * Le transcodage audio nécessite la présence de [FFMPEG V6](#vérification)
-* La "FLAM" n'est pas encore supportée (*travail en cours*)
+* La **FLAM** n'est pas encore supportée (*travail en cours*)
 
-**À faire**
-* Ajouter le support de la FLAM ?
-* Améliorer le traitement des archives 7z
-* Fichier de configuration pour sauvegarder la configuration du menu (tailles / détails)
-* Ajout d'une image à la liste des arbres ?
+
 
 
 ### Table des matières
 <!-- TOC -->
 - [Lunii.QT](#luniiqt)
-  - [Présentation de l'interface](#présentation-de-linterface)
+  - [Interface Utilisateur](#interface-utilisateur)
   - [Raccourcis clavier](#racourcis-clavier)
-  - [Installations](#installations)
-    - [Linux](#linux)
-    - [Windows](#windows)
   - [Transcodage audio](#transcodage-audio)
-  - [Astuces](#astuces)
-  - [Construisez vos applications](#construisez-vos-applications)
+  - [Mise à jour du Firmware](#mise-à-jour-du-firmware)
   - [Formats d'archives pris en charge](#formats-darchives-pris-en-charge)
+  - [Construisez vos applications](#construisez-vos-applications)
+  - [Astuces](#astuces)
   - [Crédits](#crédits)
 - [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
 
-## Présentation de l'interface
-![Interface de Lunii QT](./res/lunii_qt_interface.png)
+## Interface Utilisateur
 
-Voici l'interface de Luni QT.
-1. La barre de menu.
-1. L'emplacement de votre Lunii quand elle est connectée, le bouton à gauche permet d'actualiser la détection automatique.
-1. Permet la mise à jour de la liste des histoires ainsi que les informations associées depuis le Lunii Store officiel.
-1. La liste de vos histoires avec l' UUID et l'origine de la Base de donnée (DB). 
-    1. L'UUID : Cet identifiant unique vous permet d'associer les histoires avec leur dossier sur la Lunii grâce aux huit derniers caractères qui forment le nom du dossier associé à cette histoire.
-    1. DB : Il y a deux bases de données prises en charge. `O` pour la base de données officielle de Lunii (toutes les métadonnées proviennent des serveurs Lunii) et `T` pour la base de données tierce également connu sous le nom d'Histoires non officielles ou personnalisées (Ces métadonnées ne peuvent pas être récupérées, elles sont complétées lors de l'importation de l'histoire).
-1. Dans cette barre d'état, vous retrouverez votre SNU (numéro de série), la version du firmware de votre Lunii, l'espace disponible et le nombre d'histoires qu'elle contient.
+<img src="./res/screenshot_about.png" width="450">  
+<img src="./res/screenshot_main.png" width="600">  
+<img src="./res/screenshot_debug.png" width="600"> 
 
-D'autres captures :
-![Menu contextuel pour la gestion des histoires](./res/screenshot_main.png)
-![Fenêtre de débug](./res/screenshot_debug.png)
-![Fenêtre à propos](./res/screenshot_about.png)
+### Description
+![Interface de Lunii QT](./res/screenshot_interface.png")
 
-### Raccourcis clavier
+1. La **barre de menu**. Elle vous informera lorsqu'une mise à jour est disponible  
+   (il suffit de l'obtenir avec Menu About/Update to v2.X.X)
+1. L'**emplacement de votre Lunii** lorsqu'elle est connectée.   
+   Le bouton de gauche met à jour la détection automatique.
+1. **Réactualisation de la base de données officielle** : Mettre à jour la liste des histoires et des informations connexes de la boutique officielle de Lunii. Utilisez-la lorsque certaines histoires officielles ne sont pas reconnues.
+1. La **liste de vos histoires** avec l'UUID et l'origine de la base de données (DB).  
+   L'UUID : Cet identifiant unique vous permet d'associer les histoires à leur dossier sur le Lunii, grâce aux huit derniers caractères qui composent le nom du dossier associé à cette histoire.
+
+   **DB** signifie **Base de données**. Cette application prend en charge deux bases de données différentes
+     - **O** - Base de données **officielle de Lunii  
+        (Toutes les métadonnées proviennent des serveurs de Lunii).
+     - **T** - base de données tierce, également connue sous le nom d'Histoires non officielles ou personnalisées  
+        (Ces métadonnées ne peuvent pas être récupérées, elles sont complétées lors de l'importation de l'histoire)
+1. Dans la **barre d'état**, vous trouverez : 
+* Votre SNU (numéro de série),
+* La version du firmware de votre Lunii,
+* L'espace disponible  ,
+* Le nombre d'histoires qu'il contient.
+
+## Raccourcis clavier
 
 | Keys           | Actions                                               |
 |----------------|-------------------------------------------------------|
@@ -74,46 +79,6 @@ D'autres captures :
 | `F1`           | À propos de l'application                              |
 | `F5`           | Réactualise les appareils                              |
 
-
-## Installations
-### Linux
-Vérifier la version de Python installée sur votre machine avec la commande `python3 -V`.
-
-```bash
-anthony@McFly-Bureau:~$ python3 -V
-Python 3.10.12
-```
-
-Si vous n'avez pas Python installé, lancez la commande suivante.
-
-```bash
-sudo apt install python3
-```
-
-**Installer les dépendances**
-```bash
-sudo apt install libxcb-cursor0
-```
-
-Récupérez la [dernière version de Luni.QT pour Linux](https://github.com/o-daneel/Lunii.QT/releases) puis décompressez-la.
-
-Double-cliquer sur `lunii-qt` pour lancer l'application.
-
-#### Débug
-En cas de problème lors du lancement, essayez d'exécuter l'application depuis le Terminal dans le dossier avec la commande suivante. Il devrait vous afficher un message d'erreur qu'il faudra dans une issue.
-
-```bash
-./lunii-qt
-```
-
-### Windows
->FAUX POSITIF : Votre système d'exploitation (et VirusTotal également) pourrait signaler l'executable comme une menace, mais ce n'est pas le cas. C'est un faux positif dû à pyinstaller. Les binaires sont générés par des workflows depuis GitHub, directement de Sources à Binaire.
->Ne faites jamais confiance à un exécutable sur internet, et [reconstruisez-le vous-même](#construisez-vos-applications) (vous arriverez au même résultat 😅).
-
-Récupérez la [dernière version de Luni.QT pour Linux](https://github.com/o-daneel/Lunii.QT/releases) puis décompressez-la.
-
-Double-cliquer sur `lunii-qt.exe` pour lancer l'application.
-
 ## Transcodage audio
 Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc pas être installés tels quels sur Lunii. Cela nécessite une étape de **transcodage**. Ce processus supplémentaire est réalisé à l'aide de l'outil **FFMPEG** disponible [ici](https://github.com/eugeneware/ffmpeg-static/releases/latest ) :     
  
@@ -124,7 +89,7 @@ Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc 
 Vous devez vous assurer que la commande `ffmpeg` se trouve dans votre chemin.  
 Si vous êtes perdu, vous pouvez récupérer un binaire autonome sur le lien précédent, pour votre plateforme (Win/Linux/MacOs), et le copier à côté de cette application, comme ceci :
 
-```tree
+```
 - 
  |- lunii-qt.exe
  |- ffmpeg.exe
@@ -135,78 +100,43 @@ Si vous êtes perdu, vous pouvez récupérer un binaire autonome sur le lien pr�
 3) Copiez à côté de `lunii-qt.exe` ou `lunii-qt` (en fonction de votre système d'exploitation)
 
 ### Vérification 
-Dans l'application, le menu Outils affiche l'état de la détection.
+Dans l'application, le menu `Outils` affiche l'état de la détection.
 #### Non trouvé
 ![FFMPEG Non disponible](res/ffmpeg_off.png)  
 #### Trouvé
 ![FFMPEG disponible](./res/ffmpeg_on.png)
 
-## Astuces
-### Gestion du cache
-Cette application téléchargera une fois pour toutes la base de données des histoires officielles et toutes les images demandées dans le dossier dédié à l'application.
-* `$HOME/.lunii-qt/official.db`
-* `$HOME/.lunii-qt/cache/*`
+## Mise à jour du firmware
 
-En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour forcer le rafraîchissement.
+Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Firmware sans vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **expérimentale** mais jusqu'à présent personne n'a rencontré de problèmes.
 
-### Exportation V3
-Afin de supporter l'exportation d'histoires depuis le matériel Lunii v3, vous devez placer vos clés de périphérique ici :
-```bash
-%HOME%\.lunii-qt\v3.keys
-$HOME/.lunii-qt/v3.keys
+**NOTE 1:** Pensez à garder une sauvegarde de votre firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. *Vous serez en mesure de rétrograder*.
+**NOTE 2:** Vous ne pouvez pas choisir la version du firmware. Vous n'obtiendrez que la **dernière version disponible** sur les serveurs de Lunii.
+
+
+### Guide Pratique
+1. Sélectionnez un appareil Lunii
+1. Menu Outils / Obtenir la mise à jour FW
+1. Vous serez invité à vous connecter  
+![Connexion](./res/screenshot_login.png)
+1. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
+   Vous pouvez vérifier ce point ici [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
+1. Choisissez un emplacement où sauvegarder la version de votre firmware
+1. Copiez-la dans le répertoire racine de votre lunii
+1. Renommez-le en `fa.bin`.   
 ```
-Il s'agit d'un fichier binaire avec 0x10 octets pour la clé et 0x10 octets pour l'IV.
-
-### Création de l'ICO
-```bash
-magick
+- 
+ |- .contents
+ |- .md
+ |- .pi
+ |- fa.bin
+ |- ... (other files)
 ```
-
-## Construisez vos applications
-
-**Préparation de l'environnement**
-
-Commencer par cloner le dépot.
-Préparer l'environnement virtuel pour le projet et installer les dépendances.
-```bash
-python -m venv venv
-```
-
-Passez à votre venv
-* sous Linux   
-   `source venv/bin/activate`
-* sous Windows   
-  `.\venv\Scripts\activate.bat`
-
-Installer les dépendances
-```
-pip install -r requirements.txt
-```
-
-**Linux** a besoin d'une dépendance supplémentaire.
-
-```bash
-apt install libxcb-cursor0
-```
-**Construction du fichier UI**
-```bash
-$ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
-$ pyside6-rcc resources.qrc -o resources_rc.py
-```
-**Démarrer**
-```bash
-python lunii-qt.py
-```
-
-**Construire l'exécutable**
-```bash
-pip install pyinstaller
-pyinstaller lunii-qt.spec
-...
-dist\lunii-qt
-```
-
-
+1. Éteindre, rallumer, attendre : **TADA**  
+   (si vous reconnectez votre lunii sur votre pc, le `fa.bin` devrait avoir été supprimé)
+   
+   
+   
 ## Formats d'archives pris en charge
 ### .plain.pk
 **Filename** :  `story_name.8B_UUID.plain.pk`  
@@ -282,15 +212,88 @@ dist\lunii-qt
         stroy.json
         thumbnail.png
 
+## À faire
+* Ajouter le support de la FLAM ?
+* Améliorer le traitement des archives 7z
+* Fichier de configuration pour sauvegarder la configuration du menu (tailles / détails)
+* Ajout d'une image à la liste des arbres ?
 
-## Crédits
+## Utilisation avec Python
+### Préparation de l'environnement**
+
+Commencer par cloner le dépot.
+Préparer l'environnement virtuel pour le projet et installer les dépendances.
+```bash
+python -m venv venv
+```
+
+Passez à votre venv
+* sous Linux   
+   `source venv/bin/activate`
+* sous Windows   
+  `.\venv\Scripts\activate.bat`
+
+Installer les dépendances
+```
+pip install -r requirements.txt
+```
+
+**Linux** a besoin d'une dépendance supplémentaire.
+
+```bash
+apt install libxcb-cursor0
+```
+### Construction du fichier UI**
+```bash
+$ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
+$ pyside6-rcc resources.qrc -o resources_rc.py
+```
+### Démarrer**
+```bash
+python lunii-qt.py
+```
+
+### Construire l'exécutable GUI**
+```bash
+pip install pyinstaller
+pyinstaller lunii-qt.spec
+...
+dist\lunii-qt
+```
+
+## Astuces
+
+### Gestion du cache
+Cette application téléchargera une fois pour toutes la base de données des histoires officielles et toutes les images demandées dans le dossier dédié à l'application.
+* `$HOME/.lunii-qt/official.db`
+* `$HOME/.lunii-qt/cache/*`
+
+En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour forcer le rafraîchissement.
+
+### Exportation V3
+Afin de supporter l'exportation d'histoires depuis le matériel Lunii v3, vous devez placer vos clés de périphérique ici :
+```bash
+%HOME%\.lunii-qt\v3.keys
+$HOME/.lunii-qt/v3.keys
+```
+Il s'agit d'un fichier binaire avec 0x10 octets pour la clé et 0x10 octets pour l'IV.
+
+### Création de l'ICO
+```bash
+magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.ico
+```
+
+## Remerciements
 Merci à :
-* **olup** pour les archives au format STUdio
-* **sniperflo** pour le support et le debug de la V1
+* **olup** pour l'aide sur le format des archives STUdio  
+* **sniperflo** pour le support de la v1 & debug 
+* **McFlyPartages** pour le debug sous Linux et ses contributions 
+*  ceux que j'oublie.... 👍
 
 # Liens / Dépôts similaires
 * [Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
+* [Lunii CLI tool](https://github.com/o-daneel/Lunii.PACKS)
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
-* [Lunii Admin](https://github.com/olup/lunii-admin) (Une alternative enGo de STUdio)
+* [Lunii Admin](https://github.com/olup/lunii-admin) (Une alternative en Go de STUdio)
 * [Lunii Admin Web](https://github.com/olup/lunii-admin) (même chose que précédemment mais à partir d'un navigateur)
