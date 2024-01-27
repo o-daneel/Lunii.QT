@@ -53,7 +53,7 @@ This is the Luni QT interface.
 More screenshots :
 ![Context menu for story management](./res/screenshot_main.png)
 ![Debug window](./res/screenshot_debug.png)
-About window](./res/screenshot_about.png)
+![About window](./res/screenshot_about.png)
 
 ### Shortcuts
 

@@ -108,7 +108,7 @@ En cas de problème lors du lancement, essayez d'exécuter l'application depuis 
 
 ### Windows
 >FAUX POSITIF : Votre système d'exploitation (et VirusTotal également) pourrait signaler l'executable comme une menace, mais ce n'est pas le cas. C'est un faux positif dû à pyinstaller. Les binaires sont générés par des workflows depuis GitHub, directement de Sources à Binaire.
->Ne faites jamais confiance à un exécutable sur internet, et [reconstruisez-le vous-même](#construiser-vos-applications) (vous arriverez au même résultat 😅).
+>Ne faites jamais confiance à un exécutable sur internet, et [reconstruisez-le vous-même](#construisez-vos-applications) (vous arriverez au même résultat 😅).
 
 Récupérez la [dernière version de Luni.QT pour Linux](https://github.com/o-daneel/Lunii.QT/releases) puis décompressez-la.
 
