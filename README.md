@@ -19,8 +19,9 @@ for Windows / Linux / MacOs 11
   - [User Interface](#user-interface)
   - [Shortcuts](#shortcuts)
   - [Audio Transcoding](#audio-transcoding)
+  - [Firmware upgrade](#firmware-upgrade)
   - [Supported archive formats](#supported-archive-formats)
-  - [HowTo](#howto)
+  - [Python ? HowTo](#python--howto)
   - [Trick](#trick)
   - [Credits](#credits)
 - [Links / Similar repos](#links--similar-repos)
@@ -37,11 +38,29 @@ for Windows / Linux / MacOs 11
 
 
 ### Description
-* **DB** stands for **Database**. This application supports two different databases
-  1. **O** - Lunii **O**fficial Database  
-     _(all metadata are fed from Lunii servers)_
-  2. **T** - **T**hirdparty Database, also known as Unofficial or Custom Stories  
-     _(Those metadata can't be fetched. They are completed upon story import)_
+
+<img src="./res/screenshot_interface.png" width="600">  
+
+1. The **menu bar**. It will notify you when an update is available  
+   (just get it with Menu About/Update to v2.X.X)
+2. The **location of your Lunii** when it's connected.   
+   The button on the left updates automatic detection.
+3. **Official DB refresh** : Updates the list of stories and related information from the official Lunii Store. Use it when some official are not recognized.
+4. The **list of your stories** with UUID and Database (DB) origin.  
+   The UUID: This unique identifier allows you to associate stories with their folder on the Lunii, thanks to the last eight characters that make up the name of the folder associated with that story.
+
+   * **DB** stands for **Database**. This application supports two different databases
+     - **O** - Lunii **O**fficial Database  
+        _(all metadata are fed from Lunii servers)_
+     - **T** - **T**hirdparty Database, also known as Unofficial or Custom Stories  
+        _(Those metadata can't be fetched. They are completed upon story import)_
+
+
+5. The **status bar**, you'll find 
+   * your SNU (serial number)
+   * the firmware version of your Lunii
+   * the available space  
+   * the number of stories it contains
 
 ## Shortcuts
 
@@ -87,6 +106,37 @@ Within the application, the Tools menu will display the status of detection.
 ![Not available](res/ffmpeg_off.png)  
 #### Found
 ![Available](./res/ffmpeg_on.png)
+
+
+## Firmware upgrade
+
+Lunii.QT offers you the possibility to backup and upgrade your Firmware without connecting to LuniiStore (you won't lost your non official loaded stories). This procedure is experimental but so far no one faced issues.
+
+**NOTE 1:** Remember to keep a backup of your firmware for Lunii v3 and FLAMs, in cas of a release that would break to third party stories trick. <u>You will be able to downgrade.</u>  
+**NOTE 2:** You cannot choose the firmware version. You'll only get the latest available from Lunii servers.
+
+
+### HowTo
+1. Select a Lunii device
+2. Menu Tools/Get FW Update
+3. You'll be prompted for login entry  
+![Login](./res/screenshot_login.png)
+1. Enter your Luniistore credentials (they are not saved for security purpose).  
+   You can verify this point here [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
+2. Pick a location where to save your firmware version
+3. Copy it to the root dir of your lunii
+4. Rename it to `fa.bin`  
+```
+- 
+ |- .contents
+ |- .md
+ |- .pi
+ |- fa.bin
+ |- ... (other files)
+```
+1. Power OFF, Power ON, Wait : **TADA**  
+   (if you reconnect your lunii on your pc, the `fa.bin` should have been removed)
+
 
 
 ## Supported archive formats
@@ -171,7 +221,7 @@ Within the application, the Tools menu will display the status of detection.
 * add picture to tree list ?
 
 
-## HowTo
+## Python ? HowTo
 
 ### Prepare env
 
@@ -215,6 +265,7 @@ $ dist\lunii-qt
 ```
 
 ## Trick
+
 ### Cache management
 This application will download once for all the official story database and any request pictures to the application dedicated folder
 * `$HOME/.lunii-qt/official.db`
