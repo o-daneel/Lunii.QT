@@ -32,7 +32,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.5.3"
+APP_VERSION = "v2.5.4"
 
 
 class VLine(QFrame):
@@ -911,11 +911,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # connecting slots
         self.thread.started.connect(self.worker.process)
-        self.worker.signal_finished.connect(self.thread.quit)
-        self.worker.signal_total_progress.connect(self.slot_total_progress)
+        self.worker.signal_finished.connect(self.slot_finished)
+        # self.worker.signal_finished.connect(self.worker.deleteLater)
+        # self.thread.finished.connect(self.thread.deleteLater)
+
+        # UI update slots
         self.lunii_device.signal_story_progress.connect(self.slot_story_progress)
         self.lunii_device.signal_logger.connect(self.logger.log)
-        self.worker.signal_finished.connect(self.slot_finished)
+        self.worker.signal_total_progress.connect(self.slot_total_progress)
+        self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
         self.worker.signal_message.connect(self.sb_update)
 
@@ -957,5 +961,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lunii_device.signal_logger.disconnect()
         except: pass
 
-        self.worker = None
-        self.thread = None
+        if self.worker:
+            self.worker.deleteLater()
+            self.worker = None
+        if self.thread:
+            self.thread.deleteLater()
+            self.thread = None
