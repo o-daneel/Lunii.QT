@@ -9,11 +9,11 @@ for Windows / Linux / MacOs 11
 ### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
+* **Flam** (partial support, no Third-Party stories)
 
 ### Limitations
 * Application <u>no longer</u> allows Official stories to be exported
 * Audio transcoding requires FFMPEG v6 to be present (link to section)
-* **Flam** not yet supported (next update might)
 
 ### Table of contents
 <!-- TOC -->
