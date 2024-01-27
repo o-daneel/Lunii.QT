@@ -17,7 +17,7 @@ from pkg.api.constants import *
 from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
-from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
+from pkg.api.firmware import luniistore_get_authtoken, luniiv1_fw_version, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 from pkg.ui.about_ui import about_dlg
@@ -478,56 +478,40 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             try:
                 # getting auth token
-                auth_token = lunii_get_authtoken(login, password)
+                auth_token = luniistore_get_authtoken(login, password)
                 if not auth_token:
                     self.sb_update(f"⚠️ Login failed, please check your credentials")
                     return
-
                 self.sb_update(f"Login success...")
-                version = lunii_fw_version(self.audio_device.device_version, auth_token)
 
-                if version:
-                    backup_fw_fn = f"fa.v{version}.bin"
-                else:
-                    backup_fw_fn = f"fa.v3.bin"
-                print(backup_fw_fn)
+                # getting list of FW to download
+                fw_list = device_fw_getlist(self.audio_device.device_version, auth_token)
 
+                # preparing save dialog
                 options = QFileDialog.Options()
                 file_dialog = QFileDialog(self, options=options)
                 file_dialog.setAcceptMode(QFileDialog.AcceptSave)
-                file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
-
-                # Preconfigure a default name
-                file_dialog.selectFile(backup_fw_fn)
-
-                if file_dialog.exec_() == QFileDialog.Accepted:
-                    selected_file = file_dialog.selectedFiles()[0]
-                    if lunii_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token, selected_file):
-                        self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
-                    else:
-                        self.sb_update(f"🛑 Fail to download update")
+                if self.audio_device.device_version == FLAM_V1:
+                    file_dialog.setNameFilter("Flam Firmware (*.enc);;All Files (*)")
                 else:
-                    self.sb_update("")
-                    return
-
-                if self.audio_device.device_version == LUNII_V1:
-                    version = lunii_fw_version(self.audio_device.device_version, auth_token, True)
-                    backup_fw_fn = f"fu.v{version}.bin"
-
-                    options = QFileDialog.Options()
-                    file_dialog = QFileDialog(self, options=options)
-                    file_dialog.setAcceptMode(QFileDialog.AcceptSave)
                     file_dialog.setNameFilter("Lunii Firmware (*.bin);;All Files (*)")
 
+                # looping to download all of them
+                for index, one_fw in enumerate(fw_list):
                     # Preconfigure a default name
-                    file_dialog.selectFile(backup_fw_fn)
+                    file_dialog.selectFile(one_fw)
 
                     if file_dialog.exec_() == QFileDialog.Accepted:
                         selected_file = file_dialog.selectedFiles()[0]
-                        if lunii_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token, selected_file, True):
+                        if device_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token,
+                                              selected_file, index != 0):
                             self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                         else:
                             self.sb_update(f"🛑 Fail to download update")
+                    else:
+                        self.sb_update("")
+                        return
+
             except requests.exceptions.ConnectionError:
                 self.sb_update(f"🛑 Network error...")
 

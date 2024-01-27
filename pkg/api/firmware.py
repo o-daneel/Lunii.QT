@@ -6,7 +6,7 @@ from pkg.api.constants import *
 V1V2_FAHID = "-NnUun90mQ56GosDyA3R"
 
 
-def lunii_get_authtoken(login, pwd):
+def luniistore_get_authtoken(login, pwd):
     url1 = "https://server-auth-prod.lunii.com/auth/signin"
     args1 = {'application':"luniistore_mobile",
             'email':login,
@@ -29,22 +29,37 @@ def lunii_get_authtoken(login, pwd):
     return header_auth
 
 
-def lunii_vid_pid(hw_version):
+def __lunii_vid_pid(hw_version):
     if hw_version == LUNII_V1:
         return FAH_V1_FW_2_USB_VID_PID
     else:
         return FAH_V2_V3_USB_VID_PID
 
+def device_fw_getlist(hw_version, json_auth):
+    fw_list = []
 
-def lunii_fw_version(hw_version, json_auth, fu_upgrade=False):
-    vid, pid = lunii_vid_pid(hw_version)
+    if hw_version == LUNII_V1:
+        fw_list.append(f"fa.v{luniiv1_fw_version(hw_version, json_auth)}.bin")
+        fw_list.append(f"fu.v{luniiv1_fw_version(hw_version, json_auth, True)}.bin")
+    elif hw_version == LUNII_V2:
+        fw_list.append(f"fa.v{luniiv1_fw_version(hw_version, json_auth)}.bin")
+    elif hw_version == LUNII_V3:
+        fw_list.append("fa.v3_x_x.bin")
+    elif hw_version == FLAM_V1:
+        fw_list.append("update-main.enc")
+        fw_list.append("update-comm.enc")
+
+    return fw_list
+
+
+def luniiv1_fw_version(hw_version, json_auth, fu_upgrade=False):
+    vid, pid = __lunii_vid_pid(hw_version)
 
     if hw_version <= LUNII_V2:
         json_auth["user-agent"]="unirest-java/3.1.00"
         fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update/current?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth, timeout=10)
         if fw.status_code == 200:
             # print(fw.json())
-            print("Last FW version :")
             versions = fw.json()["response"]["currentUpdate"]
             if versions.get("fu_version") and fu_upgrade:
                 return f"{versions['fu_version']['major']}_{versions['fu_version']['minor']}"
@@ -54,8 +69,8 @@ def lunii_fw_version(hw_version, json_auth, fu_upgrade=False):
     return None
 
 
-def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=False):
-    vid, pid = lunii_vid_pid(hw_version)
+def device_fw_download(hw_version, snu, json_auth, filepath: str, second_fw=False):
+    vid, pid = __lunii_vid_pid(hw_version)
 
     json_auth["user-agent"]="unirest-java/3.1.00"
     if hw_version <= LUNII_V2:
@@ -63,7 +78,7 @@ def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=Fals
         if fw.status_code == 200:
 
             # getting FU.BIN
-            if fw.json()['response']['update'].get('fu_file') and fu_upgrade:
+            if fw.json()['response']['update'].get('fu_file') and second_fw:
                 url = fw.json()['response']['update']['fu_file']['url']
                 # print(url)
                 fw_file = requests.get(url, timeout=10)
@@ -73,7 +88,7 @@ def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=Fals
                         return fu.tell()
 
             # getting FA.BIN
-            if fw.json()['response']['update'].get('fa_file') and not fu_upgrade:
+            if fw.json()['response']['update'].get('fa_file') and not second_fw:
                 url = fw.json()['response']['update']['fa_file']['url']
                 # print(url)
                 fw_file = requests.get(url, timeout=10)
@@ -84,6 +99,19 @@ def lunii_fw_download(hw_version, snu, json_auth, filepath: str, fu_upgrade=Fals
 
     elif hw_version == LUNII_V3:
         fw = requests.get(f"https://server-backend-prod.lunii.com/devices/{snu}/firmware?installed=3.1.2", headers=json_auth, timeout=10)
+
+        # getting FA.BIN
+        if fw.status_code == 200:
+            with open(filepath, "wb") as fa:
+                fa.write(fw.content)
+                return fa.tell()
+
+    elif hw_version == FLAM_V1:
+        if not second_fw:
+            chipset = "main"
+        else:
+            chipset = "comm"
+        fw = requests.get(f"https://server-backend-prod.lunii.com/devices/{snu}/firmware?installed=1.1.1-01&chipset={chipset}", headers=json_auth, timeout=10)
 
         # getting FA.BIN
         if fw.status_code == 200:
