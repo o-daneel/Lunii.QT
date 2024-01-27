@@ -1,3 +1,5 @@
+:uk: [Readme in English](./README.md) :uk:
+
 # Lunii.QT
 
 C'est une application, écrite en Python QT, compatible Linux, Windows et Mac OS 11, permettant la gestion de vos appareils Lunii Storyteller.
