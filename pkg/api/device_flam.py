@@ -24,7 +24,7 @@ from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
-class FlamDevice():
+class FlamDevice(QtCore.QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
@@ -101,6 +101,54 @@ class FlamDevice():
                                        f"FW (comm) : {self.fw_comm}\n"
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n")
 
+    def update_pack_index(self):
+        lib_path = Path(self.mount_point).joinpath("etc/library/")
+        list_path = Path(self.mount_point).joinpath("etc/library/list")
+        list_path.unlink(missing_ok=True)
+        lib_path.mkdir(parents=True, exist_ok=True)
+        with open(list_path, "w") as fp:
+            for story in self.stories:
+                fp.write(str(story.uuid) + "\n")
+        return
+
+    def remove_story(self, short_uuid):
+        if short_uuid not in self.stories:
+            self.signal_logger.emit(logging.ERROR, "This story is not present on your storyteller")
+            return False
+
+        slist = self.stories.matching_stories(short_uuid)
+        if len(slist) > 1:
+            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
+            return False
+        uuid = slist[0].str_uuid
+
+        self.signal_logger.emit(logging.INFO, f"🚧 Removing {uuid[28:]} - {self.stories.get_story(uuid).name}...")
+
+        short_uuid = uuid[28:]
+        self.signal_story_progress.emit(short_uuid, 0, 3)
+
+        # removing story contents
+        st_path = Path(self.mount_point).joinpath(f"str/{str(uuid)}")
+        if os.path.isdir(st_path):
+            try:
+                shutil.rmtree(st_path)
+            except OSError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+            except PermissionError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+
+        self.signal_story_progress.emit(short_uuid, 1, 3)
+
+        # removing story from class
+        self.stories.remove(slist[0])
+        # updating pack index file
+        self.update_pack_index()
+
+        self.signal_story_progress.emit(short_uuid, 2, 3)
+
+        return True
 
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
