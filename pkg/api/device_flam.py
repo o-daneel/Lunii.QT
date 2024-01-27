@@ -6,6 +6,7 @@ import logging
 from uuid import UUID
 
 import psutil
+import py7zr
 from PySide6 import QtCore
 
 from pkg.api.constants import *
@@ -132,10 +133,83 @@ class FlamDevice(QtCore.QObject):
             return self.import_flam_7z(story_path)
 
     def import_flam_zip(self, story_path):
-        pass
+        # checking if archive is OK
+        try:
+            with zipfile.ZipFile(file=story_path):
+                pass  # If opening succeeds, the archive is valid
+        except zipfile.BadZipFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+
+        # opening zip file
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+
+            # getting UUID from path
+            dir_name = os.path.dirname(zip_contents[0])
+            if len(dir_name) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, dir_name)
+                try:
+                    if "-" not in dir_name:
+                        new_uuid = UUID(bytes=binascii.unhexlify(dir_name))
+                    else:
+                        new_uuid = UUID(dir_name)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, e)
+                    return False
+            else:
+                self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
+                return False
+
+            # checking if UUID already loaded
+            if str(new_uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                return False
+
+            # decompressing story contents
+            short_uuid = str(new_uuid).upper()[28:]
+            output_path = Path(self.mount_point).joinpath(f"{STORIES_BASEDIR}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+
+                # Extract each zip file
+                data = zip_file.read(file)
+
+                target: Path = output_path.joinpath(file)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                with open(target, "wb") as f_dst:
+                    f_dst.write(data)
+
+        # TODO
+        # creating authorization file : key
+        # self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        # bt_path = output_path.joinpath(f"{str(new_uuid)}/key")
+        # with open(bt_path, "wb") as fp_bt:
+        #     fp_bt.write(self.key)
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(new_uuid))
+        self.update_pack_index()
+
+        return True
     
     def import_flam_7z(self, story_path):
-        pass
+        # checking if archive is OK
+        try:
+            with py7zr.SevenZipFile(story_path, mode='r'):
+                pass  # If opening succeeds, the archive is valid
+        except py7zr.exceptions.Bad7zFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
 
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
