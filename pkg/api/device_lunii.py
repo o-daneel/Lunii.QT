@@ -1,16 +1,14 @@
 import glob
 import json
 import os.path
-import platform
 import shutil
-import unicodedata
 import zipfile
 import psutil
 import py7zr
+import unicodedata
 import xxtea
 import binascii
 import logging
-from pathlib import Path
 from uuid import UUID
 
 from Crypto.Cipher import AES
@@ -35,7 +33,6 @@ class LuniiDevice(QtCore.QObject):
 
         # dummy values
         self.device_version = 0
-        self.UUID = ""
         self.dev_keyfile = keyfile
         self.device_key = None
         self.device_iv = None
@@ -45,7 +42,6 @@ class LuniiDevice(QtCore.QObject):
         self.fw_vers_major = 0
         self.fw_vers_minor = 0
         self.fw_vers_subminor = 0
-        self.memory_left = 0
         self.bt = b""
 
         self.debug_plain = False
@@ -382,7 +378,7 @@ class LuniiDevice(QtCore.QObject):
     def import_dir(self, story_path):
         # print(story_path + "**/*.plain.pk")
         pk_list = []
-        for ext in SUPPORTED_EXT:
+        for ext in LUNII_SUPPORTED_EXT:
             pk_list += glob.glob(os.path.join(story_path, "**/*" + ext), recursive=True)
         self.signal_logger.emit(logging.INFO, f"Importing {len(pk_list)} archives...")
         for index, pk in enumerate(pk_list):
@@ -1230,25 +1226,6 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-
-def secure_filename(filename):
-    INVALID_FILE_CHARS = '/\\?%*:|"<>'  # https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
-
-    # keep only valid ascii chars
-    output = list(unicodedata.normalize("NFKD", filename))
-
-    # special case characters that don't get stripped by the above technique
-    for pos, char in enumerate(output):
-        if char == '\u0141':
-            output[pos] = 'L'
-        elif char == '\u0142':
-            output[pos] = 'l'
-
-    # remove unallowed characters
-    output = [c if c not in INVALID_FILE_CHARS else '_' for c in output]
-    return "".join(output).encode("ASCII", "ignore").decode()
-
-
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
     logger = logging.getLogger(LUNII_LOGGER)
@@ -1302,3 +1279,20 @@ def is_lunii(root_path):
     except PermissionError as e:
         pass
     return False
+
+def secure_filename(filename):
+    INVALID_FILE_CHARS = '/\\?%*:|"<>'  # https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+
+    # keep only valid ascii chars
+    output = list(unicodedata.normalize("NFKD", filename))
+
+    # special case characters that don't get stripped by the above technique
+    for pos, char in enumerate(output):
+        if char == '\u0141':
+            output[pos] = 'L'
+        elif char == '\u0142':
+            output[pos] = 'l'
+
+    # remove unallowed characters
+    output = [c if c not in INVALID_FILE_CHARS else '_' for c in output]
+    return "".join(output).encode("ASCII", "ignore").decode()

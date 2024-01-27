@@ -561,7 +561,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
-            if (self.audio_device.device_version < LUNII_V3 or
+            if (self.audio_device.device_version == FLAM_V1 or
+                self.audio_device.device_version < LUNII_V3 or
                     (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_export.setEnabled(True)
 
@@ -887,7 +888,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
             # checking if dropped files are ending with expected extensions
-            if all(any(file.endswith(ext) for ext in SUPPORTED_EXT) for file in file_paths):
+            if (self.audio_device.device_version == FLAM_V1 and
+                    all(any(file.endswith(ext) for ext in FLAM_SUPPORTED_EXT) for file in file_paths)):
+                event.acceptProposedAction()
+            elif all(any(file.endswith(ext) for ext in LUNII_SUPPORTED_EXT) for file in file_paths):
                 event.acceptProposedAction()
             else:
                 event.ignore()

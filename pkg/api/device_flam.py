@@ -1,27 +1,20 @@
-import glob
-import json
 import os.path
-import platform
 import shutil
-import unicodedata
 import zipfile
-import psutil
-import py7zr
-import xxtea
 import binascii
 import logging
-from pathlib import Path
 from uuid import UUID
 
-from Crypto.Cipher import AES
+import psutil
 from PySide6 import QtCore
 
-from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
-from pkg.api import stories
-from pkg.api.convert_audio import audio_to_mp3
-from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
+from pkg.api.device_lunii import secure_filename
+from pkg.api.stories import StoryList, Story
+
+
+STORIES_BASEDIR = "str/"
+LIB_BASEDIR = "etc/library/"
 
 
 class FlamDevice(QtCore.QObject):
@@ -102,14 +95,112 @@ class FlamDevice(QtCore.QObject):
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n")
 
     def update_pack_index(self):
-        lib_path = Path(self.mount_point).joinpath("etc/library/")
-        list_path = Path(self.mount_point).joinpath("etc/library/list")
+        lib_path = Path(self.mount_point).joinpath(LIB_BASEDIR)
+        list_path = lib_path.joinpath("list")
         list_path.unlink(missing_ok=True)
         lib_path.mkdir(parents=True, exist_ok=True)
         with open(list_path, "w") as fp:
             for story in self.stories:
                 fp.write(str(story.uuid) + "\n")
         return
+
+    def import_story(self, story_path):
+        archive_type = TYPE_UNK
+
+        self.signal_logger.emit(logging.INFO, f"🚧 Loading {story_path}...")
+
+        archive_size = os.path.getsize(story_path)
+        free_space = psutil.disk_usage(str(self.mount_point)).free
+        if archive_size >= free_space:
+            self.signal_logger.emit(logging.ERROR, f"Not enough space left on Flam (only {free_space//1024//1024}MB)")
+            return False
+
+        # identifying based on filename
+        if story_path.lower().endswith(EXT_PK_FLAM):
+            archive_type = TYPE_FLAM_ZIP
+        elif story_path.lower().endswith(EXT_ZIP):
+            archive_type = TYPE_FLAM_ZIP
+        elif story_path.lower().endswith(EXT_7z):
+            archive_type = TYPE_FLAM_7Z
+
+        # processing story
+        if archive_type == TYPE_FLAM_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
+            return self.import_flam_zip(story_path)
+        elif archive_type == TYPE_FLAM_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_7Z")
+            return self.import_flam_7z(story_path)
+
+    def import_flam_zip(self, story_path):
+        pass
+    
+    def import_flam_7z(self, story_path):
+        pass
+
+    def export_story(self, uuid, out_path):
+        # is UUID part of existing stories
+        if uuid not in self.stories:
+            return None
+
+        slist = self.stories.matching_stories(uuid)
+        if len(slist) > 1:
+            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
+            for st in slist:
+                self.signal_logger.emit(logging.ERROR, f"[{st.str_uuid} - {st.name}]")
+            return None
+
+        one_story = slist[0]
+
+        # checking that .content dir exist
+        content_path = Path(self.mount_point).joinpath(STORIES_BASEDIR)
+        if not content_path.is_dir():
+            return None
+        story_path = content_path.joinpath(str(one_story.uuid))
+        if not story_path.is_dir():
+            return None
+
+        self.signal_logger.emit(logging.INFO, f"🚧 Exporting {one_story.short_uuid} - {one_story.name}")
+
+        # for Lunii v3, checking keys (original or trick)
+        # if self.device_version == FLAM_V1:
+        #     #TODO
+
+        # Preparing zip file
+        sname = one_story.name
+        sname = secure_filename(sname)
+
+        zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.flam.pk")
+        # if os.path.isfile(zip_path):
+        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
+        #     return None
+
+        # preparing file list
+        story_flist = []
+        story_arcnames = []
+        for root, _, filenames in os.walk(story_path):
+            for filename in filenames:
+                #TODO
+                # if filename in ["keys"]:
+                #     continue
+                abs_file = os.path.join(root, filename)
+                story_flist.append(abs_file)
+
+                index = abs_file.find(str(one_story.uuid))
+                story_arcnames.append(abs_file[index:])
+
+        try:
+            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+                self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
+                for index, file in enumerate(story_flist):
+                    self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
+                    self.signal_logger.emit(logging.DEBUG, story_arcnames[index])
+                    zip_out.write(file, story_arcnames[index])
+
+        except PermissionError as e:
+            self.signal_logger.emit(logging.ERROR, f"failed to create ZIP - {e}")
+            return None
+
+        return zip_path
 
     def remove_story(self, short_uuid):
         if short_uuid not in self.stories:
@@ -155,7 +246,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
     logger = logging.getLogger(LUNII_LOGGER)
 
     mount_path = Path(root_path)
-    list_path = mount_path.joinpath("etc/library/list")
+    list_path = mount_path.joinpath(LIB_BASEDIR + "list")
 
     story_list = StoryList()
 

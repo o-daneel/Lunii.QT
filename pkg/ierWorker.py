@@ -27,7 +27,7 @@ class ierWorker(QObject):
         super().__init__()
 
         self.early_exit = False
-        self.lunii = device
+        self.audio_device = device
         self.action = action
         self.items = story_list
         self.out_dir = out_dir
@@ -65,7 +65,7 @@ class ierWorker(QObject):
 
             self.signal_total_progress.emit(index, len(self.items))
             ts_start = time.time()
-            if self.lunii.import_story(file):
+            if self.audio_device.import_story(file):
                 ts_end = time.time()
                 self.signal_message.emit(f"Time to import : {round(ts_end-ts_start, 3)}s'")
                 self.signal_message.emit(f"👍 New story imported : '{file}'")
@@ -92,7 +92,7 @@ class ierWorker(QObject):
                 return
 
             # Official story export is forbidden
-            story_to_export = self.lunii.stories.get_story(str_uuid)
+            story_to_export = self.audio_device.stories.get_story(str_uuid)
             if not constants.REFRESH_CACHE and story_to_export.is_official():
                 self.signal_message.emit(f"🛑 Forbidden to export : '{story_to_export.name}'")
                 self.signal_refresh.emit()
@@ -100,7 +100,7 @@ class ierWorker(QObject):
 
             self.signal_total_progress.emit(index, len(self.items))
             
-            res = self.lunii.export_story(str_uuid, self.out_dir)
+            res = self.audio_device.export_story(str_uuid, self.out_dir)
             if res:
                 self.signal_message.emit(f"👍 Story exported to '{res}'")
                 success += 1
@@ -123,8 +123,8 @@ class ierWorker(QObject):
 
             self.signal_total_progress.emit(index, len(self.items))
             # remove story contents from device
-            story_to_remove = self.lunii.stories.get_story(str_uuid)
-            res = self.lunii.remove_story(str_uuid)
+            story_to_remove = self.audio_device.stories.get_story(str_uuid)
+            res = self.audio_device.remove_story(str_uuid)
             if res:
                 self.signal_message.emit(f"👍 Story removed: '{story_to_remove.name}'")
                 success += 1
@@ -140,12 +140,12 @@ class ierWorker(QObject):
     def _task_size(self):
 
         # processing all stories
-        for index, story in enumerate(self.lunii.stories):
+        for index, story in enumerate(self.audio_device.stories):
             if self.early_exit:
                 self.exit_requested()
                 return
 
-            self.signal_total_progress.emit(index, len(self.lunii.stories))
+            self.signal_total_progress.emit(index, len(self.audio_device.stories))
 
             # is the size already known ?
             if story.size != -1:
@@ -154,7 +154,7 @@ class ierWorker(QObject):
             # processing all files in a story
             story.size = 0
             all_files = list()
-            for parent_dir, _, files in os.walk(f"{self.lunii.mount_point}/.content/{story.short_uuid}"):
+            for parent_dir, _, files in os.walk(f"{self.audio_device.mount_point}/.content/{story.short_uuid}"):
                 for file in files:
                     story.size += os.path.getsize(os.path.join(parent_dir, file))
 
