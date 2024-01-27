@@ -61,7 +61,7 @@ class LuniiDevice(QtCore.QObject):
     def snu_str(self):
         return self.snu.hex().upper().lstrip("0")
 
-    # opens the .pi file to read all installed stories
+    # opens the .md file to read all information related to device
     def __feed_device(self):
         
         mount_path = Path(self.mount_point)

@@ -25,32 +25,82 @@ from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE
 
 
 class FlamDevice():
+    signal_story_progress = QtCore.Signal(str, int, int)
+    signal_logger = QtCore.Signal(int, str)
+    stories: StoryList
+
     def __init__(self, mount_point, keyfile=None):
         super().__init__()
         self.mount_point = mount_point
+
+        # dummy values
+        self.lunii_version = 0
+        self.UUID = ""
+        self.dev_keyfile = keyfile
+        self.device_key = None
+        self.device_iv = None
+        self.story_key = None
+        self.story_iv = None
+        self.snu = ""
+        self.fw_vers_major = 0
+        self.fw_vers_minor = 0
+        self.fw_vers_subminor = 0
+        self.memory_left = 0
+
+        # internal device details
+        if not self.__feed_device():
+            return
+
+        # internal stories
+        self.stories = []
+        # self.stories = feed_stories(self.mount_point)
 
     @property
     def snu_str(self):
         return self.snu.hex().upper().lstrip("0")
 
-    # opens the .pi file to read all installed stories
+    # opens the .mdf file to read all information related to device
     def __feed_device(self):
 
         mount_path = Path(self.mount_point)
-        md_path = mount_path.joinpath(".mdf")
+        mdf_path = mount_path.joinpath(".mdf")
 
         # checking if specified path is acceptable
-        if not os.path.isfile(md_path):
+        if not os.path.isfile(mdf_path):
             return False
 
-        with open(md_path, "rb") as fp_md:
-            md_version = int.from_bytes(fp_md.read(2), 'little')
-            #
-            # if md_version == 6:
-            #     self.__md6_parse(fp_md)
-            # else:
-            #     self.__md1to5_parse(fp_md)
+        with open(mdf_path, "rb") as fp_mdf:
+            mdf_version = int.from_bytes(fp_mdf.read(2), 'little')
+
+            if mdf_version == 1:
+                self.__md1_parse(fp_mdf)
         return True
+
+    def __md1_parse(self, fp_mdf):
+        fp_mdf.seek(2)
+        versions = fp_mdf.read(48)
+        fws = versions.split(b"\n")
+        self.fw_main = fws[0].split(b": ")[1].split(b"-")[0]
+        self.fw_comm = fws[1].split(b": ")[1].split(b"-")[0]
+
+        snu_str = fp_mdf.read(24).decode('utf-8').rstrip('\x00')
+        self.snu = binascii.unhexlify(snu_str)
+
+        vid = int.from_bytes(fp_mdf.read(2), 'little')
+        pid = int.from_bytes(fp_mdf.read(2), 'little')
+
+        if (vid, pid) == FLAM_USB_VID_PID:
+            self.device_version = FLAM_V1
+        else:
+            self.device_version = UNDEF_DEV
+
+        logger = logging.getLogger(LUNII_LOGGER)
+        logger.log(logging.DEBUG, f"\n"
+                                       f"SNU : {self.snu_str}\n"
+                                       f"HW  : v{self.device_version-(FLAM_V1-1)}\n"
+                                       f"FW (main) : {self.fw_main}\n"
+                                       f"FW (comm) : {self.fw_comm}\n"
+                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n")
 
 
 def is_flam(root_path):

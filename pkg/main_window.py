@@ -14,6 +14,7 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 
 from pkg.api import constants
 from pkg.api.constants import *
+from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
@@ -55,7 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.debug_dialog.show()
 
         # class instance vars init
-        self.lunii_device: LuniiDevice = None
+        self.audio_device: LuniiDevice = None
         self.worker: ierWorker = None
         self.thread: QtCore.QThread = None
         self.app = app
@@ -263,7 +264,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_dev_refresh(self):
         dev_list = find_devices()
         self.combo_device.clear()
-        self.lunii_device = None
+        self.audio_device = None
 
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
@@ -294,19 +295,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-            if not is_lunii(dev_name):
-                self.statusbar.showMessage(f"ERROR : {dev_name} is not a recognized Lunii.")
+            if not is_lunii(dev_name) and not is_flam(dev_name):
+                self.logger.log(logging.ERROR, f"{dev_name} is not a recognized device.")
 
                 # removing the new entry
                 cur_index = self.combo_device.currentIndex()
+                self.combo_device.setCurrentIndex(-1)
                 self.combo_device.removeItem(cur_index)
-
-                # picking another existing entry
-                if self.combo_device.count() > 0:
-                    self.combo_device.setCurrentIndex(0)
-                else:
-                    self.combo_device.lineEdit().setText("Enter a path here")
-
                 return
 
             # in case of a worker, abort it
@@ -316,14 +311,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.app.processEvents()
                     time.sleep(0.05)
 
-            self.lunii_device = LuniiDevice(dev_name, V3_KEYS)
+            if is_lunii(dev_name):
+                self.audio_device = LuniiDevice(dev_name, V3_KEYS)
+            else:
+                self.audio_device = FlamDevice(dev_name)
             self.statusbar.showMessage(f"")
 
             self.ts_update()
             self.sb_update("")
 
             # computing sizes if necessary
-            if not self.sizes_hidden and any(story for story in self.lunii_device.stories if story.size == -1):
+            if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
                 self.worker_launch(ACTION_SIZE)
 
     def cb_tree_select(self):
@@ -345,7 +343,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.details_last_uuid = uuid
 
             # feeding story image and desc
-            one_story = self.lunii_device.stories.get_story(uuid)
+            one_story = self.audio_device.stories.get_story(uuid)
             if not one_story:
                 return
             one_story_desc = one_story.desc
@@ -483,7 +481,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     return
 
                 self.sb_update(f"Login success...")
-                version = lunii_fw_version(self.lunii_device.lunii_version, auth_token)
+                version = lunii_fw_version(self.audio_device.lunii_version, auth_token)
 
                 if version:
                     backup_fw_fn = f"fa.v{version}.bin"
@@ -501,7 +499,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 if file_dialog.exec_() == QFileDialog.Accepted:
                     selected_file = file_dialog.selectedFiles()[0]
-                    if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file):
+                    if lunii_fw_download(self.audio_device.lunii_version, self.audio_device.snu_str, auth_token, selected_file):
                         self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                     else:
                         self.sb_update(f"🛑 Fail to download update")
@@ -509,8 +507,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.sb_update("")
                     return
 
-                if self.lunii_device.lunii_version == LUNII_V1:
-                    version = lunii_fw_version(self.lunii_device.lunii_version, auth_token, True)
+                if self.audio_device.lunii_version == LUNII_V1:
+                    version = lunii_fw_version(self.audio_device.lunii_version, auth_token, True)
                     backup_fw_fn = f"fu.v{version}.bin"
 
                     options = QFileDialog.Options()
@@ -523,7 +521,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                     if file_dialog.exec_() == QFileDialog.Accepted:
                         selected_file = file_dialog.selectedFiles()[0]
-                        if lunii_fw_download(self.lunii_device.lunii_version, self.lunii_device.snu_str, auth_token, selected_file, True):
+                        if lunii_fw_download(self.audio_device.lunii_version, self.audio_device.snu_str, auth_token, selected_file, True):
                             self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                         else:
                             self.sb_update(f"🛑 Fail to download update")
@@ -545,7 +543,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             action.setEnabled(False)
 
         # during download or no device selected, no action possible
-        if not self.lunii_device or self.worker:
+        if not self.audio_device or self.worker:
             return
 
         # always possible to import in an empty device
@@ -560,28 +558,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
-            if (self.lunii_device.lunii_version < LUNII_V3 or
-                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
+            if (self.audio_device.lunii_version < LUNII_V3 or
+                    (self.audio_device.lunii_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_export.setEnabled(True)
 
             # Official story export is forbidden
             if not constants.REFRESH_CACHE:
                 selected = self.tree_stories.selectedItems()
                 if len(selected) == 1:
-                    one_story = self.lunii_device.stories.get_story(selected[0].text(COL_UUID))
+                    one_story = self.audio_device.stories.get_story(selected[0].text(COL_UUID))
                     if one_story.is_official():
                         self.act_export.setEnabled(False)
 
         # are there story loaded ?
-        if self.lunii_device.stories:
-            if (self.lunii_device.lunii_version < LUNII_V3 or
-                    (self.lunii_device.lunii_version == LUNII_V3 and self.lunii_device.device_key)):
+        if self.audio_device.stories:
+            if (self.audio_device.lunii_version < LUNII_V3 or
+                    (self.audio_device.lunii_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_exportall.setEnabled(True)
 
     def cb_menu_tools_update(self):
         self.act_getfw.setEnabled(False)
 
-        if self.lunii_device:
+        if self.audio_device:
             self.act_getfw.setEnabled(True)
 
     def cb_menu_help_update(self):
@@ -602,7 +600,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_populate(self):
         # empty device
-        if not self.lunii_device or not self.lunii_device.stories or len(self.lunii_device.stories) == 0:
+        if not self.audio_device or not self.audio_device.stories or len(self.audio_device.stories) == 0:
             return
 
         # creating font
@@ -613,7 +611,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         le_filter = self.le_filter.text()
 
         # adding items
-        for story in self.lunii_device.stories:
+        for story in self.audio_device.stories:
             # filtering 
             if le_filter and not le_filter.lower() in story.name.lower():
                 continue
@@ -675,31 +673,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if message:
             self.logger.log(logging.INFO, message)
 
-        if not self.lunii_device:
+        if not self.audio_device:
             return
 
         # SNU
-        self.lbl_snu.setText(self.lunii_device.snu_str)
+        self.lbl_snu.setText(self.audio_device.snu_str)
         # self.lbl_snu.setText("23023030012345")
 
         # Version
         version = ""
-        if self.lunii_device.lunii_version == LUNII_V1:
+        if self.audio_device.lunii_version == LUNII_V1:
             HW_version = "v1"
-            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
-        elif self.lunii_device.lunii_version == LUNII_V2:
+            SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
+        elif self.audio_device.lunii_version == LUNII_V2:
             HW_version = "v2"
-            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
-        elif self.lunii_device.lunii_version == LUNII_V3:
+            SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
+        elif self.audio_device.lunii_version == LUNII_V3:
             HW_version = "v3"
-            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}.{self.lunii_device.fw_vers_subminor}"
+            SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}.{self.audio_device.fw_vers_subminor}"
         else:
             HW_version = "?v1/v2?"
-            SW_version = f"{self.lunii_device.fw_vers_major}.{self.lunii_device.fw_vers_minor}"
+            SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
         self.lbl_version.setText(f"Lunii {HW_version}, FW: {SW_version}")
 
         # Free Space
-        free_space = psutil.disk_usage(str(self.lunii_device.mount_point)).free
+        free_space = psutil.disk_usage(str(self.audio_device.mount_point)).free
         free_space = free_space//1024//1024
         self.lbl_fs.setText(f"{free_space} MB")
 
@@ -717,16 +715,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_count.setText("")
 
     def ts_move(self, offset):
-        if self.worker or not self.lunii_device:
+        if self.worker or not self.audio_device:
             return
 
         # start = time.time()
 
         # shifting to be right is shifting to the left the reverse list
         if offset >= 1:
-            self.lunii_device.stories.reverse()
+            self.audio_device.stories.reverse()
 
-        working_list = [[story, index+1] for index, story in enumerate(self.lunii_device.stories)]
+        working_list = [[story, index+1] for index, story in enumerate(self.audio_device.stories)]
 
         # getting selection
         selected_items = self.tree_stories.selectedItems()
@@ -761,16 +759,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         working_list.sort(key= lambda x: x[1])
 
         # updating story list
-        self.lunii_device.stories = StoryList()
+        self.audio_device.stories = StoryList()
         for story, index in working_list:
-            self.lunii_device.stories.append(story)
+            self.audio_device.stories.append(story)
 
         # we shifted the reverse list, we need to reverse it one last time
         if offset >= 1:
-            self.lunii_device.stories.reverse()
+            self.audio_device.stories.reverse()
 
         # # update Lunii device (.pi)
-        self.lunii_device.update_pack_index()
+        self.audio_device.update_pack_index()
 
         # refresh stories
         self.ts_update()
@@ -860,7 +858,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.sb_update("🛑 Export All cancelled")
 
     def ts_import(self):
-        if not self.lunii_device:
+        if not self.audio_device:
             return
 
         file_filter = "All supported (*.pk *.7z *.zip);;PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All files (*)"
@@ -873,7 +871,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_dragenter_action(self, event):
         # a Lunii must be selected
-        if not self.lunii_device:
+        if not self.audio_device:
             event.ignore()
             return
 
@@ -898,11 +896,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.worker:
             return
 
-        if not self.lunii_device:
+        if not self.audio_device:
             return
 
         # setting up the thread
-        self.worker = ierWorker(self.lunii_device, action, item_list, out_dir)
+        self.worker = ierWorker(self.audio_device, action, item_list, out_dir)
         self.thread = QtCore.QThread()
         self.worker.moveToThread(self.thread)
 
@@ -917,8 +915,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.thread.finished.connect(self.thread.deleteLater)
 
         # UI update slots
-        self.lunii_device.signal_story_progress.connect(self.slot_story_progress)
-        self.lunii_device.signal_logger.connect(self.logger.log)
+        self.audio_device.signal_story_progress.connect(self.slot_story_progress)
+        self.audio_device.signal_logger.connect(self.logger.log)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
@@ -956,10 +954,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_story.setVisible(False)
 
         try:
-            self.lunii_device.signal_story_progress.disconnect()
+            self.audio_device.signal_story_progress.disconnect()
         except: pass
         try:
-            self.lunii_device.signal_logger.disconnect()
+            self.audio_device.signal_logger.disconnect()
         except: pass
 
         if self.worker:
