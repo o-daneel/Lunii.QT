@@ -1322,7 +1322,7 @@ def find_devices(extra_path=None):
         for part in psutil.disk_partitions():
             logger.log(logging.DEBUG, f"- {part}")
             if (part.device.startswith("/dev/sd") and
-                    (part.fstype == "msdosfs" or part.fstype == "vfat") and
+                    (part.fstype.startswith("msdos") or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
                 logger.log(logging.DEBUG, "  Device found")
                 lunii_dev.append(part.mountpoint)
@@ -1332,7 +1332,7 @@ def find_devices(extra_path=None):
         for part in psutil.disk_partitions():
             logger.log(logging.DEBUG, f"- {part}")
             if (any(part.mountpoint.lower().startswith(mnt_pt) for mnt_pt in ["/mnt", "/media", "/volume"]) and
-                    (part.fstype == "msdosfs" or part.fstype == "vfat") and
+                    (part.fstype.startswith("msdos") or part.fstype == "vfat") and
                     is_device(part.mountpoint)):
                 logger.log(logging.DEBUG, "  Device found")
                 lunii_dev.append(part.mountpoint)
