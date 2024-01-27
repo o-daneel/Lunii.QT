@@ -5,7 +5,7 @@ from PySide6 import QtCore
 from PySide6.QtCore import QObject
 
 from pkg.api import constants
-from pkg.api.device import LuniiDevice
+from pkg.api.device_lunii import LuniiDevice
 
 ACTION_IMPORT = 1
 ACTION_EXPORT = 2

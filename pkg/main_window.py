@@ -14,7 +14,8 @@ from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessag
 
 from pkg.api import constants
 from pkg.api.constants import *
-from pkg.api.device import find_devices, LuniiDevice, is_device
+from pkg.api.device_lunii import LuniiDevice, is_lunii
+from pkg.api.devices import find_devices
 from pkg.api.firmware import lunii_get_authtoken, lunii_fw_version, lunii_fw_download
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
@@ -293,7 +294,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev_name = self.combo_device.currentText()
 
         if dev_name:
-            if not is_device(dev_name):
+            if not is_lunii(dev_name):
                 self.statusbar.showMessage(f"ERROR : {dev_name} is not a recognized Lunii.")
 
                 # removing the new entry
@@ -404,7 +405,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return
 
             # check if path is a recognized device
-            if not is_device(dev_dir):
+            if not is_lunii(dev_dir):
                 self.sb_update("Not a Lunii or unsupported one 😥")
                 return
 

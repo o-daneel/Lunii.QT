@@ -24,35 +24,6 @@ from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
-class FlamDevice():
-    def __init__(self, mount_point, keyfile=None):
-        super().__init__()
-        self.mount_point = mount_point
-
-    @property
-    def snu_str(self):
-        return self.snu.hex().upper().lstrip("0")
-
-    # opens the .pi file to read all installed stories
-    def __feed_device(self):
-
-        mount_path = Path(self.mount_point)
-        md_path = mount_path.joinpath(".mdf")
-
-        # checking if specified path is acceptable
-        if not os.path.isfile(md_path):
-            return False
-
-        with open(md_path, "rb") as fp_md:
-            md_version = int.from_bytes(fp_md.read(2), 'little')
-            #
-            # if md_version == 6:
-            #     self.__md6_parse(fp_md)
-            # else:
-            #     self.__md1to5_parse(fp_md)
-        return True
-
-
 class LuniiDevice(QtCore.QObject):
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
@@ -1321,66 +1292,12 @@ def feed_stories(root_path) -> StoryList[UUID]:
     return story_list
 
 
-def find_devices(extra_path=None):
-    logger = logging.getLogger(LUNII_LOGGER)
-
-    lunii_dev = []
-
-    current_os = platform.system()
-    logger.log(logging.INFO, f"Finding Lunii devices...")
-    
-    if current_os == "Windows":
-        # checking all drive letters
-        for drive in range(ord('A'), ord('Z')+1):
-            drv_str = f"{chr(drive)}:/"
-            lunii_path = Path(drv_str)
-
-            if is_device(lunii_path):
-                logger.log(logging.DEBUG, f"- {lunii_path} : Device found")
-                lunii_dev.append(lunii_path)
-
-        # checking for extra path
-        if extra_path:
-            lunii_path = Path(extra_path)
-
-            if is_device(lunii_path):
-                lunii_dev.append(lunii_path)
-
-    elif current_os == "Linux":
-        # Iterate through all partitions
-        for part in psutil.disk_partitions():
-            logger.log(logging.DEBUG, f"- {part}")
-            if (part.device.startswith("/dev/sd") and
-                    (part.fstype.startswith("msdos") or part.fstype == "vfat") and
-                    is_device(part.mountpoint)):
-                logger.log(logging.DEBUG, "  Device found")
-                lunii_dev.append(part.mountpoint)
-                
-    elif current_os == "Darwin":
-        # Iterate through all partitions
-        for part in psutil.disk_partitions():
-            logger.log(logging.DEBUG, f"- {part}")
-            if (any(part.mountpoint.lower().startswith(mnt_pt) for mnt_pt in ["/mnt", "/media", "/volume"]) and
-                    (part.fstype.startswith("msdos") or part.fstype == "vfat") and
-                    is_device(part.mountpoint)):
-                logger.log(logging.DEBUG, "  Device found")
-                lunii_dev.append(part.mountpoint)
-
-    logger.log(logging.INFO, f"> found {len(lunii_dev)} devices")
-    # done
-    return lunii_dev
-
-
-def is_device(root_path):
+def is_lunii(root_path):
     root_path = Path(root_path)
     md_path = root_path.joinpath(".md")
-    # pi_path = root_path.joinpath(".pi")
-    # cfg_path = root_path.joinpath(".cfg")
-    # content_path = root_path.joinpath(".content")
 
     try:
         if md_path.is_file():
-            # and pi_path.is_file() and cfg_path.is_file() and content_path.is_dir():
             return True
     except PermissionError as e:
         pass
