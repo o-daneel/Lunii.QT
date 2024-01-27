@@ -1,4 +1,4 @@
-:fr: [README en francais](README_FR.md) :fr:
+:fr: [README en français](README_FR.md) :fr:
 
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
