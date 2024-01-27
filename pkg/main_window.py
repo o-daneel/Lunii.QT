@@ -276,6 +276,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.combo_device.addItem(dev_name)
 
         if os.path.isdir("C:/Work/dev/lunii-sd/"):
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/")
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/_flam/")
+            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v1/")
             self.combo_device.addItem("C:/Work/dev/lunii-sd/_v1/")
             self.combo_device.addItem("C:/Work/dev/lunii-sd/_v2/")
             self.combo_device.addItem("C:/Work/dev/lunii-sd/_v3/")
