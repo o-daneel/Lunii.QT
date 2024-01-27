@@ -32,7 +32,7 @@ Elle permet de réorganiser, importer, exporter vos histoires, mais aussi de té
   - [Astuces](#astuces)
   - [Construisez vos applications](#construisez-vos-applications)
   - [Formats d'archives pris en charge](#formats-darchives-pris-en-charge)
-  - [Crédits](#credits)
+  - [Crédits](#crédits)
 - [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
 

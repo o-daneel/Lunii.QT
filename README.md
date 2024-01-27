@@ -1,51 +1,59 @@
-:fr: [README en francais](./README_FR.md) :fr:
-
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
-for Windows / Linux / MacOs 11  
-(compatible with STUdio archive, **with** transcoding)
 
+This is an application, written in Python QT, compatible with Linux, Windows and Mac OS 11, for managing your Lunii Storyteller devices.
 
-### Hardware supported:
-* **v1, v2**  (full Support)
-* **v3**  (export requires device key file)  
+It allows you to reorganize, import and export your stories, as well as download and install the latest firmware **#####Choose firmware or only the latest ?#####**.
 
-### Limitations
-* Application <u>no longer</u> allows Official stories to be exported
-* Audio transcoding requires FFMPEG v6 to be present (link to section)
-* **Flam** not yet supported (next update might)
+**Supported hardware:**
+* My Story Factory V1 and V2 (full support)
+* My Story Factory V3 (export requires device key file)
+
+**Limitations:**
+* The application can no longer export official stories.
+* Audio transcoding requires the presence of [FFMPEG V6](#check)
+* FLAM" is not yet supported (*work in progress*)
+
+**To do**
+* Add FLAM support ?
+* Improve 7z archive processing
+* Configuration file to save menu settings (sizes / details)
+* Add image to tree list?
+
 
 ### Table of contents
 <!-- TOC -->
 - [Lunii.QT](#luniiqt)
-  - [User Interface](#user-interface)
+  - [Interface presentation](#interface-presentation)
   - [Shortcuts](#shortcuts)
-  - [Audio Transcoding](#audio-transcoding)
+  - [Installations](#installations)
+    - [Linux](#linux)
+    - [Windows](#windows)
+  - [Audio transcoding](#audio-transcoding)
+  - [Tips](#tips)
+  - [Build your applications](#build-your-applications)
   - [Supported archive formats](#supported-archive-formats)
-  - [HowTo](#howto)
-  - [Trick](#trick)
   - [Credits](#credits)
-- [Links / Similar repos](#links--similar-repos)
+- [Links / Similar repositories](#links--similar-repositories)
 <!-- TOC -->
 
+## Interface presentation
+![Lunii QT interface](./res/lunii_qt_interface.png)
 
-## User Interface
+This is the Luni QT interface.
+1. The menu bar.
+1. The location of your Lunii when it's connected. The button on the left updates automatic detection.
+1. Updates the list of stories and related information from the official Lunii Store.
+1. The list of your stories with UUID and Database (DB) origin. 
+    1. The UUID: This unique identifier allows you to associate stories with their folder on the Lunii, thanks to the last eight characters that make up the name of the folder associated with that story.
+    1. DB: There are two databases supported: `O` for the official Lunii database (all metadata comes from Lunii servers) and `T` for the third-party database also known as Unofficial or Custom Stories (this metadata cannot be retrieved, it is filled in when the story is imported).
+1. In this status bar, you'll find your SNU (serial number), the firmware version of your Lunii, the available space and the number of stories it contains.
 
-<img src="./res/screenshot_about.png" width="450">  
+More screenshots :
+![Context menu for story management](./res/screenshot_main.png)
+![Debug window](./res/screenshot_debug.png)
+About window](./res/screenshot_about.png)
 
- .  
-<img src="./res/screenshot_main.png" width="600">  
-<img src="./res/screenshot_debug.png" width="600">  
-
-
-### Description
-* **DB** stands for **Database**. This application supports two different databases
-  1. **O** - Lunii **O**fficial Database  
-     _(all metadata are fed from Lunii servers)_
-  2. **T** - **T**hirdparty Database, also known as Unofficial or Custom Stories  
-     _(Those metadata can't be fetched. They are completed upon story import)_
-
-## Shortcuts
+### Shortcuts
 
 | Keys           | Actions                          |
 |----------------|----------------------------------|
@@ -64,31 +72,137 @@ for Windows / Linux / MacOs 11
 | `F1`           | About the app                    |
 | `F5`           | Refresh devices                  |
 
-## Audio Transcoding
-Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool available here :  
-https://github.com/eugeneware/ffmpeg-static/releases/latest  
 
-**WARNING** : transcoding is <u>very long</u>, you should be patient. That's why you should prefer the [.plain.pk](#plainpk) format that use compatible audio.
+## Installations
+### Linux
+Check the version of Python installed on your machine with the command `python3 -V`.
+
+```bash
+anthony@McFly-Bureau:~$ python3 -V
+Python 3.10.12
+```
+
+If you don't have Python installed, run the following command.
+
+```bash
+sudo apt install python3
+```
+
+**Install dependencies
+bash
+sudo apt install libxcb-cursor0
+```
+
+Download the [latest version of Luni.QT for Linux](https://github.com/o-daneel/Lunii.QT/releases) and unzip it.
+
+Double-click on `lunii-qt` to launch the application.
+
+#### Debugging
+If you encounter any problems during launch, try running the application from the Terminal in the folder with the following command. It should display an error message that you'll need to troubleshoot.
+
+bash
+./lunii-qt
+```
+
+### Windows
+>FALSE POSITIVE: Your operating system (and VirusTotal too) might report the executable as a threat, but it's not. It's a false positive due to pyinstaller. Binaries are generated by workflows from GitHub, directly from Sources to Binary.
+>Never trust an executable on the internet, and [rebuild it yourself](#build-your-applications) (you'll get the same result 😅).
+
+Get the [latest version of Luni.QT for Linux](https://github.com/o-daneel/Lunii.QT/releases) then unzip it.
+
+Double-click on `lunii-qt.exe` to launch the application.
+
+## Audio transcoding
+Some third-party stories use non-MP3 files. They cannot be installed on Lunii as they are. This requires a **transcoding** step. This additional process is carried out using the **FFMPEG** tool available [here](https://github.com/eugeneware/ffmpeg-static/releases/latest ):     
+ 
+
+**WARNING**: transcoding is **very time-consuming**, so you need to be patient. This is why you should prefer the [.plain.pk](#plainpk) format, which uses compatible sound.
 
 ### Installation
-You must ensure that `ffmpeg` command is in your path.  
-If you're lost, just can grab a standalone binary on the previous link, for you platform (Win/Linux/MacOs), and copy it beside this app, like this :
-```
+Make sure you have the `ffmpeg` command in your path.  
+If you're lost, you can grab a standalone binary from the previous link, for your platform (Win/Linux/MacOs), and copy it next to this application, like this:
+
+```tree
 - 
  |- lunii-qt.exe
  |- ffmpeg.exe
 ```
 
-1) Grab your ffmpeg release
-2) Rename it to `ffmpeg.exe` or `ffmpeg` (depending on your host OS)
-3) Copy beside lunii-qt.exe 
+1) Get your version of ffmpeg
+2) Rename it to `ffmpeg.exe` or `ffmpeg` (depending on your operating system)
+3) Copy next to `lunii-qt.exe` or `lunii-qt` (depending on your operating system)
 
-### Checking 
-Within the application, the Tools menu will display the status of detection.
+### Check 
+In the application, the Tools menu displays the detection status.
 #### Not found
-![Not available](res/ffmpeg_off.png)  
+FFMPEG Not available](res/ffmpeg_off.png)  
 #### Found
-![Available](./res/ffmpeg_on.png)
+![FFMPEG available](./res/ffmpeg_on.png)
+
+## Tips
+### Cache management
+This application will download once and for all the official stories database and all the images requested in the folder dedicated to the application.
+* `$HOME/.lunii-qt/official.db`
+* `$HOME/.lunii-qt/cache/*`
+
+In the event of a problem, simply delete this file and directory to force a refresh.
+
+### Export V3
+To support story export from Lunii v3 hardware, you need to place your device keys here:
+```bash
+%HOME%\.lunii-qt\v3.keys
+$HOME/.lunii-qt/v3.keys
+```
+This is a binary file with 0x10 bytes for the key and 0x10 bytes for the IV.
+
+### ICO creation
+```bash
+magick
+```
+
+## Build your applications
+
+**Preparing the environment
+
+Start by cloning the repository.
+Prepare the virtual environment for the project and install dependencies.
+bash
+python -m venv venv
+```
+
+Switch to your venv
+* under Linux   
+   source venv/bin/activate`
+* under Windows   
+  `.\venv\Scripts\activate.bat`
+
+Install dependencies
+```
+pip install -r requirements.txt
+```
+
+**Linux** needs an additional dependency.
+
+```bash
+apt install libxcb-cursor0
+```
+**Build UI file
+```bash
+$ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
+$ pyside6-rcc resources.qrc -o resources_rc.py
+```
+**Start**
+```bash
+python lunii-qt.py
+```
+
+**Build executable**
+```bash
+pip install pyinstaller
+pyinstaller lunii-qt.spec
+...
+dist\lunii-qt
+```
 
 
 ## Supported archive formats
@@ -166,84 +280,15 @@ Within the application, the Tools menu will display the status of detection.
         stroy.json
         thumbnail.png
 
-## TODO
-* add Flam support ?
-* improve 7z archive processing
-* config file to backup menu config (sizes / details)
-* add picture to tree list ?
-
-
-## HowTo
-
-### Prepare env
-
-Prepare a Vitrual environment for your project and install requirements
-```
-$ python -m venv venv
-```
-
-Switch to your venv 
-* on Linux   
-   `source venv/bin/activate`
-* on Windows   
-  `.\venv\Scripts\activate.bat`
-
-Install dependencies
-```
-$ pip install -r requirements.txt
-```
-
-**Linux** has one more extra dependency to be installed  
-
-```bash
-$ apt install libxcb-cursor0
-```
-### Build UI files
-```
-$ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
-$ pyside6-rcc resources.qrc -o resources_rc.py
-```
-### Run
-```
-$ python lunii-qt.py
-```
-
-### Build GUI executable
-```
-$ pip install pyinstaller
-$ pyinstaller lunii-qt.spec
-...
-$ dist\lunii-qt
-```
-
-## Trick
-### Cache management
-This application will download once for all the official story database and any request pictures to the application dedicated folder
-* `$HOME/.lunii-qt/official.db`
-* `$HOME/.lunii-qt/cache/*`
-
-In case of any trouble, just remove this file and directory to force refresh
-
-### V3 export
-In order to suport story export from Lunii v3 hardware, you must place your device keys in here :
-```bash
-%HOME%\.lunii-qt\v3.keys
-$HOME/.lunii-qt/v3.keys
-```
-It is a binary file with 0x10 bytes for Key and 0x10 bytes for IV
-### ICO creation
-```bash
-magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.ico
-```
 
 ## Credits
 Thanks to :
-* **olup** for STUdio archive format 
-* **sniperflo** for v1 support & debug 
+**olup** for the STUdio archives
+**sniperflo** for V1 support and debugging
 
-# Links / Similar repos
-* [Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
+# Links / Similar repositories
+* Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
-* [Lunii Admin](https://github.com/olup/lunii-admin) (a GO implementation of a STUdio alternative)
-* [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as previous but from a browser)
+* [Lunii Admin](https://github.com/olup/lunii-admin) (An enGo alternative to STUdio)
+* [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as above, but browser-based)
