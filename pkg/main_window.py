@@ -50,6 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.logger = logging.getLogger(LUNII_LOGGER)
 
         self.debug_dialog = DebugDialog()
+        self.login_dialog = LoginDialog()
         # self.debug_dialog.show()
 
         # class instance vars init
@@ -239,8 +240,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().moveEvent(event)
 
     def onFocusChanged(self, old, now):
+        if not self.isHidden() and not old and now:
+            self.raise_()
         if not self.debug_dialog.isHidden() and not old and now:
             self.debug_dialog.raise_()
+        if not self.login_dialog.isHidden() and not old and now:
+            self.login_dialog.raise_()
 
     def closeEvent(self, event):
         # Explicitly close the log window when the main window is closed
@@ -465,10 +470,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         elif act_name == "actionGet_firmware":
             # prompt for Luniistore connection
-            login_dialog = LoginDialog()
-            if login_dialog.exec_() != QDialog.Accepted:
+            if self.login_dialog.exec_() != QDialog.Accepted:
                 return
-            login, password = login_dialog.get_login_password()
+            login, password = self.login_dialog.get_login_password()
 
             try:
                 # getting auth token
