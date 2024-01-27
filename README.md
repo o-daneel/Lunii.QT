@@ -1,3 +1,5 @@
+:fr: [README en francais](README_FR.md) :fr:
+
 # Lunii.QT
 A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
 for Windows / Linux / MacOs 11  
@@ -289,6 +291,7 @@ magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.
 Thanks to :
 * **olup** for STUdio archive format 
 * **sniperflo** for v1 support & debug 
+* **McFlyPartages** for Linux debug and other contributions 
 
 # Links / Similar repos
 * [Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
