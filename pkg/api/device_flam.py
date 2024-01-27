@@ -52,8 +52,7 @@ class FlamDevice():
             return
 
         # internal stories
-        self.stories = []
-        # self.stories = feed_stories(self.mount_point)
+        self.stories = feed_stories(self.mount_point)
 
     @property
     def snu_str(self):
@@ -102,6 +101,31 @@ class FlamDevice():
                                        f"FW (comm) : {self.fw_comm}\n"
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n")
 
+
+# opens the .pi file to read all installed stories
+def feed_stories(root_path) -> StoryList[UUID]:
+    logger = logging.getLogger(LUNII_LOGGER)
+
+    mount_path = Path(root_path)
+    list_path = mount_path.joinpath("etc/library/list")
+
+    story_list = StoryList()
+
+    logger.log(logging.INFO, f"Reading Flam loaded stories...")
+
+    # no pi file, done
+    if not os.path.isfile(list_path):
+        return story_list
+
+    with open(list_path, "r") as fp_list:
+        lines = fp_list.read().splitlines()
+        for uuid_str in lines:
+            one_uuid = UUID(uuid_str)
+            logger.log(logging.DEBUG, f"- {str(one_uuid)}")
+            story_list.append(Story(one_uuid))
+
+    logger.log(logging.INFO, f"Read {len(story_list)} stories")
+    return story_list
 
 def is_flam(root_path):
     root_path = Path(root_path)
