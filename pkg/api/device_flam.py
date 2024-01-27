@@ -79,8 +79,8 @@ class FlamDevice(QtCore.QObject):
         fp_mdf.seek(2)
         versions = fp_mdf.read(48)
         fws = versions.split(b"\n")
-        self.fw_main = fws[0].split(b": ")[1].split(b"-")[0]
-        self.fw_comm = fws[1].split(b": ")[1].split(b"-")[0]
+        self.fw_main = fws[0].split(b": ")[1].split(b"-")[0].decode('utf-8')
+        self.fw_comm = fws[1].split(b": ")[1].split(b"-")[0].decode('utf-8')
 
         snu_str = fp_mdf.read(24).decode('utf-8').rstrip('\x00')
         self.snu = binascii.unhexlify(snu_str)

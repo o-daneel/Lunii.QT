@@ -34,7 +34,7 @@ class LuniiDevice(QtCore.QObject):
         self.mount_point = mount_point
 
         # dummy values
-        self.lunii_version = 0
+        self.device_version = 0
         self.UUID = ""
         self.dev_keyfile = keyfile
         self.device_key = None
@@ -90,11 +90,11 @@ class LuniiDevice(QtCore.QObject):
         pid = int.from_bytes(fp_md.read(2), 'little')
 
         if (vid, pid) == FAH_V1_USB_VID_PID or (vid, pid) == FAH_V1_FW_2_USB_VID_PID:
-            self.lunii_version = LUNII_V1
+            self.device_version = LUNII_V1
         elif (vid, pid) == FAH_V2_V3_USB_VID_PID:
-            self.lunii_version = LUNII_V2
+            self.device_version = LUNII_V2
         else:
-            self.lunii_version = LUNII_V1or2_UNK
+            self.device_version = LUNII_V1or2_UNK
 
         fp_md.seek(0x100)
         self.raw_devkey = fp_md.read(0x100)
@@ -105,14 +105,14 @@ class LuniiDevice(QtCore.QObject):
         logger = logging.getLogger(LUNII_LOGGER)
         logger.log(logging.DEBUG, f"\n"
                                        f"SNU : {self.snu_str}\n"
-                                       f"HW  : v{self.lunii_version}\n"
+                                       f"HW  : v{self.device_version}\n"
                                        f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
                                        f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}")
 
 
     def __md6_parse(self, fp_md):
-        self.lunii_version = LUNII_V3
+        self.device_version = LUNII_V3
         fp_md.seek(2)
         # reading fw version
         self.fw_vers_major = int.from_bytes(fp_md.read(1), 'little') - 0x30
@@ -174,7 +174,7 @@ class LuniiDevice(QtCore.QObject):
         return buffer
 
     def decipher(self, buffer, key, iv=None, offset=0, dec_len=512):
-        if self.lunii_version == LUNII_V3:
+        if self.device_version == LUNII_V3:
             return self.__v3_decipher(buffer, key, iv, offset, dec_len)
         else:
             return self.__v1v2_decipher(buffer, key, offset, dec_len)
@@ -219,7 +219,7 @@ class LuniiDevice(QtCore.QObject):
         if self.debug_plain:
             return buffer
 
-        if self.lunii_version == LUNII_V3:
+        if self.device_version == LUNII_V3:
             return self.__v3_cipher(buffer, key, iv, offset, enc_len)
         else:
             return self.__v1v2_cipher(buffer, key, offset, enc_len)
@@ -255,13 +255,13 @@ class LuniiDevice(QtCore.QObject):
             dev_iv = binascii.hexlify(self.device_iv, ' ')
 
         repr_str = f"Lunii device on \"{self.mount_point}\"\n"
-        if self.lunii_version <= LUNII_V2:
+        if self.device_version <= LUNII_V2:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
         else:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
         repr_str += f"- snu      : {binascii.hexlify(self.snu_hex, ' ')}\n"
         repr_str += f"- dev key  : {dev_key}\n"
-        if self.lunii_version == LUNII_V3:
+        if self.device_version == LUNII_V3:
             repr_str += f"- dev iv   : {dev_iv}\n"
         repr_str += f"- stories  : {len(self.stories)}x\n"
         return repr_str
@@ -294,18 +294,18 @@ class LuniiDevice(QtCore.QObject):
         # selecting key
         key = None
         iv = None
-        if self.lunii_version <= LUNII_V2:
+        if self.device_version <= LUNII_V2:
             key = lunii_generic_key
             iv = None
-        elif self.lunii_version == LUNII_V3:
+        elif self.device_version == LUNII_V3:
             key = self.story_key
             iv = self.story_iv
            
         if file.endswith("bt"):
-            if self.lunii_version <= LUNII_V2:
+            if self.device_version <= LUNII_V2:
                 key = self.device_key
                 iv = None
-            elif self.lunii_version == LUNII_V3:
+            elif self.device_version == LUNII_V3:
                 key = self.device_key
                 iv = self.device_iv
         if file.endswith("ni") or file.endswith("nm"):
@@ -334,7 +334,7 @@ class LuniiDevice(QtCore.QObject):
 
     def __get_ciphered_data(self, file, data):
         # selecting key
-        if self.lunii_version <= LUNII_V2:
+        if self.device_version <= LUNII_V2:
             key = lunii_generic_key
             iv = None
         else:
@@ -565,7 +565,7 @@ class LuniiDevice(QtCore.QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version <= LUNII_V2 and file.endswith("ri.plain"):
+                if self.device_version <= LUNII_V2 and file.endswith("ri.plain"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -645,7 +645,7 @@ class LuniiDevice(QtCore.QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
+                if self.device_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -717,7 +717,7 @@ class LuniiDevice(QtCore.QObject):
                 else:
                     file = fname[28:]
 
-                if self.lunii_version <= LUNII_V2:
+                if self.device_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
@@ -740,7 +740,7 @@ class LuniiDevice(QtCore.QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
+                if self.device_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -814,7 +814,7 @@ class LuniiDevice(QtCore.QObject):
                 else:
                     file = file[28:]
 
-                if self.lunii_version <= LUNII_V2:
+                if self.device_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
@@ -837,7 +837,7 @@ class LuniiDevice(QtCore.QObject):
                     f_dst.write(data)
 
                 # in case of v2 device, we need to prepare bt file 
-                if self.lunii_version <= LUNII_V2 and file.endswith("ri"):
+                if self.device_version <= LUNII_V2 and file.endswith("ri"):
                     self.bt = self.cipher(data[0:0x40], self.device_key)
 
         # creating authorization file : bt
@@ -950,7 +950,7 @@ class LuniiDevice(QtCore.QObject):
         ri_data = one_story.get_ri_data()
         self.__write(ri_data, output_path, "ri")
         # in case of v2 device, we need to prepare bt file
-        if self.lunii_version <= LUNII_V2:
+        if self.device_version <= LUNII_V2:
             ri_ciph = self.__get_ciphered_data("ri", ri_data)
             self.bt = self.cipher(ri_ciph[0:0x40], self.device_key)
 
@@ -1065,7 +1065,7 @@ class LuniiDevice(QtCore.QObject):
         ri_data = one_story.get_ri_data()
         self.__write(ri_data, output_path, "ri")
         # in case of v2 device, we need to prepare bt file
-        if self.lunii_version <= LUNII_V2:
+        if self.device_version <= LUNII_V2:
             ri_ciph = self.__get_ciphered_data("ri", ri_data)
             self.bt = self.cipher(ri_ciph[0:0x40], self.device_key)
 
@@ -1132,7 +1132,7 @@ class LuniiDevice(QtCore.QObject):
         self.signal_logger.emit(logging.INFO, f"🚧 Exporting {uuid} - {one_story.name}")
 
         # for Lunii v3, checking keys (original or trick)
-        if self.lunii_version == LUNII_V3:
+        if self.device_version == LUNII_V3:
             # loading story keys
             self.load_story_keys(str(story_path.joinpath("bt")))
             # are keys usable ?

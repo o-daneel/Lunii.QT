@@ -484,7 +484,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     return
 
                 self.sb_update(f"Login success...")
-                version = lunii_fw_version(self.audio_device.lunii_version, auth_token)
+                version = lunii_fw_version(self.audio_device.device_version, auth_token)
 
                 if version:
                     backup_fw_fn = f"fa.v{version}.bin"
@@ -502,7 +502,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 if file_dialog.exec_() == QFileDialog.Accepted:
                     selected_file = file_dialog.selectedFiles()[0]
-                    if lunii_fw_download(self.audio_device.lunii_version, self.audio_device.snu_str, auth_token, selected_file):
+                    if lunii_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token, selected_file):
                         self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                     else:
                         self.sb_update(f"🛑 Fail to download update")
@@ -510,8 +510,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.sb_update("")
                     return
 
-                if self.audio_device.lunii_version == LUNII_V1:
-                    version = lunii_fw_version(self.audio_device.lunii_version, auth_token, True)
+                if self.audio_device.device_version == LUNII_V1:
+                    version = lunii_fw_version(self.audio_device.device_version, auth_token, True)
                     backup_fw_fn = f"fu.v{version}.bin"
 
                     options = QFileDialog.Options()
@@ -524,7 +524,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                     if file_dialog.exec_() == QFileDialog.Accepted:
                         selected_file = file_dialog.selectedFiles()[0]
-                        if lunii_fw_download(self.audio_device.lunii_version, self.audio_device.snu_str, auth_token, selected_file, True):
+                        if lunii_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token, selected_file, True):
                             self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
                         else:
                             self.sb_update(f"🛑 Fail to download update")
@@ -561,8 +561,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
-            if (self.audio_device.lunii_version < LUNII_V3 or
-                    (self.audio_device.lunii_version == LUNII_V3 and self.audio_device.device_key)):
+            if (self.audio_device.device_version < LUNII_V3 or
+                    (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_export.setEnabled(True)
 
             # Official story export is forbidden
@@ -575,8 +575,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # are there story loaded ?
         if self.audio_device.stories:
-            if (self.audio_device.lunii_version < LUNII_V3 or
-                    (self.audio_device.lunii_version == LUNII_V3 and self.audio_device.device_key)):
+            if (self.audio_device.device_version < LUNII_V3 or
+                    (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_exportall.setEnabled(True)
 
     def cb_menu_tools_update(self):
@@ -685,19 +685,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Version
         version = ""
-        if self.audio_device.lunii_version == LUNII_V1:
-            HW_version = "v1"
+        if self.audio_device.device_version == LUNII_V1:
+            HW_version = "Lunii v1"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
-        elif self.audio_device.lunii_version == LUNII_V2:
-            HW_version = "v2"
+        elif self.audio_device.device_version == LUNII_V2:
+            HW_version = "Lunii v2"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
-        elif self.audio_device.lunii_version == LUNII_V3:
-            HW_version = "v3"
+        elif self.audio_device.device_version == LUNII_V3:
+            HW_version = "Lunii v3"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}.{self.audio_device.fw_vers_subminor}"
+        elif self.audio_device.device_version == FLAM_V1:
+            HW_version = "Flam v1"
+            SW_version = f"v{self.audio_device.fw_main}"
         else:
             HW_version = "?v1/v2?"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
-        self.lbl_version.setText(f"Lunii {HW_version}, FW: {SW_version}")
+        self.lbl_version.setText(f"{HW_version}, FW: {SW_version}")
 
         # Free Space
         free_space = psutil.disk_usage(str(self.audio_device.mount_point)).free
