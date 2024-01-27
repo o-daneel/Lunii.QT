@@ -10,7 +10,7 @@ This application is a PoC that allows to manage the contents of your own Lunii S
 including changing stories order, backup (for personal usage only), restore, and downloading 
 your latest Lunii firmware (to eventually restore from a broken device).<br />
   
-<br />Powered by Python 3.11, PySide 6<br />
+<br />Powered by Python 3.12, PySide 6<br />
 <br />
 
 Icons are provided freely by <a href="www.icons8.com">icon8</a><br />

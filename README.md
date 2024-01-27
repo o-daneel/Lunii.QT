@@ -268,6 +268,13 @@ $ dist\lunii-qt
 
 ## Trick
 
+### Third Party story metadata
+You might have already loaded non-official stories to your device thanks to another app. When opening Lunii.QT, this 
+story will appear as `Unknown story (maybe a User created story)...`.   
+You can easily fix that by dropping the corresponding archive as you'll do for loading.  
+Lunii.QT will **only read the metadata** and add them locally, **skipping the rest** of the archive.
+
+
 ### Cache management
 This application will download once for all the official story database and any request pictures to the application dedicated folder
 * `$HOME/.lunii-qt/official.db`
@@ -290,7 +297,7 @@ magick convert logo.png -define icon:auto-resize="256,128,96,64,48,32,16"  logo.
 ## Credits
 Thanks to :
 * **olup** for STUdio archive format 
-* **sniperflo** for v1 support & debug 
+* **sniperflo** for v1 support, MacOs support & debug 
 * **McFlyPartages** for Linux debug and other contributions 
 
 # Links / Similar repos
