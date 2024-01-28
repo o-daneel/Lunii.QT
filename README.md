@@ -1,7 +1,7 @@
 :fr: [README en francais](README_FR.md) :fr:
 
 # Lunii.QT
-A Python QT app to manage Lunii Storyteller, including **reorder** / **import** / **export** / **firmware download**   
+A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **firmware download**   
 for Windows / Linux / MacOs 11  
 (compatible with STUdio archive, **with** transcoding)
 
@@ -9,7 +9,7 @@ for Windows / Linux / MacOs 11
 ### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
-* **Flam** (partial support, only reorder and Firmware backup)
+* **Flam** (partial support, only reorder and firmware backup)
 
 ### Limitations
 * Application <u>no longer</u> allows Official stories to be exported
@@ -248,9 +248,9 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 
 ### Prepare env
 
-Prepare a Vitrual environment for your project and install requirements
+Prepare a Virtual environment for your project and install requirements
 ```
-$ python -m venv venv
+$ python3 -m venv venv
 ```
 
 Switch to your venv 
