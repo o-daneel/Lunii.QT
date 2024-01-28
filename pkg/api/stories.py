@@ -438,3 +438,18 @@ class StoryList(List[Story]):
     def matching_stories(self, short_uuid):
         slist = [one_story for one_story in self if _uuid_match(one_story.uuid, short_uuid)]
         return slist
+
+
+def story_is_studio(contents):
+    file: str
+    for file in contents:
+        for studio_pattern in [FILE_STUDIO_JSON, FILE_STUDIO_THUMB, "assets/"]:
+            if studio_pattern in file:
+                return True
+
+    return False
+
+
+def story_is_lunii(contents):
+    return all(any(file.endswith(pattern) for file in contents) for pattern in ["ri", "si", "li", "ni"])
+

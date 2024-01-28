@@ -12,8 +12,7 @@ from PySide6 import QtCore
 
 from pkg.api.constants import *
 from pkg.api.device_lunii import secure_filename
-from pkg.api.stories import StoryList, Story
-
+from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
 
 STORIES_BASEDIR = "str/"
 LIB_BASEDIR = "etc/library/"
@@ -157,6 +156,10 @@ class FlamDevice(QtCore.QObject):
             # reading all available files
             zip_contents = zip_file.namelist()
 
+            if story_is_lunii(zip_contents) or story_is_studio(zip_contents):
+                self.signal_logger.emit(logging.ERROR, f"Archive seems to be made of Lunii story (not compatible with Flam)")
+                return False
+
             # getting UUID from path
             uuid_path = Path(zip_contents[0])
             uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
@@ -225,8 +228,13 @@ class FlamDevice(QtCore.QObject):
         # opening zip file
         with py7zr.SevenZipFile(story_path, mode='r') as zip:
             # reading all available files
-            zip_contents = zip.list()
+            zip_contents = zip.getnames()
+            if story_is_lunii(zip_contents) or story_is_studio(zip_contents):
+                self.signal_logger.emit(logging.ERROR, f"Archive seems to be made of Lunii story (not compatible with Flam)")
+                return False
 
+            # reading all available files
+            zip_contents = zip.list()
             # getting UUID from path
             uuid_path = Path(zip_contents[0].filename)
             uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
@@ -414,3 +422,5 @@ def is_flam(root_path):
     except PermissionError as e:
         pass
     return False
+
+
