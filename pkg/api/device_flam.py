@@ -30,10 +30,9 @@ class FlamDevice(QtCore.QObject):
         # dummy values
         self.lunii_version = 0
         self.UUID = ""
-        self.snu = ""
-        self.fw_vers_major = 0
-        self.fw_vers_minor = 0
-        self.fw_vers_subminor = 0
+        self.snu = b""
+        self.fw_main = "?.?.?"
+        self.fw_comm = "?.?.?"
         self.memory_left = 0
 
         # internal device details
@@ -80,14 +79,22 @@ class FlamDevice(QtCore.QObject):
 
     def __md1_parse(self, fp_mdf):
         fp_mdf.seek(2)
-        versions = fp_mdf.read(48)
-        fws = versions.split(b"\n")
-        self.fw_main = fws[0].split(b": ")[1].split(b"-")[0].decode('utf-8')
-        self.fw_comm = fws[1].split(b": ")[1].split(b"-")[0].decode('utf-8')
 
+        # parsing firmware versions
+        raw = fp_mdf.read(48)
+        raw_str = raw.decode('utf-8').strip('\x00')
+        raw_str = raw_str.replace("main: ", "").replace("comm: ", "")
+        versions = raw_str.splitlines()
+
+        self.fw_main = versions[0].split("-")[0]
+        if len(versions) > 1:
+            self.fw_comm = versions[1].split("-")[0]
+
+        # parsing snu
         snu_str = fp_mdf.read(24).decode('utf-8').rstrip('\x00')
         self.snu = binascii.unhexlify(snu_str)
 
+        # parsing VID/PID
         vid = int.from_bytes(fp_mdf.read(2), 'little')
         pid = int.from_bytes(fp_mdf.read(2), 'little')
 
