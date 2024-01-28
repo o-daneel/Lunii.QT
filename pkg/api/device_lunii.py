@@ -670,18 +670,20 @@ class LuniiDevice(QtCore.QObject):
             # reading all available files
             archive_contents = zip.list()
 
-            # getting UUID from first dir
-            if not archive_contents[0].is_directory:
+            # getting UUID from path
+            uuid_path = Path(archive_contents[0].filename)
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                try:
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
+                    else:
+                        new_uuid = UUID(uuid_str)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, f"UUID parse error {e}")
+                    return False
+            else:
                 self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
-                return False
-
-            try:
-                if "-" not in archive_contents[0].filename:
-                    new_uuid = UUID(bytes=binascii.unhexlify(archive_contents[0].filename))
-                else:
-                    new_uuid = UUID(archive_contents[0].filename)
-            except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
                 return False
 
             # checking if UUID already loaded
@@ -766,16 +768,17 @@ class LuniiDevice(QtCore.QObject):
             zip_contents = zip_file.namelist()
 
             # getting UUID from path
-            dir_name = os.path.dirname(zip_contents[0])
-            if len(dir_name) >= 16:  # long enough to be a UUID
-                # self.signal_logger.emit(logging.DEBUG, dir_name)
+            uuid_path = Path(zip_contents[0])
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, uuid_str)
                 try:
-                    if "-" not in dir_name:
-                        new_uuid = UUID(bytes=binascii.unhexlify(dir_name))
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
                     else:
-                        new_uuid = UUID(dir_name)
+                        new_uuid = UUID(uuid_str)
                 except ValueError as e:
-                    self.signal_logger.emit(logging.ERROR, e)
+                    self.signal_logger.emit(logging.ERROR, f"UUID parse error {e}")
                     return False
             else:
                 self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")

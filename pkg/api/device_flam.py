@@ -134,7 +134,7 @@ class FlamDevice(QtCore.QObject):
 
         # processing story
         if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z]:
-            self.signal_logger.emit(logging.WARN, "😴 This process is veeeeeeeeery long due to Flam firmware.\nBe patient 😮‍💨...")
+            self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware.\n😴 Be patient ...")
 
         if archive_type == TYPE_FLAM_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
@@ -158,16 +158,18 @@ class FlamDevice(QtCore.QObject):
             zip_contents = zip_file.namelist()
 
             # getting UUID from path
-            dir_name = os.path.dirname(zip_contents[0])
-            if len(dir_name) >= 16:  # long enough to be a UUID
-                # self.signal_logger.emit(logging.DEBUG, dir_name)
+            uuid_path = Path(zip_contents[0])
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, uuid_str)
                 try:
-                    if "-" not in dir_name:
-                        new_uuid = UUID(bytes=binascii.unhexlify(dir_name))
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
                     else:
-                        new_uuid = UUID(dir_name)
+                        new_uuid = UUID(uuid_str)
                 except ValueError as e:
-                    self.signal_logger.emit(logging.ERROR, e)
+                    self.signal_logger.emit(logging.ERROR, f"UUID parse error {e}")
                     return False
             else:
                 self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
@@ -187,6 +189,9 @@ class FlamDevice(QtCore.QObject):
             # Loop over each file
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+
+                if file.endswith("/"):
+                    continue
 
                 # Extract each zip file
                 self.signal_logger.emit(logging.DEBUG, f"Writing file : {file}")
@@ -223,16 +228,17 @@ class FlamDevice(QtCore.QObject):
             zip_contents = zip.list()
 
             # getting UUID from path
-            dir_name = zip_contents[0].filename
-            if len(dir_name) >= 16:  # long enough to be a UUID
-                # self.signal_logger.emit(logging.DEBUG, dir_name)
+            uuid_path = Path(zip_contents[0].filename)
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, uuid_str)
                 try:
-                    if "-" not in dir_name:
-                        new_uuid = UUID(bytes=binascii.unhexlify(dir_name))
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
                     else:
-                        new_uuid = UUID(dir_name)
+                        new_uuid = UUID(uuid_str)
                 except ValueError as e:
-                    self.signal_logger.emit(logging.ERROR, e)
+                    self.signal_logger.emit(logging.ERROR, f"UUID parse error {e}")
                     return False
             else:
                 self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
