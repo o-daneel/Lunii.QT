@@ -255,11 +255,11 @@ class LuniiDevice(QtCore.QObject):
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}\n"
         else:
             repr_str += f"- firmware : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
-        repr_str += f"- snu      : {binascii.hexlify(self.snu_hex, ' ')}\n"
+        repr_str += f"- SNU      : {binascii.hexlify(self.snu_hex, ' ')}\n"
         repr_str += f"- dev key  : {dev_key}\n"
         if self.device_version == LUNII_V3:
             repr_str += f"- dev iv   : {dev_iv}\n"
-        repr_str += f"- stories  : {len(self.stories)}x\n"
+        repr_str += f"- stories  : {len(self.stories)}x"
         return repr_str
 
     def export_all(self, out_path):

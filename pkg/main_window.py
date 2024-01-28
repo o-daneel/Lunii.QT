@@ -686,6 +686,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             HW_version = "?v1/v2?"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
         self.lbl_version.setText(f"{HW_version}, FW: {SW_version}")
+        self.lbl_version.setToolTip(str(self.audio_device))
+
 
         # Free Space
         free_space = psutil.disk_usage(str(self.audio_device.mount_point)).free

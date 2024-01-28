@@ -52,6 +52,19 @@ class FlamDevice(QtCore.QObject):
     def snu_str(self):
         return self.snu.hex().upper().lstrip("0")
 
+    @property
+    def snu_hex(self):
+        return self.snu
+
+    def __repr__(self):
+        repr_str = f"Flam device on \"{self.mount_point}\"\n"
+        repr_str += f"- Main firmware : v{self.fw_main}\n"
+        repr_str += f"- Comm firmware : v{self.fw_comm}\n"
+        repr_str += f"- SNU      : {binascii.hexlify(self.snu_hex, ' ')}\n"
+        repr_str += f"- stories  : {len(self.stories)}x"
+        return repr_str
+
+
     # opens the .mdf file to read all information related to device
     def __feed_device(self):
 
