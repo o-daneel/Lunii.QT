@@ -110,7 +110,7 @@ class FlamDevice(QtCore.QObject):
         list_path = lib_path.joinpath("list")
         list_path.unlink(missing_ok=True)
         lib_path.mkdir(parents=True, exist_ok=True)
-        with open(list_path, "w") as fp:
+        with open(list_path, "w", newline='\n') as fp:
             for story in self.stories:
                 fp.write(str(story.uuid) + "\n")
         return
@@ -397,7 +397,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
     with open(list_path, "r") as fp_list:
         lines = fp_list.read().splitlines()
         for uuid_str in lines:
-            one_uuid = UUID(uuid_str)
+            one_uuid = UUID(uuid_str.strip())
             logger.log(logging.DEBUG, f"> {str(one_uuid)}")
             story_list.append(Story(one_uuid))
 
