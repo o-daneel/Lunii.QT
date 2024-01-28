@@ -855,7 +855,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not self.audio_device:
             return
 
-        file_filter = "All supported (*.pk *.7z *.zip);;PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All files (*)"
+        if self.audio_device.device_version == FLAM_V1:
+            file_filter = "All supported (*.7z *.zip);;All files (*)"
+        else:
+            file_filter = "All supported (*.pk *.7z *.zip);;PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All files (*)"
         files, _ = QFileDialog.getOpenFileNames(self, "Open Stories", "", file_filter)
 
         if not files:
