@@ -9,7 +9,7 @@ for Windows / Linux / MacOs 11
 ### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
-* **Flam** (partial support, no Third-Party stories)
+* **Flam** (partial support, only reorder and Firmware backup)
 
 ### Limitations
 * Application <u>no longer</u> allows Official stories to be exported
@@ -17,16 +17,18 @@ for Windows / Linux / MacOs 11
 
 ### Table of contents
 <!-- TOC -->
-- [Lunii.QT](#luniiqt)
-  - [User Interface](#user-interface)
-  - [Shortcuts](#shortcuts)
-  - [Audio Transcoding](#audio-transcoding)
-  - [Firmware upgrade](#firmware-upgrade)
-  - [Supported archive formats](#supported-archive-formats)
-  - [Python ? HowTo](#python--howto)
-  - [Trick](#trick)
-  - [Credits](#credits)
-- [Links / Similar repos](#links--similar-repos)
+* [Lunii.QT](#luniiqt)
+  * [User Interface](#user-interface)
+  * [Shortcuts](#shortcuts)
+  * [Audio Transcoding](#audio-transcoding)
+  * [Firmware upgrade](#firmware-upgrade)
+    * [HowTo - Lunii](#howto---lunii)
+    * [HowTo - Flam](#howto---flam)
+  * [Supported archive formats (Lunii)](#supported-archive-formats-lunii)
+  * [Python ? HowTo](#python--howto)
+  * [Tricks](#tricks)
+  * [Credits](#credits)
+* [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
 
 
@@ -45,7 +47,7 @@ for Windows / Linux / MacOs 11
 
 1. The **menu bar**. It will notify you when an update is available  
    (just get it with Menu About/Update to v2.X.X)
-2. The **location of your Lunii** when it's connected.   
+2. The **location of your Lunii/Flam** when it's connected.   
    The button on the left updates automatic detection.
 3. **Official DB refresh** : Updates the list of stories and related information from the official Lunii Store. Use it when some official are not recognized.
 4. The **list of your stories** with UUID and Database (DB) origin.  
@@ -60,7 +62,7 @@ for Windows / Linux / MacOs 11
 
 5. The **status bar**, you'll find 
    * your SNU (serial number)
-   * the firmware version of your Lunii
+   * the firmware version of your Lunii/Flam
    * the available space  
    * the number of stories it contains
 
@@ -78,7 +80,7 @@ for Windows / Linux / MacOs 11
 | `Ctrl+Shift+S` | Export all the stories           |
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
-| `Ctrl+O`       | Open a Lunii device              |
+| `Ctrl+O`       | Open a Lunii/Flam device         |
 | `Ctrl+L`       | Open debug log window            |
 | `F1`           | About the app                    |
 | `F5`           | Refresh devices                  |
@@ -118,16 +120,16 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 **NOTE 2:** You cannot choose the firmware version. You'll only get the latest available from Lunii servers.
 
 
-### HowTo
-1. Select a Lunii device
-2. Menu Tools/Get FW Update
+### HowTo - Lunii
+1. Select a Lunii/Flam device
+2. Menu **Tools/Get FW** Update
 3. You'll be prompted for login entry  
-![Login](./res/screenshot_login.png)
+<img src="./res/screenshot_login.png" width="170">  
 1. Enter your Luniistore credentials (they are not saved for security purpose).  
    You can verify this point here [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
-2. Pick a location where to save your firmware version
-3. Copy it to the root dir of your lunii
-4. Rename it to `fa.bin`  
+2. Pick a location where to save your firmware(s) (there are two for Lunii v1)
+3. Copy it to the root dir of your device
+4. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)
 ```
 - 
  |- .contents
@@ -136,12 +138,33 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
  |- fa.bin
  |- ... (other files)
 ```
-1. Power OFF, Power ON, Wait : **TADA**  
+8. Power OFF, Power ON, Wait : **TADA**  
    (if you reconnect your lunii on your pc, the `fa.bin` should have been removed)
 
 
+### HowTo - Flam
+1. Select a Flam device
+2. Menu **Tools/Get FW** Update
+3. You'll be prompted for login entry  
+<img src="./res/screenshot_login.png" width="170">  
+1. Enter your Luniistore credentials (they are not saved for security purpose).  
+   You can verify this point here [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
+2. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
+3. Copy it to the root dir of your device
+```
+- 
+ |- etc/
+ |- str/
+ |- .mdf
+ |- update-main.enc
+ |- update-comm.enc
+ |- ... (other files)
+```
+1. Power OFF, Power ON, Wait : **TADA**  
+   (if you reconnect your lunii on your pc, the `*.enc` should have been removed)
 
-## Supported archive formats
+## Supported archive formats (Lunii)
+**NOTE :** Flam stories are not yet supported
 ### .plain.pk
 **Filename** :  `story_name.8B_UUID.plain.pk`  
 **Ciphering** : None / Plain  
@@ -217,8 +240,6 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
         thumbnail.png
 
 ## TODO
-* add Flam support ?
-* improve 7z archive processing
 * config file to backup menu config (sizes / details)
 * add picture to tree list ?
 
@@ -266,7 +287,7 @@ $ pyinstaller lunii-qt.spec
 $ dist\lunii-qt
 ```
 
-## Trick
+## Tricks
 
 ### Third Party story metadata
 You might have already loaded non-official stories to your device thanks to another app. When opening Lunii.QT, this 
