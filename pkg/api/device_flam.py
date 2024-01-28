@@ -1,3 +1,4 @@
+import glob
 import os.path
 import shutil
 import zipfile
@@ -23,18 +24,13 @@ class FlamDevice(QtCore.QObject):
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
 
-    def __init__(self, mount_point, keyfile=None):
+    def __init__(self, mount_point):
         super().__init__()
         self.mount_point = mount_point
 
         # dummy values
         self.lunii_version = 0
         self.UUID = ""
-        self.dev_keyfile = keyfile
-        self.device_key = None
-        self.device_iv = None
-        self.story_key = None
-        self.story_iv = None
         self.snu = ""
         self.fw_vers_major = 0
         self.fw_vers_minor = 0
@@ -107,7 +103,7 @@ class FlamDevice(QtCore.QObject):
                                        f"HW  : v{self.device_version-(FLAM_V1-1)}\n"
                                        f"FW (main) : {self.fw_main}\n"
                                        f"FW (comm) : {self.fw_comm}\n"
-                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n")
+                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}")
 
     def update_pack_index(self):
         lib_path = Path(self.mount_point).joinpath(LIB_BASEDIR)
@@ -393,7 +389,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
         lines = fp_list.read().splitlines()
         for uuid_str in lines:
             one_uuid = UUID(uuid_str)
-            logger.log(logging.DEBUG, f"- {str(one_uuid)}")
+            logger.log(logging.DEBUG, f"> {str(one_uuid)}")
             story_list.append(Story(one_uuid))
 
     logger.log(logging.INFO, f"Read {len(story_list)} stories")

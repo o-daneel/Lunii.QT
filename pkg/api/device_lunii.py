@@ -1247,7 +1247,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
             next_uuid = fp_pi.read(16)
             if next_uuid:
                 one_uuid = UUID(bytes=next_uuid)
-                logger.log(logging.DEBUG, f"- {str(one_uuid)}")
+                logger.log(logging.DEBUG, f"> {str(one_uuid)}")
                 story_list.append(Story(one_uuid))
             else:
                 loop_again = False

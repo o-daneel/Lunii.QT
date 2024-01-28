@@ -560,7 +560,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # are there story loaded ?
         if self.audio_device.stories:
-            if (self.audio_device.device_version < LUNII_V3 or
+            if (self.audio_device.device_version == FLAM_V1 or
+                     self.audio_device.device_version < LUNII_V3 or
                     (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_exportall.setEnabled(True)
 
