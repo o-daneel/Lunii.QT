@@ -133,6 +133,9 @@ class FlamDevice(QtCore.QObject):
             archive_type = TYPE_FLAM_7Z
 
         # processing story
+        if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z]:
+            self.signal_logger.emit(logging.WARN, "😴 This process is veeeeeeeeery long due to Flam firmware.\nBe patient 😮‍💨...")
+
         if archive_type == TYPE_FLAM_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
             return self.import_flam_zip(story_path)
