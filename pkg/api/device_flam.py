@@ -142,7 +142,7 @@ class FlamDevice(QtCore.QObject):
 
         # processing story
         if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z]:
-            self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware.\n😴 Be patient ...")
+            self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...")
 
         if archive_type == TYPE_FLAM_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
@@ -325,7 +325,7 @@ class FlamDevice(QtCore.QObject):
         one_story = slist[0]
 
         # checking that .content dir exist
-        content_path = Path(self.mount_point).joinpath(STORIES_BASEDIR)
+        content_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
         if not content_path.is_dir():
             return None
         story_path = content_path.joinpath(str(one_story.uuid))
