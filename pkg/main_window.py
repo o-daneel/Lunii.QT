@@ -870,13 +870,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
             # checking if dropped files are ending with expected extensions
-            if (self.audio_device.device_version == FLAM_V1 and
-                    all(any(file.endswith(ext) for ext in FLAM_SUPPORTED_EXT) for file in file_paths)):
-                event.acceptProposedAction()
-            elif all(any(file.endswith(ext) for ext in LUNII_SUPPORTED_EXT) for file in file_paths):
-                event.acceptProposedAction()
+            if self.audio_device.device_version == FLAM_V1:
+                # for flam
+                if all(any(file.endswith(ext) for ext in FLAM_SUPPORTED_EXT) for file in file_paths):
+                    event.acceptProposedAction()
+                    return
             else:
-                event.ignore()
+                # for lunii
+                if all(any(file.endswith(ext) for ext in LUNII_SUPPORTED_EXT) for file in file_paths):
+                    event.acceptProposedAction()
+                    return
+
+            event.ignore()
 
     def ts_drop_action(self, event):
         # getting path for dropped files
