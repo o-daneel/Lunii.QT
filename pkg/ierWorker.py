@@ -5,6 +5,7 @@ from PySide6 import QtCore
 from PySide6.QtCore import QObject
 
 from pkg.api import constants
+from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice
 
 ACTION_IMPORT = 1
@@ -154,7 +155,7 @@ class ierWorker(QObject):
             # processing all files in a story
             story.size = 0
             all_files = list()
-            for parent_dir, _, files in os.walk(f"{self.audio_device.mount_point}/.content/{story.short_uuid}"):
+            for parent_dir, _, files in os.walk(f"{self.audio_device.mount_point}/{self.audio_device.STORIES_BASEDIR}/{str(story.uuid) if self.audio_device.device_version == FLAM_V1 else story.short_uuid }"):
                 for file in files:
                     story.size += os.path.getsize(os.path.join(parent_dir, file))
 

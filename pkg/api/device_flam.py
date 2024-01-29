@@ -14,11 +14,11 @@ from pkg.api.constants import *
 from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
 
-STORIES_BASEDIR = "str/"
 LIB_BASEDIR = "etc/library/"
 
-
 class FlamDevice(QtCore.QObject):
+    STORIES_BASEDIR = "str/"
+
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
@@ -192,7 +192,7 @@ class FlamDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = str(new_uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f"{STORIES_BASEDIR}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -266,7 +266,7 @@ class FlamDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = str(new_uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f"{STORIES_BASEDIR}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 

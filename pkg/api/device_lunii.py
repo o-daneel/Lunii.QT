@@ -23,6 +23,8 @@ from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE
 
 
 class LuniiDevice(QtCore.QObject):
+    STORIES_BASEDIR = ".content/"
+
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
@@ -532,7 +534,7 @@ class LuniiDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = str(new_uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -610,7 +612,7 @@ class LuniiDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = str(new_uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}/{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -692,7 +694,7 @@ class LuniiDevice(QtCore.QObject):
                 return False
             
             # decompressing story contents
-            output_path = Path(self.mount_point).joinpath(f".content/")
+            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
             # {str(new_uuid).upper()[28:]
             if not output_path.exists():
                 output_path.mkdir(parents=True)
@@ -790,7 +792,7 @@ class LuniiDevice(QtCore.QObject):
                 return False
 
             # decompressing story contents
-            output_path = Path(self.mount_point).joinpath(f".content/")
+            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
             # {str(new_uuid).upper()[28:]
             if not output_path.exists():
                 output_path.mkdir(parents=True)
@@ -896,7 +898,7 @@ class LuniiDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = one_story.short_uuid
-            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -1011,7 +1013,7 @@ class LuniiDevice(QtCore.QObject):
 
             # decompressing story contents
             short_uuid = one_story.short_uuid
-            output_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{short_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -1121,7 +1123,7 @@ class LuniiDevice(QtCore.QObject):
         uuid = one_story.str_uuid[28:]
 
         # checking that .content dir exist
-        content_path = Path(self.mount_point).joinpath(".content")
+        content_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
         if not content_path.is_dir():
             return None
         story_path = content_path.joinpath(uuid)
@@ -1207,7 +1209,7 @@ class LuniiDevice(QtCore.QObject):
         self.signal_story_progress.emit(short_uuid, 0, 3)
 
         # removing story contents
-        st_path = Path(self.mount_point).joinpath(f".content/{short_uuid}")
+        st_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{short_uuid}")
         if os.path.isdir(st_path):
             try:
                 shutil.rmtree(st_path)
