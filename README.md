@@ -13,7 +13,7 @@ for Windows / Linux / MacOs 11
 
 ### Limitations
 * Application <u>no longer</u> allows Official stories to be exported
-* Audio transcoding requires FFMPEG v6 to be present (link to section)
+* Audio transcoding requires FFMPEG v6 to be present ([more details](#audio-transcoding))
 
 ### Table of contents
 <!-- TOC -->
@@ -126,10 +126,10 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 3. You'll be prompted for login entry  
 <img src="./res/screenshot_login.png" width="170">  
 1. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
+   You can verify this point here     [main_window.py](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py) L468-L475
 2. Pick a location where to save your firmware(s) (there are two for Lunii v1)
 3. Copy it to the root dir of your device
-4. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)
+4. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)   
 ```
 - 
  |- .contents
@@ -148,9 +148,9 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 3. You'll be prompted for login entry  
 <img src="./res/screenshot_login.png" width="170">  
 1. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
-2. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
-3. Copy it to the root dir of your device
+   You can verify this point here [main_window.py](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py) L468-L475
+3. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
+3. Copy it to the root dir of your device   
 ```
 - 
  |- etc/
@@ -160,7 +160,7 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
  |- update-comm.enc
  |- ... (other files)
 ```
-1. Power OFF, Power ON, Wait : **TADA**  
+7. Power OFF, Power ON, Wait : **TADA**  
    (if you reconnect your lunii on your pc, the `*.enc` should have been removed)
 
 ## Supported archive formats (Lunii)
