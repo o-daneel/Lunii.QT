@@ -399,8 +399,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return
 
             # check if path is a recognized device
-            if not is_lunii(dev_dir):
-                self.sb_update("Not a Lunii or unsupported one 😥")
+            if not is_lunii(dev_dir) and not is_flam(dev_dir):
+                self.sb_update("Not a Lunii, nor Flam or unsupported one 😥")
                 return
 
             # add device to list
