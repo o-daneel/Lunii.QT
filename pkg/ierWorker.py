@@ -27,13 +27,18 @@ class ierWorker(QObject):
     def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None):
         super().__init__()
 
-        self.early_exit = False
+        self.abort_process = False
         self.audio_device = device
         self.action = action
         self.items = story_list
         self.out_dir = out_dir
 
     def process(self):
+        # cleaning any previous abortion
+        self.abort_process = False
+        self.audio_device.abort_process = False
+
+        # which action to perform ?
         try:
             if self.action == ACTION_IMPORT:
                 self._task_import()
@@ -60,7 +65,7 @@ class ierWorker(QObject):
 
         # importing selected files
         for index, file in enumerate(self.items):
-            if self.early_exit:
+            if self.abort_process:
                 self.exit_requested()
                 return
 
@@ -76,6 +81,10 @@ class ierWorker(QObject):
 
             self.signal_refresh.emit()
 
+        if self.abort_process:
+            self.exit_requested()
+            return
+
         self._task_size()
 
         # done
@@ -88,7 +97,7 @@ class ierWorker(QObject):
 
         # Save all files
         for index, str_uuid in enumerate(self.items):
-            if self.early_exit:
+            if self.abort_process:
                 self.exit_requested()
                 return
 
@@ -109,6 +118,10 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
             self.signal_refresh.emit()
 
+        if self.abort_process:
+            self.exit_requested()
+            return
+
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
@@ -118,7 +131,7 @@ class ierWorker(QObject):
         success = 0
 
         for index, str_uuid in enumerate(self.items):
-            if self.early_exit:
+            if self.abort_process:
                 self.exit_requested()
                 return
 
@@ -133,16 +146,19 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"🛑 Failed to remove : '{story_to_remove.name}'")
             self.signal_refresh.emit()
 
+        if self.abort_process:
+            self.exit_requested()
+            return
+
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit(f"✅ {success} stories removed")
 
     def _task_size(self):
-
         # processing all stories
         for index, story in enumerate(self.audio_device.stories):
-            if self.early_exit:
+            if self.abort_process:
                 self.exit_requested()
                 return
 
@@ -159,12 +175,16 @@ class ierWorker(QObject):
                 for file in files:
                     story.size += os.path.getsize(os.path.join(parent_dir, file))
 
-                    if self.early_exit:
+                    if self.abort_process:
                         self.exit_requested()
                         return
 
             # updating to display story size
             self.signal_refresh.emit()
+
+        if self.abort_process:
+            self.exit_requested()
+            return
 
         # done
         self.signal_finished.emit()

@@ -35,6 +35,8 @@ class FlamDevice(QtCore.QObject):
         self.fw_comm = "?.?.?"
         self.memory_left = 0
 
+        self.abort_process = False
+
         # internal device details
         if not self.__feed_device():
             return
@@ -198,6 +200,11 @@ class FlamDevice(QtCore.QObject):
 
             # Loop over each file
             for index, file in enumerate(zip_contents):
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
 
                 if file.endswith("/"):
@@ -274,6 +281,12 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.INFO, "Reading 7zip archive... (takes time)")
             contents = zip.readall().items()
             for index, (fname, bio)  in enumerate(contents):
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
                 self.signal_story_progress.emit(short_uuid, index, len(contents))
 
                 if zip_contents[index].is_directory:
@@ -345,6 +358,10 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(zip_path, 'w') as zip_out:
                 self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
                 for index, file in enumerate(story_flist):
+                    # abort requested ? early exit
+                    if self.abort_process:
+                        return None
+
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
                     self.signal_logger.emit(logging.DEBUG, story_arcnames[index])
                     zip_out.write(file, story_arcnames[index])
@@ -354,6 +371,19 @@ class FlamDevice(QtCore.QObject):
             return None
 
         return zip_path
+
+    def __clean_up_story_dir(self, story_uuid: UUID):
+        story_dir = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{str(story_uuid)}")
+        if os.path.isdir(story_dir):
+            try:
+                shutil.rmtree(story_dir)
+            except OSError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+            except PermissionError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+        return True
 
     def remove_story(self, short_uuid):
         if short_uuid not in self.stories:
@@ -372,16 +402,8 @@ class FlamDevice(QtCore.QObject):
         self.signal_story_progress.emit(short_uuid, 0, 3)
 
         # removing story contents
-        st_path = Path(self.mount_point).joinpath(f"str/{str(uuid)}")
-        if os.path.isdir(st_path):
-            try:
-                shutil.rmtree(st_path)
-            except OSError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
-            except PermissionError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
+        if not self.__clean_up_story_dir(slist[0].uuid):
+            return False
 
         self.signal_story_progress.emit(short_uuid, 1, 3)
 

@@ -131,6 +131,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+        self.btn_abort.setVisible(False)
 
         # self.pbar_story.setStyleSheet("""
         #     QProgressBar::chunk {
@@ -181,6 +182,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.btn_refresh.clicked.connect(self.cb_dev_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
+        self.btn_abort.clicked.connect(self.worker_abort)
 
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
@@ -301,7 +303,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # in case of a worker, abort it
             if self.worker:
-                self.worker.early_exit = True
+                self.worker.abort_process = True
                 while self.worker:
                     self.app.processEvents()
                     time.sleep(0.05)
@@ -919,6 +921,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # running
         self.thread.start()
 
+    def worker_abort(self):
+        if not self.worker:
+            return
+
+        # trying to abort current process
+        self.worker.abort_process = True
+        self.audio_device.abort_process = True
+
     def slot_total_progress(self, current, max_val):
         # updating UI
         self.lbl_total.setVisible(True)
@@ -936,6 +946,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_story.setRange(0, max_val)
         self.pbar_story.setValue(current+1)
 
+        self.btn_abort.setVisible(True)
+
     def slot_finished(self):
         # print("SLOT FINISHED")
         # updating UI
@@ -946,6 +958,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+        self.btn_abort.setVisible(False)
 
         try:
             self.audio_device.signal_story_progress.disconnect()
