@@ -124,12 +124,14 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 1. Select a Lunii/Flam device
 2. Menu **Tools/Get FW** Update
 3. You'll be prompted for login entry  
-<img src="./res/screenshot_login.png" width="170">  
-1. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here     [main_window.py](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py) L468-L475
-2. Pick a location where to save your firmware(s) (there are two for Lunii v1)
-3. Copy it to the root dir of your device
-4. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)   
+<img src="./res/screenshot_login.png" width="170">
+
+4. Enter your Luniistore credentials (they are not saved for security purpose).  
+   You can verify this point here
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
+5. Pick a location where to save your firmware(s) (there are two for Lunii v1)
+6. Copy it to the root dir of your device
+7. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)   
 ```
 - 
  |- .contents
@@ -146,11 +148,13 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 1. Select a Flam device
 2. Menu **Tools/Get FW** Update
 3. You'll be prompted for login entry  
-<img src="./res/screenshot_login.png" width="170">  
-1. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here [main_window.py](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py) L468-L475
-3. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
-3. Copy it to the root dir of your device   
+<img src="./res/screenshot_login.png" width="170">
+
+4. Enter your Luniistore credentials (they are not saved for security purpose).  
+   You can verify this point here
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
+5. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
+6. Copy it to the root dir of your device   
 ```
 - 
  |- etc/
