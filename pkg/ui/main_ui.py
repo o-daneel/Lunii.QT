@@ -201,6 +201,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.tree_stories)
 
+        self.prognstopLayout = QHBoxLayout()
+        self.prognstopLayout.setObjectName(u"prognstopLayout")
         self.progressLayout = QVBoxLayout()
         self.progressLayout.setSpacing(0)
         self.progressLayout.setObjectName(u"progressLayout")
@@ -251,7 +253,17 @@ class Ui_MainWindow(object):
         self.progressLayout.addLayout(self.storyLayout)
 
 
-        self.verticalLayout_2.addLayout(self.progressLayout)
+        self.prognstopLayout.addLayout(self.progressLayout)
+
+        self.btn_abort = QPushButton(self.centralwidget)
+        self.btn_abort.setObjectName(u"btn_abort")
+        self.btn_abort.setIcon(icon5)
+        self.btn_abort.setIconSize(QSize(24, 24))
+
+        self.prognstopLayout.addWidget(self.btn_abort)
+
+
+        self.verticalLayout_2.addLayout(self.prognstopLayout)
 
         self.details_layout = QHBoxLayout()
         self.details_layout.setObjectName(u"details_layout")
@@ -450,6 +462,10 @@ class Ui_MainWindow(object):
 
         self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
         self.lbl_story.setText(QCoreApplication.translate("MainWindow", u"8B_UUID", None))
+#if QT_CONFIG(tooltip)
+        self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_abort.setText("")
         self.lbl_picture.setText(QCoreApplication.translate("MainWindow", u"No Thumb", None))
         self.te_story_details.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Story description", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
