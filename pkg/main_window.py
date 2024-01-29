@@ -925,6 +925,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not self.worker:
             return
 
+        # pushing message
+        self.sb_update("Abort requested, please wait...")
+
         # trying to abort current process
         self.worker.abort_process = True
         self.audio_device.abort_process = True

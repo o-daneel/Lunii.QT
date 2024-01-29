@@ -47,6 +47,7 @@ class LuniiDevice(QtCore.QObject):
         self.bt = b""
 
         self.debug_plain = False
+        self.abort_process = False
 
         # internal device details
         if not self.__feed_device():
@@ -516,7 +517,7 @@ class LuniiDevice(QtCore.QObject):
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
                 return False
 
             # thirdparty story ?
@@ -541,6 +542,11 @@ class LuniiDevice(QtCore.QObject):
             # Loop over each file
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
 
                 # skipping .plain.pk specific files 
                 if file in [FILE_UUID, FILE_META, FILE_THUMB]:
@@ -607,7 +613,7 @@ class LuniiDevice(QtCore.QObject):
         
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
                 return False
 
             # decompressing story contents
@@ -619,6 +625,12 @@ class LuniiDevice(QtCore.QObject):
             # Loop over each file
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
                 if file == FILE_UUID or file.endswith("bt"):
                     continue
 
@@ -690,7 +702,7 @@ class LuniiDevice(QtCore.QObject):
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
                 return False
             
             # decompressing story contents
@@ -704,6 +716,11 @@ class LuniiDevice(QtCore.QObject):
             contents = zip.readall().items()
             for index, (fname, bio) in enumerate(contents):
                 self.signal_story_progress.emit(short_uuid, index, len(contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
 
                 if fname.endswith("bt"):
                     continue
@@ -788,7 +805,7 @@ class LuniiDevice(QtCore.QObject):
 
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
                 return False
 
             # decompressing story contents
@@ -801,6 +818,12 @@ class LuniiDevice(QtCore.QObject):
             short_uuid = str(new_uuid).upper()[28:]
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
                 if zip_file.getinfo(file).is_dir():
                     continue
                 if file.endswith("bt"):
@@ -893,7 +916,7 @@ class LuniiDevice(QtCore.QObject):
 
             # checking if UUID already loaded
             if str(one_story.uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
                 return False
 
             # decompressing story contents
@@ -905,6 +928,12 @@ class LuniiDevice(QtCore.QObject):
             # Loop over each file
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(one_story.uuid)
+                    return False
+
                 if zip_file.getinfo(file).is_dir():
                     continue
                 if file.endswith(FILE_STUDIO_JSON):
@@ -1008,7 +1037,7 @@ class LuniiDevice(QtCore.QObject):
 
             # checking if UUID already loaded
             if str(one_story.uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded, aborting !")
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
                 return False
 
             # decompressing story contents
@@ -1021,6 +1050,11 @@ class LuniiDevice(QtCore.QObject):
             contents = zip_contents.items()
             for index, (fname, bio) in enumerate(contents):
                 self.signal_story_progress.emit(short_uuid, index, len(contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(one_story.uuid)
+                    return False
 
                 if fname.endswith(FILE_STUDIO_JSON):
                     continue
@@ -1163,6 +1197,9 @@ class LuniiDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
                 for index, file in enumerate(story_flist):
                     self.signal_story_progress.emit(uuid, index, len(story_flist))
+                    # abort requested ? early exit
+                    if self.abort_process:
+                        return None
 
                     # Extract each file to another directory
                     # decipher if necessary (mp3 / bmp / li / ri / si)
@@ -1191,7 +1228,20 @@ class LuniiDevice(QtCore.QObject):
             return None
         
         return zip_path
-    
+
+    def __clean_up_story_dir(self, story_uuid: UUID):
+        story_dir = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{story_uuid.hex.upper()[-8:]}")
+        if os.path.isdir(story_dir):
+            try:
+                shutil.rmtree(story_dir)
+            except OSError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+            except PermissionError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+        return True
+
     def remove_story(self, short_uuid):
         if short_uuid not in self.stories:
             self.signal_logger.emit(logging.ERROR, "This story is not present on your storyteller")
@@ -1209,16 +1259,8 @@ class LuniiDevice(QtCore.QObject):
         self.signal_story_progress.emit(short_uuid, 0, 3)
 
         # removing story contents
-        st_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{short_uuid}")
-        if os.path.isdir(st_path):
-            try:
-                shutil.rmtree(st_path)
-            except OSError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
-            except PermissionError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
+        if not self.__clean_up_story_dir(slist[0].uuid):
+            return False
 
         self.signal_story_progress.emit(short_uuid, 1, 3)
 
