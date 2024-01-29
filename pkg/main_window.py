@@ -275,14 +275,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # print(dev_name)
             self.combo_device.addItem(dev_name)
 
-        if os.path.isdir("C:/Work/dev/lunii-sd/"):
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/")
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/_flam/")
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v1/")
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v1/")
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v2/")
-            self.combo_device.addItem("C:/Work/dev/lunii-sd/_v3/")
-
         if self.combo_device.count():
             self.combo_device.setPlaceholderText("Select your Lunii")
 
@@ -864,6 +856,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not files:
             return
 
+        self.sb_update("Importing stories...")
         self.worker_launch(ACTION_IMPORT, files)
 
     def ts_dragenter_action(self, event):
@@ -890,6 +883,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
+        self.sb_update("Importing stories...")
         self.worker_launch(ACTION_IMPORT, file_paths)
 
     def worker_launch(self, action, item_list=None, out_dir=None):
