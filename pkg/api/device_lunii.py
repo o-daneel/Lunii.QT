@@ -430,7 +430,7 @@ class LuniiDevice(QtCore.QObject):
                 elif (any(file.endswith("ri") for file in zip_contents) and
                       any(file.endswith("si") for file in zip_contents) and
                       any(file.endswith("ni") for file in zip_contents) and
-                      any(file.endswith("li") for file in zip_contents)) :
+                      any(file.endswith("li") for file in zip_contents)):
                     # trying to decipher ri with v2
 
                     ri_file = next(file for file in zip_contents if file.endswith("ri"))
@@ -902,7 +902,7 @@ class LuniiDevice(QtCore.QObject):
 
             # getting UUID file
             try:
-                story_json=json.loads(zip_file.read(FILE_STUDIO_JSON))
+                story_json = json.loads(zip_file.read(FILE_STUDIO_JSON))
             except ValueError as e:
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
@@ -1023,7 +1023,7 @@ class LuniiDevice(QtCore.QObject):
   
             # getting UUID file
             try:
-                story_json=json.loads(zip_contents[FILE_STUDIO_JSON].read())
+                story_json = json.loads(zip_contents[FILE_STUDIO_JSON].read())
             except ValueError as e:
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
@@ -1127,7 +1127,6 @@ class LuniiDevice(QtCore.QObject):
             data = self.__get_ciphered_data(path_file, data_plain)
             # data =  data_plain
             fp.write(data)
-
 
     def __story_check_key(self, story_path, key, iv):
         # Trying to decipher RI/SI for path check
@@ -1273,6 +1272,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
+
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
     logger = logging.getLogger(LUNII_LOGGER)
@@ -1323,9 +1323,10 @@ def is_lunii(root_path):
     try:
         if md_path.is_file():
             return True
-    except PermissionError as e:
+    except PermissionError:
         pass
     return False
+
 
 def secure_filename(filename):
     INVALID_FILE_CHARS = '/\\?%*:|"<>'  # https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words

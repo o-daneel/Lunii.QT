@@ -17,7 +17,7 @@ from pkg.api.constants import *
 from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
-from pkg.api.firmware import luniistore_get_authtoken, luniiv1_fw_version, device_fw_download, device_fw_getlist
+from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
 from pkg.ui.about_ui import about_dlg
@@ -172,7 +172,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_update = next(act for act in t_actions if act.objectName() == "actionUpdate")
         self.act_update.setVisible(False)
 
-       # Connect the main window's moveEvent to the custom slot
+        # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
 
     # connecting slots and signals
@@ -228,7 +228,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.tree_stories.setColumnWidth(COL_NAME, col_size_width - 30)
 
         return False
-
 
     def customMoveEvent(self, event):
         # This custom slot is called when the main window is moved
@@ -368,7 +367,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_db_refresh(self):
         self.sb_update("Fetching official Lunii DB...")
         self.pbar_total.setVisible(True)
-        self.pbar_total.setRange(0,100)
+        self.pbar_total.setRange(0, 100)
         self.pbar_total.setValue(10)
         self.app.processEvents()
 
@@ -395,7 +394,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # file_filter = "Lunii Metadata (.md);;All files (*)"
             # file, _ = QFileDialog.getOpenFileName(self, "Open Lunii device", "", file_filter)
             dev_dir = QFileDialog.getExistingDirectory(self, "Open Lunii device", "",
-                                                   QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+                                                       QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
             if not dev_dir:
                 return
 
@@ -555,7 +554,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # are there story loaded ?
         if self.audio_device.stories:
             if (self.audio_device.device_version == FLAM_V1 or
-                     self.audio_device.device_version < LUNII_V3 or
+                    self.audio_device.device_version < LUNII_V3 or
                     (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_exportall.setEnabled(True)
 
@@ -664,7 +663,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.lbl_snu.setText("23023030012345")
 
         # Version
-        version = ""
         if self.audio_device.device_version == LUNII_V1:
             HW_version = "Lunii v1"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
@@ -682,7 +680,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
         self.lbl_version.setText(f"{HW_version}, FW: {SW_version}")
         self.lbl_version.setToolTip(str(self.audio_device))
-
 
         # Free Space
         free_space = psutil.disk_usage(str(self.audio_device.mount_point)).free
@@ -744,7 +741,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     first_index = prev_index
 
         # sorting item based on new index
-        working_list.sort(key= lambda x: x[1])
+        working_list.sort(key=lambda x: x[1])
 
         # updating story list
         self.audio_device.stories = StoryList()
@@ -965,10 +962,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         try:
             self.audio_device.signal_story_progress.disconnect()
-        except: pass
+        except:
+            pass
         try:
             self.audio_device.signal_logger.disconnect()
-        except: pass
+        except:
+            pass
 
         if self.worker:
             self.worker.deleteLater()

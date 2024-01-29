@@ -63,7 +63,9 @@ class DebugDialog(QWidget):
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Close|QDialogButtonBox.Reset|QDialogButtonBox.Save)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Close |
+                                          QDialogButtonBox.Reset |
+                                          QDialogButtonBox.Save)
         # callbacks on buttons
         self.buttonBox.clicked.connect(self.button_clicked)
 
@@ -101,11 +103,11 @@ class DebugDialog(QWidget):
 
     def cb_level_selected(self):
         # getting current device
-        dict_level = { "NONE": logging.NOTSET,
-                       "DEBUG": logging.DEBUG,
-                       "INFO": logging.INFO,
-                       "WARNING": logging.WARNING,
-                       "ERROR": logging.ERROR}
+        dict_level = {"NONE": logging.NOTSET,
+                      "DEBUG": logging.DEBUG,
+                      "INFO": logging.INFO,
+                      "WARNING": logging.WARNING,
+                      "ERROR": logging.ERROR}
 
         level = self.cb_level.currentText()
         self.logger.setLevel(dict_level[level])

@@ -84,7 +84,7 @@ class StudioStory:
                 if image not in self.ri:
                     normalized_name = os.path.splitext(image)[0]
                     normalized_name = normalized_name[-8:].upper()
-                    self.ri[image]=(normalized_name, len(self.ri))
+                    self.ri[image] = (normalized_name, len(self.ri))
 
             audio = snode.get('audio')
             if audio:
@@ -95,7 +95,7 @@ class StudioStory:
                 if audio not in self.ri:
                     normalized_name = os.path.splitext(audio)[0]
                     normalized_name = normalized_name[-8:].upper()
-                    self.si[audio]=(normalized_name, len(self.si))
+                    self.si[audio] = (normalized_name, len(self.si))
 
         # looping action nodes
         absolute_index = 0
@@ -207,6 +207,7 @@ class StudioStory:
     def write_bt(self, path_ni):
         pass
 
+
 def story_load_db(reload=False):
     global DB_OFFICIAL
     global DB_THIRD_PARTY
@@ -282,7 +283,7 @@ def thirdparty_db_add_story(uuid: UUID, title: str, desc: str):
             db.unlink(FILE_THIRD_PARTY_DB)
 
     # creating new entry
-    db_stories[uuid.hex] = { 'uuid': str(uuid), 'title': title, 'description': desc}
+    db_stories[uuid.hex] = {'uuid': str(uuid), 'title': title, 'description': desc}
 
     # saving updated db
     with open(FILE_THIRD_PARTY_DB, "w", encoding='utf-8') as fp_db:
@@ -300,7 +301,7 @@ def _uuid_match(uuid: UUID, key_part: str):
 
 
 class Story:
-    def __init__(self, uuid: UUID, size: int=-1):
+    def __init__(self, uuid: UUID, size: int = -1):
         self.uuid = uuid
         self.size = size
 
@@ -356,7 +357,7 @@ class Story:
 
         return DESC_NOT_FOUND
 
-    def get_picture(self, reload: bool=False):
+    def get_picture(self, reload: bool = False):
         image_data = None
 
         # creating cache dir if necessary

@@ -20,6 +20,7 @@ Logos are provided by <b>malexxx</b><br /><br />
 <b>URL : </b><a href="https://github.com/o-daneel/Lunii.QT">https://github.com/o-daneel/Lunii.QT</a>
 """
 
+
 def about_dlg():
     msg_box = QMessageBox(QMessageBox.Information, "About", LUNIIQT_ABOUT_INFO_HTML, QMessageBox.Ok)
 

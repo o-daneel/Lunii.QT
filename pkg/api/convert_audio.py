@@ -2,7 +2,10 @@ import platform
 import subprocess
 import ffmpeg
 
+
 def audio_to_mp3(audio_data):
+    audio_mp3 = b""
+
     # Construct the ffmpeg command using the ffmpeg-python syntax
     ffmpeg_cmd = (
         ffmpeg.input('pipe:0')
@@ -15,13 +18,13 @@ def audio_to_mp3(audio_data):
                 map_metadata='-1',
                 write_xing='0',
                 id3v2_version='0'
-            )
+               )
         .compile()
     )
 
     current_os = platform.system()
     if current_os == "Windows":
-        flags = subprocess.CREATE_NO_WINDOW;
+        flags = subprocess.CREATE_NO_WINDOW
     else:
         flags = 0
 

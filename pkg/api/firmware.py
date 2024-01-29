@@ -7,22 +7,22 @@ V1V2_FAHID = "-NnUun90mQ56GosDyA3R"
 
 
 def luniistore_get_authtoken(login, pwd):
-    url1 = "https://server-auth-prod.lunii.com/auth/signin"
-    args1 = {'application':"luniistore_mobile",
-            'email':login,
-            'password':pwd
+    url_sign = "https://server-auth-prod.lunii.com/auth/signin"
+    args1 = {'application': "luniistore_mobile",
+             'email': login,
+             'password': pwd
             }
-    auth = requests.post(url1, json = args1)
+    auth = requests.post(url_sign, json=args1)
     if auth.status_code != 200:
         return None
 
-    token = auth.json()['response']['tokens']['access_tokens']['user']['server']
-    user_id = auth.json()['response']['user_id']
+    # token = auth.json()['response']['tokens']['access_tokens']['user']['server']
+    # user_id = auth.json()['response']['user_id']
 
     # print("\nToken: {0}".format(token))
     # print("\nUser ID: {0}".format(user_id))
 
-    header_auth = {'x-auth-token':auth.json()['response']['tokens']['access_tokens']['user']['server'],
+    header_auth = {'x-auth-token': auth.json()['response']['tokens']['access_tokens']['user']['server'],
                    'authorization': 'Bearer {0}'.format(auth.json()['response']['tokens']['access_tokens']['user']['server'])
                   }
 
@@ -34,6 +34,7 @@ def __lunii_vid_pid(hw_version):
         return FAH_V1_FW_2_USB_VID_PID
     else:
         return FAH_V2_V3_USB_VID_PID
+
 
 def device_fw_getlist(hw_version, json_auth):
     fw_list = []
@@ -56,7 +57,7 @@ def luniiv1_fw_version(hw_version, json_auth, fu_upgrade=False):
     vid, pid = __lunii_vid_pid(hw_version)
 
     if hw_version <= LUNII_V2:
-        json_auth["user-agent"]="unirest-java/3.1.00"
+        json_auth["user-agent"] = "unirest-java/3.1.00"
         fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update/current?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth, timeout=10)
         if fw.status_code == 200:
             # print(fw.json())
@@ -72,7 +73,7 @@ def luniiv1_fw_version(hw_version, json_auth, fu_upgrade=False):
 def device_fw_download(hw_version, snu, json_auth, filepath: str, second_fw=False):
     vid, pid = __lunii_vid_pid(hw_version)
 
-    json_auth["user-agent"]="unirest-java/3.1.00"
+    json_auth["user-agent"] = "unirest-java/3.1.00"
     if hw_version <= LUNII_V2:
         fw = requests.get(f"https://server-user-prod.lunii.com/v2/fah/{V1V2_FAHID}/update?vendor_id={vid:04x}&product_id={pid:04x}", headers=json_auth, timeout=10)
         if fw.status_code == 200:

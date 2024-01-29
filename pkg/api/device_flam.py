@@ -1,4 +1,3 @@
-import glob
 import os.path
 import shutil
 import zipfile
@@ -15,6 +14,7 @@ from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
 
 LIB_BASEDIR = "etc/library/"
+
 
 class FlamDevice(QtCore.QObject):
     STORIES_BASEDIR = "str/"
@@ -59,7 +59,6 @@ class FlamDevice(QtCore.QObject):
         repr_str += f"- SNU      : {binascii.hexlify(self.snu_hex, ' ')}\n"
         repr_str += f"- stories  : {len(self.stories)}x"
         return repr_str
-
 
     # opens the .mdf file to read all information related to device
     def __feed_device(self):
@@ -238,7 +237,6 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.ERROR, e)
             return False
 
-
         # opening zip file
         with py7zr.SevenZipFile(story_path, mode='r') as zip:
             # reading all available files
@@ -280,7 +278,7 @@ class FlamDevice(QtCore.QObject):
             # Loop over each file
             self.signal_logger.emit(logging.INFO, "Reading 7zip archive... (takes time)")
             contents = zip.readall().items()
-            for index, (fname, bio)  in enumerate(contents):
+            for index, (fname, bio) in enumerate(contents):
                 # abort requested ? early exit
                 if self.abort_process:
                     self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
@@ -441,6 +439,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
     logger.log(logging.INFO, f"Read {len(story_list)} stories")
     return story_list
 
+
 def is_flam(root_path):
     root_path = Path(root_path)
     md_path = root_path.joinpath(".mdf")
@@ -448,7 +447,7 @@ def is_flam(root_path):
     try:
         if md_path.is_file():
             return True
-    except PermissionError as e:
+    except PermissionError:
         pass
     return False
 

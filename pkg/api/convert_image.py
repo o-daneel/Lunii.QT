@@ -20,7 +20,6 @@ def image_to_bitmap_rle4(image_data):
     if img.mode not in ["1", "P", "L"]:
         img = img.convert("RGB")
 
-
     # Get pixel data
     pixel_data = list(img.getdata())
 
@@ -41,7 +40,7 @@ def image_to_bitmap_rle4(image_data):
             if img.mode == 'L' or img.mode == '1':
                 # Get gray values for the current pixel
                 gray = pixel_data[index]
-                grayscale_value = int((gray)/16)
+                grayscale_value = int(gray/16)
                 # print(f"@{x:3}x{y:3}: GR={gray:02X} => GR={grayscale_value:02X}")
             # RGB source
             else:
@@ -85,7 +84,6 @@ def image_to_bitmap_rle4(image_data):
 
     # end = time.time()
     # print(f"{end-start:2.3}s")
-
 
     header_size = 54
     data_size = len(bmp_data)
