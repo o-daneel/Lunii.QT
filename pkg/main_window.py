@@ -34,7 +34,7 @@ COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 
-APP_VERSION = "v2.6.1"
+APP_VERSION = "v2.6.2"
 
 
 class VLine(QFrame):
