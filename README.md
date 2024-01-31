@@ -330,4 +330,7 @@ Thanks to :
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
 * [Lunii Admin](https://github.com/olup/lunii-admin) (a GO implementation of a STUdio alternative)
-* [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as previous but from a browser)
+* [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as previous but from a browser)  
+  
+
+* Icon trick for workflow using **[rcedit](https://github.com/electron/rcedit)**

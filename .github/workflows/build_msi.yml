@@ -1,0 +1,72 @@
+name: Build for Windows (MSI & Portable)
+
+on:
+  push:
+    branches:
+      - cx_freeze
+    tags:
+      - v*.*.*
+
+jobs:
+  build_win:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.0.0
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install cx_freeze
+
+    - name: Python generate resources
+      run: |
+        pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
+        pyside6-rcc ./resources.qrc -o ./resources_rc.py
+
+    - name: cx_Freeze - Build EXE
+      run: |
+        python setup.py build_exe
+
+    - name: Insert icon (manually)
+      run: |
+        tools\rcedit-x64.exe build\exe.win-amd64-3.11\Lunii-Qt.exe --set-icon res\lunii.ico
+
+    - name: cx_Freeze - Build MSI
+      run: |
+        python setup.py bdist_msi
+
+    - name: Create portable archive
+      run: |
+        Copy-Item -Path "./build/exe.win-amd64-3.11" -Destination ./build/Lunii-Qt -Recurse
+        Compress-Archive -DestinationPath Lunii.Qt-win64_portable.zip -CompressionLevel Optimal -Path ./build/Lunii-Qt
+
+    - name: Upload MSI
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Lunii.Qt-win64_msi
+        path: |
+          ./dist/*.msi
+
+    - name: Upload Portable
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Lunii.Qt-win64_portable
+        path: |
+          ./build/Lunii-Qt
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        draft: true
+        files: |
+          ./dist/*.msi
+          Lunii.Qt-win64_portable.zip
