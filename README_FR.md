@@ -2,38 +2,34 @@
 
 # Lunii.QT
 
-Une application Python QT pour gérer Lunii Storyteller, y compris **la commande** / **l'importation** / **l'exportation** / **le téléchargement du firmware**   
+Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
 pour Windows / Linux / MacOs 11  
-(compatible avec l'archive STUdio, **avec** transcodage)
+(compatible avec les archives STUdio, **avec** support de la conversion audio)
 
 ### Matériels pris en charge :
-* Ma fabrique à histoire **V1** et **V2** (support complet)
-* Ma fabrique à histoire **V3** (l'exportation nécessite un fichier clé de l'appareil)
+* Fah **v1** et **v2** (support complet)
+* Fah **v3** (l'export requiert les clés  de la Fah)
+* Flam (support partiel, tri des histoires et sauvegarde du firmware)
 
 ### Limitations :
-* L'application *ne permet plus* d'exporter les histoires officielles.
-* Le transcodage audio nécessite la présence de [FFMPEG V6](#vérification)
-* La **FLAM** n'est pas encore supportée (*travail en cours*)
-
-
+* L'application <u>n'autorise plus</u> d'exporter les histoires officielles.
+* Le transcodage audio nécessite la présence de [FFMPEG v6](#vérification)
 
 
 ### Table des matières
 <!-- TOC -->
-- [Lunii.QT](#luniiqt)
-  - [Interface Utilisateur](#interface-utilisateur)
-  - [Raccourcis clavier](#racourcis-clavier)
-  - [Transcodage audio](#transcodage-audio)
-  - [Mise à jour du Firmware](#mise-à-jour-du-firmware)
-  - [Formats d'archives pris en charge](#formats-darchives-pris-en-charge)
-  - [Construisez vos applications](#construisez-vos-applications)
-  - [Astuces](#astuces)
-  - [Crédits](#crédits)
-- [Liens / Dépôts similaires](#liens--dépôts-similaires)
-
-  - [Installations](#installations)
-    - [Linux](#linux)
-    - [Windows](#windows)
+* [Lunii.QT](#luniiqt)
+  * [Interface Utilisateur](#interface-utilisateur)
+  * [Raccourcis clavier](#raccourcis-clavier)
+  * [Transcodage audio](#transcodage-audio)
+  * [Mise à jour du firmware](#mise-à-jour-du-firmware)
+    * [Guide Pratique - Lunii](#guide-pratique---lunii)
+    * [Guide Pratique - Flam](#guide-pratique---flam)
+  * [Formats d'archives pris en charge (Lunii)](#formats-darchives-pris-en-charge-lunii)
+  * [Python ? Guide Pratique](#python--guide-pratique)
+  * [Astuces](#astuces)
+  * [Remerciements](#remerciements)
+* [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
 
 ## Interface Utilisateur
@@ -43,26 +39,27 @@ pour Windows / Linux / MacOs 11
 <img src="./res/screenshot_debug.png" width="600"> 
 
 ### Description
-![Interface de Lunii QT](./res/screenshot_interface.png")
 
-1. La **barre de menu**. Elle vous informera lorsqu'une mise à jour est disponible  
-   (il suffit de l'obtenir avec Menu About/Update to v2.X.X)
-1. L'**emplacement de votre Lunii** lorsqu'elle est connectée.   
-   Le bouton de gauche met à jour la détection automatique.
-1. **Réactualisation de la base de données officielle** : Mettre à jour la liste des histoires et des informations connexes de la boutique officielle de Lunii. Utilisez-la lorsque certaines histoires officielles ne sont pas reconnues.
-1. La **liste de vos histoires** avec l'UUID et l'origine de la base de données (DB).  
-   L'UUID : Cet identifiant unique vous permet d'associer les histoires à leur dossier sur le Lunii, grâce aux huit derniers caractères qui composent le nom du dossier associé à cette histoire.
+<img src="./res/screenshot_interface.png" width="600">  
+
+1. La **barre de menu**. Elle vous informera lorsqu'une mise à jour de l'application est disponible  
+   (il suffit d'aller dans Menu About/Update to v2.X.X)
+1. **L'emplacement de votre Lunii/Flam** lorsqu'elle est connectée.   
+   Le bouton à gauche relance la détection automatique.
+2. Actualisation de la **base de données Officielle** : Met à jour la liste des histoires et leurs descriptions depuis le Luniistore. Utilisez ce bouton lorsque certaines histoires officielles ne sont pas reconnues.
+3. La **liste de vos histoires** avec l'UUID et le type d'histoire (DB).  
+   L'UUID : Un identifiant unique permettant de lier les histoires à leur dossier sur la Lunii/Flam. Les huit derniers caractères de l'UUID composent le nom du dossier de l'histoire.
 
    **DB** signifie **Base de données**. Cette application prend en charge deux bases de données différentes
-     - **O** - Base de données **officielle de Lunii  
+     - **O** - Base de données **O**fficielle de Lunii  
         (Toutes les métadonnées proviennent des serveurs de Lunii).
-     - **T** - base de données tierce, également connue sous le nom d'Histoires non officielles ou personnalisées  
+     - **T** - base de données **T**ierce, également connue sous Non officielles ou Custom  
         (Ces métadonnées ne peuvent pas être récupérées, elles sont complétées lors de l'importation de l'histoire)
-1. Dans la **barre d'état**, vous trouverez : 
-* Votre SNU (numéro de série),
-* La version du firmware de votre Lunii,
-* L'espace disponible  ,
-* Le nombre d'histoires qu'il contient.
+4. Dans la **barre d'état**, vous trouverez  
+   * Votre SNU (numéro de série),
+   * La version du firmware de votre Lunii/Flam
+   * L'espace disponible sur la SD
+   * Le nombre d'histoires
 
 ## Raccourcis clavier
 
@@ -78,19 +75,19 @@ pour Windows / Linux / MacOs 11
 | `Ctrl+Shift+S` | Exporte toutes les histoires                          |
 | `Delete`       | Supprime les histoires sélectionnées                  |
 |                |                                                       |
-| `Ctrl+O`       | Ouvre le dossier de votre Lunii                       |
+| `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                    |
 | `Ctrl+L`       | Ouvre la fenêtre de debug                             |
-| `F1`           | À propos de l'application                              |
-| `F5`           | Réactualise les appareils                              |
+| `F1`           | À propos de l'application                             |
+| `F5`           | Réactualise les appareils                             |
 
 ## Transcodage audio
-Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc pas être installés tels quels sur Lunii. Cela nécessite une étape de **transcodage**. Ce processus supplémentaire est réalisé à l'aide de l'outil **FFMPEG** disponible [ici](https://github.com/eugeneware/ffmpeg-static/releases/latest ) :     
+Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc pas être installés tels quels sur Lunii. Cela nécessite une étape de **transcodage**. Ce processus supplémentaire est réalisé à l'aide de l'outil **FFMPEG** disponible [ici](https://github.com/eugeneware/ffmpeg-static/releases/latest )  
  
 
-**ATTENTION** : le transcodage est **très long**, il faut être patient. C'est pourquoi vous devriez préférer le format [.plain.pk](#plainpk) qui utilise un son compatible.
+**ATTENTION** : le transcodage est <u>très long</u>, il faut être patient. C'est pourquoi vous devriez préférer le format [.plain.pk](#plainpk) qui utilise un format audio compatible.
 
 ### Installation
-Vous devez vous assurer que la commande `ffmpeg` se trouve dans votre chemin.  
+Vous devez vous assurer que la commande `ffmpeg` se trouve dans votre PATH.  
 Si vous êtes perdu, vous pouvez récupérer un binaire autonome sur le lien précédent, pour votre plateforme (Win/Linux/MacOs), et le copier à côté de cette application, comme ceci :
 
 ```
@@ -104,7 +101,7 @@ Si vous êtes perdu, vous pouvez récupérer un binaire autonome sur le lien pr�
 3) Copiez à côté de `lunii-qt.exe` ou `lunii-qt` (en fonction de votre système d'exploitation)
 
 ### Vérification 
-Dans l'application, le menu `Outils` affiche l'état de la détection.
+Dans l'application, le menu `Tools` affiche l'état de la détection.
 #### Non trouvé
 ![FFMPEG Non disponible](res/ffmpeg_off.png)  
 #### Trouvé
@@ -114,20 +111,22 @@ Dans l'application, le menu `Outils` affiche l'état de la détection.
 
 Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Firmware sans vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **expérimentale** mais jusqu'à présent personne n'a rencontré de problèmes.
 
-**NOTE 1:** Pensez à garder une sauvegarde de votre firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. *Vous serez en mesure de rétrograder*.
+**NOTE 1:** Pensez à garder une sauvegarde de votre firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. <u>Vous serez en mesure de rétrograder.</u>  
 **NOTE 2:** Vous ne pouvez pas choisir la version du firmware. Vous n'obtiendrez que la **dernière version disponible** sur les serveurs de Lunii.
 
 
-### Guide Pratique
-1. Sélectionnez un appareil Lunii
-1. Menu Outils / Obtenir la mise à jour FW
-1. Vous serez invité à vous connecter  
-![Connexion](./res/screenshot_login.png)
-1. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
-   Vous pouvez vérifier ce point ici [main_window.py#L468](https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468)
-1. Choisissez un emplacement où sauvegarder la version de votre firmware
-1. Copiez-la dans le répertoire racine de votre lunii
-1. Renommez-le en `fa.bin`.   
+### Guide Pratique - Lunii
+1. Sélectionnez une Lunii
+2. Menu **Tools/Get FW Update**
+3. Vous serez invité à vous connecter  
+<img src="./res/screenshot_login.png" width="170">
+
+4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
+   Vous pouvez vérifier ce point ici  
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
+5. Choisissez un emplacement où sauvegarder votre firmware (deux fichiers pour une Lunii v1)
+6. Copiez-la dans le répertoire racine de votre lunii
+7. Renommez-le en `fa.bin` (et aussi `fu.bin`  pour les Lunii v1)   
 ```
 - 
  |- .contents
@@ -136,12 +135,36 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
  |- fa.bin
  |- ... (other files)
 ```
-1. Éteindre, rallumer, attendre : **TADA**  
+8. Éteindre, rallumer, attendre : **TADA**  
    (si vous reconnectez votre lunii sur votre pc, le `fa.bin` devrait avoir été supprimé)
    
+
+### Guide Pratique - Flam
+1. Sélectionnez une Lunii
+2. Menu **Tools/Get FW Update**
+3. Vous serez invité à vous connecter  
+<img src="./res/screenshot_login.png" width="170">
+
+4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
+   Vous pouvez vérifier ce point ici  
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
+5. Choisissez un emplacement où sauvegarder vos firmwares (`update-main.enc` and `update-comm.enc`)
+6. Copiez-les dans le répertoire racine de votre Flam    
+```
+- 
+ |- etc/
+ |- str/
+ |- .mdf
+ |- update-main.enc
+ |- update-comm.enc
+ |- ... (other files)
+```
+7. Éteindre, rallumer, attendre : **TADA**  
+   (si vous reconnectez votre lunii sur votre pc, les `*.enc` devraient avoir été supprimés)
+      
    
-   
-## Formats d'archives pris en charge
+## Formats d'archives pris en charge (Lunii)
+**NOTE :** Les histoires Flam ne sont pas encore supportées
 ### .plain.pk
 **Filename** :  `story_name.8B_UUID.plain.pk`  
 **Ciphering** : None / Plain  
@@ -216,19 +239,18 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
         stroy.json
         thumbnail.png
 
-## À faire
-* Ajouter le support de la FLAM ?
-* Améliorer le traitement des archives 7z
+## TODO
 * Fichier de configuration pour sauvegarder la configuration du menu (tailles / détails)
 * Ajout d'une image à la liste des arbres ?
 
-## Utilisation avec Python
-### Préparation de l'environnement**
+## Python ? Guide Pratique
 
-Commencer par cloner le dépot.
+### Préparation de l'environnement
+
+Commencer par cloner le dépot.  
 Préparer l'environnement virtuel pour le projet et installer les dépendances.
 ```bash
-python -m venv venv
+$ python3 -m venv venv
 ```
 
 Passez à votre venv
@@ -239,33 +261,48 @@ Passez à votre venv
 
 Installer les dépendances
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 **Linux** a besoin d'une dépendance supplémentaire.
 
 ```bash
-apt install libxcb-cursor0
+$ apt install libxcb-cursor0
 ```
-### Construction du fichier UI**
+### Génération des UI
 ```bash
 $ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
-### Démarrer**
+### Exécution
 ```bash
-python lunii-qt.py
+$ python lunii-qt.py
 ```
 
-### Construire l'exécutable GUI**
+### Générer un exécutable GUI
+**NOTE :** PyInstaller by its design generates executables that are flagged by AntiViruses. Those are false positives. cx_Freeze is an alternative that allows to avoid such false positives.
+
+#### PyInstaller 👎
 ```bash
-pip install pyinstaller
-pyinstaller lunii-qt.spec
+$ pip install pyinstaller
+$ pyinstaller lunii-qt.spec
 ...
-dist\lunii-qt
+$ dist\lunii-qt
+```
+
+#### cx_Freeze 👍
+```bash
+$ pip install cx_Freeze
+$ python setup.py build_exe
+...
+$ build/exe.win-amd64/lunii-qt
 ```
 
 ## Astuces
+
+### Métadonnées des histoires tierces
+Lors de l'utilisation de cette application, vous allez peut-être constater des hisoires marquées `Unknown story (maybe a User created story)...`. Il s'agit certainement d'une histoire tierce qui a été chargé par une autre application. Lunii.QT n'a donc pas connaissance des métadonnées associées (Titre, Description, Image).  
+Il est possible de pallier à ce problème en glissant déposant l'archive de l'histoire dans l'application, comme pour la charger. Cette dernière étant déjà présente, Lunii.Qt ne va faire qu'**analyser les métadonnées** et les ajouter dans la base interne, en prenant soin de **ne pas recharger** l'histoire.
 
 ### Gestion du cache
 Cette application téléchargera une fois pour toutes la base de données des histoires officielles et toutes les images demandées dans le dossier dédié à l'application.
@@ -275,7 +312,7 @@ Cette application téléchargera une fois pour toutes la base de données des hi
 En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour forcer le rafraîchissement.
 
 ### Exportation V3
-Afin de supporter l'exportation d'histoires depuis le matériel Lunii v3, vous devez placer vos clés de périphérique ici :
+Afin de supporter l'exportation d'histoires depuis une Lunii v3, vous devez placer vos clés de périphérique ici :
 ```bash
 %HOME%\.lunii-qt\v3.keys
 $HOME/.lunii-qt/v3.keys
@@ -301,3 +338,4 @@ Merci à :
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
 * [Lunii Admin](https://github.com/olup/lunii-admin) (Une alternative en Go de STUdio)
 * [Lunii Admin Web](https://github.com/olup/lunii-admin) (même chose que précédemment mais à partir d'un navigateur)
+* Astuce de l'icone dans le workflow avec  **[rcedit](https://github.com/electron/rcedit)**

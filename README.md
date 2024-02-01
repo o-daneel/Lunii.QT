@@ -122,7 +122,7 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 
 ### HowTo - Lunii
 1. Select a Lunii/Flam device
-2. Menu **Tools/Get FW** Update
+2. Menu **Tools/Get FW Update**
 3. You'll be prompted for login entry  
 <img src="./res/screenshot_login.png" width="170">
 
@@ -154,7 +154,7 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
    You can verify this point here
    https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
 5. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
-6. Copy it to the root dir of your device   
+6. Copy them to the root dir of your device   
 ```
 - 
  |- etc/
@@ -252,8 +252,9 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 
 ### Prepare env
 
+First, clone the git repo   
 Prepare a Virtual environment for your project and install requirements
-```
+```bash
 $ python3 -m venv venv
 ```
 
@@ -274,21 +275,32 @@ $ pip install -r requirements.txt
 $ apt install libxcb-cursor0
 ```
 ### Build UI files
-```
+```bash
 $ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
 ### Run
-```
+```bash
 $ python lunii-qt.py
 ```
 
 ### Build GUI executable
-```
+**NOTE :** PyInstaller by its design generates executables that are flagged by AntiViruses. Those are false positives. cx_Freeze is an alternative that allows to avoid such false positives.
+
+#### PyInstaller 👎
+``` bash
 $ pip install pyinstaller
 $ pyinstaller lunii-qt.spec
 ...
 $ dist\lunii-qt
+```
+
+#### cx_Freeze 👍
+```bash
+$ pip install cx_Freeze
+$ python setup.py build_exe
+...
+$ build/exe.win-amd64/lunii-qt
 ```
 
 ## Tricks
@@ -307,7 +319,7 @@ This application will download once for all the official story database and any 
 
 In case of any trouble, just remove this file and directory to force refresh
 
-### V3 export
+### v3 export
 In order to suport story export from Lunii v3 hardware, you must place your device keys in here :
 ```bash
 %HOME%\.lunii-qt\v3.keys
@@ -327,10 +339,9 @@ Thanks to :
 
 # Links / Similar repos
 * [Lunii v3 - Reverse Engineering](https://github.com/o-daneel/Lunii_v3.RE)
+* [Lunii CLI tool](https://github.com/o-daneel/Lunii.PACKS)
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
 * [Lunii Admin](https://github.com/olup/lunii-admin) (a GO implementation of a STUdio alternative)
 * [Lunii Admin Web](https://github.com/olup/lunii-admin) (same as previous but from a browser)  
-  
-
 * Icon trick for workflow using **[rcedit](https://github.com/electron/rcedit)**
