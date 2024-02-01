@@ -41,8 +41,9 @@ class FlamDevice(QtCore.QObject):
         if not self.__feed_device():
             return
 
-        # internal stories
+        # loading internal stories + pi update for duplicates filtering
         self.stories = feed_stories(self.mount_point)
+        self.update_pack_index()
 
     @property
     def snu_str(self):
@@ -414,6 +415,7 @@ class FlamDevice(QtCore.QObject):
 
         return True
 
+
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
     logger = logging.getLogger(LUNII_LOGGER)
@@ -434,7 +436,10 @@ def feed_stories(root_path) -> StoryList[UUID]:
         for uuid_str in lines:
             one_uuid = UUID(uuid_str.strip())
             logger.log(logging.DEBUG, f"> {str(one_uuid)}")
-            story_list.append(Story(one_uuid))
+            if one_uuid in story_list:
+                logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+            else:
+                story_list.append(Story(one_uuid))
 
     logger.log(logging.INFO, f"Read {len(story_list)} stories")
     return story_list
