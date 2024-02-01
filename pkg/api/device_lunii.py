@@ -910,7 +910,7 @@ class LuniiDevice(QtCore.QObject):
 
             one_story = StudioStory(story_json)
             if not one_story.compatible:
-                self.signal_logger.emit(logging.ERROR, "STUdio story with unsupported format.")
+                self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
                 return False
 
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
@@ -1031,7 +1031,7 @@ class LuniiDevice(QtCore.QObject):
 
             one_story = StudioStory(story_json)
             if not one_story.compatible:
-                self.signal_logger.emit(logging.ERROR, "STUdio story with unsupported format.")
+                self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
                 return False
 
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
