@@ -436,7 +436,7 @@ class LuniiDevice(QtCore.QObject):
 
                     ri_file = next(file for file in zip_contents if file.endswith("ri"))
                     ri_ciphered = zip_file.read(ri_file)
-                    ri_plain = self.decipher(ri_ciphered, lunii_generic_key)
+                    ri_plain = self.__v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
                     if ri_plain[:4] == b"000\\":
                         archive_type = TYPE_V2
                     else:
