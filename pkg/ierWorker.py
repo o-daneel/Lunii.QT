@@ -14,10 +14,6 @@ ACTION_REMOVE = 3
 ACTION_SIZE = 4
 
 
-class ExitException(Exception):
-    pass
-
-
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
     signal_refresh = QtCore.Signal()
@@ -49,9 +45,10 @@ class ierWorker(QObject):
             elif self.action == ACTION_SIZE:
                 self._task_size()
 
-        except ExitException:
+        except Exception as e:
             # Abort requested
-            self.signal_message.emit("🛑 Aborted")
+            self.exit_requested()
+            self.signal_message.emit(f"🛑 Critical error : {e}")
 
         self.signal_refresh.emit()
 
