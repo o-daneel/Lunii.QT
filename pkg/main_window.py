@@ -8,7 +8,7 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication
 
@@ -49,8 +49,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
 
+        # internal resources
         self.logger = logging.getLogger(LUNII_LOGGER)
 
+        self.iconLunii = QIcon(":/icon/res/lunii.ico")
+        self.iconFlam = QIcon(":/icon/res/flam.ico")
         self.debug_dialog = DebugDialog()
         self.login_dialog = LoginDialog()
         # self.debug_dialog.show()
@@ -132,12 +135,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
         self.btn_abort.setVisible(False)
-
-        # self.pbar_story.setStyleSheet("""
-        #     QProgressBar::chunk {
-        #         background-color: #3498db; /* Couleur de la barre de progression */
-        #     }
-        # """)
 
         # finding menu actions
         s_actions = self.menuStory.actions()
@@ -262,6 +259,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuStory.exec_(self.tree_stories.mapToGlobal(point))
 
     # WIDGETS UPDATES
+    def cb_dev_add(self, dev_path):
+        if is_lunii(dev_path):
+            self.combo_device.addItem(self.iconLunii, dev_path)
+        elif is_flam(dev_path):
+            self.combo_device.addItem(self.iconFlam, dev_path)
+        else:
+            self.combo_device.addItem(dev_path)
+
     def cb_dev_refresh(self):
         dev_list = find_devices()
         self.combo_device.clear()
@@ -274,17 +279,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for dev in dev_list:
             dev_name = str(dev)
             # print(dev_name)
-            self.combo_device.addItem(dev_name)
+            self.cb_dev_add(dev_name)
 
+        self.setWindowIcon(self.iconLunii)
         if self.combo_device.count():
             self.combo_device.setPlaceholderText("Select your Lunii")
 
             # automatic select if only one device
             if self.combo_device.count() == 1:
+                self.setWindowIcon(self.combo_device.itemIcon(0))
                 self.combo_device.setCurrentIndex(0)
         else:
-            self.statusbar.showMessage("No Lunii detected 😥, try File/Open")
+            self.sb_update("No Lunii detected 😥, try File/Open")
             self.combo_device.setPlaceholderText("No Lunii detected 😥")
+
 
     def cb_dev_select(self):
         # getting current device
@@ -307,10 +315,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.app.processEvents()
                     time.sleep(0.05)
 
-            if is_lunii(dev_name):
-                self.audio_device = LuniiDevice(dev_name, V3_KEYS)
-            else:
-                self.audio_device = FlamDevice(dev_name)
+            # update app icon based on cb item
+            self.setWindowIcon(self.combo_device.itemIcon(self.combo_device.currentIndex()))
+
+            # open device
+            try:
+                if is_lunii(dev_name):
+                    self.audio_device = LuniiDevice(dev_name, V3_KEYS)
+                else:
+                    self.audio_device = FlamDevice(dev_name)
+            except PermissionError:
+                error = "🛑 PermissionError : Unable to open this device"
+                self.logger.log(logging.ERROR, error)
+                self.statusbar.showMessage(error)
+                return
+
             self.statusbar.showMessage(f"")
 
             self.ts_update()
@@ -406,7 +425,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # add device to list
             device_list = [self.combo_device.itemText(i) for i in range(self.combo_device.count())]
             if dev_dir not in device_list:
-                self.combo_device.addItem(dev_dir)
+                self.cb_dev_add(dev_dir)
                 index = self.combo_device.findText(dev_dir)
                 self.combo_device.setCurrentIndex(index)
 
