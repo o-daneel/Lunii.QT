@@ -406,6 +406,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.sb_update("🛑 Lunii DB failed.")
 
+    def cb_lbl_click(self, event):
+        if self.audio_device:
+            msg = str(self.audio_device)
+            self.logger.log(logging.INFO, msg)
+            self.statusbar.showMessage("Device info sent to clipboard.")
+            clipboard = QApplication.clipboard()
+            clipboard.setText(msg)
+
     def cb_menu_file(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionOpen_Lunii":
@@ -698,7 +706,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             HW_version = "?v1/v2?"
             SW_version = f"{self.audio_device.fw_vers_major}.{self.audio_device.fw_vers_minor}"
         self.lbl_version.setText(f"{HW_version}, FW: {SW_version}")
+
+        self.lbl_snu.setToolTip(str(self.audio_device))
         self.lbl_version.setToolTip(str(self.audio_device))
+        self.lbl_snu.mousePressEvent = self.cb_lbl_click
+        self.lbl_version.mousePressEvent = self.cb_lbl_click
 
         # Free Space
         free_space = psutil.disk_usage(str(self.audio_device.mount_point)).free
