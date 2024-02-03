@@ -47,19 +47,19 @@ jobs:
     - name: Create portable archive
       run: |
         Copy-Item -Path "./build/exe.win-amd64-3.11" -Destination ./build/Lunii-Qt -Recurse
-        Compress-Archive -DestinationPath Lunii.Qt-win64_portable.zip -CompressionLevel Optimal -Path ./build/Lunii-Qt
+        Compress-Archive -DestinationPath Lunii.Qt-${{ github.ref }}-win64_portable.zip -CompressionLevel Optimal -Path ./build/Lunii-Qt
 
     - name: Upload MSI
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-win64_msi
+        name: Lunii.Qt-${{ github.ref }}-win64_msi
         path: |
           ./dist/*.msi
 
     - name: Upload Portable
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-win64_portable
+        name: Lunii.Qt-${{ github.ref }}-win64_portable
         path: |
           ./build/Lunii-Qt
 
@@ -69,4 +69,4 @@ jobs:
         draft: true
         files: |
           ./dist/*.msi
-          Lunii.Qt-win64_portable.zip
+          Lunii.Qt-${{ github.ref }}-win64_portable.zip

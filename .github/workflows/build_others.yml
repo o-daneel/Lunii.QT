@@ -6,58 +6,6 @@ on:
       - v*.*.*
 
 jobs:
-#  build_win:
-#    runs-on: windows-latest
-#
-#    steps:
-#    - name: Checkout repository
-#      uses: actions/checkout@v4.1.1
-#      with:
-#        fetch-depth: 0
-#
-#    - name: Set up Python
-#      uses: actions/setup-python@v5.0.0
-#      with:
-#        python-version: 3.11
-#
-#    - name: Install dependencies
-#      run: |
-#        pip install -r requirements.txt
-#        pip install cx_freeze
-#
-#    - name: Build Exec & Create Archive
-#      run: |
-#        pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
-#        pyside6-rcc ./resources.qrc -o ./resources_rc.py
-#        python setup.py bdist_msi
-#        move ./build/exe.win-amd64-3.11 "./build/Lunii Qt"
-#        Compress-Archive -DestinationPath Lunii.Qt-win64_portable.zip -CompressionLevel Optimal -Path "./build/Lunii Qt"
-##        python setup.py build_exe
-##        ./tools/rcedit-x64.exe "./build/exe.win-amd64-3.11/Lunii Qt.exe" --set-icon ./res/lunii.ico
-#
-#    - name: Upload MSI
-#      uses: actions/upload-artifact@v4.0.0
-#      with:
-#        name: Lunii.Qt-win64_msi
-#        path: |
-#          ./dist/*.msi
-#
-#    - name: Upload Portable
-#      uses: actions/upload-artifact@v4.0.0
-#      with:
-#        name: Lunii.Qt-win64_portable
-#        path: |
-#          ./build/Lunii\ Qt/*
-#
-#    - name: Release
-#      uses: softprops/action-gh-release@v1
-#      if: startsWith(github.ref, 'refs/tags/')
-#      with:
-#        draft: true
-#        files: |
-#          Lunii.Qt-win64_portable.zip
-#          dist/*.msi
-
   build_linux:
     runs-on: ubuntu-latest
 
@@ -83,12 +31,12 @@ jobs:
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.spec
         mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-Linux-x86_64.zip ./lunii-qt
+        zip -9 -j Lunii.Qt-${{ github.ref }}-Linux-x86_64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-Linux-x86_64
+        name: Lunii.Qt-${{ github.ref }}-Linux-x86_64
         path: |
           ./lunii-qt
 
@@ -97,7 +45,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
-        files: Lunii.Qt-Linux-x86_64.zip
+        files: Lunii.Qt-${{ github.ref }}-Linux-x86_64.zip
 
   build_mac:
     runs-on: macos-latest
@@ -124,12 +72,12 @@ jobs:
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.darwin.spec
         mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-Darwin-x86_64.zip ./lunii-qt
+        zip -9 -j Lunii.Qt-${{ github.ref }}-Darwin-x86_64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-Darwin-x86_64
+        name: Lunii.Qt-${{ github.ref }}-Darwin-x86_64
         path: |
           ./lunii-qt
 
@@ -138,7 +86,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
-        files: Lunii.Qt-Darwin-x86_64.zip
+        files: Lunii.Qt-${{ github.ref }}-Darwin-x86_64.zip
 
   # build_mac_arm:
   #   runs-on: macos-latest-large
