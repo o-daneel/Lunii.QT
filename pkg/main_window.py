@@ -8,7 +8,7 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication
 
@@ -246,7 +246,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             sub_window_rect = self.debug_dialog.geometry()
 
             sub_window_rect.moveTopLeft(main_window_rect.topRight() + QtCore.QPoint(5, 0))
-            self.debug_dialog.setGeometry(sub_window_rect)
+
+            # getting screen
+            screen = QGuiApplication.screenAt(sub_window_rect.topLeft())
+            if screen:
+                screen_geometry = screen.geometry()
+                is_inside_screen = screen_geometry.contains(sub_window_rect.topLeft() + QtCore.QPoint(100, 0))
+            else:
+                is_inside_screen = False
+
+
+            if is_inside_screen:
+                self.debug_dialog.setGeometry(sub_window_rect)
 
         # Call the default moveEvent implementation
         super().moveEvent(event)
@@ -491,18 +502,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionShow_Log":
-            main_geometry = self.geometry()
-            debug_geometry = self.debug_dialog.geometry()
+            # already visible ? so hide it
+            if self.debug_dialog.isVisible():
+                self.debug_dialog.hide()
+                return
 
-            # computing log geometry
-            child_x = main_geometry.x() + main_geometry.width() + 5
-            child_y = main_geometry.y()
-            child_width = debug_geometry.width()
-            child_height = main_geometry.height()
+            # not visible, prepare location to show it
+            if not self.isMaximized():
+                main_geometry = self.geometry()
+                debug_geometry = self.debug_dialog.geometry()
 
-            # apply new geo
-            self.debug_dialog.setGeometry(child_x, child_y, child_width, child_height)
-            self.debug_dialog.show()
+                # computing log geometry
+                child_x = main_geometry.x() + main_geometry.width() + 5
+                child_y = main_geometry.y()
+                child_width = debug_geometry.width()
+                child_height = main_geometry.height()
+
+                # apply new geo
+                self.debug_dialog.setGeometry(child_x, child_y, child_width, child_height)
+                self.debug_dialog.show()        # show me debug log wnd
+                self.activateWindow()           # focus back to main
+            else:
+                self.debug_dialog.show()        # show me debug log wnd
 
         elif act_name == "actionGet_firmware":
             # prompt for Luniistore connection
