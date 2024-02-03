@@ -33,6 +33,7 @@ COL_SIZE = 3
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
+COL_EXTRA = 40
 
 APP_VERSION = "v2.6.3"
 
@@ -214,17 +215,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                # Adjusting cols based on widget size
-                if not self.sizes_hidden:
-                    col_size_width = self.tree_stories.width() - COL_DB_SIZE - self.tree_stories.columnWidth(COL_UUID) - COL_SIZE_SIZE
-                    self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
-                    self.tree_stories.setColumnWidth(COL_SIZE, COL_SIZE_SIZE - 30)
-                else:
-                    col_size_width = self.tree_stories.width() - COL_DB_SIZE - COL_UUID_SIZE
-                    self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
-                    self.tree_stories.setColumnWidth(COL_NAME, col_size_width - 30)
+                self.tw_resize_columns()
 
         return False
+
+    def tw_resize_columns(self):
+        # Adjusting cols based on widget size
+
+        # 1. forcing UUID to be at min size by huge name size
+        self.tree_stories.setColumnWidth(COL_NAME, 4096)
+        # 2. force resize to content
+        self.tree_stories.resizeColumnToContents(COL_UUID)
+        self.tree_stories.resizeColumnToContents(COL_SIZE)
+        # 3. get cur size
+        col_uuid_size = self.tree_stories.columnWidth(COL_UUID)
+        col_size_size = self.tree_stories.columnWidth(COL_SIZE)
+
+        # 4. update the name col while keeping uuid size
+        col_size_width = self.tree_stories.width() - COL_DB_SIZE - col_uuid_size
+        if not self.sizes_hidden:
+            col_size_width -= col_size_size
+        col_size_width -= COL_EXTRA
+        self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
 
     def customMoveEvent(self, event):
         # This custom slot is called when the main window is moved
@@ -332,7 +344,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             self.statusbar.showMessage(f"")
 
+            # widgets update with new device
             self.ts_update()
+            self.tw_resize_columns()
             self.sb_update("")
 
             # computing sizes if necessary
