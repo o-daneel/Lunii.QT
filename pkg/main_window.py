@@ -943,7 +943,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # setting up the thread
-        self.worker = ierWorker(self.audio_device, action, item_list, out_dir)
+        self.worker = ierWorker(self.audio_device, action, item_list, out_dir, not self.sizes_hidden and action == ACTION_IMPORT)
         self.thread = QtCore.QThread()
         self.worker.moveToThread(self.thread)
 

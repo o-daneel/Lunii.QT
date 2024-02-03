@@ -20,7 +20,7 @@ class ierWorker(QObject):
     signal_finished = QtCore.Signal()
     signal_message = QtCore.Signal(str)
 
-    def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None):
+    def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None, update_size=False):
         super().__init__()
 
         self.abort_process = False
@@ -28,6 +28,7 @@ class ierWorker(QObject):
         self.action = action
         self.items = story_list
         self.out_dir = out_dir
+        self.update_size = update_size      # stories size to be computed at the end of import
 
     def process(self):
         # cleaning any previous abortion
@@ -82,7 +83,9 @@ class ierWorker(QObject):
             self.exit_requested()
             return
 
-        self._task_size()
+        # size to be updated ?
+        if self.update_size:
+            self._task_size()
 
         # done
         self.signal_finished.emit()
