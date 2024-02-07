@@ -515,6 +515,10 @@
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
     <addaction name="separator"/>
+    <addaction name="actionRecover"/>
+    <addaction name="actionClean_up"/>
+    <addaction name="actionFactory_Reset"/>
+    <addaction name="separator"/>
     <addaction name="actionTranscode"/>
    </widget>
    <widget class="QMenu" name="menuStory">
@@ -754,6 +758,24 @@
    </property>
    <property name="text">
     <string>FFMPEG detected</string>
+   </property>
+  </action>
+  <action name="actionRecover">
+   <property name="text">
+    <string>Recover lost stories</string>
+   </property>
+  </action>
+  <action name="actionClean_up">
+   <property name="text">
+    <string>Clean up storage</string>
+   </property>
+  </action>
+  <action name="actionFactory_Reset">
+   <property name="icon">
+    <iconset theme="dialog-warning"/>
+   </property>
+   <property name="text">
+    <string>Factory Reset</string>
    </property>
   </action>
  </widget>
