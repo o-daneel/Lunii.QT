@@ -645,7 +645,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         device_selected: bool = self.audio_device is not None
 
         self.act_getfw.setEnabled(device_selected)
-        self.act_factory.setEnabled(device_selected)
+        self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
 
 
