@@ -156,7 +156,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
         act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
         act_transcode.setChecked(self.ffmpeg_present)
-        act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing")
+        act_transcode.setEnabled(not self.ffmpeg_present)
+        act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
 
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
@@ -254,7 +255,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 is_inside_screen = screen_geometry.contains(sub_window_rect.topLeft() + QtCore.QPoint(100, 0))
             else:
                 is_inside_screen = False
-
 
             if is_inside_screen:
                 self.debug_dialog.setGeometry(sub_window_rect)
@@ -569,6 +569,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             except requests.exceptions.ConnectionError:
                 self.sb_update(f"🛑 Network error...")
+
+        elif act_name == "actionTranscode":
+            website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
+            # Open the URL in the default web browser
+            QDesktopServices.openUrl(website_url)
 
     def cb_menu_help(self, action: QtGui.QAction):
         act_name = action.objectName()
