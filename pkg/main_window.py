@@ -107,7 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.modify_widgets()
         self.setup_connections()
-        self.cb_dev_refresh()
+        self.cb_device_refresh()
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
@@ -181,7 +181,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
 
-        self.btn_refresh.clicked.connect(self.cb_dev_refresh)
+        self.btn_refresh.clicked.connect(self.cb_device_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
         self.btn_abort.clicked.connect(self.worker_abort)
 
@@ -205,7 +205,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuHelp.triggered.connect(self.cb_menu_help)
 
         # story list shortcuts
-        QShortcut(QKeySequence("F5"), self, self.cb_dev_refresh)
+        QShortcut(QKeySequence("F5"), self, self.cb_device_refresh)
         QShortcut(QKeySequence("F2"), self, toggle_refresh_cache)
         QShortcut(QKeySequence("F1"), self, about_dlg)
 
@@ -293,7 +293,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.combo_device.addItem(dev_path)
 
-    def cb_dev_refresh(self):
+    def cb_device_refresh(self):
         dev_list = find_devices()
         self.combo_device.clear()
         self.audio_device = None
