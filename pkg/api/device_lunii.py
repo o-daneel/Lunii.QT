@@ -2,6 +2,7 @@ import glob
 import json
 import os.path
 import shutil
+from string import hexdigits
 import zipfile
 import psutil
 import py7zr
@@ -374,10 +375,37 @@ class LuniiDevice(QtCore.QObject):
 
         return recovered
 
-    #TODO
     def cleanup_stories(self):
-        print("cleanup_stories")
-        pass
+        removed = 0
+        recovered_size = 0
+
+        # getting all stories
+        content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
+        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+
+        for index, story in enumerate(stories_dir):
+            # directory is a partial UUID
+            self.signal_story_progress.emit(story, index, len(stories_dir))
+
+            if story not in self.stories:
+                # remove it
+                try:
+                    lost_story_path = os.path.join(content_dir, story)
+
+                    # computing lost size
+                    for parent_dir, _, files in os.walk(lost_story_path):
+                        for file in files:
+                            recovered_size += os.path.getsize(os.path.join(parent_dir, file))
+
+                    # removing whole directory
+                    self.signal_logger.emit(logging.INFO, f"Deleting - {lost_story_path}")
+                    shutil.rmtree(lost_story_path)
+                    removed += 1
+                except (OSError, PermissionError) as e:
+                    self.signal_logger.emit(logging.WARN, f"Failed to delete - {lost_story_path}")
+                    self.signal_logger.emit(logging.ERROR, e)
+
+        return removed, recovered_size//1024//1024
 
     def __get_plain_data(self, file):
         if not os.path.isfile(file):

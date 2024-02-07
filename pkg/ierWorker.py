@@ -211,10 +211,7 @@ class ierWorker(QObject):
 
 
     def _task_cleanup(self):
-        self.audio_device.cleanup_stories()
-
-        count = 0
-        size = 0
+        count, size = self.audio_device.cleanup_stories()
 
         # done
         self.signal_finished.emit()

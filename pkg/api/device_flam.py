@@ -126,12 +126,12 @@ class FlamDevice(QtCore.QObject):
     #TODO
     def recover_stories(self):
         print("recover_stories")
-        pass
+        return 0
 
     #TODO
     def cleanup_stories(self):
         print("cleanup_stories")
-        pass
+        return 0, 0
 
     def import_story(self, story_path):
         archive_type = TYPE_UNK
