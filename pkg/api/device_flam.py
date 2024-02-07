@@ -211,7 +211,7 @@ class FlamDevice(QtCore.QObject):
                     continue
 
                 # Extract each zip file
-                self.signal_logger.emit(logging.DEBUG, f"Writing file : {file}")
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file}")
                 data = zip_file.read(file)
 
                 target: Path = output_path.joinpath(file)
@@ -292,7 +292,7 @@ class FlamDevice(QtCore.QObject):
                     continue
 
                 # Extract each zip file
-                self.signal_logger.emit(logging.DEBUG, f"Writing file : {fname}")
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {fname}")
 
                 target: Path = output_path.joinpath(fname)
 

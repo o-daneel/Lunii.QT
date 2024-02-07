@@ -376,7 +376,7 @@ class LuniiDevice(QtCore.QObject):
                 file = dir_head.upper() + file[8:]
         file = file.replace("\\", "/")
 
-        self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
+        # self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
         return file
 
     def import_dir(self, story_path):
@@ -566,6 +566,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data)
 
@@ -652,6 +653,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data)
 
@@ -754,6 +756,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data)
 
@@ -858,6 +861,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data)
 
@@ -974,6 +978,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data_ciphered)
 
@@ -1094,6 +1099,7 @@ class LuniiDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
                 with open(target, "wb") as f_dst:
                     f_dst.write(data_ciphered)
 

@@ -115,6 +115,8 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
+*.patch
+make_vip.ps1
 
 # mkdocs documentation
 /site
