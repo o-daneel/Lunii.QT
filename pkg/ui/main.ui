@@ -703,7 +703,10 @@
      <normaloff>:/icon/res/open.png</normaloff>:/icon/res/open.png</iconset>
    </property>
    <property name="text">
-    <string>Open Lunii</string>
+    <string>Open device</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Lunii or Flam device</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
