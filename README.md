@@ -86,23 +86,48 @@ for Windows / Linux / MacOs 11
 | `F5`           | Refresh devices                  |
 
 ## Audio Transcoding
-Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool available here :  
-https://github.com/eugeneware/ffmpeg-static/releases/latest  
+Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool ( [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html) )
 
 **WARNING** : transcoding is <u>very long</u>, you should be patient. That's why you should prefer the [.plain.pk](#plainpk) format that use compatible audio.
 
 ### Installation
-You must ensure that `ffmpeg` command is in your path.  
-If you're lost, just can grab a standalone binary on the previous link, for you platform (Win/Linux/MacOs), and copy it beside this app, like this :
-```
-- 
- |- lunii-qt.exe
- |- ffmpeg.exe
-```
+#### Windows
+1) grab your ffmpeg release from [here](https://www.gyan.dev/ffmpeg/builds/)
+2) rename it to `ffmpeg.exe`
+3) copy beside lunii-qt.exe   
+    ```
+    - 
+     |- lunii-qt.exe
+     |- ffmpeg.exe
+    ```
+4) restart luni-qt
 
-1) Grab your ffmpeg release
-2) Rename it to `ffmpeg.exe` or `ffmpeg` (depending on your host OS)
-3) Copy beside lunii-qt.exe 
+Alternate method (I prefer):
+1) open powershell terminal
+2) run the following commands to install Scoop Package manager  
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    ```
+3) install ffmpeg with   
+  `scoop install ffmpeg`
+4) restart luni-qt
+
+#### Linux
+1) open a terminal
+2) run following command :   
+`sudo apt-get install ffmpeg`
+4) restart luni-qt
+
+#### MacOs
+To ease ffmpeg tool installation, it is recommended to use Brew from https://brew.sh/  
+1) open a terminal
+2) copy and paste the following link  
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+3) At the end of the installation, type into the terminal:  
+`brew install ffmpeg`
+4) restart luni-qt
+
 
 ### Checking 
 Within the application, the Tools menu will display the status of detection.
