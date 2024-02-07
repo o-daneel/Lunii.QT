@@ -283,6 +283,16 @@ class LuniiDevice(QtCore.QObject):
                 fp.write(story.uuid.bytes)
         return
 
+    #TODO
+    def recover_stories(self):
+        print("recover_stories")
+        pass
+
+    #TODO
+    def cleanup_stories(self):
+        print("cleanup_stories")
+        pass
+
     def __get_plain_data(self, file):
         if not os.path.isfile(file):
             return b""
@@ -1279,6 +1289,10 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
+    #TODO
+    def factory_reset(self):
+        print("factory_reset")
+        pass
 
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:

@@ -509,15 +509,21 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
+    <widget class="QMenu" name="menuLost_stories">
+     <property name="title">
+      <string>Lost stories</string>
+     </property>
+     <addaction name="actionRecover_stories"/>
+     <addaction name="actionRemove_stories"/>
+    </widget>
     <addaction name="actionShow_size"/>
     <addaction name="actionShow_story_details"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
     <addaction name="separator"/>
-    <addaction name="actionRecover"/>
-    <addaction name="actionClean_up"/>
-    <addaction name="actionFactory_Reset"/>
+    <addaction name="menuLost_stories"/>
+    <addaction name="actionFactory_reset"/>
     <addaction name="separator"/>
     <addaction name="actionTranscode"/>
    </widget>
@@ -760,17 +766,17 @@
     <string>FFMPEG detected</string>
    </property>
   </action>
-  <action name="actionRecover">
+  <action name="actionRecover_stories">
    <property name="text">
-    <string>Recover lost stories</string>
+    <string>Recover</string>
    </property>
   </action>
-  <action name="actionClean_up">
+  <action name="actionRemove_stories">
    <property name="text">
-    <string>Clean up storage</string>
+    <string>Remove</string>
    </property>
   </action>
-  <action name="actionFactory_Reset">
+  <action name="actionFactory_reset">
    <property name="icon">
     <iconset theme="dialog-warning"/>
    </property>

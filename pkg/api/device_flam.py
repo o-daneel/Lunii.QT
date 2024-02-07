@@ -123,6 +123,16 @@ class FlamDevice(QtCore.QObject):
                 fp.write(str(story.uuid) + "\n")
         return
 
+    #TODO
+    def recover_stories(self):
+        print("recover_stories")
+        pass
+
+    #TODO
+    def cleanup_stories(self):
+        print("cleanup_stories")
+        pass
+
     def import_story(self, story_path):
         archive_type = TYPE_UNK
 
@@ -414,6 +424,11 @@ class FlamDevice(QtCore.QObject):
         self.signal_story_progress.emit(short_uuid, 2, 3)
 
         return True
+
+    #TODO
+    def factory_reset(self):
+        print("factory_reset")
+        pass
 
 
 # opens the .pi file to read all installed stories

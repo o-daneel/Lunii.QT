@@ -19,7 +19,8 @@ from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
-from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE
+from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
+    ACTION_FACTORY, ACTION_RECOVER
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -154,6 +155,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
+        self.act_factory = next(act for act in t_actions if act.objectName() == "actionFactory_reset")
         act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
         act_transcode.setChecked(self.ffmpeg_present)
         act_transcode.setEnabled(not self.ffmpeg_present)
@@ -198,6 +200,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
         self.menuTools.triggered.connect(self.cb_menu_tools)
         self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
+        self.menuLost_stories.triggered.connect(self.cb_menu_lost)
         self.menuHelp.aboutToShow.connect(self.cb_menu_help_update)
         self.menuHelp.triggered.connect(self.cb_menu_help)
 
@@ -575,6 +578,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # Open the URL in the default web browser
             QDesktopServices.openUrl(website_url)
 
+        elif act_name == "actionFactory_reset":
+            # TODO request confirmation before performing
+
+            # starting reset process
+            self.worker_launch(ACTION_FACTORY)
+
+    def cb_menu_lost(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionRecover_stories":
+            self.worker_launch(ACTION_RECOVER)
+        elif act_name == "actionRemove_stories":
+            self.worker_launch(ACTION_CLEANUP)
+
     def cb_menu_help(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionAbout":
@@ -626,10 +642,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.act_exportall.setEnabled(True)
 
     def cb_menu_tools_update(self):
-        self.act_getfw.setEnabled(False)
+        device_selected: bool = self.audio_device is not None
 
-        if self.audio_device:
-            self.act_getfw.setEnabled(True)
+        self.act_getfw.setEnabled(device_selected)
+        self.act_factory.setEnabled(device_selected)
+        self.menuLost_stories.setEnabled(device_selected)
+
 
     def cb_menu_help_update(self):
         if self.last_version and self.last_version != APP_VERSION:
