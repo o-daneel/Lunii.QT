@@ -110,7 +110,6 @@ class LuniiDevice(QtCore.QObject):
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
                                        f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}")
 
-
     def __md6_parse(self, fp_md):
         self.device_version = LUNII_V3
         fp_md.seek(2)
@@ -134,6 +133,8 @@ class LuniiDevice(QtCore.QObject):
 
         vid, pid = FAH_V2_V3_USB_VID_PID
         logger = logging.getLogger(LUNII_LOGGER)
+        if self.device_key:
+            logger.log(logging.INFO, f"v3 key file read from {self.dev_keyfile}")
         logger.log(logging.DEBUG, f"\n"
                                        f"SNU : {self.snu_str}\n"
                                        f"HW  : v3\n"
@@ -283,10 +284,95 @@ class LuniiDevice(QtCore.QObject):
                 fp.write(story.uuid.bytes)
         return
 
-    #TODO
+    def __valid_story(self, story_path):
+        # getting all files in story
+        story_files = glob.glob(os.path.join(story_path, "**/*"), recursive=True)
+
+        # expected files
+        expected_files = ["bt", "li", "ni", "ri", "si"]
+        for pattern in expected_files:
+            if not any(entry.lower().endswith(pattern) for entry in story_files):
+                self.signal_logger.emit(logging.WARN, f"Missing {pattern} in {story_path}")
+                return False
+
+        # expected dirs
+        expected_dirs = ["rf", "sf"]
+        for pattern in expected_dirs:
+            if not any(entry.lower().endswith(pattern) for entry in story_files):
+                self.signal_logger.emit(logging.WARN, f"Missing {pattern} in {story_path}")
+                return False
+
+        # for Lunii v3, checking keys (original or trick)
+        if self.device_version == LUNII_V3:
+            # loading story keys
+            self.load_story_keys(os.path.join(story_path, "bt"))
+            # are keys usable ?
+            if not self.__story_check_key(Path(story_path), self.story_key, self.story_iv):
+                # not the trick keys or dev keys unknown... can't get further
+                return True
+            
+        # checking auth file (if possible)
+        if self.device_version <= LUNII_V2:
+            if not self.__story_check_key(Path(story_path), lunii_generic_key, None):
+                return False
+
+        # parsing ri file - each resource must exist
+        ri_plain = self.__get_plain_data(os.path.join(story_path, "ri")).decode("utf-8")
+        ri_lines = [ri_plain[i:i+12] for i in range(0, len(ri_plain), 12)]
+        for res in ri_lines:
+            res_path = os.path.join(story_path, "rf", res)
+            if not os.path.isfile(res_path):
+                self.signal_logger.emit(logging.WARN, f"Missing rf\\{res} in {story_path}")
+                return False
+
+        # parsing si file - each resource must exist
+        si_plain = self.__get_plain_data(os.path.join(story_path, "si")).decode("utf-8")
+        si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
+        for res in si_lines:
+            res_path = os.path.join(story_path, "sf", res)
+            if not os.path.isfile(res_path):
+                self.signal_logger.emit(logging.WARN, f"Missing sf\\{res} in {story_path}")
+                return False
+
+        # all requested files are there, including auth file ans resources
+        return True
+
+    # try to recover lost stories from .content directory
     def recover_stories(self):
-        print("recover_stories")
-        pass
+        recovered = 0
+
+        # getting all stories
+        content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
+        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+
+        for index, story in enumerate(stories_dir):
+            # directory is a partial UUID
+            self.signal_story_progress.emit(story, index, len(stories_dir))
+
+            str_uuid = None
+            # looking complete UUID in official DB
+            if not str_uuid:
+                str_uuid = next((uuid for uuid in stories.DB_OFFICIAL if story.upper() in uuid.upper()), None)
+            # looking complete UUID in third party DB
+            if not str_uuid:
+                str_uuid = next((uuid for uuid in stories.DB_THIRD_PARTY if story.upper() in uuid.upper()), None)
+            # padding partial UUID
+            if not str_uuid and len(story) == 8 and all(c in hexdigits for c in story):
+                str_uuid = "00"*12 + story
+
+            if str_uuid and str_uuid not in self.stories:
+                story_dir = os.path.join(content_dir, story)
+                if self.__valid_story(story_dir):
+                    full_uuid = UUID(str_uuid)
+                    self.signal_logger.emit(logging.INFO, f"Recovered - {str(full_uuid).upper()}")
+                    self.stories.append(Story(full_uuid))
+                    recovered += 1
+                else:
+                    self.signal_logger.emit(logging.INFO, f"Skipping lost story (seems broken/incomplete) - {str_uuid}")
+            else:
+                self.signal_logger.emit(logging.DEBUG, f"Already in list - {str_uuid}")
+
+        return recovered
 
     #TODO
     def cleanup_stories(self):
@@ -1145,7 +1231,7 @@ class LuniiDevice(QtCore.QObject):
             # data =  data_plain
             fp.write(data)
 
-    def __story_check_key(self, story_path, key, iv):
+    def __story_check_key(self, story_path: Path, key, iv):
         # Trying to decipher RI/SI for path check
         ri_path = story_path.joinpath("ri")
         if not os.path.isfile(ri_path):
@@ -1294,6 +1380,7 @@ class LuniiDevice(QtCore.QObject):
         print("factory_reset")
         pass
 
+
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
     logger = logging.getLogger(LUNII_LOGGER)
@@ -1307,7 +1394,7 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
     # no pi file, done
     if not os.path.isfile(pi_path):
-        return
+        return story_list
 
     with open(pi_path, "rb") as fp_pi:
         loop_again = True

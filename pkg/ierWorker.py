@@ -1,5 +1,6 @@
 import os
 import time
+import traceback
 
 from PySide6 import QtCore
 from PySide6.QtCore import QObject
@@ -58,6 +59,7 @@ class ierWorker(QObject):
             # Abort requested
             self.exit_requested()
             self.signal_message.emit(f"🛑 Critical error : {e}")
+            traceback.print_exc()
 
         self.signal_refresh.emit()
 
@@ -199,9 +201,8 @@ class ierWorker(QObject):
         self.signal_message.emit(f"✅ Stories parsed, sizes updated")
 
     def _task_recover(self):
-        self.audio_device.recover_stories()
-
-        count = 0
+        count = self.audio_device.recover_stories()
+        self.audio_device.update_pack_index()
 
         # done
         self.signal_finished.emit()
