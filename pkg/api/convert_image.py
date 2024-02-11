@@ -17,7 +17,7 @@ def image_to_bitmap_rle4(image_data):
         img = img.transpose(Image.FLIP_TOP_BOTTOM)
 
     # print(img.mode)
-    if img.mode not in ["1", "P", "L"]:
+    if img.mode not in ["1", "L"]:
         img = img.convert("RGB")
 
     # Get pixel data
@@ -37,7 +37,7 @@ def image_to_bitmap_rle4(image_data):
             index = y * width + x
 
             # GrayScaled source
-            if img.mode == 'L' or img.mode == '1':
+            if img.mode in ['P', 'L', '1']:
                 # Get gray values for the current pixel
                 gray = pixel_data[index]
                 grayscale_value = int(gray/16)
