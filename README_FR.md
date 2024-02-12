@@ -1,6 +1,7 @@
 :uk: [Readme in English](./README.md) :uk:
 
 # Lunii.QT
+#### (version obsolète, requiert une mise à jour)
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
 pour Windows / Linux / MacOs 11  

@@ -57,10 +57,12 @@ class ierWorker(QObject):
 
         except Exception as e:
             # Abort requested
-            self.exit_requested()
             self.signal_message.emit(f"🛑 Critical error : {e}")
+            self.signal_message.emit(f"Trace\n{traceback.format_exc()}")
             traceback.print_exc()
-
+            self.exit_requested()
+            return
+            
         self.signal_refresh.emit()
 
     def exit_requested(self):

@@ -2,7 +2,7 @@
 
 # Lunii.QT
 A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **firmware download**   
-for Windows / Linux / MacOs 11  
+for Windows / Linux / macOS  
 (compatible with STUdio archive, **with** transcoding)
 
 
@@ -21,12 +21,17 @@ for Windows / Linux / MacOs 11
   * [User Interface](#user-interface)
   * [Shortcuts](#shortcuts)
   * [Audio Transcoding](#audio-transcoding)
+    * [Installation](#installation)
+    * [Checking](#checking-)
   * [Firmware upgrade](#firmware-upgrade)
     * [HowTo - Lunii](#howto---lunii)
     * [HowTo - Flam](#howto---flam)
   * [Supported archive formats (Lunii)](#supported-archive-formats-lunii)
   * [Python ? HowTo](#python--howto)
   * [Tricks](#tricks)
+    * [macOS - Application Authorization](#macos---application-authorization)
+    * [Third Party story metadata](#third-party-story-metadata)
+    * [Cache management](#cache-management)
   * [Credits](#credits)
 * [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
@@ -119,7 +124,7 @@ Alternate method (I prefer):
 `sudo apt-get install ffmpeg`
 4) restart luni-qt
 
-#### MacOs
+#### macOS
 To ease ffmpeg tool installation, it is recommended to use Brew from https://brew.sh/  
 1) open a terminal
 2) copy and paste the following link  
@@ -268,10 +273,6 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
         stroy.json
         thumbnail.png
 
-## TODO
-* config file to backup menu config (sizes / details)
-* add picture to tree list ?
-
 
 ## Python ? HowTo
 
@@ -290,7 +291,7 @@ Switch to your venv
   `.\venv\Scripts\activate.bat`
 
 Install dependencies
-```
+****```
 $ pip install -r requirements.txt
 ```
 
@@ -329,6 +330,22 @@ $ build/exe.win-amd64/lunii-qt
 ```
 
 ## Tricks
+
+### macOS - Application Authorization
+1. Double-click the file called `lunii-qt`.
+2. You should see an error message "`lunii-qt` can’t be opened because it is from an unidentified developer".  
+![](./res/macos_install_1.png)  
+  Click "**OK**"
+3. Go to System **Preferences** > **Security** and **Privacy** and click on the General tab.  
+![](./res/macos_install_2.png)
+4. At the bottom of the window you will see a message saying that `lunii-qt` was blocked. Click "**Open Anyway**".   
+   If you do not see this message in the General tab, double-click `lunii-qt` again.  
+   **NOTE :** You may have to click the "**unlock**" button and enter your password to be able to click "**Open Anyway**".
+8. If you see another popup that says “`lunii-qt` is from an unidentified developer. Are you sure you want to open it?”, click "**Open**". If you don’t get this popup, just go to the same file and double-click it again.    
+![](./res/macos_install_3.png)
+9. Finally, you'll be informed that `lunii-qt` was downloaded from internet     
+![](./res/macos_install_4.png)  
+Click "**Open**", and you'll never get these messages in the future. 
 
 ### Third Party story metadata
 You might have already loaded non-official stories to your device thanks to another app. When opening Lunii.QT, this 
