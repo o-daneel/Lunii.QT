@@ -12,6 +12,7 @@ from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopS
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication
 
+from pkg import versionWorker
 from pkg.api import constants
 from pkg.api.constants import *
 from pkg.api.device_flam import is_flam, FlamDevice
@@ -69,7 +70,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
-        self.last_version = None
         self.ffmpeg_present = shutil.which("ffmpeg") is not None
 
         # actions local storage
@@ -89,26 +89,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         story_load_db(False)
 
         # UI init
-        self.app.processEvents()
         self.init_ui()
-        self.app.processEvents()
 
-        # fetching last app version on Github
-        try:
-            headers = {'Referer': f"Lunii.QT {APP_VERSION}"}
-            response = requests.get("https://github.com/o-daneel/Lunii.QT/releases/latest", headers=headers, timeout=1)
-            self.last_version = response.url.split("/").pop()
-            self.logger.log(logging.INFO, f"Latest Github release {self.last_version}")
-        except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
-            pass
+        # starting thread to fetch version
+        self.worker_version()
 
-        self.cb_menu_help_update()
+        # refresh devices
+        self.cb_device_refresh()
 
     def init_ui(self):
         self.setupUi(self)
         self.modify_widgets()
         self.setup_connections()
-        self.cb_device_refresh()
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
@@ -203,7 +195,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuTools.triggered.connect(self.cb_menu_tools)
         self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
         self.menuLost_stories.triggered.connect(self.cb_menu_lost)
-        self.menuHelp.aboutToShow.connect(self.cb_menu_help_update)
+        # self.menuHelp.aboutToShow.connect(self.cb_menu_help_update)
         self.menuHelp.triggered.connect(self.cb_menu_help)
 
         # story list shortcuts
@@ -660,12 +652,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
 
+    def cb_menu_help_update(self, last_version):
+        if last_version:
+            self.logger.log(logging.INFO, f"Latest Github release {last_version}")
+        else:
+            self.logger.log(logging.WARN, f"🛑 Unable to fetch version from Github")
 
-    def cb_menu_help_update(self):
-        if self.last_version and self.last_version != APP_VERSION:
+        if last_version and last_version > APP_VERSION:
             self.menuHelp.setTitle("[ Help ]")
             self.menuUpdate.setTitle("New update is available")
-            self.act_update.setText(f"Update to {self.last_version}")
+            self.act_update.setText(f"Update to {last_version}")
             self.act_update.setVisible(True)
         else:
             self.act_update.setVisible(False)
@@ -1018,6 +1014,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.sb_update("Importing stories...")
         self.worker_launch(ACTION_IMPORT, file_paths)
+
+    def worker_version(self):
+        # version_thread.start()
+        self.version_worker = versionWorker.VersionChecker()
+        self.version_thread = QtCore.QThread()
+
+        self.version_worker.update_available.connect(self.cb_menu_help_update)
+        self.version_thread.started.connect(self.version_worker.check_for_updates)
+
+        # move worker to the worker thread
+        self.version_worker.moveToThread(self.version_thread)
+
+        # start the thread
+        self.version_thread.start()
 
     def worker_launch(self, action, item_list=None, out_dir=None):
         if self.worker:
