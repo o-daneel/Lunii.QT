@@ -290,31 +290,42 @@ class LuniiDevice(QtCore.QObject):
         story_files = glob.glob(os.path.join(story_path, "**/*"), recursive=True)
 
         # expected files
-        expected_files = ["bt", "li", "ni", "ri", "si"]
+        expected_files = ["li", "ni", "ri", "si"]
         for pattern in expected_files:
             if not any(entry.lower().endswith(pattern) for entry in story_files):
                 self.signal_logger.emit(logging.WARN, f"Missing {pattern} in {story_path}")
                 return False
+
+        # checking for bt file
+        # for Lunii v3, checking keys (original or trick)
+        if self.device_version == LUNII_V3:
+            # loading story keys
+            self.load_story_keys(os.path.join(story_path, "bt"))
+            # are keys usable ?
+            if not self.__story_check_v3key(Path(story_path), self.story_key, self.story_iv):
+                # not the trick keys or dev keys unknown... can't get further
+                return True
+
+        # checking auth file (if possible) + fix
+        if self.device_version <= LUNII_V2:
+            if not self.__story_check_v2bt(Path(story_path)):
+                self.signal_logger.emit(logging.WARN, f"Bad authorization file bt in {story_path}")
+
+                # Fixing bt file
+                data_ri = self.__get_plain_data(os.path.join(story_path, "ri"))
+                self.bt = self.cipher(data_ri[0:0x40], self.device_key)
+
+                # creating authorization file : bt
+                self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+                with open(os.path.join(story_path, "bt"), "wb") as fp_bt:
+                    fp_bt.write(self.bt)
+
 
         # expected dirs
         expected_dirs = ["rf", "sf"]
         for pattern in expected_dirs:
             if not any(entry.lower().endswith(pattern) for entry in story_files):
                 self.signal_logger.emit(logging.WARN, f"Missing {pattern} in {story_path}")
-                return False
-
-        # for Lunii v3, checking keys (original or trick)
-        if self.device_version == LUNII_V3:
-            # loading story keys
-            self.load_story_keys(os.path.join(story_path, "bt"))
-            # are keys usable ?
-            if not self.__story_check_key(Path(story_path), self.story_key, self.story_iv):
-                # not the trick keys or dev keys unknown... can't get further
-                return True
-            
-        # checking auth file (if possible)
-        if self.device_version <= LUNII_V2:
-            if not self.__story_check_key(Path(story_path), lunii_generic_key, None):
                 return False
 
         # parsing ri file - each resource must exist
@@ -339,7 +350,7 @@ class LuniiDevice(QtCore.QObject):
         return True
 
     # try to recover lost stories from .content directory
-    def recover_stories(self):
+    def recover_stories(self, dry_run: bool):
         recovered = 0
 
         # getting all stories
@@ -361,17 +372,24 @@ class LuniiDevice(QtCore.QObject):
             if not str_uuid and len(story) == 8 and all(c in hexdigits for c in story):
                 str_uuid = "00"*12 + story
 
-            if str_uuid and str_uuid not in self.stories:
+            full_uuid = UUID(str_uuid)
+            one_story = Story(full_uuid)
+
+            if str_uuid not in self.stories:
                 story_dir = os.path.join(content_dir, story)
                 if self.__valid_story(story_dir):
-                    full_uuid = UUID(str_uuid)
-                    self.signal_logger.emit(logging.INFO, f"Recovered - {str(full_uuid).upper()}")
-                    self.stories.append(Story(full_uuid))
+
+                    # is it a dry run ?
+                    if not dry_run:
+                        self.signal_logger.emit(logging.INFO, f"Recovered - {str(full_uuid).upper()} - {one_story.name}")
+                        self.stories.append(Story(full_uuid))
+                    else:
+                        self.signal_logger.emit(logging.INFO, f"Found - {str(full_uuid).upper()} - {one_story.name}")
                     recovered += 1
                 else:
-                    self.signal_logger.emit(logging.INFO, f"Skipping lost story (seems broken/incomplete) - {str_uuid}")
+                    self.signal_logger.emit(logging.INFO, f"Skipping lost story (seems broken/incomplete) - {str(full_uuid).upper()} - {one_story.name}")
             else:
-                self.signal_logger.emit(logging.DEBUG, f"Already in list - {str_uuid}")
+                self.signal_logger.emit(logging.DEBUG, f"Already in list - {str(full_uuid).upper()} - {one_story.name}")
 
         return recovered
 
@@ -1259,7 +1277,7 @@ class LuniiDevice(QtCore.QObject):
             # data =  data_plain
             fp.write(data)
 
-    def __story_check_key(self, story_path: Path, key, iv):
+    def __story_check_v3key(self, story_path: Path, key, iv):
         # Trying to decipher RI/SI for path check
         ri_path = story_path.joinpath("ri")
         if not os.path.isfile(ri_path):
@@ -1270,6 +1288,24 @@ class LuniiDevice(QtCore.QObject):
 
         plain = self.decipher(ri_content, key, iv)
         return plain[:3] == b"000"
+
+    def __story_check_v2bt(self, story_path: Path):
+        bt_path = story_path.joinpath("bt")
+        if not os.path.isfile(bt_path):
+            return False
+        ri_path = story_path.joinpath("ri")
+        if not os.path.isfile(ri_path):
+            return False
+        else:
+            ri_data = self.__get_plain_data(os.path.join(story_path, "ri"))
+
+        # Trying to decipher BT
+        with open(bt_path, "rb") as fp_bt:
+            bt_content = fp_bt.read()
+            plain_bt = self.decipher(bt_content, self.device_key)
+            return ri_data[:0x40] == plain_bt
+
+        return False
 
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
@@ -1301,7 +1337,7 @@ class LuniiDevice(QtCore.QObject):
             # loading story keys
             self.load_story_keys(str(story_path.joinpath("bt")))
             # are keys usable ?
-            if not self.__story_check_key(story_path, self.story_key, self.story_iv):
+            if not self.__story_check_v3key(story_path, self.story_key, self.story_iv):
                 self.signal_logger.emit(logging.ERROR, "Lunii v3 requires Device Key for genuine story export.")
                 return None
 

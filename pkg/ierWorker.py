@@ -13,9 +13,10 @@ ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
 ACTION_REMOVE  = 3
 ACTION_SIZE    = 4
-ACTION_RECOVER = 5
-ACTION_CLEANUP = 6
-ACTION_FACTORY = 7
+ACTION_FIND    = 5
+ACTION_RECOVER = 6
+ACTION_CLEANUP = 7
+ACTION_FACTORY = 8
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
@@ -48,8 +49,10 @@ class ierWorker(QObject):
                 self._task_remove()
             elif self.action == ACTION_SIZE:
                 self._task_size()
+            elif self.action == ACTION_FIND:
+                self._task_recover(True)
             elif self.action == ACTION_RECOVER:
-                self._task_recover()
+                self._task_recover(False)
             elif self.action == ACTION_CLEANUP:
                 self._task_cleanup()
             elif self.action == ACTION_FACTORY:
@@ -202,17 +205,20 @@ class ierWorker(QObject):
         self.signal_refresh.emit()
         self.signal_message.emit(f"✅ Stories parsed, sizes updated")
 
-    def _task_recover(self):
-        count = self.audio_device.recover_stories()
-        self.audio_device.update_pack_index()
+    def _task_recover(self, dry_run=False):
+        self.signal_message.emit(f"🚧 Analyzing storage ...")
+        count = self.audio_device.recover_stories(dry_run)
+        if not dry_run:
+            self.audio_device.update_pack_index()
 
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Storage parsed, {count} lost stories recovered")
+        self.signal_message.emit(f"✅ Storage parsed, {count} lost stories {'found (try to recover them)' if dry_run else 'recovered'}")
 
 
     def _task_cleanup(self):
+        self.signal_message.emit(f"🚧 Cleaning storage ...")
         count, size = self.audio_device.cleanup_stories()
 
         # done

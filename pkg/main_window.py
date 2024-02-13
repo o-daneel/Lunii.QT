@@ -20,7 +20,7 @@ from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
-    ACTION_FACTORY, ACTION_RECOVER
+    ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -588,10 +588,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # handling action
         act_name = action.objectName()
-        if act_name == "actionRecover_stories":
+        if act_name == "actionFind_stories":
+            self.worker_launch(ACTION_FIND)
+        elif act_name == "actionRecover_stories":
             self.worker_launch(ACTION_RECOVER)
         elif act_name == "actionRemove_stories":
-            self.debug_dialog.show()
             self.worker_launch(ACTION_CLEANUP)
 
     def cb_menu_help(self, action: QtGui.QAction):

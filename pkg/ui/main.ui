@@ -513,6 +513,7 @@
      <property name="title">
       <string>Lost stories</string>
      </property>
+     <addaction name="actionFind_stories"/>
      <addaction name="actionRecover_stories"/>
      <addaction name="actionRemove_stories"/>
     </widget>
@@ -566,6 +567,9 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
   <action name="actionImport">
@@ -742,6 +746,9 @@
    <property name="text">
     <string>About</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
   </action>
   <action name="actionUpdate">
    <property name="icon">
@@ -782,6 +789,11 @@
    </property>
    <property name="text">
     <string>Factory Reset</string>
+   </property>
+  </action>
+  <action name="actionFind_stories">
+   <property name="text">
+    <string>Find</string>
    </property>
   </action>
  </widget>
