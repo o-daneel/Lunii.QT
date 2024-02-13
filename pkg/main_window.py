@@ -242,25 +242,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         col_size_width -= COL_EXTRA
         self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
 
+
+    def __set_dbg_wndSize(self):
+        # Move the sub-window alongside the main window
+        main_geometry = self.geometry()
+        debug_geometry = self.debug_dialog.geometry()
+
+        debug_geometry.moveTopLeft(main_geometry.topRight() + QtCore.QPoint(5, 0))
+        debug_geometry.setHeight(main_geometry.height())
+
+        # getting screen
+        screen = QGuiApplication.screenAt(debug_geometry.topLeft())
+        if screen:
+            screen_geometry = screen.geometry()
+            is_inside_screen = screen_geometry.contains(debug_geometry.topLeft() + QtCore.QPoint(100, 0))
+        else:
+            is_inside_screen = False
+
+        if is_inside_screen:
+            self.debug_dialog.setGeometry(debug_geometry)
+
     def customMoveEvent(self, event):
         # This custom slot is called when the main window is moved
         if self.debug_dialog.isVisible():
-            # Move the sub-window alongside the main window
-            main_window_rect = self.geometry()
-            sub_window_rect = self.debug_dialog.geometry()
-
-            sub_window_rect.moveTopLeft(main_window_rect.topRight() + QtCore.QPoint(5, 0))
-
-            # getting screen
-            screen = QGuiApplication.screenAt(sub_window_rect.topLeft())
-            if screen:
-                screen_geometry = screen.geometry()
-                is_inside_screen = screen_geometry.contains(sub_window_rect.topLeft() + QtCore.QPoint(100, 0))
-            else:
-                is_inside_screen = False
-
-            if is_inside_screen:
-                self.debug_dialog.setGeometry(sub_window_rect)
+            self.__set_dbg_wndSize()
 
         # Call the default moveEvent implementation
         super().moveEvent(event)
@@ -512,17 +517,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # not visible, prepare location to show it
             if not self.isMaximized():
-                main_geometry = self.geometry()
-                debug_geometry = self.debug_dialog.geometry()
+                self.__set_dbg_wndSize()
 
-                # computing log geometry
-                child_x = main_geometry.x() + main_geometry.width() + 5
-                child_y = main_geometry.y()
-                child_width = debug_geometry.width()
-                child_height = main_geometry.height()
-
-                # apply new geo
-                self.debug_dialog.setGeometry(child_x, child_y, child_width, child_height)
                 self.debug_dialog.show()        # show me debug log wnd
                 self.activateWindow()           # focus back to main
             else:
@@ -585,10 +581,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.worker_launch(ACTION_FACTORY)
 
     def cb_menu_lost(self, action: QtGui.QAction):
+        # prepare for debug dialog to show
+        self.__set_dbg_wndSize()
+        self.debug_dialog.show()
+        self.activateWindow()
+
+        # handling action
         act_name = action.objectName()
         if act_name == "actionRecover_stories":
             self.worker_launch(ACTION_RECOVER)
         elif act_name == "actionRemove_stories":
+            self.debug_dialog.show()
             self.worker_launch(ACTION_CLEANUP)
 
     def cb_menu_help(self, action: QtGui.QAction):
