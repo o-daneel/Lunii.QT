@@ -537,6 +537,8 @@
     <addaction name="actionMove_Down"/>
     <addaction name="actionMove_Bottom"/>
     <addaction name="separator"/>
+    <addaction name="actionHide"/>
+    <addaction name="separator"/>
     <addaction name="actionImport"/>
     <addaction name="actionExport"/>
     <addaction name="actionExport_All"/>
@@ -794,6 +796,11 @@
   <action name="actionFind_stories">
    <property name="text">
     <string>Find</string>
+   </property>
+  </action>
+  <action name="actionHide">
+   <property name="text">
+    <string>Hide / Show</string>
    </property>
   </action>
  </widget>

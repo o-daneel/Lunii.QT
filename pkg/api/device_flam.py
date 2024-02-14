@@ -117,11 +117,16 @@ class FlamDevice(QtCore.QObject):
     def update_pack_index(self):
         lib_path = Path(self.mount_point).joinpath(LIB_BASEDIR)
         list_path = lib_path.joinpath("list")
+        list_hidden_path = lib_path.joinpath("list.hidden")
         list_path.unlink(missing_ok=True)
+        list_hidden_path.unlink(missing_ok=True)
         lib_path.mkdir(parents=True, exist_ok=True)
-        with open(list_path, "w", newline='\n') as fp:
+        with open(list_path, "w", newline='\n') as fp, open(list_hidden_path, "w", newline='\n') as fp_hidden:
             for story in self.stories:
-                fp.write(str(story.uuid) + "\n")
+                if story.hidden:
+                    fp_hidden.write(str(story.uuid) + "\n")
+                else:
+                    fp.write(str(story.uuid) + "\n")
         return
 
     def __valid_story(self, story_dir):
@@ -516,26 +521,40 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
     mount_path = Path(root_path)
     list_path = mount_path.joinpath(LIB_BASEDIR + "list")
+    list_hidden_path = mount_path.joinpath(LIB_BASEDIR + "list.hidden")
 
     story_list = StoryList()
 
     logger.log(logging.INFO, f"Reading Flam loaded stories...")
 
-    # no pi file, done
-    if not os.path.isfile(list_path):
-        return story_list
+    # if there is a list
+    if os.path.isfile(list_path):
+        with open(list_path, "r") as fp_list:
+            lines = fp_list.read().splitlines()
+            for uuid_str in lines:
+                one_uuid = UUID(uuid_str.strip())
+                logger.log(logging.DEBUG, f"> {str(one_uuid)}")
+                if one_uuid in story_list:
+                    logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+                else:
+                    story_list.append(Story(one_uuid))
 
-    with open(list_path, "r") as fp_list:
-        lines = fp_list.read().splitlines()
-        for uuid_str in lines:
-            one_uuid = UUID(uuid_str.strip())
-            logger.log(logging.DEBUG, f"> {str(one_uuid)}")
-            if one_uuid in story_list:
-                logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
-            else:
-                story_list.append(Story(one_uuid))
-
+    story_count = len(story_list)
     logger.log(logging.INFO, f"Read {len(story_list)} stories")
+
+    # if there is a hidden list
+    if os.path.isfile(list_hidden_path):
+        with open(list_hidden_path, "r") as fp_list:
+            lines = fp_list.read().splitlines()
+            for uuid_str in lines:
+                one_uuid = UUID(uuid_str.strip())
+                logger.log(logging.DEBUG, f"> {str(one_uuid)}")
+                if one_uuid in story_list:
+                    logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+                else:
+                    story_list.append(Story(one_uuid, True))
+
+    logger.log(logging.INFO, f"Read {len(story_list) - story_count} hidden stories")
     return story_list
 
 

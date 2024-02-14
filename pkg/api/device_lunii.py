@@ -279,10 +279,15 @@ class LuniiDevice(QtCore.QObject):
 
     def update_pack_index(self):
         pi_path = Path(self.mount_point).joinpath(".pi")
+        pi_hidden_path = Path(self.mount_point).joinpath(".pi.hidden")
         pi_path.unlink(missing_ok=True)
-        with open(pi_path, "wb") as fp:
+        pi_hidden_path.unlink(missing_ok=True)
+        with open(pi_path, "wb") as fp_pi, open(pi_hidden_path, "wb") as fp_hidden:
             for story in self.stories:
-                fp.write(story.uuid.bytes)
+                if story.hidden:
+                    fp_hidden.write(story.uuid.bytes)
+                else:
+                    fp_pi.write(story.uuid.bytes)
         return
 
     def __valid_story(self, story_path):
@@ -1462,43 +1467,48 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
     mount_path = Path(root_path)
     pi_path = mount_path.joinpath(".pi")
+    pi_hidden_path = mount_path.joinpath(".pi.hidden")
 
     story_list = StoryList()
 
     logger.log(logging.INFO, f"Reading Lunii loaded stories...")
 
-    # no pi file, done
-    if not os.path.isfile(pi_path):
-        return story_list
-
-    with open(pi_path, "rb") as fp_pi:
-        loop_again = True
-        while loop_again:
-            next_uuid = fp_pi.read(16)
-            if next_uuid:
-                one_uuid = UUID(bytes=next_uuid)
-                logger.log(logging.DEBUG, f"> {str(one_uuid)}")
-                if one_uuid in story_list:
-                    logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+    # if there is a .pi
+    if os.path.isfile(pi_path):
+        with open(pi_path, "rb") as fp_pi:
+            loop_again = True
+            while loop_again:
+                next_uuid = fp_pi.read(16)
+                if next_uuid:
+                    one_uuid = UUID(bytes=next_uuid)
+                    logger.log(logging.DEBUG, f"> {str(one_uuid)}")
+                    if one_uuid in story_list:
+                        logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+                    else:
+                        story_list.append(Story(one_uuid))
                 else:
-                    story_list.append(Story(one_uuid))
-            else:
-                loop_again = False
+                    loop_again = False
 
-    # # try to recover from .content directory
-    # if not story_list:
-    #     content_dir = os.path.join(mount_path, ".content")
-    #     stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
-    #
-    #     if stories_dir:
-    #         for story in stories_dir:
-    #             for uuid in stories.DB_OFFICIAL:
-    #                 if story in uuid.upper():
-    #                     found_uuid = UUID(uuid.upper())
-    #                     print(f"Recovered {found_uuid.hex}")
-    #                     story_list.append(Story(found_uuid))
+    story_count = len(story_list)
+    logger.log(logging.INFO, f"Read {story_count} stories")
 
-    logger.log(logging.INFO, f"Read {len(story_list)} stories")
+    # if there is a hidden .pi
+    if os.path.isfile(pi_hidden_path):
+        with open(pi_hidden_path, "rb") as fp_pi:
+            loop_again = True
+            while loop_again:
+                next_uuid = fp_pi.read(16)
+                if next_uuid:
+                    one_uuid = UUID(bytes=next_uuid)
+                    logger.log(logging.DEBUG, f"> {str(one_uuid)}")
+                    if one_uuid in story_list:
+                        logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+                    else:
+                        story_list.append(Story(one_uuid, hidden=True))
+                else:
+                    loop_again = False
+
+    logger.log(logging.INFO, f"Read {len(story_list) - story_count} hidden stories")
     return story_list
 
 

@@ -8,7 +8,7 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication
 
@@ -77,6 +77,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_mv_up = None
         self.act_mv_down = None
         self.act_mv_bottom = None
+        self.act_hide = None
         self.act_import = None
         self.act_export = None
         self.act_exportall = None
@@ -144,6 +145,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_mv_up = next(act for act in s_actions if act.objectName() == "actionMove_Up")
         self.act_mv_down = next(act for act in s_actions if act.objectName() == "actionMove_Down")
         self.act_mv_bottom = next(act for act in s_actions if act.objectName() == "actionMove_Bottom")
+        self.act_hide = next(act for act in s_actions if act.objectName() == "actionHide")
         self.act_import = next(act for act in s_actions if act.objectName() == "actionImport")
         self.act_export = next(act for act in s_actions if act.objectName() == "actionExport")
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
@@ -241,7 +243,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             col_size_width -= col_size_size
         col_size_width -= COL_EXTRA
         self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
-
 
     def __set_dbg_wndSize(self):
         # Move the sub-window alongside the main window
@@ -403,6 +404,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.lbl_picture.setVisible(False)
                 return
 
+            # hidden story
+            self.te_story_details.setDisabled(one_story.hidden)
+            self.lbl_picture.setDisabled(one_story.hidden)
+
             # Update story description
             self.te_story_details.setText(one_story_desc)
 
@@ -480,6 +485,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_move(1)
         elif act_name == "actionMove_Bottom":
             self.ts_move(10)
+        elif act_name == "actionHide":
+            self.ts_hide()
         elif act_name == "actionImport":
             self.ts_import()
         elif act_name == "actionExport":
@@ -622,6 +629,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_mv_up.setEnabled(True)
             self.act_mv_down.setEnabled(True)
             self.act_mv_bottom.setEnabled(True)
+            self.act_hide.setEnabled(True)
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
@@ -689,7 +697,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # create and add item to treeWidget
             item = QTreeWidgetItem()
+
             item.setText(COL_NAME, story.name)
+
             if story.is_official():
                 item.setText(COL_DB, "O")
             else:
@@ -700,6 +710,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if story.size != -1:
                 item.setText(COL_SIZE, f"{round(story.size/1024/1024, 1)}MB")
             item.setTextAlignment(COL_SIZE, Qt.AlignRight)
+
+            if story.hidden:
+                grey_color = QColor(128, 128, 128)
+                for column in range(item.columnCount()):
+                    item.setToolTip(column, "Story is hidden for LuniiStore synchronization")
+                    item.setForeground(column, grey_color)
+
             self.tree_stories.addTopLevelItem(item)
 
     def sb_create(self):
@@ -934,6 +951,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
         else:
             self.sb_update("🛑 Export All cancelled")
+
+    def ts_hide(self):
+        if not self.audio_device:
+            return
+
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        if len(selection) == 0:
+            return
+
+        # updating story hidden state
+        for item in selection:
+            one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
+            one_story.hidden = not one_story.hidden
+
+        # updating pack index file and display
+        self.audio_device.update_pack_index()
+        self.ts_update()
+        self.sb_update("Stories updated...")
 
     def ts_import(self):
         if not self.audio_device:

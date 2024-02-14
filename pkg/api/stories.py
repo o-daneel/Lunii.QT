@@ -301,9 +301,10 @@ def _uuid_match(uuid: UUID, key_part: str):
 
 
 class Story:
-    def __init__(self, uuid: UUID, size: int = -1):
+    def __init__(self, uuid: UUID, hidden: bool = False, size: int = -1):
         self.uuid = uuid
         self.size = size
+        self.hidden = hidden
 
     def __eq__(self, __value: UUID):
         return self.uuid == __value
