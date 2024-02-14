@@ -9,6 +9,7 @@ import psutil
 import py7zr
 from PySide6 import QtCore
 
+from pkg.api import stories
 from pkg.api.constants import *
 from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
@@ -123,15 +124,93 @@ class FlamDevice(QtCore.QObject):
                 fp.write(str(story.uuid) + "\n")
         return
 
-    #TODO
-    def recover_stories(self):
-        print("recover_stories")
-        return 0
+    def __valid_story(self, story_dir):
+        return True
 
-    #TODO
+    def recover_stories(self, dry_run: bool):
+        recovered = 0
+
+        # getting all stories
+        content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
+        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+
+        for index, story in enumerate(stories_dir):
+            # directory is a partial UUID
+            self.signal_story_progress.emit(story, index, len(stories_dir))
+
+            str_uuid = None
+            # looking complete UUID in official DB
+            if not str_uuid:
+                str_uuid = next((uuid for uuid in stories.DB_OFFICIAL if story.upper() in uuid.upper()), None)
+            # looking complete UUID in third party DB
+            if not str_uuid:
+                str_uuid = next((uuid for uuid in stories.DB_THIRD_PARTY if story.upper() in uuid.upper()), None)
+            if not str_uuid:
+                str_uuid = story
+
+            # prepare for story analysis
+            try:
+                full_uuid = UUID(str_uuid)
+            except (TypeError, ValueError) as e:
+                self.signal_logger.emit(logging.DEBUG, f"Not a valid UUID - {str_uuid}")
+                continue
+
+            one_story = Story(full_uuid)
+            story_dir = os.path.join(content_dir, story)
+
+            if str_uuid not in self.stories:
+                # Lost Story
+                if self.__valid_story(story_dir):
+
+                    # is it a dry run ?
+                    if not dry_run:
+                        self.signal_logger.emit(logging.INFO, f"Recovered - {str(full_uuid).upper()} - {one_story.name}")
+                        self.stories.append(Story(full_uuid))
+                    else:
+                        self.signal_logger.emit(logging.INFO, f"Found - {str(full_uuid).upper()} - {one_story.name}")
+                    recovered += 1
+                else:
+                    self.signal_logger.emit(logging.INFO, f"Skipping lost story (seems broken/incomplete) - {str(full_uuid).upper()} - {one_story.name}")
+            else:
+                # In DB story
+                if not self.__valid_story(story_dir):
+                    self.signal_logger.emit(logging.WARNING, f"Already in list but invalid - {str(full_uuid).upper()} - {one_story.name}")
+                else:
+                    self.signal_logger.emit(logging.DEBUG, f"Already in list - {str(full_uuid).upper()} - {one_story.name}")
+
+        return recovered
+
     def cleanup_stories(self):
-        print("cleanup_stories")
-        return 0, 0
+        removed = 0
+        recovered_size = 0
+
+        # getting all stories
+        content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
+        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+
+        for index, story in enumerate(stories_dir):
+            # directory is a partial UUID
+            self.signal_story_progress.emit(story, index, len(stories_dir))
+
+            if story not in self.stories:
+                # remove it
+                try:
+                    lost_story_path = os.path.join(content_dir, story)
+
+                    # computing lost size
+                    for parent_dir, _, files in os.walk(lost_story_path):
+                        for file in files:
+                            recovered_size += os.path.getsize(os.path.join(parent_dir, file))
+
+                    # removing whole directory
+                    self.signal_logger.emit(logging.INFO, f"Deleting - {lost_story_path}")
+                    shutil.rmtree(lost_story_path)
+                    removed += 1
+                except (OSError, PermissionError) as e:
+                    self.signal_logger.emit(logging.WARN, f"Failed to delete - {lost_story_path}")
+                    self.signal_logger.emit(logging.ERROR, e)
+
+        return removed, recovered_size//1024//1024
 
     def import_story(self, story_path):
         archive_type = TYPE_UNK

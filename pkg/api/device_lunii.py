@@ -373,7 +373,12 @@ class LuniiDevice(QtCore.QObject):
                 str_uuid = "00"*12 + story
 
             # prepare for story analysis
-            full_uuid = UUID(str_uuid)
+            try:
+                full_uuid = UUID(str_uuid)
+            except (TypeError, ValueError) as e:
+                self.signal_logger.emit(logging.DEBUG, f"Not a valid UUID - {str_uuid}")
+                continue
+
             one_story = Story(full_uuid)
             story_dir = os.path.join(content_dir, story)
 
