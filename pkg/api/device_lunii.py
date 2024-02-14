@@ -317,7 +317,9 @@ class LuniiDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.WARN, f"Bad authorization file bt in {story_path}")
 
                 # Fixing bt file
-                data_ri = self.__get_plain_data(os.path.join(story_path, "ri"))
+                data_ri = b""
+                with open(os.path.join(story_path, "ri"), "rb") as fp:
+                    data_ri = fp.read(0x40)
                 self.bt = self.cipher(data_ri[0:0x40], self.device_key)
 
                 # creating authorization file : bt
@@ -1316,8 +1318,10 @@ class LuniiDevice(QtCore.QObject):
         ri_path = story_path.joinpath("ri")
         if not os.path.isfile(ri_path):
             return False
-        else:
-            ri_data = self.__get_plain_data(os.path.join(story_path, "ri"))
+
+        # reading reference data
+        with open(os.path.join(story_path, "ri"), 'rb') as fp:
+            ri_data = fp.read(0x40)
 
         # Trying to decipher BT
         with open(bt_path, "rb") as fp_bt:
