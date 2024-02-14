@@ -1,7 +1,7 @@
 :fr: [README en français](README_FR.md) :fr:
 
 # Lunii.QT
-A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **firmware download**   
+A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **hide** / **firmware download**   
 for Windows / Linux / macOS  
 (compatible with STUdio archive, **with** transcoding)
 
@@ -20,6 +20,7 @@ for Windows / Linux / macOS
 * [Lunii.QT](#luniiqt)
   * [User Interface](#user-interface)
   * [Shortcuts](#shortcuts)
+  * [Features](#features)
   * [Audio Transcoding](#audio-transcoding)
     * [Installation](#installation)
     * [Checking](#checking-)
@@ -71,6 +72,8 @@ for Windows / Linux / macOS
    * the available space  
    * the number of stories it contains
 
+6. **Hidden stories** (greyed items in the list) are still stored on the device, but won't be visible by Luniistore app. That will avoid getting third party stories to be removed during synchronization. Just remember to hide them before hitting sync button !
+
 ## Shortcuts
 
 | Keys           | Actions                          |
@@ -89,6 +92,22 @@ for Windows / Linux / macOS
 | `Ctrl+L`       | Open debug log window            |
 | `F1`           | About the app                    |
 | `F5`           | Refresh devices                  |
+
+## Features
+* Automatic **Update** detection
+* **Import** / **Export** / **Remove** stories
+* Support **STUdio** archive formats
+* **Reorganize** the stories in the order you want
+* **Hide** stories  
+  In order to avoid stories to get removed by Luniistore PC Synchronization, you can temporary hide them (all files ares kept on device), sync, and revert hide.
+* **Lost Stories**  
+  Three tools are offered to manage "crashed" stories on your device.  
+ ![](./res/screenshot_lost.png)
+  You can :
+  * List them
+  * Recover them (if they are complete)
+  * Remove them (**be careful, files will be deleted**)  
+* **Get Firmware**  for your device (refer [this section](#firmware-upgrade))
 
 ## Audio Transcoding
 Some third-party stories are using non MP3 files. Thus they can't be installed as it is on Lunii. It requires a **transcoding** step. This extra process is done using **FFMPEG** tool ( [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html) )

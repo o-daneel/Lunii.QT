@@ -1,7 +1,7 @@
 :uk: [Readme in English](./README.md) :uk:
 
 # Lunii.QT
-#### (version obsolète, requiert une mise à jour)
+#### (peut être version obsolète)
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
 pour Windows / Linux / MacOs 11  
@@ -22,13 +22,19 @@ pour Windows / Linux / MacOs 11
 * [Lunii.QT](#luniiqt)
   * [Interface Utilisateur](#interface-utilisateur)
   * [Raccourcis clavier](#raccourcis-clavier)
+  * [Fonctionnalités](#fonctionnalités)
   * [Transcodage audio](#transcodage-audio)
+    * [Installation](#installation)
+    * [Vérification](#vérification)
   * [Mise à jour du firmware](#mise-à-jour-du-firmware)
     * [Guide Pratique - Lunii](#guide-pratique---lunii)
     * [Guide Pratique - Flam](#guide-pratique---flam)
   * [Formats d'archives pris en charge (Lunii)](#formats-darchives-pris-en-charge-lunii)
   * [Python ? Guide Pratique](#python--guide-pratique)
   * [Astuces](#astuces)
+    * [macOS - Authorisation de l'application](#macos---authorisation-de-lapplication)
+    * [Métadonnées des histoires non-officielles](#métadonnées-des-histoires-non-officielles)
+    * [Gestion du cache](#gestion-du-cache)
   * [Remerciements](#remerciements)
 * [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
@@ -45,10 +51,10 @@ pour Windows / Linux / MacOs 11
 
 1. La **barre de menu**. Elle vous informera lorsqu'une mise à jour de l'application est disponible  
    (il suffit d'aller dans Menu About/Update to v2.X.X)
-1. **L'emplacement de votre Lunii/Flam** lorsqu'elle est connectée.   
+2. **L'emplacement de votre Lunii/Flam** lorsqu'elle est connectée.   
    Le bouton à gauche relance la détection automatique.
-2. Actualisation de la **base de données Officielle** : Met à jour la liste des histoires et leurs descriptions depuis le Luniistore. Utilisez ce bouton lorsque certaines histoires officielles ne sont pas reconnues.
-3. La **liste de vos histoires** avec l'UUID et le type d'histoire (DB).  
+3. Actualisation de la **base de données Officielle** : Met à jour la liste des histoires et leurs descriptions depuis le Luniistore. Utilisez ce bouton lorsque certaines histoires officielles ne sont pas reconnues.
+4. La **liste de vos histoires** avec l'UUID et le type d'histoire (DB).  
    L'UUID : Un identifiant unique permettant de lier les histoires à leur dossier sur la Lunii/Flam. Les huit derniers caractères de l'UUID composent le nom du dossier de l'histoire.
 
    **DB** signifie **Base de données**. Cette application prend en charge deux bases de données différentes
@@ -56,11 +62,14 @@ pour Windows / Linux / MacOs 11
         (Toutes les métadonnées proviennent des serveurs de Lunii).
      - **T** - base de données **T**ierce, également connue sous Non officielles ou Custom  
         (Ces métadonnées ne peuvent pas être récupérées, elles sont complétées lors de l'importation de l'histoire)
-4. Dans la **barre d'état**, vous trouverez  
+5. Dans la **barre d'état**, vous trouverez  
    * Votre SNU (numéro de série),
    * La version du firmware de votre Lunii/Flam
    * L'espace disponible sur la SD
    * Le nombre d'histoires
+
+6. **Histoire cachées** (les entrées grisées dans la liste) sont toujours physiquement présente dans l'appareil, mais ne seront pas visible par l'application Luniistore. De la sorte, les histoires non officielles ne seront pas supprimées lors de la synchronisation. N'oubliez pas de bien "cacher" vos histoires avant de cliquer sur "synchroniser" !
+
 
 ## Raccourcis clavier
 
@@ -81,6 +90,24 @@ pour Windows / Linux / MacOs 11
 | `F1`           | À propos de l'application                             |
 | `F5`           | Réactualise les appareils                             |
 
+## Fonctionnalités
+* Détection automatique des **Mise à jour**
+* **Import** / **Export** / **Suppression** des histoires
+* Support des archives au format **STUdio**
+* **Réorganisez** vos histoires dans votre ordre préféré
+* **Cachez** les histoires  
+  Dans le but de ne pas subir une suppression forcée des histoires non officielles durant la synchronisation avec l'application Luniistore, vous pouvez désormais "cacher" temporairement certaines histoires  
+  (tous les fichiers sont conservés sur l'appareil)
+* **Histoires perdues**  
+  Trois nouveaux outils sont proposés pour gérer vos histoires perdues.   
+  (souvent suite à un crash d'une autre application 😜)   
+ ![](./res/screenshot_lost.png)
+  Vous pouvez :
+  * les lister
+  * les récupérer (si elles sont saines)
+  * les supprimer (**attention, les fichiers seront supprimés**)  
+* **Récupération du Firmware** pour votre appareil (cf. [cette section](#mise-à-jour-du-firmware))
+  
 ## Transcodage audio
 Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc pas être installés tels quels sur Lunii. Cela nécessite une étape de **transcodage**. Ce processus supplémentaire est réalisé à l'aide de l'outil **FFMPEG** disponible [ici](https://github.com/eugeneware/ffmpeg-static/releases/latest )  
  
@@ -301,7 +328,25 @@ $ build/exe.win-amd64/lunii-qt
 
 ## Astuces
 
-### Métadonnées des histoires tierces
+### macOS - Authorisation de l'application
+1. Double cliquez sur le fichier `lunii-qt`.
+2. Vous devez voir apparaître le message d'erreur suivant :     
+![](./res/macos_install_1.png)  
+  Cliquez sur "**OK**"
+3. Allez dans **Préférences du système** > **Sécurité et confidentialité** et cliquez sur l'onglet **Général**.  
+![](./res/macos_install_2.png)
+4. En bas de la fenêtre, vous trouverez un message indiquant que  `lunii-qt` est bloqué. Cliquez sur "**Ouvrir quand même**".   
+   Si vous ne voyez pas ce message sur l'onglet Général, double cliquez de nouveau sur `lunii-qt`.  
+   **NOTE :** Il est possible que vous deviez en premier cliquer sur le bouton "**unlock**" puis entrer votre nom d'utilisateur / mot de passe pour pouvoir cliquer sur "**Ouvrir quand même**".
+5. Une nouvelle popup apparait       
+![](./res/macos_install_3.png)  
+Cliquez sur "**Ouvrir**".   
+Si vous n'avez pas eu cette popup, retournez juste double cliquer sur le fichier.
+1. Pour finir, un dernier message vous informera de la sorte       
+![](./res/macos_install_4.png)  
+Cliquez sur "**Ouvrir**", et vous n'aurez plus ces avertissement à l'avenir. 
+
+### Métadonnées des histoires non-officielles
 Lors de l'utilisation de cette application, vous allez peut-être constater des hisoires marquées `Unknown story (maybe a User created story)...`. Il s'agit certainement d'une histoire tierce qui a été chargé par une autre application. Lunii.QT n'a donc pas connaissance des métadonnées associées (Titre, Description, Image).  
 Il est possible de pallier à ce problème en glissant déposant l'archive de l'histoire dans l'application, comme pour la charger. Cette dernière étant déjà présente, Lunii.Qt ne va faire qu'**analyser les métadonnées** et les ajouter dans la base interne, en prenant soin de **ne pas recharger** l'histoire.
 
