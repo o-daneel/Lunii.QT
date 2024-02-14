@@ -335,6 +335,7 @@ class LuniiDevice(QtCore.QObject):
 
         # parsing ri file - each resource must exist
         ri_plain = self.__get_plain_data(os.path.join(story_path, "ri")).decode("utf-8")
+        ri_plain = ri_plain.rstrip('\x00')
         ri_lines = [ri_plain[i:i+12] for i in range(0, len(ri_plain), 12)]
         for res in ri_lines:
             res = res.replace('\\', '/')
@@ -345,6 +346,7 @@ class LuniiDevice(QtCore.QObject):
 
         # parsing si file - each resource must exist
         si_plain = self.__get_plain_data(os.path.join(story_path, "si")).decode("utf-8")
+        si_plain = si_plain.rstrip('\x00')
         si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
         for res in si_lines:
             res = res.replace('\\', '/')
