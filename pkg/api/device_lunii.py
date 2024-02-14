@@ -372,11 +372,13 @@ class LuniiDevice(QtCore.QObject):
             if not str_uuid and len(story) == 8 and all(c in hexdigits for c in story):
                 str_uuid = "00"*12 + story
 
+            # prepare for story analysis
             full_uuid = UUID(str_uuid)
             one_story = Story(full_uuid)
+            story_dir = os.path.join(content_dir, story)
 
             if str_uuid not in self.stories:
-                story_dir = os.path.join(content_dir, story)
+                # Lost Story
                 if self.__valid_story(story_dir):
 
                     # is it a dry run ?
@@ -389,7 +391,11 @@ class LuniiDevice(QtCore.QObject):
                 else:
                     self.signal_logger.emit(logging.INFO, f"Skipping lost story (seems broken/incomplete) - {str(full_uuid).upper()} - {one_story.name}")
             else:
-                self.signal_logger.emit(logging.DEBUG, f"Already in list - {str(full_uuid).upper()} - {one_story.name}")
+                # In DB story
+                if not self.__valid_story(story_dir):
+                    self.signal_logger.emit(logging.WARNING, f"Already in list but invalid - {str(full_uuid).upper()} - {one_story.name}")
+                else:
+                    self.signal_logger.emit(logging.DEBUG, f"Already in list - {str(full_uuid).upper()} - {one_story.name}")
 
         return recovered
 
