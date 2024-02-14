@@ -337,18 +337,20 @@ class LuniiDevice(QtCore.QObject):
         ri_plain = self.__get_plain_data(os.path.join(story_path, "ri")).decode("utf-8")
         ri_lines = [ri_plain[i:i+12] for i in range(0, len(ri_plain), 12)]
         for res in ri_lines:
+            res = res.replace('\\', '/')
             res_path = os.path.join(story_path, "rf", res)
             if not os.path.isfile(res_path):
-                self.signal_logger.emit(logging.WARN, f"Missing rf\\{res} in {story_path}")
+                self.signal_logger.emit(logging.WARN, f"Missing rf/{res} in {story_path}")
                 return False
 
         # parsing si file - each resource must exist
         si_plain = self.__get_plain_data(os.path.join(story_path, "si")).decode("utf-8")
         si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
         for res in si_lines:
+            res = res.replace('\\', '/')
             res_path = os.path.join(story_path, "sf", res)
             if not os.path.isfile(res_path):
-                self.signal_logger.emit(logging.WARN, f"Missing sf\\{res} in {story_path}")
+                self.signal_logger.emit(logging.WARN, f"Missing sf/{res} in {story_path}")
                 return False
 
         # all requested files are there, including auth file ans resources
