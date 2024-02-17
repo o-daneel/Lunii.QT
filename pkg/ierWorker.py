@@ -3,7 +3,7 @@ import time
 import traceback
 
 from PySide6 import QtCore
-from PySide6.QtCore import QObject
+from PySide6.QtCore import QObject, QThread
 
 from pkg.api import constants
 from pkg.api.constants import FLAM_V1
@@ -67,11 +67,13 @@ class ierWorker(QObject):
             return
             
         self.signal_refresh.emit()
+        QThread.currentThread().quit()
 
     def exit_requested(self):
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit("🛑 Aborted")
+        QThread.currentThread().quit()
 
     def _task_import(self):
         success = 0

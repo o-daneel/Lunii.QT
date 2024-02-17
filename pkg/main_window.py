@@ -274,6 +274,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, event):
         # Explicitly close the log window when the main window is closed
         self.debug_dialog.close()
+        self.hide()
+
+        # waiting for threads to close
+        if self.version_thread and self.version_thread.isRunning():
+            self.version_thread.wait()
+        if self.thread and self.thread.isRunning():
+            self.worker_abort()
+            self.thread.wait()
+
         event.accept()
 
     def cb_show_context_menu(self, point):
