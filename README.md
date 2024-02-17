@@ -86,6 +86,7 @@ for Windows / Linux / macOS
 | `Ctrl+I`       | Import new story                 |
 | `Ctrl+S`       | Export the selection             |
 | `Ctrl+Shift+S` | Export all the stories           |
+| `Ctrl+H`       | Hide/Show the selection          |
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
 | `Ctrl+O`       | Open a Lunii/Flam device         |
@@ -101,10 +102,11 @@ for Windows / Linux / macOS
 * **Hide** stories  
   In order to avoid stories to get removed by Luniistore PC Synchronization, you can temporary hide them (all files ares kept on device), sync, and revert hide.
 * **Lost Stories**  
-  Three tools are offered to manage "crashed" stories on your device.  
+  Three tools are offered to manage "crashed" stories on your device.   
  ![](./res/screenshot_lost.png)
   You can :
-  * List them
+  * List them  
+  _(app will try to fix broken stories, in particular auth files on v1/v2)_
   * Recover them (if they are complete)
   * Remove them (**be careful, files will be deleted**)  
 * **Get Firmware**  for your device (refer [this section](#firmware-upgrade))

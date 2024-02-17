@@ -802,6 +802,9 @@
    <property name="text">
     <string>Hide / Show</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
  </widget>
  <tabstops>

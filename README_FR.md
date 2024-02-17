@@ -73,22 +73,23 @@ pour Windows / Linux / MacOs 11
 
 ## Raccourcis clavier
 
-| Keys           | Actions                                               |
-|----------------|-------------------------------------------------------|
-| `Ctrl+Up`      | Déplace la ou les sélection(s) en première position   |
-| `Alt+Up`       | Déplace la ou les sélection(s) vers le haut           |
-| `Alt+Down`     | Déplace la ou les sélection(s) vers le bas            |
-| `Ctrl+Down`    | Déplace la ou les sélection(s) en dernière position   |
-|                |                                                       |
-| `Ctrl+I`       | Importe une nouvelle histoire                         |
-| `Ctrl+S`       | Exporte la sélection                                  |
-| `Ctrl+Shift+S` | Exporte toutes les histoires                          |
-| `Delete`       | Supprime les histoires sélectionnées                  |
-|                |                                                       |
-| `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                    |
-| `Ctrl+L`       | Ouvre la fenêtre de debug                             |
-| `F1`           | À propos de l'application                             |
-| `F5`           | Réactualise les appareils                             |
+| Keys           | Actions                                             |
+|----------------|-----------------------------------------------------|
+| `Ctrl+Up`      | Déplace la ou les sélection(s) en première position |
+| `Alt+Up`       | Déplace la ou les sélection(s) vers le haut         |
+| `Alt+Down`     | Déplace la ou les sélection(s) vers le bas          |
+| `Ctrl+Down`    | Déplace la ou les sélection(s) en dernière position |
+|                |                                                     |
+| `Ctrl+I`       | Importe une nouvelle histoire                       |
+| `Ctrl+S`       | Exporte la sélection                                |
+| `Ctrl+Shift+S` | Exporte toutes les histoires                        |
+| `Ctrl+H`       | Masquer/Démasquer la sélection                      |
+| `Delete`       | Supprime les histoires sélectionnées                |
+|                |                                                     |
+| `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                  |
+| `Ctrl+L`       | Ouvre la fenêtre de debug                           |
+| `F1`           | À propos de l'application                           |
+| `F5`           | Réactualise les appareils                           |
 
 ## Fonctionnalités
 * Détection automatique des **Mise à jour**
@@ -103,7 +104,8 @@ pour Windows / Linux / MacOs 11
   (souvent suite à un crash d'une autre application 😜)   
  ![](./res/screenshot_lost.png)
   Vous pouvez :
-  * les lister
+  * les lister  
+    _(l'application tentera de réparer les histoires, en particulier les fichiers sur les Lunii v1/v2)_
   * les récupérer (si elles sont saines)
   * les supprimer (**attention, les fichiers seront supprimés**)  
 * **Récupération du Firmware** pour votre appareil (cf. [cette section](#mise-à-jour-du-firmware))
