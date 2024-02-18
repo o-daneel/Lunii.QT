@@ -1,7 +1,29 @@
 import platform
 import subprocess
-import ffmpeg
+from io import BytesIO
 
+import ffmpeg
+from mutagen.mp3 import MP3, BitrateMode
+
+
+def transcoding_required(filename: str, audio_data):
+    if not filename.lower().endswith(".mp3"):
+        return True
+
+    audio_bytesio = BytesIO(audio_data)
+
+    try:
+        audio = MP3(audio_bytesio)
+        print(f"MP3 {audio.info.bitrate // 1000}Kbps ({audio.info.bitrate_mode}) for {filename}")
+    except Exception as e:
+        print("Error:", e)
+        return None, None
+
+    # not the correct mode
+    if not audio.info.bitrate_mode in [BitrateMode.VBR, BitrateMode.CBR]:
+        return True
+
+    return False
 
 def audio_to_mp3(audio_data):
     audio_mp3 = b""
@@ -9,12 +31,13 @@ def audio_to_mp3(audio_data):
     # Construct the ffmpeg command using the ffmpeg-python syntax
     ffmpeg_cmd = (
         ffmpeg.input('pipe:0')
-        .output('pipe:', format='mp3', codec='libmp3lame',
+        .output('pipe:', format='mp3',
+                codec='libmp3lame',
                 map='0:a',
                 ar='44100',
                 ac='1',
-                # aq='9',
-                ab='64k',
+                aq='4',
+                # ab='128k', # NOOOOOOOOOOO CBR
                 map_metadata='-1',
                 write_xing='0',
                 id3v2_version='0'
@@ -48,8 +71,8 @@ def audio_to_mp3(audio_data):
     # print(f"{len(audio_mp3)//1024}K")
     return audio_mp3
 #
-# INPUT = 'C:/Work/dev/lunii-packs/test/packs/transcode/2d1a50ec4800416d935d4ef04805a115cbe0e85f.ogg'
-# OUTPUT = 'C:/Work/dev/lunii-packs/test/packs/transcode/2d1a50ec4800416d935d4ef04805a115cbe0e85f.mp3'
+# INPUT = 'C:/Work/dev/lunii-sd/packs/transcode/2d1a50ec4800416d935d4ef04805a115cbe0e85f.ogg'
+# OUTPUT = 'C:/Work/dev/lunii-sd/packs/transcode/2d1a50ec4800416d935d4ef04805a115cbe0e85f.mp3'
 #
 # with open(INPUT, 'rb') as fp:
 #     audio_data = fp.read()

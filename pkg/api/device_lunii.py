@@ -18,7 +18,7 @@ from PySide6 import QtCore
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api import stories
-from pkg.api.convert_audio import audio_to_mp3
+from pkg.api.convert_audio import audio_to_mp3, transcoding_required
 from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
@@ -1127,7 +1127,7 @@ class LuniiDevice(QtCore.QObject):
                 elif file in one_story.si:
                     file_newname = self.__get_ciphered_name(one_story.si[file][0], studio_si=True)
                     # transcode audio if necessary
-                    if not file.lower().endswith('.mp3'):
+                    if transcoding_required(file, data):
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         data = audio_to_mp3(data)
                 else:
@@ -1248,7 +1248,7 @@ class LuniiDevice(QtCore.QObject):
                 elif fname in one_story.si:
                     file_newname = self.__get_ciphered_name(one_story.si[fname][0], studio_si=True)
                     # transcode audio if necessary
-                    if not fname.lower().endswith('.mp3'):
+                    if transcoding_required(fname, data):
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         data = audio_to_mp3(data)
                 else:
