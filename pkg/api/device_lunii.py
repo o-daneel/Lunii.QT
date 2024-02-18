@@ -930,7 +930,7 @@ class LuniiDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
-        bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
+        bt_path = output_path.joinpath(str(new_uuid).upper()[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
@@ -1035,7 +1035,7 @@ class LuniiDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
-        bt_path = output_path.joinpath(str(new_uuid)[28:]+"/bt")
+        bt_path = output_path.joinpath(str(new_uuid).upper()[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
