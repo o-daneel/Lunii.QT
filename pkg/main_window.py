@@ -1053,6 +1053,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # UI limitations
         self.btn_db.setEnabled(False)
         self.tree_stories.setEnabled(False)
+        self.btn_refresh.setEnabled(False)
+        self.combo_device.setEnabled(False)
 
         # connecting slots
         self.thread.started.connect(self.worker.process)
@@ -1106,7 +1108,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # updating UI
         self.tree_stories.setEnabled(True)
         self.btn_db.setEnabled(True)
+        self.btn_refresh.setEnabled(True)
+        self.combo_device.setEnabled(True)
 
+        # hiding progress
         self.lbl_total.setVisible(False)
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
