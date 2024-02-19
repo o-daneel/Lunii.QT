@@ -669,13 +669,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.logger.log(logging.WARN, f"🛑 Unable to fetch version from Github")
 
-        if last_version and last_version > APP_VERSION:
-            self.menuHelp.setTitle("[ Help ]")
-            self.menuUpdate.setTitle("New update is available")
-            self.act_update.setText(f"Update to {last_version}")
-            self.act_update.setVisible(True)
-        else:
-            self.act_update.setVisible(False)
+        # hidden by default
+        self.act_update.setVisible(False)
+
+        # if a version was fetched
+        if last_version:
+            is_alpha = APP_VERSION[-2] == "a"
+
+            if (is_alpha and last_version >= APP_VERSION[:-2] or last_version > APP_VERSION):
+                # and last_version > APP_VERSION:
+                self.menuHelp.setTitle("[ Help ]")
+                self.menuUpdate.setTitle("New update is available")
+                self.act_update.setText(f"Update to {last_version}")
+                self.act_update.setVisible(True)
 
     def ts_update(self):
         # clear previous story list
