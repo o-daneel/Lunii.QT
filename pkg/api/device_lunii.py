@@ -18,7 +18,7 @@ from PySide6 import QtCore
 from pkg.api.aes_keys import fetch_keys, reverse_bytes
 from pkg.api.constants import *
 from pkg.api import stories
-from pkg.api.convert_audio import audio_to_mp3, transcoding_required
+from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
@@ -1129,7 +1129,14 @@ class LuniiDevice(QtCore.QObject):
                     # transcode audio if necessary
                     if transcoding_required(file, data):
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
+                        # len_before = len(data)//1024
                         data = audio_to_mp3(data)
+                        # print(f"Transcoded from {len_before:4}KB to {len(data)//1024:4}KB")
+                    # removing tags if necessary
+                    if tags_removal_required(data):
+                        self.signal_logger.emit(logging.WARN, f"⌛ Removing tags from audio {file_newname}...")
+                        data = mp3_tag_cleanup(data)
+
                 else:
                     # unexpected file, skipping
                     continue

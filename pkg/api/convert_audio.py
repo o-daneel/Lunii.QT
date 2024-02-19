@@ -1,9 +1,17 @@
+import os
 import platform
 import subprocess
+import tempfile
 from io import BytesIO
 
 import ffmpeg
-from mutagen.mp3 import MP3, BitrateMode
+from mutagen.mp3 import MP3, BitrateMode, MONO
+
+
+def tags_removal_required(audio_data):
+    audio_bytesio = BytesIO(audio_data)
+    audio = MP3(audio_bytesio)
+    return audio.tags
 
 
 def transcoding_required(filename: str, audio_data):
@@ -11,19 +19,43 @@ def transcoding_required(filename: str, audio_data):
         return True
 
     audio_bytesio = BytesIO(audio_data)
-
-    try:
-        audio = MP3(audio_bytesio)
-        print(f"MP3 {audio.info.bitrate // 1000}Kbps ({audio.info.bitrate_mode}) for {filename}")
-    except Exception as e:
-        print("Error:", e)
-        return None, None
+    audio = MP3(audio_bytesio)
+    # print(f"MP3 {audio.info.bitrate // 1000}Kbps ({audio.info.bitrate_mode} / {audio.info.mode}) for {filename}")
 
     # not the correct mode
     if not audio.info.bitrate_mode in [BitrateMode.VBR, BitrateMode.CBR]:
         return True
 
+    # not a mono audio
+    if audio.info.mode != MONO:
+        return True
+
+    # to be kept as it is
     return False
+
+
+def mp3_tag_cleanup(audio_data):
+    audio_bytesio = BytesIO(audio_data)
+    audio = MP3(audio_bytesio)
+
+    # write the original MP3 data to a temporary file
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(audio_data)
+
+        # remove tags and update file
+        modified_audio = MP3(temp_file.name)
+        modified_audio.delete()
+
+        # read again the file without tags
+        temp_file.seek(0)
+        audio_data = temp_file.read()
+
+    # cleaning up the mess
+    os.remove(temp_file.name)
+
+    # returning mp3 without tags
+    return audio_data
+
 
 def audio_to_mp3(audio_data):
     audio_mp3 = b""
@@ -36,8 +68,8 @@ def audio_to_mp3(audio_data):
                 map='0:a',
                 ar='44100',
                 ac='1',
-                aq='4',
-                # ab='128k', # NOOOOOOOOOOO CBR
+                aq='5',
+                # ab='128k', # NOOOOOOOOOOO CBR 😡
                 map_metadata='-1',
                 write_xing='0',
                 id3v2_version='0'
