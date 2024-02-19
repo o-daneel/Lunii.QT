@@ -388,6 +388,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = selection[0]
             uuid = item.text(COL_UUID)
 
+            # update selection to show cursor if hidden by UI
+            self.tree_stories.scrollToItem(item)
+
             # early exit if no changes on story
             if uuid == self.details_last_uuid:
                 return
