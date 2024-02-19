@@ -152,6 +152,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         t_actions = self.menuTools.actions()
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
         self.act_factory = next(act for act in t_actions if act.objectName() == "actionFactory_reset")
+        self.act_factory.setVisible(False)
         act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
         act_transcode.setChecked(self.ffmpeg_present)
         act_transcode.setEnabled(not self.ffmpeg_present)
