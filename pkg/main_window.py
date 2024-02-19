@@ -65,6 +65,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.audio_device: LuniiDevice = None
         self.worker: ierWorker = None
         self.thread: QtCore.QThread = None
+        self.version_worker: versionWorker = None
+        self.version_thread: QtCore.QThread = None
         self.app = app
         # app config
         self.sizes_hidden = True
@@ -91,11 +93,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # UI init
         self.init_ui()
 
-        # starting thread to fetch version
-        self.worker_version()
-
         # refresh devices
         self.cb_device_refresh()
+
+        # starting thread to fetch version
+        self.worker_check_version()
 
     def init_ui(self):
         self.setupUi(self)
@@ -1024,7 +1026,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update("Importing stories...")
         self.worker_launch(ACTION_IMPORT, file_paths)
 
-    def worker_version(self):
+    def worker_check_version(self):
         # version_thread.start()
         self.version_worker = versionWorker.VersionChecker()
         self.version_thread = QtCore.QThread()
