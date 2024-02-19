@@ -10,7 +10,7 @@ from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication, QTreeWidget
+    QDialog, QApplication
 
 from pkg import versionWorker
 from pkg.api import constants
@@ -37,7 +37,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v2.7.2"
+APP_VERSION = "v2.7.3"
 
 
 class VLine(QFrame):
@@ -1000,7 +1000,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
 
-        self.sb_update("Stories updated...")
+        self.sb_update("✅ Stories updated...")
 
     def ts_import(self):
         if not self.audio_device:
