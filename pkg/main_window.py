@@ -10,7 +10,7 @@ from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication
+    QDialog, QApplication, QTreeWidget
 
 from pkg import versionWorker
 from pkg.api import constants
@@ -979,13 +979,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # updating story hidden state
+        item_to_hide = []
         for item in selection:
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.hidden = not one_story.hidden
+            item_to_hide.append(self.tree_stories.indexOfTopLevelItem(item))
 
         # updating pack index file and display
         self.audio_device.update_pack_index()
         self.ts_update()
+
+        # update selection
+        sel_model = self.tree_stories.selectionModel()
+
+        # selecting moved items
+        new_selection = [self.tree_stories.topLevelItem(index) for index in item_to_hide]
+        self.tree_stories.setCurrentItem(new_selection[0])
+        for item in new_selection:
+            for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
+                sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
+
+
         self.sb_update("Stories updated...")
 
     def ts_import(self):
