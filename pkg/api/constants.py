@@ -1,10 +1,12 @@
 import os
+import shutil
 from pathlib import Path
 
 # this logger MUST not be used from worker thread.
 LUNII_LOGGER = "lunii-qt"
 REFRESH_CACHE = False
 
+STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
 
 def toggle_refresh_cache():
     global REFRESH_CACHE

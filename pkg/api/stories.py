@@ -1,14 +1,13 @@
 import json
 import os
-import shutil
 from pathlib import Path
 from typing import List
 from uuid import UUID
 
 import requests
 
-from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB
-
+from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
+    STORY_TRANSCODING_SUPPORTED
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -25,9 +24,6 @@ FILE_META  = "_metadata.json"
 FILE_UUID  = "uuid.bin"
 FILE_STUDIO_JSON  = "story.json"
 FILE_STUDIO_THUMB = "thumbnail.png"
-
-STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
-
 
 class StudioStory:
     def __init__(self, story_json=None):

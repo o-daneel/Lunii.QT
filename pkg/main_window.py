@@ -72,7 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
-        self.ffmpeg_present = shutil.which("ffmpeg") is not None
+        self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
 
         # actions local storage
         self.act_mv_top = None

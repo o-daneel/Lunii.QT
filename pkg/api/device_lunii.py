@@ -1128,6 +1128,10 @@ class LuniiDevice(QtCore.QObject):
                     file_newname = self.__get_ciphered_name(one_story.si[file][0], studio_si=True)
                     # transcode audio if necessary
                     if transcoding_required(file, data):
+                        if not STORY_TRANSCODING_SUPPORTED:
+                            self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                            return False
+
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         # len_before = len(data)//1024
                         data = audio_to_mp3(data)
@@ -1256,6 +1260,10 @@ class LuniiDevice(QtCore.QObject):
                     file_newname = self.__get_ciphered_name(one_story.si[fname][0], studio_si=True)
                     # transcode audio if necessary
                     if transcoding_required(fname, data):
+                        if not STORY_TRANSCODING_SUPPORTED:
+                            self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                            return False
+
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         data = audio_to_mp3(data)
                 else:
