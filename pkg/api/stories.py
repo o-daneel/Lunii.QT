@@ -317,19 +317,18 @@ class Story:
     def name(self):
         one_uuid = str(self.uuid).upper()
 
-        # checking official DB
-        if one_uuid in DB_OFFICIAL:
-            title = DB_OFFICIAL[one_uuid].get("title")
-            if not title:
-                locale = list(DB_OFFICIAL[one_uuid]["locales_available"].keys())[0]
-                title = DB_OFFICIAL[one_uuid]["localized_infos"][locale].get("title")
-            return title
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            # checking current db
+            if one_uuid in db:
+                if db[one_uuid].get("locales_available") and db[one_uuid].get("localized_infos"):
+                    locale = list(db[one_uuid]["locales_available"].keys())[0]
+                    title = db[one_uuid]["localized_infos"][locale].get("title")
+                    return title
+                else:
+                    title = db[one_uuid].get("title")
+                    if title:
+                        return title
 
-        # checking third-party DB
-        if one_uuid in DB_THIRD_PARTY:
-            title = DB_THIRD_PARTY[one_uuid].get("title")
-            if title:
-                return title
 
         return STORY_UNKNOWN
 
@@ -337,20 +336,21 @@ class Story:
     def desc(self):
         one_uuid = str(self.uuid).upper()
 
-        # checking official DB
-        if one_uuid in DB_OFFICIAL:
-            locale = list(DB_OFFICIAL[one_uuid]["locales_available"].keys())[0]
-            desc: str = DB_OFFICIAL[one_uuid]["localized_infos"][locale].get("description")
-            while desc.lstrip().startswith("<"):
-                pos = desc.find(">")
-                desc = desc[pos+1:].lstrip()
-            return desc
-
-        # checking third-party DB
-        if one_uuid in DB_THIRD_PARTY:
-            desc = DB_THIRD_PARTY[one_uuid].get("description")
-            if desc:
-                return desc
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            # checking current db
+            if one_uuid in db:
+                if db[one_uuid].get("locales_available") and db[one_uuid].get("localized_infos"):
+                    locale = list(db[one_uuid]["locales_available"].keys())[0]
+                    desc: str = db[one_uuid]["localized_infos"][locale].get("description")
+                    # removing html parts
+                    while desc.lstrip().startswith("<"):
+                        pos = desc.find(">")
+                        desc = desc[pos+1:].lstrip()
+                    return desc
+                else:
+                    desc = db[one_uuid].get("description")
+                    if desc:
+                        return desc
 
         return DESC_NOT_FOUND
 
