@@ -18,6 +18,9 @@ class QTextEditHandler(logging.Handler):
         msg = self.format(record)
         self.text_edit.appendPlainText(msg)
 
+        # moving horizontal scrollbar to left
+        h_sb = self.text_edit.horizontalScrollBar()
+        h_sb.setValue(h_sb.minimum())
 
 class DebugDialog(QWidget):
     def __init__(self, parent=None):

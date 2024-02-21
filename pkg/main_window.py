@@ -294,6 +294,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.menuStory.exec_(self.tree_stories.mapToGlobal(point))
 
+    def cb_show_log(self):
+        # prepare for debug dialog to show
+        self.__set_dbg_wndSize()
+        # show dialog and give back control to main
+        self.debug_dialog.show()
+        self.activateWindow()
+
     # WIDGETS UPDATES
     def cb_dev_add(self, dev_path):
         if is_lunii(dev_path):
@@ -531,10 +538,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # not visible, prepare location to show it
             if not self.isMaximized():
-                self.__set_dbg_wndSize()
-
-                self.debug_dialog.show()        # show me debug log wnd
-                self.activateWindow()           # focus back to main
+                self.cb_show_log()              # prepare log size, show and activate
             else:
                 self.debug_dialog.show()        # show me debug log wnd
 
@@ -1095,6 +1099,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
         self.worker.signal_message.connect(self.sb_update)
+        self.worker.signal_showlog.connect(self.cb_show_log)
 
         # running
         self.thread.start()

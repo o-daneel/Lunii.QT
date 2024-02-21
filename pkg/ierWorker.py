@@ -23,6 +23,7 @@ class ierWorker(QObject):
     signal_refresh = QtCore.Signal()
     signal_finished = QtCore.Signal()
     signal_message = QtCore.Signal(str)
+    signal_showlog = QtCore.Signal()
 
     def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None, update_size=False):
         super().__init__()
@@ -60,6 +61,7 @@ class ierWorker(QObject):
 
         except Exception as e:
             # Abort requested
+            self.signal_showlog.emit()
             self.signal_message.emit(f"🛑 Critical error : {e}")
             self.signal_message.emit(f"Trace\n{traceback.format_exc()}")
             traceback.print_exc()
@@ -92,6 +94,7 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"👍 New story imported : '{file}'")
                 success += 1
             else:
+                self.signal_showlog.emit()
                 self.signal_message.emit(f"🛑 Failed to import : '{file}'")
 
             self.signal_refresh.emit()
@@ -132,6 +135,7 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"👍 Story exported to '{res}'")
                 success += 1
             else:
+                self.signal_showlog.emit()
                 self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
             self.signal_refresh.emit()
 
@@ -160,6 +164,7 @@ class ierWorker(QObject):
                 self.signal_message.emit(f"👍 Story removed: '{story_to_remove.name}'")
                 success += 1
             else:
+                self.signal_showlog.emit()
                 self.signal_message.emit(f"🛑 Failed to remove : '{story_to_remove.name}'")
             self.signal_refresh.emit()
 
