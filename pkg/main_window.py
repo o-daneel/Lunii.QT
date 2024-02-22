@@ -984,6 +984,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # updating story hidden state
         item_to_hide = []
+        one_story = None
         for item in selection:
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.hidden = not one_story.hidden
@@ -1003,6 +1004,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
+        # updating detail panel
+        self.te_story_details.setDisabled(one_story.hidden)
+        self.lbl_picture.setDisabled(one_story.hidden)
 
         self.sb_update("✅ Stories updated...")
 
