@@ -86,18 +86,19 @@ for Windows / Linux / macOS
 | `Ctrl+I`       | Import new story                 |
 | `Ctrl+S`       | Export the selection             |
 | `Ctrl+Shift+S` | Export all the stories           |
-| `Ctrl+H`       | Hide/Show the selection          |
+| `Ctrl+H`       | Hide/Show selected stories       |
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
 | `Ctrl+O`       | Open a Lunii/Flam device         |
 | `Ctrl+L`       | Open debug log window            |
+| `Ctrl+Q`       | Exit the application             |
 | `F1`           | About the app                    |
 | `F5`           | Refresh devices                  |
 
 ## Features
 * Automatic **Update** detection
 * **Import** / **Export** / **Remove** stories
-* Support **STUdio** archive formats
+* Support **STUdio** archive formats, and **import STUdio database**
 * **Reorganize** the stories in the order you want
 * **Hide** stories  
   In order to avoid stories to get removed by Luniistore PC Synchronization, you can temporary hide them (all files ares kept on device), sync, and revert hide.
@@ -118,6 +119,10 @@ Some third-party stories are using non MP3 files. Thus they can't be installed a
 
 ### Installation
 #### Windows
+
+**NOTE :** By default, from now on, the Windows portable and MSI will embed FFMPEG 6.1.1   
+  
+Procedure:
 1) grab your ffmpeg release from [here](https://www.gyan.dev/ffmpeg/builds/)
 2) rename it to `ffmpeg.exe`
 3) copy beside lunii-qt.exe   
@@ -371,7 +376,9 @@ Click "**Open**", and you'll never get these messages in the future.
 ### Third Party story metadata
 You might have already loaded non-official stories to your device thanks to another app. When opening Lunii.QT, this 
 story will appear as `Unknown story (maybe a User created story)...`.   
-You can easily fix that by dropping the corresponding archive as you'll do for loading.  
+You can easily fix that by :  
+1. Importing STUdio DB with menu `File/Import STUdio DB`
+2. Dropping the corresponding archive as you'll do for loading.  
 Lunii.QT will **only read the metadata** and add them locally, **skipping the rest** of the archive.
 
 

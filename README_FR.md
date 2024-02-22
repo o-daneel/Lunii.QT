@@ -9,7 +9,7 @@ pour Windows / Linux / MacOs 11
 
 ### Matériels pris en charge :
 * Fah **v1** et **v2** (support complet)
-* Fah **v3** (l'export requiert les clés  de la Fah)
+* Fah **v3** (l'export requiert les clés de la Fah)
 * Flam (support partiel, tri des histoires et sauvegarde du firmware)
 
 ### Limitations :
@@ -68,7 +68,7 @@ pour Windows / Linux / MacOs 11
    * L'espace disponible sur la SD
    * Le nombre d'histoires
 
-6. **Histoire cachées** (les entrées grisées dans la liste) sont toujours physiquement présente dans l'appareil, mais ne seront pas visible par l'application Luniistore. De la sorte, les histoires non officielles ne seront pas supprimées lors de la synchronisation. N'oubliez pas de bien "cacher" vos histoires avant de cliquer sur "synchroniser" !
+6. **Histoires cachées** (les entrées grisées dans la liste) sont toujours physiquement présente dans l'appareil, mais ne seront pas visible par l'application Luniistore. De la sorte, les histoires non officielles ne seront pas supprimées lors de la synchronisation. N'oubliez pas de bien "cacher" vos histoires avant de cliquer sur "synchroniser" !
 
 
 ## Raccourcis clavier
@@ -83,7 +83,7 @@ pour Windows / Linux / MacOs 11
 | `Ctrl+I`       | Importe une nouvelle histoire                       |
 | `Ctrl+S`       | Exporte la sélection                                |
 | `Ctrl+Shift+S` | Exporte toutes les histoires                        |
-| `Ctrl+H`       | Masquer/Démasquer la sélection                      |
+| `Ctrl+H`       | Masquer/Démasquer les histoires sélectionnées       |
 | `Delete`       | Supprime les histoires sélectionnées                |
 |                |                                                     |
 | `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                  |
@@ -92,9 +92,9 @@ pour Windows / Linux / MacOs 11
 | `F5`           | Réactualise les appareils                           |
 
 ## Fonctionnalités
-* Détection automatique des **Mise à jour**
+* Détection automatique des **Mises à jour**
 * **Import** / **Export** / **Suppression** des histoires
-* Support des archives au format **STUdio**
+* Support des archives au format **STUdio**, et **importez la base d'histoire de STUdio**
 * **Réorganisez** vos histoires dans votre ordre préféré
 * **Cachez** les histoires  
   Dans le but de ne pas subir une suppression forcée des histoires non officielles durant la synchronisation avec l'application Luniistore, vous pouvez désormais "cacher" temporairement certaines histoires  
@@ -117,18 +117,46 @@ Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc 
 **ATTENTION** : le transcodage est <u>très long</u>, il faut être patient. C'est pourquoi vous devriez préférer le format [.plain.pk](#plainpk) qui utilise un format audio compatible.
 
 ### Installation
-Vous devez vous assurer que la commande `ffmpeg` se trouve dans votre PATH.  
-Si vous êtes perdu, vous pouvez récupérer un binaire autonome sur le lien précédent, pour votre plateforme (Win/Linux/MacOs), et le copier à côté de cette application, comme ceci :
+#### Windows
 
-```
-- 
- |- lunii-qt.exe
- |- ffmpeg.exe
-```
+**NOTE :** Désormais, et par défaut, FFMPEG 6.1.1 sera inclus dans les éditions portables et MSI de l'application sous Windows  
+  
+Procedure:
+1) récupérez votre version de ffmpeg [ici](https://www.gyan.dev/ffmpeg/builds/)
+2) renommez là en `ffmpeg.exe`
+3) copiez le fichier à côté de lunii-qt.exe   
+    ```
+    - 
+     |- lunii-qt.exe
+     |- ffmpeg.exe
+    ```
+4) redémarrez luni-qt
 
-1) Récupérez votre version de ffmpeg
-2) Renommez-la en `ffmpeg.exe` ou `ffmpeg` (en fonction de votre système d'exploitation)
-3) Copiez à côté de `lunii-qt.exe` ou `lunii-qt` (en fonction de votre système d'exploitation)
+Méthode alternative (préférée):
+1) ouvrir un terminal powershell
+2) exécutez les commandes suivantes pour installer le Scoop Package manager  
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    ```
+3) installez ffmpeg avec   
+  `scoop install ffmpeg`
+4) redémarrez luni-qt
+
+#### Linux
+1) ouvrir un terminal
+2) exécutez la commande suivante :   
+`sudo apt-get install ffmpeg`
+4) redémarrez luni-qt
+
+#### macOS
+Afin de simplifier l'installation de ffmpeg, il est recommandé d'utiliser Bew, https://brew.sh/  
+1) ouvrir un terminal
+2) exécutez la commande suivante  
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+3) à la fin de l'installation, installez ffmpeg avec:  
+`brew install ffmpeg`
+4) redémarrez luni-qt
 
 ### Vérification 
 Dans l'application, le menu `Tools` affiche l'état de la détection.
@@ -346,11 +374,15 @@ Cliquez sur "**Ouvrir**".
 Si vous n'avez pas eu cette popup, retournez juste double cliquer sur le fichier.
 1. Pour finir, un dernier message vous informera de la sorte       
 ![](./res/macos_install_4.png)  
-Cliquez sur "**Ouvrir**", et vous n'aurez plus ces avertissement à l'avenir. 
+Cliquez sur "**Ouvrir**", et vous n'aurez plus ces avertissements à l'avenir. 
 
 ### Métadonnées des histoires non-officielles
-Lors de l'utilisation de cette application, vous allez peut-être constater des hisoires marquées `Unknown story (maybe a User created story)...`. Il s'agit certainement d'une histoire tierce qui a été chargé par une autre application. Lunii.QT n'a donc pas connaissance des métadonnées associées (Titre, Description, Image).  
-Il est possible de pallier à ce problème en glissant déposant l'archive de l'histoire dans l'application, comme pour la charger. Cette dernière étant déjà présente, Lunii.Qt ne va faire qu'**analyser les métadonnées** et les ajouter dans la base interne, en prenant soin de **ne pas recharger** l'histoire.
+Lors de l'utilisation de cette application, vous allez peut-être constater des hisoires marquées `Unknown story (maybe a User created story)...`. 
+Il s'agit certainement d'une histoire tierce qui a été chargé par une autre application. Lunii.QT n'a donc 
+pas connaissance des métadonnées associées (Titre, Description, Image).  
+Il est possible de pallier ce problème de deux manières (au choix) :
+1. en important la base d'histoires de STUdio avec le menu `File/Import STUdio DB`
+2. en glissant déposant l'archive de l'histoire dans l'application, comme pour la charger. Cette dernière étant déjà présente, Lunii.Qt ne va faire qu'**analyser les métadonnées** et les ajouter dans la base interne, en prenant soin de **ne pas recharger** l'histoire.
 
 ### Gestion du cache
 Cette application téléchargera une fois pour toutes la base de données des histoires officielles et toutes les images demandées dans le dossier dédié à l'application.
@@ -360,7 +392,7 @@ Cette application téléchargera une fois pour toutes la base de données des hi
 En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour forcer le rafraîchissement.
 
 ### Exportation V3
-Afin de supporter l'exportation d'histoires depuis une Lunii v3, vous devez placer vos clés de périphérique ici :
+Afin de supporter l'exportation d'histoires depuis une Luniis v3, vous devez placer vos clés de périphérique ici :
 ```bash
 %HOME%\.lunii-qt\v3.keys
 $HOME/.lunii-qt/v3.keys
@@ -385,5 +417,5 @@ Merci à :
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
 * [Lunii Admin](https://github.com/olup/lunii-admin) (Une alternative en Go de STUdio)
-* [Lunii Admin Web](https://github.com/olup/lunii-admin) (même chose que précédemment mais à partir d'un navigateur)
+* [Lunii Admin Web](https://github.com/olup/lunii-admin) (même chose que précédemment, mais à partir d'un navigateur)
 * Astuce de l'icone dans le workflow avec  **[rcedit](https://github.com/electron/rcedit)**
