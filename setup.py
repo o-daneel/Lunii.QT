@@ -71,6 +71,7 @@ options = {
             "xml",
             "pydoc",
         ],
+        "include_files" : ["tools/ffmpeg.exe"],
         "zip_include_packages": ["PySide6", "shiboken6"],
         "silent_level": "1",
         "include_msvcr": True

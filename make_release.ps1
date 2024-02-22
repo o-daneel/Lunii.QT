@@ -1,8 +1,8 @@
 # Cleanup
-Remove-Item -Force -Recurse build
-Remove-Item -Force -Recurse dist
-Remove-Item -Force Lunii*.msi
-Remove-Item -Force Lunii*_portable.zip
+Remove-Item -ErrorAction SilentlyContinue -Force -Recurse build
+Remove-Item -ErrorAction SilentlyContinue -Force -Recurse dist
+Remove-Item -ErrorAction SilentlyContinue -Force Lunii*.msi
+Remove-Item -ErrorAction SilentlyContinue -Force Lunii*_portable.zip
 
 # msi build
 ..\lunii-venv\Scripts\python.exe .\setup.py build_exe
