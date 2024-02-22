@@ -1,6 +1,9 @@
+import base64
+import json
 import os
 import time
 import traceback
+from uuid import UUID
 
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
@@ -8,6 +11,7 @@ from PySide6.QtCore import QObject, QThread
 from pkg.api import constants
 from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice
+from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, story_load_db
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
@@ -17,6 +21,7 @@ ACTION_FIND    = 5
 ACTION_RECOVER = 6
 ACTION_CLEANUP = 7
 ACTION_FACTORY = 8
+ACTION_DB_IMPORT = 9
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
@@ -38,7 +43,8 @@ class ierWorker(QObject):
     def process(self):
         # cleaning any previous abortion
         self.abort_process = False
-        self.audio_device.abort_process = False
+        if self.audio_device:
+            self.audio_device.abort_process = False
 
         # which action to perform ?
         try:
@@ -58,6 +64,8 @@ class ierWorker(QObject):
                 self._task_cleanup()
             elif self.action == ACTION_FACTORY:
                 self._task_factory_reset()
+            elif self.action == ACTION_DB_IMPORT:
+                self._task_db_import()
 
         except Exception as e:
             # Abort requested
@@ -243,3 +251,62 @@ class ierWorker(QObject):
         self.signal_refresh.emit()
         self.signal_message.emit(f"✅ Factory reset performed, device is empty")
 
+
+    def _task_db_import(self):
+        count = 0
+
+        # loading DB
+        with open(self.items, encoding='utf-8') as fp_db:
+            db_stories = json.load(fp_db)
+
+        # checking for official DB instead of STUdio
+        print(db_stories.keys())
+        print(list(db_stories.keys()))
+        if "response" in list(db_stories.keys()):
+            self.signal_finished.emit()
+            self.signal_message.emit(f"🛑 Failed to import DB (wrong file ?)")
+            return
+
+        # for each entry
+        for index, s_uuid in enumerate(db_stories.keys()):
+            if self.abort_process:
+                self.exit_requested()
+                return
+
+            self.signal_total_progress.emit(index, len(self.items))
+            # get uuuid/title/desc/image
+            uuid = db_stories[s_uuid].get("uuid")
+            title = db_stories[s_uuid].get("title")
+            desc = db_stories[s_uuid].get("description")
+            image = db_stories[s_uuid].get("image")
+
+            # if enough details
+            if not uuid and not title:
+                continue
+
+            try:
+                one_uuid = UUID(uuid)
+            except:
+                continue
+
+            # create db entry
+            print(f"{uuid} - {title}")
+            if desc:
+                print(f"({desc[:25]})")
+            if image:
+                print(f"+{image[:5]}")
+
+            thirdparty_db_add_story(one_uuid, title, desc)
+
+            # create image entry
+            if image:
+                _, encoded_data = image.split(',', 1)
+                image_data = base64.b64decode(encoded_data)
+                thirdparty_db_add_thumb(one_uuid, image_data)
+
+            count += 1
+
+        # done
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit(f"✅ STUdio DB imported ({count}/{len(db_stories.keys())}).")

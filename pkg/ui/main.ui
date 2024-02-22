@@ -500,8 +500,17 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <property name="separatorsCollapsible">
+     <bool>true</bool>
+    </property>
+    <property name="toolTipsVisible">
+     <bool>false</bool>
+    </property>
     <addaction name="separator"/>
     <addaction name="actionOpen_Lunii"/>
+    <addaction name="separator"/>
+    <addaction name="actionImport_DB"/>
+    <addaction name="actionRefresh_DB"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -570,8 +579,14 @@
    <property name="text">
     <string>Exit</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionImport">
@@ -727,6 +742,9 @@
    <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionShow_Log">
    <property name="icon">
@@ -804,6 +822,24 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionImport_DB">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/import.png</normaloff>:/icon/res/import.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import STUdio DB</string>
+   </property>
+  </action>
+  <action name="actionRefresh_DB">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/refresh_db.png</normaloff>:/icon/res/refresh_db.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh official DB</string>
    </property>
   </action>
  </widget>

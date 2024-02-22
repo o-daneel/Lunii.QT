@@ -1,6 +1,5 @@
 import logging
 import os.path
-import shutil
 import time
 from pathlib import WindowsPath
 
@@ -21,7 +20,7 @@ from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
-    ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND
+    ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -488,6 +487,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.cb_dev_add(dev_dir)
                 index = self.combo_device.findText(dev_dir)
                 self.combo_device.setCurrentIndex(index)
+        elif act_name == "actionImport_DB":
+            file_filter = "STUdio DB (unofficial.json);;All DBs (*.json);;All files (*)"
+            STUDIO_DIR: Path = os.path.join(Path.home(), ".studio/db")
+            file, _ = QFileDialog.getOpenFileName(self, "Open STUdio DB", STUDIO_DIR, file_filter)
+            if not file:
+                return
+
+            self.worker_launch(ACTION_DB_IMPORT, file)
+
+        elif act_name == "actionRefresh_DB":
+            self.cb_db_refresh()
 
     def cb_menu_story(self, action: QtGui.QAction):
         act_name = action.objectName()
@@ -1076,8 +1086,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.worker:
             return
 
-        if not self.audio_device:
-            return
+        # if not self.audio_device:
+        #     return
 
         # setting up the thread
         self.worker = ierWorker(self.audio_device, action, item_list, out_dir, not self.sizes_hidden and action == ACTION_IMPORT)
@@ -1097,8 +1107,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.thread.finished.connect(self.thread.deleteLater)
 
         # UI update slots
-        self.audio_device.signal_story_progress.connect(self.slot_story_progress)
-        self.audio_device.signal_logger.connect(self.logger.log)
+        if self.audio_device:
+            self.audio_device.signal_story_progress.connect(self.slot_story_progress)
+            self.audio_device.signal_logger.connect(self.logger.log)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
@@ -1126,6 +1137,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(True)
         self.pbar_total.setRange(0, max_val)
         self.pbar_total.setValue(current+1)
+
+        self.btn_abort.setVisible(True)
 
     def slot_story_progress(self, uuid, current, max_val):
         # updating UI
