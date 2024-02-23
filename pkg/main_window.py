@@ -723,7 +723,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # adding items
         for story in self.audio_device.stories:
             # filtering 
-            if le_filter and not le_filter.lower() in story.name.lower():
+            if (le_filter and
+                not le_filter.lower() in story.name.lower() and
+                not le_filter.lower() in story.str_uuid.lower() ):
                 continue
 
             # create and add item to treeWidget

@@ -479,7 +479,7 @@ class Ui_MainWindow(object):
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
-        self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type to filter", None))
+        self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Story Name or UUID filter text)", None))
 #if QT_CONFIG(tooltip)
         self.btn_db.setToolTip(QCoreApplication.translate("MainWindow", u"Force official Lunii DB to be refreshed", None))
 #endif // QT_CONFIG(tooltip)

@@ -118,7 +118,7 @@
       <item>
        <widget class="QLineEdit" name="le_filter">
         <property name="placeholderText">
-         <string>Type to filter</string>
+         <string>(Story Name or UUID filter text)</string>
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>
