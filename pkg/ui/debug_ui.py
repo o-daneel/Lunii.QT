@@ -9,14 +9,36 @@ from PySide6.QtWidgets import (QAbstractButton, QDialogButtonBox,
 LUNII_LOGGER = "lunii-qt"
 
 
+def filter_log(log, filter):
+    if filter:
+        log_lines = log.splitlines()
+        left_lines = [line for line in log_lines if filter.lower() in line.lower()]
+        left_log = "\n".join(left_lines)
+        pass
+    else:
+        left_log = log
+    return left_log
+
 class QTextEditHandler(logging.Handler):
     def __init__(self, text_edit):
         super(QTextEditHandler, self).__init__()
         self.text_edit = text_edit
+        self.text_edit.full_log = ""
+        self.text_edit.filter = ""
 
     def emit(self, record):
         msg = self.format(record)
-        self.text_edit.appendPlainText(msg)
+
+        # saving in internal buffer
+        self.text_edit.full_log += msg + "\n"
+        # filtering
+        log = filter_log(self.text_edit.full_log, self.text_edit.filter)
+        # showing
+        self.text_edit.setPlainText(log)
+
+        # moving vertical scrollbar to bottom
+        v_sb = self.text_edit.verticalScrollBar()
+        v_sb.setValue(v_sb.maximum())
 
         # moving horizontal scrollbar to left
         h_sb = self.text_edit.horizontalScrollBar()
@@ -42,6 +64,7 @@ class DebugDialog(QWidget):
         self.le_filter = QLineEdit(self)
         self.le_filter.setClearButtonEnabled(True)
         self.le_filter.setPlaceholderText("(Log filter text)")
+        self.le_filter.setToolTip("Try \"error\" or \"fail\".")
 
         horizontalSpacer = QSpacerItem(80, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
@@ -93,11 +116,13 @@ class DebugDialog(QWidget):
         self.logger.setLevel(logging.INFO)
 
         self.le_filter.setVisible(True)
-        self.le_filter.setEnabled(False)
 
     def setup_connections(self):
         # log level selector
         self.cb_level.currentIndexChanged.connect(self.cb_level_selected)
+
+        # text filter
+        self.le_filter.textChanged.connect(self.log_update)
 
         # connecting logger handler
         handler = QTextEditHandler(self.te_Logger)
@@ -115,6 +140,21 @@ class DebugDialog(QWidget):
         level = self.cb_level.currentText()
         self.logger.setLevel(dict_level[level])
 
+    def log_update(self):
+        # getting filter text
+        self.te_Logger.filter = self.le_filter.text()
+
+        # filtering
+        left_log = filter_log(self.te_Logger.full_log, self.te_Logger.filter)
+
+        # showing log
+        self.te_Logger.clear()
+        self.te_Logger.setPlainText(left_log)
+
+        # moving vertical scrollbar to bottom
+        v_sb = self.te_Logger.verticalScrollBar()
+        v_sb.setValue(v_sb.maximum())
+
     def button_clicked(self, button: QAbstractButton):
         button_role = self.sender().buttonRole(button)
 
@@ -129,4 +169,4 @@ class DebugDialog(QWidget):
         filename, _ = QFileDialog.getSaveFileName(self, "Save Log", "", "Text Files (*.txt);;All Files (*)")
         if filename:
             with open(filename, 'wb') as file:
-                file.write(self.te_Logger.toPlainText().encode('utf-8'))
+                file.write(self.te_Logger.full_log.encode('utf-8'))
