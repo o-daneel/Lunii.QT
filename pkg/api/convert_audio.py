@@ -23,7 +23,7 @@ def transcoding_required(filename: str, audio_data):
     # print(f"MP3 {audio.info.bitrate // 1000}Kbps ({audio.info.bitrate_mode} / {audio.info.mode}) for {filename}")
 
     # not the correct mode
-    if not audio.info.bitrate_mode in [BitrateMode.VBR, BitrateMode.CBR]:
+    if not audio.info.bitrate_mode in [BitrateMode.UNKNOWN, BitrateMode.VBR, BitrateMode.CBR]:
         return True
 
     # not a mono audio
