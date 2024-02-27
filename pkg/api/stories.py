@@ -88,7 +88,7 @@ class StudioStory:
                     self.compatible = False
                     return
 
-                if audio not in self.ri:
+                if audio not in self.si:
                     normalized_name = os.path.splitext(audio)[0]
                     normalized_name = normalized_name[-8:].upper()
                     self.si[audio] = (normalized_name, len(self.si))

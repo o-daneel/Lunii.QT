@@ -1138,7 +1138,7 @@ class LuniiDevice(QtCore.QObject):
                         # print(f"Transcoded from {len_before:4}KB to {len(data)//1024:4}KB")
                     # removing tags if necessary
                     if tags_removal_required(data):
-                        self.signal_logger.emit(logging.WARN, f"⌛ Removing tags from audio {file_newname}...")
+                        self.signal_logger.emit(logging.WARN, f"⌛ Removing tags from audio {file_newname}")
                         data = mp3_tag_cleanup(data)
 
                 else:
