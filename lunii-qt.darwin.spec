@@ -8,7 +8,7 @@ a = Analysis(
     ['lunii-qt.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('ffmpeg', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

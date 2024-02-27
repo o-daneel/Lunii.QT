@@ -66,6 +66,11 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
 
+    - name: Getting latest FFMPEG
+      run: |
+        wget https://evermeet.cx/ffmpeg/getrelease/zip -O ffmpeg.zip
+        unzip ffmpeg.zip
+
     - name: Build Exec & Create Archive
       run: |
         pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
