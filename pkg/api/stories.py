@@ -5,6 +5,7 @@ from typing import List
 from uuid import UUID
 
 import requests
+from PySide6.QtCore import QFile, QTextStream
 
 from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
     STORY_TRANSCODING_SUPPORTED
@@ -239,6 +240,19 @@ def story_load_db(reload=False):
             db.unlink(FILE_OFFICIAL_DB)
 
     # trying to load third-party DB
+    if not os.path.isfile(FILE_THIRD_PARTY_DB):
+        # no local unofficial DB, creating the one from resource
+        file = QFile(f":/json/res/unofficial.json")  # Use the alias defined in the .qrc file
+        if file.open(QFile.ReadOnly | QFile.Text):
+            textStream = QTextStream(file)
+            content = textStream.readAll()
+            file.close()
+
+            # Write the content to a new file
+            with open(FILE_THIRD_PARTY_DB, "w", encoding='utf-8') as f:
+                f.write(content)
+
+    # there should be an unofficial DB
     if os.path.isfile(FILE_THIRD_PARTY_DB):
         try:
             with open(FILE_THIRD_PARTY_DB, encoding='utf-8') as fp_db:

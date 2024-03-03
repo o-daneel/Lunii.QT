@@ -289,13 +289,13 @@ class ierWorker(QObject):
             except:
                 continue
 
-            # create db entry
-            print(f"{uuid} - {title}")
-            if desc:
-                print(f"({desc[:25]})")
-            if image:
-                print(f"+{image[:5]}")
+            # print(f"{uuid} - {title}")
+            # if desc:
+            #     print(f"({desc[:25]})")
+            # if image:
+            #     print(f"+{image[:5]}")
 
+            # create db entry
             thirdparty_db_add_story(one_uuid, title, desc)
 
             # create image entry

@@ -6,6 +6,23998 @@
 from PySide6 import QtCore
 
 qt_resource_data = b"\
+\x00\x05\xdbQ\
+{\
+\x0d\x0a    \x22d8b6f047-\
+1283-4ada-b3aa-0\
+8856f60b51e\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22d8b6f047-1283-\
+4ada-b3aa-08856f\
+60b51e\x22,\x0d\x0a      \
+  \x22title\x22: \x22Enco\
+re une histoire \
+- Rosa Parks (8 \
+episodes)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Une histoir\
+e \xc3\xa9crite par Ab\
+delhakim Rezgui,\
+ interpr\xc3\xa9t\xc3\xa9e p\
+ar C\xc3\xa9line Kallm\
+ann, r\xc3\xa9alisatio\
+n Alexandre Ferr\
+eira, production\
+ Benjamin Muller\
+.\x5cn\x5cnEncore une \
+histoire est un \
+podcast destin\xc3\xa9\
+ aux enfants (et\
+ \xc3\xa0 ceux qui le \
+sont encore dans\
+ leur t\xc3\xaate) qui\
+ aiment qu'on le\
+ur raconte des h\
+istoires.\x5cnChaqu\
+e semaine, vous \
+retrouverez ici \
+une histoire lue\
+, tir\xc3\xa9e d'un li\
+vre de litt\xc3\xa9rat\
+ure jeunesse ou \
+une cr\xc3\xa9ation or\
+iginale.\x5cnUn pod\
+cast produit par\
+ Benjamin Muller\
+, interpr\xc3\xa9t\xc3\xa9 p\
+ar C\xc3\xa9line Kallm\
+ann et r\xc3\xa9alis\xc3\xa9\
+ par Alexandre F\
+erreira.\x5cnA \xc3\xa9co\
+uter avant de se\
+ coucher, allong\
+\xc3\xa9 dans l'herbe,\
+ dans la voiture\
+ ou dans le trai\
+n, Encore une hi\
+stoire veut mett\
+re en avant la f\
+ormidable cr\xc3\xa9at\
+ion litt\xc3\xa9raire \
+destin\xc3\xa9e aux je\
+unes lecteurs (e\
+t aux moins jeun\
+es, donc).\x5cnVous\
+ retrouverez bie\
+n \xc3\xa9videmment \xc3\xa0\
+ chaque fois les\
+ r\xc3\xa9f\xc3\xa9rences de\
+s livres lus, si\
+ vous voulez all\
+er plus loin en \
+vous offrant le \
+livre en questio\
+n.\x5cnVive la lect\
+ure, vive la lit\
+t\xc3\xa9rature jeunes\
+se, vive les his\
+toires !\x22\x0d\x0a    }\
+,\x0d\x0a    \x22d8e12f3d\
+-8a74-4e9c-a87b-\
+dc30ec5ddbc2\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22d8e12f3d-8a74\
+-4e9c-a87b-dc30e\
+c5ddbc2\x22,\x0d\x0a     \
+   \x22title\x22: \x22CD \
+Les Contes De Va\
+lerie Bonenfant \
+7 Contes de No\xc3\xab\
+l\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Les\
+ Contes De Val\xc3\xa9\
+rie Bonenfant, V\
+ol. 1 - Contes D\
+e No\xc3\xabl lus par \
+Fabienne PRO\x5cn02\
+ La Boutique De \
+No\xc3\xabl\x5cn03 Les R\xc3\
+\xa9verb\xc3\xa8res De No\
+\xc3\xabl\x5cn04 Manca Bl\
+ue, La Marmotte \
+Surfeuse\x5cn05 Hal\
+louf Le Chameau\x5c\
+n06 Le Chaudron \
+Polaire\x5cn07 Le P\
+etit Gar\xc3\xa7on Qui\
+ R\xc3\xaavait D'Avoir\
+ Un Chien\x5cn08 Le\
+ Cadeau Du Ciel\x22\
+\x0d\x0a    },\x0d\x0a    \x226\
+13a5a33-8b17-4b8\
+2-b6bd-154d9c03a\
+1ac\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22613a5a\
+33-8b17-4b82-b6b\
+d-154d9c03a1ac\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Didier Jeune\
+sse - 2012 - Les\
+ Plus Belles Ber\
+ceuses Jazz\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22S\xc3\xa9lectio\
+nn\xc3\xa9es par Misja\
+ Fitzgerald Mich\
+el, voici 15 ber\
+ceuses \xc3\xa0 la bea\
+ut\xc3\xa9 intemporell\
+e, interpr\xc3\xa9t\xc3\xa9e\
+s par les plus b\
+elles voix de l\xe2\
+\x80\x99\xc3\xa2ge d\xe2\x80\x99or du\
+ jazz : Ella Fit\
+zgerald, Billie \
+Holiday, Sarah V\
+aughan, Nat King\
+ Cole, Chet Bake\
+r\xe2\x80\xa6 Des standar\
+ds incontournabl\
+es, mais aussi d\
+es titres moins \
+connus \xc3\xa0 d\xc3\xa9cou\
+vrir, immortalis\
+\xc3\xa9s par des voix\
+ chaudes et sens\
+uelles, qui font\
+ de chaque chans\
+on un moment d\xe2\x80\
+\x99une infinie dou\
+ceur. Les traduc\
+tions de Val\xc3\xa9ri\
+e Rouzeau nous r\
+\xc3\xa9v\xc3\xa8lent des te\
+xtes d\xe2\x80\x99une rar\
+e po\xc3\xa9sie.\x5cn\x5cn20\
+12\x5cn\x5cnhttps://di\
+dier-jeunesse.co\
+m/collections/cl\
+assique-jazz/les\
+-plus-belles-ber\
+ceuses-jazz-edit\
+ion-classique-97\
+82278068340\x5cn\x5cnR\
+ussian Lullaby\x5cn\
+Lullaby of Birdl\
+and\x5cnOnce Upon a\
+ Summertime\x5cnLul\
+laby in blue\x5cnDr\
+eams Are Made fo\
+r Children\x5cnMy S\
+leepy Head\x5cnOver\
+ the Rainbow\x5cnGo\
+odnight my Love\x5c\
+nMy Funny Valent\
+ine\x5cnHit the roa\
+d to Dreamland\x5cn\
+Summertime\x5cnLull\
+aby of the Leave\
+s\x5cnLooking for a\
+ boy\x5cnGod Bless \
+the Child\x5cnBrahm\
+'s Lullaby\x22\x0d\x0a   \
+ },\x0d\x0a    \x223781d8\
+95-aa1a-48a0-b77\
+1-9cc66c9fef16\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x223781d895-aa\
+1a-48a0-b771-9cc\
+66c9fef16\x22,\x0d\x0a   \
+     \x22title\x22: \x22A\
+udiocontes Hache\
+tte\x22,\x0d\x0a        \x22\
+description\x22: \x22C\
+e pack contient \
+les 60 histoires\
+ des audiocontes\
+ vendus en livre\
+ + figurine sur \
+enceinte par Hac\
+hette.\x5cn----\x5cnLa\
+ magie des conte\
+s racont\xc3\xa9s par \
+leurs h\xc3\xa9ros\x5cn\x5cn\
+Hachette Collect\
+ions fait honneu\
+r \xc3\xa0 tous les gr\
+ands contes clas\
+siques que l'on \
+conna\xc3\xaet toutes \
+et tous.\x5cnCertai\
+ns sont vraiment\
+ tr\xc3\xa8s connus (\x5c\
+\x22 le petit chape\
+ron rouge\x5c\x22 ou \x5c\
+\x22les trois petit\
+s cochons\x5c\x22), d'\
+autres un peu mo\
+ins comme \x5c\x22le r\
+enard et les rai\
+sins\x5c\x22.\x22\x0d\x0a    },\
+\x0d\x0a    \x22a958c1a1-\
+d4bd-45c2-9220-0\
+7a3af774489\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22a958c1a1-d4bd-\
+45c2-9220-07a3af\
+774489\x22,\x0d\x0a      \
+  \x22title\x22: \x22Pete\
+r le pirate\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x2210 courte\
+s histoires de P\
+eter le pirate !\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+ff854ba6-d6b6-42\
+1f-b052-44bb7fe7\
+80b4\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22ff854\
+ba6-d6b6-421f-b0\
+52-44bb7fe780b4\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Histoires p\
+our les petits -\
+ 2eme Trimestre \
+2022\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Histoires pour l\
+es petits (V1)\x5cn\
+2eme Trimestre 2\
+022 / 9 Histoire\
+s\x5cn\x5cnChangelog\x5cn\
+V1 : 1er release\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e83f2718-5cad-44\
+5b-8f81-7bcd68e1\
+6c95\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e83f2\
+718-5cad-445b-8f\
+81-7bcd68e16c95\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Le P\xc3\xa8re No\
+\xc3\xabl et ses petit\
+s sapins (11 \xc3\xa9p\
+isodes et 11 cha\
+nsons)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x221df35ae7-9396-\
+4038-b8f0-a54403\
+507e09\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x221df\
+35ae7-9396-4038-\
+b8f0-a54403507e0\
+9\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Une histo\
+ire et OLI Pack \
+5 (12 Histoires)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Vous\
+ cherchez des hi\
+stoires du soir \
+pour vos enfants\
+ ? D\xc3\xa9couvrez le\
+s nouveaux \xc3\xa9pis\
+odes de la s\xc3\xa9ri\
+e audio France I\
+nter : des conte\
+s pour les 5-7 a\
+ns, imagin\xc3\xa9s et\
+ racont\xc3\xa9s par d\
+e nombreux auteu\
+rs tels que Chlo\
+\xc3\xa9 Delaume, Kath\
+erine Pancol, Ze\
+p, Delphine de V\
+igan, Guillaume \
+Meurice, Alain M\
+abanckou\xe2\x80\xa6 \x5cn\x5cn\
+https://www.radi\
+ofrance.fr/franc\
+einter/podcasts/\
+une-histoire-et-\
+oli\x22\x0d\x0a    },\x0d\x0a  \
+  \x22826ab7d3-5de8\
+-4f6e-906d-59160\
+fa01de0\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2282\
+6ab7d3-5de8-4f6e\
+-906d-59160fa01d\
+e0\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Courvoll\
+e - Voyage dans \
+un autre monde\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x22a38f93\
+24-9c27-42c6-b4c\
+7-680db1192a8a\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22a38f9324-9c\
+27-42c6-b4c7-680\
+db1192a8a\x22,\x0d\x0a   \
+     \x22title\x22: \x22P\
+etit Bambou Enfa\
+nts Partie 01\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Petit B\
+ambou Enfants Pa\
+rtie 01\x22\x0d\x0a    },\
+\x0d\x0a    \x22ea53f1dc-\
+1fec-4319-a189-c\
+6462c7883ca\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22ea53f1dc-1fec-\
+4319-a189-c6462c\
+7883ca\x22,\x0d\x0a      \
+  \x22title\x22: \x22Char\
+lie et la chocol\
+aterie\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x5c\x22Le m\xc3\xa9tier d\
+e visseur de cap\
+uchons de tubes \
+de dentifrice ne\
+ permettait pas \
+\xc3\xa0 Mr. Bucket de\
+ subvenir aux be\
+soins de sa nomb\
+reuse famille : \
+Mrs. Bucket son \
+\xc3\xa9pouse, grand-m\
+aman Jos\xc3\xa9phine \
+et grand-papa Jo\
+e, grand-papa Ge\
+orges et grand-m\
+aman Georgina. S\
+ans oublier son \
+fils Charlie don\
+t le r\xc3\xaave le pl\
+us fou \xc3\xa9tait de\
+ manger du choco\
+lat ! Aussi, que\
+lle ne fut pas l\
+'\xc3\xa9motion du jeu\
+ne gar\xc3\xa7on en ap\
+prenant que Will\
+y Wonka invitait\
+ cinq enfants \xc3\xa0\
+ visiter sa merv\
+eilleuse chocola\
+terie, la plus c\
+\xc3\xa9l\xc3\xa8bre du mond\
+e entier. Les ci\
+nq enfants qui d\
+\xc3\xa9couvriraient u\
+n ticket d'or ca\
+ch\xc3\xa9 dans cinq b\
+\xc3\xa2tons de chocol\
+at...\x5c\x22Entour\xc3\xa9 \
+de quatre com\xc3\xa9d\
+iens qui donnent\
+ vie \xc3\xa0 ces \xc3\xa9to\
+nnants personnag\
+es, Claude Ville\
+rs raconte l'une\
+ des histoires l\
+es plus c\xc3\xa9l\xc3\xa8br\
+es de Roald Dahl\
+. Une interpr\xc3\xa9t\
+ation exceptionn\
+elle au service \
+d'un texte d'une\
+ grande dr\xc3\xb4leri\
+e !\x22\x0d\x0a    },\x0d\x0a  \
+  \x2264e524a6-3398\
+-4ee7-ac56-616a6\
+36a3877\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2264\
+e524a6-3398-4ee7\
+-ac56-616a636a38\
+77\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les aven\
+tures de Rodolph\
+e et Gala, saiso\
+n 3\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x222\
+94572ec-f541-490\
+8-9cb5-81fa3f77f\
+109\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22294572\
+ec-f541-4908-9cb\
+5-81fa3f77f109\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Max et le tr\
+\xc3\xa9sor de Moust\xc3\xa9\
+rian\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+C'est les vacanc\
+es ! Max a h\xc3\xa2te\
+ d'arriver en Br\
+etagne pour retr\
+ouver son tonton\
+ ador\xc3\xa9, les p\xc3\xaa\
+cheurs du villag\
+e et surtout pou\
+r aller faire du\
+ bateau ! Mais c\
+ette fois-ci, c'\
+est une toute au\
+tre aventure qui\
+ l'attend, rempl\
+ie de l\xc3\xa9gendes \
+et de personnage\
+s myst\xc3\xa9rieux...\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+bc98cd60-488f-4e\
+1d-aa2f-6ebcd37b\
+a7ae\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22bc98c\
+d60-488f-4e1d-aa\
+2f-6ebcd37ba7ae\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Souffleur d\
+e r\xc3\xaaves - Les a\
+ventures de Stel\
+la et Galaxy-v2\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Le Ro\
+yaume des Elfes \
+court un grand d\
+anger ! Un morce\
+au de la lune sa\
+cr\xc3\xa9e a \xc3\xa9t\xc3\xa9 vo\
+l\xc3\xa9 ! Sans elle,\
+ les habitants d\
+u peuple de la f\
+or\xc3\xaat ne pourron\
+t pas survivre. \
+Stella, la princ\
+esse h\xc3\xa9riti\xc3\xa8re\
+, se voit confie\
+r la mission de \
+partir \xc3\xa0 sa rec\
+herche. Accompag\
+n\xc3\xa9e de Galaxy, \
+son animal totem\
+, et de deux gar\
+des royaux, elle\
+ est pr\xc3\xaate \xc3\xa0 r\
+elever tous les \
+d\xc3\xa9fis mais parv\
+iendra-t-elle \xc3\xa0\
+ sauver les sien\
+s ?\x22\x0d\x0a    },\x0d\x0a  \
+  \x22c2fea238-5d51\
+-484b-852a-490c7\
+cecfa1e\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22c2\
+fea238-5d51-484b\
+-852a-490c7cecfa\
+1e\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Monsieur\
+ Madame\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x22018be87a-e606\
+-47e7-a4b2-ca14d\
+2a950fd\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2201\
+8be87a-e606-47e7\
+-a4b2-ca14d2a950\
+fd\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Le Monde\
+ d'Henri D\xc3\xa8s Vo\
+lume 3\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Volume 11: \x5c\x22l\
+e petit zinzin\x5c\x22\
+, et, \x5c\x22papa mon\
+ baiser\x5c\x22\x5cnVolum\
+e 12: \x5c\x22Salut le\
+s filles, salut \
+les gars\x5c\x22, et, \
+\x5c\x22Dominique joue\
+ du piano\x5c\x22\x5cnVol\
+ume 13: \x5c\x22Mon hi\
+ppopotame\x5c\x22 et \x5c\
+\x22Les oursons, le\
+s reuqins, les k\
+angourous et les\
+ ouistitis\x5c\x22\x5cnVo\
+lume 14: \x5c\x22Le Vo\
+yage\x5c\x22 et \x5c\x22Moi \
+j'veux partir av\
+ec toi\x5c\x22\x5cnVolume\
+ 15: \x5c\x22La fourmi\
+ amoureuse\x5c\x22 et \
+\x5c\x22Le mille-patte\
+s\x5c\x22\x5cn\x22\x0d\x0a    },\x0d\x0a\
+    \x224ee562ac-36\
+f1-46d5-8faf-82f\
+27cdb1078\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+4ee562ac-36f1-46\
+d5-8faf-82f27cdb\
+1078\x22,\x0d\x0a        \
+\x22title\x22: \x22Mythes\
+ & L\xc3\xa9gendes\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Ulysse, \
+Athena, Thor, An\
+ubis, le roi Art\
+hur, et bien d'a\
+utres... Quelle \
+Histoire te fait\
+ d\xc3\xa9couvrir les \
+mythes et l\xc3\xa9gen\
+des du monde ent\
+ier, comme tu ne\
+ les as jamais e\
+ntendues.\x22\x0d\x0a    \
+},\x0d\x0a    \x2296827ba\
+3-8868-4a8e-b440\
+-83b99fc8d451\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2296827ba3-886\
+8-4a8e-b440-83b9\
+9fc8d451\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ch\
+ansons Winnie L'\
+Ourson\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22cd091452-84ec-\
+4fc0-8bb9-ba4160\
+6e3887\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22cd0\
+91452-84ec-4fc0-\
+8bb9-ba41606e388\
+7\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Quand est\
+-ce qu'on arrive\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22La c\
+ollection de pod\
+casts des enfant\
+s qui adorent av\
+oir r\xc3\xa9ponse \xc3\xa0 \
+tout !\x5cnQue se p\
+asse-t-il quand \
+on a 7 ans et qu\
+'on part pour un\
+e longue route e\
+n voiture ? On s\
+'ennuie et on de\
+mande : \x5c\x22Quand \
+est-ce qu'on arr\
+ive ?\x5c\x22. Mais qu\
+and on s'appelle\
+ Nina, et que l'\
+on est \xc3\xa0 la foi\
+s curieuse et r\xc3\
+\xaaveuse, cela d\xc3\xa9\
+bouche sur de fo\
+lles aventures !\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+440b5d87-fdb5-4f\
+db-9ef8-dfbd3526\
+6b96\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22440b5\
+d87-fdb5-4fdb-9e\
+f8-dfbd35266b96\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22J'aime Lire\
+ Vol. 01\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Dr\xc3\xb4le de di\
+recteur\x5cnLa pelo\
+te de No\xc3\xabl\x5cnLa \
+revanche du pein\
+tre\x5cnLe prince g\
+renouille\x5cnLe se\
+cret de papy Lou\
+is\x5cnLes Nivues n\
+iconnues sont de\
+s sorcieres\x5cnMis\
+sion dent de lai\
+t\x5cnNil et le dra\
+gon bleu\x5cnSam Ch\
+atouille detecti\
+ve\x5cnUn extraterr\
+estre \xc3\xa0 la mais\
+on\x22\x0d\x0a    },\x0d\x0a   \
+ \x224babae6b-f01d-\
+48a6-8f3f-ec8770\
+5ac3d3\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x224ba\
+bae6b-f01d-48a6-\
+8f3f-ec87705ac3d\
+3\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Radio can\
+ada ohdio\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Livres audi\
+o jeunesse Radio\
+ Canada OhDio\x22\x0d\x0a\
+    },\x0d\x0a    \x22f61\
+b5179-3845-4f97-\
+aeb2-fd6b67796e6\
+7\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22f61b5179\
+-3845-4f97-aeb2-\
+fd6b67796e67\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Mon guide sexu\
+ 6-9ans\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x229ac705a0-0193\
+-4385-9121-b3293\
+ca322da\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x229a\
+c705a0-0193-4385\
+-9121-b3293ca322\
+da\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Pere Cas\
+tor raconte ses \
+histoires pour g\
+randir\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x227f12384a-3e9c-\
+44f8-a742-125a3c\
+169784\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x227f1\
+2384a-3e9c-44f8-\
+a742-125a3c16978\
+4\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Histoires\
+ pour les petits\
+ Heros\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Histoires pour\
+ les petits Hero\
+s\x5cnSaison 2022\x5cn\
+1-2-3\x22\x0d\x0a    },\x0d\x0a\
+    \x22ed131803-40\
+79-4a62-8c0a-1be\
+9a41348fb\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+ed131803-4079-4a\
+62-8c0a-1be9a413\
+48fb\x22,\x0d\x0a        \
+\x22title\x22: \x22Les Av\
+entures de Tinti\
+n - le Lotus ble\
+u\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Le \
+Lotus bleu (\xc3\xa0 l\
+'origine Les Ave\
+ntures de Tintin\
+, reporter, en E\
+xtr\xc3\xaame-Orient) \
+est le cinqui\xc3\xa8m\
+e album de la s\xc3\
+\xa9rie de bande de\
+ssin\xc3\xa9e Les Aven\
+tures de Tintin,\
+ pr\xc3\xa9publi\xc3\xa9 en \
+noir et blanc du\
+ 9 ao\xc3\xbbt 1934 au\
+ 17 octobre 1935\
+ dans les pages \
+du Petit Vingti\xc3\
+\xa8me, suppl\xc3\xa9ment\
+ pour la jeuness\
+e du journal Le \
+Vingti\xc3\xa8me Si\xc3\xa8c\
+le. La version c\
+ouleur et actuel\
+le de l'album a \
+\xc3\xa9t\xc3\xa9 r\xc3\xa9alis\xc3\xa9e\
+ en 1946.\x22\x0d\x0a    \
+},\x0d\x0a    \x22d49caf1\
+5-f6a2-4856-b3d4\
+-a1ec00d22adb\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22d49caf15-f6a\
+2-4856-b3d4-a1ec\
+00d22adb\x22,\x0d\x0a    \
+    \x22title\x22: \x22Pa\
+xi le voyageur d\
+e l'espace\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Pistes aud\
+io issues de vid\
+\xc3\xa9o de l'ESA Kid\
+s (agence spatia\
+le europ\xc3\xa9enne)\x5c\
+nhttps://www.esa\
+.int/kids/fr/A p\
+ropos de/Paxi\x5cn\x5c\
+nPaxi est un voy\
+ageur de l'espac\
+e qui vient sur \
+Terre pour expli\
+quer aux enfants\
+ comment fonctio\
+nne l'espace. \x5cn\
+\x5cn01. Qui est Pa\
+xi\x5cn02. Le syst\xc3\
+\xa8me Solaire\x5cn03.\
+ Rosetta et les \
+com\xc3\xa8tes\x5cn04. Le\
+s secrets de la \
+plan\xc3\xa8te rouge\x5cn\
+05. Y a-t-il des\
+ martiens ?\x5cn06.\
+ Le jour, la nui\
+t et les saisons\
+\x5cn07. Le cycle d\
+e l'eau\x5cn08. L'e\
+ffet de serre\x5cn0\
+9. Paxi et notre\
+ Lune, Phases et\
+ \xc3\xa9clipses\x5cn10. \
+Paxi explore la \
+lune\x5cn11. Paxi e\
+xplore les exopl\
+an\xc3\xa8tes\x5cn12. Pax\
+i et le nettoyeu\
+r de l'espace \x22\x0d\
+\x0a    },\x0d\x0a    \x2296\
+33fa57-4996-4d3e\
+-b081-4fd62e2b89\
+b2\x22: {\x0d\x0a        \
+\x22uuid\x22: \x229633fa5\
+7-4996-4d3e-b081\
+-4fd62e2b89b2\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Les deux gred\
+ins\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x229\
+de1b3ca-2ad6-477\
+f-8af0-0a8f2847a\
+d63\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x229de1b3\
+ca-2ad6-477f-8af\
+0-0a8f2847ad63\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Pomme d'api \
+2020\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+961e868c-e90c-42\
+ff-a372-3771a6b6\
+3fa6\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22961e8\
+68c-e90c-42ff-a3\
+72-3771a6b63fa6\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les contes \
+de mon vieux gri\
+moire\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Apr\xc3\xa8s avoir ra\
+cont\xc3\xa9 ses histo\
+ires pendant 10 \
+ans sur sc\xc3\xa8ne, \
+Samuel Genin les\
+ transforme en p\
+odcast ! Des con\
+tes color\xc3\xa9s et \
+vitamin\xc3\xa9s, plei\
+ns de personnage\
+s dr\xc3\xb4les ou eff\
+rayants, pour le\
+s enfants et les\
+ moins enfants. \
+Sautez dans mon \
+vieux grimoire, \
+on part \xc3\xa0 l\xe2\x80\x99a\
+venture !!! Une \
+nouvelle histoir\
+e tous les mercr\
+edis ! \x22\x0d\x0a    },\
+\x0d\x0a    \x22f35a367f-\
+ae68-4854-b5a7-6\
+19a4556d402\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22f35a367f-ae68-\
+4854-b5a7-619a45\
+56d402\x22,\x0d\x0a      \
+  \x22title\x22: \x22Chan\
+sons capfun\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Carabouil\
+le : un r\xc3\xaave \xc3\xa9\
+veill\xc3\xa9\x5cnJoe Coo\
+k : coeur de pir\
+ate\x5cnGaufrette :\
+ la gourmande\x22\x0d\x0a\
+    },\x0d\x0a    \x22c00\
+20e66-9d96-4ad0-\
+b648-64f13760355\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22c0020e66\
+-9d96-4ad0-b648-\
+64f137603551\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Ecole-des-lois\
+irs-Kilimax-2021\
+-2022(15-histoir\
+es) 01-11-22 By \
+JeSuisUneFoug\xc3\xa8r\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x2215 \
+histoires de l'E\
+cole des Loisirs\
+, collection Kil\
+imax 5-7 ans, \xc3\xa9\
+dition 2021-2022\
+.\x5cnhttps://www.e\
+coledesmax.com/2\
+021-22/fascicule\
+s/4 Kilimax fasc\
+icule 21-22.pdf\x5c\
+nBlanchette et l\
+es sept chevreau\
+x; C'est mon arb\
+re; Francisco; L\
+a valise; Mon pe\
+tit cheval Mahab\
+at; Tope-la; Com\
+ment ranger sa c\
+hambre en sept j\
+ours seulement; \
+Nous sommes l\xc3\xa0;\
+ Au bois dormant\
+; Hulotte; La my\
+st\xc3\xa9rieuse balei\
+ne; Lisette et l\
+e gros mensonge;\
+ Qu'y a-t-il sou\
+s la mer; Le feu\
+; Sidonie Souris\
+. \x22\x0d\x0a    },\x0d\x0a   \
+ \x2240e5e957-b7fe-\
+4297-a25e-6dea91\
+04e42a\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x2240e\
+5e957-b7fe-4297-\
+a25e-6dea9104e42\
+a\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Chantal G\
+oya Mes Personna\
+ges Enchant\xc3\xa9s(A\
+lbum) by Lezardi\
+ere 31-01-2023\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Chanta\
+l Goya\x5cnAlbum: M\
+es personnages E\
+nchant\xc3\xa9s\x5cn\x5cn01 \
+-Monsieur le Cha\
+t Bott\xc3\xa9(3:06)\x5cn\
+02 -Pandi, Panda\
+(2:44)\x5cn03 -L\xe2\x80\x99\
+alphabet en chan\
+tant(2:39)\x5cn04 -\
+Babar, Babar(2:0\
+8)\x5cn05 -Ce matin\
+ un lapin(2:49)\x5c\
+n06 -Snoopy(2:42\
+)\x5cn07 -B\xc3\xa9cassin\
+e(2:41)\x5cn08 -C\xe2\x80\
+\x99est Guignol(2:5\
+1)\x5cn09 -M\xc3\xa9cky l\
+e h\xc3\xa9risson(3:14\
+)\x5cn10 -Loup Loup\
+(4:06)\x5cn11 -Papa\
+ Mille Pattes(3:\
+26)\x22\x0d\x0a    },\x0d\x0a  \
+  \x2244b3827c-3373\
+-4437-8c87-9acf9\
+e741768\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2244\
+b3827c-3373-4437\
+-8c87-9acf9e7417\
+68\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Mes prem\
+iers j'aime lire\
+ - Pack 3\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x2203358cca-4d\
+b0-45f0-924f-281\
+8afa30e20\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+03358cca-4db0-45\
+f0-924f-2818afa3\
+0e20\x22,\x0d\x0a        \
+\x22title\x22: \x22Little\
+ Stories for Tin\
+y People - S01\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Little\
+ Stories for Tin\
+y People is a ch\
+ildren's podcast\
+ featuring origi\
+nal audio storie\
+s that will deli\
+ght the tiny peo\
+ple in your life\
+. Perfect for bl\
+eary-eyed parent\
+s, innovative te\
+achers, and at-w\
+its'-end babysit\
+ters looking for\
+ an alternative \
+and non-annoying\
+ way to engage t\
+he toddlers and \
+young kids they \
+love at bedtime \
+or any time! Eac\
+h story is lovin\
+gly written and \
+performed with a\
+ttention to the \
+whimsical senses\
+ of humor childr\
+en often possess\
+. \x5cn\x5cnhttps://ww\
+w.littlestoriest\
+inypeople.com/\x22\x0d\
+\x0a    },\x0d\x0a    \x22e6\
+e640b5-ecc3-4a01\
+-8836-6bb853d528\
+a9\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22e6e640b\
+5-ecc3-4a01-8836\
+-6bb853d528a9\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22The Beatles B\
+allads (disc 1)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22The B\
+eatles Ballads -\
+ Disc 1\x5cnhttps:/\
+/en.wikipedia.or\
+g/wiki/The Beatl\
+es Ballads\x5cn\x5cn1.\
+ \x5c\x22Yesterday\x5c\x22 (\
+lead singer: Pau\
+l McCartney)\x5cn2.\
+ \x5c\x22Norwegian Woo\
+d (This Bird Has\
+ Flown)\x5c\x22 (lead \
+singer: John Len\
+non)\x5cn3. \x5c\x22Do Yo\
+u Want to Know a\
+ Secret\x5c\x22 (lead \
+singer: George H\
+arrison)\x5cn4. \x5c\x22F\
+or No One\x5c\x22 (lea\
+d singer: Paul M\
+cCartney)\x5cn5. \x5c\x22\
+Michelle\x5c\x22 (lead\
+ singer: Paul Mc\
+Cartney)\x5cn6. \x5c\x22N\
+owhere Man\x5c\x22 (le\
+ad singer: John \
+Lennon)\x5cn7. \x5c\x22Yo\
+u've Got to Hide\
+ Your Love Away\x5c\
+\x22 (lead singer: \
+John Lennon)\x5cn8.\
+ \x5c\x22Across the Un\
+iverse\x5c\x22 (\x5c\x22Wild\
+life\x5c\x22 version f\
+rom a British va\
+rious artists ch\
+arity album titl\
+ed No One's Gonn\
+a Change Our Wor\
+ld) (lead singer\
+: John Lennon)\x5cn\
+9. \x5c\x22All My Lovi\
+ng\x5c\x22 (lead singe\
+r: Paul McCartne\
+y)\x5cn10. \x5c\x22Hey Ju\
+de\x5c\x22 (lead singe\
+r: Paul McCartne\
+y)\x22\x0d\x0a    },\x0d\x0a   \
+ \x2203e4e87d-9782-\
+4675-9abe-1e7825\
+e40a6b\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x2203e\
+4e87d-9782-4675-\
+9abe-1e7825e40a6\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les avent\
+ures de Rodolphe\
+ et Gala, saison\
+ 6\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x22dd\
+001026-5b2c-4d3e\
+-b394-aaf7278b42\
+bb\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22dd00102\
+6-5b2c-4d3e-b394\
+-aaf7278b42bb\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Le Monde d'He\
+nri D\xc3\xa8s Vol 4\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Volume\
+ 16: \x5c\x22Oh\xc3\xa9 le b\
+ateau\x5c\x22, et, \x5c\x22V\
+agues vaguelette\
+s\x5c\x22\x5cnVolume 17: \
+\x5c\x22La petite Char\
+lotte\x5c\x22, et, \x5c\x22Z\
+ingla\xc3\xafro\x5c\x22\x5cnVol\
+ume 18: \x5c\x22Tous l\
+es chats sont gr\
+is\x5c\x22 et \x5c\x22Mes ch\
+ats\x5c\x22\x5cnVolume 19\
+: \x5c\x22Le t\xc3\xa9l\xc3\xa9pho\
+ne\x5c\x22 et \x5c\x22Tr\xc3\xa8s \
+gentil tout l'mo\
+nde\x5c\x22\x5cnVolume 20\
+: \x5c\x22Mon ami le p\
+oisson\x5c\x22 et \x5c\x22Y'\
+a y'a un poisson\
+\x5c\x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22a72d1efb-1f0d-\
+46bb-9872-47bafb\
+6be076\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22a72\
+d1efb-1f0d-46bb-\
+9872-47bafb6be07\
+6\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les belle\
+s histoires (5 h\
+istoires)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x225 histoires\
+: G\xc3\xa9d\xc3\xa9on et le\
+ b\xc3\xa9b\xc3\xa9 rose; Ku\
+mkat et la for\xc3\xaa\
+t myst\xc3\xa9rieuse; \
+L'\xc3\xa9trange docte\
+ur Jonquille; Le\
+ tr\xc3\xa9sor de Barb\
+e d'Or; Sacha et\
+ la porte myst\xc3\xa9\
+rieuse.\x22\x0d\x0a    },\
+\x0d\x0a    \x2237ddfb2d-\
+2c3c-431e-a0f7-7\
+8c97f5f0d09\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2237ddfb2d-2c3c-\
+431e-a0f7-78c97f\
+5f0d09\x22,\x0d\x0a      \
+  \x22title\x22: \x22Bodo\
+do\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x2277\
+6b187c-fcb2-49b7\
+-aa10-76f7feb538\
+db\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22776b187\
+c-fcb2-49b7-aa10\
+-76f7feb538db\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Arthur et les\
+ Minimoys (3 liv\
+res) by Morsure \
+170323\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Arthur a bien \
+des soucis. Un m\
+\xc3\xa9chant promoteu\
+r r\xc3\xaave de saisi\
+r la belle maiso\
+n de sa grand-m\xc3\
+\xa8re dans laquell\
+e il passe ses v\
+acances. Pas que\
+stion de compter\
+ sur ses parents\
+ qui l'ont d\xc3\xa9po\
+s\xc3\xa9 l\xc3\xa0 sans m\xc3\xa9\
+nagement. Pas qu\
+estion non plus \
+d'attendre son g\
+rand-p\xc3\xa8re, disp\
+aru myst\xc3\xa9rieuse\
+ment, il y a mai\
+ntenant quatre a\
+ns. Et puis, com\
+ble de malchance\
+, Arthur n'a que\
+ dix ans... Peut\
+-\xc3\xaatre pourra-t-\
+il compter sur A\
+lfred, son gros \
+chien plus affec\
+tueux qu'intelli\
+gent ? A moins q\
+ue dans la viell\
+e biblioth\xc3\xa8que \
+du grand-p\xc3\xa8re, \
+un grimoire ne l\
+ui permette de p\
+asser de l'autre\
+ c\xc3\xb4t\xc3\xa9, au pays\
+ des minimoys. E\
+ux seuls peuvent\
+ encore tout sau\
+ver !\x22\x0d\x0a    },\x0d\x0a\
+    \x2236857b18-1c\
+1b-4696-9741-12f\
+71ae775c6\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+36857b18-1c1b-46\
+96-9741-12f71ae7\
+75c6\x22,\x0d\x0a        \
+\x22title\x22: \x22Audibl\
+e Les Ailes de M\
+ica (10 parties)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Mica\
+ vit dans un mon\
+de extraordinair\
+e : dans un mond\
+e o\xc3\xb9 les arbres\
+ dansent au clai\
+r de lune, o\xc3\xb9 l\
+es sir\xc3\xa8nes chan\
+tent dans le ven\
+t, o\xc3\xb9 le peuple\
+ des nuages se d\
+\xc3\xa9place en volan\
+t gr\xc3\xa2ce \xc3\xa0 de m\
+agnifiques ailes\
+ ! Parfois, ces \
+ailes sont bleue\
+s comme le ciel \
+d'\xc3\xa9t\xc3\xa9, roses c\
+omme l'aurore, v\
+iolettes comme l\
+a tomb\xc3\xa9e de la \
+nuit ou encore o\
+ranges comme le \
+cr\xc3\xa9puscule.\x5cnCe\
+lles de Mica son\
+t un peu diff\xc3\xa9r\
+entes. Au d\xc3\xa9but\
+ de son aventure\
+, elles \xc3\xa9taient\
+ enti\xc3\xa8rement bl\
+anches mais... c\
+ela va changer !\
+\x5cnPour faire pla\
+isir \xc3\xa0 sa petit\
+e s\xc5\x93ur, Mica ma\
+nipule un objet \
+familial tr\xc3\xa8s p\
+r\xc3\xa9cieux et... l\
+e laisse tomber,\
+ droit sur la te\
+rre...\x22\x0d\x0a    },\x0d\
+\x0a    \x22a2c0f700-c\
+a47-4dd1-b0d7-95\
+7741b32c80\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22a2c0f700-ca47-4\
+dd1-b0d7-957741b\
+32c80\x22,\x0d\x0a       \
+ \x22title\x22: \x22J'aim\
+e Lire Vol. 04\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22A la r\
+echerche du lapi\
+n vert\x5cnBarry fa\
+it son cirque\x5cnB\
+elle Bedain et G\
+rand Gosier\x5cnLe \
+cadeau fou\x5cnLe m\
+yst\xc3\xa8re P\xc3\xa8re No\
+\xc3\xabl\x5cnLe parfum d\
+u diable\x5cnL\xc3\xa9o, \
+Chevalier Malgr\xc3\
+\xa9 Lui\x5cnL'epreuve\
+ du prince Firmi\
+n\x5cnLes graines \xc3\
+\xa0 devenir roi\x5cnT\
+ous en scene\x22\x0d\x0a \
+   },\x0d\x0a    \x225256\
+409d-f086-4426-9\
+97e-fd4833518f93\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x225256409d-\
+f086-4426-997e-f\
+d4833518f93\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Ririro - Contes\
+ de f\xc3\xa9es\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22af372902-93\
+27-49f8-b0a5-49b\
+5378c4c58\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+af372902-9327-49\
+f8-b0a5-49b5378c\
+4c58\x22,\x0d\x0a        \
+\x22title\x22: \x22Grande\
+s Histoires Pomm\
+e d'Api\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x222cf19326-254b\
+-43ac-aeec-1245d\
+cfed4b2\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x222c\
+f19326-254b-43ac\
+-aeec-1245dcfed4\
+b2\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les cont\
+es d'automne de \
+Pomme d'Api\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Les conte\
+s d'automne de P\
+omme d'Api (3-7 \
+ans), Voici 12 h\
+istoires \xc3\xa0 \xc3\xa9co\
+uter en famille \
+au moment de la \
+rentr\xc3\xa9e, des \xc2\xab\
+ravicelles\xc2\xbb, de\
+s peurs du loup \
+et des r\xc3\xaaves de\
+ princesses. Un \
+plongeon dans l'\
+imaginaire et au\
+ssi des histoire\
+s qui font \xc3\xa9cho\
+ \xc3\xa0 la vie des p\
+etits.  Le com\xc3\xa9\
+dien G\xc3\xa9rard Rou\
+zier et Isabelle\
+ racontent avec \
+tout leur talent\
+ une s\xc3\xa9lection \
+de 12 histoires \
+parues dans POMM\
+E D'API mises en\
+ valeur par les \
+illustrations so\
+nores de Christo\
+phe Chauvet et l\
+e d\xc3\xa9cor musical\
+ de Charlie.\x5cn\x5cn\
+- Le dragon et l\
+e chevalier\x5cn- P\
+ernelle a la rar\
+icelle\x5cn- Mout l\
+e mouton\x5cn- Le c\
+hien Spaghetti\x5cn\
+- Gros comme Bru\
+no l'\xc3\xa9l\xc3\xa9phante\
+au\x5cn- Un ami pou\
+r Justine\x5cn- La \
+bo\xc3\xaete \xc3\xa0 secret\
+s\x5cn- Des bisous \
+plein les poches\
+\x5cn- Le plus fort\
+ de la jungle\x5cn-\
+ Charlotte n'arr\
+ive pas \xc3\xa0 dormi\
+r\x5cn- Nina et Tit\
+ou\x5cn- L'annivers\
+aire de la princ\
+esse\x22\x0d\x0a    },\x0d\x0a \
+   \x22e06b799b-7c6\
+7-442f-920f-4315\
+c849cfbe\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22e\
+06b799b-7c67-442\
+f-920f-4315c849c\
+fbe\x22,\x0d\x0a        \x22\
+title\x22: \x22Pomme d\
+'api - 24 histoi\
+res pour attendr\
+e No\xc3\xabl 2018\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2224 histo\
+ires \xc3\xa0 \xc3\xa9couter\
+ pour attendre N\
+o\xc3\xabl #2018\x5cn\x5cn\xe2\x80\
+\x9cLe No\xc3\xabl de H\xc3\xa9\
+risson\xe2\x80\x9d, ce so\
+nt 24 histoires \
+avec les animaux\
+ de la for\xc3\xaat qu\
+i accompagneront\
+ vos enfants jus\
+qu\xe2\x80\x99au jour de \
+No\xc3\xabl\xe2\x80\xa6\x5cn\x5cnhttp\
+s://www.pommedap\
+i.com/radio-et-p\
+odcasts/24-histo\
+ires-a-ecouter-p\
+our-attendre-noe\
+l\x22\x0d\x0a    },\x0d\x0a    \
+\x2207d0d7c3-3e91-4\
+b04-941a-c7b6bf0\
+2b5f6\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2207d0\
+d7c3-3e91-4b04-9\
+41a-c7b6bf02b5f6\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Histoires \
+nature de la Pet\
+ite Salamandre (\
+16 histoires)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22La Peti\
+te Salamandre, u\
+n magazine pour \
+les 4 \xc3\xa0 7 ans q\
+ui leur donne en\
+vie de d\xc3\xa9couvri\
+r la nature.\x5cnht\
+tps://www.salama\
+ndre.org/petite-\
+salamandre/\x5cn16 \
+histoires\x22\x0d\x0a    \
+},\x0d\x0a    \x22f97538f\
+2-b12d-47d8-8829\
+-a8586bede5f2\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22f97538f2-b12\
+d-47d8-8829-a858\
+6bede5f2\x22,\x0d\x0a    \
+    \x22title\x22: \x22As\
+t\xc3\xa9rix (3 Disque\
+ Aventure)\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22bdd20daf-5\
+dbf-4d25-bd11-54\
+49fc90a367\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22bdd20daf-5dbf-4\
+d25-bd11-5449fc9\
+0a367\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les h\
+istoires de p'ti\
+t loup\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Les histoires \
+de p'tit loup po\
+ur les enfants d\
+e 2 \xc3\xa0 4 ans.\x5cn\x5c\
+n01 - Le merveil\
+leux Noel de P't\
+it Loup\x5cn02 - P'\
+tit Loup fait de\
+s b\xc3\xaatises\x5cn03 -\
+ P'tit Loup se b\
+rosse les dents\x5c\
+n04 - P'tit Loup\
+ a un animal de \
+compagnie\x5cn\x22\x0d\x0a  \
+  },\x0d\x0a    \x22bef88\
+417-fcee-48d8-b3\
+87-417d121ac8cb\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22bef88417-f\
+cee-48d8-b387-41\
+7d121ac8cb\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+[Musique]Jazz so\
+us la lune (Didi\
+er Jeunesse 2016\
+) [V2 by JeSuisU\
+neFoug\xc3\xa8re]\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x221 Willow \
+Weep for Me\x5cn2 G\
+one With the Win\
+d\x5cn3 It Might as\
+ Well Be Spring\x5c\
+n4 Winter Wonder\
+land\x5cn5 Let It S\
+now ! Let It Sno\
+w ! Let It Snow \
+!\x5cn6 December\x5cn7\
+ Winter Weather\x5c\
+n8 Santa Baby\x5cn9\
+ Stormy Weather\x5c\
+n10 Blue Moon\x5cn1\
+1 Come Rain or C\
+ome Shine\x5cn12 Th\
+e Snow Is Fallin\
+g\x5cn13 What Are Y\
+ou Doing New Yea\
+r's Eve\x5cn14 Moon\
+ River\x22\x0d\x0a    },\x0d\
+\x0a    \x22b9e3611d-f\
+8bf-4b2d-9e0b-8e\
+cedb225294\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22b9e3611d-f8bf-4\
+b2d-9e0b-8ecedb2\
+25294\x22,\x0d\x0a       \
+ \x22title\x22: \x22Feliz\
+ Halloween (10)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x221 Un \
+fantasma gracios\
+o\x5cn2 Un vampiro \
+peligrozo\x5cn3 Pam\
+purrias\x5cn4 Camun\
+as\x5cn5 Soy el gat\
+o de una bruja\x5cn\
+6 Qu\xc3\xa9 risa de h\
+uesos\x5cn7 La fami\
+lia Adams\x5cn8 El \
+monstruo de colo\
+res\x5cn9 Gato negr\
+o\x5cn10 La bruja q\
+ue no queria una\
+ escoba\x22\x0d\x0a    },\
+\x0d\x0a    \x22df57b2a9-\
+7b48-41e8-8cb5-7\
+e75a3d3e86d\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22df57b2a9-7b48-\
+41e8-8cb5-7e75a3\
+d3e86d\x22,\x0d\x0a      \
+  \x22title\x22: \x22Livr\
+es Didier Jeunes\
+se (8 histoires)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x228 hi\
+stoires de Didie\
+r Jeunesse :\x5cn- \
+La grenouille \xc3\xa0\
+ grande bouche\x5cn\
+- la moufle\x5cn- l\
+a souris qui che\
+rchait un mari\x5cn\
+- la voiture de \
+groucho\x5cn- les d\
+eniers de comp\xc3\xa8\
+re lapin\x5cn- mons\
+ieur petit sou\x5cn\
+- p'tit biscuit,\
+ l'histoire du b\
+onhomme de pain \
+d'\xc3\xa9pice qui ne \
+voulait pas fini\
+r en miette\x5cn- r\
+ouge\x22\x0d\x0a    },\x0d\x0a \
+   \x22c9c49494-70f\
+2-43f6-b13f-1708\
+c0a1f197\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22c\
+9c49494-70f2-43f\
+6-b13f-1708c0a1f\
+197\x22,\x0d\x0a        \x22\
+title\x22: \x22Une his\
+toire et OLI Pac\
+k 1 (25 Histoire\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x22f4\
+2fe138-ff09-4eae\
+-b56d-45e4d3b58e\
+de\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22f42fe13\
+8-ff09-4eae-b56d\
+-45e4d3b58ede\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Remi Guichard\
+ - Petites histo\
+ires du soir\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2201 Zabo \
+l'hippopotame\x5cn0\
+2 Le chat Pablo\x5c\
+n03 La balade de\
+ Margot l'escarg\
+ot\x5cn04 Un cadeau\
+ pour grand-m\xc3\xa8r\
+e\x5cn05 La grenoui\
+lle bleut\xc3\xa9e\x5cn06\
+ La princesse p\xc3\
+\xa2tissi\xc3\xa8re\x5cn07 L\
+e v\xc3\xa9lo de la pr\
+incesse\x5cn08 Les \
+boutons de Prune\
+\x5cn09 Le bal des \
+princesses\x5cn10 L\
+a couronne perdu\
+e\x5cn11 Le tournoi\
+\x5cn12 L'oeuf de d\
+ragon\x5cn13 La plu\
+me de dragon ble\
+u\x5cn14 Le chevali\
+er L\xc3\xa9opold\x5cn15 \
+Le chevalier est\
+ amoureux\x5cn16 Le\
+s cauchemars de \
+Fildefer\x5cn17 Pab\
+lo et le marchan\
+d de sable\x5cn18 L\
+a nuit de petit \
+ours\x5cn19 Une his\
+toire pour Arthu\
+r\x5cn20 La maison \
+de Polochon\x22\x0d\x0a  \
+  },\x0d\x0a    \x220cf49\
+f8e-bf57-4771-9e\
+30-08978fd9b69d\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x220cf49f8e-b\
+f57-4771-9e30-08\
+978fd9b69d\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Disney - Les Che\
+fs-d'Oeuvre\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Red\xc3\xa9couv\
+rez la magie de \
+Disney gr\xc3\xa2ce \xc3\xa0\
+ ce superbe recu\
+eil d'histoires \
+!\x5cnDe merveilleu\
+ses illustration\
+s vous permettro\
+nt de partager e\
+n famille et de \
+revivre avec \xc3\xa9m\
+otion les plus b\
+eaux chefs-d'oeu\
+vre de votre enf\
+ance : Le Livre \
+de la Jungle, Ba\
+mbi, Blanche-Nei\
+ge, Peter Pan, A\
+lice au Pays des\
+ Merveilles, Pin\
+occhio,La Belle \
+Bois Dormant, Le\
+ Roi Lion, Cendr\
+illon et Les Ari\
+stochats.\x22\x0d\x0a    \
+},\x0d\x0a    \x227508642\
+f-5aa8-4823-b08a\
+-463129bb6135\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x227508642f-5aa\
+8-4823-b08a-4631\
+29bb6135\x22,\x0d\x0a    \
+    \x22title\x22: \x22El\
+enael - Pack 1 (\
+chapitre 1 \xc3\xa0 3)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Ce p\
+ack est le premi\
+er pour le livre\
+ audio \x5c\x22Elenael\
+\x5c\x22. Il couvre le\
+s chapitres 1 \xc3\xa0\
+ 3 qui racontent\
+ les d\xc3\xa9buts des\
+ aventures du pe\
+tit gar\xc3\xa7on. Plu\
+s de renseigneme\
+nts sur www.elen\
+ael.fr\x22\x0d\x0a    },\x0d\
+\x0a    \x227ebb3510-5\
+4ac-424b-86aa-1d\
+b28c84c8ab\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x227ebb3510-54ac-4\
+24b-86aa-1db28c8\
+4c8ab\x22,\x0d\x0a       \
+ \x22title\x22: \x22Artie\
+ et Moe - Pas de\
+ sieste aujourd'\
+hui (Ramona Bade\
+scu) 2023-01-08\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Artie\
+ et Moe, deux pe\
+tits poissons in\
+s\xc3\xa9parables, n\xe2\x80\
+\x99aiment pas fair\
+e la sieste. Qua\
+nd ils doivent d\
+ormir, ils tourn\
+ent d\xe2\x80\x99un c\xc3\xb4t\xc3\
+\xa9, de l\xe2\x80\x99autre,\
+ jouent aux pois\
+sons pan\xc3\xa9s, \xc2\xab \
+Chuuuuuuuuuuut !\
+ \xc2\xbb , \xc3\xa0 la carp\
+e, \xc2\xab Chuuuuuuut\
+ ! \xc2\xbb\xe2\x80\xa6 Alors, \
+un jour, sans br\
+uit, Artie et Mo\
+e se glissent ho\
+rs de la couvert\
+ure pour voir ce\
+ qu\xe2\x80\x99il y a, de\
+ l\xe2\x80\x99autre c\xc3\xb4t\xc3\
+\xa9\xe2\x80\xa6\x22\x0d\x0a    },\x0d\x0a \
+   \x22a9dcc208-7d8\
+a-413c-8076-8f73\
+c328bc61\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22a\
+9dcc208-7d8a-413\
+c-8076-8f73c328b\
+c61\x22,\x0d\x0a        \x22\
+title\x22: \x22Au pays\
+ des histoires\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x2284c0a8\
+fc-946e-4300-987\
+c-3216ea90b97e\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2284c0a8fc-94\
+6e-4300-987c-321\
+6ea90b97e\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+a potion magique\
+ de Georges Boui\
+llon\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+La plupart des g\
+rands-m\xc3\xa8res son\
+t d'adorables vi\
+eilles dames, ge\
+ntilles et servi\
+ables. H\xc3\xa9las, c\
+e n'est pas le c\
+as de la grand-m\
+\xc3\xa8re de Georges \
+! Grincheuse, af\
+freuse et \xc3\xa9go\xc3\xaf\
+ste, elle ressem\
+ble trop \xc3\xa0 une \
+sorci\xc3\xa8re. Et pu\
+is elle a de cur\
+ieux go\xc3\xbbts : el\
+le aime se r\xc3\xa9ga\
+ler de limaces, \
+de chenilles... \
+Un jour, alors q\
+u'elle vient une\
+ fois de plus de\
+ le terroriser, \
+Georges d\xc3\xa9cide \
+de lui pr\xc3\xa9parer\
+ une terrible po\
+tion magique. Un\
+e potion aux eff\
+ets surprenants,\
+ extraordinaires\
+, hilarants.\x22\x0d\x0a \
+   },\x0d\x0a    \x2286fe\
+cf10-0588-47bb-a\
+c4e-1d0f196bd46e\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2286fecf10-\
+0588-47bb-ac4e-1\
+d0f196bd46e\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les aventures d\
+e Rodolphe et Ga\
+la, saison 2\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22a60076ed\
+-fb41-48a8-bd1b-\
+ba5ba35a91ad\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22a60076ed-fb41\
+-48a8-bd1b-ba5ba\
+35a91ad\x22,\x0d\x0a     \
+   \x22title\x22: \x22bed\
+time stories\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22128b085d\
+-ce69-4327-9e32-\
+abcbcc7db6e6\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22128b085d-ce69\
+-4327-9e32-abcbc\
+c7db6e6\x22,\x0d\x0a     \
+   \x22title\x22: \x22Osc\
+ar et Malika, to\
+ujours en retard\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Osca\
+r et Malika sont\
+ voisins et sont\
+ scolaris\xc3\xa9s dan\
+s la m\xc3\xaame class\
+e. Aussi, ils fo\
+nt ensemble chaq\
+ue matin le chem\
+in vers l'\xc3\xa9cole\
+ et, chaque mati\
+n, il leur arriv\
+e une aventure e\
+xtraordinaire qu\
+i fait que, syst\
+\xc3\xa9matiquement, i\
+ls arrivent en r\
+etard \xc3\xa0 l'\xc3\xa9col\
+e. Une cr\xc3\xa9ation\
+ fran\xc3\xa7aise bour\
+r\xc3\xa9e d'aventure \
+et d'humour, qui\
+ parvient \xc3\xa0 sur\
+prendre \xc3\xa0 chaqu\
+e \xc3\xa9pisode.\x5cn\x5cn1\
+0 \xc3\xa9pisodes :\x5cn\x5c\
+n* Le coiffeur\x5cn\
+* La gorgone\x5cn* \
+Le pirate\x5cn* Le \
+spationaute\x5cn* L\
+es b\xc3\xaates sauvag\
+es\x5cn* Le dinosau\
+re\x5cn* Le ma\xc3\xaetre\
+ ninja\x5cn* Le dra\
+gon\x5cn* La louve\x5c\
+n* Le drone\x22\x0d\x0a  \
+  },\x0d\x0a    \x2275cbf\
+dab-af7c-4e29-99\
+87-9abd0c38db59\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2275cbfdab-a\
+f7c-4e29-9987-9a\
+bd0c38db59\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+L effet Panda po\
+ur sauver la pla\
+netev5\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22L'Effet Panda \
+: un podcast pou\
+r sensibiliser \xc3\
+\xa0 la sauvegarde \
+de la plan\xc3\xa8te. \
+Une s\xc3\xa9rie de po\
+dcasts in\xc3\xa9dite \
+qui plonge l\xe2\x80\x99a\
+uditeur au c\xc5\x93ur\
+ des missions me\
+n\xc3\xa9es par l\xe2\x80\x99as\
+sociation WWF, p\
+our les enfants \
+et les plus gran\
+ds. De l'\xc3\xa9vasio\
+n, de la p\xc3\xa9dago\
+gie et de la d\xc3\xa9\
+couverte !\x5cn\x5cn02\
+ \xc3\x89tudier le dau\
+phin de Guyane p\
+our mieux le pro\
+t\xc3\xa9ger\x5cn07 La ch\
+a\xc3\xaene des Alpes \
+et les activit\xc3\xa9\
+s humaines\x5cn01 \xc3\
+\x80 la rencontre d\
+u jaguar en Guya\
+ne\x5cn04 Le bateau\
+ Blue Panda et l\
+a mobilisation c\
+itoyenne\x5cn08 Les\
+ femmes solaires\
+ de Madagascar\x5cn\
+03 Les innovatio\
+ns au service de\
+ la protection d\
+es oc\xc3\xa9ans\x5cn05 P\
+rot\xc3\xa9ger les for\
+\xc3\xaats embl\xc3\xa9matiq\
+ues de Nouvelle-\
+Cal\xc3\xa9donie\x5cn06 R\
+estaurer les for\
+\xc3\xaats vivantes au\
+ Mexique\x22\x0d\x0a    }\
+,\x0d\x0a    \x22d365cb1c\
+-1fe5-497d-b3aa-\
+dda81fdfeea6\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22d365cb1c-1fe5\
+-497d-b3aa-dda81\
+fdfeea6\x22,\x0d\x0a     \
+   \x22title\x22: \x22Yas\
+sir la chance et\
+ autres contes m\
+arocains\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Trois contes\
+ marocains racon\
+t\xc3\xa9s par Halima \
+Hamdane : savour\
+eux !\x5cnLa conteu\
+se truffe ses r\xc3\
+\xa9cits fac\xc3\xa9tieux\
+ de mots arabes \
+et de sa voix mu\
+sicale, elle nou\
+s invite \xc3\xa0 un f\
+abuleux voyage\xe2\x80\
+\xa6\x5cnC\xe2\x80\x99est le de\
+uxi\xc3\xa8me recueil \
+de contes enregi\
+str\xc3\xa9s par Halim\
+a Hamdane dans l\
+a collection \xc2\xab \
+Contes et voix d\
+u monde \xc2\xbb. Il s\
+\xc3\xa9duit tout auta\
+nt que le premie\
+r\x5cnMahboul le sa\
+ge. Le tissage d\
+e l\xe2\x80\x99arabe et d\
+u fran\xc3\xa7ais donn\
+e \xc3\xa0 entendre un\
+ message fort, f\
+ait d\xe2\x80\x99humour e\
+t de tol\xc3\xa9rance,\
+ de sagesse et d\
+e po\xc3\xa9sie. \x5cn\x5cnS\
+ofiane Negra, au\
+ luth, cr\xc3\xa9e une\
+ ambiance \xc3\xa0 l\xe2\x80\
+\x99image de ces hi\
+stoires, le tout\
+ sublim\xc3\xa9 par la\
+ palette color\xc3\xa9\
+e et chatoyante \
+d\xe2\x80\x99Aur\xc3\xa9lia Fro\
+nty.\x5cn\x5cnLes cont\
+es : Yassir la C\
+hance (14 min), \
+Chiche le petit \
+pois (8 min), Fa\
+ra la souris (12\
+ min)\x22\x0d\x0a    },\x0d\x0a\
+    \x2278032c7c-dd\
+62-4a0f-a627-563\
+d4c4cb76b\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+78032c7c-dd62-4a\
+0f-a627-563d4c4c\
+b76b\x22,\x0d\x0a        \
+\x22title\x22: \x22[ Cr\xc3\xa9\
+ation - Les Hist\
+oires du Nord Lu\
+nii (2 histoires\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Les\
+ histoires du No\
+rd\x22\x0d\x0a    },\x0d\x0a   \
+ \x22f86ffe9e-fce9-\
+4bcb-932e-ddc30f\
+3ccb8f\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22f86\
+ffe9e-fce9-4bcb-\
+932e-ddc30f3ccb8\
+f\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les Belle\
+s Histoires (Bay\
+ard)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+https://www.bell\
+eshistoires.com/\
+histoire-audio\x22\x0d\
+\x0a    },\x0d\x0a    \x22fc\
+482f84-d63f-48af\
+-bf85-24008e99c4\
+59\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22fc482f8\
+4-d63f-48af-bf85\
+-24008e99c459\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22LICORNE V2\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x221991010\
+d-5a2d-44e8-8da4\
+-10d2df7f4014\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x221991010d-5a2\
+d-44e8-8da4-10d2\
+df7f4014\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+ Monde d'Henri D\
+\xc3\xa8s Vol 2\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Volume 6 : \
+\x5c\x22Far West\x5c\x22, et\
+, \x5c\x22Mon cheval g\
+ris\x5c\x22\x5cnVolume 7 \
+: \x5c\x22Chanson pour\
+ mon chien\x5c\x22, et\
+, \x5c\x22Comme chien \
+et chat\x5c\x22\x5cnVolum\
+e 9 : \x5c\x22Un \xc3\xa9l\xc3\xa9\
+phant\x5c\x22, et, \x5c\x22L\
+e kangourou\x5c\x22\x5cnV\
+olume 10 : \x5c\x22Pou\
+r toi Maman\x5c\x22, e\
+t, \x5c\x22Une marguer\
+ite\x5c\x22\x22\x0d\x0a    },\x0d\x0a\
+    \x2237983850-0f\
+42-4733-a936-1b2\
+c8d694264\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+37983850-0f42-47\
+33-a936-1b2c8d69\
+4264\x22,\x0d\x0a        \
+\x22title\x22: \x22Le pet\
+it renard perdu\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22https\
+://abc-applicati\
+ons.com/pdf/iBoo\
+k-LePetitRenardP\
+erdu.pdf\x22\x0d\x0a    }\
+,\x0d\x0a    \x22210ff5f1\
+-22ec-472b-b075-\
+a94595c2f6ff\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22210ff5f1-22ec\
+-472b-b075-a9459\
+5c2f6ff\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ Malheurs de Sop\
+hie\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+u par Jean-Yves \
+Beltran, C\xc3\xa9line\
+ Monsarrat, Jack\
+ie Berger, Isabe\
+lle Ganz, Eric E\
+tchevery, France\
+tte Vernillat\x22\x0d\x0a\
+    },\x0d\x0a    \x22ab4\
+a3fdd-4f80-45cd-\
+9bfb-4d3336acaab\
+4\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22ab4a3fdd\
+-4f80-45cd-9bfb-\
+4d3336acaab4\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Des histoires \
+en musique\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22D\xc3\xa9couvrez\
+ les histoires r\
+acont\xc3\xa9es par El\
+odie Fondacci su\
+r les plus belle\
+s musiques class\
+iques.\x5cn\x5cnPour e\
+nchanter les enf\
+ants et ceux qui\
+ le sont rest\xc3\xa9s\
+\xe2\x80\xa6\x5cn\x5cnA \xc3\xa9coute\
+r sur radioclass\
+ique.fr et sur v\
+otre plateforme \
+de podcasts habi\
+tuelle.\x5cn\x5cnSi vo\
+us souhaitez t\xc3\xa9\
+l\xc3\xa9charger un \xc3\xa9\
+pisode des \xc2\xab Hi\
+stoires en musiq\
+ue \xc2\xbb, il suffit\
+ de cliquer sur \
+\xc2\xab Partage \xc2\xbb pu\
+is sur \xc2\xab T\xc3\xa9l\xc3\xa9\
+charger ce podca\
+st \xc2\xbb.\x5cn\x5cnBonne \
+\xc3\xa9coute !\x5cnhttps\
+://www.radioclas\
+sique.fr/podcast\
+s/serie/des-hist\
+oires-en-musique\
+/\x22\x0d\x0a    },\x0d\x0a    \
+\x22b6b13949-c652-4\
+803-acbb-252c327\
+6041a\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22b6b1\
+3949-c652-4803-a\
+cbb-252c3276041a\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22MINI LOUP \
+10 HISTOIRES\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2210 histo\
+ires de Mini-Lou\
+p:\x5cnMini-Loup \xc3\xa0\
+ la piscine\x5cnMin\
+i-Loup \xc3\xa0 l'\xc3\xa9co\
+le\x5cnMini-Loup ch\
+ampion de foot\x5cn\
+Mini-Loup chez P\
+api et Mamie Lou\
+p\x5cnMini-Loup et \
+la maison hant\xc3\xa9\
+e\x5cnMini-Loup et \
+les dinosaures\x5cn\
+Mini-Loup et les\
+ pirates\x5cnMini-L\
+oup policier\x5cnMi\
+ni-Loup pompier\x5c\
+nMini-Loup super\
+-h\xc3\xa9ros\x22\x0d\x0a    },\
+\x0d\x0a    \x22811c745b-\
+2628-4884-b4e6-e\
+444de8cc834\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22811c745b-2628-\
+4884-b4e6-e444de\
+8cc834\x22,\x0d\x0a      \
+  \x22title\x22: \x22Alva\
+ et le fils du F\
+roid\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Le village d\xe2\x80\x99A\
+lva est plong\xc3\xa9 \
+dans un hiver sa\
+ns fin car le fi\
+ls du Froid s\xe2\x80\x99\
+est install\xc3\xa9\x5cnd\
+ans la montagne.\
+ Personne n\xe2\x80\x99a \
+r\xc3\xa9ussi \xc3\xa0 vainc\
+re Blizzard, son\
+ terrible servit\
+eur. Bravement, \
+Alva part l\xe2\x80\x99af\
+fronter\xe2\x80\xa6\x5cnHist\
+oire novembre 20\
+22 - Mes premier\
+s J'aime lire\x22\x0d\x0a\
+    },\x0d\x0a    \x22b30\
+5108f-5d7e-4d78-\
+b494-8313541092f\
+9\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22b305108f\
+-5d7e-4d78-b494-\
+8313541092f9\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Club Citrouill\
+ade\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22b\
+9726461-aa28-442\
+d-ac43-02ca638fa\
+5ae\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22b97264\
+61-aa28-442d-ac4\
+3-02ca638fa5ae\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Asterix chez\
+ les Bretons (Fr\
+ance Inter 1967)\
+ by Lezardiere 1\
+4-02-23 V2\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x5c\x22Ast\xc3\xa9rix\
+ chez les Breton\
+s est le huiti\xc3\xa8\
+me album de la b\
+ande dessin\xc3\xa9e A\
+st\xc3\xa9rix, publi\xc3\xa9\
+ en 1966, sc\xc3\xa9na\
+ris\xc3\xa9 par Ren\xc3\xa9 \
+Goscinny et dess\
+in\xc3\xa9 par Albert \
+Uderzo.\x5cn\x5cnEn 50\
+ av. J.-C., apr\xc3\
+\xa8s la d\xc3\xa9faite d\
+e Vercing\xc3\xa9torix\
+, toute la Gaule\
+ est occup\xc3\xa9e. T\
+oute ? Non, car \
+un petit village\
+ d'Armorique r\xc3\xa9\
+siste encore aux\
+ assauts des l\xc3\xa9\
+gions de Petibon\
+um,\x5cnLaudanum, B\
+abaorum et Aquar\
+ium et Jules C\xc3\xa9\
+sar est fort con\
+trari\xc3\xa9 de voir \
+une petite r\xc3\xa9gi\
+on mettre en \xc3\xa9c\
+hec son arm\xc3\xa9e..\
+.\x5c\x22\x5cn\x5cnAvec: Rog\
+er Carel, Jacque\
+s Morel, Bernard\
+ Lavalette,...\x5cn\
+\x5cnAdaptation : M\
+ichel de Villier\
+s / R\xc3\xa9alisation\
+ : Claude Dupont\
+ / Musique : G\xc3\xa9\
+rard Calvi / Dif\
+fusion : 24/04/1\
+967 au 07/06/196\
+7 sur France Int\
+er \xc3\xa0 12H20\x22\x0d\x0a  \
+  },\x0d\x0a    \x22ea811\
+055-0301-4824-98\
+c6-b81100061c9b\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22ea811055-0\
+301-4824-98c6-b8\
+1100061c9b\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Musique : Disney\
+ - Le roi lion\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Pack d\
+e 6 chansons du \
+roi lion :\x5cn- L'\
+histoire de la v\
+ie\x5cn- Le rapport\
+ du matin\x5cn- Je \
+voudrais d\xc3\xa9j\xc3\xa0 \
+\xc3\xaatre roi\x5cn- Soy\
+ez pr\xc3\xaates\x5cn- Ha\
+kuna Matata\x5cn- L\
+'amour brille so\
+us les \xc3\xa9toiles\x22\
+\x0d\x0a    },\x0d\x0a    \x221\
+083e8e3-b1fc-45e\
+f-bcff-6153badae\
+7c1\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x221083e8\
+e3-b1fc-45ef-bcf\
+f-6153badae7c1\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22histoires de\
+ sorci\xc3\xa8res\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x225 histoir\
+es de Cornebidou\
+ille\x5cn4 contes d\
+e la rue Broca\x22\x0d\
+\x0a    },\x0d\x0a    \x22d3\
+640269-7f97-4550\
+-8615-94db2c753c\
+e4\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22d364026\
+9-7f97-4550-8615\
+-94db2c753ce4\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Les contes de\
+ la maison ronde\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Des \
+contes et histoi\
+res populaires \xc3\
+\xa0 \xc3\xa9couter en li\
+gne sur le site \
+de France Musiqu\
+e. Cette s\xc3\xa9rie \
+de podcasts abor\
+de les contes po\
+ur enfants les p\
+lus c\xc3\xa9l\xc3\xa8bres, \
+accompagn\xc3\xa9s de \
+la belle musique\
+ jou\xc3\xa9e par les \
+formations music\
+ales de Radio Fr\
+ance : l'Orchest\
+re National de F\
+rance, l'Orchest\
+re Philharmoniqu\
+e de Radio Franc\
+e et le Ch\xc5\x93ur d\
+e Radio France.\x22\
+\x0d\x0a    },\x0d\x0a    \x228\
+d2596fa-4f0f-48c\
+0-8d6c-4411ebaa5\
+4a5\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x228d2596\
+fa-4f0f-48c0-8d6\
+c-4411ebaa54a5\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22France Inter\
+ Olma integrale \
+01/08/2023 (9 pa\
+rties, 52 episod\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22P\
+ar Romain Weber,\
+ Mathieu Vidard,\
+ Lucie Sarfaty. \
+France Inter inv\
+ite les enfants \
+de 8 \xc3\xa0 12 ans \xc3\
+\xa0 partir \xc3\xa0 la d\
+\xc3\xa9couverte des s\
+cience\x22\x0d\x0a    },\x0d\
+\x0a    \x22d84106b7-3\
+f36-4232-9b5f-d4\
+c1c280bb8d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22d84106b7-3f36-4\
+232-9b5f-d4c1c28\
+0bb8d\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les m\
+erveilleuses his\
+toires du soir\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Les me\
+rveilleuses hist\
+oires du soir\x22\x0d\x0a\
+    },\x0d\x0a    \x2286d\
+90202-abec-445e-\
+8b67-17151582eb5\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x2286d90202\
+-abec-445e-8b67-\
+17151582eb51\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les contes m\xc3\xa9\
+lang\xc3\xa9s - Vincen\
+t Malone (Le roi\
+ des papas)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Le Roi de\
+s papas, alias V\
+incent Malone, d\
+\xc3\xa9tourne les cla\
+ssiques de l'enf\
+ance, avec humou\
+r et d\xc3\xa9rision !\
+\x5cn\x5cnCe pack repr\
+end le 10 volume\
+s sortis, en enl\
+evant les pistes\
+ de g\xc3\xa9n\xc3\xa9rique \
+qui n'int\xc3\xa9resse\
+ront pas les enf\
+ants ;)\x5cn\x5cnPour \
+chaque conte, re\
+trouvez une hist\
+oire puis une ch\
+anson qui la r\xc3\xa9\
+sume.\x5cn\x5cn01 - Bo\
+ucle ne veut pas\
+ dormir\x5cn02 - Le\
+ prince pas char\
+mant\x5cn03 - Le pe\
+tit poucin\x5cn04 -\
+ Le chat beaut\xc3\xa9\
+\x5cn05 - La ch\xc3\xa8vr\
+e de Mme Seguin\x5c\
+n06 - La princes\
+se au petit pois\
+ dormant\x5cn07 - L\
+a petite sir\xc3\xa8ne\
+ des pompiers\x5cn0\
+8 - Jack et le b\
+ourricot magique\
+\x5cn09 - Pierre et\
+ la tortue\x5cn10 -\
+ Le vilain petit\
+ pinocchio\x5cn\x22\x0d\x0a \
+   },\x0d\x0a    \x2258b0\
+547f-826f-4c7d-8\
+668-81ec7302e5fc\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2258b0547f-\
+826f-4c7d-8668-8\
+1ec7302e5fc\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Harry Potter\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Retrouv\
+ez toute la saga\
+ Harry Potter\x22\x0d\x0a\
+    },\x0d\x0a    \x223d4\
+d28c2-280f-4492-\
+aadf-6df06f8c421\
+a\x22: {\x0d\x0a        \x22\
+uuid\x22: \x223d4d28c2\
+-280f-4492-aadf-\
+6df06f8c421a\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Vocabulaire d'\
+anglais\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Vocabulaire d\
+'anglais\x5cn3 ans \
+et +\x22\x0d\x0a    },\x0d\x0a \
+   \x226c446ba6-e8d\
+7-4bad-a29f-2d2b\
+13ddf616\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x226\
+c446ba6-e8d7-4ba\
+d-a29f-2d2b13ddf\
+616\x22,\x0d\x0a        \x22\
+title\x22: \x22Les ave\
+ntures d'Ast\xc3\xa9ri\
+x\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Les\
+ aventures d'Ast\
+\xc3\xa9rix\x22\x0d\x0a    },\x0d\x0a\
+    \x2247a872bf-34\
+3c-44fe-b294-54a\
+1810782be\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+47a872bf-343c-44\
+fe-b294-54a18107\
+82be\x22,\x0d\x0a        \
+\x22title\x22: \x22Les p'\
+tites histoires \
+- A la recherche\
+ de la grande no\
+tice\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Il y a mille ans\
+, lors de l\xe2\x80\x99\xc3\x89\
+norme Eclipse, L\
+a Grande Notice \
+s\xe2\x80\x99est divis\xc3\xa9e\
+ en trois morcea\
+ux dispers\xc3\xa9s au\
+x quatre vents. \
+Depuis, tout va \
+de travers dans \
+le monde de LEGO\
+. Jusqu\xe2\x80\x99au jou\
+r o\xc3\xb9 Mila et so\
+n fr\xc3\xa8re Gabriel\
+ fabriquent quel\
+que chose qui fo\
+nctionne parfait\
+ement ! Si bien \
+que Sylvia Ratav\
+ia, la plus prod\
+igieuse voyante \
+du monde leur an\
+nonce quelque ch\
+ose d\xe2\x80\x99incroyab\
+le : ils sont le\
+ duo dont parle \
+la proph\xc3\xa9tie ! \
+ Les seuls capab\
+le de lever la t\
+errible mal\xc3\xa9dic\
+tion.\x22\x0d\x0a    },\x0d\x0a\
+    \x227aee6535-7c\
+c6-4c97-a54e-e5d\
+2b140696b\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+7aee6535-7cc6-4c\
+97-a54e-e5d2b140\
+696b\x22,\x0d\x0a        \
+\x22title\x22: \x22DICI H\
+alloween\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x22b4800fc0-bb4\
+0-492d-bbf5-9db2\
+3c29b312\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22b\
+4800fc0-bb40-492\
+d-bbf5-9db23c29b\
+312\x22,\x0d\x0a        \x22\
+title\x22: \x22TitouMA\
+X\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\xc3\x80 \
+l\xe2\x80\x99\xc3\xa9cole, \xc3\xa0 l\
+a cr\xc3\xa8che ou \xc3\xa0 \
+votre domicile, \
+votre enfant re\xc3\
+\xa7oit, \x5cnchaque m\
+ois, de novembre\
+ \xc3\xa0 juin, 8 livr\
+es vari\xc3\xa9s, dr\xc3\xb4\
+les et stimulant\
+s, \x5cns\xc3\xa9lectionn\
+\xc3\xa9s avec soin, a\
+dapt\xc3\xa9s \xc3\xa0 son \xc3\
+\xa2ge et \xc3\xa0 ses en\
+vies.\x5cnEn d\xc3\xa9cou\
+vrant ces livres\
+ avec vous, votr\
+e enfant s\xe2\x80\x99att\
+ache \xc3\xa0 des h\xc3\xa9r\
+os, \x5cnessentiels\
+ petits guides p\
+our la vie qui l\
+\xe2\x80\x99attend. Notre\
+ s\xc3\xa9lection r\xc3\xa9p\
+ond ainsi \x5cn\xc3\xa0 s\
+a curiosit\xc3\xa9, \xc3\xa0\
+ ses \xc3\xa9motions e\
+t \xc3\xa0 son besoin \
+de comprendre le\
+ monde.\x5cn\x5cnhttps\
+://www.ecoledesm\
+ax.com/selection\
+-titoumax.php\x22\x0d\x0a\
+    },\x0d\x0a    \x229d9\
+c42d5-baff-4898-\
+8e7e-da87adb9625\
+c\x22: {\x0d\x0a        \x22\
+uuid\x22: \x229d9c42d5\
+-baff-4898-8e7e-\
+da87adb9625c\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Anticontes de \
+f\xc3\xa9e\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Et si le Petit C\
+haperon Rouge n\xe2\
+\x80\x99\xc3\xa9tait rien qu\
+\xe2\x80\x99une sale ment\
+euse et que le P\
+etit Chaperon Ve\
+rt \xc3\xa9tait bien p\
+lus sympathique \
+et courageuse ? \
+Et si la Belle a\
+u Bois Dormant a\
+vait une soeur l\
+aide ?\x22\x0d\x0a    },\x0d\
+\x0a    \x228d32bf30-e\
+103-4a2a-867f-a8\
+60ebc22b63\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x228d32bf30-e103-4\
+a2a-867f-a860ebc\
+22b63\x22,\x0d\x0a       \
+ \x22title\x22: \x22Petit\
+ Vulgaire Saison\
+ 2 (8 episodes)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22a24da\
+f0f-d5a1-4032-83\
+20-36b3033cc5c7\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22a24daf0f-d\
+5a1-4032-8320-36\
+b3033cc5c7\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les myst\xc3\xa8res do\
+nt vous \xc3\xaates le\
+ h\xc3\xa9ro : explora\
+tion\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Tu es Marlo, un \
+ado du futur. Ap\
+prenti astronaut\
+e, tu participes\
+ au deuxi\xc3\xa8me vo\
+yage d\xe2\x80\x99explora\
+tion d\xe2\x80\x99une pla\
+n\xc3\xa8te habitable,\
+ Andelka. Lors d\
+e cette mission \
+tu devras assist\
+er chacun des me\
+mbres de l\xe2\x80\x99\xc3\xa9q\
+uipe, leur facil\
+iter la t\xc3\xa2che. \
+\x5cnTu te r\xc3\xa9veill\
+es peu apr\xc3\xa8s l\xe2\
+\x80\x99atterrissage. \
+Tu d\xc3\xa9couvres, s\
+urpris, que la p\
+artie du vaissea\
+u \xc3\xa0 laquelle tu\
+ as acc\xc3\xa8s est d\
+\xc3\xa9serte, \xc3\xa0 l\xe2\x80\x99\
+exception d\xe2\x80\x99Al\
+ma qui vient de \
+se r\xc3\xa9veiller el\
+le aussi. \x5cnVous\
+ \xc3\xaates seuls et \
+ce n\xe2\x80\x99est pas d\
+u tout ce qui \xc3\xa9\
+tait pr\xc3\xa9vu. L\xe2\x80\
+\x99\xc3\xa9quipage sembl\
+e avoir disparu,\
+ c\xe2\x80\x99est inqui\xc3\xa9\
+tant, car tout l\
+aisse penser \xc3\xa0 \
+un d\xc3\xa9part pr\xc3\xa9c\
+ipit\xc3\xa9. \x5cn\xc3\x80 toi\
+ de mener l\xe2\x80\x99en\
+qu\xc3\xaate et de pre\
+ndre les bonnes \
+d\xc3\xa9cisions pour \
+parvenir \xc3\xa0 r\xc3\xa9s\
+oudre l\xe2\x80\x99\xc3\xa9nigm\
+e. \x5cn\x22\x0d\x0a    },\x0d\x0a\
+    \x222072a3e4-89\
+95-4fe8-afe3-9ff\
+1f10c31ce\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+2072a3e4-8995-4f\
+e8-afe3-9ff1f10c\
+31ce\x22,\x0d\x0a        \
+\x22title\x22: \x22Simon \
+/ Super Lapin\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Choix e\
+ntre 2 h\xc3\xa9ros : \
+Simon ou Simon S\
+uper Lapin\x5cn\x5cnLe\
+ pack comprend 2\
+ histoires de Si\
+mon : \x5cn* Je  ve\
+ux pas aller \xc3\xa0 \
+l'\xc3\xa9cole\x5cn* Je v\
+eux pas aller \xc3\xa0\
+ la piscine\x5cn\x5cnE\
+t 6 histoires de\
+ Simon Super Lap\
+in :\x5cn* Giga bil\
+le\x5cn* Le duel de\
+ grimaces\x5cn* Le \
+super m\xc3\xa9ga parc\
+ours\x5cn* Mission \
+crabe\x5cn* Mission\
+ super grand\x5cn* \
+Qui a vol\xc3\xa9 la l\
+une ?\x22\x0d\x0a    },\x0d\x0a\
+    \x229e83b707-42\
+ee-422c-8174-c64\
+52ec0a549\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+9e83b707-42ee-42\
+2c-8174-c6452ec0\
+a549\x22,\x0d\x0a        \
+\x22title\x22: \x22Mikalo\
+u\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Les\
+ histoires de Mi\
+kalou par \x5c\x22Elle\
+ \xc3\xa9tait une fois\
+\x5c\x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x227929a081-bc52-\
+4ab2-9956-2eedbd\
+4ed6d0\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22792\
+9a081-bc52-4ab2-\
+9956-2eedbd4ed6d\
+0\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Sideways \
+Stories from Way\
+side School (par\
+t 1)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Is your school j\
+ust a little too\
+\xe2\x80\xa6 NORMAL?\x5cn\x5cnM\
+aybe you should \
+go to Wayside Sc\
+hool. You'll mee\
+t Bebe, the fast\
+est draw in art \
+class; John, who\
+ only reads upsi\
+de down; and Sam\
+my, the new kid\xe2\
+\x80\x94he's a real ra\
+t. Come on! Hurr\
+y up! If you're \
+late for class, \
+Mrs. Gorf will t\
+urn you into an \
+app\xe2\x80\xa6Oops... So\
+rry about that.\x22\
+\x0d\x0a    },\x0d\x0a    \x22a\
+c7306b0-4b23-44b\
+4-93ac-121dd8872\
+0bf\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22ac7306\
+b0-4b23-44b4-93a\
+c-121dd88720bf\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22audio contes\
+ magique Disney\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22audio\
+ contes magique \
+Disney\x22\x0d\x0a    },\x0d\
+\x0a    \x22d3f0afca-7\
+bf7-4bcf-8f4c-77\
+0ca170bcb4\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22d3f0afca-7bf7-4\
+bcf-8f4c-770ca17\
+0bcb4\x22,\x0d\x0a       \
+ \x22title\x22: \x22Histo\
+ires pour les pe\
+tits - 1er Trime\
+stre 2022\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Histoires p\
+our les petits (\
+V1)\x5cn1er Trimest\
+re 2022 / 9 Hist\
+oires\x5cn\x5cnChangel\
+og\x5cnV1 : 1er rel\
+ease\x22\x0d\x0a    },\x0d\x0a \
+   \x224bbeaaf2-b62\
+9-414e-869a-09fa\
+6963a7ac\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x224\
+bbeaaf2-b629-414\
+e-869a-09fa6963a\
+7ac\x22,\x0d\x0a        \x22\
+title\x22: \x221+[musi\
+que]We love disn\
+ey (17 chansons)\
+ByBenjamin8410\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Les ar\
+tistes fran\xc3\xa7ais\
+ reprennent les \
+chansons Disney\x5c\
+n1. \xc3\x89lodie Fr\xc3\xa9\
+g\xc3\xa9 - Un jour, m\
+on prince viendr\
+a\x5cn2. Nolwenn Le\
+roy - Quand on p\
+rie la bonne \xc3\xa9t\
+oile\x5cn3. Al.Hy, \
+Ari\xc3\xa9 Elmaleh - \
+Supercalifragili\
+stic4. Ben L'onc\
+le Soul - \xc3\x8atre \
+un homme comme v\
+ous\x5cn5. Michael \
+Youn - Il En Fau\
+t Peu Pour Etre \
+Heureux\x5cn6. Thom\
+as Dutronc, Laur\
+a Smet - Tout le\
+ monde veut deve\
+nir un cat\x5cn7. G\
+arou, Camille Lo\
+u - La Belle Et \
+La B\xc3\xaate\x5cn8. Ale\
+x Beaupain - Pri\
+nce Ali\x5cn9. Joyc\
+e Jonathan, Olym\
+pe - Ce r\xc3\xaave bl\
+eu\x5cn10. Ari\xc3\xa9 El\
+maleh - Je Suis \
+Ton Meilleur Ami\
+11. Zaho - L'his\
+toire de la vie\x5c\
+n12. Christophe \
+Willem - L'Amour\
+ Brille Sous Les\
+ Etoiles\x5cn13. Ol\
+ympe, Joyce Jona\
+than, Christophe\
+ Willem, Al.Hy, \
+Camille Lou, Zah\
+o - Hakuna Matat\
+a\x5cn14. Jenifer -\
+ L'air du vent\x5cn\
+15. Emmanuel Moi\
+re - Rien qu'un \
+jour\x5cn16. Rose -\
+ Au Bout Du R\xc3\xaav\
+e\x5cn17. Anais Del\
+va - Lib\xc3\xa9r\xc3\xa9e, \
+D\xc3\xa9livr\xc3\xa9e\x22\x0d\x0a   \
+ },\x0d\x0a    \x225549f5\
+35-9572-4f93-961\
+a-48efe9978965\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x225549f535-95\
+72-4f93-961a-48e\
+fe9978965\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+e Monde d'Henri \
+D\xc3\xa8s Volume 1\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Volume \
+1 : \x5c\x22Les b\xc3\xaatis\
+es \xc3\xa0 l'\xc3\xa9cole\x5c\x22\
+, et, \x5c\x22Petit Je\
+anneton\x5c\x22\x5cnVolum\
+e 2 : \x5c\x22Le croco\
+dile\x5c\x22, et, \x5c\x22Ma\
+ for\xc3\xaat\x5c\x22\x5cnVolum\
+e 3 : \x5c\x22La sorci\
+\xc3\xa8re de minuit\x5c\x22\
+, et, \x5c\x22Le fant\xc3\
+\xb4me\x5c\x22\x5cnVolume 4 \
+: \x5c\x22C'est le pri\
+ntemps\x5c\x22, et, \x5c\x22\
+Il pleut dehors,\
+ il pleut\x5c\x22\x5cnVol\
+ume 5 : \x5c\x22Mon gr\
+os loup, mon p't\
+it loup\x5c\x22, et, \x5c\
+\x22Les loups\x5c\x22\x22\x0d\x0a \
+   },\x0d\x0a    \x2270ae\
+a124-b772-41db-9\
+c10-5af87ed46dea\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2270aea124-\
+b772-41db-9c10-5\
+af87ed46dea\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Anatole Latuile\
+-Record battu\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Garder \
+vingt heures une\
+ cacahou\xc3\xa8te sur\
+ la t\xc3\xaate, rattr\
+aper le prince H\
+arry sur une pis\
+te de ski, pulvM\
+ode nuit* :\x5cnMin\
+iature :\x5cnD\xc3\xa9pos\
+ez pour ajouter\x5c\
+n\x5cn\xc3\xa9riser le ch\
+at de la voisine\
+ au translucidat\
+or ou traverser \
+le mur du son av\
+ec un radiateur \
+\xc3\xa0 roulettes... \
+Anatole Latuile \
+est d\xc3\xa9cid\xc3\xa9ment\
+ pr\xc3\xaat \xc3\xa0 releve\
+r tous les d\xc3\xa9fi\
+s ! D\xc3\xa9couvrez l\
+es records de b\xc3\
+\xaatises de notre \
+h\xc3\xa9ros survitami\
+n\xc3\xa9 dans ce quat\
+ri\xc3\xa8me tome expl\
+osif !\x22\x0d\x0a    },\x0d\
+\x0a    \x22abe74aac-a\
+9ea-4047-99b3-dc\
+52e2b57950\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22abe74aac-a9ea-4\
+047-99b3-dc52e2b\
+57950\x22,\x0d\x0a       \
+ \x22title\x22: \x22Marti\
+ne Vol1\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Les histoires\
+ de Martine\x5cn- 0\
+2 - Martine en v\
+\xc3\xa9lo\x5cn- 03 - Mar\
+tine \xc3\xa0 la mer\x5cn\
+- 04 - Martine a\
+u cirque\x5cn- 08 -\
+ Martine \xc3\xa0 la m\
+ontagne\x5cn- 11 - \
+Martine et les 4\
+ saisons\x5cn- 15 -\
+ Martine en avio\
+n\x5cn- 16 - Martin\
+e monte a cheval\
+\x5cn- 19 - Marine \
+f\xc3\xaate son annive\
+rsaire\x5cn- 20 - M\
+artine embellit \
+son jardin\x5cn- 21\
+ - Martine fait \
+de la bicyclette\
+\x5cn- 22 - Martine\
+ petit rat de l'\
+op\xc3\xa9ra\x5cn- 23 - M\
+artine \xc3\xa0 la f\xc3\xaa\
+te des fleurs\x22\x0d\x0a\
+    },\x0d\x0a    \x222e5\
+94270-f779-47d4-\
+904a-5e1fbe6c9a6\
+2\x22: {\x0d\x0a        \x22\
+uuid\x22: \x222e594270\
+-f779-47d4-904a-\
+5e1fbe6c9a62\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Grands Cla\
+ssiques Disney (\
+Ann\xc3\xa9es 60-70)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Histoi\
+re et dialogues:\
+\x5cn- Les 101 Dalm\
+atiens (par Cl\xc3\xa9\
+mentine C\xc3\xa9lari\xc3\
+\xa9)\x5cn- Merlin l'E\
+nchanteur (par G\
+eorges Chamarat)\
+\x5cn- Le Livre de \
+la jungle (par C\
+aroline Clerc)\x5cn\
+- Les Aristochat\
+s (par Louis de \
+Fun\xc3\xa8s)\x5cn- Les A\
+ventures de Bern\
+ard et Bianca (p\
+ar Annie Cordy)\x22\
+\x0d\x0a    },\x0d\x0a    \x223\
+fa4fc1f-10aa-405\
+0-bf13-c028c16f2\
+f6f\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x223fa4fc\
+1f-10aa-4050-bf1\
+3-c028c16f2f6f\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Peppa Pig (6\
+ histoires)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Peppa Pig\
+ Fran\xc3\xa7ais | Cru\
+che de dinosaure\
+ | Dessin Anim\xc3\xa9\
+\x5cn01 - La Poteri\
+e\x5cn02 - Les Avio\
+ns en Papier\x5cn03\
+ - Goldie le Poi\
+sson rouge\x5cn04 -\
+ La visite de Mo\
+nsieur Patate\x5cn0\
+5 - La journ\xc3\xa9e \
+des jeunes talen\
+ts\x5cn06 - Secouer\
+, racler et tape\
+r\x5cn\x5cnBande son d\
+e la video youtu\
+be: https://www.\
+youtube.com/watc\
+h?v=IXG1R3WAi-A\x22\
+\x0d\x0a    },\x0d\x0a    \x223\
+b0b7ee2-c0dd-461\
+6-b165-bf2c8b4ed\
+a85\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x223b0b7e\
+e2-c0dd-4616-b16\
+5-bf2c8b4eda85\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Cuentos Incr\
+eibles - Navidad\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Cont\
+e r\xc3\xa9cup\xc3\xa9r\xc3\xa9 su\
+r le podcast \x5c\x22C\
+uentos incr\xc3\xa9ibl\
+es\x5c\x22. S\xc3\xa9lection\
+ sur les th\xc3\xa8mes\
+ de No\xc3\xabl / Nouv\
+el An / Rois Mag\
+es (en espagnol)\
+\x5cn\x5cn1 - La f\xc3\xa9e \
+du nouvel an (el\
+ hado del a\xc3\xb1o n\
+uevo)\x5cn2 - La mo\
+ntre magique (el\
+ reloj magico)\x5cn\
+3 - Le No\xc3\xabl de \
+Scrooge (el se\xc3\xb1\
+or scrooge)\x5cn4 -\
+ La magie des ro\
+is mages (la mag\
+ia de los reyes \
+magos)\x5cn5 - Lore\
+nzo et le robot \
+de Noel (Lorenzo\
+ y el robot de n\
+avidad)\x5cn6 - Le \
+reine Rodolphe (\
+Rodolfo el reino\
+)\x5cn7 - Le p\xc3\xa8re \
+Noel a trop chau\
+d (Santa Claus t\
+iene calor)\x22\x0d\x0a  \
+  },\x0d\x0a    \x221bd09\
+582-abb8-4773-ba\
+cc-f9ab73f4558e\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x221bd09582-a\
+bb8-4773-bacc-f9\
+ab73f4558e\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Encore une histo\
+ire - Les primai\
+res (5 chapitres\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Enc\
+ore une histoire\
+ est un podcast \
+destin\xc3\xa9 aux enf\
+ants (et \xc3\xa0 ceux\
+ qui le sont enc\
+ore dans leur t\xc3\
+\xaate) qui aiment \
+qu'on leur racon\
+te des histoires\
+.\x5cnChaque semain\
+e, vous retrouve\
+rez ici une hist\
+oire lue, tir\xc3\xa9e\
+ d'un livre de l\
+itt\xc3\xa9rature jeun\
+esse ou une cr\xc3\xa9\
+ation originale.\
+\x5cnUn podcast pro\
+duit par Benjami\
+n Muller, interp\
+r\xc3\xa9t\xc3\xa9 par C\xc3\xa9li\
+ne Kallmann et r\
+\xc3\xa9alis\xc3\xa9 par Ale\
+xandre Ferreira.\
+\x5cnA \xc3\xa9couter ava\
+nt de se coucher\
+, allong\xc3\xa9 dans \
+l'herbe, dans la\
+ voiture ou dans\
+ le train, Encor\
+e une histoire v\
+eut mettre en av\
+ant la formidabl\
+e cr\xc3\xa9ation litt\
+\xc3\xa9raire destin\xc3\xa9\
+e aux jeunes lec\
+teurs (et aux mo\
+ins jeunes, donc\
+).\x5cnVous retrouv\
+erez bien \xc3\xa9vide\
+mment \xc3\xa0 chaque \
+fois les r\xc3\xa9f\xc3\xa9r\
+ences des livres\
+ lus, si vous vo\
+ulez aller plus \
+loin en vous off\
+rant le livre en\
+ question.\x5cnVive\
+ la lecture, viv\
+e la litt\xc3\xa9ratur\
+e jeunesse, vive\
+ les histoires !\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e4cdb527-d863-4a\
+70-aedf-df9743ff\
+e243\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e4cdb\
+527-d863-4a70-ae\
+df-df9743ffe243\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22La grenouil\
+le \xc3\xa0 grande bou\
+che\x22,\x0d\x0a        \x22\
+description\x22: \x22U\
+n conte malicieu\
+x et riche en d\xc3\
+\xa9couvertes. Quel\
+quesrimes bien c\
+hoisies, une rit\
+ournelle connue,\
+ des illustratio\
+nsattractives...\
+ Voil\xc3\xa0 l'histoi\
+re de la fameuse\
+ grenouille trop\
+curieuse qui se \
+transforme au fi\
+l des pages en u\
+n grandvoyage d'\
+inspiration culi\
+naire dans les f\
+estins d'animaux\
+d'Afrique. Aussi\
+ surprenant qu'h\
+ilarant...\x5cnD\xc3\xa8s\
+ 18 mois\x5cnLa gre\
+nouille \xc3\xa0 la gr\
+ande bouche vit \
+tranquillement s\
+ur un n\xc3\xa9nuphar.\
+ \xc2\xab Mais voil\xc3\xa0 \
+qu'un soir, elle\
+ en a marre. Des\
+ mouches au peti\
+t-d\xc3\xa9jeuner, des\
+ mouches au d\xc3\xaen\
+er, des mouches \
+toute la...\x22\x0d\x0a  \
+  },\x0d\x0a    \x2207481\
+123-b44b-46c1-b3\
+2b-fc141479fcc3\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2207481123-b\
+44b-46c1-b32b-fc\
+141479fcc3\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Choses \xc3\xa0 savoir\
+ - Histoire\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x227b6fbd2f-\
+86c6-4883-8f2f-2\
+813e374781e\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x227b6fbd2f-86c6-\
+4883-8f2f-2813e3\
+74781e\x22,\x0d\x0a      \
+  \x22title\x22: \x22Mill\
+e et une histoir\
+es\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x22a2\
+a86c7f-72ff-4e77\
+-a41d-3a32d82c83\
+9c\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22a2a86c7\
+f-72ff-4e77-a41d\
+-3a32d82c839c\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Pomme d'api 2\
+018\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22c\
+7ef3098-ed3e-4cf\
+4-94ad-e5c57f85d\
+048\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22c7ef30\
+98-ed3e-4cf4-94a\
+d-e5c57f85d048\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Asterix, Le \
+Menhir d'Or\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Le Menhir\
+ d'or est une av\
+enture de la s\xc3\xa9\
+rie Ast\xc3\xa9rix de \
+Ren\xc3\xa9 Goscinny e\
+t Albert Uderzo \
+sorti en livre-d\
+isque au format \
+33 tours en 1967\
+. Elle est r\xc3\xa9\xc3\xa9\
+dit\xc3\xa9e en album \
+hors collection \
+le 21 octobre 20\
+20.\x22\x0d\x0a    },\x0d\x0a  \
+  \x228a69ff87-048c\
+-45e8-b8a4-a936d\
+4c60a65\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x228a\
+69ff87-048c-45e8\
+-b8a4-a936d4c60a\
+65\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Bestiole\
+sEpisodesSeptemb\
+re22\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Regroupe les 10 \
+Episodes du Podc\
+ast Bestioles de\
+ France Inter qu\
+i ont \xc3\xa9t\xc3\xa9 publ\
+i\xc3\xa9s en septembr\
+e 2022\x22\x0d\x0a    },\x0d\
+\x0a    \x22dce6b250-9\
+5d3-45df-a44e-95\
+462167f3a7\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22dce6b250-95d3-4\
+5df-a44e-9546216\
+7f3a7\x22,\x0d\x0a       \
+ \x22title\x22: \x22Conte\
+ moi l'aventure \
+3\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Com\
+pilation de 10 n\
+ouvelles histoir\
+es de \x5c\x22Conte-mo\
+i l'aventure\x5c\x22, \
+le podcast d'his\
+toires pour les \
+enfants de Ch\xc3\xa9r\
+ie FM. Mondes me\
+rveilleux et \xc3\xa9m\
+otions fortes : \
+bienvenue dans l\
+\xe2\x80\x99univers de Co\
+nte-moi l\xe2\x80\x99aven\
+ture !\x5cnhttps://\
+www.cheriefm.fr/\
+podcasts/conte-m\
+oi-l-aventure \x5cn\
+Les 10 histoires\
+ de ce pack sont\
+: \x5cn1. Ars\xc3\xa8ne L\
+upin, gentleman \
+cambrioleur \xe2\x80\x93 \
+d\xe2\x80\x99apr\xc3\xa8s les n\
+ouvelles de Maur\
+ice Leblanc\x5cn2. \
+Doroth\xc3\xa9e et le \
+Magicien d'Oz - \
+d'apr\xc3\xa8s le roma\
+n de Lyman Franc\
+k Baum\x5cn3. La Gr\
+ande Course - d\xe2\
+\x80\x99apr\xc3\xa8s une l\xc3\xa9\
+gende cheyenne\x5cn\
+4. Lancelot et l\
+a Dame du Lac - \
+d'apr\xc3\xa8s la l\xc3\xa9g\
+ende arthurienne\
+\x5cn5. La Reine de\
+s Neiges - d\xe2\x80\x99a\
+pr\xc3\xa8s le conte d\
+\xe2\x80\x99Hans Christia\
+n Andersen\x5cn6. L\
+e Bal des douze \
+princesses - d'a\
+pr\xc3\xa8s un conte d\
+es Fr\xc3\xa8res Grimm\
+\x5cn7. Le bouclier\
+ de Pers\xc3\xa9e - d'\
+apr\xc3\xa8s la mythol\
+ogie grecque\x5cn8.\
+ Le merveilleux \
+voyage de Nils H\
+olgersson \xe2\x80\x93 d\xe2\
+\x80\x99apr\xc3\xa8s le roma\
+n de Selma Lager\
+l\xc3\xb6f\x5cn9. Le Scar\
+ab\xc3\xa9e d'Or - d'a\
+pr\xc3\xa8s la nouvell\
+e d'Edgar Allan \
+Poe\x5cn10. Le Tour\
+ du monde en 80 \
+jours - d\xe2\x80\x99apr\xc3\
+\xa8s le roman de J\
+ules Verne\x5cn\x22\x0d\x0a \
+   },\x0d\x0a    \x225f8c\
+6ab1-581e-474f-b\
+d8f-dbf3eaef72a7\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x225f8c6ab1-\
+581e-474f-bd8f-d\
+bf3eaef72a7\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Marvel Super He\
+roes Adventures\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\xc3\x80 tr\
+avers des histoi\
+res qui parlent \
+d\xe2\x80\x99amiti\xc3\xa9, d\xe2\x80\
+\x99entraide et d\xe2\x80\
+\x99h\xc3\xa9ro\xc3\xafsme, les\
+ enfants et les \
+jeunes fans pour\
+ront d\xc3\xa9couvrir \
+la richesse de l\
+\xe2\x80\x99univers Marve\
+l ! Avec 10 \xc3\xa9pi\
+sodes de 3,5 min\
+utes dans la sai\
+son 1, d\xc3\xa9couvre\
+z Spidey faire \xc3\
+\xa9quipe avec d'au\
+tres h\xc3\xa9ros insp\
+ir\xc3\xa9s et courage\
+ux de Marvel com\
+me Iron Man, Tho\
+r, Hulk, Captain\
+ America, Ant-Ma\
+n, Black Panther\
+, Captain Marvel\
+, La Gu\xc3\xaape, Ms.\
+ Marvel. et bien\
+ d\xe2\x80\x99autres !\x5cn\x5c\
+nhttps://www.you\
+tube.com/playlis\
+t?list=PLf0rPEUz\
+pMhCPKHiZE d3mwI\
+aJY8qL347\x22\x0d\x0a    \
+},\x0d\x0a    \x22c157650\
+5-01e5-4d14-864f\
+-1df1bcb551fe\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22c1576505-01e\
+5-4d14-864f-1df1\
+bcb551fe\x22,\x0d\x0a    \
+    \x22title\x22: \x22Pe\
+tite histoire de\
+ la musique Clas\
+sique\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x2213045102-2363-4\
+38c-acb1-2a6c95f\
+ab84e\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x221304\
+5102-2363-438c-a\
+cb1-2a6c95fab84e\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les Aventu\
+res du Petit Nic\
+olas (Saison 2)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Les A\
+ventures du Peti\
+t Nicolas (Saiso\
+n 2)\x22\x0d\x0a    },\x0d\x0a \
+   \x2214bf987c-113\
+a-4029-bd33-4c46\
+5e7ea4aa\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x221\
+4bf987c-113a-402\
+9-bd33-4c465e7ea\
+4aa\x22,\x0d\x0a        \x22\
+title\x22: \x22Pok\xc3\xa9mo\
+n - l'arche de l\
+a Victoire\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Episode 1-\
+Un Dresseur Moti\
+ve\x5cnEpisode 2-Fo\
+rce et Amour\x5cnEp\
+isode 3-Conflit \
+au Lac\x5cnEpisode \
+4-Inscription\x5cnE\
+pisode 5-Premier\
+ Tour\x5cnEpisode 6\
+-Combats Acharne\
+s\x5cnEpisode 7-Que\
+ Le Meilleur Gag\
+ne\x5cnEpisode 8-Un\
+e Histoire de Fo\
+rce\x22\x0d\x0a    },\x0d\x0a  \
+  \x22947ebffa-b3d6\
+-42ae-8066-4dcef\
+950bce6\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2294\
+7ebffa-b3d6-42ae\
+-8066-4dcef950bc\
+e6\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les cont\
+es audio du King\
+ (7 Histoires)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x2260fc4d\
+2d-34e1-4e8a-876\
+9-b363422e4c9c\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2260fc4d2d-34\
+e1-4e8a-8769-b36\
+3422e4c9c\x22,\x0d\x0a   \
+     \x22title\x22: \x22W\
+ILD le podcast a\
+nimalier\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x2229f3f0eb-1fa\
+a-4eaa-b289-8108\
+d8ca442d\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x222\
+9f3f0eb-1faa-4ea\
+a-b289-8108d8ca4\
+42d\x22,\x0d\x0a        \x22\
+title\x22: \x22Calme e\
+t attentif comme\
+ une grenouille\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Les e\
+nfants d'aujourd\
+'hui sont souven\
+t agit\xc3\xa9s, dispe\
+rs\xc3\xa9s, stress\xc3\xa9s\
+. Comment les ai\
+der \xc3\xa0 s'apaiser\
+ ? Comment leur \
+apprendre \xc3\xa0 se \
+concentrer ?\x5cnLa\
+ m\xc3\xa9ditation est\
+ un outil simple\
+ et efficace. El\
+le s'adapte parf\
+aitement aux bes\
+oins des petits \
+et leur procure \
+des b\xc3\xa9n\xc3\xa9fices \
+imm\xc3\xa9diats. Ce l\
+ivre original et\
+ plein de charme\
+ propose de bref\
+s exercices pour\
+ tous les jours.\
+ Il est destin\xc3\xa9\
+ aux enfants de \
+4 \xc3\xa0 10 ans et \xc3\
+\xa0 leurs parents.\
+\x5cnAccompagn\xc3\xa9 d'\
+un CD audio pour\
+ les enfants : d\
+es exercices bre\
+fs et simples qu\
+i permettent de \
+g\xc3\xa9rer toutes so\
+rtes de situatio\
+ns : quand on es\
+t \xc3\xa9nerv\xc3\xa9, stre\
+ss\xc3\xa9 ou qu'on n'\
+arrive pas \xc3\xa0 do\
+rmir. A l'occasi\
+on de son cinqui\
+\xc3\xa8me anniversair\
+e, le livre \x5c\x22Ca\
+lme et attentif \
+comme une grenou\
+ille\x5c\x22 fait peau\
+ neuve et propos\
+e une vraie nouv\
+elle \xc3\xa9dition av\
+ec : un nouveau \
+chapitre de cons\
+eils pratiques ;\
+ une nouvelle in\
+troduction racon\
+tant l'incroyabl\
+e succ\xc3\xa8s de la \
+m\xc3\xa9thode \xc3\xa0 trav\
+ers le monde ; c\
+inq nouvelles m\xc3\
+\xa9ditations in\xc3\xa9d\
+ites ajout\xc3\xa9es a\
+u CD.\x5cn\x5cnhttps:/\
+/www.decitre.fr/\
+livres/calme-et-\
+attentif-comme-u\
+ne-grenouille-97\
+82352046417.html\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+fddfc48e-2108-45\
+54-95cb-467c5311\
+b020\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22fddfc\
+48e-2108-4554-95\
+cb-467c5311b020\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les histoir\
+es de la mytholo\
+gie\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x227\
+0d9ecba-1eb8-4a7\
+7-93e3-621918de8\
+0a1\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x2270d9ec\
+ba-1eb8-4a77-93e\
+3-621918de80a1\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22J'aime Lire \
+Vol. 05\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Betty La Terr\
+eur\x5cnEsp\xc3\xa8ce de \
+martien\x5cnJe Veux\
+ Un Grufulissali\
+n\x5cnLa Chasse Aux\
+ Tr\xc3\xa9sors\x5cnLa Fo\
+r\xc3\xaat des murmure\
+s\x5cnLa Rentr\xc3\xa9e C\
+atastrophe\x5cnLaur\
+a et le tout pet\
+it chevalier\x5cnLe\
+s exploits d'Eli\
+ott\x5cnUn Petit Ro\
+i \xc3\x80 La Grande \xc3\
+\x89cole\x5cnYoussef, \
+Ali et la prince\
+sse\x22\x0d\x0a    },\x0d\x0a  \
+  \x2201e6840f-5e64\
+-46c3-9fd9-30668\
+7815541\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2201\
+e6840f-5e64-46c3\
+-9fd9-3066878155\
+41\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Bestiole\
+s fossiles\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22636453e7-0\
+05a-4ded-b504-bc\
+09dff54fa1\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22636453e7-005a-4\
+ded-b504-bc09dff\
+54fa1\x22,\x0d\x0a       \
+ \x22title\x22: \x22Ma\xc3\xa9 \
+et la pierre d\xe2\x80\
+\x99Anaya\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Ma\xc3\xa9, 10 ans, \
+vit dans la camp\
+agne anglaise au\
+ d\xc3\xa9but du 20 \xc3\xa8\
+me si\xc3\xa8cle et \xc3\xa0\
+ cette \xc3\xa9poque, \
+les petites fill\
+es se doivent d'\
+\xc3\xaatre sages et d\
+isciplin\xc3\xa9es... \
+Et c'est pr\xc3\xa9cis\
+\xc3\xa9ment tout ce q\
+u'elle d\xc3\xa9teste \
+! Son r\xc3\xaave, c'e\
+st de devenir ar\
+ch\xc3\xa9ologue comme\
+ son grand-p\xc3\xa8re\
+ ! Alors quand e\
+lle apprend qu'i\
+l a myst\xc3\xa9rieuse\
+ment disparu, el\
+le est pr\xc3\xaate \xc3\xa0\
+ tout pour le re\
+trouver...\x22\x0d\x0a   \
+ },\x0d\x0a    \x22f2e4a2\
+77-dc16-4c7b-b22\
+8-a479015a1bfb\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22f2e4a277-dc\
+16-4c7b-b228-a47\
+9015a1bfb\x22,\x0d\x0a   \
+     \x22title\x22: \x22M\
+onsieur et madam\
+e (30) Gemma\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Monsieur\
+ et Madame (30 h\
+istories)\x5cn\x5cn1 m\
+adame catastroph\
+e\x5cn2 madame timi\
+de\x5cn3 madame acr\
+obate\x5cn4 madame \
+beaut\xc3\xa9\x5cn5 madam\
+e en retard\x5cn6 m\
+adame c\xc3\xa2lin\x5cn7 \
+madame sage\x5cn8 m\
+adame coquette\x5cn\
+9 madame t\xc3\xaate e\
+n l'air\x5cn10 mada\
+me canaille \x5cn11\
+ madame risette \
+\x5cn12 madame t\xc3\xaat\
+ue \x5cn13 madame p\
+rincesse \x5cn14 ma\
+dame ind\xc3\xa9cise\x5cn\
+15 madame pourqu\
+oi \x5cn16 madame b\
+avarde\x5cn\x5cn17 mon\
+sieur grognon \x5cn\
+18 monsieur parf\
+ait \x5cn19 monsieu\
+r bagarreur\x5cn20 \
+monsieur joyeux\x5c\
+n21 monsieur non\
+ \x5cn22 monsieur m\
+alin \x5cn23 monsie\
+ur curieux\x5cn24 m\
+onsieur atchoum \
+\x5cn25 monsieur pe\
+ureux\x5cn26 monsie\
+ur formidable \x5cn\
+27monsieur heure\
+ux\x5cn28 monsieur \
+chatouille \x5cn29 \
+monsieur farceur\
+ \x5cn30 monsieur c\
+ourageux\x22\x0d\x0a    }\
+,\x0d\x0a    \x220757beec\
+-0b4e-4171-9f7b-\
+a394b794a89c\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x220757beec-0b4e\
+-4171-9f7b-a394b\
+794a89c\x22,\x0d\x0a     \
+   \x22title\x22: \x22Une\
+ histoire et OLI\
+ Pack 2 (25 Hist\
+oires)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22e112662b-5f5d-\
+4f06-929f-5748a4\
+fa7fb7\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22e11\
+2662b-5f5d-4f06-\
+929f-5748a4fa7fb\
+7\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Un petit \
+livre d'or\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x224 histoire\
+s : \x5cn\x5cn- Mon pr\
+emier ab\xc3\xa9c\xc3\xa9dai\
+re\x5cn- Le chanteu\
+r et la baleine\x5c\
+n- Le corbeau et\
+ le renard racon\
+t\xc3\xa9 aux enfants\x5c\
+n- Papa bisous\x22\x0d\
+\x0a    },\x0d\x0a    \x22c2\
+054d8c-14fd-4e1f\
+-998d-2c4773954c\
+a8\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22c2054d8\
+c-14fd-4e1f-998d\
+-2c4773954ca8\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Histoires pou\
+r mes 5 ans\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x225 histoir\
+es pour mes 5 an\
+s\x5cnLes 5 doigts \
+de la main\x5cnLe c\
+lub des 5 chiots\
+\x5cnLe royaume des\
+ 5 saisons\x5cnLe v\
+\xc3\xa9lo de L\xc3\xa9o\x5cnJ'\
+ai 5 ans et demi\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+c64fbd7e-aabb-46\
+9d-8ec1-57db3b6a\
+6ee0\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22c64fb\
+d7e-aabb-469d-8e\
+c1-57db3b6a6ee0\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Mes premier\
+s j'aime lire - \
+Pack 1\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22a94077fa-2443-\
+4a23-99ea-a4c482\
+ba8608\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22a94\
+077fa-2443-4a23-\
+99ea-a4c482ba860\
+8\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les avent\
+ures de Tintin (\
+France Culture)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Les c\
+igares du pharao\
+n\x5cnLe lotus bleu\
+\x5cnLes 7 boules d\
+e cristal\x5cnLe te\
+mple du soleil\x5cn\
+par France Cultu\
+re, la Com\xc3\xa9die-\
+Fran\xc3\xa7aise, l'Or\
+chestre national\
+ de France et Mo\
+ulinsart.\x22\x0d\x0a    \
+},\x0d\x0a    \x22676b4ef\
+0-1959-4983-be16\
+-9389abe07545\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22676b4ef0-195\
+9-4983-be16-9389\
+abe07545\x22,\x0d\x0a    \
+    \x22title\x22: \x22oc\
+tave et melo\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22770fd0f4\
+-2eb5-4f53-8ba8-\
+5561e743bf5a\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22770fd0f4-2eb5\
+-4f53-8ba8-5561e\
+743bf5a\x22,\x0d\x0a     \
+   \x22title\x22: \x22Cha\
+nsons Disney (18\
+ Chansons)\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Chansons D\
+isney\x5cn\x5cnLa rein\
+e des neige:\x5cn- \
+Lib\xc3\xa9r\xc3\xa9e, d\xc3\xa9li\
+vr\xc3\xa9e.\x5cn-L'amour\
+ est un cadeau\x5cn\
+-Je voudrais un \
+bonhomme de neig\
+e\x5cn-En \xc3\xa9t\xc3\xa9\x5cn\x5cn\
+Raiponce:\x5cn-J'ai\
+ un r\xc3\xaave\x5cn-Je v\
+eux y croire\x5cn-N\
+'\xc3\xa9coute que moi\
+\x5cn-Ou est la vra\
+ie vie\x5cn\x5cnAladdi\
+n:\x5cn-Ce r\xc3\xaave bl\
+eu\x5cn-Prince Ali\x5c\
+n-Je suis ton me\
+illeur amis\x5cn-Nu\
+its d'Arabie\x5cn\x5cn\
+Rebelle:\x5cn-Vers \
+le ciel\x5cn-Soleil\
+ brulant\x5cn\x5cnVaia\
+na:\x5cn-Le bleu lu\
+mi\xc3\xa8re\x5cn-Pour le\
+s hommes\x5cn-L'exp\
+lorateur\x5cn-Bling\
+-bling\x22\x0d\x0a    },\x0d\
+\x0a    \x2218f551a5-1\
+d9c-4891-a6b5-38\
+db3d045d4d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2218f551a5-1d9c-4\
+891-a6b5-38db3d0\
+45d4d\x22,\x0d\x0a       \
+ \x22title\x22: \x22Le mo\
+ulin \xc3\xa0 paroles\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22e3a24\
+90f-b36a-4427-be\
+f1-d7697f4323cc\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22e3a2490f-b\
+36a-4427-bef1-d7\
+697f4323cc\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les aventures de\
+ Coco (9 \xc3\xa9pisod\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22\xc3\
+\x89veil musical : \
+les aventures d'\
+un petit singe m\
+alicieux mise en\
+ musique.\x5cnAutou\
+r d'une petite h\
+istoire \xc3\xa9bourif\
+f\xc3\xa9e, une illust\
+ration fra\xc3\xaeche \
+et color\xc3\xa9e, une\
+ musique enlev\xc3\xa9\
+e et chantante, \
+avec de vrais in\
+struments, mais \
+aussi de vrais b\
+ruits, familiers\
+ et chaleureux, \
+pour \xc3\xa9veiller l\
+'oreille des tou\
+t-petits.\x5cnChaqu\
+e titre raconte \
+une b\xc3\xaatise rigo\
+lote. L'histoire\
+ lue est accompa\
+gn\xc3\xa9e d'une musi\
+que enti\xc3\xa8rement\
+ originale.\x22\x0d\x0a  \
+  },\x0d\x0a    \x22db5cd\
+ae6-0159-45ad-83\
+a5-4c4459ad257d\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22db5cdae6-0\
+159-45ad-83a5-4c\
+4459ad257d\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Contes en libert\
+\xc3\xa9\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x2299\
+5cc203-dbbc-45c0\
+-b207-74044b4a5c\
+02\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22995cc20\
+3-dbbc-45c0-b207\
+-74044b4a5c02\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Dorothee Et L\
+es Recreamis Sur\
+ Le Pont d'Avign\
+on\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Ch\
+ansons et compti\
+nes pour enfants\
+\x5cnListe des chan\
+sons : https://w\
+ww.discogs.com/f\
+r/release/162655\
+6-Doroth%C3%A9e-\
+Les-R%C3%A9cr%C3\
+%A9amis-Sur-Le-P\
+ont-DAvignon\x22\x0d\x0a \
+   },\x0d\x0a    \x227725\
+766a-536f-4319-8\
+445-67672ef5fb48\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x227725766a-\
+536f-4319-8445-6\
+7672ef5fb48\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Bertrand Fichou\
+ - 7 histoires d\
+'aventures\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Cette s\xc3\xa9l\
+ection des sept \
+meilleures avent\
+ures parues dans\
+ le magazine Bel\
+les Histoires ra\
+viront les oreil\
+les des petits e\
+t des grands.\x5cnA\
+u programme magi\
+e, myst\xc3\xa8re, enq\
+u\xc3\xaate et frisson\
+ ! Et rien de te\
+l pour partir \xc3\xa0\
+ l'aventure que \
+de suivre pas \xc3\xa0\
+ pas les p\xc3\xa9rip\xc3\
+\xa9ties du petit r\
+enard qui voulai\
+t faire du cirqu\
+e et du pirate B\
+ig Jack \xc3\xa0 la re\
+cherche de son d\
+iamant, sans oub\
+lier la d\xc3\xa9couve\
+rte par le singe\
+ Kumkat de la fo\
+r\xc3\xaat myst\xc3\xa9rieus\
+e...\x22\x0d\x0a    },\x0d\x0a \
+   \x228fd26b9f-f4f\
+a-4dfc-8ea1-4613\
+b2188670\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+fd26b9f-f4fa-4df\
+c-8ea1-4613b2188\
+670\x22,\x0d\x0a        \x22\
+title\x22: \x22L'histo\
+ire de Feuillett\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22f3e\
+cecda-86f5-4dda-\
+a9e9-9c6958306be\
+0\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22f3ececda\
+-86f5-4dda-a9e9-\
+9c6958306be0\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Pomme d'API - \
+Pack 2022 - 12 H\
+istoires\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Janvier 2022\
+ \xe2\x80\x93 Ma maison e\
+st fantastique\x5cn\
+F\xc3\xa9vrier 2022 \xe2\x80\
+\x93 Samia et le se\
+cret de la tound\
+ra\x5cnMars 2022 \xe2\x80\
+\x93 Max le loup ve\
+ut \xc3\xaatre terrifi\
+ant\x5cnAvril 2022 \
+- Le zoo en or d\
+es dinosaures\x5cnM\
+ai 2022 - Les de\
+ux oursons\x5cnJuin\
+ 2022 - Gare aux\
+ Crocochemars\x5cnJ\
+uillet 2022 - En\
+ valise jusqu'\xc3\xa0\
+ l'oc\xc3\xa9an\x5cnAo\xc3\xbbt\
+ 2022 - Le tout \
+petit tour de Pe\
+tit Lapin\x5cnSepte\
+mbre 2022 - Les \
+fourmis ennemies\
+\x5cnOctobre 2022 \xe2\
+\x80\x93 Le tr\xc3\xa9sor d\xe2\
+\x80\x99Acajou\x5cnNovemb\
+re 2022 - Le man\
+oir des 3 sorci\xc3\
+\xa8res\x5cnNovembre 2\
+022 \xe2\x80\x93 Esther, \
+l\xe2\x80\x99apprentie so\
+rci\xc3\xa8re\x22\x0d\x0a    },\
+\x0d\x0a    \x22470050dc-\
+2b7a-4510-a477-c\
+07105a867f7\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22470050dc-2b7a-\
+4510-a477-c07105\
+a867f7\x22,\x0d\x0a      \
+  \x22title\x22: \x22MYTH\
+OLOGIE - Mes his\
+toires\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x227ba64e3f-6379-\
+419b-8760-ee51d1\
+e824ab\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x227ba\
+64e3f-6379-419b-\
+8760-ee51d1e824a\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Pouet\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22b801aec3\
+-b325-48da-a37e-\
+92593ac6c9b4\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22b801aec3-b325\
+-48da-a37e-92593\
+ac6c9b4\x22,\x0d\x0a     \
+   \x22title\x22: \x22His\
+toire d'une moue\
+tte et du chat q\
+ui lui apprit \xc3\xa0\
+ voler\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22https://www.pl\
+acedeslibraires.\
+fr/livre/9782020\
+686464-histoire-\
+d-une-mouette-et\
+-du-chat-qui-lui\
+-apprit-a-voler-\
+luis-sep-lveda-m\
+iles-hyman/\x5cn\x5cnU\
+ne seule histoir\
+e :\x5cn1ere partie\
+   : 09 chapitre\
+s\x5cn2eme partie :\
+ 11 chapitres\x5cn\x5c\
+n1h50 d'\xc3\xa9coute\x5c\
+n\x5cnR\xc3\xa9sum\xc3\xa9 :\x5cn\x5c\
+nZorbas, le gran\
+d chat noir et g\
+ros, a promis \xc3\xa0\
+ la mouette, qui\
+ est venue mouri\
+r sur son balcon\
+, de couver son \
+dernier \xc5\x93uf, de\
+ prot\xc3\xa9ger le po\
+ussin et de lui \
+apprendre \xc3\xa0 vol\
+er. Tous les cha\
+ts du port de Ha\
+mbourg vont se m\
+obiliser pour l\xe2\
+\x80\x99aider \xc3\xa0 tenir\
+ ses promesses i\
+nsolites. \xc3\x80 tra\
+vers les aventur\
+es rocambolesque\
+s et dr\xc3\xb4les de \
+Zorbas et Afortu\
+nada, on d\xc3\xa9couv\
+re la solidarit\xc3\
+\xa9, la tendresse,\
+ la nature et la\
+ libert\xc3\xa9.\x22\x0d\x0a   \
+ },\x0d\x0a    \x224227a2\
+b7-955f-4355-8c8\
+8-a580477d9501\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x224227a2b7-95\
+5f-4355-8c88-a58\
+0477d9501\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es aventures de \
+Rodolphe et Gala\
+, saison 1\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22df3e2dc2-2\
+957-4fef-907f-a8\
+2460cbd3ad\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22df3e2dc2-2957-4\
+fef-907f-a82460c\
+bd3ad\x22,\x0d\x0a       \
+ \x22title\x22: \x22Appre\
+ntis d'Auteuil :\
+ les aventures d\
+e Paco (2022-202\
+3)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Ap\
+prentis d'Auteui\
+l : les aventure\
+s de Paco (calen\
+drier avent 2022\
+-2023 et 2023-20\
+24)\x5cn\x5cnApprentis\
+ d\xe2\x80\x99Auteuil vou\
+s offre 24 conte\
+s audio \xc3\xa9ducati\
+fs pour faire pa\
+tienter vos enfa\
+nts jusqu\xe2\x80\x99\xc3\xa0 N\
+o\xc3\xabl !\x5cnChaque j\
+our, \xc3\xa0 partir d\
+u 1er d\xc3\xa9cembre,\
+ un nouvel \xc3\xa9pis\
+ode pour suivre \
+les aventures de\
+ Paco et de ses \
+amis.\x5cnUn podcas\
+t Apprentis d\xe2\x80\x99\
+Auteuil \xc3\xa9crit p\
+ar Laura Demmerl\
+\xc3\xa9 et enregistr\xc3\
+\xa9 par Alix Van O\
+ost.\x5cnSource : h\
+ttps://noel.appr\
+entis-auteuil.or\
+g/\x5cn\x5cnInfo :\x5cnUn\
+e introduction (\
+50 sec) est pr\xc3\xa9\
+sente au d\xc3\xa9but \
+de cet album, ex\
+posant l\xe2\x80\x99intri\
+gue de ces nouve\
+lles histoires.\x5c\
+nVous avez la po\
+ssibilit\xc3\xa9 de pa\
+sser l\xe2\x80\x99introdu\
+ction en appuyan\
+t sur OK.\x5cn\x5cnCon\
+tes de No\xc3\xabl 202\
+2 :\x5cn1 - Paco et\
+ le pingouin rou\
+ge (5min 20)\x5cn2 \
+- Paco est trop \
+press\xc3\xa9 (5min 30\
+)\x5cn3 - Paco et l\
+e phoque \xc3\xa9nerv\xc3\
+\xa9 (3min 20)\x5cn4 -\
+ Paco et le cari\
+bou bless\xc3\xa9 (3mi\
+n 50)\x5cn5 - Paco \
+et le bonhomme d\
+e neige (3 min20\
+)\x5cn6 - Paco et l\
+\xe2\x80\x99ours blanc au\
+x grandes oreill\
+es (4 min)\x5cn7 - \
+Paco et le bonne\
+t multicolore (5\
+ min 30)\x5cn8 - Pa\
+co et le joueur \
+de saxophone (5m\
+in 20)\x5cn9 - Paco\
+ et le petit sac\
+ perdu (4min 40)\
+\x5cn10 - Paco et l\
+\xe2\x80\x99oiseau qui ne\
+ savait pas chan\
+ter (4min 50)\x5cn1\
+1 - Paco et l\xe2\x80\x99\
+amie d\xc3\xa9bordante\
+ d\xe2\x80\x99amour (4min\
+ 20)\x5cn12 - Paco \
+et le concours d\
+e p\xc3\xaache (4min 4\
+0)\x5cn13 - Paco et\
+ le renard polai\
+re (4min 40)\x5cn14\
+ - Paco et le pi\
+ngouin qui n\xe2\x80\x99a\
+imait pas vivre \
+au Groenland (4m\
+in 40)\x5cn15 - Pac\
+o et le ch\xc3\xa2teau\
+ de glace (6min \
+14)\x5cn16 - Paco e\
+t la rivi\xc3\xa8re sa\
+uvage (4min)\x5cn17\
+ - Paco et les r\
+oses rouges (4mi\
+n 50)\x5cn18 - Paco\
+ et les petits c\
+aramels (4min 10\
+)\x5cn19 - Paco et \
+le vieux phoque \
+(4min 40)\x5cn20 - \
+Paco et la chass\
+e au tr\xc3\xa9sor (4m\
+in 50)\x5cn21 - Pac\
+o et l\xe2\x80\x99ours po\
+laire boiteux(3m\
+in 15)\x5cn22 - Pac\
+o et les boules \
+de neige color\xc3\xa9\
+es (4min 20)\x5cn23\
+ - Paco et le la\
+byrinthe de neig\
+e (5min 10)\x5cn24 \
+- Paco et la din\
+de de No\xc3\xabl disp\
+arue(6min 50)\x5cn\x5c\
+nContes de No\xc3\xabl\
+ 2023:\x5cn1 - Paco\
+ et la lettre su\
+rprise\x5cn2 - Tour\
+onchon rencontre\
+ un pingouin pas\
+ comme les autre\
+s\x5cn3 - Paco et l\
+e loup blanc\x5cn4 \
+- Paco et le fac\
+teur\x5cn5 - Paco e\
+t la maladie de \
+Touronchon\x5cn6 - \
+Paco et le renar\
+d charlatan\x5cn7 -\
+ Paco pr\xc3\xa9pare l\
+'anniversaire de\
+ Touronchon\x5cn8 -\
+ Paco fait de la\
+ peinture\x5cn9 - P\
+aco et l'ours en\
+ peluche\x5cn10 - P\
+aco et le sac vo\
+l\xc3\xa9\x5cn11 - Paco n\
+e reconnait plus\
+ Touronchon\x5cn12 \
+- Toudoucette et\
+ le discours\x5cn13\
+ - Paco et le cu\
+rieux projet d'O\
+lga\x5cn14 - Paco r\
+e\xc3\xa7oit une nouve\
+lle lettre\x5cn15 -\
+ Paco et son pap\
+a d\xc3\xa9bord\xc3\xa9\x5cn16 \
+- Paco et le pet\
+it b\xc3\xa9b\xc3\xa9\x5cn17 - \
+Paco et la cours\
+e du village\x5cn18\
+ - Paco et le vo\
+lcan\x5cn19 - Paco \
+et la baleine pe\
+ureuse\x5cn20 - Pac\
+o et le gateau p\
+as comme les aut\
+res\x5cn21 - Paco e\
+t le vieux p\xc3\xaach\
+eur\x5cn22 - Paco e\
+t la collection \
+de timbres\x5cn23 -\
+ Paco et les cha\
+mallows grill\xc3\xa9s\
+\x5cn24 - Paco f\xc3\xaat\
+e No\xc3\xabl\x22\x0d\x0a    },\
+\x0d\x0a    \x22dae07352-\
+09dc-47ff-8f07-6\
+228fd3d269b\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22dae07352-09dc-\
+47ff-8f07-6228fd\
+3d269b\x22,\x0d\x0a      \
+  \x22title\x22: \x22Mami\
+e Poule raconte \
+(12 histoires)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Mamie \
+Poule raconte, \xc3\
+\xa9crit par Christ\
+ine Beigel et ra\
+cont\xc3\xa9 par \x5c\x22Ell\
+e \xc3\xa9tait une foi\
+s\x5c\x22. https://www\
+.meslivresjeunes\
+se.fr/auteur/chr\
+istine-beigel/\x22\x0d\
+\x0a    },\x0d\x0a    \x225b\
+719245-0829-43db\
+-8ff2-1f0775394f\
+30\x22: {\x0d\x0a        \
+\x22uuid\x22: \x225b71924\
+5-0829-43db-8ff2\
+-1f0775394f30\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22[Musique]Kids\
+ United (5 album\
+s) ByGayel - Cop\
+ie\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Ki\
+ds United (5 alb\
+ums)\x22\x0d\x0a    },\x0d\x0a \
+   \x22083bf4d7-a05\
+4-4a2e-9c55-a448\
+b1104d22\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x220\
+83bf4d7-a054-4a2\
+e-9c55-a448b1104\
+d22\x22,\x0d\x0a        \x22\
+title\x22: \x22Star Wa\
+rs - Episode 5 -\
+ L'empire Contre\
+ Attaque\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Star Wars - \
+Episode 5 - L'em\
+pire Contre Atta\
+que\x5cnLu par Emma\
+nuel Dekoninck\x22\x0d\
+\x0a    },\x0d\x0a    \x226f\
+32fb59-f3e7-4986\
+-a91a-eed2468fac\
+ae\x22: {\x0d\x0a        \
+\x22uuid\x22: \x226f32fb5\
+9-f3e7-4986-a91a\
+-eed2468facae\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Les petits ta\
+illeurs Le monde\
+ de Pargus (17 c\
+hapitres)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Mikus, le m\
+usicien voyageur\
+, part \xc3\xa0 l'aven\
+ture pour d\xc3\xa9cou\
+vrir ce qui ne t\
+ourne plus rond \
+dans son univers\
+. Sa qu\xc3\xaate sera\
+ jalonn\xc3\xa9e de re\
+ncontres fantast\
+iques : une for\xc3\
+\xaat qui chante, u\
+n tonton pirate,\
+ une souris mali\
+cieuse, une agav\
+e mal lun\xc3\xa9e...\x5c\
+nLe monde de Par\
+gus est une hist\
+oire musicale de\
+ 36 minutes \xc3\xa0 \xc3\
+\xa9couter \xc3\xa0 parti\
+r de 5 ans, \xc3\xa9cr\
+ite, compos\xc3\xa9e e\
+t interpr\xc3\xa9t\xc3\xa9e \
+par Mikael Taill\
+eur et r\xc3\xa9alis\xc3\xa9\
+e par Modan Tail\
+leur.\x5cnPlus d'in\
+fos : https://li\
+nktr.ee/lespetit\
+stailleurs\x22\x0d\x0a   \
+ },\x0d\x0a    \x2201bebd\
+4e-df92-4a53-8cb\
+d-d2416dabe366\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2201bebd4e-df\
+92-4a53-8cbd-d24\
+16dabe366\x22,\x0d\x0a   \
+     \x22title\x22: \x22C\
+ontes de la Mais\
+on Ronde\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x2279c7addc-67e\
+4-4069-b120-e512\
+00bd2fad\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x227\
+9c7addc-67e4-406\
+9-b120-e51200bd2\
+fad\x22,\x0d\x0a        \x22\
+title\x22: \x22Pierre \
+Gripari\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22France Cultur\
+e - Les histoire\
+s du Pince Oreil\
+le - s\xc3\xa9lection \
+des histoires co\
+nt\xc3\xa9es par Pierr\
+e Gripari\x22\x0d\x0a    \
+},\x0d\x0a    \x22c8ee064\
+6-ff0d-44ad-9d05\
+-ebbe0710afbd\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22c8ee0646-ff0\
+d-44ad-9d05-ebbe\
+0710afbd\x22,\x0d\x0a    \
+    \x22title\x22: \x22Di\
+dier Jeunesse - \
+2012 - Les Plus \
+Belles Berceuses\
+ Classiques\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x225af66e3b-\
+df95-4977-a2bf-8\
+2d2ce46bb07\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x225af66e3b-df95-\
+4977-a2bf-82d2ce\
+46bb07\x22,\x0d\x0a      \
+  \x22title\x22: \x22L Am\
+\xc3\xa9rique pour les\
+ kids\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Et si votre enf\
+ant faisait mieu\
+x connaissance a\
+vec la soci\xc3\xa9t\xc3\xa9\
+ am\xc3\xa9ricaine ava\
+nt la pr\xc3\xa9sident\
+ielle du 3 novem\
+bre ? Il entend \
+souvent parler d\
+es \xc3\x89tats-Unis, \
+surtout en ce mo\
+ment. Alors donn\
+ons-lui quelques\
+ cl\xc3\xa9s pour mieu\
+x comprendre les\
+ enjeux du scrut\
+in.\x5cn\x5cnPour d\xc3\xa9c\
+ouvrir ce pays s\
+i grand et si fa\
+scinant, France \
+Inter te propose\
+ une s\xc3\xa9rie de 9\
+ \xc3\xa9pisodes, \x5c\x22L\xe2\
+\x80\x99Am\xc3\xa9rique pour\
+ les kids\x5c\x22. Tu \
+partiras dans l\xe2\
+\x80\x99espace, tu vis\
+iteras la Maison\
+-Blanche, tu ren\
+contreras l\xe2\x80\x99ho\
+mme le plus puis\
+sant du monde, t\
+u feras connaiss\
+ance avec les co\
+wboys et les ind\
+iens\xe2\x80\xa6\x5cn\x5c\x22L\xe2\x80\x99A\
+m\xc3\xa9rique pour le\
+s kids\x5c\x22, c'est \
+un podcast origi\
+nal de France In\
+ter destin\xc3\xa9 aux\
+ enfants de 7 \xc3\xa0\
+ 10 ans.\x22\x0d\x0a    }\
+,\x0d\x0a    \x2275695c00\
+-c907-4d48-9982-\
+12aa1b96d9e6\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2275695c00-c907\
+-4d48-9982-12aa1\
+b96d9e6\x22,\x0d\x0a     \
+   \x22title\x22: \x22Le \
+voyage du prince\
+ Tudorpah\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Le voyage d\
+u prince Tudorpa\
+h\x22\x0d\x0a    },\x0d\x0a    \
+\x229cda3c91-1084-4\
+df5-876e-0594157\
+a061b\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x229cda\
+3c91-1084-4df5-8\
+76e-0594157a061b\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Emilie Jol\
+ie\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x229d\
+537756-983e-49af\
+-841c-c18db06fdf\
+8b\x22: {\x0d\x0a        \
+\x22uuid\x22: \x229d53775\
+6-983e-49af-841c\
+-c18db06fdf8b\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Souffleur de \
+r\xc3\xaaves - Vidoc (\
+5 \xc3\xa9pisodes)[V2 \
+by JeSuisUneFoug\
+\xc3\xa8re]\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Souffleur de r\xc3\
+\xaaves. Vidoc : \xc3\xa9\
+pisodes 1 \xc3\xa0 5.\x5c\
+n- Un virus pas \
+comme les autres\
+\x5cn- Eliza fait s\
+on expos\xc3\xa9\x5cn- Pe\
+tits soldats con\
+tre virus\x5cn- Vac\
+cin contre virus\
+\x5cn- Tous ensembl\
+e.\x5cnVidoc le vir\
+us n'est pas com\
+me ses fr\xc3\xa8res..\
+. Rendre les gen\
+s malades \xc3\xa7a ne\
+ l'amuse pas du \
+tout ! Il faut q\
+u'il fasse quelq\
+ue chose ! Sa re\
+ncontre avec Eli\
+sa va lui permet\
+tre de remplir l\
+a mission de sa \
+vie...\x5cnhttps://\
+souffleurdereves\
+.com/personnage/\
+vidoc/6-7-ans/\x22\x0d\
+\x0a    },\x0d\x0a    \x22af\
+c1fc8d-44df-423d\
+-91d3-cf28ce1e96\
+77\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22afc1fc8\
+d-44df-423d-91d3\
+-cf28ce1e9677\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Encore une hi\
+stoire\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Encore une his\
+toire est un pod\
+cast destin\xc3\xa9 au\
+x enfants (et \xc3\xa0\
+ ceux qui le son\
+t encore dans le\
+ur t\xc3\xaate) qui ai\
+ment qu'on leur \
+raconte des hist\
+oires.\x5cn\x5cnChaque\
+ semaine, vous r\
+etrouverez ici u\
+ne histoire lue,\
+ tir\xc3\xa9e d'un liv\
+re de litt\xc3\xa9ratu\
+re jeunesse.\x5cn\x5cn\
+A \xc3\xa9couter avant\
+ de se coucher, \
+allong\xc3\xa9 dans l'\
+herbe, dans la v\
+oiture ou dans l\
+e train, Encore \
+une histoire veu\
+t mettre en avan\
+t la formidable \
+cr\xc3\xa9ation litt\xc3\xa9\
+raire destin\xc3\xa9e \
+aux jeunes lecte\
+urs (et aux moin\
+s jeunes, donc).\
+\x5cn\x5cnVous retrouv\
+erez bien \xc3\xa9vide\
+mment \xc3\xa0 chaque \
+fois les r\xc3\xa9f\xc3\xa9r\
+ences des livres\
+ lus, si vous vo\
+ulez aller plus \
+loin en vous off\
+rant le livre en\
+ question.\x5cn\x5cnVi\
+ve la lecture, v\
+ive la litt\xc3\xa9rat\
+ure jeunesse, vi\
+ve les histoires\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x22fbb801d3-96b2-4\
+f51-a565-59d36ea\
+ef5e2\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22fbb8\
+01d3-96b2-4f51-a\
+565-59d36eaef5e2\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22La Reine d\
+es Neiges\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x2213710c24-c0\
+c5-4ab3-89cc-f9f\
+e148fe777\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+13710c24-c0c5-4a\
+b3-89cc-f9fe148f\
+e777\x22,\x0d\x0a        \
+\x22title\x22: \x22Le Bon\
+ Gros G\xc3\xa9ant\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Sophie n\
+e r\xc3\xaave pas, cet\
+te nuit-l\xc3\xa0, qua\
+nd elle est tir\xc3\
+\xa9e de son lit pa\
+r un g\xc3\xa9ant ! He\
+ureusement, c\xe2\x80\x99\
+est le Bon Gros \
+G\xc3\xa9ant, le BGG, \
+qui se nourrit d\
+e schnockombres \
+et boit de la fr\
+ambouille. Mais \
+il existe d\xe2\x80\x99au\
+tres g\xc3\xa9ants au \
+pays des g\xc3\xa9ants\
+, des brutes de \
+quinze m\xc3\xa8tres d\
+e haut qui ne ra\
+ffolent que d\xe2\x80\x99\
+une chose : les \
+hommes de terre.\
+ Sophie et son a\
+mi le BGG pourro\
+nt-ils les arr\xc3\xaa\
+ter ? Esp\xc3\xa9rons-\
+le, sinon vous p\
+ourriez bien \xc3\xaat\
+re le prochain \xc3\
+\xa0 vous faire gob\
+er par un affreu\
+x g\xc3\xa9ant. Les av\
+entures de Sophi\
+e et du Bon Gros\
+ G\xc3\xa9ant sont rac\
+ont\xc3\xa9es avec d\xc3\xa9\
+lice et espi\xc3\xa8gl\
+erie par un c\xc3\xa9l\
+\xc3\xa8bre duo de com\
+\xc3\xa9diens : Christ\
+ine Delaroche et\
+ Daniel Pr\xc3\xa9vost\
+. Une interpr\xc3\xa9t\
+ation pleine d'\xc3\
+\xa9nergie et de dr\
+\xc3\xb4lerie !\x22\x0d\x0a    \
+},\x0d\x0a    \x22b65ad60\
+a-383f-4f50-9a4f\
+-a398284592bd\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22b65ad60a-383\
+f-4f50-9a4f-a398\
+284592bd\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s Voyages d'Am\xc3\xa9\
+lia - Au c\xc5\x93ur d\
+e l'Histoire\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Am\xc3\xa9lia,\
+ une petite fill\
+e \xc3\xa2g\xc3\xa9e de 10 a\
+ns, fait un jour\
+ la connaissance\
+ de Granny, une \
+vieille antiquai\
+re bougonne mais\
+ sympathique qui\
+ cache dans sa b\
+outique un myst\xc3\
+\xa9rieux ascenseur\
+ \xc3\xa0 remonter dan\
+s le temps. Ense\
+mble, dans chaqu\
+e \xc3\xa9pisode, elle\
+s vont explorer \
+diff\xc3\xa9rentes \xc3\xa9p\
+oques et partir \
+\xc3\xa0 la rencontre \
+de nombreux pers\
+onnages qui ont \
+marqu\xc3\xa9 l\xe2\x80\x99Hist\
+oire, d\xe2\x80\x99Akhena\
+ton \xc3\xa0 Louis XIV\
+ sans oublier de\
+ remonter jusqu\xe2\
+\x80\x99aux dinosaures\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x22b27ecfa8-2e41-4\
+e9d-8be3-0e3b180\
+1f843\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22b27e\
+cfa8-2e41-4e9d-8\
+be3-0e3b1801f843\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22LittleAnge\
+l - Les chansons\
+ de b\xc3\xa9b\xc3\xa9 louis\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22pack\
+ de chanson de b\
+\xc3\xa9b\xc3\xa9 louis\x5cn\x5cnh\
+ttps://www.youtu\
+be.com/@LittleAn\
+gelFrancais/\x22\x0d\x0a \
+   },\x0d\x0a    \x229878\
+0f37-7eea-4af2-9\
+25f-44d62c166d63\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2298780f37-\
+7eea-4af2-925f-4\
+4d62c166d63\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22France Inter - \
+Les Bestioles Fo\
+ssiles - 08 2023\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Podc\
+ast France Inter\
+ Bestioles, s\xc3\xa9r\
+ie sur les fossi\
+les\x22\x0d\x0a    },\x0d\x0a  \
+  \x22785012c3-574e\
+-4748-967f-bc823\
+b0c5e8f\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2278\
+5012c3-574e-4748\
+-967f-bc823b0c5e\
+8f\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Histoire\
+s pour les petit\
+s (Milan Presse)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22http\
+s://www.milanpre\
+sse.com/ressourc\
+es/3-7\x22\x0d\x0a    },\x0d\
+\x0a    \x226b1433b5-d\
+020-455c-8931-e7\
+c4188560dd\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x226b1433b5-d020-4\
+55c-8931-e7c4188\
+560dd\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les h\
+istoires de la b\
+iblioth\xc3\xa8que\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2211 histo\
+ires issues de l\
+ivres audio de m\
+a biblioth\xc3\xa8que \
+:\x5cnLes Petites P\
+oules 1 et 2,\x5cnP\
+ierre et le Loup\
+,\x5cnH\xc3\xa9l\xc3\xa8ne et l\
+e Cheval de Troi\
+e\x5cnBulle et Bob \
+dans la for\xc3\xaat\x5cn\
+Hop dans la Lune\
+\x5cnLa boite \xc3\xa0 jo\
+ujoux\x5cnLe Gateau\
+ de Ouistiti\x5cnLe\
+ jardin d'Albert\
+\x5cnLes elfes et l\
+e cordonnier\x5cnL'\
+est o\xc3\xb9 l'doudou\
+ d'Lulu\x22\x0d\x0a    },\
+\x0d\x0a    \x22ea8ca736-\
+fe7d-4a45-ae52-4\
+aa4d8916119\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22ea8ca736-fe7d-\
+4a45-ae52-4aa4d8\
+916119\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+p'tites histoire\
+s Taleming\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Chaque sem\
+aine retrouvez d\
+eux nouvelles hi\
+stoires. Le mard\
+i, une tr\xc3\xa8s p\xe2\x80\
+\x99tite histoire, \
+d\xe2\x80\x99une minute !\
+ Le jeudi, une a\
+venture de 10 mi\
+nutes et parfois\
+ plus ! Des hist\
+oires \xc3\xa0 \xc3\xa9coute\
+r pour s\xe2\x80\x99\xc3\xa9vad\
+er, grandir et s\
+\xe2\x80\x99\xc3\xa9panouir. \x5cn\
+\x5cnhttps://talemi\
+ng.com/les-ptite\
+s-histoires/\x22\x0d\x0a \
+   },\x0d\x0a    \x225436\
+bf0a-442e-4f87-a\
+007-807b6bfff5d8\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x225436bf0a-\
+442e-4f87-a007-8\
+07b6bfff5d8\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Flammarion - Le\
+ P\xc3\xa8re Castor ra\
+conte ses histoi\
+res pour s\xe2\x80\x99end\
+ormir\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x221/ Le g\xc3\xa9ant va\
+ venir ce soir\x5cn\
+2/ La petite sou\
+ris qui a perdu \
+une dent\x5cn3/ Le \
+loup de la tapis\
+serie\x5cn4/ Je m'e\
+nnuie dans mon l\
+it\x5cn5/ Tu m'aime\
+s, dis ?\x5cn6/ Pas\
+ dodo !\x5cn7/ Le m\
+archand de sable\
+\x5cn8/ Histoire du\
+ B\xc3\xa9b\xc3\xa9 Ours\x5cn9/\
+ La sieste des m\
+amans\x5cn10/ Le m\xc3\
+\xa9chant loup du s\
+oir\x5cn11/ Dr\xc3\xb4le \
+de nuit chez les\
+ ours\x5cn12/ Les p\
+etites lumi\xc3\xa8res\
+ de la nuit\x5cn13/\
+ Quand Coulicoco\
+ dort\x5cn14/ C'est\
+ mon nid !\x5cn15/ \
+Le mouchoir de B\
+enjamin\x5cn16/ Att\
+rape-moi sommeil\
+ !\x5cn17/ Bonne nu\
+it, Gaston !\x5cn18\
+/ La nouvelle ch\
+ambre de Titou\x5cn\
+\x5cnPack cr\xc3\xa9\xc3\xa9 av\
+ec le CD du livr\
+e https://www.fl\
+ammarion-jeuness\
+e.fr/le-pere-cas\
+tor-raconte-ses-\
+histoires-pour-s\
+-endormir/978208\
+1354012\x22\x0d\x0a    },\
+\x0d\x0a    \x22f39a71a5-\
+d404-4309-afbb-7\
+569f863499d\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22f39a71a5-d404-\
+4309-afbb-7569f8\
+63499d\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+contes d'automne\
+ 2015 (Pomme d'A\
+pi)\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+es contes d'auto\
+mne de Pomme d'A\
+pi (3-7 ans), pa\
+ru en septembre \
+2015. Voici 12 h\
+istoires \xc3\xa0 \xc3\xa9co\
+uter en famille \
+au moment de la \
+rentr\xc3\xa9e, des \xc2\xab\
+ravicelles\xc2\xbb, de\
+s peurs du loup \
+et des r\xc3\xaaves de\
+ princesses. Un \
+plongeon dans l'\
+imaginaire et au\
+ssi des histoire\
+s qui font \xc3\xa9cho\
+ \xc3\xa0 la vie des p\
+etits.  Le com\xc3\xa9\
+dien G\xc3\xa9rard Rou\
+zier et Isabelle\
+ racontent avec \
+tout leur talent\
+ une s\xc3\xa9lection \
+de 12 histoires \
+parues dans POMM\
+E D'API mises en\
+ valeur par les \
+illustrations so\
+nores de Christo\
+phe Chauvet et l\
+e d\xc3\xa9cor musical\
+ de Charlie.\x22\x0d\x0a \
+   },\x0d\x0a    \x223590\
+1c2b-0b9d-4e23-9\
+a22-9515834ac2c2\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2235901c2b-\
+0b9d-4e23-9a22-9\
+515834ac2c2\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les princesses \
+Disney\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Les princesses\
+ disney\x22\x0d\x0a    },\
+\x0d\x0a    \x22b96336b1-\
+89cb-4014-ab62-0\
+73f61acfdb7\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22b96336b1-89cb-\
+4014-ab62-073f61\
+acfdb7\x22,\x0d\x0a      \
+  \x22title\x22: \x22Le t\
+emps dune histoi\
+re\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Le\
+s enfants, ferme\
+z les yeux et \xc3\xa9\
+coutez. \x5cnPartez\
+ \xc3\xa0 l'aventure e\
+n vous transform\
+ant en chevalier\
+, en princesse, \
+en animal magiqu\
+e. \x5cnLaissez-vou\
+s guider dans ce\
+s histoires cont\
+\xc3\xa9es qui vous pe\
+rmettent d'\xc3\xaatre\
+ qui vous voulez\
+ le temps d'une \
+histoire\x5cn\x5cn18 h\
+istoires:\x5cnArthu\
+r et l'\xc3\xa9p\xc3\xa9e ro\
+yal\x5cnBilly et so\
+n taureau\x5cnL'his\
+toire de la f\xc3\xa9e\
+ et de la marmot\
+te\x5cnL'histoire d\
+e la princesse A\
+urore \x5cnL'histoi\
+re de Ratapon\x5cnL\
+'histoire de Taw\
+ots le petit lap\
+in\x5cnL'histoire d\
+es trois petits \
+cochons\x5cnL'histo\
+ire du Calife ci\
+gogne\x5cnL'histoir\
+e du filet \x5cnLa \
+capture du feu\x5cn\
+La grenouille et\
+ le b\xc5\x93uf\x5cnLa ma\
+ison que Pierre \
+\xc3\xa0 b\xc3\xa2tie \x5cnLa p\
+etite princesse \
+ratonne\x5cnLe chat\
+ et le perroquet\
+\x5cnLe collier de \
+v\xc3\xa9rit\xc3\xa9\x5cnLe fil\
+ rouge de l'h\xc3\xa9r\
+o\xc3\xafsme\x5cnLe fr\xc3\xa8r\
+e de Jean Malpro\
+pre\x5cnLe loup, le\
+ cochon, la cane\
+ et l'oie\x5cn\x5cnhtt\
+ps://pitchoun-me\
+dias.fr/podcasts\
+/le-temps-d-une-\
+histoire-155/1\x22\x0d\
+\x0a    },\x0d\x0a    \x22dc\
+2a4e5e-4e9a-4d81\
+-9609-18f15d9bed\
+12\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22dc2a4e5\
+e-4e9a-4d81-9609\
+-18f15d9bed12\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Les contes a \
+\xc3\xa9couter (3 cont\
+es) 26082023\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Plusieur\
+s contes a \xc3\xa9cou\
+ter :\x5cn- Les 3 p\
+etits cochons\x5cn-\
+ Le petit bonhom\
+me en pain d'\xc3\xa9p\
+ice\x5cn- Le compte\
+ de Janot Lapin\x22\
+\x0d\x0a    },\x0d\x0a    \x22d\
+6b92f96-7092-4ff\
+a-98a3-03db8d7c7\
+9d9\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22d6b92f\
+96-7092-4ffa-98a\
+3-03db8d7c79d9\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Migros Story\
+Mania (28 histoi\
+res)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Chaque figurine \
+audio de Migros \
+constitue la cl\xc3\
+\xa9 d\xe2\x80\x99une nouvel\
+le histoire pass\
+ionnante.  D\xc3\xa9co\
+uvrez sans plus \
+tarder les avent\
+ures passionnant\
+es des stars de \
+Disney, des supe\
+r-h\xc3\xa9ros et des \
+lutins Migros!\x22\x0d\
+\x0a    },\x0d\x0a    \x22a8\
+361a48-9813-4bb6\
+-b2f8-e6f4a34da4\
+8a\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22a8361a4\
+8-9813-4bb6-b2f8\
+-e6f4a34da48a\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22MegaPack Mort\
+elle Adele\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Le Mega pa\
+ck Mortel !\x5cn\x22\x0d\x0a\
+    },\x0d\x0a    \x22c62\
+231b7-6021-4769-\
+a604-3f881568a1c\
+a\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22c62231b7\
+-6021-4769-a604-\
+3f881568a1ca\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22JP Arrou-Vigno\
+d - L'omelette a\
+u sucre\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Connaissez-vo\
+us l'omelette au\
+ sucre? Rien de \
+moins compliqu\xc3\xa9\
+ \xc3\xa0 pr\xc3\xa9parer. P\
+renez une famill\
+e de cinq gar\xc3\xa7o\
+ns. Ajoutez-y un\
+ nouveau b\xc3\xa9b\xc3\xa9 \
+\xc3\xa0 na\xc3\xaetre, une \
+tortue, un cocho\
+n d'inde et une \
+poign\xc3\xa9e de sour\
+is blanches. M\xc3\xa9\
+langez bien le t\
+out, sans oublie\
+r une m\xc3\xa8re tr\xc3\xa8\
+s organis\xc3\xa9e, un\
+ p\xc3\xa8re champion \
+du bricolage et \
+quelques copains\
+ d'\xc3\xa9cole \xc3\xa0 l'i\
+magination d\xc3\xa9bo\
+rdante. Saupoudr\
+ez d'une pinc\xc3\xa9e\
+ de malice et d'\
+\xc3\xa9motion, et ser\
+vez aussit\xc3\xb4t. C\
+'est pr\xc3\xaat... A \
+consommer sans m\
+od\xc3\xa9ration !\x5cnDu\
+r\xc3\xa9e d'\xc3\xa9coute :\
+ 2h20min environ\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+a7be0fff-55eb-4b\
+11-9405-512fe69b\
+7b7c\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22a7be0\
+fff-55eb-4b11-94\
+05-512fe69b7b7c\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Bayard - Le\
+s belles histoir\
+es 2023 (En cour\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Gr\
+ande histoire de\
+s livres \x5c\x22Les b\
+elles histoires\x5c\
+\x22 (2023) - Bayar\
+d.\x5cnEnviron 8min\
+30 par \xc3\xa9pisode.\
+\x5cn- Janvier 2023\
+ - Noemie et le \
+livre magique\x5cn-\
+ F\xc3\xa9vrier 2023 -\
+ Le premier hive\
+r de Fadou\x5cn- Ma\
+rs 2023 - Monsie\
+ur loup est mala\
+de\x5cn- Avril 2023\
+ - La prisonni\xc3\xa8\
+re \xc3\xa0 la voix d'\
+or\x5cn- Mai 2023 -\
+ L'ombre de paul\
+\x5cn- Juin 2023 - \
+Le secret du dra\
+gon\x5cn- Juillet 2\
+023 - Le fils du\
+ pirate barbenvr\
+ac\x5cn- Ao\xc3\xbbt 2023\
+ - Le voyage des\
+ trois princesse\
+s\x5cn- Septembre 2\
+023 - Le petit o\
+gre et ses copai\
+ns d'\xc3\xa9cole\x5cn- O\
+ctobre 2023 - No\
+n publi\xc3\xa9e\x5cn- No\
+vembre 2023 - No\
+n publi\xc3\xa9e\x5cn- D\xc3\
+\xa9cembre 2023 - N\
+on publi\xc3\xa9e\x5cn- B\
+onus : D\xc3\xa9cembre\
+ 2022 - Le renne\
+ de No\xc3\xabl\x22\x0d\x0a    \
+},\x0d\x0a    \x2279458fc\
+5-37ca-4fc3-a875\
+-2b40eaa2659a\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2279458fc5-37c\
+a-4fc3-a875-2b40\
+eaa2659a\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s petits genies\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x223ee20\
+333-a775-4abf-88\
+f7-5a99c4852b44\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x223ee20333-a\
+775-4abf-88f7-5a\
+99c4852b44\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+J'aime Lire Sp\xc3\xa9\
+cial No\xc3\xabl\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Ad\xc3\xa8le Et \
+Le Robono\xc3\xabl\x5cnJe\
+ Veux Un Grufuli\
+ssalin\x5cnLa missi\
+on de Georges No\
+\xc3\xabl\x5cnLa pelote d\
+e No\xc3\xabl\x5cnLa soup\
+e de Pere Noel\x5cn\
+Le myst\xc3\xa8re P\xc3\xa8r\
+e No\xc3\xabl\x5cnLe No\xc3\xab\
+l de L\xc3\xa9o Toutag\
+ogo\x5cnLe No\xc3\xabl de\
+s trop-curieux\x5cn\
+Le P\xc3\xa8re No\xc3\xabl C\
+hez Les Pirates\x5c\
+nLes comp\xc3\xa8res d\
+e No\xc3\xabl\x5cnMatti e\
+t les chiens de \
+No\xc3\xabl\x5cnMyst\xc3\xa8re \
+et boules de nei\
+ge\x5cnTiens bon, P\
+\xc3\xa8re No\xc3\xabl\x5cnUn N\
+o\xc3\xabl Qui Roule\x22\x0d\
+\x0a    },\x0d\x0a    \x22d5\
+8cad14-7cc6-4eb7\
+-b020-1e0faa1582\
+f5\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22d58cad1\
+4-7cc6-4eb7-b020\
+-1e0faa1582f5\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Petit Vulgair\
+e Saison 1-3 (30\
+ episodes)\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Les saison\
+s 1 \xc3\xa0 3 de Peti\
+t Vulgaire !\x5cn\x5cn\
+Attention, l'\xc3\xa9c\
+oute de certains\
+ \xc3\xa9pisodes requi\
+ert l'autorisati\
+on d'un adulte (\
+la mort, la pube\
+rt\xc3\xa9, comment on\
+ fait les b\xc3\xa9b\xc3\xa9\
+s...)\x5cn\x5cnPetit V\
+ulgaire, c'est u\
+n podcast de vul\
+garisation de tr\
+ucs pour les enf\
+ants... que les \
+parents aimeront\
+ aussi !\x5cnPetit \
+Vulgaire a re\xc3\xa7u\
+ le prix du Podc\
+ast Jeunesse au \
+Paris Podcast Fe\
+stival 2022 !\x5cn\x5c\
+nTu peux retrouv\
+er les \xc3\xa9pisode \
+ici :\x5cn\x5cnhttps:/\
+/play.acast.com/\
+s/petit-vulgaire\
+/\x22\x0d\x0a    },\x0d\x0a    \
+\x2283feb566-933d-4\
+735-aac8-78e6f1f\
+3d108\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2283fe\
+b566-933d-4735-a\
+ac8-78e6f1f3d108\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Ast\xc3\xa9rix E\
+t Les Normands(2\
+5 chapitres) by \
+Lezardiere 18-12\
+-2022\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x5c\x22Ast\xc3\xa9rix et l\
+es Normands est \
+le neuvi\xc3\xa8me alb\
+um de la bande d\
+essin\xc3\xa9e Ast\xc3\xa9ri\
+x, publi\xc3\xa9 en 19\
+66, sc\xc3\xa9naris\xc3\xa9 \
+par Ren\xc3\xa9 Goscin\
+ny et dessin\xc3\xa9 p\
+ar Albert Uderzo\
+.\x5cn\x5cnEn 50 av. J\
+.-C., apr\xc3\xa8s la \
+d\xc3\xa9faite de Verc\
+ing\xc3\xa9torix, tout\
+e la Gaule est o\
+ccup\xc3\xa9e. Toute ?\
+ Non, car un pet\
+it village d'Arm\
+orique r\xc3\xa9siste \
+encore aux assau\
+ts des l\xc3\xa9gions \
+de Petibonum,\x5cnL\
+audanum, Babaoru\
+m et Aquarium et\
+ Jules C\xc3\xa9sar es\
+t fort contrari\xc3\
+\xa9 de voir une pe\
+tite r\xc3\xa9gion met\
+tre en \xc3\xa9chec so\
+n arm\xc3\xa9e...\x5c\x22\x5cn\x5c\
+nAvec: Roger Car\
+el, Jacques More\
+l, Bernard Laval\
+ette,...\x5cn\x5cnAdap\
+tation : Michel \
+de Villiers / R\xc3\
+\xa9alisation : Cla\
+ude Dupont / Mus\
+ique : G\xc3\xa9rard C\
+alvi / Diffusion\
+ : 19/07/1967 au\
+ 22/08/1967 sur \
+France Inter \xc3\xa0 \
+12H20\x22\x0d\x0a    },\x0d\x0a\
+    \x22b9a5756c-1f\
+7d-49d5-964a-a8c\
+507a3756d\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+b9a5756c-1f7d-49\
+d5-964a-a8c507a3\
+756d\x22,\x0d\x0a        \
+\x22title\x22: \x22Mathie\
+u R. Elenael Vol\
+ume 1\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Elenael est un \
+jeune gar\xc3\xa7on qu\
+i vit dans un mo\
+nde diff\xc3\xa9rent d\
+u n\xc3\xb4tre, un mon\
+de rempli de mag\
+ie et de cr\xc3\xa9atu\
+res extraordinai\
+res. \x5cn\x5cnDans ce\
+ monde, chaque p\
+ersonne peut \xc3\xaat\
+re un magicien s\
+'il en a le tale\
+nt. Quand les en\
+fants atteignent\
+ l'\xc3\xa2ge de neuf \
+ans, ils sont te\
+st\xc3\xa9s afin de d\xc3\
+\xa9couvrir la forc\
+e de leur pouvoi\
+r et leur affini\
+t\xc3\xa9 (c'est-\xc3\xa0-di\
+re l'\xc3\xa9l\xc3\xa9ment l\
+i\xc3\xa9 \xc3\xa0 leur pouv\
+oir : le feu, l'\
+eau, etc...).\x5cn\x5c\
+nNotre histoire \
+commence quand n\
+otre jeune h\xc3\xa9ro\
+s, jusque l\xc3\xa0 un\
+ gar\xc3\xa7on normal \
+qui habite dans \
+un petit village\
+ recul\xc3\xa9, r\xc3\xa9v\xc3\xa8\
+le un talent qui\
+ pourrait faire \
+de lui le plus g\
+rand magicien de\
+ son \xc3\xa9poque. Co\
+mmence alors son\
+ voyage parsem\xc3\xa9\
+ de joie, de tri\
+stesse, de belle\
+s rencontres et \
+de situations di\
+fficiles, et \xc3\xa9v\
+idemment de magi\
+e !\x5cnInt\xc3\xa9grale \
+du volume\x22\x0d\x0a    \
+},\x0d\x0a    \x222ba98d7\
+2-825b-456b-9f55\
+-3d722b1b4cd5\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x222ba98d72-825\
+b-456b-9f55-3d72\
+2b1b4cd5\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ha\
+bia una vez (7)[\
+V2 by Jerem Tlse\
+31]\x22,\x0d\x0a        \x22\
+description\x22: \x22C\
+e pack contient \
+un ensemble d'hi\
+stoire tir\xc3\xa9s du\
+ podcast \x5c\x22Habia\
+ Una Vez\x5c\x22 sur S\
+potify. \x5cn\x5cnATTE\
+NTION: Certaines\
+ histoires sont \
+en espagnol lati\
+no.\x5cn\x5cn1 - Caper\
+ucita Roja (le p\
+etit chaperon ro\
+uge)\x5cn2 - Ricito\
+s de Oro (Boucle\
+ d'or)\x5cn3 - La p\
+rincesa y el sap\
+o (la princesse \
+et la grenouille\
+)\x5cn4 - El Cabell\
+o y el Burro (le\
+ cheval et l'\xc3\xa2n\
+e)\x5cn5 - Jack y l\
+as habichuelas (\
+jack et les hari\
+cots magiques)\x5cn\
+6 - Peter pan\x5cn7\
+ - La Bella y la\
+ Bestia (la bell\
+e et la b\xc3\xaate)\x5cn\
+\x5cnLien du Podcas\
+t:\x5cnhttps://open\
+.spotify.com/int\
+l-fr/artist/18h7\
+mbIvxGVV5pDxKR8g\
+lX?si=QMsyDtyxQ \
+2thW409G6L-w\x22\x0d\x0a \
+   },\x0d\x0a    \x2279c9\
+4faf-c681-4657-8\
+941-f60c1eab8b26\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2279c94faf-\
+c681-4657-8941-f\
+60c1eab8b26\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Chut - J'\xc3\xa9cout\
+e (5 histoires)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Chut \
+j\xe2\x80\x99\xc3\xa9coute ! De\
+s histoires pour\
+ les enfants, ma\
+is qui ne sont p\
+as gnangnans. De\
+s contes \xc3\xa0 \xc3\xa9co\
+uter, pour le pl\
+aisir de l\xe2\x80\x99his\
+toire et du mess\
+age cach\xc3\xa9 derri\
+\xc3\xa8re. La vie, la\
+ vraie, les \xc3\xa9mo\
+tions, les petit\
+es et les grande\
+s \xc3\xa9preuves\xe2\x80\xa6 \x5c\
+nPeu importe vot\
+re \xc3\xa2ge, blottis\
+sez-vous bien so\
+us les draps, ou\
+vrez vos oreille\
+s, et fermez vos\
+ yeux.\x5cn\x5cn\xc3\x89crit\
+ et racont\xc3\xa9 par\
+ Val\xc3\xa9rie Savoir\
+. \x5cn\x5cn- Le Chich\
+i\x5cn- Les fr\xc3\xa8res\
+ lions\x5cn- Le dra\
+gon qui voulait \
+\xc3\xaatre pompier\x5cn-\
+ La plaine de je\
+ux de l\xe2\x80\x99aventu\
+re\x5cn- La maman k\
+angourou\x22\x0d\x0a    }\
+,\x0d\x0a    \x2257ab24a9\
+-ac6b-4dd6-9f8a-\
+e5522c46f047\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2257ab24a9-ac6b\
+-4dd6-9f8a-e5522\
+c46f047\x22,\x0d\x0a     \
+   \x22title\x22: \x22Pie\
+rre et le Loup\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x22ece23e\
+47-01dc-4741-85e\
+2-aad8636642bb\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22ece23e47-01\
+dc-4741-85e2-aad\
+8636642bb\x22,\x0d\x0a   \
+     \x22title\x22: \x22M\
+es premiers j'ai\
+me lire - Pack 2\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22944f\
+703a-e337-480c-9\
+af0-cf56a4928472\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22944f703a-\
+e337-480c-9af0-c\
+f56a4928472\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les mini-mondes\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Nos \
+petits h\xc3\xa9ros (S\
+acha et Oscar) s\
+ont dr\xc3\xb4les, cur\
+ieux, ouverts d\xe2\
+\x80\x99esprit. Ils jo\
+uent \xc3\xa0 une gran\
+de chasse aux tr\
+\xc3\xa9sors \xc3\xa0 traver\
+s le monde.\x5cn\x5cn\xc3\
+\x80 travers leurs \
+aventures, vos e\
+nfants d\xc3\xa9couvre\
+nt le monde sous\
+ un angle bienve\
+illant et positi\
+f \xe2\x9c\xa8\x22\x0d\x0a    },\x0d\x0a\
+    \x229fd7b9d8-45\
+af-4b86-8a29-afc\
+d0c29d99d\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+9fd7b9d8-45af-4b\
+86-8a29-afcd0c29\
+d99d\x22,\x0d\x0a        \
+\x22title\x22: \x22La bel\
+le lisse poire d\
+u prince Motordu\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22La b\
+elle lisse poire\
+ du prince de Mo\
+tordu et 4 autre\
+s histoires :\x5cn-\
+ La belle lisse \
+poire du prince \
+Motordu\x5cn- Motor\
+du papa\x5cn- Le pe\
+tit Motordu\x5cn- A\
+u loup tordu\x5cn- \
+Rendez moi mes p\
+oux\x22\x0d\x0a    },\x0d\x0a  \
+  \x22f2bbed84-6145\
+-4a2b-be12-0e2e0\
+870148c\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22f2\
+bbed84-6145-4a2b\
+-be12-0e2e087014\
+8c\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les Dago\
+bert - Contes de\
+ Noel\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Les Dagobert - \
+Contes de Noel -\
+ 14 histoires\x5cn\x5c\
+nhttps://www.ama\
+zon.com/Deux-pet\
+ites-savoyardes/\
+dp/B0B6CK2TN1\x22\x0d\x0a\
+    },\x0d\x0a    \x22e92\
+fb225-fd3c-4bd8-\
+a339-1845c947306\
+0\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22e92fb225\
+-fd3c-4bd8-a339-\
+1845c9473060\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22SuperOuafetlap\
+uce Vol1\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Dans cette c\
+ompilation, tu t\
+rouveras les 6 m\
+eilleures enqu\xc3\xaa\
+tes de Super Oua\
+f et la puce :\x5cn\
+\x5cn\xe2\x80\xa2 Super Ouaf\
+ dans la jungle\x5c\
+n\xe2\x80\xa2 Super Ouaf \
+au service de la\
+ majest\xc3\xa9\x5cn\xe2\x80\xa2 S\
+uper Ouaf chez l\
+es pirates\x5cn\xe2\x80\xa2 \
+Super Ouaf \xc3\xa0 bo\
+rd de l'Orient E\
+xpress\x5cn\xe2\x80\xa2 Supe\
+r Ouaf au palais\
+ imp\xc3\xa9rial\x5cn\xe2\x80\xa2 \
+Super Ouaf au Ma\
+noir\x5cn\x5cnSaperlic\
+roquette, un vol\
+ de rubis a \xc3\xa9t\xc3\
+\xa9 commis ! Moi, \
+Super-Ouaf, l'en\
+qu\xc3\xaateur au gran\
+d flair, je prom\
+ets de mettre la\
+ patte sur le vo\
+leur. Avec La Pu\
+ce, ma fid\xc3\xa8le c\
+o-\xc3\xa9quipi\xc3\xa8re, n\
+ous sommes les c\
+hampions de l'in\
+vestigation. Auc\
+un myst\xc3\xa8re ne n\
+ous r\xc3\xa9siste, au\
+cun coupable ne \
+nous \xc3\xa9chappe. P\
+arues dans le ma\
+gazine J'apprend\
+s \xc3\xa0 lire, nos e\
+nqu\xc3\xaates sont d\xc3\
+\xa9sormais disponi\
+bles en audio. A\
+lors, viens enqu\
+\xc3\xaater \xc3\xa0 nos c\xc3\xb4\
+t\xc3\xa9s !\x22\x0d\x0a    },\x0d\
+\x0a    \x225de2a1aa-b\
+2c4-427c-aad6-9d\
+11d5ea8b4d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x225de2a1aa-b2c4-4\
+27c-aad6-9d11d5e\
+a8b4d\x22,\x0d\x0a       \
+ \x22title\x22: \x22La Te\
+te dans les hist\
+oires\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x2236 histoires\x5cn\x5c\
+nChaque soir nou\
+s racontons une \
+histoire improvi\
+s\xc3\xa9e \xc3\xa0 vos enfa\
+nts. Rien n'est \
+pr\xc3\xa9par\xc3\xa9. Nous \
+cr\xc3\xa9ons l'histoi\
+re en m\xc3\xaame temp\
+s que nous l'enr\
+egistrons.\x5cn\x5cn\x5cn\
+Nous pouvons y i\
+nt\xc3\xa9grer les id\xc3\
+\xa9es des enfants \
+comme leurs pers\
+onnages pr\xc3\xa9f\xc3\xa9r\
+\xc3\xa9s ou un lieu, \
+un objet, une ex\
+pression etc.\x5cn\x5c\
+navec les voix d\
+e : Bastien Carp\
+entier, Jeanne C\
+hartier & Batist\
+e De Oliveira\x5cn\x5c\
+nr\xc3\xa9alisation : \
+Jeanne Chartier\x5c\
+n\x5cnmusique : Cyr\
+il Ledoubl\xc3\xa9e\x5cn\x5c\
+nillustration : \
+Mathieu Chartier\
+ / Batiste De Ol\
+iveira\x22\x0d\x0a    },\x0d\
+\x0a    \x22365f7c08-f\
+170-4459-b474-ce\
+8fa0a4b63f\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22365f7c08-f170-4\
+459-b474-ce8fa0a\
+4b63f\x22,\x0d\x0a       \
+ \x22title\x22: \x22Morte\
+lle Adele - Le P\
+odcast des Bizar\
+res\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+\xe2\x80\x99\xc3\xa9mission r\xc3\xa9\
+serv\xc3\xa9e \xc3\xa0 celle\
+s et ceux qui ch\
+angent le monde \
+en c\xc3\xa9l\xc3\xa9brant l\
+eurs diff\xc3\xa9rence\
+s : \xe2\x80\x9cLe Podcas\
+t des Bizarres\xe2\x80\
+\x9d !\x5cn\x5cnChaque se\
+maine, Mortelle \
+Ad\xc3\xa8le r\xc3\xa9pond \xc3\
+\xa0 l\xe2\x80\x99une de vos\
+ questions.\x5cnEt \
+pour cela, elle \
+est accompagn\xc3\xa9e\
+ dans son talk-s\
+how de ceux qui \
+rendent ses aven\
+tures si funky m\
+oumoute : Antoin\
+e Dole alias Mr \
+Tan et Diane Le \
+Feyer.\x5cn\x5cnLe pre\
+mier num\xc3\xa9ro abo\
+rde le th\xc3\xa8me du\
+ harc\xc3\xa8lement sc\
+olaire, les suiv\
+ants les phobies\
+, la lecture, la\
+ parole de l\xe2\x80\x99a\
+dulte ou encore \
+l\xe2\x80\x99adoption des\
+ animaux ou la t\
+imidit\xc3\xa9.\x5cn\x5cnCha\
+que \xc3\xa9mission se\
+ terminera par l\
+e JT des Bizarre\
+s : 3 infos fant\
+ag\xc3\xa9niales s\xc3\xa9le\
+ctionn\xc3\xa9es et do\
+nn\xc3\xa9es par Morte\
+lle Ad\xc3\xa8le elle-\
+m\xc3\xaame.\x5cnEt n\xe2\x80\x99o\
+ubliez pas de po\
+ser vos question\
+s \xc3\xa0 l\xe2\x80\x99adresse\
+ : podcastdesbiz\
+arres@mortellead\
+ele.com\x5cnUne de \
+vos questions se\
+ra peut-\xc3\xaatre s\xc3\
+\xa9lectionn\xc3\xa9e pou\
+r le podcast de \
+la semaine proch\
+aine !!! MORTEL \
+!!!\x5cn\x5cnhttps://m\
+ortelleadele.com\
+/index.php/le-po\
+dcast-des-bizarr\
+es/\x22\x0d\x0a    },\x0d\x0a  \
+  \x22cc70f035-75ca\
+-47ee-acff-6047a\
+226e292\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22cc\
+70f035-75ca-47ee\
+-acff-6047a226e2\
+92\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Pomme d'\
+API - Pack 2021 \
+- 13 Histoires\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Janvie\
+r 2021 \xe2\x80\x93 Le pe\
+tit roi qui s\xe2\x80\x99\
+ennuyait\x5cnF\xc3\xa9vri\
+er 2021 \xe2\x80\x93 Dion\
+y et son bonhomm\
+e de neige\x5cnMars\
+ 2021 \xe2\x80\x93 Le car\
+naval de Petit M\
+onstre\x5cnAvril 20\
+21 - Lili et la \
+graine magique\x5cn\
+Mai 2021 \xe2\x80\x93 Mad\
+ame Cherfule et \
+ses nouveaux voi\
+sins\x5cnJuin 2021 \
+\xe2\x80\x93 Michel, le t\
+out petit cheval\
+ier\x5cnJuillet 202\
+1 \xe2\x80\x93 Taro et le\
+ tr\xc3\xa9sor de l\xe2\x80\x99\
+oc\xc3\xa9an\x5cnJuillet \
+2021 \xe2\x80\x93 Nicolet\
+te et le crabe\x5cn\
+Juillet 2021 \xe2\x80\x93\
+ La grenouille n\
+\xe2\x80\x99est pas une n\
+ouille\x5cnAo\xc3\xbbt 20\
+21 \xe2\x80\x93 Myst\xc3\xa8re \
+dans la savane\x5cn\
+Septembre 2021 \xe2\
+\x80\x93 Petit-pas-de-\
+soucis\x5cnOctobre \
+2021 - Au dodo, \
+Petit Ours !\x5cnNo\
+vembre 2021 \xe2\x80\x93 \
+Les trois petits\
+ Chonchons\x22\x0d\x0a   \
+ },\x0d\x0a    \x226a8746\
+6f-c66e-44a7-855\
+a-f2c4d0b5f573\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x226a87466f-c6\
+6e-44a7-855a-f2c\
+4d0b5f573\x22,\x0d\x0a   \
+     \x22title\x22: \x22E\
+ncore une histoi\
+re - La cite d'A\
+ngele (7 episode\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Lo\
+uis est pre\xcc\x82t a\
+\xcc\x80 tout pour rej\
+oindre depuis Ne\
+w York son amour\
+euse Ange\xcc\x80le qu\
+i vit a\xcc\x80 Los An\
+geles. Sans arge\
+nt ni moyen de t\
+ransport, il va \
+vivre un road tr\
+ip romantique a\xcc\
+\x80 travers les Et\
+ats-Unis ! Une h\
+istoire pour les\
+ petits et les g\
+rands, sans viol\
+ence et avec bea\
+ucoup de rencont\
+res. Une o\xcc\x82de a\
+u voyage et a\xcc\x80 \
+la bienveillance\
+.\x5cn\x5cnEncore une \
+histoire est un \
+podcast destin\xc3\xa9\
+ aux enfants (et\
+ \xc3\xa0 ceux qui le \
+sont encore dans\
+ leur t\xc3\xaate) qui\
+ aiment qu'on le\
+ur raconte des h\
+istoires.\x5cn\x5cnCha\
+que semaine, vou\
+s retrouverez ic\
+i une histoire l\
+ue, tir\xc3\xa9e d'un \
+livre de litt\xc3\xa9r\
+ature jeunesse o\
+u une cr\xc3\xa9ation \
+originale.\x5cn\x5cnUn\
+ podcast produit\
+ par Benjamin Mu\
+ller, interpr\xc3\xa9t\
+\xc3\xa9 par C\xc3\xa9line K\
+allmann et r\xc3\xa9al\
+is\xc3\xa9 par Alexand\
+re Ferreira.\x5cn\x5cn\
+A \xc3\xa9couter avant\
+ de se coucher, \
+allong\xc3\xa9 dans l'\
+herbe, dans la v\
+oiture ou dans l\
+e train, Encore \
+une histoire veu\
+t mettre en avan\
+t la formidable \
+cr\xc3\xa9ation litt\xc3\xa9\
+raire destin\xc3\xa9e \
+aux jeunes lecte\
+urs (et aux moin\
+s jeunes, donc).\
+\x5cn\x5cnVous retrouv\
+erez bien \xc3\xa9vide\
+mment \xc3\xa0 chaque \
+fois les r\xc3\xa9f\xc3\xa9r\
+ences des livres\
+ lus, si vous vo\
+ulez aller plus \
+loin en vous off\
+rant le livre en\
+ question.\x5cn\x5cnVi\
+ve la lecture, v\
+ive la litt\xc3\xa9rat\
+ure jeunesse, vi\
+ve les histoires\
+ !\x22\x0d\x0a    },\x0d\x0a   \
+ \x22aef98dc1-aea9-\
+48fa-87ab-ca164e\
+9bbe9b\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22aef\
+98dc1-aea9-48fa-\
+87ab-ca164e9bbe9\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les Arist\
+ochats racont\xc3\xa9 \
+par Louis Defune\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22b23\
+f757a-99c7-4e92-\
+a5be-53318d4bfb0\
+e\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22b23f757a\
+-99c7-4e92-a5be-\
+53318d4bfb0e\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Encore une his\
+toire - Abracada\
+Park (6 episodes\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Tou\
+t l'\xc3\xa9t\xc3\xa9, suive\
+z les aventures \
+pleines d\xe2\x80\x99\xc3\xa9mo\
+tions de Tom, Sa\
+cha, et In\xc3\xa8s, \xc3\
+\xa0 AbracadaParc !\
+\x5cn\x5cnUne histoire\
+ propos\xc3\xa9e en pa\
+rtenariat avec l\
+a Fondation Rona\
+ld McDonald qui \
+accompagne les f\
+amilles d'enfant\
+s hospitalis\xc3\xa9s \
+en construisant \
+des lieux de vie\
+ \xc3\xa0 proximit\xc3\xa9 e\
+t au sein m\xc3\xaame \
+des h\xc3\xb4pitaux.\x5cn\
+\x5cnUne histoire \xc3\
+\xa9crite par Benja\
+min Muller, avec\
+ l\xe2\x80\x99aide du Doc\
+teur en psycholo\
+gie B\xc3\xa9n\xc3\xa9dicte \
+Minguet, interpr\
+\xc3\xa9t\xc3\xa9e par C\xc3\xa9li\
+ne Kallmann, et \
+r\xc3\xa9alis\xc3\xa9e par A\
+lexandre Ferreir\
+a.\x5cn\x5cnPour aller\
+ plus loin sur c\
+hacune des \xc3\xa9mot\
+ions, pour mieux\
+ les comprendre \
+et les g\xc3\xa9rer, d\
+\xc3\xa9couvrez une fi\
+che pratique pou\
+r chaque \xc3\xa9pisod\
+e. \xc3\x89crites en c\
+ollaboration ave\
+c le docteur en \
+psychologie B\xc3\xa9n\
+\xc3\xa9dicte Minguet,\
+ elles sont \xc3\xa0 d\
+estination des f\
+amilles et des \xc3\
+\xa9quipes soignant\
+es et disponible\
+s sur fondation-\
+ronald-McDonald.\
+fr\x22\x0d\x0a    },\x0d\x0a   \
+ \x22309122ba-a158-\
+4cac-b90a-fc3a7a\
+d329bc\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22309\
+122ba-a158-4cac-\
+b90a-fc3a7ad329b\
+c\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22La Philos\
+ophie racont\xc3\xa9e \
+aux enfants\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22LA PHILOS\
+OPHIE RACONT\xc3\x89E \
+AUX ENFANTS PAR \
+FRANCOIS MOREL.\x5c\
+nINTERPR\xc3\x89T\xc3\x89 PA\
+R FRAN\xc3\x87OIS MORE\
+L, TEXTE DE CHIA\
+RA PASTORINI.\x22\x0d\x0a\
+    },\x0d\x0a    \x22c38\
+36c3b-6b9d-4aa2-\
+b325-90f63689b4f\
+c\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22c3836c3b\
+-6b9d-4aa2-b325-\
+90f63689b4fc\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Contes Curieux\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22cb93\
+363c-b9f5-4b29-9\
+836-2518dbdec95c\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22cb93363c-\
+b9f5-4b29-9836-2\
+518dbdec95c\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Contes de H\
+ans Christian AN\
+DERSEN\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x223f969c96-cb90-\
+4318-85c9-d4eec2\
+bac417\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x223f9\
+69c96-cb90-4318-\
+85c9-d4eec2bac41\
+7\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Bestioles\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x228e1b\
+d11d-eadd-4734-8\
+1b3-10e1c9ec5f8a\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x228e1bd11d-\
+eadd-4734-81b3-1\
+0e1c9ec5f8a\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22L'Afrique en Co\
+nte\x22,\x0d\x0a        \x22\
+description\x22: \x22D\
+es biblioth\xc3\xa9cai\
+res de l\xe2\x80\x99ONG D\
+es livres pour t\
+ous sont all\xc3\xa9s \
+dans des quartie\
+rs et des villag\
+es de C\xc3\xb4te d\xe2\x80\x99\
+Ivoire pour coll\
+ecter des contes\
+ aupr\xc3\xa8s des pop\
+ulations, avec u\
+ne ambition : me\
+ttre \xc3\xa0 la dispo\
+sition des oreil\
+les du monde ent\
+ier ces histoire\
+s issues du patr\
+imoine ivoirien \
+que l\xe2\x80\x99on retro\
+uve \xc3\xa9galement u\
+n peu partout en\
+ Afrique de l'Ou\
+est.\x5cn\x5cnAvec les\
+ cr\xc3\xa9ateurs sono\
+res du collectif\
+ Making Waves, i\
+ls ont s\xc3\xa9lectio\
+nn\xc3\xa9 des contes,\
+ les ont adapt\xc3\xa9\
+s en micro-ficti\
+ons de 6 \xc3\xa0 10 m\
+inutes enregistr\
+\xc3\xa9es avec des co\
+m\xc3\xa9dien.nes et d\
+es musicien.nes,\
+ pour donner nai\
+ssance \xc3\xa0 une s\xc3\
+\xa9rie de podcasts\
+ : L\xe2\x80\x99Afrique e\
+n conte.\x22\x0d\x0a    }\
+,\x0d\x0a    \x22629e0b21\
+-6fe3-4e9a-a1d5-\
+f1fb330a5cfa\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22629e0b21-6fe3\
+-4e9a-a1d5-f1fb3\
+30a5cfa\x22,\x0d\x0a     \
+   \x22title\x22: \x22Pri\
+x Unicef Littera\
+ture Jeunesse (1\
+7 histoires, 201\
+9 a 2023)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22le Prix UNI\
+CEF de litt\xc3\xa9rat\
+ure jeunesse per\
+met de sensibili\
+ser aux droits d\
+e l\xe2\x80\x99enfant gr\xc3\
+\xa2ce \xc3\xa0 la lectur\
+e, et de r\xc3\xa9comp\
+enser des ouvrag\
+es porteurs des \
+valeurs de l\xe2\x80\x99U\
+NICEF.\x5cnLe jury \
+? Les enfants eu\
+x-m\xc3\xaames ! \x5cnCe \
+pack contient le\
+s oeuvres r\xc3\xa9com\
+pens\xc3\xa9s dans la \
+cat\xc3\xa9gorie 3 - 5\
+ ans.\x5cnIl s'agit\
+ d'audiodescript\
+ions adapt\xc3\xa9s au\
+x enfants malvoy\
+ants mais appr\xc3\xa9\
+ciables par tous\
+ \x22\x0d\x0a    },\x0d\x0a    \
+\x2297b36629-9a13-4\
+b0a-a704-62720fb\
+6d457\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2297b3\
+6629-9a13-4b0a-a\
+704-62720fb6d457\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22auden\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x22e6a37d81-\
+1418-47ea-ab77-9\
+98d36437440\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22e6a37d81-1418-\
+47ea-ab77-998d36\
+437440\x22,\x0d\x0a      \
+  \x22title\x22: \x22Bull\
+e Et Bob\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Bulle et Bob\
+ par Nathalie Tu\
+al\x22\x0d\x0a    },\x0d\x0a   \
+ \x229e4d22e9-0178-\
+4937-9314-c92d00\
+9880e2\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x229e4\
+d22e9-0178-4937-\
+9314-c92d009880e\
+2\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Le Monde \
+d'Henri D\xc3\xa8s Vol\
+ 6\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Vo\
+lume 26 : \x5c\x22Il n\
+eige dans mon ja\
+rdin\x5c\x22, et, \x5c\x22So\
+us le gros duvet\
+\x5c\x22\x5cnVolume 27 : \
+\x5c\x22Ballon rond\x5c\x22,\
+ et, \x5c\x22Trois pet\
+its gar\xc3\xa7ons\x5c\x22\x5cn\
+Volume 28 : \x5c\x22Ma\
+ b\xc3\xaate noire\x5c\x22, \
+et, \x5c\x22Le cartabl\
+e\x5c\x22\x5cnVolume 29 :\
+ \x5c\x22J'veux un p't\
+it fr\xc3\xa8re\x5c\x22, et,\
+ \x5c\x22Le grand fr\xc3\xa8\
+re et la petite \
+soeur\x5c\x22\x5cnVolume \
+30 : \x5c\x22Des sous \
+des sous\x5c\x22, et, \
+\x5c\x22Le porte-monna\
+ie\x5c\x22\x22\x0d\x0a    },\x0d\x0a \
+   \x22c43445f2-f0e\
+e-4ac8-9f12-2805\
+7d6c2691\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22c\
+43445f2-f0ee-4ac\
+8-9f12-28057d6c2\
+691\x22,\x0d\x0a        \x22\
+title\x22: \x22Le Conf\
+in des Contes de\
+ France Bleu Lor\
+raine Nord\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x2210- La pla\
+nte carnivore de\
+ madame Machin.m\
+p3\x5cn11-Cagatio.m\
+p3\x5cn12-Sign\xc3\xa9 Me\
+m\xc3\xa8re.mp3\x5cn13-Le\
+ cimeti\xc3\xa8re de D\
+ean.mp3\x5cn14-Le p\
+remier flocon de\
+ neige sur le bo\
+ut du nez.mp3\x5cn1\
+5-De la colle et\
+ des ciseaux.mp3\
+\x5cn16-Le No\xc3\xabl de\
+s animaux.mp3\x5cn1\
+7-Koyasan.mp3\x5cn1\
+8-LaCreche.mp3\x5cn\
+19-LaPetiteBille\
+AuxAllumettes.mp\
+3\x5cn1-Elephant Ma\
+gasin.mp3\x5cn20-Ba\
+ndeAnnonce.mp3\x5cn\
+21-Tailleur Floc\
+ons.mp3\x5cn22-Jacq\
+ues le ripeur.mp\
+3\x5cn23-The Carlto\
+n club.mp3\x5cn24-L\
+es mar\xc3\xa9chaux d'\
+empire.mp3\x5cn25-W\
+alking dinde.mp3\
+\x5cn26-Jocelyne.mp\
+3\x5cn27-MonTontonT\
+outRouge.mp3\x5cn28\
+-LesHommesSapins\
+.mp3\x5cn29-De plus\
+ en plus rare.mp\
+3\x5cn2-La for\xc3\xaat q\
+ui en savait tro\
+p.mp3\x5cn30-Du ros\
+e, du bleu.mp3\x5cn\
+3-Jimmy la puce.\
+mp3\x5cn4-Le ventre\
+ de la baleine.m\
+p3\x5cn5-LesMorphel\
+ins.mp3\x5cn6-LaPer\
+ledesPerles.mp3\x5c\
+n7-Igor le Troll\
+ guerrier.mp3\x5cn8\
+-Lescapologue.mp\
+3\x5cn9-UnSiGrandVo\
+yage.mp3\x22\x0d\x0a    }\
+,\x0d\x0a    \x22d075fe94\
+-4dde-4736-b57d-\
+6589ee372741\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22d075fe94-4dde\
+-4736-b57d-6589e\
+e372741\x22,\x0d\x0a     \
+   \x22title\x22: \x22Ast\
+\xc3\xa9rix Legionnair\
+e(28 chapitres) \
+by Lezardiere 18\
+-12-2022\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x5c\x22Ast\xc3\xa9rix l\
+\xc3\xa9gionnaire est \
+le dixi\xc3\xa8me albu\
+m de la bande de\
+ssin\xc3\xa9e Ast\xc3\xa9rix\
+, publi\xc3\xa9 en 196\
+7, sc\xc3\xa9naris\xc3\xa9 p\
+ar Ren\xc3\xa9 Goscinn\
+y et dessin\xc3\xa9 pa\
+r Albert Uderzo.\
+\x5cn\x5cnEn 50 av. J.\
+-C., apr\xc3\xa8s la d\
+\xc3\xa9faite de Verci\
+ng\xc3\xa9torix, toute\
+ la Gaule est oc\
+cup\xc3\xa9e. Toute ? \
+Non, car un peti\
+t village d'Armo\
+rique r\xc3\xa9siste e\
+ncore aux assaut\
+s des l\xc3\xa9gions d\
+e Petibonum,\x5cnLa\
+udanum, Babaorum\
+ et Aquarium et \
+Jules C\xc3\xa9sar est\
+ fort contrari\xc3\xa9\
+ de voir une pet\
+ite r\xc3\xa9gion mett\
+re en \xc3\xa9chec son\
+ arm\xc3\xa9e...\x5c\x22\x5cn\x5cn\
+Avec: Roger Care\
+l, Jacques Morel\
+, Bernard Lavale\
+tte,...\x5cn\x5cnAdapt\
+ation : Michel d\
+e Villiers / R\xc3\xa9\
+alisation : Clau\
+de Dupont / Musi\
+que : G\xc3\xa9rard Ca\
+lvi / Diffusion \
+: 23/08/1967 au \
+29/09/1967 sur F\
+rance Inter \xc3\xa0 1\
+2H20\x22\x0d\x0a    },\x0d\x0a \
+   \x224fbed15e-e84\
+5-4736-aa3d-977f\
+39b6e069\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x224\
+fbed15e-e845-473\
+6-aa3d-977f39b6e\
+069\x22,\x0d\x0a        \x22\
+title\x22: \x22Les 3 C\
+hardons (18 hist\
+oires)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x2218 histoires d\
+e la compagnie d\
+es 3 chardons. h\
+ttps://www.3char\
+dons.com/\x22\x0d\x0a    \
+},\x0d\x0a    \x221d915ce\
+5-17de-4e57-ac19\
+-58cafce2d352\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x221d915ce5-17d\
+e-4e57-ac19-58ca\
+fce2d352\x22,\x0d\x0a    \
+    \x22title\x22: \x22Co\
+ntes pour dormir\
+ (5 histoires)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Quelqu\
+es contes pour l\
+es petits loulou\
+s. \x5cnLes contes \
+proviennent de Y\
+outube\x5cn\x5cnPack c\
+ontenant 5 histo\
+ires \x5cn- J'ai be\
+soin de mon mons\
+tre\x5cn- Les folle\
+s journ\xc3\xa9es de p\
+apa\x5cn- Renard et\
+ Georges\x5cn- Un e\
+nfant c'est un e\
+nfant tout simpl\
+ement \x5cn- Un pet\
+it besoin urgent\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+6c902070-b85f-49\
+ab-b3df-d6dd7b00\
+6e47\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x226c902\
+070-b85f-49ab-b3\
+df-d6dd7b006e47\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les contes \
+de la Petite Sou\
+ris\x22,\x0d\x0a        \x22\
+description\x22: \x226\
+ histoires de la\
+ collection Les \
+contes de la Pet\
+ite Souris :\x5cn\x5cn\
+1 - Bonne nuit p\
+etit kaki !\x5cn2 -\
+ Sur le dos d'un\
+e souris\x5cn3 - Oh\
+ hisse petit esc\
+argot!\x5cn4 - Peti\
+t Chat \xc3\xa0 la f\xc3\xaa\
+te foraine\x5cn5 - \
+Hop dans la lune\
+\x5cn6 - Le g\xc3\xa2teau\
+ de Ouistiti\x5cn\x5cn\
+Repris sur cette\
+ cha\xc3\xaene Youtube\
+ : https://www.y\
+outube.com/chann\
+el/UCPhkOjTpyr3c\
+yiFegUbajGQ/play\
+lists\x22\x0d\x0a    },\x0d\x0a\
+    \x229adebdd3-a6\
+f9-4817-877d-83f\
+761fc2de6\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+9adebdd3-a6f9-48\
+17-877d-83f761fc\
+2de6\x22,\x0d\x0a        \
+\x22title\x22: \x22Roncho\
+nchon et Compagn\
+ie\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Co\
+nte musical pour\
+ enfants par Ale\
+xis HK et Liz Ch\
+erhal, avec la p\
+articipation de \
+Juliette, Lauren\
+t Deschamps, Jeh\
+an et Lo\xc3\xafc Lant\
+oine.\x5cn\x5cn1. Le B\
+ourg de la Grogn\
+iardi\xc3\xa8re\x5cn2. La\
+ Maison Ronchonc\
+hon\x5cn3. L'Apicul\
+teur\x5cn4. Ab\xc3\xa9lar\
+d\x5cn5. Les Avions\
+\x5cn6. Les Nerfs d\
+'un pilote\x5cn7. L\
+a Trahison\x5cn8. L\
+a D\xc3\xa9sillusion d\
+e Marie-Pierre\x5cn\
+9. Une grande lu\
+mi\xc3\xa8re\x5cn10. La M\
+aison qui descen\
+d du ciel\x5cn11. L\
+'Arriv\xc3\xa9e de la \
+famille Fonky\x5cn1\
+2. La Famille Fo\
+nky\x5cn13. Qui son\
+t les Fonky ?\x5cn1\
+4. La Rumeur\x5cn15\
+. La Rencontre\x5cn\
+16. L'Invitation\
+\x5cn17. Le Tour en\
+ maison volante\x5c\
+n18. Un crash d'\
+ULM\x5cn19. Le Reto\
+ur de Marie-Pier\
+re\x5cn20. Quelque \
+chose de bizarre\
+\x5cn21. La F\xc3\xaate a\
+u village\x5cn22. L\
+e D\xc3\xa9part\x5cn23. T\
+out a chang\xc3\xa9\x22\x0d\x0a\
+    },\x0d\x0a    \x226d7\
+69944-8e9d-4e3d-\
+94ee-17bc62680e1\
+6\x22: {\x0d\x0a        \x22\
+uuid\x22: \x226d769944\
+-8e9d-4e3d-94ee-\
+17bc62680e16\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Le Cabaret Mag\
+ique du Roi des \
+Papas\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Bienvenue au ca\
+baret magique du\
+ Roi des papas :\
+ du big-bang \xc3\xa0 \
+Internet en pass\
+ant par Adam et \
+Eve, l'oeuf et l\
+a poule, les abe\
+illes et le poll\
+en, la bombe ato\
+mique et la barb\
+e \xc3\xa0 papa, la vi\
+e est magique...\
+ \x5cnEntour\xc3\xa9 de s\
+es six musiciens\
+, Vincent Malone\
+, surnomm\xc3\xa9 le R\
+oi des Papas, co\
+ntinue \xc3\xa0 \xc3\xa9tonn\
+er et \xc3\xa0 faire p\
+laisir aux plus \
+petits mais auss\
+i aux moins peti\
+ts, \xc3\xa0 travers l\
+a chanson enfant\
+ine. Le Cabaret \
+magique propose \
+treize chansons \
+in\xc3\xa9dites (Le bi\
+g-band, L'argent\
+, Le jardin d'Ed\
+en...), et survo\
+le de fa\xc3\xa7on enf\
+antine l'histoir\
+e de l'humanit\xc3\xa9\
+. \x5c\x22Au d\xc3\xa9but il\
+ n'y avait rien,\
+ enfin presque r\
+ien, c'\xc3\xa9tait l'\
+\xc3\xa9poque du pas g\
+rand chose. Pas \
+d'eau pas d'air \
+ni de soleil ni \
+de martiens, per\
+sonne pour voir \
+la vie en rose. \
+Il faisait tout \
+noir, c'\xc3\xa9tait v\
+raiment pas gai \
+et \xc3\xa7a ne sentai\
+t pas bon. Y ava\
+it pas Internet \
+ni la t\xc3\xa9l\xc3\xa9, de\
+ frites ou d'san\
+dwiches au jambo\
+n\x5c\x22.\x5cn\x5cn01 - BIE\
+NVENUE\x5cn02 - LA \
+VIE EST MAGIQUE\x5c\
+n03 - ANNONCE BI\
+G BANG\x5cn04 - LE \
+BIG BANG\x5cn05 - L\
+E JARDIN D'EDEN\x5c\
+n06 - LES DINOSA\
+URES\x5cn07 - L'EVO\
+LUTION\x5cn08 - LES\
+ ABEILLES\x5cn09 - \
+DEHORS DEDANS\x5cn1\
+0 - LES OMBRES C\
+HINOISES\x5cn11 - L\
+E TRAVAIL\x5cn12 - \
+L'ARGENT\x5cn13 - L\
+ES MEDICAMENTS\x5cn\
+14 - LE CORPS HU\
+MAIN\x5cn15 - ANNON\
+CE BANG BING\x5cn16\
+ - LE BANG BING\x5c\
+n17 - AU REVOIR\x5c\
+n18 - LES PRINCE\
+S ET LES PRINCES\
+SES\x22\x0d\x0a    },\x0d\x0a  \
+  \x2296f4afcd-488c\
+-4406-bd87-179f6\
+87ac536\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2296\
+f4afcd-488c-4406\
+-bd87-179f687ac5\
+36\x22,\x0d\x0a        \x22t\
+itle\x22: \x22WAGABOO \
+Les petites hist\
+oires du soir\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x22b7e4410\
+1-ee9c-4448-9d73\
+-7c4e9587603f\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22b7e44101-ee9\
+c-4448-9d73-7c4e\
+9587603f\x22,\x0d\x0a    \
+    \x22title\x22: \x22Hi\
+stoires pour les\
+ petits - Saison\
+ 2021\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Histoires pour \
+les petits (V3)\x5c\
+nSaison 2021 / 3\
+3 Histoires\x5cn\x5cnC\
+hangelog\x5cnV1 : 1\
+er release\x5cnV2 :\
+ Fix bouton home\
+ histoire 17\x5cnV3\
+ : Fix bouton ho\
+me menu\x22\x0d\x0a    },\
+\x0d\x0a    \x22ee3ba649-\
+316a-4e0f-b9dc-3\
+2cb716e05ec\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22ee3ba649-316a-\
+4e0f-b9dc-32cb71\
+6e05ec\x22,\x0d\x0a      \
+  \x22title\x22: \x22Supe\
+r-Heros Marvel\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x225 Hist\
+oires:\x5cnCaptain \
+America\x5cnLes Gar\
+diens de la Gala\
+xie\x5cnIron Man\x5cnC\
+aptain Marvel\x5cnS\
+pider-Man\x5cn\x5cnhtt\
+ps://www.fr.fnac\
+.ch/a17235591/Ma\
+rvel-MARVEL-Mes-\
+Super-Histoires-\
+a-Ecouter-Livre-\
+CD-Marvel\x22\x0d\x0a    \
+},\x0d\x0a    \x220d5eaaf\
+4-6f37-41c4-b982\
+-ad29be512502\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x220d5eaaf4-6f3\
+7-41c4-b982-ad29\
+be512502\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+ Ranch\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Ils sont 4, il\
+s sont jeunes, i\
+ls sont beaux et\
+ sont tous li\xc3\xa9s\
+ par la passion \
+du cheval ! L\xc3\xa9n\
+a, et ses meille\
+urs amis ont r\xc3\xa9\
+am\xc3\xa9nag\xc3\xa9 le ran\
+ch de son grand-\
+p\xc3\xa8re pour pouvo\
+ir accueillir Mi\
+stral, un cheval\
+ fougueux et sau\
+vage. Gr\xc3\xa2ce \xc3\xa0 \
+sa pers\xc3\xa9v\xc3\xa9ranc\
+e et ses talents\
+ de \xc2\xab chuchoteu\
+se \xc2\xbb, elle parv\
+iendra \xc3\xa0 appriv\
+oiser ce bel \xc3\xa9t\
+alon ; et ensemb\
+le, ils vivront \
+de fabuleuses av\
+entures \xc3\xa9questr\
+es.\x5cnSaison 1 / \
+5 \xc3\xa9pisodes\x22\x0d\x0a  \
+  },\x0d\x0a    \x223e84d\
+215-a4f3-4bf7-ba\
+42-efd09200e834\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x223e84d215-a\
+4f3-4bf7-ba42-ef\
+d09200e834\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Deltarune\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22460e6307-35\
+31-46e9-90b6-ee5\
+77cca066f\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+460e6307-3531-46\
+e9-90b6-ee577cca\
+066f\x22,\x0d\x0a        \
+\x22title\x22: \x22Les av\
+entures de Jim e\
+t L\xc3\xa9a\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22e5449882-b532-\
+4c3b-92a1-137fe5\
+291b7e\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22e54\
+49882-b532-4c3b-\
+92a1-137fe5291b7\
+e\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Elle \xc3\xa9ta\
+it une histoire \
+- Histoires de N\
+o\xc3\xabl (12 histoir\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22D\
+ouze histoires d\
+e No\xc3\xabl tir\xc3\xa9es \
+d'Elle \xc3\xa9tait un\
+e fois.\x22\x0d\x0a    },\
+\x0d\x0a    \x224d3acf50-\
+6aa9-4873-802d-3\
+512e0be5b28\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x224d3acf50-6aa9-\
+4873-802d-3512e0\
+be5b28\x22,\x0d\x0a      \
+  \x22title\x22: \x22Lelo\
+upPARISV2\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22471f59c1-bd\
+3a-4c6a-b0a2-e6c\
+77733c00d\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+471f59c1-bd3a-4c\
+6a-b0a2-e6c77733\
+c00d\x22,\x0d\x0a        \
+\x22title\x22: \x22Histoi\
+resDisney\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22d57f5bec-b0\
+e7-495b-8061-198\
+744b6e72d\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+d57f5bec-b0e7-49\
+5b-8061-198744b6\
+e72d\x22,\x0d\x0a        \
+\x22title\x22: \x22Les Be\
+stioles fossiles\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Des \
+grands dinosaure\
+s aux mollusques\
+ disparus, une s\
+\xc3\xa9rie de Bestiol\
+es consacr\xc3\xa9e au\
+x animaux fossil\
+es.\x22\x0d\x0a    },\x0d\x0a  \
+  \x22c464a336-bc6c\
+-402a-8533-21032\
+b7314f3\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22c4\
+64a336-bc6c-402a\
+-8533-21032b7314\
+f3\x22,\x0d\x0a        \x22t\
+itle\x22: \x2224 histo\
+ires pour attend\
+re No\xc3\xabl\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Voici 24 his\
+toires pour auta\
+nt de jours de l\
+'Avent:\x5cn01 - Le\
+ No\xc3\xabl de Thibau\
+lt le louveteau\x5c\
+n02 - Le No\xc3\xabl d\
+e Charlotte la m\
+armotte\x5cn03 - Le\
+ No\xc3\xabl de Marcel\
+lin le pingouin\x5c\
+n04 - Le No\xc3\xabl d\
+e Sidonie la sou\
+ris\x5cn05 - Le No\xc3\
+\xabl d'Apollo le c\
+hiot\x5cn06 - Le No\
+\xc3\xabl de Claire l'\
+\xc3\xa9toile de mer\x5cn\
+07 - Le No\xc3\xabl de\
+ Ross le rhinoc\xc3\
+\xa9ros\x5cn08 - Le No\
+\xc3\xabl de G\xc3\xa9d\xc3\xa9on \
+le cochon\x5cn09 - \
+Le No\xc3\xabl de Nest\
+or le castor\x5cn10\
+ - Le No\xc3\xabl de P\
+aco le manchot\x5cn\
+11 - Le No\xc3\xabl de\
+ Manolo l'escarg\
+ot\x5cn12 - Le No\xc3\xab\
+l de Juju la tor\
+tue\x5cn13 - Le No\xc3\
+\xabl de Garou le k\
+angourou\x5cn14 - L\
+e No\xc3\xabl de L\xc3\xa9on\
+ le cam\xc3\xa9l\xc3\xa9on\x5cn\
+15 - Le No\xc3\xabl de\
+ Simon le h\xc3\xa9ris\
+son\x5cn16 - Le No\xc3\
+\xabl d'Odilon l'\xc3\xa2\
+non\x5cn17 - Le No\xc3\
+\xabl de Pablo le b\
+aleineau\x5cn18 - L\
+e No\xc3\xabl de Lance\
+lot le crapaud\x5cn\
+19 - Le No\xc3\xabl d'\
+Alec le fennec\x5cn\
+20 - Le No\xc3\xabl d'\
+Enzo l'\xc3\xa9l\xc3\xa9phan\
+teau\x5cn21 - Le No\
+\xc3\xabl de Bouba le \
+boa\x5cn22 - Le No\xc3\
+\xabl d'Humphrey le\
+ perroquet\x5cn23 -\
+ Le No\xc3\xabl des fr\
+\xc3\xa8res Hamster\x5cn2\
+4 - Le No\xc3\xabl du \
+P\xc3\xa8re No\xc3\xabl\x5cn\x5cnL\
+es histoires son\
+t lues par Virgi\
+nie Ledoyen et M\
+ichel Leeb.\x5cn\x5cnS\
+ource: https://w\
+ww.enfant.com/ac\
+tivites/activite\
+s-enfants/24-his\
+toires-pour-atte\
+ndre-noel-1134\x5cn\
+\x5cnBonnes fetes!\x5c\
+n\x5cn\x5cnenfant.com-\
+24 histoires pou\
+r attendre No\xc3\xabl\
+-(24 histoires) \
+2022-12-01!\x22\x0d\x0a  \
+  },\x0d\x0a    \x22c2283\
+33a-f7cd-469e-93\
+3b-16e34cbf9b15\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22c228333a-f\
+7cd-469e-933b-16\
+e34cbf9b15\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les 3 Chardons (\
+18 histoires)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x2218 hist\
+oires de la comp\
+agnie des 3 char\
+dons. https://ww\
+w.3chardons.com/\
+\x5cn\x5cn1 Pitou l'en\
+fant roi\x5cn2 Anga\
+ fils du feu\x5cn3 \
+Petite Indienne \
+\x5cn4 Mirabelle et\
+ ses amis\x5cn5 Pai\
+llasse l'\xc3\xa9pouva\
+ntail\x5cn6 Tchico\x5c\
+n7 Le\xc3\xafla et la \
+baleine\x5cn8 Petit\
+-Sapin quatre sa\
+isons\x5cn9 Le bel \
+oiseau\x5cn10 Bouba\
+m et le tam-tam\x5c\
+n11 Bluette et R\
+onchon\x5cn12 L'arb\
+re roux\x5cn13 Mons\
+ieur le vent\x5cn14\
+ Eloi et le cham\
+ois\x5cn15 Le petit\
+ bois de Pitou\x5cn\
+16 Lucine et Mal\
+o\x5cn17 Galou le b\
+erger\x5cn18 Antoin\
+e et les \xc3\xa9toile\
+s\x22\x0d\x0a    },\x0d\x0a    \
+\x226b19b9b2-a964-4\
+8e9-a409-3ac1364\
+1ecce\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x226b19\
+b9b2-a964-48e9-a\
+409-3ac13641ecce\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Original L\
+es histoires de \
+petit lapin (his\
+toire interactiv\
+e)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Un\
+e aventure inter\
+active tout au l\
+ong de l'histoir\
+e avec des choix\
+ multiples.\x22\x0d\x0a  \
+  },\x0d\x0a    \x2290750\
+a5a-9dcc-4553-9d\
+de-a992e11dfd51\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2290750a5a-9\
+dcc-4553-9dde-a9\
+92e11dfd51\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Pomme d'api 2021\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x221e75\
+847f-3679-47c3-a\
+7b6-64c02d247e46\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x221e75847f-\
+3679-47c3-a7b6-6\
+4c02d247e46\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Encore une hist\
+oire - Les vacan\
+ces extraordinai\
+res (3 saisons s\
+oit 20 + 2 bonus\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x223 s\
+aisons des vacan\
+ces extraordinai\
+res (avec 2 bonu\
+s) !\x5cn\x5cnEncore u\
+ne histoire est \
+un podcast desti\
+n\xc3\xa9 aux enfants \
+(et \xc3\xa0 ceux qui \
+le sont encore d\
+ans leur t\xc3\xaate) \
+qui aiment qu'on\
+ leur raconte de\
+s histoires.\x5cn\x5cn\
+Chaque semaine, \
+vous retrouverez\
+ ici une histoir\
+e lue, tir\xc3\xa9e d'\
+un livre de litt\
+\xc3\xa9rature jeuness\
+e ou une cr\xc3\xa9ati\
+on originale.\x5cn\x5c\
+nUn podcast prod\
+uit par Benjamin\
+ Muller, interpr\
+\xc3\xa9t\xc3\xa9 par C\xc3\xa9lin\
+e Kallmann et r\xc3\
+\xa9alis\xc3\xa9 par Alex\
+andre Ferreira.\x5c\
+n\x5cnA \xc3\xa9couter av\
+ant de se couche\
+r, allong\xc3\xa9 dans\
+ l'herbe, dans l\
+a voiture ou dan\
+s le train, Enco\
+re une histoire \
+veut mettre en a\
+vant la formidab\
+le cr\xc3\xa9ation lit\
+t\xc3\xa9raire destin\xc3\
+\xa9e aux jeunes le\
+cteurs (et aux m\
+oins jeunes, don\
+c).\x5cn\x5cnVous retr\
+ouverez bien \xc3\xa9v\
+idemment \xc3\xa0 chaq\
+ue fois les r\xc3\xa9f\
+\xc3\xa9rences des liv\
+res lus, si vous\
+ voulez aller pl\
+us loin en vous \
+offrant le livre\
+ en question.\x5cn\x5c\
+nVive la lecture\
+, vive la litt\xc3\xa9\
+rature jeunesse,\
+ vive les histoi\
+res !\x22\x0d\x0a    },\x0d\x0a\
+    \x22529eb1ab-23\
+cf-4921-a258-f72\
+ddd3602d0\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+529eb1ab-23cf-49\
+21-a258-f72ddd36\
+02d0\x22,\x0d\x0a        \
+\x22title\x22: \x22Mes pr\
+emi\xc3\xa8res belles \
+histoires 2022\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Mes pr\
+emi\xc3\xa8res belles \
+histoires 2022\x5cn\
+2022-04 La brioc\
+he \xc3\xa0 roulette\x5cn\
+2022-05 Monsieur\
+ Patati est malp\
+oli\x5cn2022-06 Le \
+cadeau de Poulet\
+te Josette\x5cn2022\
+-07 La chasse au\
+ tr\xc3\xa9sor de Fifo\
+lette\x5cn2022-08 L\
+a petite b\xc3\xaatise\
+ de Tcha\x5cn2022-0\
+9 En route pour \
+l'\xc3\xa9cole\x5cn2022-1\
+0 Drole de monst\
+re\x5cn2022-11 Tous\
+ malades chez le\
+s Touvabien\x5cn202\
+2-12 La couvertu\
+re du P\xc3\xa8re-No\xc3\xab\
+l\x22\x0d\x0a    },\x0d\x0a    \
+\x2282a0b902-d242-4\
+6c6-81b0-0255967\
+f9b55\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2282a0\
+b902-d242-46c6-8\
+1b0-0255967f9b55\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Petit Ours\
+ Brun\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x2238c0d0b6-0e4e-4\
+5be-9f7d-312f77d\
+ccce6\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2238c0\
+d0b6-0e4e-45be-9\
+f7d-312f77dccce6\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les films \
+(presque) racont\
+\xc3\xa9s aux enfants\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x226cf20\
+860-9275-4cd0-91\
+3a-1a604d78fd42\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x226cf20860-9\
+275-4cd0-913a-1a\
+604d78fd42\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Ecole des Loisir\
+s : Les aventure\
+s de Minusculett\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Pac\
+k du livre audio\
+ Minusculette - \
+La collection co\
+mplete disponibl\
+e sur le KoboSto\
+re.\x5cn\x5cn- Le prem\
+ier jour de Minu\
+sculette\x5cn- Minu\
+sculette en hive\
+r\x5cn- Minusculett\
+e en \xc3\xa9t\xc3\xa9\x5cn- Mi\
+nusculette et la\
+ magie\x5cn- Minusc\
+ulette en automn\
+e\x5cn- Minusculett\
+e et la bataille\
+ des fleurs\x5cn- M\
+inusculette \xc3\xa0 l\
+'\xc3\xa9cole des f\xc3\xa9e\
+s\x5cn- Minusculett\
+e la f\xc3\xa9e du jar\
+din\x5cn- Minuscule\
+tte du bruits da\
+ns la nuits\x5cn- L\
+a chanson de Min\
+usculette\x22\x0d\x0a    \
+},\x0d\x0a    \x224e218b8\
+e-5fe0-4eee-9ea2\
+-aaccb28ccf76\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x224e218b8e-5fe\
+0-4eee-9ea2-aacc\
+b28ccf76\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ri\
+ra Bien Qui Rira\
+ Le Dernier\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Un livre-\
+disque joyeux au\
+tour d'une des t\
+h\xc3\xa9matiques pr\xc3\xa9\
+f\xc3\xa9r\xc3\xa9es des enf\
+ants : la ruse:\x5c\
+n-  La souris et\
+ le voleur  (Jih\
+ad Darwiche,  Ch\
+ristian Voltz)  \
+:\x5cnQuelle veinar\
+de cette souris \
+! En faisant le \
+m\xc3\xa9nage, elle a \
+trouv\xc3\xa9 un sou. \
+Mais pendant la \
+nuit, un voleur \
+lui d\xc3\xa9robe la m\
+oiti\xc3\xa9 de la via\
+nde qu'elle a ac\
+het\xc3\xa9e. Un conte\
+ dr\xc3\xb4lissime, d'\
+origine libanais\
+e.\x5cn-  La cocott\
+e qui tap-tip-to\
+pe (Coline Prome\
+yrat,  C\xc3\xa9cile H\
+udrisier)  :\x5cnLa\
+ p'tite mamie a \
+bien du souci. S\
+a cocotte pos\xc3\xa9e\
+ sur la cuisini\xc3\
+\xa8re n'a plus rie\
+n \xc3\xa0 faire. Alor\
+s la p'tite mami\
+e la range sur l\
+'\xc3\xa9tag\xc3\xa8re et lu\
+i dit \x5c\x22Ma cocot\
+te jolie, les ra\
+tatouilles et le\
+s r\xc3\xb4tis, c'est \
+fini.\x5c\x22 \x5c\x22C'est \
+toi qui l'dis, m\
+amie ! Moi, aujo\
+urd'hui, je tap-\
+tip-tope.\x5c\x22 Sacr\
+\xc3\xa9e cocotte ! El\
+le a la bougeott\
+e ! Galettes, cr\
+\xc3\xa8me ou pi\xc3\xa8ces \
+d'or, elle a plu\
+s d'un tour dans\
+ son sac pour ra\
+mener de quoi fa\
+ire la popotte. \
+Mais gare \xc3\xa0 sa \
+malice !\x5cn-  La \
+toute petite, pe\
+tite bonne femme\
+ (Jean-Louis Le \
+Craver,  Delphin\
+e Grenier)  :\x5cnI\
+l \xc3\xa9tait une foi\
+s, une toute pet\
+ite, petite bonn\
+e femme, qui ava\
+it une toute pet\
+ite, petite poul\
+e. Une toute pet\
+ite, petite bonn\
+e femme, une tou\
+te petite, petit\
+e omelette, un g\
+ros, gros b\xc3\xa2ton\
+ pour un joli, j\
+oli livre.\x22\x0d\x0a   \
+ },\x0d\x0a    \x22fb95e4\
+67-7665-4465-a07\
+8-fd7f54b25f40\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22fb95e467-76\
+65-4465-a078-fd7\
+f54b25f40\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es enfantines\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x22023d97c\
+f-e358-4022-8879\
+-a77eb031b8f1\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22023d97cf-e35\
+8-4022-8879-a77e\
+b031b8f1\x22,\x0d\x0a    \
+    \x22title\x22: \x22Me\
+rlin l'enchanteu\
+r - Walt Disney\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22racon\
+t\xc3\xa9 par G. CHAMA\
+RAT\x22\x0d\x0a    },\x0d\x0a  \
+  \x22c6ed42e9-886b\
+-4278-9838-9d7f4\
+5549b57\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22c6\
+ed42e9-886b-4278\
+-9838-9d7f45549b\
+57\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Histoire\
+s pour les petit\
+s 2020 2021\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x2236 histoi\
+res pour les pet\
+its\x22\x0d\x0a    },\x0d\x0a  \
+  \x22d2445bc1-9af9\
+-4b49-af92-e4b13\
+2da931d\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22d2\
+445bc1-9af9-4b49\
+-af92-e4b132da93\
+1d\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Raconte-\
+moi les animaux\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Racon\
+te-moi les anima\
+ux (86 animaux \xc3\
+\xa0 d\xc3\xa9couvrir)\x5cn\x5c\
+nMais ? Quel est\
+ ce bruit ? Un a\
+nimal ? Il faut \
+vite le d\xc3\xa9couvr\
+ir ! Il ne te re\
+ste plus qu\xe2\x80\x99\xc3\xa0\
+ \xc3\xa9couter Guilla\
+ume et Clara pou\
+r voyager \xc3\xa0 tra\
+vers le monde et\
+ d\xc3\xa9couvrir les \
+animaux comme ja\
+mais auparavant.\
+ Tu es pr\xc3\xaat ? A\
+lors partons \xc3\xa0 \
+l'aventure !\x5cn\x5cn\
+Les reptiles\x5cnLe\
+s poissons\x5cnLes \
+oiseaux\x5cnLes mol\
+lusques\x5cnLes mar\
+supiaux\x5cnLes mam\
+mif\xc3\xa8res\x5cnLes cr\
+ustac\xc3\xa9s\x5cnLes am\
+phibiens\x5cnLes in\
+sectes\x5cn\x5cnhttps:\
+//pitchoun-media\
+s.fr/podcasts/ra\
+conte-moi-les-an\
+imaux-152/1\x22\x0d\x0a  \
+  },\x0d\x0a    \x220889e\
+a0a-e1a0-4188-8e\
+c3-77ec481f8393\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x220889ea0a-e\
+1a0-4188-8ec3-77\
+ec481f8393\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Oh les pieds\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x229c43a8aa\
+-c7ba-41de-bfb3-\
+8b23d385d3d8\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x229c43a8aa-c7ba\
+-41de-bfb3-8b23d\
+385d3d8\x22,\x0d\x0a     \
+   \x22title\x22: \x22Ana\
+toleLatuile-Reco\
+rdbattu\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x227f3a7ae6-0bba\
+-48ba-afc1-2e70b\
+e90993b\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x227f\
+3a7ae6-0bba-48ba\
+-afc1-2e70be9099\
+3b\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Roald Da\
+hl - L'\xc3\xa9norme c\
+rocodile\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Un classique\
+ \xc3\xa0 d\xc3\xa9vorer!\x5cn\x5c\
+n\xc2\xabRien n'est pl\
+us d\xc3\xa9licieux qu\
+'un enfant dodu \
+et bien juteux!\xc2\
+\xbb dit l'\xc3\xa9norme \
+crocodile. Heure\
+usement, ce n'es\
+t pas facile pou\
+r un crocodile d\
+e trouver un enf\
+ant \xc3\xa0 manger lo\
+rsque les autres\
+ animaux de la f\
+or\xc3\xaat s'en m\xc3\xaale\
+nt.\x5cn\x5cnTitre rec\
+ommand\xc3\xa9 par le \
+minist\xc3\xa8re de l'\
+\xc3\x89ducation natio\
+nale pour le cyc\
+le 1 de l'\xc3\xa9cole\
+ primaire (\xc3\xa9col\
+e maternelle).\x5cn\
+\x5cnhttps://www.ga\
+llimard-jeunesse\
+.fr/978207515510\
+6/l-enorme-croco\
+dile.html\x22\x0d\x0a    \
+},\x0d\x0a    \x2245c1723\
+5-ea30-4952-af71\
+-8509410135be\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2245c17235-ea3\
+0-4952-af71-8509\
+410135be\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+ voeu d'Andreas\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\xc2\xab Le\
+ v\xc5\x93u d\xe2\x80\x99Andr\xc3\xa9\
+as \xc2\xbb, c\xe2\x80\x99est l\
+e podcast de No\xc3\
+\xabl de La Cabane \
+\xc3\xa0 Jouer. C\xe2\x80\x99es\
+t un conte audio\
+ qui vous emm\xc3\xa8n\
+e aux quatre coi\
+ns de la plan\xc3\xa8t\
+e pour y d\xc3\xa9couv\
+rir les traditio\
+ns de No\xc3\xabl, \xc3\xa0 \
+travers les yeux\
+ d\xe2\x80\x99Andr\xc3\xa9as et\
+ de son doudou M\
+oustache. En sui\
+vant ces deux-l\xc3\
+\xa0, on apprend, o\
+n s\xe2\x80\x99amuse, on \
+imagine\xe2\x80\xa6 on s\xe2\
+\x80\x99y croit !\x5cn\x5cn2\
+4 histoires pour\
+ attendre No\xc3\xabl\x5c\
+n\x5cnhttps://www.l\
+acabaneajouerdec\
+discount.com/ces\
+t-noel/conte-de-\
+noel-2021-le-pod\
+cast-gratuit/\x22\x0d\x0a\
+    },\x0d\x0a    \x22291\
+827a8-568d-4bc9-\
+ac96-11940d61a91\
+0\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22291827a8\
+-568d-4bc9-ac96-\
+11940d61a910\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Caroline et se\
+s amis - Saison \
+1 (10 \xc3\xa9pisodes)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Retr\
+ouvez 10 \xc3\xa9pisod\
+es de Caroline e\
+t ses amis lors \
+de leurs aventur\
+es : \x5cn\x5cn1. Le g\
+\xc3\xa2teau d'anniver\
+saire\x5cn3. Le fan\
+tome gourmand\x5cn4\
+. Temp\xc3\xaate de ne\
+ige\x5cn5. Le sapin\
+ de No\xc3\xabl\x5cn6. Un\
+ cadeau de trop\x5c\
+n7. La lettre au\
+ P\xc3\xa8re No\xc3\xabl\x5cn9.\
+ Princesse Carol\
+ine\x5cn15. La mer \
+monte\x5cn18. Silen\
+ce on tourne\x5cn24\
+. En direct du g\
+renier\x5cn\x5cnhttps:\
+//www.youtube.co\
+m/playlist?list=\
+PL 8BbB1m6YjVAd7\
+o8irkL7WspCuvf0n\
+8u\x22\x0d\x0a    },\x0d\x0a   \
+ \x2219c530ec-e105-\
+45e7-bb14-0ed240\
+1a5d12\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x2219c\
+530ec-e105-45e7-\
+bb14-0ed2401a5d1\
+2\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Mathieu R\
+. Elenael Volume\
+ 2\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Vo\
+lume 2 - Le port\
+eur de lumi\xc3\xa8re\x5c\
+nElenael est un \
+jeune gar\xc3\xa7on qu\
+i vit dans un mo\
+nde diff\xc3\xa9rent d\
+u n\xc3\xb4tre, un mon\
+de rempli de mag\
+ie et de cr\xc3\xa9atu\
+res extraordinai\
+res. \x5cn\x5cnDans ce\
+ monde, chaque p\
+ersonne peut \xc3\xaat\
+re un magicien s\
+'il en a le tale\
+nt. Quand les en\
+fants atteignent\
+ l'\xc3\xa2ge de neuf \
+ans, ils sont te\
+st\xc3\xa9s afin de d\xc3\
+\xa9couvrir la forc\
+e de leur pouvoi\
+r et leur affini\
+t\xc3\xa9 (c'est-\xc3\xa0-di\
+re l'\xc3\xa9l\xc3\xa9ment l\
+i\xc3\xa9 \xc3\xa0 leur pouv\
+oir : le feu, l'\
+eau, etc...).\x5cn\x5c\
+nNotre histoire \
+commence quand n\
+otre jeune h\xc3\xa9ro\
+s, jusque l\xc3\xa0 un\
+ gar\xc3\xa7on normal \
+qui habite dans \
+un petit village\
+ recul\xc3\xa9, r\xc3\xa9v\xc3\xa8\
+le un talent qui\
+ pourrait faire \
+de lui le plus g\
+rand magicien de\
+ son \xc3\xa9poque. Co\
+mmence alors son\
+ voyage parsem\xc3\xa9\
+ de joie, de tri\
+stesse, de belle\
+s rencontres et \
+de situations di\
+fficiles, et \xc3\xa9v\
+idemment de magi\
+e !\x5cnInt\xc3\xa9grale \
+du volume 2\x22\x0d\x0a  \
+  },\x0d\x0a    \x2257816\
+573-a366-4f0e-a8\
+d0-b5be12a064f9\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2257816573-a\
+366-4f0e-a8d0-b5\
+be12a064f9\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Roald Dahl - Un \
+amour de tortue\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Un am\
+our de tortue ra\
+conte l'histoire\
+ d'un vieux c\xc3\xa9l\
+ibataire nomm\xc3\xa9 \
+M. Hoppy qui tom\
+be amoureux de s\
+a voisine, qui n\
+e vit que pour s\
+a tortue Alfred.\
+\x5cn\x5cnComme la voi\
+sine d\xc3\xa9sesp\xc3\xa8re\
+ de ne voir gran\
+dir Alfred, Hopp\
+y va acheter une\
+ centaine de tor\
+tues, toutes de \
+tailles diff\xc3\xa9re\
+ntes. Il donne e\
+nsuite une formu\
+le magique \xc3\xa0 sa\
+ voisine et, cha\
+que matin, il re\
+mplace la tortue\
+ par une plus gr\
+ande pour que sa\
+ voisine ait l'i\
+mpression de voi\
+r grandir Alfred\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x220cfbc250-0ede-4\
+7e6-9e9b-8fdab84\
+fc0b4\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x220cfb\
+c250-0ede-47e6-9\
+e9b-8fdab84fc0b4\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22France Int\
+er - Les odyss\xc3\xa9\
+es\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Fr\
+ance Inter invit\
+e les enfants de\
+ 7 \xc3\xa0 12 ans \xc3\xa0 \
+se plonger dans \
+les aventures de\
+s grandes figure\
+s de l'histoire.\
+\x5cn\x5cnC'est au tra\
+vers de 80 \xc3\xa9pis\
+odes que vous po\
+urrez vivre la d\
+\xc3\xa9couverte des E\
+tats-Unis, la r\xc3\
+\xa9volution Fran\xc3\xa7\
+aise, la chute d\
+u dernier empere\
+ur chinois, les \
+fouilles de la g\
+rande vall\xc3\xa9e de\
+s rois en Egypte\
+, la folle \xc3\xa9nig\
+me du masque de \
+fer, les aventur\
+es de deux femme\
+s pirates, le r\xc3\
+\xa9cit d'un roi l\xc3\
+\xa9gendaire, le po\
+uvoir de la rein\
+e Ali\xc3\xa9nor d'Aqu\
+itaine etc.\x22\x0d\x0a  \
+  },\x0d\x0a    \x22de1fb\
+c5f-2793-48df-bc\
+0e-32c6408683f5\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22de1fbc5f-2\
+793-48df-bc0e-32\
+c6408683f5\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Harry Potter\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Retrouve\
+z toute la saga \
+Harry Potter\x22\x0d\x0a \
+   },\x0d\x0a    \x22dd1b\
+1aae-0b52-436d-b\
+27f-133d64fb44aa\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22dd1b1aae-\
+0b52-436d-b27f-1\
+33d64fb44aa\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Comptines en vo\
+yage\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+R\xc3\xa9mi vous emm\xc3\xa8\
+ne en musique au\
+tour du monde ! \
+Partez en voyage\
+ avec lui pour r\
+ed\xc3\xa9couvrir nos \
+plus belles comp\
+tines et chanson\
+s \xc3\xa0 mimer : ret\
+rouvez le grand \
+cerf, les petits\
+ poissons, les c\
+rocodiles... et \
+plein de nouveau\
+t\xc3\xa9s lors d'esca\
+les en Afrique, \
+chez les cow-boy\
+s, en Russie, da\
+ns le monde celt\
+e... Les enfants\
+ chantent, mimen\
+t, dansent sur d\
+es rythmes venus\
+ d'ailleurs...  \
+id\xc3\xa9al pour les \
+tout-petits et l\
+es plus grands, \
+en famille, chez\
+ la nounou, \xc3\xa0 l\
+a cr\xc3\xa8che ou \xc3\xa0 \
+l'\xc3\xa9cole materne\
+lle ! \x22\x0d\x0a    },\x0d\
+\x0a    \x22f561f2d7-e\
+0ab-4eed-a0ca-64\
+ed797044e7\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22f561f2d7-e0ab-4\
+eed-a0ca-64ed797\
+044e7\x22,\x0d\x0a       \
+ \x22title\x22: \x22Enque\
+te au parc\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22https://ww\
+w.clsh-lannilis.\
+com/phocadownloa\
+d/grands jeux/hi\
+stoire heros.pdf\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e8d37c4f-6d17-4c\
+b5-91b5-2f71035d\
+8dec\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e8d37\
+c4f-6d17-4cb5-91\
+b5-2f71035d8dec\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22La bande or\
+iginal- Miraculo\
+us -Film 2023 -1\
+0 chanson\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Miraculous \
+  (2023)\x5cn\x5cn\xe2\x80\xa2 \
+Film de Jeremy Z\
+ag, Thomas Astru\
+c \xe2\x80\xa2 \xe2\x80\xa2 Au cin\
+\xc3\xa9ma le 05-07-20\
+23   \xe2\x80\xa2\x5cn\x5cn\xe2\x80\xa2 \
+Musique original\
+e compos\xc3\xa9e par \
+Jeremy Zag\x5cn\x5cnJe\
+remy Zag con\xc3\xa7oi\
+t la B.O du film\
+ d'animation (ad\
+aptation de l\xe2\x80\x99\
+une des sagas d\xe2\
+\x80\x99animation les \
+plus populaires \
+de ces dix derni\
+\xc3\xa8res ann\xc3\xa9es \xc3\xa0\
+ la t\xc3\xa9l\xc3\xa9) qu'i\
+l r\xc3\xa9alise avec \
+Thomas Astruc av\
+ec des chansons \
+originales inter\
+pr\xc3\xa9t\xc3\xa9es par Lo\
+u et Eliott, res\
+pectivement anci\
+ens candidats de\
+ The Voice et Th\
+e Voice Kids. Il\
+ s'agit d'un fil\
+m d\xe2\x80\x99action mus\
+ical dans lequel\
+ les h\xc3\xa9ros chan\
+tent pour exprim\
+er leurs sentime\
+nts et leurs r\xc3\xa9\
+flexions. On y e\
+ntend aussi le m\
+orceau \x5c\x22The Wal\
+l Between Us\x5c\x22 (\
+\x5c\x22Ce mur qui nou\
+s separe\x5c\x22)  de \
+Lou & Lenni Kim.\
+ \x5cn\x5cn6ans +\x5cn\x5cnS\
+ource : Youtube\x22\
+\x0d\x0a    },\x0d\x0a    \x22f\
+2e02a99-c1e2-4bc\
+8-84c7-e679ba923\
+c33\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22f2e02a\
+99-c1e2-4bc8-84c\
+7-e679ba923c33\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Histoires et\
+ Contes (47 hist\
+oires)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22pack Histoires\
+ et Contes - 47 \
+Histoires\x5cn\x5cnhtt\
+ps://www.youtube\
+.com/@Histoirese\
+tContes\x22\x0d\x0a    },\
+\x0d\x0a    \x2289d8d7b2-\
+b232-4e6c-b265-b\
+ac57e9ad790\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2289d8d7b2-b232-\
+4e6c-b265-bac57e\
+9ad790\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+gros mots\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x221afc7ffc-9e\
+f4-4473-a2b8-510\
+08ac051c2\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+1afc7ffc-9ef4-44\
+73-a2b8-51008ac0\
+51c2\x22,\x0d\x0a        \
+\x22title\x22: \x22T Chou\
+pi\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x222a\
+8e79d1-a421-4028\
+-8b9b-8d9779c394\
+86\x22: {\x0d\x0a        \
+\x22uuid\x22: \x222a8e79d\
+1-a421-4028-8b9b\
+-8d9779c39486\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Star Wars - E\
+pisode 6 - Le Re\
+tour du Jedi\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Star War\
+s - \xc3\x89pisode 6 -\
+ Le Retour du Je\
+di\x22\x0d\x0a    },\x0d\x0a   \
+ \x2299323267-798b-\
+4e5d-8288-f4c138\
+776f72\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22993\
+23267-798b-4e5d-\
+8288-f4c138776f7\
+2\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Mamie rac\
+onte - 13 histoi\
+res lues par Ode\
+tte Laure\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Mamie racon\
+te - 13 histoire\
+s lues par Odett\
+e Laure\x5cn1. Le p\
+etite lapin rose\
+\x5cn2. Le pyjama e\
+t le papillon\x5cn3\
+. La l\xc3\xa9gende de\
+ la premi\xc3\xa8re \xc3\xa9\
+toile filante\x5cn4\
+. Histoire d'un \
+petit nuage blan\
+c\x5cn5. La l\xc3\xa9gend\
+e de la pivoine\x5c\
+n6. La licorne\x5cn\
+7. Maison douce\x5c\
+n8. La girafe et\
+ le petit oiseau\
+\x5cn9. Poum et la \
+m\xc3\xa9sange\x5cn10. La\
+ coccinelle et l\
+'\xc3\xa9glantier\x5cn11.\
+ Escapade musica\
+le\x5cn12. Le vieux\
+ loup\x5cn13. Le r\xc3\
+\xaave de Franck\x22\x0d\x0a\
+    },\x0d\x0a    \x221e2\
+9cb4f-584d-4760-\
+ac5e-969bc464ea1\
+c\x22: {\x0d\x0a        \x22\
+uuid\x22: \x221e29cb4f\
+-584d-4760-ac5e-\
+969bc464ea1c\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Le Petit Princ\
+e [V1 by ilLUNII\
+nati V2 by JeSui\
+sUneFoug\xc3\xa8re]\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Le Peti\
+t Prince, d'Anto\
+ine de Saint-Exu\
+p\xc3\xa9ry, lu par Be\
+rnard Giraudeau \
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+27d0778d-80d3-4a\
+b0-8e73-088552eb\
+c450\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2227d07\
+78d-80d3-4ab0-8e\
+73-088552ebc450\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Au pays des\
+ monstres, Claud\
+e Ponti\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Certains mons\
+tres n'en sont p\
+as. D\xc3\xa9couvrez l\
+es histoires ima\
+gin\xc3\xa9es par Clau\
+de Ponti autour \
+des gentils mons\
+tres de L\xc3\xa9opold\
+ Chauveau.\x5cn\x5cnDe\
+sign Sonore : Jo\
+sh Vardey\x5cnG\xc3\xa9n\xc3\
+\xa9rique et musiqu\
+es originales : \
+alto Music\x5cnPris\
+e de son et mixa\
+ge : S\xc3\xa9bastien \
+Cannas et Pablo \
+Roche (Capitaine\
+ Plouf)\x5cn\x5cn\xc2\xa9 Un\
+e coproduction M\
+us\xc3\xa9e d\xe2\x80\x99Orsay \
+et LACM\xc3\x89 Produc\
+tion\x5c\x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22f3f366f0-0\
+415-41bf-ab79-89\
+c5435642aa\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22f3f366f0-0415-4\
+1bf-ab79-89c5435\
+642aa\x22,\x0d\x0a       \
+ \x22title\x22: \x22Le Mo\
+nde des \xc3\xa9motion\
+s des enfants\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Lorsque\
+ les enfants son\
+t en col\xc3\xa8re, il\
+s peuvent le man\
+ifester par un m\
+auvais comportem\
+ent. Ils peuvent\
+ crier, pleurer,\
+ jeter des objet\
+s et se rouler p\
+ar terre ou tout\
+ cela \xc3\xa0 la fois\
+. C'est pourquoi\
+ la plupart des \
+parents ont beso\
+in d'aide pour l\
+a gestion des \xc3\xa9\
+motions et des s\
+entiments de leu\
+rs enfants.\x5cn\x5cnA\
+uteur : Elizabet\
+h Cole, Romain P\
+illard, Sophie S\
+ala\xc3\xbcn \x5cn\x5cn1 - J\
+e suis plus fort\
+ que la col\xc3\xa8re\x5c\
+n2 - Je suis plu\
+s fort que mes a\
+ngoisses\x5cn3 - La\
+ gentillesse me \
+rend plus fort\x5cn\
+4 - La pers\xc3\xa9v\xc3\xa9\
+rance me rend pl\
+us fort\x5cn5 - Not\
+re diversit\xc3\xa9 me\
+ rend plus fort\x5c\
+n6 - Vivre l'ins\
+tant pr\xc3\xa9sent me\
+ rend plus fort\x22\
+\x0d\x0a    },\x0d\x0a    \x228\
+de8dc85-88ae-411\
+5-8e5c-b42bd9219\
+e8d\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x228de8dc\
+85-88ae-4115-8e5\
+c-b42bd9219e8d\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Disney Junio\
+r - Ma petite hi\
+stoire du soir\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x22987dde\
+d2-a614-4fbf-82e\
+7-d18d6702b8d3\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22987dded2-a6\
+14-4fbf-82e7-d18\
+d6702b8d3\x22,\x0d\x0a   \
+     \x22title\x22: \x22R\
+OCKAMBOLESQUES\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x222c4ca7\
+b1-d962-4635-870\
+f-f567515f6534\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x222c4ca7b1-d9\
+62-4635-870f-f56\
+7515f6534\x22,\x0d\x0a   \
+     \x22title\x22: \x22R\
+aconte-moi une b\
+\xc3\xaatise - Saisons\
+ 1 et 2 - Source\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x2235b\
+18601-a231-4dcf-\
+bac1-f96080271e9\
+d\x22: {\x0d\x0a        \x22\
+uuid\x22: \x2235b18601\
+-a231-4dcf-bac1-\
+f96080271e9d\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Mes premiers j\
+'aime lire - Pac\
+k 5\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22d\
+b92828d-1257-4f4\
+4-ab8e-4aa4d015a\
+543\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22db9282\
+8d-1257-4f44-ab8\
+e-4aa4d015a543\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les P'Tites \
+Histoires de Tal\
+eming - En cours\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22c58c\
+8576-099e-4fa1-9\
+1db-313c3e859cc1\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22c58c8576-\
+099e-4fa1-91db-3\
+13c3e859cc1\x22,\x0d\x0a \
+       \x22title\x22: \
+\x2212 mois de l an\
+n\xc3\xa9e\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Issu des CD : 36\
+5 Comptines pour\
+ toute l'ann\xc3\xa9e\x22\
+\x0d\x0a    },\x0d\x0a    \x22e\
+4d90bde-003b-4e9\
+e-86b2-95f85a144\
+cde\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22e4d90b\
+de-003b-4e9e-86b\
+2-95f85a144cde\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22The BBC scho\
+ol radio (Early \
+Years)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22The BBC school\
+ radio\x5cnEarly ye\
+ars foundation s\
+tage\x5cn18 stories\
+ aroud 4 themes\x22\
+\x0d\x0a    },\x0d\x0a    \x22c\
+62f2764-8c64-4ea\
+2-8e5a-e4682b06c\
+80d\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22c62f27\
+64-8c64-4ea2-8e5\
+a-e4682b06c80d\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Harry Potter\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Retr\
+ouvez toute la s\
+aga Harry Potter\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+32be163e-d683-46\
+eb-a1aa-07e6e1d8\
+42be\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2232be1\
+63e-d683-46eb-a1\
+aa-07e6e1d842be\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Le Monde d'\
+Henri D\xc3\xa8s Vol 3\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Volu\
+me 11: \x5c\x22le peti\
+t zinzin\x5c\x22, et, \
+\x5c\x22papa mon baise\
+r\x5c\x22\x5cnVolume 12: \
+\x5c\x22Salut les fill\
+es, salut les ga\
+rs\x5c\x22, et, \x5c\x22Domi\
+nique joue du pi\
+ano\x5c\x22\x5cnVolume 13\
+: \x5c\x22Mon hippopot\
+ame\x5c\x22 et \x5c\x22Les o\
+ursons, les reuq\
+ins, les kangour\
+ous et les ouist\
+itis\x5c\x22\x5cnVolume 1\
+4: \x5c\x22Le Voyage\x5c\x22\
+ et \x5c\x22Moi j'veux\
+ partir avec toi\
+\x5c\x22\x5cnVolume 15: \x5c\
+\x22La fourmi amour\
+euse\x5c\x22 et \x5c\x22Le m\
+ille-pattes\x5c\x22\x5cn\x22\
+\x0d\x0a    },\x0d\x0a    \x22b\
+bdb4079-bf4f-420\
+7-ab22-313818285\
+664\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22bbdb40\
+79-bf4f-4207-ab2\
+2-313818285664\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Petit Ours B\
+run (14 histoire\
+s) [V2 by Eldius\
+ V3 by JeSuisUne\
+Foug\xc3\xa8re]\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Le d\xc3\xa9part \
+en vacances\x5cnViv\
+e le ski\x5cnLe r\xc3\xa9\
+veil grognon\x5cnLa\
+ rentr\xc3\xa9e \xc3\xa0 l'\xc3\
+\xa9cole\x5cnJour de p\
+luie\x5cnBonne nuit\
+\x5cnC'est nient\xc3\xb4t\
+ noel\x5cnC'est la \
+f\xc3\xaate des mamans\
+\x5cnC'est beau la \
+mer\x5cnOh le gourm\
+and\x5cnLa galette \
+des rois\x5cnLa nui\
+t \xc3\xa9toil\xc3\xa9e\x5cnLa \
+grosse b\xc3\xaatise\x5cn\
+Les joies du bai\
+n\x22\x0d\x0a    },\x0d\x0a    \
+\x229563ae86-66b7-4\
+a86-bb2a-d480120\
+84046\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x229563\
+ae86-66b7-4a86-b\
+b2a-d48012084046\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Story Time\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Bedt\
+ime.fm \x5c\x22Story T\
+ime\x5c\x22 : https://\
+bedtime.fm/story\
+time\x22\x0d\x0a    },\x0d\x0a \
+   \x22082829e0-12b\
+8-450c-9716-5e09\
+9413603e\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x220\
+82829e0-12b8-450\
+c-9716-5e0994136\
+03e\x22,\x0d\x0a        \x22\
+title\x22: \x22Conte d\
+e No\xc3\xabl (Charles\
+ Dickens)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Parmi tous \
+les marchands de\
+ Londres, Ebenez\
+er Scrooge est c\
+onnu comme l'un \
+des plus riches \
+et des plus avar\
+es. Ce vieillard\
+ solitaire et in\
+sensible vit dan\
+s l'obsession de\
+ ses livres de c\
+omptes. Ni la mo\
+rt de son associ\
+\xc3\xa9, Marley, ni l\
+a pauvre conditi\
+on de son employ\
+\xc3\xa9, Bob Cratchit\
+, n'ont jamais r\
+\xc3\xa9ussi \xc3\xa0 l'\xc3\xa9mo\
+uvoir. De tous l\
+es jours de l'an\
+n\xc3\xa9e, celui que \
+Scrooge d\xc3\xa9teste\
+ le plus est No\xc3\
+\xabl. L'id\xc3\xa9e de r\
+\xc3\xa9pandre joie et\
+ cadeaux va d\xc3\xa9f\
+initivement \xc3\xa0 l\
+'encontre de tou\
+s ses principes \
+! Pourtant, cett\
+e ann\xc3\xa9e, Scroog\
+e va vivre un No\
+\xc3\xabl qu'il ne ser\
+a pas pr\xc3\xa8s d'ou\
+blier.\x22\x0d\x0a    },\x0d\
+\x0a    \x22ec6bcfb9-0\
+4d2-4368-a0ad-d4\
+572a2b492e\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22ec6bcfb9-04d2-4\
+368-a0ad-d4572a2\
+b492e\x22,\x0d\x0a       \
+ \x22title\x22: \x22la ci\
+te du train - Le\
+ No\xc3\xabl de Luna\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Mesdam\
+es et messieurs,\
+ et vous les enf\
+ants, votre atte\
+ntion, s'il vous\
+ pla\xc3\xaet :\x5cnles w\
+agons enchant\xc3\xa9s\
+ en provenance d\
+e la Cit\xc3\xa9 du Tr\
+ain et \xc3\xa0 destin\
+ation du Pays de\
+ No\xc3\xabl vont bien\
+t\xc3\xb4t entrer en g\
+are. \xc3\x89loignez-v\
+ous de la bordur\
+e du quai.\x5cn\x5cnC'\
+est la veille de\
+ No\xc3\xabl, Luna, pe\
+tite foraine esp\
+i\xc3\xa8gle, vous emp\
+orte pour une tr\
+avers\xc3\xa9e f\xc3\xa9eriq\
+ue en compagnie \
+d'\xc3\xa9tonnants et \
+fabuleux voyageu\
+rs. Attention au\
+ d\xc3\xa9part !\x5cn\x5cn\xe2\x80\
+\x8bLa Cit\xc3\xa9 Du Tra\
+in - Patrimoine \
+SNCF vous invite\
+ \xc3\xa0 vivre un mom\
+ent de douceur, \
+de po\xc3\xa9sie, mais\
+ aussi d'aventur\
+e, \xc3\xa0 vivre en f\
+amille.\x5cnPlaid, \
+petits g\xc3\xa2teaux \
+et chocolat chau\
+d conseill\xc3\xa9s \xf0\x9f\
+\x98\x89\x5cn\x5cnF\xc3\xa9\xc3\xa9rique\
+, Le No\xc3\xabl de Lu\
+na permet aux en\
+fants de d\xc3\xa9couv\
+rir l\xe2\x80\x99univers \
+du chemin de fer\
+ en compagnie d\xe2\
+\x80\x99\xc3\xa9tonnants et \
+fabuleux voyageu\
+rs. Un conte de \
+No\xc3\xabl porteur de\
+ valeurs d\xe2\x80\x99ent\
+raide et de soli\
+darit\xc3\xa9, le tout\
+ saupoudr\xc3\xa9 d\xe2\x80\x99\
+une touche de po\
+\xc3\xa9sie et d\xe2\x80\x99une\
+ pinc\xc3\xa9e de magi\
+e.\x5cn\x5cnImagin\xc3\xa9e \
+en 2020 par Gr\xc3\xa9\
+gory Morin (com\xc3\
+\xa9dien que vous a\
+vez pu d\xc3\xa9couvri\
+r au mus\xc3\xa9e avec\
+ la Compagnie Ve\
+rsatile)  et Mar\
+ie-Christine Wil\
+ly (com\xc3\xa9dienne \
+et conteuse), ce\
+tte s\xc3\xa9rie de po\
+dcasts originaux\
+, sp\xc3\xa9cialement \
+cr\xc3\xa9\xc3\xa9e pour le \
+mus\xc3\xa9e, se d\xc3\xa9cl\
+ine en 4 \xc3\xa9pisod\
+es d'environ 5 m\
+inutes.\x5cn\x5cnChacu\
+n des \xc3\xa9pisodes \
+est \xc3\xa9galement i\
+llustr\xc3\xa9 d'un de\
+ssin r\xc3\xa9alis\xc3\xa9 p\
+ar Maud Sembach,\
+ passionn\xc3\xa9e de \
+dessin et ancien\
+ne alternante au\
+ sein de la Cit\xc3\
+\xa9 du Train - Pat\
+rimoine SNCF.\x5cn\x5c\
+nEnfin, l\xe2\x80\x99enre\
+gistrement et l\xe2\
+\x80\x99habillage sono\
+re ont \xc3\xa9t\xc3\xa9 r\xc3\xa9\
+alis\xc3\xa9s au studi\
+o Sillon Music, \
+\xc3\xa0 Mulhouse, par\
+ Pascal Ferraro \
+(musicien/arrang\
+eur).\x5cn\x5cnhttps:/\
+/www.citedutrain\
+.com/le-noel-de-\
+luna-podcast\x22\x0d\x0a \
+   },\x0d\x0a    \x220ce1\
+7190-9043-494f-a\
+018-e5d1c830f755\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x220ce17190-\
+9043-494f-a018-e\
+5d1c830f755\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Aventures D\
+e Flash Et Marti\
+n\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22882\
+749b4-7149-4c16-\
+aa62-c75a01ceb82\
+0\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22882749b4\
+-7149-4c16-aa62-\
+c75a01ceb820\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Papa te racont\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Pac\
+k de 15 histoire\
+s, de Papa te ra\
+conte\x22\x0d\x0a    },\x0d\x0a\
+    \x22a03cca3e-0b\
+9a-4c13-bb00-6ff\
+c98224ae5\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+a03cca3e-0b9a-4c\
+13-bb00-6ffc9822\
+4ae5\x22,\x0d\x0a        \
+\x22title\x22: \x22Les P'\
+tites Histoires \
+de Taleming\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Lego\x5cnLil\
+a et les sales g\
+osses\x22\x0d\x0a    },\x0d\x0a\
+    \x224ab46358-04\
+95-47e2-bcfb-e53\
+3d7bb53ad\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+4ab46358-0495-47\
+e2-bcfb-e533d7bb\
+53ad\x22,\x0d\x0a        \
+\x22title\x22: \x22Anne R\
+oumanoff raconte\
+ les fables\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Anne Roum\
+anoff raconte 4 \
+fables de la Fon\
+taine a sa fa\xc3\xa7o\
+n\x5cn- Phildebert \
+le li\xc3\xa8vre et Hu\
+luberlue la tort\
+ue\x5cn- Gaston le \
+H\xc3\xa9ron\x5cn- Theo L\
+e Corbeau Et Mai\
+tre Renard\x5cn- Ma\
+rie Chantal La C\
+igale Et Eug\xc3\xa9ni\
+e La Fourmie\x22\x0d\x0a \
+   },\x0d\x0a    \x2271a8\
+5086-d716-4e78-8\
+cc2-714b445bd8a0\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2271a85086-\
+d716-4e78-8cc2-7\
+14b445bd8a0\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Auzou Loup et s\
+es amis (9 histo\
+ires) 2023-06-24\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Issu\
+ des Lectures du\
+ CP avec Loup\x5cn\x5c\
+nhttps://music.y\
+outube.com/playl\
+ist?list=OLAK5uy\
+ mewf3EFk4pNjRJD\
+Sz8Lj2AQlcqjTZWt\
+qQ\x22\x0d\x0a    },\x0d\x0a   \
+ \x220654908f-16e0-\
+421d-b8e5-c70dcd\
+2f5d42\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22065\
+4908f-16e0-421d-\
+b8e5-c70dcd2f5d4\
+2\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Radio Can\
+ada  Dragouilles\
+ (8 episodes)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Les jum\
+eaux sont en qu\xc3\
+\xaate d'enqu\xc3\xaates \
+pas tr\xc3\xa8s s\xc3\xa9rie\
+uses. Les deux c\
+omparses parcour\
+ent le monde \xc3\xa0 \
+l'aide de leur d\
+ragouillemobile \
+afin de trouver \
+des r\xc3\xa9ponses \xc3\xa0\
+ leurs questions\
+. Interroger un \
+poulet, tenter d\
+e r\xc3\xa9veiller un \
+volcan ou voyage\
+r dans le temps,\
+ tous les moyens\
+ sont bons (ou p\
+resque) pour ce \
+duo moiti\xc3\xa9 pata\
+te, moiti\xc3\xa9 drag\
+on!\x22\x0d\x0a    },\x0d\x0a  \
+  \x22e39afd9f-510e\
+-4269-8951-3ab8f\
+8b49237\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22e3\
+9afd9f-510e-4269\
+-8951-3ab8f8b492\
+37\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Pierre e\
+t le Loup\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Pierre et l\
+e Loup de Sergue\
+\xc3\xaf PROKOFIEV, ra\
+cont\xc3\xa9 par Rober\
+t HIRSCH, sous l\
+a direction musi\
+cale de KARAJAN.\
+ 16 Chapitres, m\
+ode nuit.\x22\x0d\x0a    \
+},\x0d\x0a    \x22ea71563\
+d-1c67-494b-bca0\
+-ae49495f7151\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22ea71563d-1c6\
+7-494b-bca0-ae49\
+495f7151\x22,\x0d\x0a    \
+    \x22title\x22: \x22En\
+core une histoir\
+e - Contes de No\
+\xc3\xabl\x22,\x0d\x0a        \x22\
+description\x22: \x22P\
+ack de 4 histoir\
+es de no\xc3\xabl issu\
+es du podcast \x5c\x22\
+Encore une Histo\
+ire\x5c\x22 : https://\
+www.youtube.com/\
+channel/UCd58JXG\
+1TRef0WvJYcdD61A\
+\x5cn\x5cn1 - Qui pour\
+ remplacer le P\xc3\
+\xa8re No\xc3\xabl\x5cn2 - I\
+l \xc3\xa9tait une foi\
+s la chouette de\
+ No\xc3\xabl\x5cn3 - La g\
+r\xc3\xa8ve des lutins\
+\x5cn4 - Le No\xc3\xabl g\
+alactique de Tom\
+y\x22\x0d\x0a    },\x0d\x0a    \
+\x22c5fb2920-ed99-4\
+501-a59b-accd398\
+77081\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22c5fb\
+2920-ed99-4501-a\
+59b-accd39877081\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Histoires \
+pour mes 6 ans\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x226 hist\
+oires pour mes 6\
+ ans\x5cnA l'eau dr\
+agonnet ch\xc3\xa9ri!\x5c\
+nDes cadeaux dan\
+s le ciel\x5cnLa pe\
+tite souris des \
+souris\x5cnLance le\
+ d\xc3\xa9\x5cnLe chat de\
+ L\xc3\xa9a\x5cnLe mervei\
+lleux voyage de \
+l'\xc3\xa9pouvantail\x5cn\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+97aad64c-d8d0-4d\
+05-87ae-a111ca1d\
+5cc2\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2297aad\
+64c-d8d0-4d05-87\
+ae-a111ca1d5cc2\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Pok\xc3\xa9mon, l\
+es aventures de \
+la Dresseuse Lou\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22ed6e\
+7a42-9241-4b2c-a\
+4e1-1aafb85dcf0c\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22ed6e7a42-\
+9241-4b2c-a4e1-1\
+aafb85dcf0c\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Table de multip\
+lication en chan\
+son\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+es tables de mul\
+tiplication en c\
+hanson\x5cn\x5cnhttp:/\
+/lemondedhugo.co\
+m/apprendre-tabl\
+e-multiplication\
+-par-2.php\x22\x0d\x0a   \
+ },\x0d\x0a    \x229df1c4\
+d0-65eb-422f-87c\
+2-383f0baef007\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x229df1c4d0-65\
+eb-422f-87c2-383\
+f0baef007\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+a Ch\xc3\xa8vre de Mon\
+sieur Seguin\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x229c3be1c1\
+-3da6-400d-b581-\
+6784b251e810\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x229c3be1c1-3da6\
+-400d-b581-6784b\
+251e810\x22,\x0d\x0a     \
+   \x22title\x22: \x22Ann\
+e Bonny La reine\
+ des pirates (6 \
+episodes)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22LA REINE DE\
+S PIRATES\x5cnPar C\
+laire Richard\x5cnU\
+ne histoire d'av\
+enture et de lib\
+ert\xc3\xa9, avec des \
+temp\xc3\xaates, des a\
+bordages, des mo\
+uettes et bien s\
+\xc3\xbbr, des blagues\
+. Une adaptation\
+ pour les enfant\
+s de la fiction \
+radio La Derni\xc3\xa8\
+re Nuit d'Anne B\
+onny.\x22\x0d\x0a    },\x0d\x0a\
+    \x229d12042b-7c\
+bc-41cb-b92b-ea1\
+8e98382ab\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+9d12042b-7cbc-41\
+cb-b92b-ea18e983\
+82ab\x22,\x0d\x0a        \
+\x22title\x22: \x22Encore\
+ une histoire - \
+Rosa Parks (8 \xc3\xa9\
+pisodes)\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Une histoire\
+ \xc3\xa9crite par Abd\
+elhakim Rezgui, \
+interpr\xc3\xa9t\xc3\xa9e pa\
+r C\xc3\xa9line Kallma\
+nn, r\xc3\xa9alisation\
+ Alexandre Ferre\
+ira, production \
+Benjamin Muller.\
+\x5cn\x5cnEncore une h\
+istoire est un p\
+odcast destin\xc3\xa9 \
+aux enfants (et \
+\xc3\xa0 ceux qui le s\
+ont encore dans \
+leur t\xc3\xaate) qui \
+aiment qu'on leu\
+r raconte des hi\
+stoires.\x22\x0d\x0a    }\
+,\x0d\x0a    \x223e91ed8f\
+-1a82-4732-be22-\
+7c4ecbde2e0a\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x223e91ed8f-1a82\
+-4732-be22-7c4ec\
+bde2e0a\x22,\x0d\x0a     \
+   \x22title\x22: \x22Ast\
+\xc3\xa9rix Et Les Got\
+hs(29 Chapitres)\
+ by Lezardiere18\
+-12-22\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x5c\x22Ast\xc3\xa9rix et \
+les Goths est le\
+ troisi\xc3\xa8me albu\
+m de la bande de\
+ssin\xc3\xa9e Ast\xc3\xa9rix\
+, publi\xc3\xa9 en 196\
+3, sc\xc3\xa9naris\xc3\xa9 p\
+ar Ren\xc3\xa9 Goscinn\
+y et dessin\xc3\xa9 pa\
+r Albert Uderzo.\
+\x5cn\x5cnEn 50 av. J.\
+-C., apr\xc3\xa8s la d\
+\xc3\xa9faite de Verci\
+ng\xc3\xa9torix, toute\
+ la Gaule est oc\
+cup\xc3\xa9e. Toute ? \
+Non, car un peti\
+t village d'Armo\
+rique r\xc3\xa9siste e\
+ncore aux assaut\
+s des l\xc3\xa9gions d\
+e Petibonum,\x5cnLa\
+udanum, Babaorum\
+ et Aquarium et \
+Jules C\xc3\xa9sar est\
+ fort contrari\xc3\xa9\
+ de voir une pet\
+ite r\xc3\xa9gion mett\
+re en \xc3\xa9chec son\
+ arm\xc3\xa9e...\x5c\x22\x5cn\x5cn\
+Avec: Roger Care\
+l, Jacques Morel\
+, Bernard Lavale\
+tte,...\x5cn\x5cnAdapt\
+ation : Michel d\
+e Villiers / R\xc3\xa9\
+alisation : Clau\
+de Dupont / Musi\
+que : G\xc3\xa9rard Ca\
+lvi / Diffusion \
+: 08/06/1967 au \
+18/07/1967 sur F\
+rance Inter \xc3\xa0 1\
+2H20\x22\x0d\x0a    },\x0d\x0a \
+   \x22721a492a-bf7\
+2-4aee-a6a3-ec7b\
+984cd7d4\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x227\
+21a492a-bf72-4ae\
+e-a6a3-ec7b984cd\
+7d4\x22,\x0d\x0a        \x22\
+title\x22: \x22Les plu\
+s beaux contes d\
+u monde\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Ce coffret co\
+ntient les plus \
+beaux contes pop\
+ulaires du monde\
+ entier, autrefo\
+is racont\xc3\xa9s de \
+g\xc3\xa9n\xc3\xa9ration en \
+g\xc3\xa9n\xc3\xa9ration. Ec\
+outer aujourd'hu\
+i ces histoires \
+passionnantes, c\
+'est faire conna\
+issance avec d'a\
+utres cultures. \
+Dans un style ac\
+cessible, Ce son\
+t des belles heu\
+res de r\xc3\xaave en \
+perspective !\x22\x0d\x0a\
+    },\x0d\x0a    \x22dd6\
+25c37-a278-4795-\
+8a09-2a45d58b89e\
+6\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22dd625c37\
+-a278-4795-8a09-\
+2a45d58b89e6\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Oscar et Malik\
+a, toujours en r\
+etard\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Oscar et Malika\
+ sont voisins et\
+ sont scolaris\xc3\xa9\
+s dans la m\xc3\xaame \
+classe. Aussi, i\
+ls font ensemble\
+ chaque matin le\
+ chemin vers l'\xc3\
+\xa9cole et, chaque\
+ matin, il leur \
+arrive une avent\
+ure extraordinai\
+re qui fait que,\
+ syst\xc3\xa9matiqueme\
+nt, ils arrivent\
+ en retard \xc3\xa0 l'\
+\xc3\xa9cole. Une cr\xc3\xa9\
+ation fran\xc3\xa7aise\
+ bourr\xc3\xa9e d'aven\
+ture et d'humour\
+, qui parvient \xc3\
+\xa0 surprendre \xc3\xa0 \
+chaque \xc3\xa9pisode.\
+\x5cn\x5cn10 \xc3\xa9pisodes\
+ :\x5cn\x5cn* Le coiff\
+eur\x5cn* La gorgon\
+e\x5cn* Le pirate\x5cn\
+* Le spationaute\
+\x5cn* Les b\xc3\xaates s\
+auvages\x5cn* Le di\
+nosaure\x5cn* Le ma\
+\xc3\xaetre ninja\x5cn* L\
+e dragon\x5cn* La l\
+ouve\x5cn* Le drone\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+cc3e0ec2-ad80-49\
+22-9280-be2e6461\
+446a\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22cc3e0\
+ec2-ad80-4922-92\
+80-be2e6461446a\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Matilda\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x2204f814f0\
+-4fa8-4ed9-9927-\
+774756395b0f\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2204f814f0-4fa8\
+-4ed9-9927-77475\
+6395b0f\x22,\x0d\x0a     \
+   \x22title\x22: \x22Com\
+pilation Rock, H\
+ipHop, Reggae, S\
+oul, Jazz, Elect\
+ro\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Ro\
+ck\x5cn1 - ACDC - H\
+ighway to hell\x5cn\
+2 - Mot\xc3\xb6rhead -\
+ Ace of Spades\x5cn\
+3 - Nirvana - Sm\
+ells Like Teen S\
+pirit\x5cn4 - Queen\
+s of the Stone A\
+ge - The Way You\
+ Used to Do\x5cn5 -\
+ Joan Jett - I L\
+ove Rock 'N Roll\
+\x5cn6 - The Beatle\
+s - A Hard Day\xe2\x80\
+\x99s Night\x5cn7 - Th\
+e Black Keys- Go\
+ld on the Ceilin\
+g\x5cn8 - Ram Jam -\
+ Black Betty\x5cn9 \
+- Black Sabbath \
+- Paranoid\x5cn10 -\
+ The White Strip\
+es - Seven Natio\
+n Army\x5cn11 - Met\
+allica - Enter S\
+andman\x5cn\x5cnHipHop\
+\x5cn1- Dr. Dre - N\
+uthin\xe2\x80\x99 But A \xc2\
+\xab\xc2\xa0G\xc2\xa0\xc2\xbb Thang\x5cn\
+2- Notorious BIG\
+ - Going Back To\
+ Cali\x5cn3- Fugees\
+ - Fu-Gee-La\x5cn4-\
+ Nas - The messa\
+ge\x5cn5 - Dr. Dre \
+- Still D.R.E.\x5cn\
+6- 2pac - Califo\
+rnia Love\x5cn7- Ke\
+ndrick Lamar - H\
+UMBLE.\x5cn8 - Mobb\
+ Deep - Survival\
+ Of the Fittest\x5c\
+n9 - Nujabes - F\
+eather\x5cn10 - Evi\
+dence - You\x5cn11 \
+- Mac Miller - L\
+adders\x5cn12 - Rea\
+son - Sauce\x5cn\x5cnR\
+eggae\x5cn1 - Toots\
+ & The Maytals -\
+ 54-46 Was My Nu\
+mber\x5cn2 - Desmon\
+d Dekker - Fu Ma\
+n Chu\x5cn3 - Skarr\
+a Mucci - Movie \
+Star\x5cn4 - Bob Ma\
+rley and the Wai\
+lers - Burnin\xe2\x80\x99\
+ and Lootin\xe2\x80\x99\x5cn\
+5 - The Gladiato\
+rs - Mix Up\x5cn6 -\
+ Groundation - B\
+abylon Rule Dem\x5c\
+n7 - Junior Murv\
+in - Rescue the \
+Children\x5cn8 - Ho\
+race Andy - Skyl\
+arking\x5cn9 - Linv\
+al Thompson - Do\
+n\xe2\x80\x99t Cut Off Yo\
+ur Dreadlocks\x5cn1\
+0 - Tiken Jah Fa\
+koly - Is It Bec\
+ause I\xe2\x80\x99m Black\
+? (Feat. Ken Boo\
+the)\x5cn\x5cnR&B/Soul\
+\x5cn1- Otis Reddin\
+g - (Sittin\xe2\x80\x99 O\
+n) The Dock of t\
+he Bay\x5cn2- Grove\
+r Washington Jr.\
+ - Just the Two \
+of Us\x5cn3 - Marvi\
+n Gaye - I Heard\
+ It Through the \
+Grapevine\x5cn4 - S\
+on Little - The \
+Middle\x5cn5 - Aret\
+ha Franklin - Re\
+spect\x5cn6 - Billy\
+ Paul - Your Son\
+g\x5cn7 - Durand Jo\
+nes - Morning in\
+ America\x5cn8 - Cu\
+rtis Mayfield - \
+Move On Up\x5cn9 - \
+Al Green - Let\xe2\x80\
+\x99s Stay Together\
+\x5cn10 - Michael J\
+ackson - P.Y.T.\x5c\
+n\x5cnJazz&Blues\x5cn1\
+- Miles Davis - \
+Milestones\x5cn2 - \
+Billie Holiday -\
+ Strange Fruits\x5c\
+n3 - Charlie Par\
+ker - Summer Tim\
+e\x5cn4 - Ramsey Le\
+wis Trio - The \xc2\
+\xab\xc2\xa0In\xc2\xa0\xc2\xbb Crowd\x5c\
+n5 - Louis Armst\
+rong - What A Wo\
+nderfull World\x5cn\
+6 - Nina Simone \
+- I Put a Spell \
+On You \x5cn7 - Ray\
+ Charles - What \
+I\xe2\x80\x99d Say\x5cn8 - J\
+ohn Lee Hooker -\
+ Shake It Baby\x5cn\
+9 - B.B. King - \
+The Thrill is Go\
+ne\x5cn\x5cnMusique El\
+ectronique\x5cn1 - \
+Daft Punk - Hard\
+er Better Faster\
+ Stronger\x5cn2 - T\
+he Chemical Brot\
+hers - Galvanize\
+\x5cn3 - Paul Kalkb\
+renner - Dockyar\
+d\x5cn4 - Breakbot \
+- Make You Mine\x5c\
+n5 - Cassius - F\
+eeling For You\x5cn\
+6 - RJD2 - Ghost\
+writer\x5cn7 - Just\
+ice - Genesis\x5cn8\
+ - Kraftwerk - T\
+he Robots\x22\x0d\x0a    \
+},\x0d\x0a    \x227d7e6af\
+0-0295-4bd7-b250\
+-9bf1424403bb\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x227d7e6af0-029\
+5-4bd7-b250-9bf1\
+424403bb\x22,\x0d\x0a    \
+    \x22title\x22: \x22La\
+ naissance d'Ast\
+ro le petit robo\
+t\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22601\
+7a868-3f20-4b70-\
+932d-7484c4781f5\
+0\x22: {\x0d\x0a        \x22\
+uuid\x22: \x226017a868\
+-3f20-4b70-932d-\
+7484c4781f50\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Aristochat\
+s racont\xc3\xa9 par L\
+ouis Defunes\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Conversi\
+on cassette audi\
+o de 1982\x5cnHisto\
+ire de 46min \x5cnI\
+ntroduction de 2\
+min sautable ave\
+c OK\x22\x0d\x0a    },\x0d\x0a \
+   \x22dccbf5d3-6e4\
+9-4cc9-b94e-be82\
+f38f27bc\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22d\
+ccbf5d3-6e49-4cc\
+9-b94e-be82f38f2\
+7bc\x22,\x0d\x0a        \x22\
+title\x22: \x22Aaron's\
+ World\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Aaron's World\x22\
+\x0d\x0a    },\x0d\x0a    \x22a\
+7044586-e83d-412\
+f-b8e2-be2b95680\
+980\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22a70445\
+86-e83d-412f-b8e\
+2-be2b95680980\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Une histoire\
+ et OLI Pack 6 (\
+10 Histoires)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x229504a69\
+2-bc26-4158-ae3d\
+-d65871d2cb25\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x229504a692-bc2\
+6-4158-ae3d-d658\
+71d2cb25\x22,\x0d\x0a    \
+    \x22title\x22: \x22T \
+Choupi (59 histo\
+ires)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x22e17ff349-47b0-4\
+7c7-85f9-c332a1e\
+42ed0\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22e17f\
+f349-47b0-47c7-8\
+5f9-c332a1e42ed0\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Le Petit P\
+rince\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Le Petit Prince\
+ d'Antoine de Sa\
+int-Exup\xc3\xa9ry, lu\
+ par Bernard Gir\
+audeau\x22\x0d\x0a    },\x0d\
+\x0a    \x223cc93382-f\
+14b-4f81-a7e3-17\
+c5df41e54d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x223cc93382-f14b-4\
+f81-a7e3-17c5df4\
+1e54d\x22,\x0d\x0a       \
+ \x22title\x22: \x22CURIE\
+UX DE SCIENCES 2\
+023\x22,\x0d\x0a        \x22\
+description\x22: \x22C\
+URIEUX DE SCIENC\
+ES\x5cnLe podcast q\
+ui met la scienc\
+e \xc3\xa0 hauteur d\xe2\x80\
+\x99enfants ! Une c\
+oproduction Baya\
+rd Jeunesse et l\
+e Mus\xc3\xa9um nation\
+al d\xe2\x80\x99Histoire \
+naturelle.\x22\x0d\x0a   \
+ },\x0d\x0a    \x222dca26\
+36-231b-48aa-92c\
+d-372ef79068cb\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x222dca2636-23\
+1b-48aa-92cd-372\
+ef79068cb\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es tables de mul\
+tiplication\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x22d51e8a52-\
+b666-4ebe-a970-5\
+6a0e2c9c2f8\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22d51e8a52-b666-\
+4ebe-a970-56a0e2\
+c9c2f8\x22,\x0d\x0a      \
+  \x22title\x22: \x22Enco\
+re une histoire \
+- Les vacances e\
+xtraordinaires (\
+3 saisons soit 2\
+0 + 2 bonus)\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x223 saison\
+s des vacances e\
+xtraordinaires (\
+avec 2 bonus) !\x5c\
+n\x5cnEncore une hi\
+stoire est un po\
+dcast destin\xc3\xa9 a\
+ux enfants (et \xc3\
+\xa0 ceux qui le so\
+nt encore dans l\
+eur t\xc3\xaate) qui a\
+iment qu'on leur\
+ raconte des his\
+toires.\x5cn\x5cnChaqu\
+e semaine, vous \
+retrouverez ici \
+une histoire lue\
+, tir\xc3\xa9e d'un li\
+vre de litt\xc3\xa9rat\
+ure jeunesse ou \
+une cr\xc3\xa9ation or\
+iginale.\x5cn\x5cnUn p\
+odcast produit p\
+ar Benjamin Mull\
+er, interpr\xc3\xa9t\xc3\xa9\
+ par C\xc3\xa9line Kal\
+lmann et r\xc3\xa9alis\
+\xc3\xa9 par Alexandre\
+ Ferreira.\x5cn\x5cnA \
+\xc3\xa9couter avant d\
+e se coucher, al\
+long\xc3\xa9 dans l'he\
+rbe, dans la voi\
+ture ou dans le \
+train, Encore un\
+e histoire veut \
+mettre en avant \
+la formidable cr\
+\xc3\xa9ation litt\xc3\xa9ra\
+ire destin\xc3\xa9e au\
+x jeunes lecteur\
+s (et aux moins \
+jeunes, donc).\x5cn\
+\x5cnVous retrouver\
+ez bien \xc3\xa9videmm\
+ent \xc3\xa0 chaque fo\
+is les r\xc3\xa9f\xc3\xa9ren\
+ces des livres l\
+us, si vous voul\
+ez aller plus lo\
+in en vous offra\
+nt le livre en q\
+uestion.\x5cn\x5cnVive\
+ la lecture, viv\
+e la litt\xc3\xa9ratur\
+e jeunesse, vive\
+ les histoires !\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+3a620866-c361-43\
+51-aa3a-c94305c4\
+4515\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x223a620\
+866-c361-4351-aa\
+3a-c94305c44515\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22les d\xc3\xa9couv\
+reurs partie 2\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x220b660a\
+85-eae9-4645-ae2\
+a-05c275ce4d05\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x220b660a85-ea\
+e9-4645-ae2a-05c\
+275ce4d05\x22,\x0d\x0a   \
+     \x22title\x22: \x22H\
+arry Potter - 5 \
+- L'Ordre du Ph\xc3\
+\xa9nix Complet\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Le livre\
+ audio Harry Pot\
+ter et l\xe2\x80\x99Ordre\
+ du Ph\xc3\xa9nix est \
+le cinqui\xc3\xa8me li\
+vre audio de la \
+s\xc3\xa9rie Harry Pot\
+ter \xc3\xa0 raconter \
+l\xe2\x80\x99histoire de \
+la vie de Harry \
+en tant qu\xe2\x80\x99\xc3\xa9t\
+udiant de 5e ann\
+\xc3\xa9e \xc3\xa0 l\xe2\x80\x99\xc3\xa9col\
+e de sorcellerie\
+ et de sorceller\
+ie de Poudlard.\x5c\
+n\x5cn\xc3\x80 ce stade d\
+e la vie du jeun\
+e sorcier, il ob\
+tient une entr\xc3\xa9\
+e myst\xc3\xa9rieuse d\
+ans un tournoi d\
+e trois magicien\
+s, o\xc3\xb9 il n\xe2\x80\x99a \
+d\xe2\x80\x99autre choix \
+que de concourir\
+.\x5cn\x5cnL\xe2\x80\x99\xc3\xa9v\xc3\xa9ne\
+ment litt\xc3\xa9raire\
+ d\xc3\xa9sormais accl\
+am\xc3\xa9, la saga Ha\
+rry Potter de JK\
+ Rowling, choque\
+ \xc3\xa0 nouveau dans\
+ ce cinqui\xc3\xa8me t\
+ome. Dans cet ar\
+ticle, vous pouv\
+ez facilement ac\
+c\xc3\xa9der aux archi\
+ves du cinqui\xc3\xa8m\
+e tome de la sag\
+a Young Potter, \
+t\xc3\xa9l\xc3\xa9charger gr\
+atuitement, rapi\
+dement et sans e\
+ngagement le liv\
+re audio Harry P\
+otter et l\xe2\x80\x99Ord\
+re du Ph\xc3\xa9nix, e\
+t en profiter co\
+urageusement. Le\
+s aventures d\xe2\x80\x99\
+un jeune sorcier\
+ selon le concep\
+t de JK Rowling\x22\
+\x0d\x0a    },\x0d\x0a    \x22c\
+27e43ce-6161-465\
+9-bc54-7099dfc62\
+d45\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22c27e43\
+ce-6161-4659-bc5\
+4-7099dfc62d45\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22EL KAPOUTCHI\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Entr\
+ez dans l'univer\
+s fantasque d'El\
+ Kapoutchi, le r\
+oi des m\xc3\xa9chants\
+, pr\xc3\xaat \xc3\xa0 tout \
+pour emb\xc3\xaater le\
+s enfants. Des h\
+istoires con\xc3\xa7ue\
+s pour les petit\
+es oreilles (de \
+6-9 ans), mais q\
+ui sauront satis\
+faire les plus g\
+randes aussi. D\xc3\
+\xa9couvrez de nouv\
+elles aventures \
+chaque mois.\x5cn\x5cn\
+https://ici.radi\
+o-canada.ca/ohdi\
+o/balados/4815/e\
+lkapoutchi\x22\x0d\x0a   \
+ },\x0d\x0a    \x22062d5c\
+50-cd37-4fff-90e\
+c-5e407e8a3656\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22062d5c50-cd\
+37-4fff-90ec-5e4\
+07e8a3656\x22,\x0d\x0a   \
+     \x22title\x22: \x22C\
+ontes \xc3\xa0 l\xe2\x80\x99env\
+ers\x22,\x0d\x0a        \x22\
+description\x22: \x22U\
+ne pr\xc3\xa9sidente d\
+e la R\xc3\xa9publique\
+ f\xc3\xa9ministe \xc3\xa0 q\
+ui un sondage r\xc3\
+\xa9v\xc3\xa8le qu\xe2\x80\x99une \
+certaine Blanche\
+-Neige est plus \
+intelligente qu\xe2\
+\x80\x99elle\xe2\x80\xa6 Une de\
+scendante du Pet\
+it Chaperon roug\
+e v\xc3\xaatue de bleu\
+ marine qui se c\
+roit plus malign\
+e que tout le mo\
+nde, et enferme \
+sa grand-m\xc3\xa8re d\
+ans la cage au l\
+oup du Jardin de\
+s Plantes\xe2\x80\xa6 Un \
+enfant maltrait\xc3\
+\xa9 par son oncle \
+et dont chaque l\
+arme qui coule s\
+e transforme en \
+cigarette\xe2\x80\xa6\x22\x0d\x0a \
+   },\x0d\x0a    \x22fcef\
+f976-d181-48a1-a\
+328-43d1a6aef7f0\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22fceff976-\
+d181-48a1-a328-4\
+3d1a6aef7f0\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Contes racont\xc3\xa9\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Plu\
+sieurs contes ra\
+cont\xc3\xa9s\x22\x0d\x0a    },\
+\x0d\x0a    \x221fd5fb37-\
+8802-4bb3-a6a9-0\
+f939c44a156\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x221fd5fb37-8802-\
+4bb3-a6a9-0f939c\
+44a156\x22,\x0d\x0a      \
+  \x22title\x22: \x22Hist\
+oire pour les or\
+eilles v2\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Histoire po\
+ur les oreilles.\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+1a31a64d-48d6-43\
+41-ba2b-6579a057\
+5d6d\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x221a31a\
+64d-48d6-4341-ba\
+2b-6579a0575d6d\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x2210 histoire\
+s de sorci\xc3\xa8res\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Agr\xc3\xa9\
+gation de diff\xc3\xa9\
+rentes histoires\
+ sur le th\xc3\xa8me d\
+es sorci\xc3\xa8res\x22\x0d\x0a\
+    },\x0d\x0a    \x228f3\
+403ed-3fd0-47df-\
+a7a1-69bc2136949\
+b\x22: {\x0d\x0a        \x22\
+uuid\x22: \x228f3403ed\
+-3fd0-47df-a7a1-\
+69bc2136949b\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Henri D\xc3\xa8s Rac\
+onte\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Henri D\xc3\xa8s racon\
+te, 28 histoires\
+\x5cn\x5cnhttps://www.\
+youtube.com/user\
+/HenriDesTV/\x5cn\x5cn\
+01 Il \xc3\xa9tait une\
+ fois au plus pr\
+ofond des bois\x5cn\
+02 Le chat bott\xc3\
+\xa9\x5cn03 Le Petit P\
+oucet\x5cn04 Boucle\
+ d'Or et les tro\
+is ours\x5cn05 Les \
+trois petits coc\
+hons\x5cn06 Le vila\
+in petit canard\x5c\
+n07 A l'\xc3\xa9cole D\
+avy Crockett\x5cn08\
+ Attention au d\xc3\
+\xa9part!\x5cn09 Bloub\
+il voit la vie e\
+n bleu\x5cn10 Bon a\
+pp\xc3\xa9tit Georges\x5c\
+n11 Chat de ch\xc3\xa2\
+teau et chat des\
+ champs\x5cn12 Dest\
+ination jumeaux\x5c\
+n13 En attendant\
+ la neige\x5cn14 Et\
+ si on dansait\x5cn\
+15 Hippo voudrai\
+t \xc3\xaatre beau\x5cn16\
+ J'aurais voulu \
+un petit fr\xc3\xa8re\x5c\
+n17 Je suis deve\
+nu transparent\x5cn\
+18 Je t'aime mam\
+an\x5cn19 Je veux \xc3\
+\xaatre grande\x5cn20 \
+La f\xc3\xaate de la m\
+usique\x5cn21 Le gr\
+and tour du peti\
+t poisson\x5cn22 Ma\
+\xc3\xablle la timide\x5c\
+n23 Mes petites \
+\xc3\xa9conomies\x5cn24 O\
+n t'aime papa\x5cn2\
+5 Paindur et Bon\
+pain\x5cn26 Petite \
+vague part \xc3\xa0 l'\
+aventure\x5cn27 Tex\
+, le chasseur de\
+ nuages\x5cn28 Une \
+lettre pour toi\x22\
+\x0d\x0a    },\x0d\x0a    \x22c\
+019415a-4205-4c6\
+b-a1ab-1e4761ec7\
+e09\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22c01941\
+5a-4205-4c6b-a1a\
+b-1e4761ec7e09\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Mes Petits L\
+ouveteaux\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x2212 de mes h\
+istoires de peti\
+ts louveteaux (\xc3\
+\xa9crites et lues \
+par l'auteur) et\
+ illustr\xc3\xa9es par\
+ abkassoul : \x5cn\x5c\
+n- Purlububu\x5cn- \
+Tatapin\x5cn- Color\
+icoco\x5cn- L\xc3\xa9l\xc3\xa9\x5c\
+n- Pipoli\x5cn- Fil\
+androni\x5cn- Lilip\
+ouss\x5cn- Soupalo\x5c\
+n- Eglantine\x5cn- \
+Lili\x5cn- Z\xc3\xa9bulon\
+ette\x5cn- Maintena\
+nt\x5cn\x5cnhttps://ww\
+w.chrisfalcoz.fr\
+/louveteaux.php \
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e9ee1bab-ec61-47\
+e9-bceb-13d55447\
+0940\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e9ee1\
+bab-ec61-47e9-bc\
+eb-13d554470940\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Pomme d'api\
+ 2019\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x227c45ca83-72de-4\
+be7-b94e-70ccb68\
+a87e2\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x227c45\
+ca83-72de-4be7-b\
+94e-70ccb68a87e2\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22mortelle a\
+d\xc3\xa8le\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\xc3\x87a fait quel b\
+ruit un d\xc3\xa9tecte\
+ur de mortellitu\
+de ? Et qui a bi\
+en p\xc3\xbb inventer \
+bien \xc3\xa7a ? Morte\
+lle Ad\xc3\xa8le bien \
+s\xc3\xbbr ! Enfin un \
+moyen de reconna\
+\xc3\xaetre ses sembla\
+bles, des gens b\
+izarres et morte\
+ls \xc3\xa0 la fois ! \
+Ad\xc3\xa8le d\xc3\xa9cide d\
+e tester son inv\
+ention \xc3\xa0 l'\xc3\xa9co\
+le : Geoffroy, J\
+ade, Miranda, Je\
+nnyfer... tous s\
+es camarades y p\
+assent mais aucu\
+n ne fait bouger\
+ l'aiguille du d\
+\xc3\xa9tecteur Ad\xc3\xa8le\
+ va-t-elle trouv\
+er quelqu'un d'a\
+ussi mortel qu'e\
+lle ?\x5cn\x5cnPlonge \
+les oreilles gra\
+ndes ouvertes da\
+ns cette adaptat\
+ion audio du rom\
+an Mortel un jou\
+r, Mortel toujou\
+rs pour le savoi\
+r ! Une aventure\
+ audio... trop m\
+ortelle !\x22\x0d\x0a    \
+},\x0d\x0a    \x220ce8ced\
+1-e631-4db1-adee\
+-187dd6828838\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x220ce8ced1-e63\
+1-4db1-adee-187d\
+d6828838\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+ livre des berce\
+uses\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+52697aba-bb5d-45\
+25-bb32-22bad739\
+fb8c\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2252697\
+aba-bb5d-4525-bb\
+32-22bad739fb8c\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Epopia - Le\
+s P'tites histoi\
+res\x22,\x0d\x0a        \x22\
+description\x22: \x22S\
+uivez en famille\
+ les folles aven\
+tures de Nao, My\
+rtille et Barnab\
+\xc3\xa9 ! Pirates, so\
+rci\xc3\xa8res, cowboy\
+s, indiens, mons\
+tres\xe2\x80\xa6 Chacune \
+des histoires pr\
+opos\xc3\xa9es transpo\
+rte l\xe2\x80\x99enfant d\
+ans un univers f\
+antastique !\x5cnht\
+tps://www.epopia\
+.com/blog/podcas\
+t/contes-histoir\
+es-audio/\x22\x0d\x0a    \
+},\x0d\x0a    \x22acc2aff\
+9-d8eb-4a39-a484\
+-a5fadd85edbe\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22acc2aff9-d8e\
+b-4a39-a484-a5fa\
+dd85edbe\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s histoires en \xc3\
+\xa2ge\x22,\x0d\x0a        \x22\
+description\x22: \x225\
+-6-7 ans\x22\x0d\x0a    }\
+,\x0d\x0a    \x22d9f64f09\
+-0bd2-4067-b610-\
+6d53b593fbbd\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22d9f64f09-0bd2\
+-4067-b610-6d53b\
+593fbbd\x22,\x0d\x0a     \
+   \x22title\x22: \x22Le \
+grimoire aux his\
+toires\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Le grimoire au\
+x histoires prop\
+ose des histoire\
+s audio \xc3\xa9ducati\
+ves pour les enf\
+ants.\x5cn\x22\x0d\x0a    },\
+\x0d\x0a    \x2269d71020-\
+b9f5-4511-8a5b-3\
+e4020469b3b\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2269d71020-b9f5-\
+4511-8a5b-3e4020\
+469b3b\x22,\x0d\x0a      \
+  \x22title\x22: \x22Disn\
+ey - Les chanson\
+s (16 films - 46\
+ chansons)\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22S\xc3\xa9lection\
+ de chanson Disn\
+ey.\x5cnV1: Release\
+ Fabouin\x5cnV2: Aj\
+out de 9 chanson\
+s\x5cnV3: Segmentat\
+ion par film, aj\
+out de 17 chanso\
+ns et retouche d\
+es vignettes\x5cnV4\
+: Ajout de 5 cha\
+nsons par EvilPi\
+mousse\x5cn\x5cnS\xc3\xa9lec\
+tion de 46 chans\
+ons Disney.\x5cnhtt\
+ps://www.youtube\
+.com/playlist?li\
+st=PLU5-6mn9YBf2\
+GRSsGqTnr4Hmosr7\
+zaqck\x5cn\x5cnLa Rein\
+e des Neiges\x5cn -\
+ 01 Lib\xc3\xa9r\xc3\xa9e, d\
+\xc3\xa9livr\xc3\xa9e\x5cn - 02\
+ Je voudrais un \
+bonhomme de neig\
+e\x5cn - 03 Je vais\
+ f\xc3\xaater ce renou\
+veau\x5cn - 04 L'am\
+our est un cadea\
+u\x5cn - 05 Nul n'e\
+st parfait\x5cn - 0\
+6 En \xc3\xa9t\xc3\xa9\x5cn\x5cnLe\
+ Roi Lion\x5cn - 07\
+ Hakuna Matata\x5cn\
+ - 08 Je voudrai\
+s d\xc3\xa9j\xc3\xa0 \xc3\xaatre r\
+oi\x5cn - 09 L\xe2\x80\x99Am\
+our brille sous \
+les \xc3\xa9toiles\x5cn -\
+ 10 L\xe2\x80\x99Histoire\
+ de la vie\x5cn - 1\
+1 Soyez pr\xc3\xaates \
+\x5cn - 12 Le Rappo\
+rt du matin\x5cn\x5cnR\
+aiponse\x5cn - 13 O\
+\xc3\xb9 est la vraie \
+vie?\x5cn - 14 J'ai\
+ un r\xc3\xaave\x5cn - 15\
+ N'\xc3\xa9coute que m\
+oi\x5cn - 16 Je veu\
+x y croire\x5cn\x5cnVa\
+iana\x5cn - 17 Le b\
+leu lumi\xc3\xa8re\x5cn -\
+ 18 Pour les hom\
+mes\x5cn - 19 Bling\
+-bling\x5cn - 20 L'\
+explorateur\x5cn\x5cnL\
+e livre de la Ju\
+ngle\x5cn - 21 Il e\
+n faut peu pour \
+\xc3\xaatre heureux\x5cn \
+- 22 Le livre de\
+ la Jungle: \xc3\x8atr\
+e un homme comme\
+ vous\x5cn\x5cnLa peti\
+te sir\xc3\xa8ne\x5cn - 2\
+3 Sous l'oc\xc3\xa9an\x5c\
+n - 24 Les poiss\
+ons\x5cn - 25 Parti\
+r l\xc3\xa0-bas\x5cn\x5cnOli\
+ver et Compagnie\
+\x5cn - 26 Mais pou\
+rquoi m'en faire\
+\x5cn\x5cnMulan\x5cn - 27\
+ Comme un homme\x5c\
+n - 28 Honneur \xc3\
+\xa0 tous\x5cn - 29 Qu\
+i je suis vraime\
+nt\x5cn\x5cnPocahontas\
+\x5cn - 30 L'air du\
+ vent\x5cn\x5cnLa Bell\
+e et la B\xc3\xaate\x5cn \
+- 31 C'est la f\xc3\
+\xaate\x5cn - 32 Belle\
+\x5cn\x5cnAladin\x5cn - 3\
+3 Je suis ton me\
+illeur ami\x5cn - 3\
+4 Ce r\xc3\xaave bleu\x5c\
+n - 35 Prince Al\
+i\x5cn - 36 Nuits d\
+'Arabie\x5cn\x5cnTarza\
+n\x5cn - 37 Je veux\
+ savoir\x5cn\x5cnPeter\
+ Pan\x5cn - 38 A la\
+ file indienne\x5cn\
+\x5cnHercule\x5cn - 39\
+ De z\xc3\xa9ro en h\xc3\xa9\
+ros\x5cn - 40 Jamai\
+s je n'avouerai\x5c\
+n\x5cnEncanto\x5cn - 4\
+1 Que sais-je fa\
+ire d'autre ?\x5cn \
+- 42 Ne parlons \
+pas de Bruno\x5cn -\
+ 43 La famille M\
+adrigal\x5cn - 44 S\
+ous les apparenc\
+es\x5cn\x5cnRebelle\x5cn \
+- 45 Vers le cie\
+l\x5cn - 46 Soleil \
+brulant\x5cn\x5cnV1 : \
+15 chansons\x5cnV2 \
+: 24 chansons\x5cnV\
+3 : 41 chansons\x5c\
+nV4 : 46 chanson\
+s\x22\x0d\x0a    },\x0d\x0a    \
+\x22b01fe3fc-cb13-4\
+603-9d0d-f987422\
+828e7\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22b01f\
+e3fc-cb13-4603-9\
+d0d-f987422828e7\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22J'aime Lir\
+e Vol. 09\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Enqu\xc3\xaate \xc3\xa0\
+ la Tour Eiffel\x5c\
+nL'incroyable ch\
+apeau\x5cnL'\xc3\xa9cole \
+s'affole\x5cnLa jun\
+gle de Gaspard\x5cn\
+La t\xc3\xa9l\xc3\xa9command\
+e Anti-D\xc3\xa9p\xc3\xaache\
+-Toi\x5cnMaudit por\
+te-bonheur\x5cnMiss\
+ion vide-grenier\
+\x5cnPrisonni\xc3\xa8re d\
+e l'ogre\x5cnTiens \
+bon, P\xc3\xa8re No\xc3\xabl\
+\x5cnUn pingouin da\
+ns le frigo\x22\x0d\x0a  \
+  },\x0d\x0a    \x227b286\
+245-9e29-4490-bf\
+8d-1b48ee47ed75\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x227b286245-9\
+e29-4490-bf8d-1b\
+48ee47ed75\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+J'aime Lire Vol.\
+ 10\x22,\x0d\x0a        \x22\
+description\x22: \x22A\
+ la poursuite du\
+ v\xc3\xa9lo vol\xc3\xa9\x5cnFr\
+issons en classe\
+ de neige\x5cnL'inv\
+asion des bonsho\
+mmes de neige\x5cnL\
+a petite fille e\
+t l'oiseau\x5cnLe g\
+rand voyage du p\
+etit caillou\x5cnMe\
+nace sur les elf\
+es\x5cnPrunelle la \
+pirate \xc3\xa0 lunett\
+es\x5cnSidonie au p\
+ays du vent\x5cnUn \
+slouf dans la cl\
+asse\x5cnUne rentr\xc3\
+\xa9e ensorcel\xc3\xa9e\x22\x0d\
+\x0a    },\x0d\x0a    \x22b8\
+a9e295-6802-43ac\
+-9a4d-064d8b372b\
+6f\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22b8a9e29\
+5-6802-43ac-9a4d\
+-064d8b372b6f\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Fantastique M\
+a\xc3\xaetre Renard\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Dans la\
+ vall\xc3\xa9e, il y a\
+vait trois fermi\
+ers, \xc3\xa9leveurs d\
+e volailles dodu\
+es... Le premier\
+ \xc3\xa9tait gros et \
+gourmand; le deu\
+xi\xc3\xa8me \xc3\xa9tait pe\
+tit et bilieux; \
+le troisi\xc3\xa8me \xc3\xa9\
+tait maigre et s\
+e nourrissait de\
+ cidre. Tous les\
+ trois \xc3\xa9taient \
+laids et m\xc3\xa9chan\
+ts. Dans le bois\
+ qui surplombait\
+ la vall\xc3\xa9e viva\
+ient Ma\xc3\xaetre Ren\
+ard, Dame Renard\
+ et leurs quatre\
+ renardeaux, aff\
+am\xc3\xa9s et malins.\
+.. Les aventures\
+ de Ma\xc3\xaetre Rena\
+rd sont racont\xc3\xa9\
+es avec d\xc3\xa9lice \
+et espi\xc3\xa8glerie \
+par un c\xc3\xa9l\xc3\xa8bre\
+ duo de com\xc3\xa9die\
+ns: Christine De\
+laroche et Danie\
+l Pr\xc3\xa9vost. Une \
+interpr\xc3\xa9tation \
+pleine d'\xc3\xa9nergi\
+e et de dr\xc3\xb4leri\
+es !\x22\x0d\x0a    },\x0d\x0a \
+   \x222a4f56c6-2b8\
+8-4184-8333-d87a\
+abc5ed83\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x222\
+a4f56c6-2b88-418\
+4-8333-d87aabc5e\
+d83\x22,\x0d\x0a        \x22\
+title\x22: \x22Le Mond\
+e d'Henri D\xc3\xa8s V\
+olume 3\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Volume 11: \x5c\x22\
+le petit zinzin\x5c\
+\x22, et, \x5c\x22papa mo\
+n baiser\x5c\x22\x5cnVolu\
+me 12: \x5c\x22Salut l\
+es filles, salut\
+ les gars\x5c\x22, et,\
+ \x5c\x22Dominique jou\
+e du piano\x5c\x22\x5cnVo\
+lume 13: \x5c\x22Mon h\
+ippopotame\x5c\x22 et \
+\x5c\x22Les oursons, l\
+es reuqins, les \
+kangourous et le\
+s ouistitis\x5c\x22\x5cnV\
+olume 14: \x5c\x22Le V\
+oyage\x5c\x22 et \x5c\x22Moi\
+ j'veux partir a\
+vec toi\x5c\x22\x5cnVolum\
+e 15: \x5c\x22La fourm\
+i amoureuse\x5c\x22 et\
+ \x5c\x22Le mille-patt\
+es\x5c\x22\x5cn\x22\x0d\x0a    },\x0d\
+\x0a    \x22babb5465-b\
+624-46ba-8308-da\
+53b0423e3a\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22babb5465-b624-4\
+6ba-8308-da53b04\
+23e3a\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les M\
+ini Mondes, 4-7 \
+ans (38 pays) 20\
+23-11-22\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Quoi de mieu\
+x que de la musi\
+que pour voyager\
+ d\xe2\x80\x99un pays \xc3\xa0 \
+l\xe2\x80\x99autre au ryt\
+hme des chansons\
+ !\x5cn\x5cnDe la musi\
+que, mais aussi \
+des histoires et\
+ surtout du fun \
+\xc3\xa0 gogo pour bou\
+ger son corps de\
+ bas en haut ! \xc3\
+\x80 \xc3\xa9couter \xc3\xa0 la\
+ maison, en voit\
+ure\xe2\x80\xa6 ou en van\
+, bien \xc3\xa9videmme\
+nt !\x5cn\x5cnAccroche\
+z vos ceintures,\
+ \xc3\xa7a va swinguer\
+ ! 38 pays \xc3\xa0 d\xc3\
+\xa9couvrir \xc3\xa0 trav\
+ers des comptine\
+s, musiques et h\
+istoires ultra c\
+houettes que vos\
+ enfants \xc3\xa9coute\
+ront avec bonheu\
+r d\xc3\xa8s qu\xe2\x80\x99ils \
+auront envie de \
+revivre l\xe2\x80\x99aven\
+ture du tour du \
+monde (ou d\xe2\x80\x99im\
+proviser une bou\
+m dans leur cham\
+bre !) \x5cn\x5cnMise \
+\xc3\xa0 jour de novem\
+bre 2023\x22\x0d\x0a    }\
+,\x0d\x0a    \x22fd9f503c\
+-636c-419b-91b0-\
+d4b596cb66e3\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22fd9f503c-636c\
+-419b-91b0-d4b59\
+6cb66e3\x22,\x0d\x0a     \
+   \x22title\x22: \x22Le \
+petit renard per\
+du\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Il\
+ \xc3\xa9tait une fois\
+ un petit renard\
+ perdu, il ne sa\
+vait pas quels c\
+hemins prendre p\
+our retrouver sa\
+ maman. Heureuse\
+ment que le lect\
+eur peut choisir\
+ pour lui !\x5cn\x5cnC\
+e livre \xc3\xa0 choix\
+ multiples est \xc3\
+\xa0 lire aux enfan\
+ts de maternelle\
+. Chaque lecture\
+ sera l\xe2\x80\x99occasi\
+on d\xe2\x80\x99une histo\
+ire diff\xc3\xa9rente \
+suivant les choi\
+x faits par l\xe2\x80\x99\
+enfant au cours \
+de la lecture.\x5cn\
+https://abc-appl\
+ications.com/pdf\
+/iBook-LePetitRe\
+nardPerdu.pdf\x22\x0d\x0a\
+    },\x0d\x0a    \x227e1\
+810cd-5446-424e-\
+a877-af5cff47228\
+2\x22: {\x0d\x0a        \x22\
+uuid\x22: \x227e1810cd\
+-5446-424e-a877-\
+af5cff472282\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Disney - 19 hi\
+stoires Disney\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x2219 his\
+toires d'on ne s\
+ait o\xc3\xb9 ?!\x22\x0d\x0a   \
+ },\x0d\x0a    \x2237ae8a\
+76-3fa0-4782-b25\
+9-26794688d4c5\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2237ae8a76-3f\
+a0-4782-b259-267\
+94688d4c5\x22,\x0d\x0a   \
+     \x22title\x22: \x22C\
+alypso et la boi\
+te \xc3\xa0 \xc3\xa9toiles\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Apr\xc3\xa8s\
+ avoir d\xc3\xa9couver\
+t la bo\xc3\xaete \xc3\xa0 \xc3\
+\xa9toiles, Calypso\
+ cherche \xc3\xa0 la f\
+aire fonctionner\
+ pour d\xc3\xa9couvrir\
+ toutes les hist\
+oires et l\xc3\xa9gend\
+es qu'elle regor\
+ge !\x22\x0d\x0a    },\x0d\x0a \
+   \x226081949e-9a6\
+e-4a6a-969b-72f4\
+20c5d970\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x226\
+081949e-9a6e-4a6\
+a-969b-72f420c5d\
+970\x22,\x0d\x0a        \x22\
+title\x22: \x22Spidey \
+et ses Amis\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Quelques \
+\xc3\xa9pisodes de la \
+s\xc3\xa9rie \x5c\x22Spidey \
+et ses amis extr\
+aordinaires\x5c\x22 su\
+r Disney+. Pour \
+les 3 ans et plu\
+s.\x22\x0d\x0a    },\x0d\x0a   \
+ \x22cfcf61c2-f31e-\
+410b-8850-c7fb2f\
+7cb7cd\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22cfc\
+f61c2-f31e-410b-\
+8850-c7fb2f7cb7c\
+d\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Philom\xc3\xa8n\
+e Et La Perle Ma\
+gique (10 chapit\
+res) by Lezardie\
+re 19-02-2023\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Philom\xc3\
+\xa8ne et la Perle \
+Magique - Les 10\
+ \xc3\xa9pisodes\x5cnSouf\
+fleur de R\xc3\xaaves\x5c\
+n\x5cnLu par Souffl\
+eur de R\xc3\xaaves\x5cn\x5c\
+n\x5cn\x5cnEn rentrant\
+ de l\xe2\x80\x99\xc3\xa9cole, \
+Philom\xc3\xa8ne la pe\
+tite sir\xc3\xa8ne tom\
+be sur une magni\
+fique perle bleu\
+e qui scintille \
+dans le sable...\
+ Cette d\xc3\xa9couver\
+te sera pour ell\
+e le d\xc3\xa9but d'un\
+e aventure extra\
+ordinaire qui lu\
+i fera traverser\
+ les oc\xc3\xa9ans \xc3\xa0 \
+la recherche du \
+Royaume des hu\xc3\xae\
+tres...\x5cn\x5cnEn re\
+ntrant de l\xe2\x80\x99\xc3\xa9\
+cole, Philom\xc3\xa8ne\
+ la petite sir\xc3\xa8\
+ne d\xc3\xa9couvre une\
+ magnifique perl\
+e bleue qui scin\
+tille dans le sa\
+ble. C\xe2\x80\x99est cel\
+le de la reine d\
+es hu\xc3\xaetres ! To\
+ut le monde sait\
+ que ce bijou ma\
+gique lui permet\
+ d\xe2\x80\x99\xc3\xa9clairer s\
+on royaume...\x5cn\x5c\
+nElle doit surem\
+ent le chercher \
+! Il faut donc l\
+ui rendre\xe2\x80\xa6Mais\
+ Philom\xc3\xa8ne n\xe2\x80\x99\
+en a pas tr\xc3\xa8s e\
+nvie et une dr\xc3\xb4\
+le d\xe2\x80\x99id\xc3\xa9e ger\
+me dans sa t\xc3\xaate\
+...\x5cn\x5cn\x5cn01 Un t\
+r\xc3\xa9sor dans le s\
+able\x5cn02 Loupiot\
+ le petit crabe\x5c\
+n03 Folle course\
+ dans le courant\
+ marin\x5cn04 Plube\
+lle la grosse va\
+gue\x5cn05 Une renc\
+ontre inattendue\
+\x5cn06 Ces coquine\
+s de crafouinett\
+es\x5cn07 Un invit\xc3\
+\xa9 ind\xc3\xa9sirable\x5cn\
+08 La cit\xc3\xa9 des \
+p\xc3\xaacheurs maudit\
+s\x5cn09 Le chant d\
+e la baleine\x5cn10\
+ Au royaume des \
+hu\xc3\xaetres\x5cn\x5cn\x5cnGe\
+nre : Conte - 5-\
+10 ans - Aventur\
+e\x5cn\xc3\x89diteur : 20\
+22 Audible\x5cnForm\
+at : 128 Kb/s\x5cnD\
+ur\xc3\xa9e : 2h10\x22\x0d\x0a \
+   },\x0d\x0a    \x226668\
+701a-c333-4dfe-a\
+feb-da6ec3128c8d\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x226668701a-\
+c333-4dfe-afeb-d\
+a6ec3128c8d\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Emilie Jolie - \
+Philippe Chatel\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\xc3\x89mil\
+ie Jolie tente d\
+e s\xe2\x80\x99endormir d\
+ans la p\xc3\xa9nombre\
+ de sa chambre. \
+ Elle imagine qu\
+e les personnage\
+s de son livre d\
+\xe2\x80\x99images pr\xc3\xa9f\xc3\
+\xa9r\xc3\xa9 l\xe2\x80\x99appelle\
+nt. Le temps d\xe2\x80\
+\x99un r\xc3\xaave, \xc3\x89mil\
+ie se glisse dan\
+s les pages.  Au\
+ pays des Lapins\
+ Bleus commence \
+un extraordinair\
+e voyage men\xc3\xa9 p\
+ar un oiseau mys\
+t\xc3\xa9rieux.\x5cn\x5cnhtt\
+ps://declicmusiq\
+ue.wordpress.com\
+/2019/12/23/emil\
+ie-jolie-a-40-an\
+s/\x22\x0d\x0a    },\x0d\x0a   \
+ \x22e98d1e56-4693-\
+49de-9047-e4a960\
+332b4e\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22e98\
+d1e56-4693-49de-\
+9047-e4a960332b4\
+e\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Merci R\xc3\xa9\
+mi !\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+b7e4b2d1-b0be-45\
+d4-bd02-963421d1\
+9f26\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22b7e4b\
+2d1-b0be-45d4-bd\
+02-963421d19f26\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Harry Potte\
+r - Extraits lus\
+ par Guillaume G\
+allienne\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Extraits de \
+la traduction de\
+ Jean-Fran\xc3\xa7ois \
+M\xc3\xa9nard, aux \xc3\xa9d\
+itions Gallimard\
+.\x5cn\x5cnAvec les pa\
+ssages suivants \
+:\x5cn\x5cn1. tome 1 :\
+ Harry Potter \xc3\xa0\
+ l'\xc3\xa9cole des so\
+rciers *: *Chapi\
+tre 6 \x5c\x22Rendez-v\
+ous sur la voie \
+93/4\x5c\x22 : le d\xc3\xa9b\
+ut de l'aventure\
+ \xc3\xa0 bord du Poud\
+lard Express\x5cn2.\
+ Tome 1 : Chapit\
+re 12, \x5c\x22Le miro\
+ir du rised\x5c\x22 : \
+une rencontre bo\
+uleversante\x5cn3. \
+Tome 3: Harry Po\
+tter et le priso\
+nnier d'Azkaban,\
+ Chapitre 9 : \x5c\x22\
+Sinistre d\xc3\xa9fait\
+e\x5c\x22 : les matchs\
+ de Quidditch\x5cn4\
+. Tome 6 : Harry\
+ Potter et le Pr\
+ince de Sang-m\xc3\xaa\
+l\xc3\xa9, Chapitre 14\
+ : \x5c\x22Felix felic\
+is\x5c\x22 : les premi\
+ers \xc3\xa9mois de l'\
+adolescence\x5cn5. \
+Tome 7: Harry Po\
+tter et les Reli\
+ques de la mort,\
+ Chapitre 34 : \x5c\
+\x22Retour dans la \
+for\xc3\xaat\x5c\x22 : l'ult\
+ime duel avec Vo\
+ldemort\x5cn6. Extr\
+ait du tome 8, H\
+arry Potter et l\
+'enfant maudit, \
+d'apr\xc3\xa8s JK Rowl\
+ing, pi\xc3\xa8ce de t\
+h\xc3\xa9\xc3\xa2tre co\xc3\xa9cri\
+te par John Tiff\
+any et Jack Thor\
+ne : Harry Potte\
+r a quarante ans\
+, il est mari\xc3\xa9 \
+\xc3\xa0 Ginny, la soe\
+ur de Ron; son f\
+ils, Albus, est \
+en pleine crise \
+d'adolescence...\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+c0d03758-1109-49\
+7d-bf31-a1bfc908\
+6e77\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22c0d03\
+758-1109-497d-bf\
+31-a1bfc9086e77\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Ecole des l\
+oisirs - Titouma\
+x (2021-2022)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Pack co\
+ntenant 16 histo\
+ires de l'\xc3\xa9cole\
+ des loisirs - T\
+itoumax (de 2 \xc3\xa0\
+ 4 ans) :\x5cn\x5cnSai\
+son 2020/2021 :\x5c\
+n      - 01 Z\xc3\xa9l\
+ie, viens t'habi\
+ller\x5cn      - 02\
+ Tous sur le cha\
+ntier\x5cn      - 0\
+3 Pop et le gran\
+d m\xc3\xa9chant loup\x5c\
+n      - 04 On d\
+it bonjour\x5cn    \
+  - 05 Minuscule\
+tte et la magie\x5c\
+n      - 06 Le l\
+ivre des qui fai\
+t quoi\x5cn      - \
+07 Le doudou de \
+Lolotte\x5cn      -\
+ 08 Elmer cherch\
+e et trouve\x5cn\x5cnS\
+aison 2021/2022 \
+:\x5cn      - 01 Tr\
+omboline et foul\
+bazar - la voitu\
+re\x5cn      - 02 N\
+otre Boucle d'Or\
+\x5cn      - 03 Le \
+livre va \xc3\xa0 l'\xc3\xa9\
+cole\x5cn      - 04\
+ Le grand lit de\
+ L\xc3\xa9on\x5cn      - \
+05 Le diner d'Ig\
+or\x5cn      - 06 L\
+a balan\xc3\xa7oire de\
+ l'espace\x5cn     \
+ - 07 Docteur Po\
+pov\x5cn      - 08 \
+Amour caillou\x22\x0d\x0a\
+    },\x0d\x0a    \x2283e\
+24f0f-c834-4b47-\
+83f2-b9a0d16c1ce\
+4\x22: {\x0d\x0a        \x22\
+uuid\x22: \x2283e24f0f\
+-c834-4b47-83f2-\
+b9a0d16c1ce4\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Star Wars - Ep\
+isode 3 - La rev\
+anche des Sith\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22La Gue\
+rre des Clones f\
+ait rage. Une fr\
+anche hostilit\xc3\xa9\
+ oppose d\xc3\xa9sorma\
+is le Chancelier\
+ Palpatine au Co\
+nseil Jedi. Anak\
+in Skywalker, je\
+une Chevalier Je\
+di pris entre de\
+ux feux, h\xc3\xa9site\
+ sur la conduite\
+ \xc3\xa0 tenir. S\xc3\xa9du\
+it par la promes\
+se d'un pouvoir \
+sans pr\xc3\xa9c\xc3\xa9dent\
+, tent\xc3\xa9 par le \
+c\xc3\xb4t\xc3\xa9 obscur de\
+ la Force, il pr\
+\xc3\xaate all\xc3\xa9geance\
+ au mal\xc3\xa9fique D\
+arth Sidious et \
+devient Dark Vad\
+or.\x5cnLes Seigneu\
+rs Sith s'unisse\
+nt alors pour pr\
+\xc3\xa9parer leur rev\
+anche, qui comme\
+nce par l'exterm\
+ination des Jedi\
+. Seuls rescap\xc3\xa9\
+s du massacre, Y\
+oda et Obi Wan s\
+e lancent \xc3\xa0 la \
+poursuite des Si\
+th. La traque se\
+ conclut par un \
+spectaculaire co\
+mbat au sabre en\
+tre Anakin et Ob\
+i Wan, qui d\xc3\xa9ci\
+dera du sort de \
+la galaxie.\x22\x0d\x0a  \
+  },\x0d\x0a    \x2240fc3\
+25f-5817-40ce-ae\
+ba-82eb97949247\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2240fc325f-5\
+817-40ce-aeba-82\
+eb97949247\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les histoires de\
+ Touk Touk\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22cda8c549-f\
+a28-429b-8319-0b\
+78ec2c0339\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22cda8c549-fa28-4\
+29b-8319-0b78ec2\
+c0339\x22,\x0d\x0a       \
+ \x22title\x22: \x22Besti\
+oles\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+fda17933-827b-47\
+b9-853a-ff21e306\
+dbd2\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22fda17\
+933-827b-47b9-85\
+3a-ff21e306dbd2\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Contes de f\
+\xc3\xa9es\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e06425a1-bb3a-4d\
+9f-98af-4b9beaf5\
+d498\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e0642\
+5a1-bb3a-4d9f-98\
+af-4b9beaf5d498\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Loupio - L'\
+enfant loup\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x22cd4cb984-\
+b92b-4ce9-a42e-6\
+0c1f6bcefca\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22cd4cb984-b92b-\
+4ce9-a42e-60c1f6\
+bcefca\x22,\x0d\x0a      \
+  \x22title\x22: \x22Gari\
+baldy et Giolito\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22470f\
+8228-c261-45cc-a\
+0c7-15ec0695a826\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22470f8228-\
+c261-45cc-a0c7-1\
+5ec0695a826\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22JP Arrou-Vignod\
+ - Enqu\xc3\xaate au c\
+oll\xc3\xa8ge - Le pro\
+fesseur a dispar\
+u\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Un \
+s\xc3\xa9jour \xc3\xa0 Venis\
+e ! C'est le pri\
+x du concours qu\
+e viennent de re\
+mporter R\xc3\xa9mi Ph\
+aramon, Mathilde\
+ Blondin et Pier\
+re-Paul Louis de\
+ Culbert, surnom\
+m\xc3\xa9 P.P. Cul-Ver\
+t. Accompagn\xc3\xa9s \
+de leur professe\
+ur, les trois co\
+ll\xc3\xa9giens prenne\
+nt le train pour\
+ l'Italie. Mais,\
+ en pleine nuit,\
+ le professeur d\
+ispara\xc3\xaet myst\xc3\xa9\
+rieusement... R\xc3\
+\xa9mi, Mathilde et\
+ P.P. se lancent\
+ \xc3\xa0 la poursuite\
+ des ravisseurs.\
+\x5cnDur\xc3\xa9e : 2h en\
+viron.\x22\x0d\x0a    },\x0d\
+\x0a    \x226a0be99c-2\
+fb6-40e4-8462-b6\
+c0db08e10e\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x226a0be99c-2fb6-4\
+0e4-8462-b6c0db0\
+8e10e\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les Z\
+instrus\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Un groupe d\xe2\x80\
+\x99enfants d\xc3\xa9barq\
+ue \xc3\xa0 l\xe2\x80\x99Audito\
+rium de la Maiso\
+n de la radio et\
+ de la musique. \
+Les musiciens de\
+ l\xe2\x80\x99orchestre s\
+ont partis en pa\
+use et leurs ins\
+truments les att\
+endent sagement \
+sur sc\xc3\xa8ne. Soud\
+ain, ils s\xe2\x80\x99ani\
+ment et se mette\
+nt \xc3\xa0 parler ! M\
+ais qui sont-ils\
+ vraiment ?\x5cn\x5cnC\
+omment souffler \
+dans une clarine\
+tte sans la vexe\
+r ? La trompette\
+ est-elle un age\
+nt secret ? Pour\
+quoi Loulou le c\
+lavecin craint-i\
+l les flammes ? \
+Que signifie Uku\
+l\xc3\xa9l\xc3\xa9 en hawa\xc3\xaf\
+en ? Pourquoi Gu\
+dule fait-elle a\
+utant de jaloux \
+parmi les instru\
+ments ? Pony l\xe2\x80\
+\x99harmonica a-t-i\
+l d\xc3\xa9j\xc3\xa0 mis les\
+ pieds sur la lu\
+ne ? Et la voix,\
+ que devient-ell\
+e quand elle pre\
+nd froid ? Vous \
+le saurez en \xc3\xa9c\
+outant Les Zinst\
+rus**, le nouvea\
+u podcast de Fra\
+nce Musique.**\x5cn\
+Florence Foresti\
+, Beno\xc3\xaet Poelvo\
+orde, Laure Cala\
+my, Didier Bourd\
+on, Laetitia Dos\
+ch, Alex Vizorek\
+, Laura Felpin, \
+Jean-Pascal Zadi\
+, Barbara Schulz\
+, Panayotis Pasc\
+ot, Emma de Caun\
+es, Augustin Tra\
+penard, Marie-An\
+ne Chazel et Vir\
+ginie Hocq incar\
+nent les instrum\
+ents dans les Zi\
+nstrus.\x22\x0d\x0a    },\
+\x0d\x0a    \x2224c0e2e5-\
+3cb6-4b43-a25a-7\
+181a8c48dfd\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2224c0e2e5-3cb6-\
+4b43-a25a-7181a8\
+c48dfd\x22,\x0d\x0a      \
+  \x22title\x22: \x22Alde\
+bert raconte\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2214 histo\
+ires \xc3\xa9crites et\
+ lues par Aldebe\
+rt et 11 de ses \
+chansons !\x22\x0d\x0a   \
+ },\x0d\x0a    \x221e0185\
+8d-0df8-4824-9f8\
+5-82c584b304bc\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x221e01858d-0d\
+f8-4824-9f85-82c\
+584b304bc\x22,\x0d\x0a   \
+     \x22title\x22: \x22A\
+uzou Le Loup qui\
+ voulait faire s\
+on spectacle (22\
+ audios) 2023-06\
+-24\x22,\x0d\x0a        \x22\
+description\x22: \x22E\
+t si Loup devena\
+it com\xc3\xa9dien ? \xc3\
+\x87a, \xc3\xa7a serait d\
+r\xc3\xb4lement chouet\
+te. Oui mais on \
+ne s'improvise p\
+as com\xc3\xa9dien ! C\
+omment joue-ton \
+la com\xc3\xa9die ? Co\
+mme dans la Rome\
+ antique avec un\
+e toge et des sp\
+artiates ? Heu, \
+pas facile pour \
+des pattes de lo\
+ups. Oh ! Et si \
+on jouait au th\xc3\
+\xa9\xc3\xa2tre d'ombres \
+chinoises ? Oui \
+mais c'est diffi\
+cile de ne pas f\
+aire peur avec l\
+'ombre de son mu\
+seau ! Ou alors \
+on fait comme \xc3\xa0\
+ Broadway et on \
+apprend \xc3\xa0 chant\
+er, \xc3\xa0 danser et\
+ on fait des cla\
+quettes dans un \
+costume \xc3\xa0 paill\
+ettes! Mais on p\
+eut aussi faire \
+rire et dire des\
+ blagues devant \
+un micro et \xc3\xa7a,\
+ c'est trop rigo\
+lo !\x5cn\x5cnPour Lou\
+p, accompagn\xc3\xa9 d\
+e son amoureuse \
+et de tous ses a\
+mis, c'est parti\
+ pour le grand v\
+oyage dans le mo\
+nde du spectacle\
+ pour apprendre \
+\xc3\xa0 chanter, joue\
+r, danser jusqu'\
+\xc3\xa0 en avoir le p\
+oil tout h\xc3\xa9riss\
+\xc3\xa9 !\x5cn\x5cnhttps://\
+music.youtube.co\
+m/playlist?list=\
+OLAK5uy m0KDzE41\
+wgV CE4J7IgORnHO\
+9Jzcu7pAE\x22\x0d\x0a    \
+},\x0d\x0a    \x2207370fe\
+6-25eb-45f2-b076\
+-da07419616a0\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2207370fe6-25e\
+b-45f2-b076-da07\
+419616a0\x22,\x0d\x0a    \
+    \x22title\x22: \x22Me\
+s premi\xc3\xa8res bel\
+les histoires 20\
+22\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Me\
+s premi\xc3\xa8res bel\
+les histoires 20\
+22\x5cn2022-01 Papa\
+nours\x5cn2022-02 L\
+e super lit d'Am\
+andine\x5cn2022-03 \
+Dr\xc3\xb4le de petit \
+mouton\x5cn2022-04 \
+La brioche \xc3\xa0 ro\
+ulette\x5cn2022-05 \
+Monsieur Patati \
+est malpoli\x5cn202\
+2-06 Le cadeau d\
+e Poulette Joset\
+te\x5cn2022-07 La c\
+hasse au tr\xc3\xa9sor\
+ de Fifolette\x5cn2\
+022-08 La petite\
+ b\xc3\xaatise de Tcha\
+\x5cn2022-09 En rou\
+te pour l'\xc3\xa9cole\
+\x5cn2022-10 Dr\xc3\xb4le\
+ de monstre\x5cn202\
+2-11 Tous malade\
+s chez les Touva\
+bien\x5cn2022-12 La\
+ couverture du P\
+\xc3\xa8re-No\xc3\xabl\x22\x0d\x0a   \
+ },\x0d\x0a    \x22052c1a\
+ac-9621-429b-927\
+c-c4f7868ff3b8\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22052c1aac-96\
+21-429b-927c-c4f\
+7868ff3b8\x22,\x0d\x0a   \
+     \x22title\x22: \x22a\
+utre histoire\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x22892a7b6\
+c-a939-4541-b752\
+-54286b500140\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22892a7b6c-a93\
+9-4541-b752-5428\
+6b500140\x22,\x0d\x0a    \
+    \x22title\x22: \x22Pe\
+tit Yogi\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x22861e88e4-476\
+c-4534-9b95-a599\
+fe4ad442\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+61e88e4-476c-453\
+4-9b95-a599fe4ad\
+442\x22,\x0d\x0a        \x22\
+title\x22: \x22France \
+Culture Les aven\
+tures de tintin \
+Le secret de la \
+licorne (4 episo\
+des) by Yohan\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Les ave\
+ntures de Tintin\
+, Le secret de l\
+a Licorne\x22\x0d\x0a    \
+},\x0d\x0a    \x22f56d913\
+7-9ea0-4f5d-a3b7\
+-7cb5436d1fa2\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22f56d9137-9ea\
+0-4f5d-a3b7-7cb5\
+436d1fa2\x22,\x0d\x0a    \
+    \x22title\x22: \x22En\
+core une histoir\
+e - Les primaire\
+s (5 chapitres)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Encor\
+e une histoire e\
+st un podcast de\
+stin\xc3\xa9 aux enfan\
+ts (et \xc3\xa0 ceux q\
+ui le sont encor\
+e dans leur t\xc3\xaat\
+e) qui aiment qu\
+'on leur raconte\
+ des histoires.\x5c\
+nChaque semaine,\
+ vous retrouvere\
+z ici une histoi\
+re lue, tir\xc3\xa9e d\
+'un livre de lit\
+t\xc3\xa9rature jeunes\
+se ou une cr\xc3\xa9at\
+ion originale.\x5cn\
+Un podcast produ\
+it par Benjamin \
+Muller, interpr\xc3\
+\xa9t\xc3\xa9 par C\xc3\xa9line\
+ Kallmann et r\xc3\xa9\
+alis\xc3\xa9 par Alexa\
+ndre Ferreira.\x5cn\
+A \xc3\xa9couter avant\
+ de se coucher, \
+allong\xc3\xa9 dans l'\
+herbe, dans la v\
+oiture ou dans l\
+e train, Encore \
+une histoire veu\
+t mettre en avan\
+t la formidable \
+cr\xc3\xa9ation litt\xc3\xa9\
+raire destin\xc3\xa9e \
+aux jeunes lecte\
+urs (et aux moin\
+s jeunes, donc).\
+\x5cnVous retrouver\
+ez bien \xc3\xa9videmm\
+ent \xc3\xa0 chaque fo\
+is les r\xc3\xa9f\xc3\xa9ren\
+ces des livres l\
+us, si vous voul\
+ez aller plus lo\
+in en vous offra\
+nt le livre en q\
+uestion.\x5cnVive l\
+a lecture, vive \
+la litt\xc3\xa9rature \
+jeunesse, vive l\
+es histoires\x22\x0d\x0a \
+   },\x0d\x0a    \x221cff\
+dbc0-df53-40df-9\
+812-5de34fae71ca\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x221cffdbc0-\
+df53-40df-9812-5\
+de34fae71ca\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Histoires d\
+e Toudou\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Tir\xc3\xa9 du pod\
+cast de Radio Fr\
+ance\x5cnhttps://ww\
+w.radiofrance.fr\
+/franceinter/pod\
+casts/serie-les-\
+histoires-de-tou\
+dou\x5cn\x5cn01 Toudou\
+, mon doudou\x5cn02\
+ Toudou et les m\
+ots doudous\x5cn03 \
+Toudou et la col\
+\xc3\xa8re\x5cn04 Toudou \
+et le chiffre 2\x5c\
+n05 Toudou et la\
+ for\xc3\xaat\x5cn06 Toud\
+ou et le bain\x5cn0\
+7 Toudou r\xc3\xaave e\
+n \x5c\x22ou\x5c\x22\x5cn08 Tou\
+dou et Armoire\x5cn\
+09 Toudou et la \
+neige\x5cn10 Toudou\
+ et l'anniversai\
+re\x5cn11 Toudou to\
+uche \xc3\xa0 tout\x5cn12\
+ Toudou, les yeu\
+x dans les yeux\x5c\
+n13 Toudou et le\
+s carottes\x5cn14 T\
+oudou et le prin\
+temps\x5cn15 Toudou\
+ fait un g\xc3\xa2teau\
+ vraiment d\xc3\xa9go\xc3\
+\xbbtant\x5cn16 Toudou\
+ s'ennuie\x5cn17 To\
+udou chez le doc\
+teur\x5cn18 Toudou \
+aide \xc3\xa0 la maiso\
+n\x5cn19 Toudou et \
+le piano\x5cn20 Fai\
+s comme Toudou\x5cn\
+21 Toudou et les\
+ \xc3\xa9toiles\x5cn22 To\
+udou \xc3\xa0 la ferme\
+\x5cn23 Toudou d\xc3\xa9c\
+ouvre la mer\x5cn24\
+ Toudou va \xc3\xa0 la\
+ plage\x5cn25 Toudo\
+u et les b\xc3\xa9b\xc3\xa9s\
+ oiseaux\x5cn26 Tou\
+dou se balance\x5cn\
+27 Toudou fait d\
+es blagues\x5cn28 T\
+oudou au march\xc3\xa9\
+\x5cn29 Toudou dit \
+non\x5cn30 Toudou n\
+'a plus peur du \
+noir\x22\x0d\x0a    },\x0d\x0a \
+   \x220b5fa8a1-3fb\
+f-4ced-a0fc-7a6d\
+762e1dc3\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x220\
+b5fa8a1-3fbf-4ce\
+d-a0fc-7a6d762e1\
+dc3\x22,\x0d\x0a        \x22\
+title\x22: \x22Mamie P\
+oule raconte\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Mamie Po\
+ule raconte - 11\
+ histoires - Ell\
+e \xc3\xa9tait une foi\
+s\x22\x0d\x0a    },\x0d\x0a    \
+\x2203bab4fd-a175-4\
+8e6-b64c-11a42c6\
+5dca9\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2203ba\
+b4fd-a175-48e6-b\
+64c-11a42c65dca9\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les aventu\
+res de Tom Sawye\
+r\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Com\
+me tous les gar\xc3\
+\xa7ons de son \xc3\xa2ge\
+, Tom Sawyer ado\
+re manquer l'\xc3\xa9c\
+ole. Il pr\xc3\xa9f\xc3\xa8r\
+e jouer aux pira\
+tes sur le Missi\
+ssippi et faire \
+les quatre cents\
+ coups avec son \
+ami Huckleberry,\
+ le petit vagabo\
+nd... Une nuit, \
+lors d'une exp\xc3\xa9\
+dition dans le c\
+imeti\xc3\xa8re du vil\
+lage, Tom et Huc\
+k assistent \xc3\xa0 u\
+n crime abominab\
+le. D\xc3\xa8s lors, i\
+ls n'ont plus qu\
+'une id\xc3\xa9e en t\xc3\
+\xaate: retrouver l\
+'assassin et s'e\
+mparer de son tr\
+\xc3\xa9sor.\x5cn\x22\x0d\x0a    }\
+,\x0d\x0a    \x22463717e1\
+-c52a-4e67-bd00-\
+df1df2b71645\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22463717e1-c52a\
+-4e67-bd00-df1df\
+2b71645\x22,\x0d\x0a     \
+   \x22title\x22: \x22Pac\
+k Histoires et C\
+ontes - 47 histo\
+ires\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+pack Histoires e\
+t Contes - 47 Hi\
+stoires\x5cn\x5cnhttps\
+://www.youtube.c\
+om/@HistoiresetC\
+ontes\x22\x0d\x0a    },\x0d\x0a\
+    \x22404ae266-1e\
+b1-4863-8da6-885\
+6ec92f027\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+404ae266-1eb1-48\
+63-8da6-8856ec92\
+f027\x22,\x0d\x0a        \
+\x22title\x22: \x22LesHis\
+toiresDePapa\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x220ec96f5f\
+-ba29-4277-827d-\
+b7cb6733a35e\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x220ec96f5f-ba29\
+-4277-827d-b7cb6\
+733a35e\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ Alphas\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Les Alphas :\x5c\
+n- La plan\xc3\xa8te d\
+es alphas (en 2 \
+chapitres) https\
+://www.youtube.c\
+om/watch?v=qrxIs\
+xl6sWw\x5cn- La tra\
+nsformation des \
+Alphas\x22\x0d\x0a    },\x0d\
+\x0a    \x220dbc18d7-3\
+f03-483e-a497-b9\
+7a3133c185\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x220dbc18d7-3f03-4\
+83e-a497-b97a313\
+3c185\x22,\x0d\x0a       \
+ \x22title\x22: \x22Gisel\
+a LLimona Contac\
+ontes( version c\
+atalane) (14)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Elle es\
+t une conteuse. \
+\x5cnDans ce pack, \
+il y a 14 histoi\
+res et c'est une\
+ version catalan\
+e.\x5cn\x5cnhttps://ww\
+w.giselallimona.\
+com/ca/ et \x5cn\x5cnh\
+ttps://www.youtu\
+be.com/@GiselaLl\
+imona/videos\x5cn\x5cn\
+1.\x5ctLa lluisa ui\
+\xcc\x88sa vol ser pri\
+ncesa \x5cn2.\x5ctEL m\
+ostre dels color\
+s\x5cn3.\x5ctLes princ\
+eses tambe\xcc\x81 es \
+tiren pets\x5cn4.\x5ct\
+Algu\xcc\x81 s'ha empa\
+ssat la lina!\x5cn5\
+.\x5ctUna casa a la\
+ mida\x5cn6.\x5ctCaca \
+de vaca\x5cn7.\x5ctDe \
+que\xcc\x80 fa gust la\
+ lluna\x5cn8.\x5ctEl p\
+eix irisat\x5cn9.\x5ct\
+Alla\xcc\x80 on viuen \
+els monstres\x5cn10\
+.\x5ctSomnis de neu\
+\x5cn11.\x5ctAnem a ca\
+sar un os\x5cn12.\x5ct\
+Hi ha un o\xcc\x81s so\
+ta l'escala\x5cn13.\
+\x5ctLa saltinadora\
+ gegant\x5cn14.\x5ctPi\
+ngu\xcc\x88i\xcc\x81\x5cn\x22\x0d\x0a   \
+ },\x0d\x0a    \x2236c8e9\
+9b-79b0-4bd0-b57\
+8-0a0791ae3ff2\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2236c8e99b-79\
+b0-4bd0-b578-0a0\
+791ae3ff2\x22,\x0d\x0a   \
+     \x22title\x22: \x22S\
+tar Wars Episode\
+ 2 - L'Attaque d\
+es clones\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Depuis le b\
+locus de la plan\
+\xc3\xa8te Naboo par l\
+a F\xc3\xa9d\xc3\xa9ration d\
+u commerce, la R\
+\xc3\xa9publique, gouv\
+ern\xc3\xa9e par le Ch\
+ancelier Palpati\
+ne, conna\xc3\xaet une\
+ v\xc3\xa9ritable cris\
+e. Un groupe de \
+dissidents, men\xc3\
+\xa9 par le sombre \
+Jedi comte Dooku\
+, manifeste son \
+m\xc3\xa9contentement \
+envers le foncti\
+onnement du r\xc3\xa9g\
+ime. Le S\xc3\xa9nat e\
+t la population \
+intergalactique \
+se montrent pour\
+ leur part inqui\
+ets face \xc3\xa0 l'\xc3\xa9\
+mergence d'une t\
+elle menace.\x5cnCe\
+rtains s\xc3\xa9nateur\
+s demandent \xc3\xa0 c\
+e que la R\xc3\xa9publ\
+ique soit dot\xc3\xa9e\
+ d'une solide ar\
+m\xc3\xa9e pour emp\xc3\xaac\
+her que la situa\
+tion ne se d\xc3\xa9t\xc3\
+\xa9riore davantage\
+. Parall\xc3\xa8lement\
+, Padm\xc3\xa9 Amidala\
+, devenue s\xc3\xa9nat\
+rice, est menac\xc3\
+\xa9e par les s\xc3\xa9pa\
+ratistes et \xc3\xa9ch\
+appe de justesse\
+ \xc3\xa0 un attentat.\
+ Le Padawan Anak\
+in Skywalker est\
+ charg\xc3\xa9 de sa p\
+rotection. Son m\
+a\xc3\xaetre, Obi-Wan \
+Kenobi, part enq\
+u\xc3\xaater sur cette\
+ tentative de me\
+urtre et d\xc3\xa9couv\
+re la constituti\
+on d'une myst\xc3\xa9r\
+ieuse arm\xc3\xa9e de \
+clones...\x22\x0d\x0a    \
+},\x0d\x0a    \x22c873098\
+b-8777-480b-b068\
+-00c6642f71a5\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22c873098b-877\
+7-480b-b068-00c6\
+642f71a5\x22,\x0d\x0a    \
+    \x22title\x22: \x22En\
+core une histoir\
+e Les vacances e\
+xtraordinaires \xc3\
+\x80 la recherche d\
+u dino perdu (sa\
+ison01 07 episod\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22E\
+ncore une histoi\
+re est un podcas\
+t destin\xc3\xa9 aux e\
+nfants (et \xc3\xa0 ce\
+ux qui le sont e\
+ncore dans leur \
+t\xc3\xaate) qui aimen\
+t qu'on leur rac\
+onte des histoir\
+es.\x5cn\x5cnChaque se\
+maine, vous retr\
+ouverez ici une \
+histoire lue, ti\
+r\xc3\xa9e d'un livre \
+de litt\xc3\xa9rature \
+jeunesse ou une \
+cr\xc3\xa9ation origin\
+ale.\x5cn\x5cnUn podca\
+st produit par B\
+enjamin Muller, \
+interpr\xc3\xa9t\xc3\xa9 par\
+ C\xc3\xa9line Kallman\
+n et r\xc3\xa9alis\xc3\xa9 p\
+ar Alexandre Fer\
+reira.\x5cn\x5cnhttps:\
+//podcast.ausha.\
+co/encore-une-hi\
+stoire/playlist/\
+les-vacances-ext\
+raordinaires\x22\x0d\x0a \
+   },\x0d\x0a    \x227500\
+5bf2-3622-4776-9\
+fab-881c92141b28\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2275005bf2-\
+3622-4776-9fab-8\
+81c92141b28\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les histoires d\
+e Loup\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22L'int\xc3\xa9grale d\
+es histoires de \
+\x5c\x22Loup\x5c\x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22fb3561bc\
+-720d-4588-9154-\
+1fc60c5af2f1\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22fb3561bc-720d\
+-4588-9154-1fc60\
+c5af2f1\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ Mini Mondes, 4-\
+7 ans (39 pays) \
+2023-12-10\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22MAJ v7 : D\
+\xc3\xa9cembre 2023, a\
+jout de la Norv\xc3\
+\xa8ge\x5cn\x5cnQuoi de m\
+ieux que de la m\
+usique pour voya\
+ger d\xe2\x80\x99un pays \
+\xc3\xa0 l\xe2\x80\x99autre au \
+rythme des chans\
+ons !\x5cn\x5cnDe la m\
+usique, mais aus\
+si des histoires\
+ et surtout du f\
+un \xc3\xa0 gogo pour \
+bouger son corps\
+ de bas en haut \
+! \xc3\x80 \xc3\xa9couter \xc3\xa0\
+ la maison, en v\
+oiture\xe2\x80\xa6 ou en \
+van, bien \xc3\xa9vide\
+mment !\x5cn\x5cnAccro\
+chez vos ceintur\
+es, \xc3\xa7a va swing\
+uer ! 39 pays \xc3\xa0\
+ d\xc3\xa9couvrir \xc3\xa0 t\
+ravers des compt\
+ines, musiques e\
+t histoires ultr\
+a chouettes que \
+vos enfants \xc3\xa9co\
+uteront avec bon\
+heur d\xc3\xa8s qu\xe2\x80\x99i\
+ls auront envie \
+de revivre l\xe2\x80\x99a\
+venture du tour \
+du monde (ou d\xe2\x80\
+\x99improviser une \
+boum dans leur c\
+hambre !) \x22\x0d\x0a   \
+ },\x0d\x0a    \x22d409a5\
+74-278b-4261-8ee\
+c-7806d4b5fb82\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22d409a574-27\
+8b-4261-8eec-780\
+6d4b5fb82\x22,\x0d\x0a   \
+     \x22title\x22: \x22D\
+isney\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x224da4d3e1-d514-4\
+45e-b7f1-95fe949\
+0f1ba\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x224da4\
+d3e1-d514-445e-b\
+7f1-95fe9490f1ba\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Souffleur \
+de r\xc3\xaaves Vidoc\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22https\
+://souffleurdere\
+ves.com/personna\
+ge/vidoc/6-7-ans\
+/\x5cn\x5cnVidoc\x5cnVido\
+c le virus n'est\
+ pas comme ses f\
+r\xc3\xa8res... Rendre\
+ les gens malade\
+s \xc3\xa7a ne l'amuse\
+ pas du tout ! I\
+l faut qu'il fas\
+se quelque chose\
+ ! Sa rencontre \
+avec Elisa va lu\
+i permettre de r\
+emplir la missio\
+n de sa vie...\x22\x0d\
+\x0a    },\x0d\x0a    \x226f\
+261672-9042-487c\
+-af0f-3f39db6a29\
+30\x22: {\x0d\x0a        \
+\x22uuid\x22: \x226f26167\
+2-9042-487c-af0f\
+-3f39db6a2930\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Les Tripl\xc3\xa9s\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Prene\
+z trois gamins c\
+raquants. Trois \
+enfants ins\xc3\xa9par\
+ables. Deux fr\xc3\xa8\
+res et une s\xc5\x93ur\
+ du m\xc3\xaame \xc3\xa2ge, \
+ce sont les Trip\
+l\xc3\xa9s !\x22\x0d\x0a    },\x0d\
+\x0a    \x221051b5ba-f\
+516-4c53-b7d2-10\
+6d72d2cf36\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x221051b5ba-f516-4\
+c53-b7d2-106d72d\
+2cf36\x22,\x0d\x0a       \
+ \x22title\x22: \x22J'aim\
+e Lire Vol. 07\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Ad\xc3\xa8le\
+ Et Le Robono\xc3\xabl\
+\x5cnComme tu as gr\
+andi\x5cnL'incroyab\
+le histoire du c\
+artable perdu\x5cnL\
+a soupe \xc3\xa0 r\xc3\xa9tr\
+\xc3\xa9cir\x5cnLe jour d\
+es farces\x5cnLe no\
+uveau petit chap\
+eron rouge\x5cnLes \
+lunettes de Cami\
+lle\x5cnLes pires e\
+nnemis\x5cnOn veut \
+un chien\x5cnQui se\
+ra le chef\x22\x0d\x0a   \
+ },\x0d\x0a    \x22117043\
+7d-053c-47db-b59\
+3-762b4b8e71cb\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x221170437d-05\
+3c-47db-b593-762\
+b4b8e71cb\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es aventures de \
+Rodolphe et Gala\
+, saison 5\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22a9305ba9-1\
+a79-4e14-b2c5-40\
+3b7a199d84\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22a9305ba9-1a79-4\
+e14-b2c5-403b7a1\
+99d84\x22,\x0d\x0a       \
+ \x22title\x22: \x22Club \
+Citrouillade\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22112a7bed\
+-8cc6-4687-bac1-\
+2a4dcf6519eb\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22112a7bed-8cc6\
+-4687-bac1-2a4dc\
+f6519eb\x22,\x0d\x0a     \
+   \x22title\x22: \x22La \
+Patpatrouille\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x2219 Hist\
+oires de la Pat'\
+Patrouille pour \
+se distraire san\
+s \xc3\xa9crans\x22\x0d\x0a    \
+},\x0d\x0a    \x2295866e2\
+f-db85-45ec-9e59\
+-25b7287c8f89\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2295866e2f-db8\
+5-45ec-9e59-25b7\
+287c8f89\x22,\x0d\x0a    \
+    \x22title\x22: \x22En\
+core une  histoi\
+re - Les enfants\
+ naufrag\xc3\xa9s (11 \
+\xc3\xa9pisodes + 1 bo\
+nus)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Une histoire \xc3\xa9c\
+rite par Benjami\
+n Muller, interp\
+r\xc3\xa9t\xc3\xa9e par C\xc3\xa9l\
+ine Kallmann, r\xc3\
+\xa9alisation et mu\
+siques Alexandre\
+ Ferreira, produ\
+ction Benjamin M\
+uller. Avec la p\
+articipation de \
+Juliette, Lola e\
+t Nicolas Fr\xc3\xa9re\
+t. \x5cn\x5cnEncore un\
+e histoire est u\
+n podcast destin\
+\xc3\xa9 aux enfants (\
+et \xc3\xa0 ceux qui l\
+e sont encore da\
+ns leur t\xc3\xaate) q\
+ui aiment qu'on \
+leur raconte des\
+ histoires.\x5cn\x5cnC\
+haque semaine, v\
+ous retrouverez \
+ici une histoire\
+ lue, tir\xc3\xa9e d'u\
+n livre de litt\xc3\
+\xa9rature jeunesse\
+ ou une cr\xc3\xa9atio\
+n originale.\x5cn\x5cn\
+Un podcast produ\
+it par Benjamin \
+Muller, interpr\xc3\
+\xa9t\xc3\xa9 par C\xc3\xa9line\
+ Kallmann et r\xc3\xa9\
+alis\xc3\xa9 par Alexa\
+ndre Ferreira.\x5cn\
+\x5cnA \xc3\xa9couter ava\
+nt de se coucher\
+, allong\xc3\xa9 dans \
+l'herbe, dans la\
+ voiture ou dans\
+ le train, Encor\
+e une histoire v\
+eut mettre en av\
+ant la formidabl\
+e cr\xc3\xa9ation litt\
+\xc3\xa9raire destin\xc3\xa9\
+e aux jeunes lec\
+teurs (et aux mo\
+ins jeunes, donc\
+).\x5cn\x5cnVous retro\
+uverez bien \xc3\xa9vi\
+demment \xc3\xa0 chaqu\
+e fois les r\xc3\xa9f\xc3\
+\xa9rences des livr\
+es lus, si vous \
+voulez aller plu\
+s loin en vous o\
+ffrant le livre \
+en question.\x5cn\x5cn\
+Vive la lecture,\
+ vive la litt\xc3\xa9r\
+ature jeunesse, \
+vive les histoir\
+es !\x22\x0d\x0a    },\x0d\x0a \
+   \x22a4cbcda8-110\
+f-4431-bbb0-ed0d\
+557452e6\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22a\
+4cbcda8-110f-443\
+1-bbb0-ed0d55745\
+2e6\x22,\x0d\x0a        \x22\
+title\x22: \x22Les ave\
+ntures de Tintin\
+ - Les 7 boules \
+de cristal\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Sept savan\
+ts viennent de r\
+entrer en Europe\
+ apr\xc3\xa8s une exp\xc3\
+\xa9dition  ethnolo\
+gique de deux an\
+s au P\xc3\xa9rou o\xc3\xb9 \
+ils ont d\xc3\xa9couve\
+rt la momie de  \
+l\xe2\x80\x99Inca Rascar \
+Capac, encore co\
+iff\xc3\xa9e de son di\
+ad\xc3\xa8me. Mais \xc3\xa0 \
+peine  arriv\xc3\xa9s,\
+ ils sont, les u\
+ns apr\xc3\xa8s les au\
+tres, myst\xc3\xa9rieu\
+sement frapp\xc3\xa9s \
+de  l\xc3\xa9thargie e\
+t le professeur \
+Tournesol dispar\
+a\xc3\xaet\xe2\x80\xa6 Tintin e\
+t le capitaine  \
+Haddock sauront-\
+ils d\xc3\xa9couvrir q\
+uel sortil\xc3\xa8ge s\
+emble accompagne\
+r le  retour de \
+cette exp\xc3\xa9ditio\
+n ? Les 7 boules\
+ de cristal, par\
+ France Culture,\
+ la Com\xc3\xa9die-Fra\
+n\xc3\xa7aise, l'Orche\
+stre national de\
+ France et Mouli\
+nsart.\x22\x0d\x0a    },\x0d\
+\x0a    \x223644f90c-7\
+215-49cb-8c96-ff\
+16dfc97a51\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x223644f90c-7215-4\
+9cb-8c96-ff16dfc\
+97a51\x22,\x0d\x0a       \
+ \x22title\x22: \x22Mini \
+loup\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+4 histoires de m\
+ini loup:\x5cn- Min\
+i loup au poney \
+club\x5cn- Mini lou\
+p au cirque\x5cn- U\
+ne petite soeur \
+pour mini loup\x5cn\
+- Mini loup le c\
+hevalier, la pri\
+ncesse et le dra\
+gon\x22\x0d\x0a    },\x0d\x0a  \
+  \x22b615d239-21e3\
+-47cf-8736-9579c\
+dcf273b\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22b6\
+15d239-21e3-47cf\
+-8736-9579cdcf27\
+3b\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Mes prem\
+iers j'aime lire\
+ - Pack 4\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x2212619058-48\
+c9-4e1b-829d-bad\
+cb3ee092f\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+12619058-48c9-4e\
+1b-829d-badcb3ee\
+092f\x22,\x0d\x0a        \
+\x22title\x22: \x22Les av\
+entures deTimot\xc3\
+\xa9(editions Gr\xc3\xbcn\
+d) by evaibo 202\
+30130\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22L'ensemble des \
+livres Timot\xc3\xa9 \xc3\
+\xa9crites par Emma\
+nuelle Massonaud\
+, M\xc3\xa9lanie Combe\
+s et racont\xc3\xa9s p\
+ar Marcha Van Bo\
+ven. Ils sont di\
+sponibles via co\
+de sous Lizzie  \
+(https://www.liz\
+zie.audio/search\
+)\x5cn\x5cn\xc2\xa9 2014 \xc3\x89d\
+itions Gr\xc3\xbcnd, u\
+n d\xc3\xa9partement d\
+\xe2\x80\x99\xc3\x89di8. \xe2\x84\x97 Li\
+zzie, un d\xc3\xa9part\
+ement d\xe2\x80\x99Univer\
+s Poche, Paris, \
+2022 \x5cn\x5cnTimot\xc3\xa9\
+ est un petit la\
+pin qui, au fil \
+des \xc3\xa9pisodes, p\
+artage sa vie av\
+ec ses petits le\
+cteurs.\x5cn\x5cn* Tim\
+ot\xc3\xa9 d\xc3\xa9couvre l\
+es lettres\x5cn* Ti\
+mot\xc3\xa9 et le No\xc3\xab\
+l magique\x5cn* Tim\
+ot\xc3\xa9 fait du v\xc3\xa9\
+lo\x5cn* Timot\xc3\xa9 de\
+vient grand fr\xc3\xa8\
+re\x5cn* Timot\xc3\xa9 ai\
+me la musique\x5cn*\
+ Timot\xc3\xa9 d\xc3\xa9couv\
+re les chiffres\x5c\
+n* Timot\xc3\xa9 fait \
+du ski\x5cn* Timot\xc3\
+\xa9 f\xc3\xaate P\xc3\xa2ques\x5c\
+n* Timot\xc3\xa9 visit\
+e le Louvre\x5cn* T\
+imot\xc3\xa9 f\xc3\xaate No\xc3\
+\xabl\x5cn* Timot\xc3\xa9 va\
+ chez le docteur\
+\x5cn* Timot\xc3\xa9 jard\
+ine\x5cn *Timot\xc3\xa9 j\
+oue au foot\x5cn* T\
+imot\xc3\xa9 va sur le\
+ pot\x5cn* Timot\xc3\xa9 \
+va \xc3\xa0 la cantine\
+\x5cn* Timot\xc3\xa9 visi\
+te un ch\xc3\xa2teau f\
+ort\x5cn* Timot\xc3\xa9 f\
+ait du poney\x5cn* \
+Timot\xc3\xa9 \xc3\xa0 la pi\
+scine\x5cn* Timot\xc3\xa9\
+ va \xc3\xa0 la biblio\
+th\xc3\xa8que\x5cn* Timot\
+\xc3\xa9 fait des b\xc3\xaat\
+ises\x5cn* Timot\xc3\xa9 \
+chez Papi et Mam\
+ie\x5cn* Timot\xc3\xa9 va\
+ au cirque\x5cn* Ti\
+mot\xc3\xa9 va au spec\
+tacle\x5cn* Timot\xc3\xa9\
+ et ses \xc3\xa9motion\
+s\x5cn* Timot\xc3\xa9 ne \
+veut pas dormir\x5c\
+n* Timot\xc3\xa9 et so\
+n doudou\x5cn* Timo\
+t\xc3\xa9 \xc3\xa0 l'aquariu\
+m\x5cn* Timot\xc3\xa9 et \
+ses lunettes\x5cn* \
+Timot\xc3\xa9 dort che\
+z un copain\x5cn* T\
+imot\xc3\xa9 visite le\
+ zoo\x5cn* Timot\xc3\xa9 \
+et sa t\xc3\xa9tine\x5cn*\
+ Timot\xc3\xa9 \xc3\xa0 la f\
+erme\x5cn* Timot\xc3\xa9 \
+visite Paris\x5cn* \
+Timot\xc3\xa9 visite l\
+a Bretagne\x5cn* Ti\
+mot\xc3\xa9 se d\xc3\xa9guis\
+e\x5cn* Timot\xc3\xa9 fai\
+t un g\xc3\xa2teau\x5cn* \
+Timot\xc3\xa9 f\xc3\xaate so\
+n anniversaire\x5cn\
+* Timot\xc3\xa9 prend \
+l'avion\x5cn* Timot\
+\xc3\xa9 et la petite \
+souris\x5cn* Timot\xc3\
+\xa9 prend le train\
+\x5cn* Timot\xc3\xa9 au b\
+ord de la mer\x5cn*\
+ Timot\xc3\xa9 entre \xc3\
+\xa0 l'\xc3\xa9cole\x5cn* Ti\
+mot\xc3\xa9 chez les p\
+ompiers\x5cn* Timot\
+\xc3\xa9 se prom\xc3\xa8ne e\
+n for\xc3\xaat\x5cn\x5cnAbse\
+nts (je ne dispo\
+se pas des codes\
+ ni des livres):\
+\x5cn\x5cn* Timot\xc3\xa9 es\
+t tr\xc3\xa8s poli\x5cn* \
+Timot\xc3\xa9 et la ga\
+lette des rois\x5cn\
+* Timot\xc3\xa9 f\xc3\xaate \
+la Saint-Nicolas\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e2873534-2dd8-46\
+c1-809f-b2f9b87d\
+8fd3\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e2873\
+534-2dd8-46c1-80\
+9f-b2f9b87d8fd3\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Le petit ga\
+r\xc3\xa7on magique\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Le peti\
+t gar\xc3\xa7on magiqu\
+e - contes pour \
+enfants\x5cn\x5cnLe Pe\
+tit Gar\xc3\xa7on Magi\
+que est un podca\
+st destin\xc3\xa9 aux \
+enfants qui aime\
+nt les contes et\
+ les histoires. \
+Ils pourront sui\
+vre les aventure\
+s extraordinaire\
+s d'un petit gar\
+\xc3\xa7on.\x5cnQuand la \
+vie est trop dif\
+ficile, le petit\
+ gar\xc3\xa7on se r\xc3\xa9f\
+ugie dans une fo\
+r\xc3\xaat enchant\xc3\xa9e,\
+ peupl\xc3\xa9e d'\xc3\xaatr\
+es merveilleux. \
+La for\xc3\xaat est \xc3\xa9\
+galement la deme\
+ure de la terrib\
+le sorci\xc3\xa8re Kak\
+a.\x5cnDes petits c\
+ontes qui illust\
+rent la grande o\
+dyss\xc3\xa9e de l'enf\
+ance, avec ses t\
+h\xc3\xa8mes incontour\
+nables tels que \
+la soif de liber\
+t\xc3\xa9, l'imaginair\
+e, l'\xc3\xa9cole, la \
+confiance, l'est\
+ime de soi, la j\
+alousie, l'amiti\
+\xc3\xa9, la solitude,\
+ l'aventure, le \
+courage d'affron\
+ter ses peurs et\
+ de grandir, ...\
+\x5cn\x5cnDes histoire\
+s originales \xc3\xa9c\
+rites et interpr\
+\xc3\xa9t\xc3\xa9es par Mari\
+e Corseri - une \
+production du st\
+udio Jean-Grizzl\
+y.\x5cn\x5cnhttps://ww\
+w.facebook.com/L\
+ePetitGarconMagi\
+que\x5cnhttp://lepe\
+titgarconmagique\
+.com/\x5cn\x5cnCe pack\
+ comprend les \xc3\xa9\
+pisodes de la sa\
+ison 1 et 2.  La\
+ saison 3 est ac\
+tuellement en co\
+urs de diffusion\
+ (nov 2023).\x5cn\x5cn\
+\xc3\x89pisodes de la \
+saison 1.\x5cn1. Le\
+ m\xc3\xa9daillon\x5cn2. \
+Le poisson d\xe2\x80\x99a\
+rgent\x5cn3. La f\xc3\xa9\
+e bleue\x5cn4. Les \
+grains de caf\xc3\xa9\x5c\
+n5. La cr\xc3\xa8me gl\
+ac\xc3\xa9e\x5cn6. L\xe2\x80\x99ar\
+bre magique\x5cn7. \
+L\xe2\x80\x99aigle royal\x5c\
+n8. Le cerf de l\
+a for\xc3\xaat\x5cn9. Les\
+ tortues g\xc3\xa9ante\
+s\x5cn10. Lila, le \
+miel et les abei\
+lles\x5cn\x5cn\xc3\x89pisode\
+s de la saison 2\
+\xc2\xa0:\x5cn1. Les loup\
+s\x5cn2. La grotte \
+et les pierres d\
+e soleil\x5cn3.  La\
+ cabane de la fo\
+r\xc3\xaat\x5cn4. Les our\
+s\x5cn5. Les larmes\
+ de la sorci\xc3\xa8re\
+ kaka\x5cn6. Le ren\
+ardeau\x5cn7. La d\xc3\
+\xa9esse argila\x5cn8.\
+ Le pacte de la \
+pleine Lune\x5cn9. \
+La baleine\x5cn10. \
+Le spectacle de \
+fin d\xe2\x80\x99ann\xc3\xa9e\x5cn\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+b85b916b-c9a1-4b\
+b2-befb-25183428\
+3ab0\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22b85b9\
+16b-c9a1-4bb2-be\
+fb-251834283ab0\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Le Monde d'\
+Henri D\xc3\xa8s Volum\
+e 4\x22,\x0d\x0a        \x22\
+description\x22: \x22V\
+olume 16: \x5c\x22Oh\xc3\xa9\
+ le bateau\x5c\x22, et\
+, \x5c\x22Vagues vague\
+lettes\x5c\x22\x5cnVolume\
+ 17: \x5c\x22La petite\
+ Charlotte\x5c\x22, et\
+, \x5c\x22Zingla\xc3\xafro\x5c\x22\
+\x5cnVolume 18: \x5c\x22T\
+ous les chats so\
+nt gris\x5c\x22 et \x5c\x22M\
+es chats\x5c\x22\x5cnVolu\
+me 19: \x5c\x22Le t\xc3\xa9l\
+\xc3\xa9phone\x5c\x22 et \x5c\x22T\
+r\xc3\xa8s gentil tout\
+ l'monde\x5c\x22\x5cnVolu\
+me 20: \x5c\x22Mon ami\
+ le poisson\x5c\x22 et\
+ \x5c\x22Y'a y'a un po\
+isson\x5c\x22\x22\x0d\x0a    },\
+\x0d\x0a    \x2292fe85de-\
+188f-45c0-9f4f-9\
+d35dcc18239\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2292fe85de-188f-\
+45c0-9f4f-9d35dc\
+c18239\x22,\x0d\x0a      \
+  \x22title\x22: \x22Disn\
+ey - 38 histoire\
+s de princesses\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22b5c68\
+c15-8933-4731-ad\
+5c-6f60165b5276\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22b5c68c15-8\
+933-4731-ad5c-6f\
+60165b5276\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Moko, enfant du \
+monde\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x221936e7c0-02a6-4\
+a1c-95e9-c56f9c1\
+a2ad0\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x221936\
+e7c0-02a6-4a1c-9\
+5e9-c56f9c1a2ad0\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x227 milliard\
+s de voisins, de\
+s contes \xc3\xa0 \xc3\xa9co\
+uter\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+aaa4b4f5-6ea4-43\
+af-9d70-e8eda248\
+13ad\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22aaa4b\
+4f5-6ea4-43af-9d\
+70-e8eda24813ad\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22KIDICO L'en\
+cyclop\xc3\xa9die sono\
+re pour les enfa\
+nts\x22,\x0d\x0a        \x22\
+description\x22: \x22K\
+IDICO : L'ENCYCL\
+OP\xc3\x89DIE SONORE P\
+OUR LES ENFANTS\x5c\
+nLes \xc3\xa9pisodes s\
+e d\xc3\xa9coupent en \
+3 grandes p\xc3\xa9rio\
+des : les 3 Ques\
+tions Kidico pou\
+r d\xc3\xa9couvrir, le\
+s Chiffres Fou F\
+ou pour s'amuser\
+ tout en apprena\
+nt et les \x5c\x22Vrai\
+ ou Faux\x5c\x22 pour \
+approfondir les \
+connaissances de\
+ l'enfant.\x5cnKIDI\
+CO a ainsi \xc3\xa9t\xc3\xa9\
+ pens\xc3\xa9 comme un\
+ \xc3\xa9change, une d\
+iscussion avec l\
+es enfants pour \
+faciliter l'appr\
+entissage.\x5cnLes \
+parents sont inv\
+it\xc3\xa9s \xc3\xa0 \xc3\xa9coute\
+r les \xc3\xa9pisodes \
+pour passer un m\
+oment d'\xc3\xa9change\
+ et de plaisir a\
+vec leur enfant.\
+\x5cnhttps://play.a\
+cast.com/s/kidic\
+o\x22\x0d\x0a    },\x0d\x0a    \
+\x226380f533-9adf-4\
+0e6-8125-c5c61bf\
+a5ef3\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x226380\
+f533-9adf-40e6-8\
+125-c5c61bfa5ef3\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les Zinstr\
+us france musiqu\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Un \
+groupe d\xe2\x80\x99enfan\
+ts d\xc3\xa9barque \xc3\xa0 \
+l\xe2\x80\x99Auditorium d\
+e la Maison de l\
+a radio et de la\
+ musique. Les mu\
+siciens de l\xe2\x80\x99o\
+rchestre sont pa\
+rtis en pause et\
+ leurs instrumen\
+ts les attendent\
+ sagement sur sc\
+\xc3\xa8ne. Soudain, i\
+ls s\xe2\x80\x99animent e\
+t se mettent \xc3\xa0 \
+parler ! Mais qu\
+i sont-ils vraim\
+ent ?\x5cn\x5cnComment\
+ souffler dans u\
+ne clarinette sa\
+ns la vexer ? La\
+ trompette est-e\
+lle un agent sec\
+ret ? Pourquoi L\
+oulou le claveci\
+n craint-il les \
+flammes ? Que si\
+gnifie Ukul\xc3\xa9l\xc3\xa9\
+ en hawa\xc3\xafen ? P\
+ourquoi Gudule f\
+ait-elle autant \
+de jaloux parmi \
+les instruments \
+? Pony l\xe2\x80\x99harmo\
+nica a-t-il d\xc3\xa9j\
+\xc3\xa0 mis les pieds\
+ sur la lune ? E\
+t la voix, que d\
+evient-elle quan\
+d elle prend fro\
+id ? Vous le sau\
+rez en \xc3\xa9coutant\
+ Les Zinstrus**,\
+ le nouveau podc\
+ast de France Mu\
+sique.**\x5cnFloren\
+ce Foresti, Beno\
+\xc3\xaet Poelvoorde, \
+Laure Calamy, Di\
+dier Bourdon, La\
+etitia Dosch, Al\
+ex Vizorek, Laur\
+a Felpin, Jean-P\
+ascal Zadi, Barb\
+ara Schulz, Pana\
+yotis Pascot, Em\
+ma de Caunes, Au\
+gustin Trapenard\
+, Marie-Anne Cha\
+zel et Virginie \
+Hocq incarnent l\
+es instruments d\
+ans les Zinstrus\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x223c0c27f1-fbfa-4\
+b1a-8fd1-6557093\
+34f36\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x223c0c\
+27f1-fbfa-4b1a-8\
+fd1-655709334f36\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les aventu\
+res de Princesse\
+ Plouplou\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22e382102e-ef\
+63-4de8-8605-f33\
+06a3761f9\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+e382102e-ef63-4d\
+e8-8605-f3306a37\
+61f9\x22,\x0d\x0a        \
+\x22title\x22: \x22Les Hi\
+stoires d'Akiko \
+et de Takiji (pe\
+tits contes zen)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Les \
+Histoires d'Akik\
+o et de Takiji (\
+petits contes ze\
+n) d\xe2\x80\x99Antoine G\
+uillop\xc3\xa9 : \x5cn\x5cn-\
+ Akiko la Voyage\
+use\x5cnAkiko joue \
+du shamisen au b\
+ord de la rivi\xc3\xa8\
+re quand un pois\
+son lui apporte \
+un message gliss\
+\xc3\xa9 dans un bambo\
+u. Elle entrepre\
+nd alors un long\
+ voyage \xc3\xa0 trave\
+rs la montagne a\
+vant d'arriver d\
+evant une jolie \
+maison. L\xc3\xa0, sa \
+grande s\xc5\x93ur lui\
+ pr\xc3\xa9sente Misak\
+i, qui vient \xc3\xa0 \
+peine de na\xc3\xaetre\
+. Akiko lui joue\
+ une m\xc3\xa9lodie po\
+ur l'aider \xc3\xa0 s'\
+endormir.\x5cn\x5cn- A\
+kiko l'Amoureuse\
+ \x5cnAkiko n'a pas\
+ peur du noir et\
+ elle aime bien \
+se promener la n\
+uit au bord du l\
+ac. C'est l\xc3\xa0 qu\
+'elle rencontre \
+Takiji qui, lui,\
+ a peur du solei\
+l ! Le petit gar\
+\xc3\xa7on est persuad\
+\xc3\xa9 que la sorci\xc3\
+\xa8re lui a jet\xc3\xa9 \
+un sort et que l\
+es rayons du sol\
+eil le transform\
+eraient en pierr\
+e. Avec l'aide d\
+e ses amis les o\
+iseaux et les re\
+nards de la for\xc3\
+\xaat, Akiko va lui\
+ venir en aide. \
+Car seul l'amour\
+ de quelqu'un po\
+urra faire oubli\
+er sa peur \xc3\xa0 Ta\
+kiji et lui redo\
+nner confiance.\x5c\
+n\x5cn- Akiko la Cu\
+rieuse\x5cnAkiko es\
+t une petite fil\
+le japonaise qui\
+ vit au pied du \
+mont Fuji. Avide\
+ de curiosit\xc3\xa9 e\
+t d'aventures, e\
+lle va, non sans\
+ une certaine ap\
+pr\xc3\xa9hension, se \
+lancer dans une \
+aventure qui lui\
+ apprendra \xc3\xa0 ne\
+ pas faire demi-\
+tour au premier \
+obstacle venu, \xc3\
+\xa0 d\xc3\xa9fier les da\
+ngers, \xc3\xa0 ma\xc3\xaetr\
+iser ses peurs. \
+Elle verra qu'au\
+ bout du chemin \
+l'attendent une \
+belle surprise e\
+t un immense hon\
+neur.\x5cn\x5cn- Akiko\
+ la Courageuse \x5c\
+nAkiko la courag\
+euse n'a pas peu\
+r de la nuit : l\
+es silhouettes d\
+es arbres se d\xc3\xa9\
+coupent sous la \
+lune comme un me\
+rveilleux th\xc3\xa9\xc3\xa2\
+tre d'ombres et \
+ses amis les ani\
+maux l'accompagn\
+ent et veillent \
+sur elle. Un qua\
+tri\xc3\xa8me album d'\
+Antoine Guillopp\
+\xc3\xa9 o\xc3\xb9 l'on retr\
+ouve la magie de\
+ son univers gra\
+phique : la forc\
+e du noir, la vi\
+bration des coul\
+eurs et le raffi\
+nement des papie\
+rs japonais.\x5cn\x5cn\
+- Akiko la Malic\
+ieuse \x5cnA la gra\
+nde surprise des\
+ habitants de la\
+ for\xc3\xaat, Akiko a\
+ un dr\xc3\xb4le de co\
+mportement. Elle\
+ a bien chang\xc3\xa9 \
+et ses mauvais t\
+ours ne sont pas\
+ du go\xc3\xbbt de tou\
+t le monde. Il y\
+ a s\xc3\xbbrement une\
+ raison cach\xc3\xa9e \
+\xc3\xa0 ce comporteme\
+nt farceur, mais\
+ laquelle ?\x5cn\x5cn-\
+ Akiko la R\xc3\xaaveu\
+se\x5cnAkiko part \xc3\
+\xa0 la rencontre d\
+'un r\xc3\xaave si vra\
+i qu'elle veut l\
+e rejoindre dans\
+ le monde r\xc3\xa9el.\
+ Au bord d'un la\
+c, elle trouvera\
+ sa grand-m\xc3\xa8re,\
+ venue la saluer\
+ une derni\xc3\xa8re f\
+ois. C'est alors\
+ qu'un tourbillo\
+n de feuilles vo\
+le autour d'elle\
+. Akiko est au p\
+rintemps de sa v\
+ie et l'automne \
+arrive.\x5cn\x5cn- Aki\
+ko la Silencieus\
+e (Lu par Lise)\x5c\
+nLes pieds nus d\
+ans l'herbe, Aki\
+ko tend l'oreill\
+e. La for\xc3\xaat l'e\
+nveloppe toute e\
+nti\xc3\xa8re : le ven\
+t dans les arbre\
+s, le murmure de\
+ la rivi\xc3\xa8re, le\
+s amandes sous l\
+es dents de l'\xc3\xa9\
+cureuil.\x5cnAttent\
+ive et apais\xc3\xa9e,\
+ elle prend tour\
+ \xc3\xa0 tour diff\xc3\xa9r\
+entes postures p\
+our devenir abei\
+lle (les bras de\
+rri\xc3\xa8re la t\xc3\xaate\
+), grenouille (a\
+ccroupie sur le \
+sol), arbre (les\
+ bras tendus ver\
+s le ciel) ou ri\
+vi\xc3\xa8re.\x5cn\x5cn- Tak\
+iji l'audacieux \
+(Lu par Antoine \
+Guillopp\xc3\xa9)\x5cnTak\
+iji \xc3\xa9tait d\xc3\xa9j\xc3\
+\xa0 apparu dans le\
+s petits contes \
+zen d\xe2\x80\x99Akiko (A\
+kiko l\xe2\x80\x99amoureu\
+se). Le voil\xc3\xa0 q\
+ui fait lui auss\
+i de la for\xc3\xaat s\
+on royaume, o\xc3\xb9 \
+il apprend \xc3\xa0 ap\
+privoiser ses pe\
+urs en les faisa\
+nt aussi petites\
+ que lui-m\xc3\xaame.\x22\
+\x0d\x0a    },\x0d\x0a    \x22d\
+c0ffc16-1cd0-4a3\
+4-a6d9-7876e6d2b\
+d57\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22dc0ffc\
+16-1cd0-4a34-a6d\
+9-7876e6d2bd57\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Sacr\xc3\xa9es Sor\
+ci\xc3\xa8res\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22ATTENTION : l\
+es vraies sorci\xc3\
+\xa8res sont habill\
+\xc3\xa9es de fa\xc3\xa7on o\
+rdinaire et ress\
+emblent \xc3\xa0 n'imp\
+orte qui. Mais e\
+lles ne sont pas\
+ ordinaires. Ell\
+es passent leur \
+temps \xc3\xa0 dresser\
+ les plans les p\
+lus d\xc3\xa9moniaques\
+ et elles d\xc3\xa9tes\
+tent les enfants\
+. La Grandissime\
+ Sorci\xc3\xa8re les d\
+\xc3\xa9teste plus que\
+ tout et compte \
+bien les faire t\
+ous dispara\xc3\xaetre\
+. Seuls un gar\xc3\xa7\
+on et sa grand-m\
+\xc3\xa8re peuvent l'e\
+n emp\xc3\xaacher, mai\
+s si leur plan \xc3\
+\xa9choue, la Grand\
+issime Sorci\xc3\xa8re\
+ va les faire fr\
+rire comme des f\
+rrites. L'univer\
+s diabolique et \
+angoissant de Sa\
+cr\xc3\xa9es sorci\xc3\xa8re\
+s nous est cont\xc3\
+\xa9 avec piquant p\
+ar Jean-Claude D\
+onda, Jeanne Cel\
+lard et Jackie B\
+erger.\x22\x0d\x0a    },\x0d\
+\x0a    \x22aa964d42-f\
+f10-4aed-ba56-be\
+c37cd39d3d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22aa964d42-ff10-4\
+aed-ba56-bec37cd\
+39d3d\x22,\x0d\x0a       \
+ \x22title\x22: \x22Le me\
+rveilleux voyage\
+ de Nils Holgers\
+son\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22a\
+3d0ad3a-04c7-47c\
+f-8964-f58ba479d\
+4dc\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22a3d0ad\
+3a-04c7-47cf-896\
+4-f58ba479d4dc\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Flammarion -\
+ Pere Castor - 1\
+0 histoires by P\
+atou+kendael+evi\
+lpimousse\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x2201 Roule Ga\
+lette\x5cn02 Poule \
+Rousse\x5cn03 La pl\
+us mignonne des \
+petites souris\x5cn\
+04 Petit chat pe\
+rdu\x5cn05 La ch\xc3\xa8v\
+re et les biquet\
+s\x5cn06 Trois peti\
+ts cochons\x5cn07 L\
+e petit Poucet\x5cn\
+08 Jack et le ha\
+ricot magique\x5cn0\
+9 La petite fill\
+e qui voulait vo\
+ir le d\xc3\xa9sert\x5cn1\
+0 Les bons amis\x5c\
+n\x5cn\x22\x0d\x0a    },\x0d\x0a  \
+  \x22222607a8-d170\
+-43d7-9583-601fc\
+a920647\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2222\
+2607a8-d170-43d7\
+-9583-601fca9206\
+47\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Mes-Prem\
+ieres-Belles-His\
+toires-2021\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Mes Premi\
+\xc3\xa8res Belles His\
+toires \x5cn2021\x5cn2\
+02101 La Myst\xc3\xa9r\
+ieuse Invit\xc3\xa9e\x5cn\
+202102 La course\
+ autour du monde\
+\x5cn202103 Au revo\
+ir bonhomme hive\
+r\x5cn202104 Qui a \
+peur de l'Ogre\x5cn\
+202105 Ou est pa\
+ss\xc3\xa9 mon doudou\x5c\
+n202106 Fifolett\
+e et le go\xc3\xbbter \
+enchant\xc3\xa9\x5cn20210\
+7 La grande aven\
+ture des vacance\
+s\x5cn202108 Le voy\
+age de Poule Pou\
+lette\x5cn202109 Bi\
+envenue \xc3\xa0 la ca\
+ntine\x5cn202110 Le\
+s tr\xc3\xa9sors de R\xc3\
+\xa9mi\x5cn202111 Tcha\
+ et la citrouill\
+e g\xc3\xa9ante\x5cn20211\
+2 Qui va tirer l\
+e traineau du P\xc3\
+\xa8re No\xc3\xabl\x5cn2022\x5c\
+n202201 Papanour\
+s\x5cn\x22\x0d\x0a    },\x0d\x0a  \
+  \x22d55806aa-485c\
+-402f-8a33-c2aa5\
+bda4442\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22d5\
+5806aa-485c-402f\
+-8a33-c2aa5bda44\
+42\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Histoire\
+s pour mes 7 ans\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x227 hi\
+stoires pour mes\
+ 7 ans\x5cnAl\xc3\xa9xis \
+contre le p\xc3\xa8re \
+No\xc3\xabl\x5cnVictoir f\
+ait son cirque\x5cn\
+Les 7 familles\x5cn\
+J'ai l'\xc3\xa2ge de r\
+aison!\x5cnNoire-Eb\
+\xc3\xa8ne et les sept\
+s g\xc3\xa9ants\x5cnLes 7\
+ ans d'Aigle Sai\
+sissant\x5cnLe livr\
+e aux tr\xc3\xa9sors\x22\x0d\
+\x0a    },\x0d\x0a    \x2225\
+028d05-4b32-4d5c\
+-8c1e-4fe829a3bc\
+d0\x22: {\x0d\x0a        \
+\x22uuid\x22: \x2225028d0\
+5-4b32-4d5c-8c1e\
+-4fe829a3bcd0\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Peppa Pig - L\
+es histoires de \
+Peppa Pig\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Source: htt\
+ps://www.youtube\
+.com/playlist?li\
+st=PLOUYMyXcLIEO\
+mjqE5NueJaXf2q0T\
+Sfl7l\x5cn\x5cnPeppa e\
+st malade\x5cnPeppa\
+ \xc3\xa0 la ferme\x5cnLa\
+ maitresse de Pe\
+ppa\x5cnPeppa va \xc3\xa0\
+ la biblioth\xc3\xa8qu\
+e\x5cnPeppa n'est p\
+lus triste\x5cnGeor\
+ges va \xc3\xa0 la gar\
+derie\x5cnLe concou\
+rs de g\xc3\xa2teaux\x5cn\
+Peppa fait du sk\
+i\x5cnPeppa fait de\
+s cr\xc3\xaapes\x5cnPeppa\
+ a peur de l'ora\
+ge\x5cnPeppa s'habi\
+lle toute seule\x5c\
+nPeppa se d\xc3\xa9gui\
+se\x22\x0d\x0a    },\x0d\x0a   \
+ \x223d0513a0-5ba5-\
+4241-9dae-65197c\
+5e33dc\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x223d0\
+513a0-5ba5-4241-\
+9dae-65197c5e33d\
+c\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Soldat Ro\
+se - Louis Chedi\
+d\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Le \
+Soldat rose est \
+un conte musical\
+ compos\xc3\xa9 par Lo\
+uis Chedid, \xc3\xa9cr\
+it par Pierre-Do\
+minique Burgaud,\
+ cr\xc3\xa9\xc3\xa9 en 2006.\
+\x5cn\x5cnIl raconte l\
+'histoire d'un e\
+nfant, Joseph, l\
+ass\xc3\xa9 du monde d\
+es adultes, et q\
+ui d\xc3\xa9cide de se\
+ r\xc3\xa9fugier dans \
+un grand magasin\
+ pour vivre avec\
+ les jouets. L'h\
+istoire est cont\
+\xc3\xa9e par une \xc2\xab v\
+oix de grand mag\
+asin \xc2\xbb. D\xc3\xa9di\xc3\xa9\
+ \xc3\xa0 Billie Ch\xc3\xa9d\
+id1, la petite-f\
+ille de Louis Ch\
+edid, ce conte e\
+st pour \xc2\xab les e\
+nfants et ceux q\
+ui le sont rest\xc3\
+\xa9s \xc2\xbb2\x22\x0d\x0a    },\x0d\
+\x0a    \x22c3ba93c2-8\
+b85-40c8-a261-27\
+0b617acd51\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22c3ba93c2-8b85-4\
+0c8-a261-270b617\
+acd51\x22,\x0d\x0a       \
+ \x22title\x22: \x22Gruff\
+alo et cie\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Le Gruffal\
+o et autres hist\
+oires\x5cnpar Julia\
+ Donaldson, lues\
+ par Rapha\xc3\xabline\
+ Goupilleau\x5cnGal\
+limard Jeunesse \
+Audio\x5cn\x5cn- Le Gr\
+uffalo\x5cn- Le pet\
+it Gruffalo\x5cn- L\
+e rat sc\xc3\xa9l\xc3\xa9rat\
+\x5cn- La sorci\xc3\xa8re\
+ dans les airs\x5cn\
+- Z\xc3\xa9bulon le dr\
+agon\x5cn- Z\xc3\xa9bulon\
+ et les m\xc3\xa9decin\
+s volants\x5cn\x22\x0d\x0a  \
+  },\x0d\x0a    \x2254dc0\
+20c-6651-42d9-ba\
+87-a17618ddc52d\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2254dc020c-6\
+651-42d9-ba87-a1\
+7618ddc52d\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les aventures de\
+ Bibifoc\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x22e2f421e4-d0a\
+4-4e1a-9d23-5759\
+f0bb2b6b\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22e\
+2f421e4-d0a4-4e1\
+a-9d23-5759f0bb2\
+b6b\x22,\x0d\x0a        \x22\
+title\x22: \x22Rockamb\
+olesques\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Pour la prem\
+i\xc3\xa8re fois des (\
+ex) enfants (pas\
+ sages) devenus \
+des artistes de \
+la chanson fran\xc3\
+\xa7aise ont eu car\
+te blanche pour \
+cr\xc3\xa9er des conte\
+s pour enfants !\
+ Des histoires d\
+ingues, dr\xc3\xb4les,\
+ po\xc3\xa9tiques\xe2\x80\xa6 r\
+acont\xc3\xa9es par Ni\
+colas Ullmann. \xc3\
+\x87a ne va pas fai\
+re des g\xc3\xa9nies d\
+e vos enfants ma\
+is ils vont bien\
+ se marrer et vo\
+us aussi. \x5cn\x5cn01\
+ L'oeuf de moine\
+ausore\x5cn02 Nuits\
+ sans sommeil\x5cn0\
+3 Laisse une cha\
+nce aux arbres\x5cn\
+04 Piou Piou\x5cn05\
+ Poison!\x5cn06 His\
+toire Nulle\x5cn07 \
+La nuit des mill\
+e chats\x5cn08 Mich\
+el l'\xc3\xa9l\xc3\xa9phant \
+dyslexique\x5cn09 L\
+e nez\x5cn10 C'est \
+pas moi ka fait \
+\xc3\xa7a\x5cn11 Slam \xc3\xa0 \
+Petaouchnok\x5cn12 \
+Le violon classi\
+que qui voulait \
+jouer du rock\x5cn1\
+3 Ta petite voix\
+\x5cn14 Snif Snif e\
+t Ouin Ouin\x5cn15 \
+Plok Plok Kling \
+Schpong Kling\x5cn1\
+6 Mimi, la tortu\
+e qui se r\xc3\xaavait\
+ ninja\x5cn17 O\xc3\xb9 n\
+aissent les vagu\
+es?\x22\x0d\x0a    },\x0d\x0a  \
+  \x22cbe3a0dd-70f3\
+-4f90-9c34-45a2c\
+d0c3b1b\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22cb\
+e3a0dd-70f3-4f90\
+-9c34-45a2cd0c3b\
+1b\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Didier J\
+eunesse - Casse-\
+Noisette - Conte\
+ musical (22 pis\
+tes 48mn)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Poussez les\
+ portes de la Ma\
+ison d\xe2\x80\x99Argent \
+et laissez-vous \
+emporter par la \
+f\xc3\xa9\xc3\xa9rie du c\xc3\xa9l\
+\xc3\xa8bre ballet de \
+Tcha\xc3\xafkovski ! C\
+\xe2\x80\x99est la nuit d\
+e No\xc3\xabl, l\xe2\x80\x99arm\
+oire aux jouets \
+s\xe2\x80\x99anime\xe2\x80\xa6 et \
+Casse-Noisette s\
+e r\xc3\xa9veille\x5cnSou\
+rce : https://ww\
+w.youtube.com/wa\
+tch?v=GnyYMcnMr3\
+A\x22\x0d\x0a    },\x0d\x0a    \
+\x223c0d89be-ed8a-4\
+8c9-8052-1871da8\
+3aa28\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x223c0d\
+89be-ed8a-48c9-8\
+052-1871da83aa28\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22alma studi\
+o\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22cbe\
+cd549-1bd3-4666-\
+9acf-4754a01eb87\
+c\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22cbecd549\
+-1bd3-4666-9acf-\
+4754a01eb87c\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22La grande hist\
+oire de Pomme d'\
+Api\x22,\x0d\x0a        \x22\
+description\x22: \x22h\
+ttps://podcast.a\
+usha.co/la-grand\
+e-histoire-de-po\
+mme-d-api\x5cn\x5cn7 h\
+istoires :\x5cn\x5cn-A\
+d\xc3\xa9lid\xc3\xa9lo et le\
+ monde magique (\
+juin 2023)\x5cn-Dr\xc3\
+\xb4le de pirate (m\
+ai 2023)\x5cn-En pi\
+ste Sim\xc3\xa9on (f\xc3\xa9\
+vrier 2023)\x5cn-Es\
+ther, l\xe2\x80\x99appren\
+tie sorci\xc3\xa8re (n\
+ovembre 2022)\x5cn-\
+L\xe2\x80\x99anniversaire\
+ de Bosco (mars \
+2023)\x5cn-Le tr\xc3\xa9s\
+or d\xe2\x80\x99Acajou (o\
+ctobre  2022)\x5cn-\
+Myst\xc3\xa8re au 6, r\
+ue de la Chausse\
+tte (avril 2023)\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+23657c46-7956-46\
+9a-ba46-55f848b2\
+e72d\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2223657\
+c46-7956-469a-ba\
+46-55f848b2e72d\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Le Monde d'\
+Henri D\xc3\xa8s Volum\
+e 2\x22,\x0d\x0a        \x22\
+description\x22: \x22V\
+olume 6 : \x5c\x22Far \
+West\x5c\x22, et, \x5c\x22Mo\
+n cheval gris\x5c\x22\x5c\
+nVolume 7 : \x5c\x22Ch\
+anson pour mon c\
+hien\x5c\x22, et, \x5c\x22Co\
+mme chien et cha\
+t\x5c\x22\x5cnVolume 9 : \
+\x5c\x22Un \xc3\xa9l\xc3\xa9phant\x5c\
+\x22, et, \x5c\x22Le kang\
+ourou\x5c\x22\x5cnVolume \
+10 : \x5c\x22Pour toi \
+Maman\x5c\x22, et, \x5c\x22U\
+ne marguerite\x5c\x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22f\
+e8c37d3-f378-4ae\
+b-875e-942974749\
+45b\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22fe8c37\
+d3-f378-4aeb-875\
+e-94297474945b\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Martine\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x2271916a91-\
+295a-480d-8534-0\
+05b4ec57770\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2271916a91-295a-\
+480d-8534-005b4e\
+c57770\x22,\x0d\x0a      \
+  \x22title\x22: \x22Enco\
+re une histoire \
+Les vacances ext\
+raordinaires Il \
+faut sauver Elyo\
+tt ! (saison02 0\
+6 episodes)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Encore un\
+e histoire est u\
+n podcast destin\
+\xc3\xa9 aux enfants (\
+et \xc3\xa0 ceux qui l\
+e sont encore da\
+ns leur t\xc3\xaate) q\
+ui aiment qu'on \
+leur raconte des\
+ histoires.\x5cn\x5cnC\
+haque semaine, v\
+ous retrouverez \
+ici une histoire\
+ lue, tir\xc3\xa9e d'u\
+n livre de litt\xc3\
+\xa9rature jeunesse\
+ ou une cr\xc3\xa9atio\
+n originale.\x5cn\x5cn\
+Un podcast produ\
+it par Benjamin \
+Muller, interpr\xc3\
+\xa9t\xc3\xa9 par C\xc3\xa9line\
+ Kallmann et r\xc3\xa9\
+alis\xc3\xa9 par Alexa\
+ndre Ferreira.\x5cn\
+\x5cnA \xc3\xa9couter ava\
+nt de se coucher\
+, allong\xc3\xa9 dans \
+l'herbe, dans la\
+ voiture ou dans\
+ le train, Encor\
+e une histoire v\
+eut mettre en av\
+ant la formidabl\
+e cr\xc3\xa9ation litt\
+\xc3\xa9raire destin\xc3\xa9\
+e aux jeunes lec\
+teurs (et aux mo\
+ins jeunes, donc\
+).\x5cn\x5cnhttps://po\
+dcast.ausha.co/e\
+ncore-une-histoi\
+re/playlist/les-\
+vacances-extraor\
+dinaires-saison-\
+2\x22\x0d\x0a    },\x0d\x0a    \
+\x22ebbf32ac-ef47-4\
+46e-ab02-92c3fbd\
+11e9e\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22ebbf\
+32ac-ef47-446e-a\
+b02-92c3fbd11e9e\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22En Avant P\
+our Adopter Un D\
+ragon\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Aventure intera\
+ctive enregistr\xc3\
+\xa9e par Pozil, et\
+ ensuite modifi\xc3\
+\xa9e par moi.\x5cnIl \
+s'inspire vaguem\
+ent du livre-jeu\
+ \x5c\x22lone wolf\x5c\x22 e\
+t suit les avent\
+ures d'un dompte\
+ur de dragons.\x5cn\
+L'aventure \xc3\xa9tai\
+t initialement d\
+isponible sur le\
+ site \x5c\x22www.mhio\
+s.com\x5c\x22 sous la \
+licence CC-BY.\x5cn\
+Comme le site es\
+t maintenant hor\
+s ligne, je le p\
+artage ici.\x22\x0d\x0a  \
+  },\x0d\x0a    \x22ac8cf\
+bb9-17f6-4cc4-9c\
+07-ba6e0282db79\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22ac8cfbb9-1\
+7f6-4cc4-9c07-ba\
+6e0282db79\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Le Monde d'Henri\
+ D\xc3\xa8s Vol 5\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Volume 21\
+ : \x5c\x22Le chocolat\
+\x5c\x22, et, \x5c\x22Croque\
+ et craque\x5c\x22\x5cnVo\
+lume 22 : \x5c\x22T'es\
+ pas beau\x5c\x22, et,\
+ \x5c\x22Dessin fou\x5c\x22\x5c\
+nVolume 23 : \x5c\x22Q\
+uand j'\xc3\xa9tais b\xc3\
+\xa9b\xc3\xa9 petit\x5c\x22, et\
+, \x5c\x22B\xc3\xa9b\xc3\xa9 d'amo\
+ur\x5c\x22\x5cnVolume 24 \
+: \x5c\x22Danse danse \
+danse\x5c\x22, et, \x5c\x22D\
+anse dans la cui\
+sine\x5c\x22\x5cnVolume 2\
+5 : \x5c\x22C'est le p\
+\xc3\xa8re no\xc3\xabl\x5c\x22, et\
+, \x5c\x22La belle his\
+toire\x5c\x22\x22\x0d\x0a    },\
+\x0d\x0a    \x229c0e6843-\
+e019-4ea9-85c8-9\
+a3c19ccfcc0\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x229c0e6843-e019-\
+4ea9-85c8-9a3c19\
+ccfcc0\x22,\x0d\x0a      \
+  \x22title\x22: \x22Gast\
+on la licorne\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Gaston \
+est une petite l\
+icorne diff\xc3\xa9ren\
+te des autres.\x5cn\
+Il a une particu\
+larit\xc3\xa9 : sa cri\
+ni\xc3\xa8re porte les\
+ couleurs de l'a\
+rc-en-ciel lorsq\
+u'il va bien, ma\
+is d\xc3\xa8s qu'une \xc3\
+\xa9motion forte le\
+ submerge, sa cr\
+ini\xc3\xa8re et sa qu\
+eue changent de \
+couleur selon so\
+n humeur : la tr\
+istesse, la col\xc3\
+\xa8re ou encore la\
+ joie par exempl\
+e.\x22\x0d\x0a    },\x0d\x0a   \
+ \x228852b867-e645-\
+47fa-9063-b34806\
+88c3ae\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22885\
+2b867-e645-47fa-\
+9063-b3480688c3a\
+e\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22B\xc3\xa9b\xc3\xa9 Lo\
+uis Volume 1\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x2213 compt\
+ines de B\xc3\xa9b\xc3\xa9 L\
+ouis\x22\x0d\x0a    },\x0d\x0a \
+   \x228d8bcf89-ae7\
+7-4baf-9832-2422\
+2529d4d8\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+d8bcf89-ae77-4ba\
+f-9832-24222529d\
+4d8\x22,\x0d\x0a        \x22\
+title\x22: \x22Mytholo\
+gie, mes histoir\
+es\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x221c\
+d34297-221a-47ca\
+-bc49-fbc1a45aaf\
+6e\x22: {\x0d\x0a        \
+\x22uuid\x22: \x221cd3429\
+7-221a-47ca-bc49\
+-fbc1a45aaf6e\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22PETIT VULGAIR\
+E Saison 1 (7 ep\
+isodes)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x2205adbc79-2f79\
+-4f68-aacd-00397\
+27d370b\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2205\
+adbc79-2f79-4f68\
+-aacd-0039727d37\
+0b\x22,\x0d\x0a        \x22t\
+itle\x22: \x22J'aime L\
+ire Vol. 08\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Champion \
+des doudous\x5cnJe \
+veux du ziglougl\
+ou\x5cnLa grande av\
+enture du Petit \
+Poupou\x5cnLa nuit \
+Magique\x5cnLe P\xc3\xa8r\
+e No\xc3\xabl Chez Les\
+ Pirates\x5cnLiling\
+ et l'empereur\x5cn\
+Ma maison d'avan\
+t\x5cnQui a perdu C\
+aramel\x5cnUn h\xc3\xa9ri\
+sson \xc3\xa0 l'\xc3\xa9cole\
+\x5cnUne nuit dans \
+la cabane\x22\x0d\x0a    \
+},\x0d\x0a    \x22fe85ea7\
+b-add2-49f1-ab06\
+-4a9ee402356f\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22fe85ea7b-add\
+2-49f1-ab06-4a9e\
+e402356f\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ch\
+arlie et le gran\
+d ascenseur de v\
+erre\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Charlie est de r\
+etour ! Et avec \
+lui, tous les h\xc3\
+\xa9ros de Charlie \
+et la chocolater\
+ie : Grand-Maman\
+ Jos\xc3\xa9phine, Gra\
+nd-Maman Georgin\
+a et Grand-Papa \
+George, sans oub\
+lier l'impr\xc3\xa9vis\
+ible Monsieur Wo\
+nka. Ce dernier \
+a fait construir\
+e un merveilleux\
+ ascenseur de ve\
+rre qui permet d\
+e voler. Mais so\
+udain, une fauss\
+e manoeuvre proj\
+ette tout ce pet\
+it monde dans l'\
+espace : les voi\
+l\xc3\xa0 en orbite au\
+tour de la Terre\
+. Et le ciel est\
+ loin d'\xc3\xaatre vi\
+de ! Car \xc3\xa0 c\xc3\xb4t\
+\xc3\xa9 d'astronautes\
+ en mission, Cha\
+rlie et ses amis\
+ vont devoir fai\
+re face aux redo\
+utables Kpoux Ve\
+rmicieux, la ter\
+reur absolue des\
+ galaxies... Emm\
+en\xc3\xa9s par Arnaud\
+ Bedouet, tous l\
+es com\xc3\xa9diens s'\
+amusent dans ce \
+r\xc3\xa9cit loufoque \
+qui va de rebond\
+issement en rebo\
+ndissement.\x22\x0d\x0a  \
+  },\x0d\x0a    \x225cb30\
+90f-ff6a-4079-86\
+56-dd08d57867c2\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x225cb3090f-f\
+f6a-4079-8656-dd\
+08d57867c2\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Un \xc3\xa9t\xc3\xa9 incroya\
+ble saison 1\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Un \xc3\xa9t\xc3\xa9\
+ incroyable sais\
+on 1\x5cn1- La caps\
+ule temporelle\x5cn\
+2- La nuit des c\
+ampeurs\x5cn3- Le r\
+ituel des n\xc3\xa9nup\
+hars\x5cn4- Le mot \
+myst\xc3\xa8re\x5cn5- L'a\
+ccident de v\xc3\xa9lo\
+\x5cn6-L'amoureuse \
+des plantes\x5cn7- \
+La f\xc3\xaate du vill\
+age\x5cn8- L'enqu\xc3\xaa\
+te\x5cn9- L'\xc3\xaele hu\
+rlante\x5cn\x22\x0d\x0a    }\
+,\x0d\x0a    \x2251a1039c\
+-7c00-4857-993e-\
+22d66b89a31f\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2251a1039c-7c00\
+-4857-993e-22d66\
+b89a31f\x22,\x0d\x0a     \
+   \x22title\x22: \x22Alb\
+um Coucou de Pas\
+se-Partout\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Les 23 cha\
+nsons de l'album\
+ Coucou de Passe\
+-Partout.\x5cn\x5cnVoi\
+r sur Youtube : \
+\x5cn\x5cnhttps://www.\
+youtube.com/play\
+list?list=OLAK5u\
+y k48oKbqfE6z26k\
+H0i9tZVA3zSQM7Me\
+C48\x22\x0d\x0a    },\x0d\x0a  \
+  \x22be735727-0fdf\
+-472a-8023-5779e\
+8d951ad\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22be\
+735727-0fdf-472a\
+-8023-5779e8d951\
+ad\x22,\x0d\x0a        \x22t\
+itle\x22: \x22RadioCan\
+ada OHdio Les hi\
+stoires dElise G\
+ravel(5 histoire\
+s)[02082023\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Les histo\
+ires d'\xc3\x89lise Gr\
+avel\x5cnpar Radio-\
+Canada OHdio\x5cn\x5cn\
+- C'est pas moi\x5c\
+n- Tout le monde\
+\x5cn- Une patate \xc3\
+\xa0 v\xc3\xa9lo\x5cn- C'est\
+ moi qui d\xc3\xa9cide\
+\x5cn- Le pire livr\
+e du monde\x22\x0d\x0a   \
+ },\x0d\x0a    \x22f4d7b2\
+75-bb47-4abd-bfd\
+5-665cfc549185\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22f4d7b275-bb\
+47-4abd-bfd5-665\
+cfc549185\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es aventures de \
+Tintin (France C\
+ulture) - 6 albu\
+ms\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Le\
+s cigares du pha\
+raon\x5cnLe lotus b\
+leu\x5cnLes 7 boule\
+s de cristal\x5cnLe\
+ temple du solei\
+l\x5cnLe secret de \
+la licorne\x5cnLes \
+bijoux de la cas\
+tafiore\x5cn\x5cnpar F\
+rance Culture, l\
+a Com\xc3\xa9die-Fran\xc3\
+\xa7aise, l'Orchest\
+re national de F\
+rance et Moulins\
+art.\x22\x0d\x0a    },\x0d\x0a \
+   \x224bc773a0-17b\
+a-4736-a8f4-4370\
+caf2b019\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x224\
+bc773a0-17ba-473\
+6-a8f4-4370caf2b\
+019\x22,\x0d\x0a        \x22\
+title\x22: \x22Le Peti\
+t Nicolas - La b\
+onne surprise et\
+ autres histoire\
+s in\xc3\xa9dites\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\xc3\x80 la mai\
+son ou \xc3\xa0 l'\xc3\xa9co\
+le, le Petit Nic\
+olas et sa bande\
+ de copains ont \
+toujours des id\xc3\
+\xa9es terribles ! \
+Le probl\xc3\xa8me, c'\
+est que le papa \
+et la maman du P\
+etit Nicolas, la\
+ ma\xc3\xaetresse, le \
+pr\xc3\xa9cepteur et m\
+\xc3\xaame Monsieur Mo\
+uchabi\xc3\xa8re, le s\
+urveillant qui r\
+emplace le Bouil\
+lon, ne sont pas\
+ toujours de cet\
+ avis... \x5cn\x5cnSep\
+t histoires in\xc3\xa9\
+dites pour faire\
+ rire et sourire\
+ les petits et l\
+es grands, lues \
+par Benoit Pooel\
+vorde.\x22\x0d\x0a    },\x0d\
+\x0a    \x22eee63765-4\
+e26-42d8-a98d-ce\
+5a28bb8c7d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22eee63765-4e26-4\
+2d8-a98d-ce5a28b\
+b8c7d\x22,\x0d\x0a       \
+ \x22title\x22: \x22Star \
+Wars Episode 1 -\
+ La menace fant\xc3\
+\xb4me\x22,\x0d\x0a        \x22\
+description\x22: \x22A\
+vant de devenir \
+un c\xc3\xa9l\xc3\xa8bre che\
+valier Jedi, et \
+bien avant de se\
+ r\xc3\xa9v\xc3\xa9ler l\xe2\x80\x99\xc3\
+\xa2me la plus noir\
+e de la galaxie,\
+ Anakin Skywalke\
+r est un jeune e\
+sclave sur la pl\
+an\xc3\xa8te Tatooine.\
+ La Force est d\xc3\
+\xa9j\xc3\xa0 puissante e\
+n lui et il est \
+un remarquable p\
+ilote de Podrace\
+r. Le ma\xc3\xaetre Je\
+di Qui-Gon Jinn \
+le d\xc3\xa9couvre et \
+entrevoit alors \
+son immense pote\
+ntiel.\x5cnPendant \
+ce temps, l\xe2\x80\x99ar\
+m\xc3\xa9e de dro\xc3\xafdes\
+ de l\xe2\x80\x99insatiab\
+le F\xc3\xa9d\xc3\xa9ration \
+du Commerce a en\
+vahi Naboo, une \
+plan\xc3\xa8te pacifiq\
+ue, dans le cadr\
+e d\xe2\x80\x99un plan se\
+cret des Sith vi\
+sant \xc3\xa0 accro\xc3\xaet\
+re leur pouvoir.\
+ Pour d\xc3\xa9fendre \
+la reine de Nabo\
+o, Amidala, les \
+chevaliers Jedi \
+vont devoir affr\
+onter le redouta\
+ble Seigneur Sit\
+h, Dark Maul.\x22\x0d\x0a\
+    },\x0d\x0a    \x22d7e\
+4d8e7-8efd-4b1a-\
+b69e-de7ee08cae5\
+9\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22d7e4d8e7\
+-8efd-4b1a-b69e-\
+de7ee08cae59\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Audible - Barb\
+ie en super prin\
+cesse-(8 chapitr\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22K\
+ara est une prin\
+cesse pleine d'\xc3\
+\xa9nergie qui r\xc3\xaav\
+e de faire de gr\
+andes choses pou\
+r son royaume. U\
+n jour, elle est\
+ embrass\xc3\xa9e par \
+un papillon magi\
+que qui lui donn\
+e des super-pouv\
+oirs ! Elle entr\
+eprend alors d'u\
+tiliser ses pouv\
+oirs pour faire \
+du royaume un mo\
+nde meilleur, ma\
+is elle ne sait \
+pas encore \xc3\xa0 qu\
+i elle va devoir\
+ se mesurer pour\
+ y parvenir...\x5cn\
+\x5cnhttps://www.ma\
+jelan.com/progra\
+ms/b78f898a-0fb9\
+-4e86-9c8e-dc4e6\
+ddef185\x22\x0d\x0a    },\
+\x0d\x0a    \x2245526411-\
+692a-4a8e-80a7-a\
+33d8893e138\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2245526411-692a-\
+4a8e-80a7-a33d88\
+93e138\x22,\x0d\x0a      \
+  \x22title\x22: \x22Quel\
+le histoire, Pr\xc3\
+\xa9histoire et Ant\
+iquit\xc3\xa9\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x22499d1633-4fb1\
+-4f68-b6f2-72739\
+278e77c\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2249\
+9d1633-4fb1-4f68\
+-b6f2-72739278e7\
+7c\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les Hist\
+oires de Mini-Lo\
+up (25)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x2225 Histoires \
+de Mini Loup de \
+Philippe Matter\x5c\
+n\x5cnMini-loup et \
+les dinosaures\x5cn\
+Mini-loup gare a\
+ux garous\x5cnMini-\
+loup et les pira\
+tes\x5cnMini-loup e\
+n vacances\x5cnMini\
+-loup champion d\
+e foot\x5cnMini-lou\
+p \xc3\xa0 la piscine\x5c\
+nMini-loup \xc3\xa0 l'\
+\xc3\xa9cole\x5cnMini-lou\
+p \xc3\xa0 l'hopital\x5cn\
+Mini-loup chez p\
+api et mamie lou\
+p\x5cnMini-loup sur\
+ la banquise\x5cnMi\
+ni-loup est amou\
+reux\x5cnMini-loup \
+en classe de nei\
+ge\x5cnMini-loup et\
+ le lapin de Paq\
+ues\x5cnMini-loup e\
+t le ch\xc3\xa2teau fo\
+rt\x5cnMini-loup en\
+ Egypte\x5cnMini-lo\
+up et la galette\
+ des rois\x5cnMini-\
+loup dans l'espa\
+ce\x5cnMini-loup po\
+mpier\x5cnMini-loup\
+ policier\x5cnMini \
+Loup le chevalie\
+r, la princesse \
+et le dragon\x5cnUn\
+e petite s\xc5\x93ur p\
+our Mini-Loup\x5cnM\
+ini-Loup au cirq\
+ue\x5cnMini-Loup au\
+ poney Club\x5cnMin\
+i- loup et les s\
+uper h\xc3\xa9ros\x5cnMin\
+i-Loup et la mai\
+son hant\xc3\xa9e\x22\x0d\x0a  \
+  },\x0d\x0a    \x221445c\
+071-cfd3-4e38-80\
+c6-c265ad0c476a\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x221445c071-c\
+fd3-4e38-80c6-c2\
+65ad0c476a\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Le petit prince\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22e6f71\
+133-f6fc-4a0b-84\
+db-9c37a42daf1f\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22e6f71133-f\
+6fc-4a0b-84db-9c\
+37a42daf1f\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Star Wars -  Epi\
+sode 4 - un nouv\
+el espoir\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x2250563bc8-27\
+3a-4006-80f9-5ac\
+07a14e864\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+50563bc8-273a-40\
+06-80f9-5ac07a14\
+e864\x22,\x0d\x0a        \
+\x22title\x22: \x22PSG Ac\
+ademy\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Tom est un jeun\
+e gar\xc3\xa7on de 12 \
+ans. Parisien, f\
+an du Paris Sain\
+t-Germain, il ne\
+ vit que pour le\
+ foot.  Il est e\
+nthousiaste, fon\
+ceur et joyeux. \
+D\xe2\x80\x99un naturel o\
+ptimiste, il ten\
+te toujours de t\
+rouver des solut\
+ions et il a d\xc3\xa9\
+j\xc3\xa0 compris que \
+c\xe2\x80\x99est en s\xe2\x80\x99a\
+lliant qu\xe2\x80\x99il e\
+st plus facile d\
+e vaincre et de \
+s\xe2\x80\x99amuser.\x5cn\x5cnV\
+OLUME 1 \x5cn- chap\
+itre 1 Tom est u\
+n \xc3\xa9norme fan de\
+ foot. Et pour s\
+on plus grand pl\
+aisir, il va int\
+\xc3\xa9grer la presti\
+gieuse PSG Acade\
+my. Mais cette p\
+remi\xc3\xa8re journ\xc3\xa9\
+e va lui r\xc3\xa9serv\
+er quelques surp\
+rises\xe2\x80\xa6\x5cn- chap\
+itre 2 C\xe2\x80\x99est l\
+e grand jour des\
+ s\xc3\xa9lections \xc3\xa0 \
+la PSG Academy. \
+Tom, Abou et Yoa\
+nn font face \xc3\xa0 \
+de tr\xc3\xa8s nombreu\
+x concurrents. M\
+ais l\xe2\x80\x99arriv\xc3\xa9e\
+ de plusieurs in\
+vit\xc3\xa9s surprise \
+rend cette journ\
+\xc3\xa9e encore plus \
+sp\xc3\xa9ciale.\x5cn- ch\
+apitre 3 Tom et \
+ses amis sont en\
+ plein doute. Fe\
+ront-ils partie \
+des heureux \xc3\xa9lu\
+s qui vont int\xc3\xa9\
+grer la PSG Acad\
+emy ? Les \xc3\xa9preu\
+ves de s\xc3\xa9lectio\
+n sont termin\xc3\xa9e\
+s, mais leur che\
+min est encore s\
+em\xc3\xa9 d\xe2\x80\x99emb\xc3\xbbch\
+es.\x5cn- chapitre \
+4 Pour int\xc3\xa9grer\
+ la PSG Academy,\
+ Tom, Abou et Yo\
+ann doivent remp\
+orter le match d\
+\xc3\xa9cisif contre u\
+ne \xc3\xa9quipe bien \
+sup\xc3\xa9rieure \xc3\xa0 e\
+ux. Mais port\xc3\xa9 \
+par tout le Parc\
+ des Princes, il\
+s sauront peut-\xc3\
+\xaatre d\xc3\xa9montrer \
+qu\xe2\x80\x99ils forment\
+ une vraie \xc3\xa9qui\
+pe.\x5cn- chapitre \
+5 Le r\xc3\xaave de To\
+m, Abou et Yoann\
+ est devenu r\xc3\xa9a\
+lit\xc3\xa9 : ils ont \
+int\xc3\xa9grer la pre\
+stigieuse PSG Ac\
+ademy. Mais ils \
+ne sont pas au b\
+out de leurs sur\
+prises. La compo\
+sition de leur \xc3\
+\xa9quipe et une an\
+nonce de la plus\
+ haute importanc\
+e vont rendre ce\
+ premier entra\xc3\xae\
+nement inoubliab\
+le.\x5cn- chapitre \
+6 La PSG Academy\
+ connait son pre\
+mier vrai test :\
+ le premier matc\
+h du grand tourn\
+oi europ\xc3\xa9en. Et\
+ tout ne va pas \
+se passer aussi \
+bien que Tom l\xe2\x80\
+\x99esp\xc3\xa9rait.\x5cn- c\
+hapitre 7 Le pre\
+mier match de la\
+ PSG Academy dan\
+s le grand tourn\
+oi europ\xc3\xa9en n\xe2\x80\
+\x99a pas \xc3\xa9t\xc3\xa9 un \
+franc succ\xc3\xa8s. M\
+ais Tom et ses c\
+o\xc3\xa9quipiers doiv\
+ent se remettre \
+au travail.\x5cn- c\
+hapitre 8 Le coa\
+ch de la PSG Aca\
+demy a pr\xc3\xa9par\xc3\xa9\
+ une surprise po\
+ur ses joueurs. \
+Quoi de mieux qu\
+\xe2\x80\x99un match inat\
+tendu pour recr\xc3\
+\xa9er un esprit d\xe2\
+\x80\x99\xc3\xa9quipe ?\x5cn\x5cnV\
+OLUME 2 \x5cn- Chap\
+itre 1 Les match\
+s s\xe2\x80\x99enchainent\
+ pour la PSG Aca\
+demy et la s\xc3\xa9ri\
+e de victoires c\
+ontinue. Mais at\
+tention \xc3\xa0 ne pa\
+s se montrer tro\
+p confiants et i\
+mprudents\xe2\x80\xa6\x5cn- \
+Chapitre 2 La PS\
+G Academy a remp\
+ort\xc3\xa9 tous ses d\
+erniers matchs. \
+Mais un exc\xc3\xa8s d\
+e confiance les \
+menace. Comment \
+vont-ils r\xc3\xa9agir\
+ si la d\xc3\xa9faite \
+revient ?\x5cn- Cha\
+pitre 3 Les joue\
+urs de la PSG Ac\
+ademy ont perdu \
+leur esprit d\xe2\x80\x99\
+\xc3\xa9quipe et encha\
+inent les d\xc3\xa9fai\
+tes. Il va fallo\
+ir agir pour les\
+ remettre dans l\
+e droit chemin. \
+Heureusement, l\xe2\
+\x80\x99un d\xe2\x80\x99entre e\
+ux a un plan.\x5cn-\
+ Chapitre 4 Yoan\
+n a donn\xc3\xa9 une b\
+onne le\xc3\xa7on \xc3\xa0 s\
+es co\xc3\xa9quipiers,\
+ bien trop s\xc3\xbbrs\
+ d\xe2\x80\x99eux depuis \
+qu\xe2\x80\x99ils avaient\
+ enchain\xc3\xa9s quel\
+ques victoires. \
+Mais est-ce que \
+ce sera suffisan\
+t pour les remet\
+tre dans le droi\
+t chemin ?\x5cn- Ch\
+apitre 5 L\xe2\x80\x99esp\
+oir est revenu \xc3\
+\xa0 la PSG Academy\
+ : Tom et ses co\
+\xc3\xa9quipiers ont r\
+etrouv\xc3\xa9 leur es\
+prit d\xe2\x80\x99\xc3\xa9quipe\
+. Mais le tourno\
+i europ\xc3\xa9en bat \
+son plein et la \
+concurrence s\xe2\x80\x99\
+av\xc3\xa8re plus dure\
+ que pr\xc3\xa9vu. D\xc3\xa9\
+sormais, ils son\
+t au pied du mur\
+.\x5cn- Chapitre 6 \
+La PSG Academy e\
+st au pied du mu\
+r : ils doivent \
+d\xc3\xa9sormais gagne\
+r tous leurs mat\
+chs pour ne pas \
+\xc3\xaatre \xc3\xa9limin\xc3\xa9 \
+du grand tournoi\
+ europ\xc3\xa9en. Mais\
+ un adversaire t\
+errifiant se pr\xc3\
+\xa9sente face \xc3\xa0 e\
+ux.\x5cn- Chapitre \
+7 La PSG Academy\
+ est \xc3\xa0 Londres \
+pour disputer le\
+ premier de sa s\
+\xc3\xa9rie de matchs \
+capitaux. C\xe2\x80\x99es\
+t l\xe2\x80\x99occasion d\
+e rencontrer un \
+adversaire aussi\
+ dou\xc3\xa9 que surpr\
+enant.\x5cn- Chapit\
+re 8 Tom et Abou\
+ se sont sortis \
+d\xe2\x80\x99une mauvaise\
+ passe, gr\xc3\xa2ce \xc3\
+\xa0 une aide inesp\
+\xc3\xa9r\xc3\xa9e. Mais pou\
+r le match d\xc3\xa9ci\
+sif du tournoi, \
+ils ne pourront \
+compter que sur \
+eux-m\xc3\xaames.\x5cn- C\
+hapitre 9 Le mat\
+ch d\xc3\xa9cisif qui \
+oppose la PSG Ac\
+ademy et les Can\
+onniers de Londr\
+es est en cours.\
+ Il faudra surmo\
+nter des d\xc3\xa9fis \
+incroyables pour\
+ gagner. Car la \
+d\xc3\xa9faite est int\
+erdite !\x5cn\x5cnhttp\
+s://podcasts.psg\
+.fr/paris-saint-\
+germain-psg-acad\
+emy\x22\x0d\x0a    },\x0d\x0a  \
+  \x22e1f1633d-28ab\
+-4436-80f4-c72c9\
+64134f0\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22e1\
+f1633d-28ab-4436\
+-80f4-c72c964134\
+f0\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Ast\xc3\xa9rix\
+ Et Cl\xc3\xa9opatre(3\
+5 chapitres) by \
+Lezardiere 18-12\
+-2022\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x5c\x22Ast\xc3\xa9rix et C\
+l\xc3\xa9op\xc3\xa2tre est l\
+e sixi\xc3\xa8me album\
+ de la bande des\
+sin\xc3\xa9e Ast\xc3\xa9rix,\
+ publi\xc3\xa9 en 1965\
+, sc\xc3\xa9naris\xc3\xa9 pa\
+r Ren\xc3\xa9 Goscinny\
+ et dessin\xc3\xa9 par\
+ Albert Uderzo.\x5c\
+n\x5cnEn 50 av. J.-\
+C., apr\xc3\xa8s la d\xc3\
+\xa9faite de Vercin\
+g\xc3\xa9torix, toute \
+la Gaule est occ\
+up\xc3\xa9e. Toute ? N\
+on, car un petit\
+ village d'Armor\
+ique r\xc3\xa9siste en\
+core aux assauts\
+ des l\xc3\xa9gions de\
+ Petibonum,\x5cnLau\
+danum, Babaorum \
+et Aquarium et J\
+ules C\xc3\xa9sar est \
+fort contrari\xc3\xa9 \
+de voir une peti\
+te r\xc3\xa9gion mettr\
+e en \xc3\xa9chec son \
+arm\xc3\xa9e...\x5c\x22\x5cn\x5cnA\
+vec: Roger Carel\
+, Jacques Morel,\
+ Bernard Lavalet\
+te,...\x5cn\x5cnAdapta\
+tion : Michel de\
+ Villiers / R\xc3\xa9a\
+lisation : Claud\
+e Dupont / Musiq\
+ue : G\xc3\xa9rard Cal\
+vi / Diffusion :\
+ 17/01/1967 au 0\
+7/03/1967 sur Fr\
+ance Inter \xc3\xa0 12\
+H20\x22\x0d\x0a    },\x0d\x0a  \
+  \x22d39acfc0-95f8\
+-4fcf-b237-1d2d3\
+c54b25a\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22d3\
+9acfc0-95f8-4fcf\
+-b237-1d2d3c54b2\
+5a\x22,\x0d\x0a        \x22t\
+itle\x22: \x22GeorgesL\
+eDragon\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x22a782ec83-dd16\
+-4df0-b63e-e8464\
+f6b42b4\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22a7\
+82ec83-dd16-4df0\
+-b63e-e8464f6b42\
+b4\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les cont\
+es de Lupin\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22R\xc3\xaavant d\
+\xe2\x80\x99\xc3\xaatre comme l\
+es h\xc3\xa9ros qu\xe2\x80\x99i\
+l admire, Lupin \
+va de conte en c\
+onte pour vivre \
+leurs aventures.\
+ Mais il n\xe2\x80\x99est\
+ pas si facile d\
+\xe2\x80\x99atteindre le \
+\x5c\x22happy end\x5c\x22 ! \
+Heureusement, il\
+ peut compter su\
+r l\xe2\x80\x99aide du na\
+rrateur pour app\
+rendre de ses b\xc3\
+\xaatises.\x5cn\x5cnhttps\
+://fr.wikipedia.\
+org/wiki/Les Con\
+tes de Lupin\x5cn\x5cn\
+1 \x5ctLe Vase de l\
+\xe2\x80\x99Empereur\x5cn2 \x5c\
+tLe Preux Paysan\
+ et l\xe2\x80\x99Esprit d\
+e la For\xc3\xaat\x5cn3 \x5c\
+tPrincesse Citro\
+uille\x5cn4 \x5ctLes T\
+rois H\xc3\xa9ros et l\
+e Dragon\x5cn5 \x5ctLa\
+ Princesse et le\
+ Tr\xc3\xa8s Gros Tigr\
+e\x5cn6 \x5ctLe Saltim\
+banque et le G\xc3\xa9\
+ant\x5cn7 \x5ctLa Pays\
+anne et le Violo\
+n Enchant\xc3\xa9\x5cn8 \x5c\
+tLe P\xc3\xaacheur, le\
+ Ph\xc3\xa9nix et les \
+Poissons\x5cn9 \x5ctLe\
+ Disciple et les\
+ Bourrasques de \
+Vent Glac\xc3\xa9\x5cn10 \
+\x5ctLa L\xc3\xa9gende du\
+ Crocodile\x5cn11 \x5c\
+tL\xe2\x80\x99Ogre et la \
+Petite F\xc3\xa9e\x5cn12 \
+\x5ctL\xe2\x80\x99Apprenti M\
+agicien et la So\
+rci\xc3\xa8re\x5cn13 \x5ctLe\
+ Nain Ronfleur e\
+t le G\xc3\xa9ant Endo\
+rmi\x5cn14 \x5ctWei, l\
+a Couronne et le\
+ Roi Singe\x5cn15 \x5c\
+tLe Petit Peintr\
+e et le Pinceau \
+Magique\x5cn16 \x5ctLe\
+ Petit Chef et l\
+\xe2\x80\x99\xc3\x89norme Radis\
+\x5cn17 \x5ctLe Cheval\
+ier, la F\xc3\xa9e et \
+la Licorne\x5cn18 \x5c\
+tLa Cheffe de la\
+ Garde et les Lu\
+tins Taquins\x5cn19\
+ \x5ctLa Walkyrie e\
+t le Volcan\x5cn20 \
+\x5ctLe Fr\xc3\xaale Forg\
+eron et les Trol\
+ls\x5cn21 \x5ctLe Vieu\
+x Ma\xc3\xaetre et le \
+D\xc3\xa9fi\x5cn22 \x5ctBaba\
+ Yaga et les Enf\
+ants\x5cn23 \x5ctLa Su\
+rprise du Shapis\
+hico\x5cn24 \x5ctPetit\
+ Biscuit et l\xe2\x80\x99\
+Ogre\x5cn25 \x5ctLe Pe\
+uple de l\xe2\x80\x99Oc\xc3\xa9\
+an et le Condor\x5c\
+n26 \x5ctCurupira e\
+t les Guerriers\x5c\
+n27 \x5ctLa Sir\xc3\xa8ne\
+ au Saphir et la\
+ Baleine Bougonn\
+e\x5cn28 \x5ctLa Danse\
+ de l\xe2\x80\x99Harmonie\
+\x5cn29 \x5ctLe Petit \
+B\xc3\xbbcheron et la \
+Gardienne de l\xe2\x80\
+\x99Hiver\x5cn30 \x5ctLe \
+Sage Soren et le\
+ Troll Souffleur\
+\x5cn31 \x5ctLe Petit \
+Viking et la Gra\
+nde Travers\xc3\xa9e\x5cn\
+32 \x5ctBarbe Rose \
+et l\xe2\x80\x99\xc3\x8ele Hant\
+\xc3\xa9e\x5cn33 \x5ctLe Gar\
+dien de la Vanil\
+le et les Singes\
+\x5cn34 \x5ctLe Cheval\
+ier et l\xe2\x80\x99Arbre\
+ de la Reine\x5cn35\
+ \x5ctLe Capitaine \
+et le Terrible P\
+irate\x5cn36 \x5ctLe P\
+lanteur et les P\
+irates\x5cn37 \x5ctLe \
+Fr\xc3\xaale Forgeron \
+et le Talisman\x5cn\
+38 \x5ctLe Basilic \
+et le Bouclier d\
+e Porcelaine\x5cn39\
+ \x5ctLe Capitaine \
+et le Coffre Mau\
+dit\x5cn40 \x5ctLa Pri\
+ncesse et le Dra\
+gon\x5cn41 \x5ctAnahi \
+et le Grand Sorc\
+ier\x5cn42 \x5ctL\xe2\x80\x99Es\
+pion et les Chap\
+eaux de la Reine\
+\x5cn43 \x5ctLa Gu\xc3\xa9ri\
+sseuse Incompr\xc3\xa9\
+hensible\x5cn44 \x5ctL\
+e Juge Pi et l\xe2\x80\
+\x99Armure Magique\x5c\
+n45 \x5ctLe Viking \
+\xc3\x89tincelant et l\
+es Trolls\x5cn46 \x5ct\
+La Poti\xc3\xa8re et l\
+\xe2\x80\x99Esprit du Ven\
+t\x5cn47 \x5ctLe Chant\
+ du Tocpillatoli\
+ztica\x5cn48 \x5ctLe M\
+usicien et le Ro\
+yaume Silencieux\
+\x5cn49 \x5ctLa Walkyr\
+ie, le Viking et\
+ le Forgeron\x5cn50\
+ \x5ctLe Tapis de l\
+\xe2\x80\x99Empereur\x5cn51 \
+\x5ctLe Guerrier et\
+ le Monstre des \
+Rizi\xc3\xa8res\x5cn52 \x5ct\
+Pagra et l\xe2\x80\x99Ara\
+ign\xc3\xa9e G\xc3\xa9ante\x5cn\
+53 \x5ctLe Chant du\
+ Perroquet\x5cn54 \x5c\
+tLes S\xc5\x93urs F\xc3\xa2c\
+h\xc3\xa9s et la Greno\
+uille\x5cn55 \x5ctLe N\
+oble Chevalier e\
+t le Royaume des\
+ Illusions\x5cn56 \x5c\
+tLa Walkyrie qui\
+ se Riait du Dan\
+ger\x5cn57 \x5ctL\xe2\x80\x99Hu\
+mble Chevalier e\
+t le Corossol d\xe2\
+\x80\x99Or\x5cn58 \x5ctLager\
+tha et le Serpen\
+t de Mer\x5cn59 \x5ctL\
+e P\xc3\xaacheur sans \
+Peur et le Batea\
+u Fant\xc3\xb4me\x5cn60 \x5c\
+tLa Chasseuse de\
+ Tr\xc3\xa9sors et le \
+Voleur\x5cn61 \x5ctLa \
+Petite Tunique R\
+ouge\x5cn62 \x5ctLa Pe\
+tite Viking et l\
+a F\xc3\xa9e des Glace\
+s\x5cn63 \x5ctLes Viki\
+ngs Maladroits e\
+t le Drakkar Gel\
+\xc3\xa9\x5cn64 \x5ctLa Sir\xc3\
+\xa8ne Bricoleuse e\
+t les Pirates\x5cn6\
+5 \x5ctLe Jardinier\
+ et le Mangeur d\
+e Nuages\x5cn66 \x5ctB\
+arbe Rose et le \
+Course des Pirat\
+es\x5cn67 \x5ctLes Pri\
+nces et l'Empere\
+ur Grognon\x5cn68 \x5c\
+tLe Forgeron et \
+le Marteau de Th\
+or\x5cn69 \x5ctLe Roi \
+des Singes et l'\
+Empereur\x5cn70 \x5ctL\
+e Jeune P\xc3\xaacheur\
+ et la Col\xc3\xa8re d\
+u Volcan\x5cn71 \x5ctL\
+a Petite Sir\xc3\xa8ne\
+ et les Pirates\x5c\
+n72 \x5ctLes Viking\
+s Paisibles et l\
+'Exploit Impossi\
+ble\x5cn73 \x5ctLe Pet\
+it P\xc3\xa2tissier et\
+ le Druide Ensor\
+cel\xc3\xa9\x5cn74 \x5ctLe M\
+ousse et l'\xc3\x8ele \
+du Crocodile\x5cn75\
+ \x5ctLe Tr\xc3\xa9sor de\
+ l'\xc3\x8ele au Cr\xc3\xa2n\
+e\x5cn76 \x5ctLe P\xc3\xaach\
+eur et le Tr\xc3\xa9so\
+r Trouv\xc3\xa9\x5cn77 \x5ct\
+Le Capitaine et \
+la Boussole Magi\
+que\x5cn78 \x5ctLa Ber\
+ceuse au Soleil\x22\
+\x0d\x0a    },\x0d\x0a    \x22c\
+12cd631-277c-4d8\
+c-b5f8-4d26cad9f\
+577\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22c12cd6\
+31-277c-4d8c-b5f\
+8-4d26cad9f577\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Mes premiers\
+ j'aime lire - 2\
+019\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x222\
+e0f4aae-4ac3-454\
+c-bc39-5565521da\
+e52\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x222e0f4a\
+ae-4ac3-454c-bc3\
+9-5565521dae52\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Disney (20 h\
+istoires)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Un jolie pa\
+ck pour les amou\
+reux de Disney a\
+vec 20 Histoires\
+.\x5cnVous y retrou\
+vez les histoire\
+s suivantes: \x5cnA\
+lice au pays des\
+ merveilles\x5cnAll\
+adin\x5cnBambi\x5cnBer\
+nard et Bianca a\
+u pays des kango\
+urous\x5cnBernard e\
+t Bianca\x5cnBlanch\
+e neige et les 7\
+ nains\x5cnCendrill\
+on\x5cnHercule\x5cnLa \
+Belle au Bois do\
+rmant\x5cnLa Belle \
+et la b\xc3\xaate\x5cnla \
+petite sir\xc3\xa8ne\x5cn\
+Le livre de la j\
+ungle\x5cnLe roi li\
+on\x5cnLes 101 dalm\
+atiens\x5cnLes Aris\
+tochats\x5cnMerlin \
+l'enchanteur\x5cnMu\
+lan\x5cnPeter pan\x5cn\
+Pinocchio\x5cnPocah\
+ontas\x5cn\x5cnbonne \xc3\
+\xa9coute\x22\x0d\x0a    },\x0d\
+\x0a    \x2208bb4446-8\
+f58-4855-af47-98\
+55f5fe9721\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2208bb4446-8f58-4\
+855-af47-9855f5f\
+e9721\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les M\
+ini Mondes, 1-7 \
+ans (37 pays) 20\
+23-09-03\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Quoi de mieu\
+x que de la musi\
+que pour voyager\
+ d\xe2\x80\x99un pays \xc3\xa0 \
+l\xe2\x80\x99autre au ryt\
+hme des chansons\
+ !\x5cn\x5cnDe la musi\
+que, mais aussi \
+des histoires et\
+ surtout du fun \
+\xc3\xa0 gogo pour bou\
+ger son corps de\
+ bas en haut ! \xc3\
+\x80 \xc3\xa9couter \xc3\xa0 la\
+ maison, en voit\
+ure\xe2\x80\xa6 ou en van\
+, bien \xc3\xa9videmme\
+nt !\x5cn\x5cnAccroche\
+z vos ceintures,\
+ \xc3\xa7a va swinguer\
+ ! 37 pays \xc3\xa0 d\xc3\
+\xa9couvrir \xc3\xa0 trav\
+ers des comptine\
+s, musiques et h\
+istoires ultra c\
+houettes que vos\
+ enfants \xc3\xa9coute\
+ront avec bonheu\
+r d\xc3\xa8s qu\xe2\x80\x99ils \
+auront envie de \
+revivre l\xe2\x80\x99aven\
+ture du tour du \
+monde (ou d\xe2\x80\x99im\
+proviser une bou\
+m dans leur cham\
+bre !) \x5cn\x5cnMise \
+\xc3\xa0 jour d'octobr\
+e 2023\x22\x0d\x0a    },\x0d\
+\x0a    \x225b0d578f-7\
+ef5-4a19-88be-da\
+6a92057082\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x225b0d578f-7ef5-4\
+a19-88be-da6a920\
+57082\x22,\x0d\x0a       \
+ \x22title\x22: \x22les d\
+\xc3\xa9couvreurs part\
+ie 1\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+b5ce4fef-49f3-4f\
+2b-b3e5-ef8c76d0\
+6835\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22b5ce4\
+fef-49f3-4f2b-b3\
+e5-ef8c76d06835\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Olma - Op\xc3\xa9\
+ration Canop\xc3\xa9e\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22La de\
+uxi\xc3\xa8me saison d\
+u podcast de Fra\
+nce Inter : Olma\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x22b8feb3ed-768b-4\
+c6c-9aff-459f443\
+6814e\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22b8fe\
+b3ed-768b-4c6c-9\
+aff-459f4436814e\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les nouvel\
+les aventures de\
+ Cornebidouille \
+(5 histoires, 2 \
+chansons)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Vous pensez\
+ que la sorci\xc3\xa8r\
+e Cornebidouille\
+ a toujours \xc3\xa9t\xc3\
+\xa9 une \xc3\xa9pouvanta\
+ble sorci\xc3\xa8re, e\
+t bien vous vous\
+ trompez, quand \
+Cornebidouille \xc3\
+\xa9tait petite, c'\
+\xc3\xa9tait une princ\
+esse adorable\xe2\x80\xa6\
+ Et pourtant, ce\
+ qu\xe2\x80\x99elle aime \
+aujourd\xe2\x80\x99hui c\xe2\
+\x80\x99est terroriser\
+ les enfants\xe2\x80\xa6 \
+Surtout quand il\
+s ne mangent pas\
+ leur soupe. Mai\
+s voil\xc3\xa0 que le \
+petit Pierre, lu\
+i, refuse sa sou\
+pe et n\xe2\x80\x99a m\xc3\xaam\
+e pas peur de Co\
+rnebidouille. La\
+ sorci\xc3\xa8re va to\
+ut tenter pour l\
+a lui faire aval\
+er, mais Pierre \
+ne va pas se lai\
+sser faire ! Fro\
+ussards et non-a\
+mateurs de soupe\
+ s\xe2\x80\x99abstenir !\x5c\
+n\x5cnhttps://parad\
+isomedia.io/fr/p\
+rogrammes?to=les\
+-nouvelles-avent\
+ures-de-cornebid\
+ouille\x22\x0d\x0a    },\x0d\
+\x0a    \x221693d349-a\
+7a3-48ce-97cc-a7\
+c3d9dcea52\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x221693d349-a7a3-4\
+8ce-97cc-a7c3d9d\
+cea52\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les A\
+ventures de Tint\
+in - les Cigares\
+ du pharaon\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Les Cigar\
+es du pharaon es\
+t un album de ba\
+nde dessin\xc3\xa9e, l\
+e quatri\xc3\xa8me des\
+ Aventures de Ti\
+ntin, cr\xc3\xa9\xc3\xa9es p\
+ar le dessinateu\
+r belge Herg\xc3\xa9. \
+L'histoire est d\
+'abord publi\xc3\xa9e \
+en noir et blanc\
+ de fa\xc3\xa7on hebdo\
+madaire dans Le \
+Petit Vingti\xc3\xa8me\
+, sous le titre \
+Les Aventures de\
+ Tintin en Orien\
+t, du 8 d\xc3\xa9cembr\
+e 1932 au 8 f\xc3\xa9v\
+rier 1934, pour \
+un total de 124 \
+planches. L'albu\
+m, paru au mois \
+de novembre 1934\
+ sous son titre \
+actuel des Cigar\
+es du pharaon, e\
+st le premier de\
+ la s\xc3\xa9rie \xc3\xa0 pa\
+ra\xc3\xaetre chez Cas\
+terman. L'aventu\
+re est enti\xc3\xa8rem\
+ent remani\xc3\xa9e et\
+ redessin\xc3\xa9e pou\
+r la colorisatio\
+n de l'album en \
+1955.\x22\x0d\x0a    },\x0d\x0a\
+    \x22f05485df-4a\
+ea-4929-bdc8-cd4\
+076520cf3\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+f05485df-4aea-49\
+29-bdc8-cd407652\
+0cf3\x22,\x0d\x0a        \
+\x22title\x22: \x22Les av\
+entures de Rodol\
+phe et Gala, sai\
+son 7\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x22be342890-e905-4\
+6e0-bada-1f01481\
+d829d\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22be34\
+2890-e905-46e0-b\
+ada-1f01481d829d\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Valentin e\
+t les lunettes d\
+u P\xc3\xa8re No\xc3\xabl\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Un cont\
+e de No\xc3\xabl pour \
+les enfants et l\
+es plus grands, \
+propos\xc3\xa9 par Bou\
+ygues Telecom.\x22\x0d\
+\x0a    },\x0d\x0a    \x2238\
+c6b520-1b00-4567\
+-8bea-d4f78a0829\
+a1\x22: {\x0d\x0a        \
+\x22uuid\x22: \x2238c6b52\
+0-1b00-4567-8bea\
+-d4f78a0829a1\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22L'Afrique en \
+Conte vol. 2\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Des bibl\
+ioth\xc3\xa9caires de \
+l\xe2\x80\x99ONG Des livr\
+es pour tous son\
+t all\xc3\xa9s dans de\
+s quartiers et d\
+es villages de C\
+\xc3\xb4te d\xe2\x80\x99Ivoire \
+pour collecter d\
+es contes aupr\xc3\xa8\
+s des population\
+s, avec une ambi\
+tion : mettre \xc3\xa0\
+ la disposition \
+des oreilles du \
+monde entier ces\
+ histoires issue\
+s du patrimoine \
+ivoirien que l\xe2\x80\
+\x99on retrouve \xc3\xa9g\
+alement un peu p\
+artout en Afriqu\
+e de l'Ouest.\x5cn\x5c\
+nAvec les cr\xc3\xa9at\
+eurs sonores du \
+collectif Making\
+ Waves, ils ont \
+s\xc3\xa9lectionn\xc3\xa9 de\
+s contes, les on\
+t adapt\xc3\xa9s en mi\
+cro-fictions de \
+6 \xc3\xa0 10 minutes \
+enregistr\xc3\xa9es av\
+ec des com\xc3\xa9dien\
+.nes et des musi\
+cien.nes, pour d\
+onner naissance \
+\xc3\xa0 une s\xc3\xa9rie de\
+ podcasts : L\xe2\x80\x99\
+Afrique en conte\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x220a6ed835-fad1-4\
+9f4-b7e8-89f0886\
+ec542\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x220a6e\
+d835-fad1-49f4-b\
+7e8-89f0886ec542\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Picsou Tou\
+t l'or du Monde\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Picso\
+u Tout l'or du M\
+onde racont\xc3\xa9 pa\
+r Roger Carel\x22\x0d\x0a\
+    },\x0d\x0a    \x22330\
+c6233-96e1-479f-\
+8719-96041e962c9\
+b\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22330c6233\
+-96e1-479f-8719-\
+96041e962c9b\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22L'\xc3\xa9cole des l\
+oisirs\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x2286707a8c-65a7-\
+433d-9f21-b65ef0\
+170859\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22867\
+07a8c-65a7-433d-\
+9f21-b65ef017085\
+9\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22La Grimm \
+Acad\xc3\xa9mie Saison\
+ 2\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Bi\
+envenue \xc3\xa0 la Gr\
+imm Acad\xc3\xa9mie (S\
+aison 2),\x5cn\x5cnSui\
+vez-moi dans la \
+tour du cha\xcc\x82tea\
+u. Ici, vous all\
+ez e\xcc\x81tudier les\
+ cr\xc3\xa9atures magi\
+ques et je serai\
+ votre professeu\
+r !\x5cn\x5cnJe me pre\
+\xcc\x81sente, mon nom\
+ \xc3\xa0 moi, c'est G\
+rimm : Hansel Gr\
+imm.\x22\x0d\x0a    },\x0d\x0a \
+   \x2287101e8b-7aa\
+c-4cb7-95e1-0f4f\
+5fc13e82\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+7101e8b-7aac-4cb\
+7-95e1-0f4f5fc13\
+e82\x22,\x0d\x0a        \x22\
+title\x22: \x22Julie D\
+epardieu - Le Ga\
+r\xc3\xa7on Transparen\
+t(2parties)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x5cnIl \xc3\xa9ta\
+it une fois, un \
+gar\xc3\xa7on transpar\
+ent qui n'avait \
+n'a pas de nom..\
+. A force d'\xc3\xaatr\
+e invisible aux \
+yeux de tous, il\
+ en avait oubli\xc3\
+\xa9 comment il s'a\
+ppelait. Lors d'\
+une nuit froide \
+de No\xc3\xabl, le P\xc3\xa8\
+re-No\xc3\xabl - qui a\
+vait lui m\xc3\xaame o\
+mis d'apporter u\
+n pr\xc3\xa9sent \xc3\xa0 l'\
+enfant - d\xc3\xa9cida\
+ qu'il \xc3\xa9tait te\
+mps que ce gar\xc3\xa7\
+on reprenne go\xc3\xbb\
+t \xc3\xa0 la vie.\x5cnLe\
+s voil\xc3\xa0 alors p\
+artis pour une i\
+ncroyable nuit d\
+urant laquelle, \
+gr\xc3\xa2ce \xc3\xa0 un ins\
+trument de musiq\
+ue enchanteur et\
+ beaucoup d'amou\
+r, la vie du gar\
+\xc3\xa7on transparent\
+ changea...\x22\x0d\x0a  \
+  },\x0d\x0a    \x22e6a72\
+a32-00b8-495e-90\
+2f-d690003506ea\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22e6a72a32-0\
+0b8-495e-902f-d6\
+90003506ea\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+G\xc3\xa9n\xc3\xa9riques Des\
+sins Anim\xc3\xa9s\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22a4e94bbe\
+-e15c-4f78-80bb-\
+1799947e9145\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22a4e94bbe-e15c\
+-4f78-80bb-17999\
+47e9145\x22,\x0d\x0a     \
+   \x22title\x22: \x22Enc\
+ore une histoire\
+ - La cite d'Ang\
+ele (7 episodes)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Loui\
+s est pre\xcc\x82t a\xcc\x80\
+ tout pour rejoi\
+ndre depuis New \
+York son amoureu\
+se Ange\xcc\x80le qui \
+vit a\xcc\x80 Los Ange\
+les. Sans argent\
+ ni moyen de tra\
+nsport, il va vi\
+vre un road trip\
+ romantique a\xcc\x80 \
+travers les Etat\
+s-Unis ! Une his\
+toire pour les p\
+etits et les gra\
+nds, sans violen\
+ce et avec beauc\
+oup de rencontre\
+s. Une o\xcc\x82de au \
+voyage et a\xcc\x80 la\
+ bienveillance.\x5c\
+n\x5cnEncore une hi\
+stoire est un po\
+dcast destin\xc3\xa9 a\
+ux enfants (et \xc3\
+\xa0 ceux qui le so\
+nt encore dans l\
+eur t\xc3\xaate) qui a\
+iment qu'on leur\
+ raconte des his\
+toires.\x5cn\x5cnChaqu\
+e semaine, vous \
+retrouverez ici \
+une histoire lue\
+, tir\xc3\xa9e d'un li\
+vre de litt\xc3\xa9rat\
+ure jeunesse ou \
+une cr\xc3\xa9ation or\
+iginale.\x5cn\x5cnUn p\
+odcast produit p\
+ar Benjamin Mull\
+er, interpr\xc3\xa9t\xc3\xa9\
+ par C\xc3\xa9line Kal\
+lmann et r\xc3\xa9alis\
+\xc3\xa9 par Alexandre\
+ Ferreira.\x5cn\x5cnA \
+\xc3\xa9couter avant d\
+e se coucher, al\
+long\xc3\xa9 dans l'he\
+rbe, dans la voi\
+ture ou dans le \
+train, Encore un\
+e histoire veut \
+mettre en avant \
+la formidable cr\
+\xc3\xa9ation litt\xc3\xa9ra\
+ire destin\xc3\xa9e au\
+x jeunes lecteur\
+s (et aux moins \
+jeunes, donc).\x5cn\
+\x5cnVous retrouver\
+ez bien \xc3\xa9videmm\
+ent \xc3\xa0 chaque fo\
+is les r\xc3\xa9f\xc3\xa9ren\
+ces des livres l\
+us, si vous voul\
+ez aller plus lo\
+in en vous offra\
+nt le livre en q\
+uestion.\x5cn\x5cnVive\
+ la lecture, viv\
+e la litt\xc3\xa9ratur\
+e jeunesse, vive\
+ les histoires !\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+41abc616-9c5d-46\
+6b-ba55-c0b4c771\
+5794\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2241abc\
+616-9c5d-466b-ba\
+55-c0b4c7715794\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Caracola\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x228338404\
+3-872f-4b6c-a45d\
+-ed26331e411e\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2283384043-872\
+f-4b6c-a45d-ed26\
+331e411e\x22,\x0d\x0a    \
+    \x22title\x22: \x22le\
+ tour du monde e\
+n 80 jours\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22le tour du\
+ monde en 80 jou\
+rs\x22\x0d\x0a    },\x0d\x0a   \
+ \x2235c27c4a-4811-\
+4763-85d5-5c522b\
+984fcb\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x2235c\
+27c4a-4811-4763-\
+85d5-5c522b984fc\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Cuentos d\
+e animales\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x2211 cuentos\
+ de animales. (e\
+spa\xc3\xb1ol)\x5cnLos cu\
+entos de animale\
+s son historias \
+maravillosas en \
+las que aparecen\
+ animales, ya se\
+a como protagoni\
+stas o como pers\
+onajes important\
+es dentro de la \
+historia. Nacier\
+on en la relaci\xc3\
+\xb3n del ser human\
+o con la natural\
+eza y al d\xc3\xada de\
+ hoy siguen teni\
+endo una gran in\
+fluencia en lect\
+ores de todas la\
+s edades.\x5cnhttps\
+://www.mundoprim\
+aria.com/\x22\x0d\x0a    \
+},\x0d\x0a    \x222596cba\
+8-a61e-4197-96f8\
+-8a5faca64825\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x222596cba8-a61\
+e-4197-96f8-8a5f\
+aca64825\x22,\x0d\x0a    \
+    \x22title\x22: \x22Po\
+mme d'api 2021\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x2275e4b9\
+78-9210-424d-a9d\
+c-3bce540e9aae\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2275e4b978-92\
+10-424d-a9dc-3bc\
+e540e9aae\x22,\x0d\x0a   \
+     \x22title\x22: \x22F\
+rance Inter - Le\
+s odyss\xc3\xa9es de F\
+rance Inter Comp\
+let\x22,\x0d\x0a        \x22\
+description\x22: \x22F\
+rance Inter invi\
+te les enfants d\
+e 7 \xc3\xa0 12 ans \xc3\xa0\
+ se plonger dans\
+ les aventures d\
+es grandes figur\
+es de l'histoire\
+.\x5cn\x5cnC'est au tr\
+avers de 80 \xc3\xa9pi\
+sodes que vous p\
+ourrez vivre la \
+d\xc3\xa9couverte des \
+Etats-Unis, la r\
+\xc3\xa9volution Fran\xc3\
+\xa7aise, la chute \
+du dernier emper\
+eur chinois, les\
+ fouilles de la \
+grande vall\xc3\xa9e d\
+es rois en Egypt\
+e, la folle \xc3\xa9ni\
+gme du masque de\
+ fer, les aventu\
+res de deux femm\
+es pirates, le r\
+\xc3\xa9cit d'un roi l\
+\xc3\xa9gendaire, le p\
+ouvoir de la rei\
+ne Ali\xc3\xa9nor d'Aq\
+uitaine etc.\x22\x0d\x0a \
+   },\x0d\x0a    \x2240f1\
+3305-c246-4867-9\
+51a-89c083a034e6\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2240f13305-\
+c246-4867-951a-8\
+9c083a034e6\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Bestioles Pack2\
+023-V2 (20 histo\
+ires)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22France Inter - \
+Bestioles - Pack\
+ 2023 V2 (20 his\
+toires) - Janvie\
+r \xc3\xa0 Juillet 202\
+3 - Les aventure\
+s du monde anima\
+l ! Le nouveau p\
+odcast pour les \
+5-7 ans\x22\x0d\x0a    },\
+\x0d\x0a    \x22c9f54cd5-\
+d846-4d41-9326-a\
+b4deb462068\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22c9f54cd5-d846-\
+4d41-9326-ab4deb\
+462068\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+Grands Classique\
+s Disney (Ann\xc3\xa9e\
+s 30-50)\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Histoire et \
+dialogues:\x5cn- Bl\
+anche Neige et l\
+e 7 nains (par B\
+ernard Giraudeau\
+)\x5cn- Pinocchio (\
+par Sophie Desma\
+rets)\x5cn- Bambi (\
+par Marie-Christ\
+ine Barrault)\x5cn-\
+ Cendrillon (par\
+ Catherine Deneu\
+ve)\x5cn- Alice au \
+pays des merveil\
+les (par Genevi\xc3\
+\xa8ve Casile)\x5cn- P\
+eter Pan (par Je\
+an Rochefort)\x5cn-\
+ La Belle et le \
+Clochard (par Je\
+an Rochefort)\x5cn-\
+ La Belle au boi\
+s dormant (par M\
+ich\xc3\xa8le Morgan)\x22\
+\x0d\x0a    },\x0d\x0a    \x22f\
+ba80eda-f7bc-4eb\
+e-9732-def9fd710\
+2f7\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22fba80e\
+da-f7bc-4ebe-973\
+2-def9fd7102f7\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Contes pour \
+enfants Disney\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Cont\xc3\xa9\
+es par Pierre Tc\
+hernia. Date de \
+sortie d'origine\
+: 23 octobre 199\
+8\x5cn01 - Blanche-\
+Neige et les 7 n\
+ains\x5cn02 - Les 1\
+01 Dalmatiens\x5cn0\
+3 - Le livre de \
+la Jungle\x5cn04 - \
+Pinocchio\x5cn05 - \
+Bambi\x5cn06 - Alad\
+din\x5cn07 - Cendri\
+llon\x5cn08 - Le Ro\
+i Lion\x5cn09 - Pet\
+er Pan\x5cn\x5cnhttps:\
+//www.amazon.fr/\
+Belles-Histoires\
+-Grands-Disney-a\
+nglais/dp/B00004\
+UPM6\x22\x0d\x0a    },\x0d\x0a \
+   \x22f4b8e475-f9d\
+a-4af7-b46a-ab1c\
+cbf01528\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22f\
+4b8e475-f9da-4af\
+7-b46a-ab1ccbf01\
+528\x22,\x0d\x0a        \x22\
+title\x22: \x22Le sacr\
+e des contes et \
+ses m\xc3\xa9ditations\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22L'un\
+ivers du Sacre d\
+es Contes et ses\
+ m\xc3\xa9ditations tr\
+ansporte par son\
+ atmosph\xc3\xa8re apa\
+isante et ses vo\
+yages magiques \xf0\
+\x9f\x8c\x9f Vous vous re\
+trouverez en un \
+instant au fond \
+d'un tipi bien a\
+u chaud, en tout\
+e intimit\xc3\xa9 ... \
+\xe2\x9b\xba\x5cn\x5cn10 histoi\
+res et contes po\
+ur nourrir l'ima\
+ginaire de nos e\
+nfants \x5cn\x5cnhttps\
+://www.lesacrede\
+scontes.com/\x22\x0d\x0a \
+   },\x0d\x0a    \x22d33b\
+ceaf-d1c1-406c-b\
+573-9aceca5a8a79\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22d33bceaf-\
+d1c1-406c-b573-9\
+aceca5a8a79\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Guillemette (8 \
+\xc3\xa9pisodes) de Ju\
+lie Bonnie (ARTE\
+ Radio)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Guillemette :\
+ une fiction mus\
+icale d'ARTE Rad\
+io. Texte, musiq\
+ue et bruitages \
+de Julie Bonnie.\
+ https://www.art\
+eradio.com/serie\
+/guillemette/579\
+ \x22\x0d\x0a    },\x0d\x0a    \
+\x2277c93e03-d8eb-4\
+2c2-bb25-25708e1\
+bed64\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2277c9\
+3e03-d8eb-42c2-b\
+b25-25708e1bed64\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les aventu\
+res d'Olma en oc\
+\xc3\xa9an Arctique\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x22ddbf639\
+5-16ca-4737-a58c\
+-1b736624d0d8\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22ddbf6395-16c\
+a-4737-a58c-1b73\
+6624d0d8\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s chansons Disne\
+y\x22,\x0d\x0a        \x22de\
+scription\x22: \x2224 \
+chansons Disney \
+\x5cn\x5cn01 La Reine \
+des Neiges: Lib\xc3\
+\xa9r\xc3\xa9e, d\xc3\xa9livr\xc3\xa9\
+e\x5cn02 La Reine d\
+es Neiges: Je vo\
+udrais un bonhom\
+me de neige\x5cn03 \
+La Reine des Nei\
+ges: Je vais f\xc3\xaa\
+ter ce renouveau\
+\x5cn04 La Reine de\
+s Neiges: L'amou\
+r est un cadeau\x5c\
+n05 La Reine des\
+ Neiges: Nul n'e\
+st parfait\x5cn06 R\
+aiponse : O\xc3\xb9 es\
+t la vraie vie?\x5c\
+n07 Le Roi Lion:\
+ Hakuna Matate\x5cn\
+08 Le Roi Lion: \
+Je voudrais d\xc3\xa9j\
+\xc3\xa0 \xc3\xaatre roi\x5cn09\
+ Vaiana: Pour le\
+s hommes\x5cn10 Le \
+livre de la Jung\
+le: Il en faut p\
+eu pour \xc3\xaatre he\
+ureux\x5cn11 La pet\
+ite sir\xc3\xa8ne: Sou\
+s l'oc\xc3\xa9an\x5cn12 O\
+liver et Compagn\
+ie: Mais pourquo\
+i m'en faire\x5cn13\
+ Mulan: Comme un\
+ homme\x5cn14 Pocah\
+ontas: L'air du \
+vent\x5cn15 La Bell\
+e et la B\xc3\xaate: C\
+'est la f\xc3\xaate\x5cn1\
+6 Aladin: Je sui\
+s ton meilleur a\
+mi\x5cn17 Tarzan: J\
+e veux savoir\x5cn1\
+8 Aladin: Ce r\xc3\xaa\
+ve bleu\x5cn19 La B\
+elle et la B\xc3\xaate\
+: Belle\x5cn20 Le l\
+ivre de la Jungl\
+e: \xc3\x8atre un homm\
+e comme vous\x5cn21\
+ Peter Pan: A la\
+ file indienne\x5cn\
+22 Raiponce: J'a\
+i un r\xc3\xaave\x5cn23 V\
+aiana: Le bleu l\
+umi\xc3\xa8re\x5cn24 Herc\
+ule: De z\xc3\xa9ro en\
+ h\xc3\xa9ros\x22\x0d\x0a    },\
+\x0d\x0a    \x2243337bb0-\
+b4ea-48a5-9f61-a\
+61cc4675b76\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2243337bb0-b4ea-\
+48a5-9f61-a61cc4\
+675b76\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+dents et dodo 41\
+7-527\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22MEGAPACK de 99 \
+\xc3\xa9pisodes de 427\
+ \xc3\xa0 527\x5cnEn mode\
+ random et compa\
+tible mode nuit.\
+\x5cn\x5cn3 min c\xe2\x80\x99es\
+t la dur\xc3\xa9e reco\
+mmand\xc3\xa9e pour le\
+ brossage de den\
+ts, 3 min c\xe2\x80\x99es\
+t aussi la dur\xc3\xa9\
+e du podcast \xc2\xab \
+Les dents et dod\
+o \xc2\xbb destin\xc3\xa9 au\
+x enfants pour l\
+es accompagner d\
+e mani\xc3\xa8re ludiq\
+ue et \xc3\xa9ducative\
+ dans le brossag\
+e de dents, en l\
+eur faisant d\xc3\xa9c\
+ouvrir une histo\
+ire vraie intemp\
+orelle qui s\xe2\x80\x99e\
+st pass\xc3\xa9e pr\xc3\xa8s\
+ ou loin de chez\
+ eux\x5cn\x5cnhttps://\
+www.bfmtv.com/po\
+dcasts/les-dents\
+-et-dodo/\x22\x0d\x0a    \
+},\x0d\x0a    \x22bf9deaf\
+f-9597-496d-b272\
+-1dbee743c627\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22bf9deaff-959\
+7-496d-b272-1dbe\
+e743c627\x22,\x0d\x0a    \
+    \x22title\x22: \x22Mi\
+niMAX\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\xc3\x80 l\xe2\x80\x99\xc3\xa9cole o\
+u \xc3\xa0 votre domic\
+ile, votre enfan\
+t re\xc3\xa7oit, chaqu\
+e mois, \x5cnde nov\
+embre \xc3\xa0 juin, 8\
+ livres vari\xc3\xa9s,\
+ dr\xc3\xb4les et stim\
+ulants, \x5cns\xc3\xa9lec\
+tionn\xc3\xa9s avec so\
+in, adapt\xc3\xa9s \xc3\xa0 \
+son \xc3\xa2ge et \xc3\xa0 s\
+es envies.\x5cnEn d\
+\xc3\xa9couvrant ces l\
+ivres avec vous,\
+ votre enfant s\xe2\
+\x80\x99attache \xc3\xa0 des\
+ h\xc3\xa9ros, \x5cnessen\
+tiels petits gui\
+des pour la vie \
+qui l\xe2\x80\x99attend. \
+Notre s\xc3\xa9lection\
+ r\xc3\xa9pond ainsi \x5c\
+n\xc3\xa0 sa curiosit\xc3\
+\xa9, \xc3\xa0 ses \xc3\xa9moti\
+ons et \xc3\xa0 son be\
+soin de comprend\
+re le monde.\x5cn\x5cn\
+https://www.ecol\
+edesmax.com/sele\
+ction-minimax.ph\
+p\x22\x0d\x0a    },\x0d\x0a    \
+\x2220b2e622-37e7-4\
+43d-8070-89b9de4\
+0172e\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2220b2\
+e622-37e7-443d-8\
+070-89b9de40172e\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Star Wars \
+Le Retour du Jed\
+i\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22f18\
+7aeba-2a61-4d70-\
+bcc5-1ff076d9a3b\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22f187aeba\
+-2a61-4d70-bcc5-\
+1ff076d9a3b1\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Harry Potter 2\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22e28f\
+237a-017a-4f79-9\
+258-83be0a3f6fa7\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22e28f237a-\
+017a-4f79-9258-8\
+3be0a3f6fa7\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Le temps dune h\
+istoire\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x229c106e61-d346\
+-4d47-affe-e5c00\
+29b78e4\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x229c\
+106e61-d346-4d47\
+-affe-e5c0029b78\
+e4\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Conte-mo\
+i l'aventure - L\
+a mythologie Gre\
+cque (5 histoire\
+s) (5)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x225 histoires su\
+r la mythologie \
+Grecque issues d\
+u podcast \x5c\x22Cont\
+e-moi l'aventure\
+\x5c\x22 https://www.c\
+heriefm.fr/podca\
+sts/conte-moi-l-\
+aventure\x5cn\x5cn- He\
+rcule et la cein\
+ture des amazone\
+s\x5cn- La course d\
+'Atalante\x5cn- Le \
+bouclier de Pers\
+\xc3\xa9e\x5cn- Les avent\
+ures d\xe2\x80\x99Ulysse \
+chez Circ\xc3\xa9\x5cn- T\
+h\xc3\xa9s\xc3\xa9e et le Mi\
+notaure\x22\x0d\x0a    },\
+\x0d\x0a    \x220908e833-\
+6be6-47bc-8dc5-5\
+d284df998a5\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x220908e833-6be6-\
+47bc-8dc5-5d284d\
+f998a5\x22,\x0d\x0a      \
+  \x22title\x22: \x22Cont\
+es Crois\xc3\xa9s - Tu\
+tti Frutti !\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22\x22\x0d\x0a    }\
+,\x0d\x0a    \x22752d4a30\
+-6799-4d89-9a63-\
+fdec15918cd1\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22752d4a30-6799\
+-4d89-9a63-fdec1\
+5918cd1\x22,\x0d\x0a     \
+   \x22title\x22: \x22Le \
+Petit Nicolas\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Savez-v\
+ous qui est le p\
+etit gar\xc3\xa7on le \
+plus impertinent\
+, le plus malin \
+et le plus tendr\
+e aussi ? A l'\xc3\xa9\
+cole ou en famil\
+le, il a souvent\
+ de bonnes id\xc3\xa9e\
+s et cela ne lui\
+ r\xc3\xa9ussit pas to\
+ujours. Vous l'a\
+vez tous reconnu\
+. C'est le Petit\
+ Nicolas \xc3\xa9videm\
+ment ! La ma\xc3\xaetr\
+esse est inqui\xc3\xa8\
+te, le photograp\
+he s'\xc3\xa9ponge le \
+front, le Bouill\
+on devient tout \
+rouge, les maman\
+s ont mauvaise m\
+ine, quant \xc3\xa0 l'\
+inspecteur, il e\
+st reparti aussi\
+ vite qu'il \xc3\xa9ta\
+it venu. Pourtan\
+t, Geoffroy, Agn\
+an, Eudes, Rufus\
+, Clotaire, Maix\
+ent, Alceste, Jo\
+achim... et le P\
+etit Nicolas son\
+t - presque - to\
+ujours sages.\x22\x0d\x0a\
+    },\x0d\x0a    \x22a8c\
+afaad-8f00-4736-\
+8666-3f897620bf0\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22a8cafaad\
+-8f00-4736-8666-\
+3f897620bf01\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22D\xc3\xa9couvre les \
+styles de musiqu\
+e fran\xc3\xa7aise\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22D\xc3\xa9couvr\
+e les style de m\
+usique au traver\
+s de diff\xc3\xa9rents\
+ hits - version \
+francophone\x22\x0d\x0a  \
+  },\x0d\x0a    \x2218e2c\
+7c9-5533-47e7-b9\
+0e-3f62144437e6\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x2218e2c7c9-5\
+533-47e7-b90e-3f\
+62144437e6\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Narnia\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x22\x0d\x0a    },\x0d\x0a   \
+ \x22012509e0-50bc-\
+4b78-abd8-843162\
+6a7409\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22012\
+509e0-50bc-4b78-\
+abd8-8431626a740\
+9\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Le monstr\
+e poilu\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x2235f80e4d-0c1c\
+-4f41-a307-86832\
+e9eb1d6\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2235\
+f80e4d-0c1c-4f41\
+-a307-86832e9eb1\
+d6\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Raconte \
+moi des Histoire\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22 Ra\
+conte-moi des hi\
+stoires (Story T\
+eller en anglais\
+) \xc3\xa9tait un maga\
+zine pour enfant\
+s \xc3\xa0 publication\
+ bimensuelle \xc3\xa9d\
+it\xc3\xa9 entre 1982 \
+et 1985 par Mars\
+hall Cavendish.\x5c\
+n\x5cnLe magazine r\
+eprenait diff\xc3\xa9r\
+ents contes folk\
+loriques traditi\
+onnels, des cont\
+es pour enfants \
+classiques tels \
+que Gobbolino, o\
+u quelques histo\
+ires contemporai\
+nes \xc3\xa9crites sp\xc3\
+\xa9cialement pour \
+la s\xc3\xa9rie comme \
+Tirondin. En com\
+pl\xc3\xa9ment figurai\
+ent des pages de\
+ jeux et de colo\
+riage. Chaque ma\
+gazine \xc3\xa9tait ac\
+compagn\xc3\xa9 d\xe2\x80\x99un\
+e cassette audio\
+ d\xe2\x80\x99une dur\xc3\xa9e \
+de 50 minutes, r\
+eprenant le text\
+e des diff\xc3\xa9rent\
+es histoires. Le\
+ g\xc3\xa9n\xc3\xa9rique d'i\
+ntroduction de c\
+haque cassette, \
+intitul\xc3\xa9 \x5c\x22Chil\
+dren's Carnival\x5c\
+\x22, a \xc3\xa9t\xc3\xa9 compo\
+s\xc3\xa9 par Ted Atki\
+ng et Alain Fean\
+ch1.\x5cn\x5cnLa s\xc3\xa9ri\
+e comporte en to\
+ut 26 livrets de\
+ 36 pages, avec \
+3 suppl\xc3\xa9ments d\
+e No\xc3\xabl, soit au\
+ total \xc2\xab 728 pa\
+ges d'histoires,\
+ 130 pages de je\
+ux et de coloria\
+ges, pr\xc3\xa8s de 20\
+0 histoires et p\
+lus de 21 heures\
+ d'\xc3\xa9coute. \xc2\xbb \x22\
+\x0d\x0a    },\x0d\x0a    \x22e\
+c755e3b-fa85-423\
+0-8d1e-952a08477\
+a72\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22ec755e\
+3b-fa85-4230-8d1\
+e-952a08477a72\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Bonjour Lond\
+on\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Bo\
+njour London : l\
+e premier podcas\
+t qui te raconte\
+ une histoire to\
+ut en t'apprenan\
+t l'anglais ! Pa\
+rs \xc3\xa0 la rencont\
+re de Summer, 11\
+ ans, qui d\xc3\xa9m\xc3\xa9\
+nage \xc3\xa0 Londres \
+avec ses parents\
+ la veille de so\
+n entr\xc3\xa9e au col\
+l\xc3\xa8ge. Et qui di\
+t nouvelle ville\
+ dit nouvelle vi\
+e ! D\xc3\xa9couvre vi\
+te son histoire.\
+.. et apprends l\
+'anglais avec el\
+le. Des mini \xc3\xa9p\
+isodes t'aideron\
+t \xc3\xa0 progresser \
+facilement. See \
+you soon ! A tr\xc3\
+\xa8s vite !\x22\x0d\x0a    \
+},\x0d\x0a    \x22dd2dbbd\
+3-27e9-447e-a66c\
+-881bdcce440b\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22dd2dbbd3-27e\
+9-447e-a66c-881b\
+dcce440b\x22,\x0d\x0a    \
+    \x22title\x22: \x22J'\
+aime Lire Vol. 0\
+2\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Cel\
+estin et les cor\
+saires\x5cnCharlott\
+e et le croque-m\
+ioche\x5cnDocteur v\
+irus a ton servi\
+ce\x5cnFreres des g\
+randes plaines\x5cn\
+La maxi-gaff d'A\
+rthur\x5cnLe menson\
+ge de Ga\xc3\xa9tan\x5cnL\
+e visiteur du so\
+ir\x5cnMon poisson \
+est un homme d'a\
+ffaire\x5cnSam Chat\
+ouille et l'\xc3\xa9ni\
+gme du tohu-bohu\
+\x5cnSurtout n'ouvr\
+e pas la porte\x22\x0d\
+\x0a    },\x0d\x0a    \x22bd\
+156b70-881f-4b24\
+-8ba6-6f99f8e097\
+97\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22bd156b7\
+0-881f-4b24-8ba6\
+-6f99f8e09797\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Mortelle Adel\
+e - Mortel un jo\
+ur, Mortel toujo\
+urs!\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Description\x5cn\xc3\x87a\
+ fait quel bruit\
+ un d\xc3\xa9tecteur d\
+e mortellitude ?\
+ Et qui a bien p\
+\xc3\xbb inventer bien\
+ \xc3\xa7a ? Mortelle \
+Ad\xc3\xa8le bien s\xc3\xbbr\
+ ! Enfin un moye\
+n de reconna\xc3\xaetr\
+e ses semblables\
+, des gens bizar\
+res et mortels \xc3\
+\xa0 la fois ! Ad\xc3\xa8\
+le d\xc3\xa9cide de te\
+ster son inventi\
+on \xc3\xa0 l'\xc3\xa9cole :\
+ Geoffroy, Jade,\
+ Miranda, Jennyf\
+er... tous ses c\
+amarades y passe\
+nt mais aucun ne\
+ fait bouger l'a\
+iguille du d\xc3\xa9te\
+cteur Ad\xc3\xa8le va-\
+t-elle trouver q\
+uelqu'un d'aussi\
+ mortel qu'elle \
+?\x5cn\x5cnPlonge les \
+oreilles grandes\
+ ouvertes dans c\
+ette adaptation \
+audio du roman M\
+ortel un jour, M\
+ortel toujours p\
+our le savoir ! \
+Une aventure aud\
+io... trop morte\
+lle !\x5cn\x5cn\xc2\xa92020 \
+Mr Tan et Diane \
+le Feyer d'apr\xc3\xa8\
+s l'\xc5\x93uvre cr\xc3\xa9\xc3\
+\xa9e par Mr Tan et\
+ Miss Prickly / \
+Bayard \xc3\x89ditions\
+ (P)2021 Bayard \
+\xc3\x89ditions\x5cn\x5cnhtt\
+ps://www.audible\
+.fr/pd/Mortel-un\
+-jour-Mortel-tou\
+jours-Livre-Audi\
+o/B09R4GM8T5\x22\x0d\x0a \
+   },\x0d\x0a    \x2299f7\
+6157-e2a7-490c-b\
+ea7-61e0e63b23ef\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2299f76157-\
+e2a7-490c-bea7-6\
+1e0e63b23ef\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Dans les pas d'\
+Ars\xc3\xa8ne Lupin\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\x22\x0d\x0a    \
+},\x0d\x0a    \x22ff91fe6\
+2-7e71-4efc-be65\
+-2ee8aa1c1739\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22ff91fe62-7e7\
+1-4efc-be65-2ee8\
+aa1c1739\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ma\
+th\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x2260\
+1c737f-7fb8-46ed\
+-916a-79718eb8a7\
+82\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22601c737\
+f-7fb8-46ed-916a\
+-79718eb8a782\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Ma petite his\
+toire du soir Di\
+sney\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+fc924323-77e5-4c\
+23-bbce-64b0f411\
+2d5b\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22fc924\
+323-77e5-4c23-bb\
+ce-64b0f4112d5b\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Audible-Sau\
+ve qui pue(9 cha\
+pitres)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Dans la petit\
+e ville de N\xc3\xa9se\
+nsible, les gens\
+ ne visitent JAM\
+AIS le zoo...\xc3\xa0 \
+moins d\xe2\x80\x99y \xc3\xaatr\
+e forc\xc3\xa9s. S\xe2\x80\x99i\
+ls y vont, ils r\
+eviennent en cri\
+ant: \x5c\x22Sauve qui\
+ pue!\x5c\x22 Dans ce \
+Mini Big, tu fer\
+as la connaissan\
+ce de Chanel la \
+moufette qui aur\
+a pour mission d\
+e...cesser de pu\
+er!\x22\x0d\x0a    },\x0d\x0a  \
+  \x227680fa83-5794\
+-4a77-97fc-e9809\
+a555a80\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2276\
+80fa83-5794-4a77\
+-97fc-e9809a555a\
+80\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Pierre D\
+elye raconte...\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x225 his\
+toires racont\xc3\xa9e\
+s par Pierre Del\
+ye:\x5cn-Le p'tit b\
+onhomme des bois\
+.\x5cn-La grosse fa\
+im de p'tit bonh\
+omme.\x5cn-Sssi j't\
+e mords, t'es mo\
+rt !\x5cn-Les Music\
+iens de la Nouve\
+lle-Br\xc3\xaame.\x5cn-Mo\
+iti\xc3\xa9 de Coq.\x22\x0d\x0a\
+    },\x0d\x0a    \x225b6\
+f59ff-6c98-4b90-\
+a184-155fe684278\
+d\x22: {\x0d\x0a        \x22\
+uuid\x22: \x225b6f59ff\
+-6c98-4b90-a184-\
+155fe684278d\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Auzou Les hist\
+oires de Ptit Lo\
+up (44 histoires\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x2244 \
+histoires de P't\
+it Loup\x5cn\x5cnhttps\
+://music.youtube\
+.com/playlist?li\
+st=OLAK5uy nbw8g\
+TdPthUsNfU49ILtz\
+HKwQA6eZHog0\x5cn\x5cn\
+Histoires dispon\
+ibles: \x5cnA peur \
+du noir\x5cnA un an\
+imal de compagni\
+e\x5cnA un bobo\x5cnAi\
+me son doudou\x5cnA\
+pprend \xc3\xa0 jardin\
+er\x5cnAttend le P\xc3\
+\xa8re No\xc3\xabl\x5cnDevie\
+nt grand fr\xc3\xa8re\x5c\
+nDit toujours no\
+n\x5cnEst le roi de\
+ la galette\x5cnEst\
+ poli\x5cnFait des \
+b\xc3\xaatises\x5cnFait d\
+u ski\x5cnFait du v\
+\xc3\xa9lo\x5cnFait une c\
+ol\xc3\xa8re\x5cnF\xc3\xaate P\xc3\
+\xa2ques\x5cnF\xc3\xaate son\
+ anniversaire\x5cnL\
+e merveilleux No\
+\xc3\xabl de Ptit Loup\
+\x5cnN'aime que les\
+ p\xc3\xa2tes\x5cnNe met \
+plus de couches\x5c\
+nNe veut pas all\
+er \xc3\xa0 l'\xc3\xa9cole\x5cn\
+Ne veut pas dorm\
+ir\x5cnNe veut pas \
+partager\x5cnNe veu\
+t pas ranger\x5cnPa\
+rt en vacances\x5cn\
+Part en voyage\x5cn\
+Pr\xc3\xa9pare No\xc3\xabl\x5cn\
+Rentre \xc3\xa0 l'\xc3\xa9co\
+le\x5cnS'habille to\
+ut seul\x5cnS'occup\
+e de petite soeu\
+r\x5cnSauve la plan\
+\xc3\xa8te\x5cnSe brosse \
+les dents\x5cnSe d\xc3\
+\xa9guise\x5cnSe lave \
+tout seul\x5cnVa \xc3\xa0\
+ la piscine\x5cnVa \
+\xc3\xa0 la plage\x5cnVa \
+au march\xc3\xa9\x5cnVa c\
+hez le docteur\x5cn\
+Va chez papi et \
+mamie\x5cnVa sur le\
+ pot\x5cnVeut \xc3\xaatre\
+ le chef\x5cnVeut s\
+a t\xc3\xa9tine\x5cnVeut \
+tout faire comme\
+ un grand\x5cnVisit\
+e une ferme\x22\x0d\x0a  \
+  },\x0d\x0a    \x229a8d4\
+358-25ef-4080-bf\
+1d-30d7373794bf\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x229a8d4358-2\
+5ef-4080-bf1d-30\
+d7373794bf\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Le petit Nicolas\
+ et les copains\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Pack \
+maison\x22\x0d\x0a    },\x0d\
+\x0a    \x2273945d87-3\
+37c-49aa-815c-e5\
+79d6730910\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2273945d87-337c-4\
+9aa-815c-e579d67\
+30910\x22,\x0d\x0a       \
+ \x22title\x22: \x22La Ve\
+illeuse du Somme\
+il (9 chapitres)\
+ by JeSuisUneFou\
+g\xc3\xa8re\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22La Veilleuse du\
+ Sommeil : \x5cnDe \
+: Sua\xc3\xabna Airaul\
+t\x5cnLu par : M\xc3\xa9l\
+odie Orru\x5cnS\xc3\xa9ri\
+e : La Veilleuse\
+ du sommeil, Vol\
+ume 1\x5cnDur\xc3\xa9e : \
+3 h\x5cnVersion int\
+\xc3\xa9grale Livre au\
+dio\x5cnDate de pub\
+lication : 20/01\
+/2020\x5cnLangue : \
+Fran\xc3\xa7ais\x5cn\xc3\x89dit\
+eur : Audible Or\
+iginals\x5cnhttps:/\
+/www.audible.fr/\
+pd/La-Veilleuse-\
+du-sommeil-La-se\
+rie-complete-Liv\
+re-Audio/B08423Z\
+8X1\x22\x0d\x0a    },\x0d\x0a  \
+  \x22da7094a9-0821\
+-45d3-9a0f-95ed3\
+d8290ec\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22da\
+7094a9-0821-45d3\
+-9a0f-95ed3d8290\
+ec\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Auzou Si\
+mon (11 histoire\
+s) 2023-07-22\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x2211 hist\
+oires de Simon\x5cn\
+\x5cnhttps://music.\
+youtube.com/chan\
+nel/UCPWQFPH-UyN\
+s4vHZ3G8hYNw\x22\x0d\x0a \
+   },\x0d\x0a    \x220030\
+e8f0-c45c-47ee-9\
+4c6-3c3e6efc3801\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x220030e8f0-\
+c45c-47ee-94c6-3\
+c3e6efc3801\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Harry Potter 1\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22cad10\
+f97-6449-480d-99\
+b7-e11c06644de5\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22cad10f97-6\
+449-480d-99b7-e1\
+1c06644de5\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les Pirates en P\
+yjama\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Les Pirates en \
+Pyjama v2\x5cnR\xc3\xa9or\
+ganisation selon\
+ ordre de paruti\
+on\x5cnRecadrage de\
+s histoires pour\
+ retirer la PUB\x5c\
+nAjout du d\xc3\xa9lai\
+s +1s sur les ti\
+tres\x5cnAjout de l\
+a saison 2\x5cn\x5cnht\
+tps://www.radiog\
+aspesie.ca/podca\
+st/les-pirates-e\
+n-pyjama/\x22\x0d\x0a    \
+},\x0d\x0a    \x22c913689\
+d-49dd-4001-952d\
+-cd249a6294a2\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22c913689d-49d\
+d-4001-952d-cd24\
+9a6294a2\x22,\x0d\x0a    \
+    \x22title\x22: \x22Co\
+mptines pour cha\
+nter la savane\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Les an\
+imaux de la sava\
+ne et de la jung\
+le comptent parm\
+i les pr\xc3\xa9f\xc3\xa9r\xc3\xa9\
+s des enfants. L\
+es voici tous r\xc3\
+\xa9unis dans une c\
+ompilation r\xc3\xa9jo\
+uissante \xc3\xa0 plus\
+ d\xe2\x80\x99un titre ! \
+Lion, gazelle, h\
+ippopotame et au\
+tres bestioles d\
+onnent de la voi\
+x et donnent env\
+ie de se tr\xc3\xa9mou\
+sser.\x22\x0d\x0a    },\x0d\x0a\
+    \x22b840c044-6e\
+86-4cdc-a9b4-12b\
+71482b9e6\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+b840c044-6e86-4c\
+dc-a9b4-12b71482\
+b9e6\x22,\x0d\x0a        \
+\x22title\x22: \x22C'est \
+pas sorcier\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Les \xc3\xa9pis\
+odes de c'est pa\
+s sorcier pr\xc3\xa9f\xc3\
+\xa9r\xc3\xa9 de ma fille\
+  \xc3\xa0 \xc3\xa9couter\x5cn\x5c\
+n1. Les bonbons\x5c\
+n2. les dinosaur\
+es\x22\x0d\x0a    },\x0d\x0a   \
+ \x22609ce90f-7517-\
+4fc5-b0e8-21e180\
+5e5380\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22609\
+ce90f-7517-4fc5-\
+b0e8-21e1805e538\
+0\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Le Monde \
+d'Henri D\xc3\xa8s Vol\
+ 1\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Vo\
+lume 1 : \x5c\x22Les b\
+\xc3\xaatises \xc3\xa0 l'\xc3\xa9c\
+ole\x5c\x22, et, \x5c\x22Pet\
+it Jeanneton\x5c\x22\x5cn\
+Volume 2 : \x5c\x22Le \
+crocodile\x5c\x22, et,\
+ \x5c\x22Ma for\xc3\xaat\x5c\x22\x5cn\
+Volume 3 : \x5c\x22La \
+sorci\xc3\xa8re de min\
+uit\x5c\x22, et, \x5c\x22Le \
+fant\xc3\xb4me\x5c\x22\x5cnVolu\
+me 4 : \x5c\x22C'est l\
+e printemps\x5c\x22, e\
+t, \x5c\x22Il pleut de\
+hors, il pleut\x5c\x22\
+\x5cnVolume 5 : \x5c\x22M\
+on gros loup, mo\
+n p'tit loup\x5c\x22, \
+et, \x5c\x22Les loups\x5c\
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x2211d38e65-9c01-4\
+a84-ab55-9c72823\
+da61d\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x2211d3\
+8e65-9c01-4a84-a\
+b55-9c72823da61d\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Les aventu\
+res de POP (8 ch\
+apitres)\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Episode 1 - \
+Le jardin de Pop\
+\x5cnEpisode 2 - Do\
+cteur Pop\x5cnEpiso\
+de 3 - Le Noel d\
+e Pop\x5cnEpisode 4\
+ - Pop \xc3\xa0 l'\xc3\xa9co\
+le\x5cnEpisode 5 - \
+Pop et la grand \
+m\xc3\xa9chant loup\x5cnE\
+pisode 6 - Pop e\
+t les m\xc3\xa9chants\x5c\
+nEpisode 7 - Pop\
+ mange toutes le\
+s couleurs\x5cnEpis\
+ode 8 - Pop voya\
+ge au pays du do\
+do\x5cn\x5cnhttps://ww\
+w.youtube.com/pl\
+aylist?list=PLOU\
+YMyXcLIENwMhQKzt\
+-kOhX57pIHZ9Cu\x22\x0d\
+\x0a    },\x0d\x0a    \x227a\
+07da49-9dc2-43eb\
+-a1d6-957262e829\
+42\x22: {\x0d\x0a        \
+\x22uuid\x22: \x227a07da4\
+9-9dc2-43eb-a1d6\
+-957262e82942\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Jules et le m\
+onde d'Harmonia\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22a46bf\
+bc6-818b-4782-8e\
+13-9e564a4fedfa\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22a46bfbc6-8\
+18b-4782-8e13-9e\
+564a4fedfa\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les Histoires de\
+ Nonno (12)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Les Histo\
+ires de Nonno, c\
+e sont des histo\
+ires \xc3\xa0 \xc3\xa9couter\
+ pour enfants de\
+ 3 \xc3\xa0 7 ans: deu\
+x livres illustr\
+\xc3\xa9s accompagnent\
+ les audios, vou\
+s pouvez command\
+er vos exemplair\
+es sur le site w\
+ww.leshistoiresd\
+enonno.ch !\x5cnTex\
+tes: Sam Malloth\
+/ Illustrations:\
+ Ad\xc3\xa8le Dafflon\x5c\
+n\x5cn1 Emilie, le \
+ouistiti qui vou\
+lait rendre serv\
+ice\x5cn2 Arthur, l\
+e h\xc3\xa9risson qui \
+avait perdu sa m\
+aison\x5cn3 Lucien,\
+ le chat qui se \
+prenait pour un \
+rat de biblioth\xc3\
+\xa8que\x5cn4 Alice, l\
+a luciole qui ra\
+ssurait les enfa\
+nts\x5cn5 Camille, \
+le rossignol qui\
+ ne voulait pas \
+aller \xc3\xa0 l'\xc3\xa9col\
+e\x5cn6 Lily, la co\
+ccinelle qui fai\
+sait preuve de c\
+ourage\x5cn7 Ernest\
+, l'araign\xc3\xa9e qu\
+i effrayait tout\
+ le monde\x5cn8 Pau\
+l, le campagnol \
+qui r\xc3\xaavait de v\
+oyager\x5cn9 Anna, \
+l'abeille qui se\
+ grattait tout l\
+e temps le nez\x5cn\
+10 Drillo, le cr\
+ocodile qui avai\
+t mal \xc3\xa0 une den\
+t\x5cn11 Charlie, l\
+'\xc3\xa9cureuil qui v\
+oulait devenir g\
+rand\x5cn12 Edgar, \
+le go\xc3\xa9land qui \
+en avait marre d\
+e voir la mer\x22\x0d\x0a\
+    },\x0d\x0a    \x22f0c\
+578ec-57ee-49aa-\
+a31d-0af4684cbe5\
+f\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22f0c578ec\
+-57ee-49aa-a31d-\
+0af4684cbe5f\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22La Patpatrouil\
+le\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x22e4\
+d17f11-2ba4-46ed\
+-9d99-1bc89a56cf\
+cd\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22e4d17f1\
+1-2ba4-46ed-9d99\
+-1bc89a56cfcd\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22papoush et pe\
+tit pouce\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22956add8b-16\
+7c-4db9-9d74-60b\
+d492064a4\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+956add8b-167c-4d\
+b9-9d74-60bd4920\
+64a4\x22,\x0d\x0a        \
+\x22title\x22: \x22Didier\
+ Jeunesse (Deeze\
+r) - Le chat dan\
+s un ogre\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Cora joue \xc3\
+\xa0 chat cach\xc3\xa9 av\
+ec Sushi son sia\
+mois\xe2\x80\xa6 elle ira\
+ jusque dans le \
+corps d\xe2\x80\x99un ogr\
+e pour le retrou\
+ver ! Des amygda\
+les jusqu\xe2\x80\x99aux \
+poumons en passa\
+nt par la rivi\xc3\xa8\
+re de globules r\
+ouges, Cora cont\
+inue son explora\
+tion jusqu\xe2\x80\x99au \
+c\xc5\x93ur. Mais pas \
+de matou. Elle r\
+emonte l\xe2\x80\x99intes\
+tin jusqu\xe2\x80\x99\xc3\xa0 l\
+\xe2\x80\x99estomac, pour\
+vu que le g\xc3\xa9ant\
+ ne se r\xc3\xa9veille\
+ pas\xe2\x80\xa6\x5cnUn cont\
+e musical avec 1\
+1 chansons dr\xc3\xb4l\
+es et instructiv\
+es, aux inspirat\
+ions vari\xc3\xa9es : \
+rock, jazz manou\
+che, \xc3\xa9lectro, f\
+olk\xe2\x80\xa6 Une explo\
+ration joyeuse e\
+t musicale du co\
+rps humain pour \
+d\xc3\xa9couvrir l\xe2\x80\x99a\
+natomie en s\xe2\x80\x99a\
+musant !\x5cnhttps:\
+//didier-jeuness\
+e.com/collection\
+s/polichinelle/l\
+e-chat-dans-un-o\
+gre-petite-lecon\
+-danatomie-en-11\
+-chansons-livre-\
+musical\x22\x0d\x0a    },\
+\x0d\x0a    \x22d794c0d2-\
+6ae1-457f-b551-3\
+aec993c5f68\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22d794c0d2-6ae1-\
+457f-b551-3aec99\
+3c5f68\x22,\x0d\x0a      \
+  \x22title\x22: \x22Cont\
+e-moi l'aventure\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x2220 h\
+istoires\x5cnConte-\
+moi l'aventure !\
+\x5cnD\xc3\xa9couvrez la \
+magie des dieux \
+d\xe2\x80\x99\xc3\x89gypte, les\
+ contes oubli\xc3\xa9s\
+ de Russie et de\
+ Chine, \x5cnles co\
+mbats \xc3\xa9piques d\
+es chevaliers de\
+ la Table ronde,\
+ les ruses des h\
+abitants de l\xe2\x80\x99\
+Olympe\xe2\x80\xa6 \x5cn\x5cnAl\
+i Baba et les 40\
+ voleurs - 12:36\
+\x5cnAlice au pays \
+des merveilles -\
+ 14:11\x5cnAlvilda \
+la princesse gue\
+rri\xc3\xa8re - 13:03\x5c\
+nAnne Bonny, fem\
+me pirate dans l\
+es Cara\xc3\xafbes - 1\
+1:35\x5cnD'Artagnan\
+ et les trois mo\
+usquetaires 1 - \
+13:50\x5cnD'Artagna\
+n et les trois m\
+ousquetaires 2 e\
+t les Ferrets de\
+ la reine - 13:4\
+6\x5cnIsis et Osiri\
+s, l'amour plus \
+fort que la mort\
+ - 9:59\x5cnJoseph \
+et ses Fr\xc3\xa8res 1\
+ - 8:58\x5cnJoseph \
+et ses Fr\xc3\xa8res 2\
+ - 12:50\x5cnL\xe2\x80\x99\xc3\x8e\
+le au Tr\xc3\xa9sor - \
+15:09\x5cnLa course\
+ d\xe2\x80\x99Atalante - \
+15:29\x5cnLa f\xc3\xa9e M\
+organe & Les che\
+valiers du Val s\
+ans Retour - 10:\
+37\x5cnLa for\xc3\xaat sa\
+ns retour - 15:3\
+3\x5cnLe Chat Bott\xc3\
+\xa9 - 12:24\x5cnL'enl\
+\xc3\xa8vement de Sita\
+ - 12:18\x5cnL'oise\
+au de feu - 13:1\
+1\x5cnThes\xc3\xa9e Arian\
+e et le Minotaur\
+e - 15:23\x5cnVingt\
+ Mille Lieues so\
+us les mers - 15\
+:50\x5cnYann & La G\
+rotte des Korrig\
+ans - 13:03\x5cnYva\
+in ou le Chevali\
+er au lion - 13:\
+45\x22\x0d\x0a    },\x0d\x0a   \
+ \x228526e0cb-05dc-\
+4fb4-b360-1e8e37\
+cf6c2b\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22852\
+6e0cb-05dc-4fb4-\
+b360-1e8e37cf6c2\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les avent\
+ures de Rodolphe\
+ et Gala, saison\
+ 4\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x2273\
+9a9db7-758b-4e59\
+-8bb4-ccee456331\
+85\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22739a9db\
+7-758b-4e59-8bb4\
+-ccee45633185\x22,\x0d\
+\x0a        \x22title\x22\
+: \x223-]B\xc3\xa9b\xc3\xa9MAX\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22A la \
+cr\xc3\xa8che, \xc3\xa0 l\xe2\x80\x99\
+\xc3\xa9cole ou \xc3\xa0 vot\
+re domicile, vot\
+re enfant re\xc3\xa7oi\
+t, \x5cnchaque mois\
+, de novembre \xc3\xa0\
+ juin, 8 livres \
+vari\xc3\xa9s, dr\xc3\xb4les\
+ et stimulants, \
+\x5cns\xc3\xa9lectionn\xc3\xa9s\
+ avec soin, adap\
+t\xc3\xa9s \xc3\xa0 son \xc3\xa2ge\
+ et \xc3\xa0 ses envie\
+s.\x5cnEn d\xc3\xa9couvra\
+nt ces livres av\
+ec vous, votre e\
+nfant s\xe2\x80\x99attach\
+e \xc3\xa0 des h\xc3\xa9ros,\
+ \x5cnessentiels pe\
+tits guides pour\
+ la vie qui l\xe2\x80\x99\
+attend. Notre s\xc3\
+\xa9lection r\xc3\xa9pond\
+ ainsi \x5cn\xc3\xa0 sa c\
+uriosit\xc3\xa9, \xc3\xa0 se\
+s \xc3\xa9motions et \xc3\
+\xa0 son besoin de \
+comprendre le mo\
+nde.\x5cn\x5cnhttps://\
+www.ecoledesmax.\
+com/selection-be\
+bemax.php\x22\x0d\x0a    \
+},\x0d\x0a    \x2265d61dd\
+5-4cae-4d02-8146\
+-e1a1bda55cc7\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2265d61dd5-4ca\
+e-4d02-8146-e1a1\
+bda55cc7\x22,\x0d\x0a    \
+    \x22title\x22: \x22RT\
+L Lis-moi une hi\
+stoire (123 hist\
+oires, jusqu'\xc3\xa0 \
+S03E08)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Albin Michel \
+Jeunesse, en par\
+tenariat avec RT\
+L, ouvre sa gran\
+de biblioth\xc3\xa8que\
+. Pour cette sai\
+son 2 de \x5c\x22Lis-m\
+oi une histoire\x5c\
+\x22, les biblioth\xc3\
+\xa8ques et les m\xc3\xa9\
+diath\xc3\xa8ques se m\
+obilisent. Au pr\
+ogramme : de l'a\
+venture bien s\xc3\xbb\
+r, du suspense, \
+mais aussi de l'\
+amour...\x5cn\x5cnhttp\
+s://www.rtl.fr/p\
+rogrammes/lis-mo\
+i-une-histoire\x22\x0d\
+\x0a    },\x0d\x0a    \x22e3\
+cac7da-9911-4070\
+-bb08-f83deef7ce\
+2e\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22e3cac7d\
+a-9911-4070-bb08\
+-f83deef7ce2e\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22La petite tro\
+uille\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22La petite troui\
+lle, de Edouard \
+Manceau et Alexi\
+s HK, edition be\
+njaminsmedia.\x22\x0d\x0a\
+    },\x0d\x0a    \x22d25\
+830db-d822-4af0-\
+849c-3fc699e5fe4\
+2\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22d25830db\
+-d822-4af0-849c-\
+3fc699e5fe42\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22D\xc3\xa9couvre les \
+styles de musiqu\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22D\xc3\xa9\
+couvre les style\
+ de musique au t\
+ravers de diff\xc3\xa9\
+rents hits - ver\
+sion anglophone\x22\
+\x0d\x0a    },\x0d\x0a    \x22d\
+8f43cd0-f8c4-4e1\
+1-a704-e2bff83d0\
+3b2\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22d8f43c\
+d0-f8c4-4e11-a70\
+4-e2bff83d03b2\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Le lac des c\
+ygnes\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Le lac des cygn\
+es racont\xc3\xa9 par \
+Natalie Dessay\x22\x0d\
+\x0a    },\x0d\x0a    \x22c0\
+dacc87-ff0d-420b\
+-b679-3ec7d4d6b8\
+7d\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22c0dacc8\
+7-ff0d-420b-b679\
+-3ec7d4d6b87d\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Pirata et cap\
+itano\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x22231896af-2007-4\
+aa8-a436-61016a3\
+b498d\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x222318\
+96af-2007-4aa8-a\
+436-61016a3b498d\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Une histoi\
+re et OLI Pack 4\
+ (17 Histoires)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22e5e2c\
+0ae-1257-4e0d-af\
+77-5f3fd5b5b8bb\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22e5e2c0ae-1\
+257-4e0d-af77-5f\
+3fd5b5b8bb\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les Aventures d \
+Ast\xc3\xa9rix (5 hist\
+oires) (1960-198\
+9)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x22ed\
+77a6c8-08d5-481f\
+-b0ef-5951686f3d\
+0c\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22ed77a6c\
+8-08d5-481f-b0ef\
+-5951686f3d0c\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Comptines pou\
+r enfants et b\xc3\xa9\
+b\xc3\xa9s\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Comptines pour e\
+nfants et b\xc3\xa9b\xc3\xa9\
+s par La Reine d\
+es chansons pour\
+ enfants et b\xc3\xa9b\
+\xc3\xa9s https://open\
+.spotify.com/alb\
+um/6FecQTEh8B3mW\
+K9KOJJUXF\x5cn\x5cnAh \
+les crocodiles\x5cn\
+Pirouette, cacah\
+u\xc3\xa8te\x5cnAu clair \
+de la lune\x5cnPomm\
+e de reinette et\
+ pomme d'api\x5cnUn\
+e souris verte\x5cn\
+Promenons-nous d\
+ans les bois\x5cnFr\
+\xc3\xa8re Jacques\x5cnAl\
+ouette, gentille\
+ alouette\x5cnIl \xc3\xa9\
+tait un petit na\
+vire\x5cnAinsi font\
+ font font\x5cnTour\
+ne petit moulin\x5c\
+nUn \xc3\xa9l\xc3\xa9phant q\
+ui se balan\xc3\xa7ait\
+\x5cnUn grand cerf\x5c\
+nL'araigne\xcc\x81e Gi\
+psy\x5cnSur le pont\
+ d'Avignon\x5cnMon \
+\xc3\xa2ne\x5cnLundi mati\
+n\x5cnFais dodo Col\
+as mon p'tit fr\xc3\
+\xa8re\x5cnLa m\xc3\xa8re Mi\
+chelle\x5cnA la cla\
+ire fontaine\x22\x0d\x0a \
+   },\x0d\x0a    \x222e9d\
+dc74-3463-4f01-9\
+396-7dc946307c5b\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x222e9ddc74-\
+3463-4f01-9396-7\
+dc946307c5b\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Le Monde d'Henr\
+i D\xc3\xa8s Volume 6\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Volum\
+e 26 : \x5c\x22Il neig\
+e dans mon jardi\
+n\x5c\x22, et, \x5c\x22Sous \
+le gros duvet\x5c\x22\x5c\
+nVolume 27 : \x5c\x22B\
+allon rond\x5c\x22, et\
+, \x5c\x22Trois petits\
+ gar\xc3\xa7ons\x5c\x22\x5cnVol\
+ume 28 : \x5c\x22Ma b\xc3\
+\xaate noire\x5c\x22, et,\
+ \x5c\x22Le cartable\x5c\x22\
+\x5cnVolume 29 : \x5c\x22\
+J'veux un p'tit \
+fr\xc3\xa8re\x5c\x22, et, \x5c\x22\
+Le grand fr\xc3\xa8re \
+et la petite soe\
+ur\x5c\x22\x5cnVolume 30 \
+: \x5c\x22Des sous des\
+ sous\x5c\x22, et, \x5c\x22L\
+e porte-monnaie\x5c\
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x22916690b8-8500-4\
+dd9-b970-fb87272\
+c4615\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x229166\
+90b8-8500-4dd9-b\
+970-fb87272c4615\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Histoires \
+pour les petits\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22\x22\x0d\x0a  \
+  },\x0d\x0a    \x22d7d59\
+0ac-cd08-4888-a7\
+96-6fb5e09c6742\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22d7d590ac-c\
+d08-4888-a796-6f\
+b5e09c6742\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+C'est pas sorcie\
+r (4 \xc3\xa9pisodes)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Les \xc3\
+\xa9pisodes de c'es\
+t pas sorcier pr\
+\xc3\xa9f\xc3\xa9r\xc3\xa9 de ma f\
+ille  \xc3\xa0 \xc3\xa9coute\
+r\x5cn\x5cnAvec une r\xc3\
+\xa9partition par t\
+h\xc3\xa8me\x5cn\x5cn1. ALIM\
+ENTATION\x5cn    - \
+Les bonbons\x5cn   \
+ - le chocolat\x5cn\
+\x5cn2.HISTOIRE\x5cn  \
+ - les dinosaure\
+s\x5cn   - les homm\
+es pr\xc3\xa9historiqu\
+es\x5cn\x5cnj'en rajou\
+terai au fur et \
+a mesure\x22\x0d\x0a    }\
+,\x0d\x0a    \x22907236a5\
+-8698-4132-a7b3-\
+e04600a60aae\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22907236a5-8698\
+-4132-a7b3-e0460\
+0a60aae\x22,\x0d\x0a     \
+   \x22title\x22: \x22L'a\
+gent Jean\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x229b1a6860-26\
+67-46b2-9afd-2c5\
+602d39207\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+9b1a6860-2667-46\
+b2-9afd-2c5602d3\
+9207\x22,\x0d\x0a        \
+\x22title\x22: \x22Encore\
+ une histoire - \
+Les vacances ext\
+raordinaires (3 \
+saisons soit 20 \
+episode + 2 bonu\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x223 \
+saisons des vaca\
+nces extraordina\
+ires (avec 2 bon\
+us) !\x5cn\x5cnEncore \
+une histoire est\
+ un podcast dest\
+in\xc3\xa9 aux enfants\
+ (et \xc3\xa0 ceux qui\
+ le sont encore \
+dans leur t\xc3\xaate)\
+ qui aiment qu'o\
+n leur raconte d\
+es histoires.\x5cn\x5c\
+nChaque semaine,\
+ vous retrouvere\
+z ici une histoi\
+re lue, tir\xc3\xa9e d\
+'un livre de lit\
+t\xc3\xa9rature jeunes\
+se ou une cr\xc3\xa9at\
+ion originale.\x5cn\
+\x5cnUn podcast pro\
+duit par Benjami\
+n Muller, interp\
+r\xc3\xa9t\xc3\xa9 par C\xc3\xa9li\
+ne Kallmann et r\
+\xc3\xa9alis\xc3\xa9 par Ale\
+xandre Ferreira.\
+\x5cn\x5cnA \xc3\xa9couter a\
+vant de se couch\
+er, allong\xc3\xa9 dan\
+s l'herbe, dans \
+la voiture ou da\
+ns le train, Enc\
+ore une histoire\
+ veut mettre en \
+avant la formida\
+ble cr\xc3\xa9ation li\
+tt\xc3\xa9raire destin\
+\xc3\xa9e aux jeunes l\
+ecteurs (et aux \
+moins jeunes, do\
+nc).\x5cn\x5cnVous ret\
+rouverez bien \xc3\xa9\
+videmment \xc3\xa0 cha\
+que fois les r\xc3\xa9\
+f\xc3\xa9rences des li\
+vres lus, si vou\
+s voulez aller p\
+lus loin en vous\
+ offrant le livr\
+e en question.\x5cn\
+\x5cnVive la lectur\
+e, vive la litt\xc3\
+\xa9rature jeunesse\
+, vive les histo\
+ires\x22\x0d\x0a    },\x0d\x0a \
+   \x225b739450-35a\
+d-4ca6-855c-8766\
+32d7c28d\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x225\
+b739450-35ad-4ca\
+6-855c-876632d7c\
+28d\x22,\x0d\x0a        \x22\
+title\x22: \x22Histoir\
+es pour les peti\
+ts - Saisons 202\
+1 et 2022\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Histoires p\
+our les petits\x5cn\
+Saison 2021 / 33\
+ Histoires\x5cnSais\
+on 2022 / 33 His\
+toires\x22\x0d\x0a    },\x0d\
+\x0a    \x22f01278bd-7\
+f0c-4da1-9451-98\
+d302274a51\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22f01278bd-7f0c-4\
+da1-9451-98d3022\
+74a51\x22,\x0d\x0a       \
+ \x22title\x22: \x22Oc\xc3\xa9a\
+ns : Petites his\
+toires des fonds\
+ marins\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Oc\xc3\xa9ans : Pet\
+ites histoires d\
+es fonds marins.\
+ Lu par Jacques \
+Perrin. https://\
+www.babelio.com/\
+livres/Durand-Oc\
+eans-Petites-his\
+toires-des-fonds\
+-marins/186932 \x5c\
+nDouze animaux m\
+arins sont d\xc3\xa9cr\
+its \xc3\xa0 partir d'\
+une anecdote viv\
+ante, dr\xc3\xb4le ou \
+po\xc3\xa9tique. Pour \
+chaque animal, u\
+ne petite histoi\
+re courte nous p\
+ermet de compren\
+dre leur r\xc3\xb4le, \
+leur comportemen\
+t, leur histoire\
+ ou l'une de leu\
+rs sp\xc3\xa9cificit\xc3\xa9\
+s.\x5cnMadame St\xc3\xa9n\
+opus ; La fr\xc3\xa9ga\
+te ; Le corail ;\
+ La rhytine de S\
+teller ; Le jeun\
+e requin blanc ;\
+ La v\xc3\xa9lelle ; L\
+a sardine ; Le p\
+etit B\xc3\xa9luga ; L\
+e bernard-l'ermi\
+te ; La tortue m\
+arine ; M\xc3\xa9moire\
+ de loutre ; Le \
+manchot empereur\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x2247738089-3132-4\
+752-8746-1183487\
+c3b14\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x224773\
+8089-3132-4752-8\
+746-1183487c3b14\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Bonne nuit\
+ les petits - Me\
+s plus belles hi\
+stoires\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Bonne nuit le\
+s petits - Mes p\
+lus belles histo\
+ires, Vol.1 (6 h\
+istoires, 5 chan\
+sons)\x5cnAnn\xc3\xa9e al\
+bum : 2003\x5cnSour\
+ce : Spotify\x5cnLi\
+en : https://ope\
+n.spotify.com/in\
+tl-fr/album/5L85\
+Y27CeWMP0HZiZYGX\
+ub?si=R0ZB-A4DQ \
+mDkfXuNS4-Dw&nd=\
+1\x5cn\x5cnHistoires :\
+\x5cn1. Yang Chu Ch\
+u rencontre Hi H\
+an\x5cn2. Gros vila\
+in vole les ceri\
+ses\x5cn3. Le pipea\
+u de Yang Chu Ch\
+u\x5cn4. Un jardin \
+sans oiseaux\x5cn5.\
+ Le poisson vola\
+nt\x5cn6. Gros vila\
+in promet d'\xc3\xaatr\
+e gentil\x5cn\x5cnChan\
+sons :\x5cn1. Petit\
+s amis, bonjour\x5c\
+n2. Le ciel magi\
+que\x5cn3. Sur notr\
+e petit nuage\x5cn4\
+. La chanson de \
+Hi Han\x5cn5. Qu'y \
+a-t-il dans le c\
+iel \x22\x0d\x0a    },\x0d\x0a \
+   \x2252a3a52e-8d3\
+0-4a10-8832-bf56\
+0f33bfa3\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x225\
+2a3a52e-8d30-4a1\
+0-8832-bf560f33b\
+fa3\x22,\x0d\x0a        \x22\
+title\x22: \x22Les con\
+tes musicaux de \
+Passe-Partout\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Passe-P\
+artout, Passe-Ca\
+rreau et Passe-M\
+ontagne invitent\
+ petits et grand\
+s \xc3\xa0 bien ouvrir\
+ leurs oreilles \
+parce que la mus\
+ique est partout\
+ ! Accompagn\xc3\xa9s \
+par leurs amis m\
+usiciens de l\xe2\x80\x99\
+Orchestre M\xc3\xa9tro\
+politain, ils pl\
+ongent dans l\xe2\x80\x99\
+univers de six c\
+ontes originaux \
+o\xc3\xb9 se m\xc3\xa9langen\
+t notes de plais\
+ir, de d\xc3\xa9couver\
+te et d\xe2\x80\x99aventu\
+re.\x5cn\x5cnLe pack c\
+ontient les cont\
+es suivants:\x5cn1.\
+ S\xc3\xa9kou et le vo\
+leur de coquilla\
+ge\x5cn2. Le royaum\
+e des Baladoux\x5cn\
+3. Louna et le h\
+ibou somnambule\x5c\
+n4. Tarek et la \
+marchande de bon\
+heur\x5cn5. Crapaud\
+ine, l\xe2\x80\x99attrape\
+use de cauchemar\
+s\x5cn6. Philom\xc3\xa8ne\
+ et le petit bat\
+eau en papier\x22\x0d\x0a\
+    },\x0d\x0a    \x22e39\
+f8d35-07d4-46a2-\
+af00-1c3379cf522\
+c\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22e39f8d35\
+-07d4-46a2-af00-\
+1c3379cf522c\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les P'tites Hi\
+stoires\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Epopia vous p\
+ropose une s\xc3\xa9ri\
+e d\xe2\x80\x99histoires \
+audio \xc3\xa0 destina\
+tion des enfants\
+, en partenariat\
+ avec le site \xc2\xab\
+ les p\xe2\x80\x99tites h\
+istoires \xc2\xbb. Sui\
+vez en famille l\
+es folles aventu\
+res de Nao, Myrt\
+ille et Barnab\xc3\xa9\
+ ! Pirates, sorc\
+i\xc3\xa8res, cowboys,\
+ indiens, monstr\
+es\xe2\x80\xa6 Chacune de\
+s histoires prop\
+os\xc3\xa9es transport\
+e l\xe2\x80\x99enfant dan\
+s un univers fan\
+tastique !\x5cn\x5cnht\
+tps://www.epopia\
+.com/blog/podcas\
+t/contes-histoir\
+es-audio/\x22\x0d\x0a    \
+},\x0d\x0a    \x221ed905b\
+b-3cfe-47e7-865b\
+-ed179dd75b2f\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x221ed905bb-3cf\
+e-47e7-865b-ed17\
+9dd75b2f\x22,\x0d\x0a    \
+    \x22title\x22: \x22Co\
+nte moi l'aventu\
+re\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Co\
+mpilation de 10 \
+histoires de \x5c\x22C\
+onte-moi l'avent\
+ure\x5c\x22, le podcas\
+t d'histoires po\
+ur les enfants d\
+e Ch\xc3\xa9rie FM. Mo\
+ndes merveilleux\
+ et \xc3\xa9motions fo\
+rtes : bienvenue\
+ dans l\xe2\x80\x99univer\
+s de Conte-moi l\
+\xe2\x80\x99aventure !\x5cn\x5c\
+nhttps://www.che\
+riefm.fr/podcast\
+s/conte-moi-l-av\
+enture \x5cn\x5cnLes 1\
+0 histoires de c\
+e pack sont: \x5cn1\
+. Vie et aventur\
+es de Santa Clau\
+s \xe2\x80\x93 d\xe2\x80\x99apr\xc3\xa8s\
+ le roman de Lym\
+an Frank Baum\x5cn2\
+. Tokoyo et le s\
+erpent de mer - \
+d'apr\xc3\xa8s un cont\
+e japonais\x5cn3. L\
+e fant\xc3\xb4me qui n\
+\xe2\x80\x99arrivait pas \
+\xc3\xa0 faire peur - \
+d\xe2\x80\x99apr\xc3\xa8s le fa\
+nt\xc3\xb4me de Canter\
+ville d\xe2\x80\x99Oscar \
+Wilde\x5cn4. Le Liv\
+re de la Jungle \
+- d'apr\xc3\xa8s les n\
+ouvelles de Rudy\
+ard Kipling\x5cn5. \
+Hercule et la ce\
+inture des amazo\
+nes \xe2\x80\x93 d\xe2\x80\x99apr\xc3\
+\xa8s la mythologie\
+ grecque\x5cn6. Rou\
+le-Petit-Pois - \
+d'apr\xc3\xa8s un cont\
+e ukrainien\x5cn7. \
+Pinocchio - d\xe2\x80\x99\
+apr\xc3\xa8s le roman \
+de Carlo Collodi\
+\x5cn8. Mulan \xe2\x80\x93 d\
+\xe2\x80\x99apr\xc3\xa8s la l\xc3\xa9\
+gende chinoise\x5cn\
+9. Merlin et la \
+Table Ronde - d'\
+apr\xc3\xa8s les l\xc3\xa9ge\
+ndes arthurienne\
+s\x5cn10. Le vailla\
+nt petit tailleu\
+r - d\xe2\x80\x99apr\xc3\xa8s l\
+e conte des fr\xc3\xa8\
+res Grimm\x22\x0d\x0a    \
+},\x0d\x0a    \x22eee6d37\
+d-3ccb-40d3-8748\
+-aa3c015fdefe\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22eee6d37d-3cc\
+b-40d3-8748-aa3c\
+015fdefe\x22,\x0d\x0a    \
+    \x22title\x22: \x22MA\
+MAN LUCIE LIT\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Maman L\
+ucie Lit (saison\
+1,12 histoires)\x5c\
+n\x5cnUUID :eee6d37\
+d-3ccb-40d3-8748\
+-aa3c015fdefe\x5cn\x22\
+\x0d\x0a    },\x0d\x0a    \x227\
+a3d3137-18b0-48d\
+4-935c-18845e5f3\
+f15\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x227a3d31\
+37-18b0-48d4-935\
+c-18845e5f3f15\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Mythes & L\xc3\xa9\
+gendes\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Ulysse, Athena\
+, Thor, Anubis, \
+le roi Arthur, e\
+t bien d'autres.\
+.. Quelle Histoi\
+re te fait d\xc3\xa9co\
+uvrir les mythes\
+ et l\xc3\xa9gendes du\
+ monde entier, c\
+omme tu ne les a\
+s jamais entendu\
+es.\x22\x0d\x0a    },\x0d\x0a  \
+  \x22203750bb-ec99\
+-4e8d-8366-becdb\
+e9b8207\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2220\
+3750bb-ec99-4e8d\
+-8366-becdbe9b82\
+07\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les hist\
+oires de Millie \
+D\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x228d7\
+05466-befe-409f-\
+87bc-788a18ba833\
+e\x22: {\x0d\x0a        \x22\
+uuid\x22: \x228d705466\
+-befe-409f-87bc-\
+788a18ba833e\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Aventures \
+du Petit Nicolas\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Cett\
+e adaptation rad\
+iophonique en 11\
+ \xc3\xa9pisodes (avec\
+ un bonus in\xc3\xa9di\
+t) a \xc3\xa9t\xc3\xa9 imagi\
+n\xc3\xa9e comme une s\
+orte de journal-\
+audio du petit N\
+icolas, retra\xc3\xa7a\
+nt une ann\xc3\xa9e sc\
+olaire, de son r\
+etour de colonie\
+ de vacances fin\
+ ao\xc3\xbbt \xc3\xa0 la c\xc3\xa9\
+r\xc3\xa9monie de remi\
+se des prix au m\
+ois de juin.\x22\x0d\x0a \
+   },\x0d\x0a    \x226547\
+8334-3114-45eb-a\
+fab-323cd146b2c9\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2265478334-\
+3114-45eb-afab-3\
+23cd146b2c9\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les animaux par\
+tent a l'aventur\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x221ad\
+0d48d-b79b-4d58-\
+a88c-84f2fef2421\
+f\x22: {\x0d\x0a        \x22\
+uuid\x22: \x221ad0d48d\
+-b79b-4d58-a88c-\
+84f2fef2421f\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Histoires pour\
+ les oreilles\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22histoir\
+es pour les orei\
+lles 51 histoire\
+s en tout genres\
+ pour tout les g\
+o\xc3\xbbts.\x5cn\x5cnhttps:\
+//www.youtube.co\
+m/c/Histoirespou\
+rlesOreilles\x22\x0d\x0a \
+   },\x0d\x0a    \x22d94b\
+c695-437d-4a76-b\
+bb1-6d8e73f044d5\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22d94bc695-\
+437d-4a76-bbb1-6\
+d8e73f044d5\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Promenades imag\
+inaires au mus\xc3\xa9\
+e d'Orsay\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Des histoir\
+es fascinantes p\
+our les enfants \
+inspir\xc3\xa9es des \xc5\
+\x93uvres du mus\xc3\xa9e\
+ d'Orsay. D\xc3\xa9cou\
+vrez les tableau\
+x comme vous ne \
+les avez jamais \
+entendus.\x5cn\x5cnUne\
+ coproduction Mu\
+s\xc3\xa9e d'Orsay et \
+Cr\xc3\xa9ation Collec\
+tive.\x22\x0d\x0a    },\x0d\x0a\
+    \x22175867fd-0e\
+2f-4351-a8c0-73d\
+db3c8ea48\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+175867fd-0e2f-43\
+51-a8c0-73ddb3c8\
+ea48\x22,\x0d\x0a        \
+\x22title\x22: \x22Didier\
+ Jeunesse - La b\
+oite a joujoux -\
+ Conte musical (\
+13 pistes 34mn)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Chaqu\
+e matin, les sol\
+dats de plomb d\xc3\
+\xa9filaient la t\xc3\xaa\
+te haute au gr\xc3\xa9\
+ des rues jusqu'\
+\xc3\xa0 midi sonnante\
+. Et chaque mati\
+n, du fond de so\
+n lit, Polichine\
+lle les maudissa\
+it d'avoir \xc3\xa9t\xc3\xa9\
+ r\xc3\xa9veill\xc3\xa9 de s\
+i bonne heure. A\
+insi allait la v\
+ie, simple et tr\
+anquille, jusqu'\
+\xc3\xa0 cette journ\xc3\xa9\
+e qui changea to\
+ut... Autour de \
+la c\xc3\xa9l\xc3\xa8bre mus\
+ique pour ballet\
+ de Claude Debus\
+sy, Rascal a lib\
+rement imagin\xc3\xa9 \
+une histoire d'a\
+mour intemporell\
+e, celle de Chou\
+chou, la jolie p\
+oup\xc3\xa9e, et du so\
+ldat 7.\x22\x0d\x0a    },\
+\x0d\x0a    \x2247bc4b58-\
+c7ba-4398-93ce-c\
+3316a90b8c5\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2247bc4b58-c7ba-\
+4398-93ce-c3316a\
+90b8c5\x22,\x0d\x0a      \
+  \x22title\x22: \x22Le L\
+oup qui voulait \
+faire son specta\
+cle\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x226\
+4b4ae58-a961-4a2\
+0-b440-40b050f41\
+c93\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x2264b4ae\
+58-a961-4a20-b44\
+0-40b050f41c93\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22France Inter\
+ Les Odyss\xc3\xa9es d\
+u Louvre (10 his\
+toires)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Une coproduct\
+ion France Inter\
+ et le Mus\xc3\xa9e du\
+ Louvre. Un podc\
+ast pour les enf\
+ants et la famil\
+le. Partez \xc3\xa0 la\
+ d\xc3\xa9couverte des\
+ histoires et de\
+s aventures des \
+grandes \xc5\x93uvres \
+et des figures q\
+ui ont fait Le L\
+ouvre : le Vol d\
+e la Joconde, la\
+ Victoire de Sam\
+othrace, N\xc3\xa9fert\
+iti et Akh\xc3\xa9nato\
+n, Michel-Ange..\
+.\x22\x0d\x0a    },\x0d\x0a    \
+\x22cdc1fa45-a528-4\
+7bd-bdd2-2047a5d\
+a0bae\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22cdc1\
+fa45-a528-47bd-b\
+dd2-2047a5da0bae\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Encore une\
+ histoire - Abra\
+cadaPark (6 epis\
+odes)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Tout l'\xc3\xa9t\xc3\xa9, s\
+uivez les aventu\
+res pleines d\xe2\x80\x99\
+\xc3\xa9motions de Tom\
+, Sacha, et In\xc3\xa8\
+s, \xc3\xa0 AbracadaPa\
+rc !\x5cn\x5cnUne hist\
+oire propos\xc3\xa9e e\
+n partenariat av\
+ec la Fondation \
+Ronald McDonald \
+qui accompagne l\
+es familles d'en\
+fants hospitalis\
+\xc3\xa9s en construis\
+ant des lieux de\
+ vie \xc3\xa0 proximit\
+\xc3\xa9 et au sein m\xc3\
+\xaame des h\xc3\xb4pitau\
+x.\x5cn\x5cnUne histoi\
+re \xc3\xa9crite par B\
+enjamin Muller, \
+avec l\xe2\x80\x99aide du\
+ Docteur en psyc\
+hologie B\xc3\xa9n\xc3\xa9di\
+cte Minguet, int\
+erpr\xc3\xa9t\xc3\xa9e par C\
+\xc3\xa9line Kallmann,\
+ et r\xc3\xa9alis\xc3\xa9e p\
+ar Alexandre Fer\
+reira.\x5cn\x5cnPour a\
+ller plus loin s\
+ur chacune des \xc3\
+\xa9motions, pour m\
+ieux les compren\
+dre et les g\xc3\xa9re\
+r, d\xc3\xa9couvrez un\
+e fiche pratique\
+ pour chaque \xc3\xa9p\
+isode. \xc3\x89crites \
+en collaboration\
+ avec le docteur\
+ en psychologie \
+B\xc3\xa9n\xc3\xa9dicte Ming\
+uet, elles sont \
+\xc3\xa0 destination d\
+es familles et d\
+es \xc3\xa9quipes soig\
+nantes et dispon\
+ibles sur fondat\
+ion-ronald-McDon\
+ald.fr\x22\x0d\x0a    },\x0d\
+\x0a    \x22652d8522-d\
+62f-4eb3-a779-33\
+b4feab5046\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22652d8522-d62f-4\
+eb3-a779-33b4fea\
+b5046\x22,\x0d\x0a       \
+ \x22title\x22: \x22Audio\
+lib Aste\xcc\x81rix Gl\
+adiateur (5 part\
+ies)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+55bdb6af-40d0-49\
+a2-bb0e-0c128401\
+b3b4\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2255bdb\
+6af-40d0-49a2-bb\
+0e-0c128401b3b4\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Alice au pa\
+ys des merveille\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Cet\
+ \xc3\xa9pisode peut \xc3\
+\xaatre \xc3\xa9cout\xc3\xa9 sa\
+gement ou... en \
+prenant le contr\
+\xc3\xb4le de l'histoi\
+re! Si tu veux c\
+hoisir ce qui va\
+ arriver \xc3\xa0 Alic\
+e dans cette his\
+toire, retrouve \
+sur le site de C\
+h\xc3\xa9rieFM la vers\
+ion interactive \
+c'est-\xc3\xa0-dire ma\
+gique de cet \xc3\xa9p\
+isode, o\xc3\xb9 tu po\
+urras en r\xc3\xa9pond\
+ant aux question\
+s guider Alice d\
+ans ses aventure\
+s! Va vite sur l\
+e site de Ch\xc3\xa9ri\
+eFM en suivant c\
+e lien et amuse-\
+toi bien!\x5cn\x5cnhtt\
+ps://www.cherief\
+m.fr/alice-au-pa\
+ys-des-merveille\
+s-le-podcast-int\
+eractif\x22\x0d\x0a    },\
+\x0d\x0a    \x220cf25b39-\
+2e43-4d1f-845d-b\
+e550c342172\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x220cf25b39-2e43-\
+4d1f-845d-be550c\
+342172\x22,\x0d\x0a      \
+  \x22title\x22: \x22LesB\
+ellesHistoires20\
+22\x22,\x0d\x0a        \x22d\
+escription\x22: \x22S\xc3\
+\xa9lection des dix\
+ meilleures de l\
+a s\xc3\xa9rie \x5c\x22les b\
+elles histoires\x5c\
+\x22 2022\x22\x0d\x0a    },\x0d\
+\x0a    \x22226f0298-f\
+184-4a70-b6dd-cd\
+fb5c4d2806\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22226f0298-f184-4\
+a70-b6dd-cdfb5c4\
+d2806\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les A\
+ventures du Peti\
+t Nicolas (Saiso\
+n 1)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Les Aventures du\
+ Petit Nicolas (\
+Saison 1)\x5cnPodca\
+sts France cultu\
+re.\x5cn12 Histoire\
+s:\x5cn\xc3\x89pisode 1 F\
+in ao\xc3\xbbt\x5cn\xc3\x89piso\
+de 2  Septembre\x5c\
+n\xc3\x89pisode 3  Oct\
+obre\x5cn\xc3\x89pisode 4\
+  Novembre\x5cn\xc3\x89pi\
+sode 5  D\xc3\xa9cembr\
+e\x5cn\xc3\x89pisode 6  J\
+anvier\x5cn\xc3\x89pisode\
+ 7  F\xc3\xa9vrier\x5cn\xc3\x89\
+pisode 8  Mars\x5cn\
+\xc3\x89pisode 9  Avri\
+l\x5cn\xc3\x89pisode 10  \
+Mai\x5cn\xc3\x89pisode 11\
+  Juin\x5cn\xc3\x89pisode\
+ 12  [BONUS] La \
+visite de l\xe2\x80\x99in\
+specteur\x22\x0d\x0a    }\
+,\x0d\x0a    \x22a3c45222\
+-89ac-471f-8e7b-\
+2f914706d52e\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22a3c45222-89ac\
+-471f-8e7b-2f914\
+706d52e\x22,\x0d\x0a     \
+   \x22title\x22: \x22L E\
+cole des loisirs\
+ nouvelles histo\
+ires D\xc3\xa9cembre20\
+21\x22,\x0d\x0a        \x22d\
+escription\x22: \x22ht\
+tps://www.ecoled\
+esloisirs.fr/cat\
+alogue/nouveaute\
+s/Dec/2021\x22\x0d\x0a   \
+ },\x0d\x0a    \x220a1c48\
+84-61d6-45f6-b06\
+6-2b224fd7b880\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x220a1c4884-61\
+d6-45f6-b066-2b2\
+24fd7b880\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es histoires d A\
+th\xc3\xa9na\xc3\xafs\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Les histoir\
+es lues par Athe\
+na\xc3\xafs (https://o\
+pen.spotify.com/\
+show/1ivNIuUUoVS\
+ltLq3xQt6aq)\x5cn\x5cn\
+1. Blanche-Neige\
+ et les 77 nains\
+\x5cn2. Boucle d'ou\
+rs\x5cn3. Caca boud\
+in\x5cn4. Deux pour\
+ moi, un pour to\
+i\x5cn5. Hou hou\x5cn6\
+. L'ours qui aim\
+ait les arbres\x5cn\
+7. Les orteils n\
+'ont pas de nom\x5c\
+n8. Les trois pe\
+tits cochons\x5cn9.\
+ Le d\xc3\xaener de mo\
+uches\x5cn10. Max e\
+t les maximonstr\
+es\x5cn11. Superlap\
+in\x22\x0d\x0a    },\x0d\x0a   \
+ \x224c325ea1-af0c-\
+48d0-b360-ab00c3\
+aeaa3e\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x224c3\
+25ea1-af0c-48d0-\
+b360-ab00c3aeaa3\
+e\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les conte\
+s de Lupin (32 h\
+istoires)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22R\xc3\xaavant d\xe2\x80\
+\x99\xc3\xaatre comme les\
+ h\xc3\xa9ros qu\xe2\x80\x99il \
+admire, Lupin va\
+ de conte en con\
+te pour vivre le\
+urs aventures. M\
+ais il n\xe2\x80\x99est p\
+as si facile d\xe2\x80\
+\x99atteindre le \x5c\x22\
+happy end\x5c\x22 ! He\
+ureusement, il p\
+eut compter sur \
+l\xe2\x80\x99aide du narr\
+ateur pour appre\
+ndre de ses b\xc3\xaat\
+ises.\x22\x0d\x0a    },\x0d\x0a\
+    \x2256ca9b74-a6\
+fe-4d7b-b11c-259\
+41bf79005\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+56ca9b74-a6fe-4d\
+7b-b11c-25941bf7\
+9005\x22,\x0d\x0a        \
+\x22title\x22: \x22Trotro\
+ fait son cirque\
+ (16 chansons)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Trotro\
+ est tr\xc3\xa8s amour\
+eux de Nana et b\
+ien d\xc3\xa9cid\xc3\xa9 \xc3\xa0 \
+lui offrir le pl\
+us magnifique de\
+s cadeaux. Mais \
+ce n'est pas fac\
+ile de trouver l\
+e plus beau des \
+cadeaux, \xc3\xa7a dem\
+ande une sacr\xc3\xa9e\
+ imagination ! O\
+h mais c'est vra\
+i ! Nana adore l\
+e cirque ! Comme\
+nt Trotro n'y a-\
+t\xe2\x80\x99il pas pens\xc3\
+\xa9 plus t\xc3\xb4t ? Av\
+ec l'aide de pap\
+a, maman et de s\
+es fid\xc3\xa8les amis\
+, Lili et Boubou\
+, Trotro redoubl\
+e de malice, de \
+dr\xc3\xb4lerie et de \
+po\xc3\xa9sie pour cr\xc3\
+\xa9er un spectacle\
+ merveilleux pou\
+r son amoureuse.\
+\x5cnEntre num\xc3\xa9ros\
+ de clown, jongl\
+eurs, acrobates,\
+ animaux sauvage\
+s et tours de ma\
+gie, Trotro fait\
+ son cirque, et \
+\xc3\xa7a, Nana et le \
+jeune public ne \
+sont pas pr\xc3\xaats \
+de l\xe2\x80\x99oublier\xe2\x80\
+\xa6 Tout le monde \
+en piste !\x5cn1. L\
+'ane Trotro\x5cn2. \
+Nana Ma Nana a M\
+oi\x5cn3. Trotro Ou\
+ Es-Tu?\x5cn4. Un N\
+umero Trotro Rig\
+olo\x5cn5. Et Patat\
+i Et Patata\x5cn6. \
+Hop\x5cn7. Magico T\
+rotro\x5cn8. Lulu\x5cn\
+9. Nana Je L'aim\
+e Bien De Tout M\
+on Coeur\x5cn10. C'\
+est Nous Les Clo\
+wns\x5cn11. Et Ya Y\
+a\x5cn12. Trotro Fa\
+it Son Cirque\x5cn1\
+3. Saluts\x5cn14. T\
+rotro Et Nana\x5cn1\
+5. L'orchestre D\
+e Trotro\x5cn16. Le\
+s Chaussures De \
+Son Papa\x22\x0d\x0a    }\
+,\x0d\x0a    \x22abcd8c55\
+-04af-44c3-9bb1-\
+345667cf9283\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22abcd8c55-04af\
+-44c3-9bb1-34566\
+7cf9283\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ aventures de Ro\
+dolphe et Gala\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x2263556d\
+da-f4f9-4b60-bdb\
+1-2c7aaa3e45da\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2263556dda-f4\
+f9-4b60-bdb1-2c7\
+aaa3e45da\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+e ciel et l espa\
+ce expliques aux\
+ enfants (9 epis\
+odes)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x229a861176-21e8-4\
+5b4-b136-d5cccfb\
+f5e27\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x229a86\
+1176-21e8-45b4-b\
+136-d5cccfbf5e27\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Le Monde d\
+'Henri D\xc3\xa8s Volu\
+me 5\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Volume 21 : \x5c\x22Le\
+ chocolat\x5c\x22, et,\
+ \x5c\x22Croque et cra\
+que\x5c\x22\x5cnVolume 22\
+ : \x5c\x22T'es pas be\
+au\x5c\x22, et, \x5c\x22Dess\
+in fou\x5c\x22\x5cnVolume\
+ 23 : \x5c\x22Quand j'\
+\xc3\xa9tais b\xc3\xa9b\xc3\xa9 pe\
+tit\x5c\x22, et, \x5c\x22B\xc3\xa9\
+b\xc3\xa9 d'amour\x5c\x22\x5cnV\
+olume 24 : \x5c\x22Dan\
+se danse danse\x5c\x22\
+, et, \x5c\x22Danse da\
+ns la cuisine\x5c\x22\x5c\
+nVolume 25 : \x5c\x22C\
+'est le p\xc3\xa8re no\
+\xc3\xabl\x5c\x22, et, \x5c\x22La \
+belle histoire\x5c\x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+78334cde-a29a-45\
+18-9dc5-72ac5fe3\
+7e59\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2278334\
+cde-a29a-4518-9d\
+c5-72ac5fe37e59\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Un podcast \
+et au lit (30 hi\
+stoires)\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Pour amuser \
+les enfants et \xc3\
+\xa9mouvoir les plu\
+s grands, Top Mu\
+sic a s\xc3\xa9lection\
+n\xc3\xa9 les plus bel\
+les histoires d'\
+Alsace et d\xe2\x80\x99ai\
+lleurs. Les podc\
+asts jeunesse, c\
+e sont des conte\
+s pleins d'humou\
+r, d'audace et d\
+e surprises. Ce \
+sont aussi des c\
+ontenus pour mie\
+ux comprendre le\
+s enfants, aigui\
+ser leur curiosi\
+t\xc3\xa9 et r\xc3\xa9pondre\
+ \xc3\xa0 leur soif in\
+satiable de conn\
+aissance. \x5cn\x5cnht\
+tps://www.topmus\
+ic.fr/un-podcast\
+-et-au-lit\x22\x0d\x0a   \
+ },\x0d\x0a    \x2274152f\
+0d-2173-4146-987\
+4-ee7c47a181af\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2274152f0d-21\
+73-4146-9874-ee7\
+c47a181af\x22,\x0d\x0a   \
+     \x22title\x22: \x22H\
+istoires pour le\
+s petits - Noel(\
+10 histoires)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Histoir\
+es pour les peti\
+ts - Sur le th\xc3\xa8\
+me de No\xc3\xabl\x5cn- L\
+e cadeau oubli\xc3\xa9\
+\x5cn- No\xc3\xabl dans l\
+a grande prairie\
+\x5cn- Bruits d'hiv\
+er\x5cn- Le p\xc3\xa8re N\
+o\xc3\xabl et le loup\x5c\
+n- Les jouets s'\
+amusent\x5cn- Un ca\
+deau pour Loulou\
+ Brisetout\x5cn- L'\
+\xc3\xaele de Rosalie\x5c\
+n- Au bal de mus\
+ette\x5cn- Catastro\
+phe au pays de N\
+o\xc3\xabl\x5cn- Voyage e\
+n hiver\x22\x0d\x0a    },\
+\x0d\x0a    \x229b21d49c-\
+ad43-49c8-a93e-4\
+32546dae2a6\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x229b21d49c-ad43-\
+49c8-a93e-432546\
+dae2a6\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+Symphonies de Be\
+ethoven\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Voici les 9 s\
+ymphonies de Bee\
+thoven class\xc3\xa9 p\
+ar par mouvement\
+.\x5cnles mouvement\
+s s'enchaine jus\
+qu'\xc3\xa0 la fin de \
+la symphonie.\x22\x0d\x0a\
+    },\x0d\x0a    \x22c1c\
+c58a5-0b3d-4574-\
+a697-bf95cf13dcc\
+7\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22c1cc58a5\
+-0b3d-4574-a697-\
+bf95cf13dcc7\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Mini Monde\
+s, 4-7 ans (37 p\
+ays) 2023-09-03\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Quoi \
+de mieux que de \
+la musique pour \
+voyager d\xe2\x80\x99un p\
+ays \xc3\xa0 l\xe2\x80\x99autre\
+ au rythme des c\
+hansons !\x5cn\x5cnDe \
+la musique, mais\
+ aussi des histo\
+ires et surtout \
+du fun \xc3\xa0 gogo p\
+our bouger son c\
+orps de bas en h\
+aut ! \xc3\x80 \xc3\xa9coute\
+r \xc3\xa0 la maison, \
+en voiture\xe2\x80\xa6 ou\
+ en van, bien \xc3\xa9\
+videmment !\x5cn\x5cnA\
+ccrochez vos cei\
+ntures, \xc3\xa7a va s\
+winguer ! 37 pay\
+s \xc3\xa0 d\xc3\xa9couvrir \
+\xc3\xa0 travers des c\
+omptines, musiqu\
+es et histoires \
+ultra chouettes \
+que vos enfants \
+\xc3\xa9couteront avec\
+ bonheur d\xc3\xa8s qu\
+\xe2\x80\x99ils auront en\
+vie de revivre l\
+\xe2\x80\x99aventure du t\
+our du monde (ou\
+ d\xe2\x80\x99improviser \
+une boum dans le\
+ur chambre !) \x5cn\
+\x5cnMise \xc3\xa0 jour d\
+'octobre 2023\x22\x0d\x0a\
+    },\x0d\x0a    \x227e8\
+bc38e-f3cc-4a9c-\
+a087-f24a2b2498b\
+2\x22: {\x0d\x0a        \x22\
+uuid\x22: \x227e8bc38e\
+-f3cc-4a9c-a087-\
+f24a2b2498b2\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Une histoire e\
+t OLI Pack 3 (22\
+ Histoires)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x22267889ad-\
+6703-4c30-820d-5\
+7c4d2a1e302\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22267889ad-6703-\
+4c30-820d-57c4d2\
+a1e302\x22,\x0d\x0a      \
+  \x22title\x22: \x22Best\
+ioles\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Bestioles, les \
+aventures du mon\
+de animal\x22\x0d\x0a    \
+},\x0d\x0a    \x220b1089c\
+8-4033-48d2-bc06\
+-c0eebf15fb48\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x220b1089c8-403\
+3-48d2-bc06-c0ee\
+bf15fb48\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ha\
+rry Potter\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Retrouvez \
+toute la saga Ha\
+rry Potter\x22\x0d\x0a   \
+ },\x0d\x0a    \x2283e32c\
+59-5fc1-4251-ae4\
+0-e489e1046871\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2283e32c59-5f\
+c1-4251-ae40-e48\
+9e1046871\x22,\x0d\x0a   \
+     \x22title\x22: \x22D\
+isney - Histoire\
+s de princesses\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Retro\
+uvez les plus be\
+lles histoires d\
+es princesses de\
+ l\xe2\x80\x99univers Dis\
+ney, narr\xc3\xa9es pa\
+r la douce voix \
+de Marie-Eve Duf\
+resne  ! De Cend\
+rillon \xc3\xa0 Rebell\
+e, ces contes de\
+ f\xc3\xa9es et aventu\
+res inoubliables\
+ ont s\xc3\xa9duit les\
+ enfants de tout\
+es les g\xc3\xa9n\xc3\xa9rat\
+ions.\x22\x0d\x0a    },\x0d\x0a\
+    \x22ff5e5a53-82\
+7a-4239-a6a0-d5a\
+7f8dc0a85\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+ff5e5a53-827a-42\
+39-a6a0-d5a7f8dc\
+0a85\x22,\x0d\x0a        \
+\x22title\x22: \x22JP Arr\
+ou-Vignod - Enqu\
+\xc3\xaate au coll\xc3\xa8ge\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Le c\
+oll\xc3\xa8ge est sous\
+ le choc : on a \
+agress\xc3\xa9 Mr Corn\
+ue, l'assistant \
+du prof de scien\
+ces nat'! Pour l\
+e proviseur, pas\
+ de doute : c'es\
+t un interne qui\
+ a fait le coup.\
+ Tout semble acc\
+user R\xc3\xa9mi Phara\
+mon, cancre bien\
+ connu de la 4\xc3\xa8\
+meB. Tout et sur\
+tout, son meille\
+ur ami, P.P Cul-\
+Vert ! Le spectr\
+e du conseil de \
+discipline n'est\
+ pas loin. Il fa\
+udra toute l'\xc3\xa9n\
+ergie des deux c\
+omp\xc3\xa8res et de l\
+eur amie Mathild\
+e pour faire \xc3\xa9c\
+later la v\xc3\xa9rit\xc3\
+\xa9.\x5cn\x5cnhttps://ww\
+w.gallimard-jeun\
+esse.fr/97820750\
+85724/enquete-au\
+-college.html\x5cnD\
+ur\xc3\xa9e : 2h envir\
+on.\x22\x0d\x0a    },\x0d\x0a  \
+  \x22c41704a3-2ee8\
+-4355-8854-6c7cc\
+c70736d\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22c4\
+1704a3-2ee8-4355\
+-8854-6c7ccc7073\
+6d\x22,\x0d\x0a        \x22t\
+itle\x22: \x22La Grimm\
+ Acad\xc3\xa9mie Saiso\
+n 1\x22,\x0d\x0a        \x22\
+description\x22: \x22B\
+ienvenue \xc3\xa0 la G\
+rimm Acad\xc3\xa9mie,\x5c\
+n\x5cnSuivez-moi da\
+ns la tour du ch\
+a\xcc\x82teau. Ici, vo\
+us allez e\xcc\x81tudi\
+er les cr\xc3\xa9ature\
+s magiques et je\
+ serai votre pro\
+fesseur !\x22\x0d\x0a    \
+},\x0d\x0a    \x221d97202\
+1-7904-4bc0-bf67\
+-68929547344d\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x221d972021-790\
+4-4bc0-bf67-6892\
+9547344d\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s histoires de C\
+ornebidouille\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Quand i\
+l \xc3\xa9tait petit, \
+Pierre ne voulai\
+t pas manger sa \
+soupe. \xc2\xab Tu sai\
+s ce qui arrive \
+aux petits gar\xc3\xa7\
+ons qui ne veule\
+nt pas manger le\
+ur soupe ? \xc2\xbb lu\
+i disait son p\xc3\xa8\
+re, \xc2\xab Eh bien, \
+\xc3\xa0 minuit, la so\
+rci\xc3\xa8re Cornebid\
+ouille vient les\
+ voir dans leur \
+chambre, et elle\
+ leur fait telle\
+ment peur que le\
+ lendemain, non \
+seulement ils ma\
+ngent leur soupe\
+, mais ils avale\
+nt la soupi\xc3\xa8re \
+avec. \xc2\xbb\x5cnPierre\
+ s'en fichait. I\
+l ne croyait pas\
+ aux sorci\xc3\xa8res.\
+ Mais il faut ad\
+mettre que son p\
+\xc3\xa8re avait raiso\
+n sur un point: \
+une nuit, \xc3\xa0 min\
+uit, dans la cha\
+mbre de Pierre, \
+la porte de l'ar\
+moire s'entrouvr\
+it avec un grinc\
+ement terrible e\
+t Cornebidouille\
+ fit son apparit\
+ion. Allait-elle\
+ parvenir \xc3\xa0 fai\
+re peur \xc3\xa0 Pierr\
+e ? Ca, c'\xc3\xa9tait\
+ beaucoup moins \
+s\xc3\xbbr.\x5cnhttps://w\
+ww.ecoledesloisi\
+rs.fr/livre/corn\
+ebidouille\x22\x0d\x0a   \
+ },\x0d\x0a    \x229526bd\
+ee-e221-497f-bd9\
+7-08905f130678\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x229526bdee-e2\
+21-497f-bd97-089\
+05f130678\x22,\x0d\x0a   \
+     \x22title\x22: \x22M\
+es-Premieres-Bel\
+les-Histoires-20\
+20-incomplet\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Mes Prem\
+i\xc3\xa8res Belles Hi\
+stoires \x5cn2020\x5cn\
+202001 #absent\x5cn\
+202002 #absent\x5cn\
+202003 L\xe2\x80\x99avent\
+ure de Choum et \
+son petit fr\xc3\xa8re\
+\x5cn202004 #absent\
+\x5cn202005 Coco Cr\
+apaud cherche un\
+e amoureuse\x5cn202\
+006 #absent\x5cn202\
+007 Tous \xc3\xa0 l\xe2\x80\x99\
+eau !\x5cn202008 La\
+ f\xc3\xa9e Fifolette \
+et les petites c\
+anailles\x5cn202009\
+ La rentr\xc3\xa9e des\
+ petits jardinie\
+rs\x5cn202010 Croqu\
+emitoune et Boul\
+ibouftou\x5cn202011\
+ Le sac \xc3\xa0 bisou\
+s\x5cn202012 Dr\xc3\xb4le\
+ de No\xc3\xabl chez l\
+a famille Touvab\
+ien\x5cn\x22\x0d\x0a    },\x0d\x0a\
+    \x22a586d453-3d\
+0d-41cd-ba84-f06\
+72c7a1e8d\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+a586d453-3d0d-41\
+cd-ba84-f0672c7a\
+1e8d\x22,\x0d\x0a        \
+\x22title\x22: \x22Dis Ja\
+my (kids) (60 ep\
+isodes) 2023 08 \
+04\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Si\
+ vous \xc3\xaates subm\
+erg\xc3\xa9s par les q\
+uestions de votr\
+e enfant, Dis Ja\
+my (kids) est fa\
+it pour vous ! P\
+ourquoi la mer e\
+st sal\xc3\xa9e, combi\
+en p\xc3\xa8se un nuag\
+e ou pourquoi ri\
+gole-t-on quand \
+on nous chatouil\
+le ? Dans ce nou\
+veau podcast en \
+exclusivit\xc3\xa9 pou\
+r Deezer, Jamy r\
+\xc3\xa9pond chaque me\
+rcredi \xc3\xa0 toutes\
+ les questions q\
+ue petits et gra\
+nds se posent , \
+avec rigueur, p\xc3\
+\xa9dagogie et touj\
+ours dans la bon\
+ne humeur. DIS J\
+AMY KIDS une pro\
+duction Webedia \
+Epicurieux pour \
+Deezer Originals\
+ Avec Jamy Gourm\
+aud, Mila Pointe\
+t, James Boulang\
+er, Lino Cordier\
+, Juliette Davis\
+ Direction artis\
+tique : Samy Bou\
+yssie, Doroth\xc3\xa9e\
+ Pouss\xc3\xa9o Webedi\
+a/Epicurieux : C\
+amille Selosse, \
+Elise Porcher, M\
+atthieu Renard, \
+Eric Batteux, La\
+ur\xc3\xa8na Jouvin Eq\
+uipe \xc3\xa9ditoriale\
+ : Emmanuel Faur\
+e, St\xc3\xa9phanie Be\
+llin (Agence Tad\
+am), Nolwenn le \
+Jannic (Agence T\
+adam), Pierre Te\
+ssier (Agence Ta\
+dam) G\xc3\xa9n\xc3\xa9rique\
+ : Agence Mooder\
+s Monteur et mix\
+eur : Charles Co\
+llin (Warp)\x22\x0d\x0a  \
+  },\x0d\x0a    \x22947e8\
+fb2-5486-4435-b2\
+c8-ec9d86ba0b62\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22947e8fb2-5\
+486-4435-b2c8-ec\
+9d86ba0b62\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Contes de Marcel\
+le 3+\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Celui qui avait\
+ le mal de mer. \
+Derri\xc3\xa8re la por\
+te. L'escargot v\
+oyageur. La prin\
+cesse aux petits\
+ pas. La sorci\xc3\xa8\
+re de No\xc3\xabl. Le \
+chemin de Solal.\
+ Le r\xc3\xaave de Mal\
+o. +L'enqu\xc3\xaate d\
+e l'Avent\x22\x0d\x0a    \
+},\x0d\x0a    \x22410fcee\
+b-8ea0-458a-aa17\
+-ba6cb35cd032\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22410fceeb-8ea\
+0-458a-aa17-ba6c\
+b35cd032\x22,\x0d\x0a    \
+    \x22title\x22: \x22Un\
+e petite souris \
+\xc3\xa0 l'op\xc3\xa9ra\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Lucie, un\
+e petite souris \
+qui r\xc3\xaave de dev\
+enir danseuse, v\
+a explorer le Pa\
+lais Garnier. Gr\
+\xc3\xa2ce \xc3\xa0 sa petit\
+e taille, elle v\
+a discr\xc3\xa8tement \
+observer les dan\
+seurs, chor\xc3\xa9gra\
+phes, chefs d\xe2\x80\x99\
+orchestre, mette\
+urs en sc\xc3\xa8ne, m\
+ais aussi les te\
+chniciens et les\
+ d\xc3\xa9corateurs, a\
+cteurs souvent m\
+\xc3\xa9connus du gran\
+d public. Ce qui\
+ se passe derri\xc3\
+\xa8re les rideaux \
+du Palais Garnie\
+r n\xe2\x80\x99aura plus \
+de secret pour L\
+ucie\xe2\x80\xa6 ni pour \
+les jeunes audit\
+eurs. Ses aventu\
+res vont la mene\
+r jusqu\xe2\x80\x99\xc3\xa0 Luc\
+a, le vieux rat \
+qui habite l\xe2\x80\x99O\
+p\xc3\xa9ra depuis tou\
+jours, et qui lu\
+i est bien d\xc3\xa9ci\
+d\xc3\xa9 \xc3\xa0 la mettre\
+ dehors. Mais so\
+n r\xc3\xaave fou de d\
+evenir chanteur \
+lyrique va le ra\
+pprocher de la p\
+etite souris.\x22\x0d\x0a\
+    },\x0d\x0a    \x22efc\
+2336b-a350-4223-\
+8235-d411f0239a5\
+7\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22efc2336b\
+-a350-4223-8235-\
+d411f0239a57\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Audible Sam le\
+ pompier (8 hist\
+oires) V1\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Sam le Pomp\
+ier - 8 histoire\
+s Audible\x5cn- Can\
+o\xc3\xa9 \xc3\xa0 la D\xc3\xa9riv\
+e\x5cn- Concours en\
+ p\xc3\xa9ril\x5cn- Dispa\
+rition au Zoo\x5cn-\
+ Un cheval \xc3\xa0 sa\
+uver\x5cn- Un conce\
+rt enflamm\xc3\xa9\x5cn- \
+Un sauvetage mag\
+ique\x5cn- Un super\
+ chien de sauvet\
+age\x5cnUn super ma\
+tch de football\x22\
+\x0d\x0a    },\x0d\x0a    \x22f\
+d18ddb2-2262-478\
+9-8e12-37311e4f2\
+399\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22fd18dd\
+b2-2262-4789-8e1\
+2-37311e4f2399\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Petite princ\
+esse\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Tir\xc3\xa9e d'une col\
+lection de livre\
+s pour enfants d\
+e l'auteur et il\
+lustrateur Tony \
+Ross, cette s\xc3\xa9r\
+ie d'animation a\
+ pour h\xc3\xa9ro\xc3\xafne \
+une adorable et \
+amusante petite \
+princesse.\x5cn\x5cnSa\
+isons 1 et 2 com\
+pl\xc3\xa8tes\x22\x0d\x0a    },\
+\x0d\x0a    \x2222d98a9c-\
+a1f6-4083-b889-2\
+1d02b01ac1a\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x2222d98a9c-a1f6-\
+4083-b889-21d02b\
+01ac1a\x22,\x0d\x0a      \
+  \x22title\x22: \x22Les \
+aventures de Tim\
+ot\xc3\xa9\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+L'ensemble des l\
+ivres Timot\xc3\xa9 \xc3\xa9\
+crites par Emman\
+uelle Massonaud,\
+ M\xc3\xa9lanie Combes\
+ et racont\xc3\xa9s pa\
+r Marcha Van Bov\
+en. Ils sont dis\
+ponibles via cod\
+e sous Lizzie  (\
+https://www.lizz\
+ie.audio/search)\
+\x5cn\x5cnTimot\xc3\xa9 est \
+un petit lapin q\
+ui, au fil des \xc3\
+\xa9pisodes, partag\
+e sa vie avec se\
+s petits lecteur\
+s.\x5cn\x5cnTimot\xc3\xa9 es\
+t malade\x5cnTimot\xc3\
+\xa9 est tr\xc3\xa8s poli\
+\x5cnTimot\xc3\xa9 va au \
+centre de loisir\
+s\x5cnTimot\xc3\xa9 veut \
+un animal\x5cnTimot\
+\xc3\xa9 \xc3\xa0 l'aquarium\
+\x5cnTimot\xc3\xa9 \xc3\xa0 la \
+ferme\x5cnTimot\xc3\xa9 \xc3\
+\xa0 la piscine\x5cnTi\
+mot\xc3\xa9 aime la mu\
+sique\x5cnTimot\xc3\xa9 a\
+u bord de la mer\
+\x5cnTimot\xc3\xa9 chez l\
+es pompiers\x5cnTim\
+ot\xc3\xa9 chez papi e\
+t mamie\x5cnTimot\xc3\xa9\
+ d\xc3\xa9couvre les c\
+hiffres\x5cnTimot\xc3\xa9\
+ d\xc3\xa9couvre les l\
+ettres\x5cnTimot\xc3\xa9 \
+devient grand fr\
+ere\x5cnTimot\xc3\xa9 dor\
+t chez un copain\
+\x5cnTimot\xc3\xa9 entre \
+\xc3\xa0 lecole\x5cnTimot\
+\xc3\xa9 et la petite \
+souris\x5cnTimot\xc3\xa9 \
+et le No\xc3\xabl magi\
+que\x5cnTimot\xc3\xa9 et \
+sa t\xc3\xa9tine\x5cnTimo\
+t\xc3\xa9 et ses emoti\
+ons\x5cnTimot\xc3\xa9 et \
+ses lunettes\x5cnTi\
+mot\xc3\xa9 et son dou\
+dou\x5cnTimot\xc3\xa9 fai\
+t des betises\x5cnT\
+imot\xc3\xa9 fait du p\
+oney\x5cnTimot\xc3\xa9 fa\
+it du ski\x5cnTimot\
+\xc3\xa9 fait du v\xc3\xa9lo\
+\x5cnTimot\xc3\xa9 fait u\
+n gateau\x5cnTimot\xc3\
+\xa9 fait de la tro\
+ttinette\x5cnTimot\xc3\
+\xa9 fete noel\x5cnTim\
+ot\xc3\xa9 fete paques\
+\x5cnTimot\xc3\xa9 fete s\
+on anniversaire\x5c\
+nTimot\xc3\xa9 jardine\
+\x5cnTimot\xc3\xa9 joue a\
+u foot\x5cnTimot\xc3\xa9 \
+ne veut pas dorm\
+ir\x5cnTimot\xc3\xa9 pren\
+d l avion\x5cnTimot\
+\xc3\xa9 prend le trai\
+n\x5cnTimot\xc3\xa9 se d\xc3\
+\xa9guise\x5cnTimot\xc3\xa9 \
+se promene en fo\
+ret\x5cnTimot\xc3\xa9 va \
+a la bibliothequ\
+e\x5cnTimot\xc3\xa9 va a \
+la cantine\x5cnTimo\
+t\xc3\xa9 va au cirque\
+\x5cnTimot\xc3\xa9 va au \
+spectacle\x5cnTimot\
+\xc3\xa9 va au zoo\x5cnTi\
+mot\xc3\xa9 va chez le\
+ docteur\x5cnTimot\xc3\
+\xa9 va sur le pot\x5c\
+nTimot\xc3\xa9 va sur \
+lepot\x5cnTimot\xc3\xa9 v\
+isite la bretagn\
+e\x5cnTimot\xc3\xa9 visit\
+e le louvre\x5cnTim\
+ot\xc3\xa9 visite le z\
+oo\x5cnTimot\xc3\xa9 visi\
+te paris\x5cnTimot\xc3\
+\xa9 visite un chat\
+eau fort\x5cn\x5cnAbse\
+nts (je ne dispo\
+se pas des codes\
+ ni des livres):\
+\x5cn* Timot\xc3\xa9 et l\
+a galette des ro\
+is\x5cn* Timot\xc3\xa9 f\xc3\
+\xaate la Saint-Nic\
+olas \x22\x0d\x0a    },\x0d\x0a\
+    \x220abd8529-b4\
+55-488a-a2b1-83b\
+1a5edaa95\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+0abd8529-b455-48\
+8a-a2b1-83b1a5ed\
+aa95\x22,\x0d\x0a        \
+\x22title\x22: \x22La rei\
+ne des neiges lu\
+ par Emmylou Hom\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22De \
+: Walt Disney\x5cnL\
+u par : Emmylou \
+Homs\x5cnS\xc3\xa9rie : W\
+alt Disney, Volu\
+me 3\x5cnDur\xc3\xa9e : 2\
+ h et 6 min\x5cnVer\
+sion int\xc3\xa9grale \
+Livre audio\x5cnDat\
+e de publication\
+ : 02/11/2017\x5cnL\
+angue : Fran\xc3\xa7ai\
+s \x22\x0d\x0a    },\x0d\x0a   \
+ \x2281ce7048-c258-\
+4e3a-b9ce-503137\
+8d3f59\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x2281c\
+e7048-c258-4e3a-\
+b9ce-5031378d3f5\
+9\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Pomme d'a\
+pi 2023 La grand\
+e histoire\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x229f4ea775-0\
+50a-4fc1-a990-2b\
+0ebfae343c\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x229f4ea775-050a-4\
+fc1-a990-2b0ebfa\
+e343c\x22,\x0d\x0a       \
+ \x22title\x22: \x22Bebe \
+orchestra joue s\
+ting et police (\
+10 chansons) 202\
+3-08-13\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x2210 chansons d\
+e Sting et The P\
+olice revisit\xc3\xa9e\
+s pour les plus \
+petits\x22\x0d\x0a    },\x0d\
+\x0a    \x223f60f11a-1\
+61d-4a7f-bf50-27\
+579ec2b4ad\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x223f60f11a-161d-4\
+a7f-bf50-27579ec\
+2b4ad\x22,\x0d\x0a       \
+ \x22title\x22: \x22Encor\
+e une histoire T\
+omy le mouton (2\
+0 histoires)\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Encore u\
+ne histoire est \
+un podcast desti\
+n\xc3\xa9 aux enfants \
+(et \xc3\xa0 ceux qui \
+le sont encore d\
+ans leur t\xc3\xaate) \
+qui aiment qu'on\
+ leur raconte de\
+s histoires.\x5cn\x5cn\
+Chaque semaine, \
+vous retrouverez\
+ ici une histoir\
+e lue, tir\xc3\xa9e d'\
+un livre de litt\
+\xc3\xa9rature jeuness\
+e ou une cr\xc3\xa9ati\
+on originale.\x5cn\x5c\
+nUn podcast prod\
+uit par Benjamin\
+ Muller, interpr\
+\xc3\xa9t\xc3\xa9 par C\xc3\xa9lin\
+e Kallmann et r\xc3\
+\xa9alis\xc3\xa9 par Alex\
+andre Ferreira.\x5c\
+n\x5cnA \xc3\xa9couter av\
+ant de se couche\
+r, allong\xc3\xa9 dans\
+ l'herbe, dans l\
+a voiture ou dan\
+s le train, Enco\
+re une histoire \
+veut mettre en a\
+vant la formidab\
+le cr\xc3\xa9ation lit\
+t\xc3\xa9raire destin\xc3\
+\xa9e aux jeunes le\
+cteurs (et aux m\
+oins jeunes, don\
+c).\x5cn\x5cnhttps://p\
+odcast.ausha.co/\
+encore-une-histo\
+ire/playlist/tom\
+y\x22\x0d\x0a    },\x0d\x0a    \
+\x225f2f527d-5346-4\
+cde-91ae-38819c6\
+ca28e\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x225f2f\
+527d-5346-4cde-9\
+1ae-38819c6ca28e\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Le merveil\
+leux voyage de N\
+ils Holgersson\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Ensorc\
+el\xc3\xa9 pour s'\xc3\xaatr\
+e moqu\xc3\xa9 d'un lu\
+tin, Ails devien\
+t tout petit. Il\
+ s'envole alors \
+sur le dos de Ma\
+rtin, un jeune j\
+ars, et part pou\
+r un merveilleux\
+ voyage au milie\
+u des oies sauva\
+ges.\x5cn\x5cnhttps://\
+www.flammarion-j\
+eunesse.fr/le-me\
+rveilleux-voyage\
+-de-nils-holgers\
+son/978291689958\
+9\x22\x0d\x0a    },\x0d\x0a    \
+\x22255083bd-5624-4\
+f93-96e3-0a7199c\
+22ecd\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x222550\
+83bd-5624-4f93-9\
+6e3-0a7199c22ecd\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Club Citro\
+uillade - 13 His\
+toires et 17 cha\
+nsons\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Chaque Semaine,\
+ partons \xc3\xa0 l\xe2\x80\x99\
+aventure avec le\
+ Club Citrouilla\
+de, une bande de\
+ copains et de c\
+opines qui jouen\
+t, s\xe2\x80\x99amusent, \
+se challengent, \
+s\xe2\x80\x99entraident, \
+sans jamais se d\
+isputer ! Il y a\
+ Vean-Pierre le \
+Vampire, P\xc3\xa2come\
+ le fant\xc3\xb4me, Mo\
+mo La momie, M\xc3\xa9\
+dusa, qui a des \
+cheveux en serpe\
+nts, Edmond le s\
+treumon, Zowie l\
+a Zombie, Lou le\
+ loup Garou dont\
+ les parents son\
+t \xc3\xa9co-loups ! S\
+uivons-les dans \
+leur soir\xc3\xa9e Cam\
+pyj (c\xe2\x80\x99est com\
+me du camping, s\
+auf qu\xe2\x80\x99on est \
+au fond du jardi\
+n, et qu\xe2\x80\x99on es\
+t en pyjama), da\
+ns leurs concour\
+s de cuisine (c\xe2\
+\x80\x99est trop bon l\
+a blanquette de \
+citrouille) ou l\
+eur sortie scola\
+ire dans le bus-\
+pirate avec la M\
+aire-tresse et J\
+ean Yves ! Chaqu\
+e \xc3\xa9pisode se co\
+nclut par une ch\
+anson entrainant\
+e aux sonorit\xc3\xa9s\
+ soul, funk, ins\
+pir\xc3\xa9es des Jack\
+son 5 et les ann\
+\xc3\xa9es 60 ! Club c\
+itrouillade, un \
+podcast de ficti\
+on pour les 2 - \
+6 ans \xc3\xa9crit par\
+ Romain Baousson\
+, et produit par\
+ sa soeur Marine\
+ Baousson ! \x5cn\x5cn\
+Histoires\x5cn1/ La\
+ surprise\x5cn2/ 1,\
+2,3 lune\x5cn3/ Mar\
+di gras\x5cn4/ Les \
+mots chez Momo\x5cn\
+5/ Le concours d\
+e cuisine\x5cn6/ Le\
+ cousin Phlipe\x5cn\
+7/ La tombala\x5cn8\
+/ Le sentier des\
+ Apothicaires\x5cn9\
+/ La chasse au t\
+r\xc3\xa9sor\x5cn10/ La b\
+aignade\x5cn11/ Les\
+ vacances\x5cn12/ C\
+ache-cache\x5cn13/ \
+\xc3\x89pisode Sp\xc3\xa9cia\
+l Dodo - Les Ber\
+feuves De Vean-P\
+ierre\x5cn\x5cnChanson\
+s : \x5cn1/ G\xc3\xa9n\xc3\xa9r\
+ique\x5cn2/ La surp\
+rise\x5cn3/ 1,2,3 l\
+une\x5cn4/ Mardi gr\
+as\x5cn5/ Les mots \
+chez Momo\x5cn6/ Le\
+ concours de cui\
+sine\x5cn7/ Le cous\
+in Phlipe\x5cn8/ La\
+ tombala\x5cn9/ Le \
+sentier des Apot\
+hicaires\x5cn10/ La\
+ chasse au tr\xc3\xa9s\
+or\x5cn11/ La baign\
+ade\x5cn12/ Les vac\
+ances\x5cn13/ Cache\
+-cache\x5cn14/ T\xc3\xaat\
+u dino\x5cn15/ Que \
+fait mon doudou\x5c\
+n16/ Tout est ca\
+lme\x5cn17/ Escalad\
+er le mont dodo\x22\
+\x0d\x0a    },\x0d\x0a    \x22a\
+fa8e588-471f-447\
+9-b758-253d1c04c\
+624\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22afa8e5\
+88-471f-4479-b75\
+8-253d1c04c624\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Robinson Cru\
+so\xc3\xa9\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Robinson Cruso\xc3\xa9\
+, cont\xc3\xa9 par Cla\
+ude Rich\x22\x0d\x0a    }\
+,\x0d\x0a    \x22ae9f0b5b\
+-f9cb-4a88-94b7-\
+ee178fcd93b8\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22ae9f0b5b-f9cb\
+-4a88-94b7-ee178\
+fcd93b8\x22,\x0d\x0a     \
+   \x22title\x22: \x22Cir\
+conflexe - Petit\
+s contes du vast\
+e monde\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x221. L'\xc3\xa9cole d\
+es oiseaux (cont\
+e de Chypre)\x5cn2.\
+ Le li\xc3\xa8vre et l\
+a renarde (conte\
+ russe)\x5cn3. Le t\
+rop gourmand (co\
+nte des Indes)\x5cn\
+4. Kakou Ananz\xc3\xa9\
+, la curieuse (c\
+onte d'Afrique d\
+e l'Ouest)\x5cn5. L\
+e tailleur de pi\
+erre (conte chin\
+ois)\x5cn6. Patrim-\
+Patram, l'ours p\
+\xc3\xaacheur (conte i\
+ndien d'Am\xc3\xa9riqu\
+e du Nord)\x5cn7. L\
+e b\xc3\xbbcheron r\xc3\xa9c\
+ompens\xc3\xa9 (conte \
+japonais)\x5cn8. Le\
+s trois amis de \
+la for\xc3\xaat (conte\
+ de Sib\xc3\xa9rie)\x5cn9\
+. Le singe malic\
+ieux, l'\xc3\xa9l\xc3\xa9pha\
+nt et la baleine\
+ (conte de l'\xc3\xael\
+e Maurice)\x5cn10. \
+Le beau manteau \
+du tatou (conte \
+aymara - Bolivie\
+)\x5cn\x5cnhttps://www\
+.circonflexe.fr/\
+catalogue/ouvrag\
+e/petits-contes-\
+du-vaste-monde-l\
+e-livre-la-versi\
+on-audio-9782378\
+624637\x22\x0d\x0a    },\x0d\
+\x0a    \x226cb1badd-f\
+b65-4064-93b2-7a\
+11ebf72377\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x226cb1badd-fb65-4\
+064-93b2-7a11ebf\
+72377\x22,\x0d\x0a       \
+ \x22title\x22: \x22Deeze\
+r - Les Contes d\
+'hiver de Pomme \
+d'Api (12 histoi\
+res)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Les Contes d'hiv\
+er de Pomme d'Ap\
+i, 12 histoires \
+:\x5cnLa vie est be\
+lle, villa No\xc3\xabl\
+\x5cnLe secret qui \
+fait lever le jo\
+ur\x5cnLe prince\x5cnL\
+amia la poup\xc3\xa9e\x5c\
+nDes provisions \
+pour l'hiver\x5cnPa\
+prika dans la tr\
+iste ville\x5cnLe l\
+oup bossu\x5cnLe ch\
+eval d'Ana\xc3\xafs\x5cnL\
+e Tsar et la pom\
+me d'or\x5cnLe peti\
+t roi\x5cnL' \xc3\xa9toil\
+e filante de gra\
+nd-p\xc3\xa8re Dadou\x5cn\
+Trotte-jolie, so\
+uri\xc3\xa7onne et Dou\
+illette\x5cn\x5cnhttps\
+://www.bayardmus\
+ique.com/album/1\
+223/les-contes-d\
+-hiver-de-pomme-\
+d-api-b-alestche\
+nkoff-s-pasquet\x22\
+\x0d\x0a    },\x0d\x0a    \x225\
+141d751-b9d2-4f8\
+6-a750-16b5a35cb\
+88e\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x225141d7\
+51-b9d2-4f86-a75\
+0-16b5a35cb88e\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les contes d\
+e No\xc3\xabl by Prima\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x22ff2f\
+df77-bcb0-4bcf-b\
+b2f-0e64836723db\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22ff2fdf77-\
+bcb0-4bcf-bb2f-0\
+e64836723db\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les enqu\xc3\xaates d\
+'Anatole Bristol\
+ - Le gang des f\
+arceurs (10 chap\
+itres)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Mon fils de 7 \
+ans \xc3\xa9coute ces \
+histoires et ado\
+re.\x5cn\x5cnAnatole, \
+ce qu'il aime da\
+ns la vie, ce so\
+nt les enqu\xc3\xaates\
+, les myst\xc3\xa8res,\
+ les \xc3\xa9nigmes...\
+\x5cn\x5cnSon terrain \
+de pr\xc3\xa9dilection\
+ : la cour de r\xc3\
+\xa9cr\xc3\xa9ation. Et j\
+ustement, en ce \
+moment, d'\xc3\xa9tran\
+ges \xc3\xa9v\xc3\xa9nements\
+ se succ\xc3\xa8dent d\
+ans sa nouvelle \
+\xc3\xa9cole... Il est\
+ temps pour Anat\
+ole d'attraper s\
+es fiches Bristo\
+l et surtout... \
+le gang des farc\
+eurs !\x5cn\x5cnLes en\
+qu\xc3\xaates d'Anatol\
+e Bristol : le g\
+ang des farceurs\
+ fait partie de \
+la toute nouvell\
+e collection Auz\
+ou Romans \x5c\x22 Pas\
+ de g\xc3\xa9ant \x5c\x22 ! \
+Les jeunes audit\
+eurs peuvent s'a\
+muser \xc3\xa0 jouer l\
+es d\xc3\xa9tectives a\
+ux c\xc3\xb4t\xc3\xa9s d'Ana\
+tole Bristol dan\
+s la cour de l'\xc3\
+\xa9cole...\x5cn\x5cnUne \
+histoire amusant\
+e et pleine de m\
+yst\xc3\xa8re, une bel\
+le histoire d'am\
+iti\xc3\xa9 qui font d\
+e ce livre audio\
+ une \xc3\xa9coute id\xc3\
+\xa9ale, d\xc3\xa8s 9 ans\
+ !\x5cn\x5cnPRIX RENAU\
+DOT DES BENJAMIN\
+S 2013.\x5cn\x5cn\xc2\xa9201\
+2 Auzou Editions\
+ (P)2022 Auzou E\
+ditions\x5cn\x5cnhttps\
+://www.audible.f\
+r/pd/Le-gang-des\
+-farceurs-Livre-\
+Audio/B0BCQD4J94\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+802d57f6-80af-4a\
+52-b0c6-ee65c0c5\
+4ac2\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22802d5\
+7f6-80af-4a52-b0\
+c6-ee65c0c54ac2\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les grandes\
+ histoires de Po\
+mme d'Api\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22V1 Elogeith\
+ : Reprise, am\xc3\xa9\
+lioration et com\
+pl\xc3\xa9tion des pac\
+ks individuels P\
+omme d'Api\x5cnV2 E\
+logeith : Ajout \
+\xc3\xa9pisodes de No\xc3\
+\xabl 2021 & 2023\x5cn\
+\x5cnLa grande hist\
+oire de pomme d'\
+api reprend les \
+plus belles hist\
+oires pour enfan\
+ts du magazine P\
+omme d'Api.\x5cnSai\
+sons 2019, 2020,\
+ 2021, 2022 et 2\
+023\x5cn\x5cn2019\x5cn- J\
+anvier 2019 - La\
+ petite veilleus\
+e\x5cn- F\xc3\xa9vrier 20\
+19 - Gare \xc3\xa0 la \
+tremblouille\x5cn- \
+Mars 2019 - Paga\
+ille \xc3\xa0 la ferme\
+ !\x5cn- Avril 2019\
+ - L'abominable \
+cri des bois\x5cn- \
+Mai 2019 - Une m\
+aman archichouet\
+te\x5cn- Juin 2019 \
+- Lapin, Lapine,\
+ et le truc\x5cn- J\
+uillet 2019 - Le\
+s Crassebosse au\
+ camping\x5cn- Juil\
+let 2019 - Le vo\
+yage de Lema\x5cn- \
+Juillet 2019 - L\
+a course \xc3\xa0 la p\
+\xc3\xaache\x5cn- Ao\xc3\xbbt 2\
+019 - Le voleur \
+d'\xc3\xa9toiles\x5cn- Se\
+ptembre 2019 - L\
+e prince Koa et \
+la petite f\xc3\xa9e\x5cn\
+- Septembre 2019\
+ - Mini Poucette\
+ et l'ogre Farfa\
+lle\x5cn- Octobre 2\
+019 - Le festin \
+des sorci\xc3\xa8res\x5cn\
+- Novembre 2019 \
+- Mon ami de la \
+nuit\x5cn- Novembre\
+ 2019 - Qui cond\
+uira le tra\xc3\xaenea\
+u du P\xc3\xa8re No\xc3\xabl\
+ ?\x5cn24 histoires\
+ pour attendre N\
+o\xc3\xabl 2019 :\x5cn- L\
+e secret de Papi\
+ Igor (9 \xc3\xa9pisod\
+es recoll\xc3\xa9s)\x5cn-\
+ Le No\xc3\xabl des an\
+imaux (7 \xc3\xa9pisod\
+es recoll\xc3\xa9s)\x5cn-\
+ Il faut sauver \
+le Magnifique (7\
+ \xc3\xa9pisodes recol\
+l\xc3\xa9s)\x5cn\x5cn2020\x5cn-\
+ Janvier 2020 - \
+Papa hibou, supe\
+r papa !\x5cn- F\xc3\xa9v\
+rier 2020 - Basi\
+le et les branch\
+es magiques\x5cn- M\
+ars 2020 - On ve\
+ut des couleurs\x5c\
+n- Avril 2020 - \
+Le ruban rouge\x5cn\
+- Mai 2020 - L'a\
+rbre de Monsieur\
+ Marcellin\x5cn- Ju\
+in 2020 - Catast\
+rophe, le coq a \
+perdu sa voix !\x5c\
+n- Juillet 2020 \
+- Le balai de P\xc3\
+\xa9trolette\x5cn- Jui\
+llet 2020 - Le m\
+yst\xc3\xa8re des chau\
+ssettes disparue\
+s\x5cn- Juillet 202\
+0 - Le tr\xc3\xa9sor d\
+\xe2\x80\x99Hector\x5cn- Ao\xc3\
+\xbbt 2020 - L'ami \
+des oiseaux\x5cn- S\
+eptembre 2020 - \
+La rentr\xc3\xa9e des \
+poussins\x5cn- Octo\
+bre 2020 - L'eau\
+ a disparu\x5cn- No\
+vembre 2020 - La\
+ ch\xc3\xa8vre et le l\
+oup\x5cn24 histoire\
+s pour attendre \
+No\xc3\xabl 2020 :\x5cn- \
+Les invit\xc3\xa9s de \
+la for\xc3\xaat (8 \xc3\xa9p\
+isodes recoll\xc3\xa9s\
+)\x5cn- Les apprent\
+is du P\xc3\xa8re No\xc3\xab\
+l (8 \xc3\xa9pisodes r\
+ecoll\xc3\xa9s)\x5cn- Le \
+No\xc3\xabl de monsieu\
+r Germain (8 \xc3\xa9p\
+isodes recoll\xc3\xa9s\
+)\x5cn\x5cn2021 \x5cn- Ja\
+nvier 2021 - Le \
+petit roi qui s'\
+ennuyait\x5cn- F\xc3\xa9v\
+rier 2021 - Dion\
+y et son bonhomm\
+e de neige\x5cn- Ma\
+rs 2021 - Le car\
+naval de Petit M\
+onstre\x5cn- Avril \
+2021 - Lili et l\
+a graine magique\
+\x5cn- Mai 2021 - M\
+adame Cherfule e\
+t ses nouveaux v\
+oisins\x5cn- Juin 2\
+021 - Michel, le\
+ tout petit chev\
+alier\x5cn- Juillet\
+ 2021 - Taro et \
+le tr\xc3\xa9sor de l\xe2\
+\x80\x99oc\xc3\xa9an\x5cn- Juil\
+let 2021 - Nicol\
+ette et le crabe\
+\x5cn- Juillet 2021\
+ - La grenouille\
+ n\xe2\x80\x99est pas une\
+ nouille\x5cn- Ao\xc3\xbb\
+t 2021 - Myst\xc3\xa8r\
+e dans la savane\
+\x5cn- Septembre 20\
+21 - Petit-pas-d\
+e-soucis\x5cn- Octo\
+bre 2021 - Au do\
+do, Petit Ours !\
+\x5cn- Novembre 202\
+1 - Les trois pe\
+tits Chonchons\x5cn\
+24 histoires pou\
+r attendre No\xc3\xabl\
+ 2021 :\x5cn- Milo \
+et la bougie de \
+No\xc3\xabl (24 \xc3\xa9piso\
+des recoll\xc3\xa9s)\x5cn\
+\x5cn2022\x5cn- Janvie\
+r 2022 - Ma mais\
+on est fantastiq\
+ue\x5cn- F\xc3\xa9vrier 2\
+022 - Samia et l\
+e secret de la t\
+oundra\x5cn- Mars 2\
+022 - Max le lou\
+p veut \xc3\xaatre ter\
+rifiant\x5cn- Avril\
+ 2022 - Le zoo e\
+n or des dinosau\
+res\x5cn- Mai 2022 \
+- Les deux ourso\
+ns\x5cn- Juin 2022 \
+- Gare aux Croco\
+chemars\x5cn- Juill\
+et 2022 - En val\
+ise jusqu'\xc3\xa0 l'o\
+c\xc3\xa9an\x5cn- Ao\xc3\xbbt 2\
+022 - Le tout pe\
+tit tour de Peti\
+t Lapin\x5cn- Septe\
+mbre 2022 - Les \
+fourmis ennemies\
+\x5cn- Octobre 2022\
+ - Le tr\xc3\xa9sor d\xe2\
+\x80\x99Acajou\x5cn- Nove\
+mbre 2022 - Le m\
+anoir des 3 sorc\
+i\xc3\xa8res\x5cn- Novemb\
+re 2022 - Esther\
+, l\xe2\x80\x99apprentie \
+sorci\xc3\xa8re\x5cn\x5cn202\
+3\x5cn- Janvier 202\
+3 - Dr\xc3\xb4le d\xe2\x80\x99e\
+nqu\xc3\xaate pour Max\
+ et Flibuste\x5cn- \
+F\xc3\xa9vrier 2023 - \
+En piste Sim\xc3\xa9on\
+\x5cn- Mars 2023 - \
+L\xe2\x80\x99anniversaire\
+ de Bosco\x5cn- Avr\
+il 2023 - Myst\xc3\xa8\
+re au 6, rue de \
+la Chaussette\x5cn-\
+ Mai 2023 - Dr\xc3\xb4\
+le de pirate\x5cn- \
+Juin 2023 - Ad\xc3\xa9\
+lid\xc3\xa9lo et le mo\
+nde magique\x5cn- J\
+uillet 2023 - Le\
+ millepattobus\x5cn\
+- Ao\xc3\xbbt 2023 - F\
+rimousse et la G\
+rande Ourse\x5cn- S\
+eptembre 2023 - \
+L'\xc3\xa9cole des tau\
+pes : Vite, papa\
+, vite !\x5cn- Sept\
+embre 2023 - L'\xc3\
+\xa9cole des h\xc3\xa9ris\
+sons : La b\xc3\xaatis\
+e de Chab\x5cn- Sep\
+tembre 2023 - L'\
+\xc3\xa9cole des greno\
+uilles : Une cac\
+hette pas si dis\
+cr\xc3\xa8te\x5cn- Septem\
+bre 2023 - L'\xc3\xa9c\
+ole des lapins :\
+ Tintamarre \xc3\xa0 l\
+a cantine\x5cn- Sep\
+tembre 2023 - L'\
+\xc3\xa9cole des fourm\
+is : Une sieste \
+agit\xc3\xa9e\x5cn- Septe\
+mbre 2023 - L'\xc3\xa9\
+cole des oiseaux\
+ : Le grand plon\
+geon\x5cn- Septembr\
+e 2023 - L'\xc3\xa9col\
+e des \xc3\xa9cureuils\
+ : Une journ\xc3\xa9e \
+bien trop courte\
+\x5cn- Octobre 2023\
+ - Op\xc3\xa9ration Do\
+udou\x5cn- Novembre\
+ 2023 - A croque\
+r\x5cn- Bonus : Alb\
+ert, le g\xc3\xa9ant g\
+\xc3\xa9ant\x5cn- Bonus :\
+ La verdiole de \
+la peur\x5cn- Bonus\
+ : L'ogre-\xc3\xa9norm\
+e-des-bois et le\
+s trois oursons\x5c\
+n- Bonus : Trist\
+an et les dragon\
+s\x5cn24 histoires \
+pour attendre No\
+\xc3\xabl 2023 :\x5cn- Pi\
+po et la maison \
+abandonn\xc3\xa9e (24 \
+\xc3\xa9pisodes recoll\
+\xc3\xa9s)\x22\x0d\x0a    },\x0d\x0a \
+   \x22e4bdd5a7-c06\
+f-4b29-b4bf-0619\
+8c6a60a6\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x22e\
+4bdd5a7-c06f-4b2\
+9-b4bf-06198c6a6\
+0a6\x22,\x0d\x0a        \x22\
+title\x22: \x22T'choup\
+i\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x22\x0d\x0a\
+    },\x0d\x0a    \x22bf9\
+f5d35-3c1c-49da-\
+a126-cd8fec5b624\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22bf9f5d35\
+-3c1c-49da-a126-\
+cd8fec5b6241\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Sideways Stori\
+es from Wayside \
+School (part 2)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Is yo\
+ur school just a\
+ little too\xe2\x80\xa6 N\
+ORMAL?\x5cn\x5cnMaybe \
+you should go to\
+ Wayside School.\
+ You'll meet Beb\
+e, the fastest d\
+raw in art class\
+; John, who only\
+ reads upside do\
+wn; and Sammy, t\
+he new kid\xe2\x80\x94he'\
+s a real rat. Co\
+me on! Hurry up!\
+ If you're late \
+for class, Mrs. \
+Gorf will turn y\
+ou into an app\xe2\x80\
+\xa6Oops... Sorry a\
+bout that.\x22\x0d\x0a   \
+ },\x0d\x0a    \x22edce91\
+58-72a5-4ee3-ae2\
+5-e6a9f650545c\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22edce9158-72\
+a5-4ee3-ae25-e6a\
+9f650545c\x22,\x0d\x0a   \
+     \x22title\x22: \x22S\
+ideways Stories \
+from Wayside Sch\
+ool (part 3)\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Is your \
+school just a li\
+ttle too\xe2\x80\xa6 NORM\
+AL?\x5cn\x5cnMaybe you\
+ should go to Wa\
+yside School. Yo\
+u'll meet Bebe, \
+the fastest draw\
+ in art class; J\
+ohn, who only re\
+ads upside down;\
+ and Sammy, the \
+new kid\xe2\x80\x94he's a\
+ real rat. Come \
+on! Hurry up! If\
+ you're late for\
+ class, Mrs. Gor\
+f will turn you \
+into an app\xe2\x80\xa6Oo\
+ps... Sorry abou\
+t that.\x22\x0d\x0a    },\
+\x0d\x0a    \x228a8813ce-\
+0606-40b7-b010-f\
+fa8794eb9ee\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x228a8813ce-0606-\
+40b7-b010-ffa879\
+4eb9ee\x22,\x0d\x0a      \
+  \x22title\x22: \x22Comp\
+tines\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Diverses compti\
+nes pour 1/2 ans\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+a23eb68e-f8d5-40\
+09-8d48-81f18473\
+c5e8\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22a23eb\
+68e-f8d5-4009-8d\
+48-81f18473c5e8\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Au Bout Du \
+Conte - 33 histo\
+ires\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Source : https:/\
+/www.podcastics.\
+com/podcast/au-b\
+out-du-conte/\x5cn0\
+1 Le vieux, l'en\
+vieux et le chie\
+n\x5cn02 Le moineau\
+ \xc3\xa0 langue coupe\
+e\x5cn03 Les musici\
+ens de Br\xc3\xaame\x5cn0\
+4 Le miroir\x5cn05 \
+Le joueur de fif\
+re\x5cn06 Le chat e\
+t la souris\x5cn07 \
+La grenouille et\
+ le prince charm\
+ant\x5cn08 La l\xc3\xa9ge\
+nde de St Nicola\
+s\x5cn09 Momotaro, \
+l'enfant des p\xc3\xaa\
+ches\x5cn10 Le puit\
+s ensorcel\xc3\xa9\x5cn11\
+ Les f\xc3\xa9es lavan\
+di\xc3\xa8res\x5cn12 Moli\
+mbo, le gardien \
+de l'eau\x5cn13 La \
+princesse triste\
+\x5cn14 Le noyau de\
+ datte\x5cn15 Le ch\
+amp du Guinarrou\
+ ou la possibili\
+t\xc3\xa9 du mil\x5cn16 J\
+eannot des haric\
+ots\x5cn17 Le roi e\
+t l'oiseleur\x5cn18\
+ Le jeune homme \
+qui voulait cont\
+er\x5cn19 Le chat e\
+t les deux vieux\
+\x5cn20 Les trois p\
+oules\x5cn21 Le mon\
+treur de marionn\
+ettes\x5cn22 Le roi\
+ grenouille\x5cn23 \
+La vraie fianc\xc3\xa9\
+e\x5cn24 La souris \
+jeune fille\x5cn25 \
+Les oies sauvage\
+s\x5cn26 Chameau...\
+ bosse !\x5cn27 Pou\
+rquoi le l\xc3\xa9opar\
+d a des t\xc3\xa2ches \
+\x5cn28 Un fin vole\
+ur\x5cn29 Les tatou\
+s\x5cn30 Le loup et\
+ le renard\x5cn31 L\
+a queue du renar\
+d\x5cn32 le marchan\
+d de fess\xc3\xa9es\x5cn3\
+3 Le secret des \
+oeufs de P\xc3\xa2ques\
+\x5cn\x5cnCr\xc3\xa9\xc3\xa9 avec \
+SPG (de Jersou) \
+v0.2.7\x22\x0d\x0a    },\x0d\
+\x0a    \x223ecb67bb-a\
+2c8-4ff0-b274-4f\
+90a9236863\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x223ecb67bb-a2c8-4\
+ff0-b274-4f90a92\
+36863\x22,\x0d\x0a       \
+ \x22title\x22: \x22Henri\
+ D\xc3\xa8s raconte\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Henri D\
+\xc3\xa8s raconte, 27 \
+histoires\x22\x0d\x0a    \
+},\x0d\x0a    \x22a7420aa\
+1-133a-4351-b6fd\
+-e2abcc56be0f\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22a7420aa1-133\
+a-4351-b6fd-e2ab\
+cc56be0f\x22,\x0d\x0a    \
+    \x22title\x22: \x22Sa\
+m le Pompier\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Sam le p\
+ompier 10 \xc3\xa9piso\
+de saison 14\x22\x0d\x0a \
+   },\x0d\x0a    \x227613\
+5cb4-548f-4c1c-8\
+bd7-fb7e2cf27416\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2276135cb4-\
+548f-4c1c-8bd7-f\
+b7e2cf27416\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Piccolo, Saxo e\
+t Cie\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Au Royaume de l\
+a Musique, les d\
+iff\xc3\xa9rentes fami\
+lles d'instrumen\
+ts ne se connais\
+sent pas et vive\
+nt s\xc3\xa9par\xc3\xa9es le\
+s unes des autre\
+s...\x22\x0d\x0a    },\x0d\x0a \
+   \x224cbaed53-9b9\
+a-4bb5-ae78-8e38\
+2d21aa33\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x224\
+cbaed53-9b9a-4bb\
+5-ae78-8e382d21a\
+a33\x22,\x0d\x0a        \x22\
+title\x22: \x22Azuro\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x22abd0eb\
+af-ed82-466f-a0b\
+5-32923e70f7b2\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22abd0ebaf-ed\
+82-466f-a0b5-329\
+23e70f7b2\x22,\x0d\x0a   \
+     \x22title\x22: \x22E\
+ncore une histoi\
+re - Les enfants\
+ naufrag\xc3\xa9e (11 \
+episodes et un b\
+onus)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Une histoire \xc3\xa9\
+crite par Benjam\
+in Muller, inter\
+pr\xc3\xa9t\xc3\xa9e par C\xc3\xa9\
+line Kallmann, r\
+\xc3\xa9alisation et m\
+usiques Alexandr\
+e Ferreira, prod\
+uction Benjamin \
+Muller. Avec la \
+participation de\
+ Juliette, Lola \
+et Nicolas Fr\xc3\xa9r\
+et. \x5cn\x5cnEncore u\
+ne histoire est \
+un podcast desti\
+n\xc3\xa9 aux enfants \
+(et \xc3\xa0 ceux qui \
+le sont encore d\
+ans leur t\xc3\xaate) \
+qui aiment qu'on\
+ leur raconte de\
+s histoires.\x5cn\x5cn\
+Chaque semaine, \
+vous retrouverez\
+ ici une histoir\
+e lue, tir\xc3\xa9e d'\
+un livre de litt\
+\xc3\xa9rature jeuness\
+e ou une cr\xc3\xa9ati\
+on originale.\x5cn\x5c\
+nUn podcast prod\
+uit par Benjamin\
+ Muller, interpr\
+\xc3\xa9t\xc3\xa9 par C\xc3\xa9lin\
+e Kallmann et r\xc3\
+\xa9alis\xc3\xa9 par Alex\
+andre Ferreira.\x5c\
+n\x5cnA \xc3\xa9couter av\
+ant de se couche\
+r, allong\xc3\xa9 dans\
+ l'herbe, dans l\
+a voiture ou dan\
+s le train, Enco\
+re une histoire \
+veut mettre en a\
+vant la formidab\
+le cr\xc3\xa9ation lit\
+t\xc3\xa9raire destin\xc3\
+\xa9e aux jeunes le\
+cteurs (et aux m\
+oins jeunes, don\
+c).\x5cn\x5cnVous retr\
+ouverez bien \xc3\xa9v\
+idemment \xc3\xa0 chaq\
+ue fois les r\xc3\xa9f\
+\xc3\xa9rences des liv\
+res lus, si vous\
+ voulez aller pl\
+us loin en vous \
+offrant le livre\
+ en question.\x5cn\x5c\
+nVive la lecture\
+, vive la litt\xc3\xa9\
+rature jeunesse,\
+ vive les histoi\
+res !\x22\x0d\x0a    },\x0d\x0a\
+    \x2218ef5408-29\
+29-4ec0-9714-d77\
+692923d88\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+18ef5408-2929-4e\
+c0-9714-d7769292\
+3d88\x22,\x0d\x0a        \
+\x22title\x22: \x22Racont\
+e-moi une b\xc3\xaatis\
+e - saisons 1, 2\
+, 3 & 4 (46 \xc3\xa9pi\
+sodes)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\xe2\x80\x9cRaconte-moi\
+ une b\xc3\xaatise\xe2\x80\x9d,\
+ le podcast dr\xc3\xb4\
+le et pas sage o\
+\xc3\xb9 des adultes r\
+acontent leur pl\
+us belle b\xc3\xaatise\
+ d\xe2\x80\x99enfance. Pe\
+tits, on a tous \
+fait des b\xc3\xaatise\
+s et les enfants\
+ adorent qu\xe2\x80\x99on\
+ leur raconte. C\
+e podcast leur c\
+huchote \xc3\xa0 l\xe2\x80\x99o\
+reille les m\xc3\xa9sa\
+ventures d\xe2\x80\x99enf\
+ants aujourd\xe2\x80\x99h\
+ui devenus grand\
+s. Un policier, \
+un humoriste, un\
+e ma\xc3\xaetresse d\xe2\x80\
+\x99\xc3\xa9cole, un gara\
+giste, une journ\
+aliste\xe2\x80\xa6 Chacun\
+ se rappelle ave\
+c malice la b\xc3\xaat\
+ise enfantine qu\
+i l\xe2\x80\x99a le plus \
+marqu\xc3\xa9. Un podc\
+ast \xc3\xa0 \xc3\xa9couter \
+en famille avant\
+ le d\xc3\xaener, pend\
+ant le brossage \
+de dents, au mom\
+ent du coucher e\
+t pourquoi pas a\
+u petit-d\xc3\xa9jeune\
+r pour d\xc3\xa9marrer\
+ la journ\xc3\xa9e ave\
+c un sourire !\x5cn\
+\x5cnhttps://www.in\
+itialstudio.fr/p\
+odcast/raconte-m\
+oi-une-betise\x5cn\x5c\
+nSaison 1 \x5cn-Les\
+ p\xc3\xa2tes au grill\
+e-pain\x5cn-Le poil\
+ \xc3\xa0 gratter de N\
+o\xc3\xabl\x5cn-Le lancer\
+ de jouets\x5cn-Le \
+vol de bonbons\x5cn\
+-Les excursions \
+chez les voisins\
+\x5cn-Le barbecue d\
+ans la cabane\x5cn\x5c\
+nSaison 2 \x5cn-Le \
+myst\xc3\xa8re des tar\
+tines disparues\x5c\
+n-L\xe2\x80\x99apprenti c\
+oiffeur\x5cn-Le rad\
+eau prend l\xe2\x80\x99ea\
+u\x5cn-Peinture non\
+-autoris\xc3\xa9e\x5cn-Pe\
+rdue dans la for\
+\xc3\xaat\x5cn-Le mauvais\
+ tour de magie\x5cn\
+-Les petits g\xc3\xa2t\
+eaux de tissu\x5cn-\
+\xc2\xab Crotte alors \
+! \xc2\xbb\x5cn-L'acciden\
+t de luge\x5cn-Les \
+poules pompettes\
+\x5cn-Le caillou da\
+ns le nez\x5cn-Inva\
+sion de crabes a\
+u cin\xc3\xa9ma\x5cn\x5cnSai\
+son 3\x5cn-Attentio\
+n b\xc3\xbbche pi\xc3\xa9g\xc3\xa9\
+e\x5cn-Danger sur l\
+'\xc3\xa9tang gel\xc3\xa9\x5cn-\
+Du stop en slip \
+de bain\x5cn-Grandm\
+a et le coussin \
+p\xc3\xa9teur\x5cn-La cha\
+nson interdite\x5cn\
+-La vraie histoi\
+re du faux ascen\
+seur\x5cn-L'attaque\
+ des boulettes d\
+e papier toilett\
+e\x5cn-Le hamster c\
+landestin\x5cn-Le p\
+etit voleur casq\
+u\xc3\xa9\x5cn-Mission sa\
+pin de No\xc3\xabl\x5cn-L\
+e toit, le p\xc3\xa8re\
+ No\xc3\xabl et moi\x5cn-\
+Y'a le feu au je\
+u !\x5cn\x5cnSaison 4\x5c\
+n-Alex Ramir\xc3\xa8s \
+et les cl\xc3\xa9s bie\
+n cach\xc3\xa9es\x5cn-Ali\
+ce Bela\xc3\xafdi et l\
+a bataille de pe\
+inture\x5cn-Bruno S\
+anches et les fa\
+usses bonnes not\
+es\x5cn-El\xc3\xa9onore C\
+ostes et la p\xc3\xaac\
+he miraculeuse\x5cn\
+-Eric Antoine et\
+ le d\xc3\xaener roman\
+tique\x5cn-Gauvain \
+Sers et le stylo\
+ explosif\x5cn-Joyc\
+e Jonathan et la\
+ teinture blonde\
+\x5cn-Laura Domenge\
+ et les poux en \
+libert\xc3\xa9\x5cn-Mahau\
+t di Sciullo et \
+le plongeon inte\
+rdit\x5cn-Myd et le\
+ graffiti interd\
+it\x5cn-Philippe Ge\
+luck et les col\xc3\
+\xa8res \xc3\xa0 faire tr\
+embler la maison\
+\x5cn-Redouanne Har\
+jane et le guet-\
+apens\x5cn-Rosa Bur\
+sztein et le bij\
+ou de famille\x5cn-\
+Samuel Le Bihan \
+et l'hypnotiseur\
+\x5cn-Thomas VDB et\
+ le kidnapping d\
+es Jedi\x5cn-Trista\
+n Lopin et le bo\
+cal du poisson r\
+ouge\x5cn\x5cnHistoriq\
+ue\x5cnV2: Saisons \
+3&4 (31 \xc3\xa9pisode\
+s) & ajout image\
+s saisons 1&2 by\
+ raidfox\x5cnV1: Sa\
+isons 1&2 (15 \xc3\xa9\
+pisodes) by Gaye\
+l\x22\x0d\x0a    },\x0d\x0a    \
+\x227b851f36-5bce-4\
+f8b-9246-b25a544\
+d90fd\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x227b85\
+1f36-5bce-4f8b-9\
+246-b25a544d90fd\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Disney (20\
+ histoires) par \
+Max187BZH\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\x22\x0d\x0a    },\x0d\x0a\
+    \x22fb5ad03b-2a\
+68-4af9-a2d5-f75\
+33034e51f\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+fb5ad03b-2a68-4a\
+f9-a2d5-f7533034\
+e51f\x22,\x0d\x0a        \
+\x22title\x22: \x22Contes\
+ d'Humahuaca\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22C'est la\
+ f\xc3\xaate \xc3\xa0 Humahu\
+aca et, les soir\
+s de f\xc3\xaate, le p\
+apa de Pablo et \
+Dolor\xc3\xa8s raconte\
+ des histoires. \
+Il raconte le ve\
+nt dans les rose\
+aux du lac Titic\
+aca et l'amiti\xc3\xa9\
+ de l'\xc3\xa2ne Gougo\
+u avec la grenou\
+ille N\xc3\xa9nette ; \
+le courage de la\
+ poule Bianca en\
+ face de SSSik l\
+e serpent et la \
+r\xc3\xa9volte du fact\
+eur Pigeon, part\
+i dans les nuage\
+s avec Kiki le C\
+ondor...\x5cn\x5cnUn l\
+ivre \xc3\xa9crit par \
+un papa voyageur\
+ qui voulait que\
+ ses petits puis\
+sent s'endormir \
+en l'\xc3\xa9coutant, \
+m\xc3\xaame lorsqu'il \
+\xc3\xa9tait loin.\x22\x0d\x0a \
+   },\x0d\x0a    \x224de2\
+c494-ce7b-4405-9\
+593-9dc99df6ff24\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x224de2c494-\
+ce7b-4405-9593-9\
+dc99df6ff24\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Envol\xc3\xa9es Cont\xc3\
+\xa9es\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x223\
+9a7fd44-cf4c-4e9\
+6-b5b2-80522b708\
+3ac\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x2239a7fd\
+44-cf4c-4e96-b5b\
+2-80522b7083ac\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les Aventure\
+s de Tintin (TV)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x229c79\
+dc97-09a1-4c2f-9\
+383-729fb6c22a34\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x229c79dc97-\
+09a1-4c2f-9383-7\
+29fb6c22a34\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Histoires d\
+u Loup (26 histo\
+ires)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Les histoires d\
+e \x5c\x22Loup\x5c\x22 (26 h\
+istoires)\x5cn\x5cn- L\
+e Loup qui aimai\
+t les arbres\x5cn- \
+Le loup qui appr\
+ivoisait ses \xc3\xa9m\
+otions\x5cn- Le Lou\
+p qui avait la t\
+\xc3\xaate dans les \xc3\xa9\
+toiles\x5cn- Le Lou\
+p qui avait perd\
+u sa langue\x5cn- L\
+e Loup qui avait\
+ peur de son omb\
+re\x5cn- Le Loup qu\
+i avait un nouve\
+l ami\x5cn- Le loup\
+ qui cherchait u\
+ne amoureuse\x5cn- \
+Le Loup qui croy\
+ait en ses r\xc3\xaave\
+s\x5cn- Le Loup qui\
+ d\xc3\xa9couvrait le \
+pays des contes\x5c\
+n- Le Loup qui d\
+evenait chef de \
+la fore\xcc\x82t\x5cn- Le\
+ Loup qui enqu\xc3\xaa\
+tait au mus\xc3\xa9e\x5cn\
+- Le Loup qui es\
+caladait les mon\
+tagnes\x5cn- Le Lou\
+p qui explorait \
+Paris\x5cn- Le loup\
+ qui faisait le \
+tour du monde\x5cn-\
+ Le Loup qui f\xc3\xaa\
+tait son anniver\
+saire\x5cn- Le Loup\
+ qui n'aimait pa\
+s lire\x5cn- Le Lou\
+p qui n'aimait p\
+as No\xc3\xabl\x5cn- Le l\
+oup qui ne voula\
+it plus marcher\x5c\
+n- Le Loup qui r\
+\xc3\xaavait d'oc\xc3\xa9an\x5c\
+n- Le loup qui s\
+'aimait beaucoup\
+ trop\x5cn- Le Loup\
+ qui voulait all\
+er a\xcc\x80 l'e\xcc\x81cole\
+\x5cn- Le loup qui \
+voulait changer \
+de couleur\x5cn- Le\
+ Loup qui voulai\
+t e\xcc\x82tre heureux\
+\x5cn- Le loup qui \
+voulait \xc3\xaatre un\
+ artiste\x5cn- Le L\
+oup qui voulait \
+\xc3\xaatre un super-h\
+\xc3\xa9ro\x5cn- Le Loup \
+qui voyageait da\
+ns le temps\x22\x0d\x0a  \
+  },\x0d\x0a    \x22a61f7\
+ad6-69c4-4ece-a8\
+14-6c284592fdaf\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22a61f7ad6-6\
+9c4-4ece-a814-6c\
+284592fdaf\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+L'ogre qui aimai\
+t les champignon\
+s-(conte en 21 \xc3\
+\xa9pisodes) 2022-1\
+2-010\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Dans l'univers \
+des ogres, la vi\
+olence et la via\
+nde sont des inc\
+ontournables. Al\
+ors, quand un je\
+une ogre grandit\
+ en d\xc3\xa9testant t\
+erroriser les ge\
+ns et pr\xc3\xa9f\xc3\xa9ran\
+t d\xc3\xa9vorer les l\
+\xc3\xa9gumes aux peti\
+tes filles, on s\
+e dit que sa vie\
+ risque d'\xc3\xaatre \
+compliqu\xc3\xa9e...\x5cn\
+Sa rencontre ave\
+c Daphn\xc3\xa9, une h\
+umaine dont il d\
+evait se r\xc3\xa9gale\
+r au petit-d\xc3\xa9je\
+uner selon sa m\xc3\
+\xa8re, finit de le\
+ convaincre de m\
+ettre un terme a\
+u r\xc3\xa8gne de terr\
+eur que les ogre\
+s m\xc3\xa8nent sur Te\
+rre. En la sauva\
+nt et en la rame\
+nant \xc3\xa0 sa famil\
+le, il se promet\
+ d'aller voir le\
+ roi des Ogres e\
+t lui donner une\
+ le\xc3\xa7on qu'il n'\
+oubliera pas...\x5c\
+nDe : R\xc3\xa9gis Iva\
+nov, Olivier Coh\
+en, Ensemble Car\
+avage\x5cnDur\xc3\xa9e : \
+59min\x5cnCat\xc3\xa9gori\
+e : R\xc3\xa9cits et c\
+ontes musicaux\x5cn\
+\x5cn01 - Parfois o\
+n ne nait pas la\
+ o\xc3\xb9 on voudrait\
+\x5cn02 - Peik d\xc3\xa8s\
+ sa naissance\x5cn0\
+3 - D\xc3\xa8s que j'e\
+n eus l'\xc3\xa2ge\x5cn04\
+ - Quelques jour\
+s plus tard\x5cn05 \
+- Et il m'enferm\
+a dix jours dans\
+ une grotte\x5cn06 \
+- A peine seul\x5cn\
+07 - Aussit\xc3\xb4t, \
+Daphn\xc3\xa9 pos\xc3\xa9e s\
+ur mon \xc3\xa9paule\x5cn\
+08 - Je ne savai\
+s que r\xc3\xa9pondre\x5c\
+n09 - Comme me l\
+'avait annonc\xc3\xa9 \
+Daphn\xc3\xa9\x5cn10 - Al\
+ors seulement, i\
+l comprit\x5cn11 - \
+Approchez tous, \
+venez voir\x5cn12 -\
+ Lorsqu'il revin\
+t aux abords\x5cn13\
+ - Aussit\xc3\xb4t ren\
+tr\xc3\xa9 dans son pa\
+lais\x5cn14 - Peik,\
+ peik\x5cn15 - Ma p\
+remi\xc3\xa8re mesure\x5c\
+n16 - Un petit o\
+gre qui aiment l\
+es champignons\x5cn\
+17 - Je pr\xc3\xa9f\xc3\xa8r\
+e les haricots\x5cn\
+18 - Par les che\
+veux de la gorgo\
+ne\x5cn19 - Il les \
+soul\xc3\xa8ve par les\
+ pieds\x5cn20 - Cha\
+nte, marmite\x5cn21\
+ - Chanson siffl\
+\xc3\xa9e\x5cn\x5cnSource : \
+https://www.yout\
+ube.com/watch?v=\
+-rT-9Fa-mco&list\
+=OLAK5uy nfrDvvA\
+-5LOsVQij1PSeVlF\
+Lrs-5Sn0uc\x5cn\x22\x0d\x0a \
+   },\x0d\x0a    \x2218f9\
+8ed4-4061-4c5f-b\
+a09-a8ccfc6219f6\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2218f98ed4-\
+4061-4c5f-ba09-a\
+8ccfc6219f6\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les aventures d\
+e Tintin (France\
+ Culture) - 6 al\
+bums\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Les cigares du p\
+haraon\x5cnLe lotus\
+ bleu\x5cnLes 7 bou\
+les de cristal\x5cn\
+Le temple du sol\
+eil\x5cnLe secret d\
+e la licorne\x5cnLe\
+s bijoux de la c\
+astafiore\x5cn\x5cnpar\
+ France Culture,\
+ la Com\xc3\xa9die-Fra\
+n\xc3\xa7aise, l'Orche\
+stre national de\
+ France et Mouli\
+nsart.\x22\x0d\x0a    },\x0d\
+\x0a    \x22cecc353f-0\
+75f-4d22-a47b-61\
+bbae5ba2ae\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22cecc353f-075f-4\
+d22-a47b-61bbae5\
+ba2ae\x22,\x0d\x0a       \
+ \x22title\x22: \x22Beedl\
+e le barde\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22f968cc68-e\
+3e6-498b-a562-3a\
+60d0b79f67\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22f968cc68-e3e6-4\
+98b-a562-3a60d0b\
+79f67\x22,\x0d\x0a       \
+ \x22title\x22: \x22Disne\
+y - Olaf raconte\
+ (6 histoires)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22https:\
+//www.youtube.co\
+m/@RKFANDUB/sear\
+ch?query=disney\x5c\
+n\x5cn1. La petite \
+sir\xc3\xa8ne\x5cn2. Vaia\
+na\x5cn3. Le roi li\
+on\x5cn4. Aladin\x5cn5\
+. Raiponce\x5cn6. L\
+a reine des neig\
+es\x22\x0d\x0a    },\x0d\x0a   \
+ \x222d5d880c-fd81-\
+442a-970c-639dd2\
+74f0a6\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x222d5\
+d880c-fd81-442a-\
+970c-639dd274f0a\
+6\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Petite Ta\
+upe\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x22d\
+29c0a1a-0f30-4bb\
+6-8466-18ca83d69\
+e74\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22d29c0a\
+1a-0f30-4bb6-846\
+6-18ca83d69e74\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les contes d\
+e Lupin\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22R\xc3\xaavant d\xe2\x80\x99\xc3\
+\xaatre comme les h\
+\xc3\xa9ros qu\xe2\x80\x99il ad\
+mire, Lupin va d\
+e conte en conte\
+ pour vivre leur\
+s aventures. Mai\
+s il n\xe2\x80\x99est pas\
+ si facile d\xe2\x80\x99a\
+tteindre le \x5c\x22ha\
+ppy end\x5c\x22 ! Heur\
+eusement, il peu\
+t compter sur l\xe2\
+\x80\x99aide du narrat\
+eur pour apprend\
+re de ses b\xc3\xaatis\
+es.\x22\x0d\x0a    },\x0d\x0a  \
+  \x2294710bbe-14d9\
+-47dc-a1b7-ebd79\
+4c3aecf\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2294\
+710bbe-14d9-47dc\
+-a1b7-ebd794c3ae\
+cf\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les fabl\
+es de La Fontain\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x22CD \
+offert par l'ass\
+ociation Valenti\
+n HA\xc3\x9cY & ses b\xc3\
+\xa9n\xc3\xa9voles (asso \
+au service des a\
+veugles & malvoy\
+ants)\x5cnCompilati\
+on 18 titres des\
+ Fables de la FO\
+NTAINE\x5cnTextes d\
+its par S\xc3\xa9gol\xc3\xa8\
+ne Bou\xc3\xabt & Dani\
+el Chevalier\x5cnAs\
+sociation Valent\
+in Ha\xc3\xbcy - avh.a\
+sso.fr\x22\x0d\x0a    },\x0d\
+\x0a    \x22fab11663-9\
+d04-4aff-8dd3-f1\
+a0141ca39b\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22fab11663-9d04-4\
+aff-8dd3-f1a0141\
+ca39b\x22,\x0d\x0a       \
+ \x22title\x22: \x22Multi\
+malin - Les tabl\
+es de multiplica\
+tion\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+M\xc3\xa9thode Multima\
+lin pour apprend\
+re les multiplic\
+ation par des im\
+ages mentales.\x5cn\
+Inspir\xc3\xa9e des te\
+chniques mentale\
+s des champions \
+de m\xc3\xa9morisation\
+, les m\xc3\xa9thodes \
+Multimalin propo\
+sent des strat\xc3\xa9\
+gies de m\xc3\xa9moris\
+ation innovantes\
+ imagin\xc3\xa9es par \
+Matthieu Protin,\
+ un ancien profe\
+sseur des \xc3\xa9cole\
+s.\x5cnLa m\xc3\xa9morisa\
+tion se fait gr\xc3\
+\xa2ce \xc3\xa0 des histo\
+ires amusantes d\
+ont les h\xc3\xa9ros o\
+nt la forme des \
+chiffres. Gr\xc3\xa2ce\
+ \xc3\xa0 leurs images\
+ mentales, les e\
+nfants seront \xc3\xa9\
+merveill\xc3\xa9s de r\
+\xc3\xa9ussir toutes l\
+eurs \xc3\xa9valuation\
+s.\x22\x0d\x0a    },\x0d\x0a   \
+ \x22416b2892-1cc0-\
+40dc-956a-650d13\
+4f7ded\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22416\
+b2892-1cc0-40dc-\
+956a-650d134f7de\
+d\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22J'aime Li\
+re Vol. 06\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Ca va bard\
+er\x5cnChacun son t\
+our\x5cnJe Suis Un \
+Extraterrestre !\
+\x5cnJean et le mon\
+stre de la caver\
+ne\x5cnLa col\xc3\xa8re d\
+'Elrik\x5cnLa rentr\
+ee des jumeaux p\
+irates\x5cnLe No\xc3\xabl\
+ des trop-curieu\
+x\x5cnLe Voleur De \
+D\xc3\xa9serts\x5cnMes de\
+nts mes copains \
+et moi\x5cnO\xc3\xb9 es-t\
+u petit fantome\x22\
+\x0d\x0a    },\x0d\x0a    \x22e\
+cda90af-910f-4c7\
+e-8049-559582cbb\
+451\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22ecda90\
+af-910f-4c7e-804\
+9-559582cbb451\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Auzou Dis-mo\
+i Loup (78 histo\
+ires) 2023-07-09\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Il \xc3\
+\xa9tait une fois, \
+un Loup, qui se \
+posait des quest\
+ions.\x5cn\x5cnTh\xc3\xa8mes\
+ abord\xc3\xa9s :\x5cn01 \
+- L'e\xcc\x81cologie, \
+c'est quoi ? (7 \
+histoires)\x5cn02 -\
+ Les e\xcc\x81motions,\
+ c\xcc\xa7a sert a\xcc\x80 q\
+uoi ? (10 histoi\
+res)\x5cn03 - L'art\
+, c'est quoi ? (\
+11 histoires)\x5cn0\
+4 - Paris, c'est\
+ comment ? (10 h\
+istoires)\x5cn05 - \
+Les traditions d\
+ans le monde, co\
+mment c\xcc\xa7a se fe\
+\xcc\x82te ? (10 histo\
+ires)\x5cn06 - Avan\
+t nous, c'e\xcc\x81tai\
+t comment ? (10 \
+histoires)\x5cn07 -\
+ Une expression,\
+ c'est quoi ? (1\
+0 histoires)\x5cn08\
+ - Au temps des \
+dinosaures, c'e\xcc\
+\x81tait comment ? \
+(10 histoires)\x5cn\
+\x5cnhttps://music.\
+youtube.com/chan\
+nel/UCs52Rj76FcY\
+e33SbRtFS1zQ\x22\x0d\x0a \
+   },\x0d\x0a    \x22d22f\
+f7e5-b7bb-4ffe-a\
+7cf-e985cffd6178\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22d22ff7e5-\
+b7bb-4ffe-a7cf-e\
+985cffd6178\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Keeku - Chevali\
+ers et dragons\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22S\xc3\xa9lec\
+tion d'histoires\
+ https://keeku.c\
+o - Chevaliers e\
+t dragons\x22\x0d\x0a    \
+},\x0d\x0a    \x22c80974f\
+1-4097-4dc2-a580\
+-f9fc290f76ca\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22c80974f1-409\
+7-4dc2-a580-f9fc\
+290f76ca\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+ facteur de l'es\
+pace\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+9193ce1a-eed5-45\
+e7-b2dc-478e59e2\
+53a5\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x229193c\
+e1a-eed5-45e7-b2\
+dc-478e59e253a5\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Marl\xc3\xa8ne Jo\
+bert raconte (65\
+ histoires) by J\
+eSuisUneFoug\xc3\xa8re\
+ 27-11-22\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x2265 histoire\
+s lues par Marl\xc3\
+\xa8ne Jobert, r\xc3\xa9p\
+arties en 5 th\xc3\xa8\
+mes. https://www\
+.glenat.com/les-\
+univers-de-marle\
+ne-jobert/collec\
+tions/marlene-jo\
+bert-raconte\x22\x0d\x0a \
+   },\x0d\x0a    \x2207b4\
+22a2-da01-4701-9\
+11d-7f2480cc5e8f\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2207b422a2-\
+da01-4701-911d-7\
+f2480cc5e8f\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Louis de Fun\xc3\xa8s\
+ (Fable de La Fo\
+ntaine)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x221b35ea12-2ace\
+-4eec-b9e0-06946\
+1d222cf\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x221b\
+35ea12-2ace-4eec\
+-b9e0-069461d222\
+cf\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Leon Acc\
+ordeon (11 parti\
+es) by Frigobox \
+Man\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+\xc3\xa9on accord\xc3\xa9on \
+voudrait rencont\
+rer d\xe2\x80\x99autres i\
+nstruments qui, \
+comme lui, utili\
+sent le vent pou\
+r faire de la mu\
+sique.\x5cn\x5cnSa qu\xc3\
+\xaate l\xe2\x80\x99am\xc3\xa8nera\
+ \xc3\xa0 rencontrer d\
+es instruments p\
+lus cocasses les\
+ uns que les aut\
+res\xe2\x80\x89: une peti\
+te harpe qui a p\
+erdu une corde, \
+un luth bless\xc3\xa9,\
+ une vielle \xc3\xa0 r\
+oue qui perd la \
+boule, des fl\xc3\xbbt\
+es volantes et d\
+es cornemuses so\
+ldates.\x5cnMais au\
+ssi un lutin lut\
+hier et les mal\xc3\
+\xa9fiques termites\
+ mangeurs de boi\
+s.\x5cn\x5cnUn Livre-C\
+D cr\xc3\xa9\xc3\xa9 par Yve\
+s Barbieux (Les \
+D\xc3\xa9m\xc3\xa9nageurs, U\
+rban Trad...) po\
+ur les enfants d\
+e 3 \xc3\xa0 8 ans, de\
+stin\xc3\xa9 \xc3\xa0 d\xc3\xa9cou\
+vrir les instrum\
+ents de la musiq\
+ue traditionnell\
+e.\x5cnLe livre : u\
+n format carr\xc3\xa9 \
+de 20X20 cm est \
+magnifiquement i\
+llustr\xc3\xa9 par Yve\
+s Dumont. \x5cnLe c\
+d contient l'his\
+toire de L\xc3\xa9on A\
+ccord\xc3\xa9on, racon\
+t\xc3\xa9e par Eric De\
+ Staercke, des a\
+mbiances sonores\
+ et une dizaine \
+de chansons : +-\
+70 minutes\x5cn\x5cnLe\
+ format de ce pa\
+ck a \xc3\xa9t\xc3\xa9 adapt\
+\xc3\xa9 en 11 parties\
+.\x5cn \x5cnhttps://ww\
+w.kerditions.eu/\
+librairie/double\
+-jeu/leon-accord\
+eon/\x22\x0d\x0a    },\x0d\x0a \
+   \x226336f524-329\
+b-4fe6-bb79-f4b0\
+5b17c1bd\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x226\
+336f524-329b-4fe\
+6-bb79-f4b05b17c\
+1bd\x22,\x0d\x0a        \x22\
+title\x22: \x22Les R\xc3\xa9\
+cr\xc3\xa9s du petit N\
+icolas\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Les R\xc3\xa9cr\xc3\xa9s d\
+u petit Nicolas,\
+ lu par Benoit P\
+oelvoorde\x22\x0d\x0a    \
+},\x0d\x0a    \x22af1809c\
+2-5ef9-4803-8d29\
+-fc3490616f94\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22af1809c2-5ef\
+9-4803-8d29-fc34\
+90616f94\x22,\x0d\x0a    \
+    \x22title\x22: \x22Gr\
+and loup et peti\
+t loup\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x223 histoires : \
+Grand loup et pe\
+tit loup, La pet\
+ite feuille qui \
+ne tombait pas, \
+Une si belle ora\
+nge, de Nadine B\
+run-Cosme. Envir\
+on 10 mn chaque \
+histoire\x22\x0d\x0a    }\
+,\x0d\x0a    \x220c76ec79\
+-d700-40ac-94c6-\
+e42ea16834e2\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x220c76ec79-d700\
+-40ac-94c6-e42ea\
+16834e2\x22,\x0d\x0a     \
+   \x22title\x22: \x22L'e\
+ffet Panda pour \
+sauver la planet\
+e (Saison 1&2)\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22V3: Sa\
+ison 2 compl\xc3\xa8te\
+ (10 \xc3\xa9pisodes)\x5c\
+nV2: Saison 1 co\
+mpl\xc3\xa8te (9 \xc3\xa9pis\
+odes)\x5cnV1: 7 \xc3\xa9p\
+isodes\x5cn\x5cnL'Effe\
+t Panda : un pod\
+cast pour sensib\
+iliser \xc3\xa0 la sau\
+vegarde de la pl\
+an\xc3\xa8te. Une s\xc3\xa9r\
+ie de podcasts i\
+n\xc3\xa9dite qui plon\
+ge l\xe2\x80\x99auditeur \
+au c\xc5\x93ur des mis\
+sions men\xc3\xa9es pa\
+r l\xe2\x80\x99associatio\
+n WWF, pour les \
+enfants et les p\
+lus grands. De l\
+'\xc3\xa9vasion, de la\
+ p\xc3\xa9dagogie et d\
+e la d\xc3\xa9couverte\
+ !\x5cn\x5cnSaison 1 \x5c\
+n01 \xc3\x80 la rencon\
+tre du jaguar en\
+ Guyane\x5cn02 \xc3\x89tu\
+dier le dauphin \
+de Guyane pour m\
+ieux le prot\xc3\xa9ge\
+r\x5cn03 Les innova\
+tions au service\
+ de la protectio\
+n des oc\xc3\xa9ans\x5cn0\
+4 Le bateau Blue\
+ Panda et la mob\
+ilisation citoye\
+nne\x5cn05 Prot\xc3\xa9ge\
+r les for\xc3\xaats em\
+bl\xc3\xa9matiques de \
+Nouvelle-Cal\xc3\xa9do\
+nie\x5cn06 Restaure\
+r les for\xc3\xaats vi\
+vantes au Mexiqu\
+e\x5cn07 La cha\xc3\xaene\
+ des Alpes et le\
+s activit\xc3\xa9s hum\
+aines\x5cn08 Les fe\
+mmes solaires de\
+ Madagascar\x5cn09 \
+Au c\xc5\x93ur des oc\xc3\
+\xa9ans avec Isabel\
+le Autissier\x5cn\x5cn\
+Saison 2 \x5cn01 Ea\
+rth Hour, un \xc3\xa9v\
+\xc3\xa9nement plan\xc3\xa9t\
+aire\x5cn02 Prot\xc3\xa9g\
+er les tortues d\
+e Guyane\x5cn03 Au \
+coeur du Parc na\
+tional du Rwenzo\
+ri\x5cn04 Pr\xc3\xa9serve\
+r les mangroves \
+de Madagascar\x5cn0\
+5 La R\xc3\xa9serve Na\
+turelle de Ch\xc3\xa9r\
+ine\x5cn06 Lutter c\
+ontre les engins\
+ de p\xc3\xaache fant\xc3\
+\xb4mes\x5cn07 Le chan\
+gement climatiqu\
+e au Maroc et en\
+ Tunisie\x5cn08 L'a\
+griculture r\xc3\xa9g\xc3\
+\xa9n\xc3\xa9ratrice\x5cn09 \
+Lutter contre la\
+ cybercriminalit\
+\xc3\xa9\x5cn10 Les potag\
+ers scolaires\x22\x0d\x0a\
+    },\x0d\x0a    \x227cf\
+0aa0d-07a4-45fa-\
+96c2-f2e213d3b2d\
+4\x22: {\x0d\x0a        \x22\
+uuid\x22: \x227cf0aa0d\
+-07a4-45fa-96c2-\
+f2e213d3b2d4\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Tom Tom et Nan\
+a - Partie 1\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Histoire\
+ de tom tom et N\
+ana\x22\x0d\x0a    },\x0d\x0a  \
+  \x222c83e1ee-5621\
+-4643-a0fe-c41cc\
+43d6d6b\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x222c\
+83e1ee-5621-4643\
+-a0fe-c41cc43d6d\
+6b\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les Aven\
+tures de Tintin \
+- Le Temple du S\
+oleil\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Le temple du so\
+leil\x5cnpar France\
+ Culture, la Com\
+\xc3\xa9die-Fran\xc3\xa7aise\
+, l'Orchestre na\
+tional de France\
+ et Moulinsart.\x22\
+\x0d\x0a    },\x0d\x0a    \x223\
+bce1365-c4a8-42e\
+5-9e25-f6dd32bef\
+4ca\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x223bce13\
+65-c4a8-42e5-9e2\
+5-f6dd32bef4ca\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les Podcasts\
+ d'Auden\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22\x22\x0d\x0a    },\x0d\x0a \
+   \x227858da1f-4ab\
+0-45e2-a2eb-bb1d\
+b6974b11\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x227\
+858da1f-4ab0-45e\
+2-a2eb-bb1db6974\
+b11\x22,\x0d\x0a        \x22\
+title\x22: \x22Les ave\
+ntures de Rodolp\
+he et Gala saiso\
+n 8 (10 episodes\
+ et HS)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Les aventures\
+ de Rodolphe et \
+Gala, saison 8\x5cn\
+10 \xc3\xa9pisodes + 3\
+ hors s\xc3\xa9rie\x22\x0d\x0a \
+   },\x0d\x0a    \x226721\
+020e-2a7d-4bba-b\
+b9d-3acb5fd8acd9\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x226721020e-\
+2a7d-4bba-bb9d-3\
+acb5fd8acd9\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les contes de l\
+a rue Broca\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22\x22\x0d\x0a    },\
+\x0d\x0a    \x22eee5fbf4-\
+5120-42d1-8a65-6\
+acb78f60a19\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22eee5fbf4-5120-\
+42d1-8a65-6acb78\
+f60a19\x22,\x0d\x0a      \
+  \x22title\x22: \x22Auzo\
+u - Dans les ore\
+illes de P'tit L\
+oup (5 th\xc3\xa8mes)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Ouvre\
+z grand vos p'ti\
+tes oreilles !\x5cn\
+\x5cnAvec plusieurs\
+ th\xc3\xa8mes :\x5cn- A \
+l'e\xcc\x81coute de la\
+ fore\xcc\x82t\x5cn- En b\
+alade dans la vi\
+lle\x5cn- A\xcc\x80 la de\
+\xcc\x81couverte de l'\
+e\xcc\x81cole de musiq\
+ue\x5cn- Une journe\
+\xcc\x81e a\xcc\x80 la ferme\
+\x5cn- Un air de va\
+cances\x22\x0d\x0a    },\x0d\
+\x0a    \x22d4d72ab1-c\
+5eb-46bc-8022-ad\
+0d96e5f1b7\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22d4d72ab1-c5eb-4\
+6bc-8022-ad0d96e\
+5f1b7\x22,\x0d\x0a       \
+ \x22title\x22: \x22McDo \
+- En avant la mu\
+sique\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22De belles histo\
+ires sur les ins\
+truments de musi\
+que\x22\x0d\x0a    },\x0d\x0a  \
+  \x2216a0e055-a78b\
+-4042-aa72-6ee7d\
+cc0ddaf\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2216\
+a0e055-a78b-4042\
+-aa72-6ee7dcc0dd\
+af\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Le Monde\
+ d'Henri D\xc3\xa8s Vo\
+lume 4\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Volume 16: \x5c\x22O\
+h\xc3\xa9 le bateau\x5c\x22,\
+ et, \x5c\x22Vagues va\
+guelettes\x5c\x22\x5cnVol\
+ume 17: \x5c\x22La pet\
+ite Charlotte\x5c\x22,\
+ et, \x5c\x22Zingla\xc3\xafr\
+o\x5c\x22\x5cnVolume 18: \
+\x5c\x22Tous les chats\
+ sont gris\x5c\x22 et \
+\x5c\x22Mes chats\x5c\x22\x5cnV\
+olume 19: \x5c\x22Le t\
+\xc3\xa9l\xc3\xa9phone\x5c\x22 et \
+\x5c\x22Tr\xc3\xa8s gentil t\
+out l'monde\x5c\x22\x5cnV\
+olume 20: \x5c\x22Mon \
+ami le poisson\x5c\x22\
+ et \x5c\x22Y'a y'a un\
+ poisson\x5c\x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x2274188d\
+9d-a395-4624-a4b\
+a-607ffac0f5a0\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2274188d9d-a3\
+95-4624-a4ba-607\
+ffac0f5a0\x22,\x0d\x0a   \
+     \x22title\x22: \x22I\
+l etait une fois\
+ la vie\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22\x22\x0d\x0a    },\x0d\x0a  \
+  \x2232a61e1d-264e\
+-472c-8417-0790b\
+074f123\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2232\
+a61e1d-264e-472c\
+-8417-0790b074f1\
+23\x22,\x0d\x0a        \x22t\
+itle\x22: \x22France C\
+ulture A la bell\
+e etoile (12 epi\
+sodes)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22France Culture\
+ lance sa premi\xc3\
+\xa8re collection \xe2\
+\x80\x9csavoirs\xe2\x80\x9d d\xc3\xa9\
+di\xc3\xa9e \xc3\xa0 la jeun\
+esse. Rep\xc3\xa9rez l\
+es constellation\
+s et voyagez dan\
+s l'espace avec \
+Chlo\xc3\xa9, sa grand\
+-m\xc3\xa8re un peu so\
+rci\xc3\xa8re et l'ast\
+rophysicienne Fr\
+an\xc3\xa7oise Combes.\
+ Un voyage initi\
+atique en 12 nui\
+ts, \xc3\xa0 \xc3\xa9couter \
+en famille d\xc3\xa8s \
+8 ans.\x22\x0d\x0a    },\x0d\
+\x0a    \x2247c4b2ef-e\
+296-45af-a28d-52\
+a484ca96c8\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2247c4b2ef-e296-4\
+5af-a28d-52a484c\
+a96c8\x22,\x0d\x0a       \
+ \x22title\x22: \x22J'aim\
+e Lire Vol. 03\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22A toi \
+de jouer Gutuk\x5cn\
+En garde fine la\
+me\x5cnLa baguette \
+de nuit noire\x5cnL\
+a renarde et le \
+chevalier\x5cnLa So\
+rciere Du TGV\x5cnL\
+a soupe de Pere \
+Noel\x5cnLe baiser \
+du dragon\x5cnLes c\
+omp\xc3\xa8res de No\xc3\xab\
+l\x5cnPi\xc3\xa8ge \xc3\xa0 gro\
+s chmar\x5cnSam Cha\
+touille S'embrou\
+ille\x22\x0d\x0a    },\x0d\x0a \
+   \x228110b268-36e\
+b-45a5-a07c-53c8\
+715f69a7\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+110b268-36eb-45a\
+5-a07c-53c8715f6\
+9a7\x22,\x0d\x0a        \x22\
+title\x22: \x22Le loup\
+ dans tous ses \xc3\
+\xa9tats\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22\x22\x0d\x0a    },\x0d\x0a    \
+\x221f78c513-3ff2-4\
+d5d-b960-26ffa96\
+821bf\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x221f78\
+c513-3ff2-4d5d-b\
+960-26ffa96821bf\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Jean-Pierr\
+e Vernant : Une \
+histoire d'Ulyss\
+e pour les enfan\
+ts\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Da\
+ns le nouveau th\
+\xc3\xa9\xc3\xa2tre de Montr\
+euil, en 2001, J\
+ean-Pierre Verna\
+nt racontait l\xe2\x80\
+\x99histoire d'Ulys\
+se \xc3\xa0 un public \
+d'enfants.\x5cn\x5cnDa\
+ns l'\xc3\xa9mission \x5c\
+\x22Histoire d'\xc3\xa9co\
+utes\x5c\x22, Jean-Pie\
+rre Vernant raco\
+ntait l\xe2\x80\x99histoi\
+re d'Ulysse \xc3\xa0 d\
+es enfants, un e\
+nregistrement de\
+ 2001. Cette con\
+f\xc3\xa9rence avait, \
+en effet, \xc3\xa9t\xc3\xa9 \
+enregistr\xc3\xa9e \xc3\xa0 \
+titre exceptionn\
+el, \xc3\xa0 l'occasio\
+n de la s\xc3\xa9ance \
+inaugurale des p\
+etites conf\xc3\xa9ren\
+ces \x5c\x22Lumi\xc3\xa8re p\
+our enfants\x5c\x22, a\
+u Centre Nationa\
+l Dramatique de \
+Montreuil. Jean-\
+Pierre Vernant r\
+acontait, tel un\
+ grand-p\xc3\xa8re, le\
+s histoires des \
+h\xc3\xa9ros et des Di\
+eux du fond des \
+\xc3\xa2ges, fondateur\
+s de l\xe2\x80\x99imagina\
+ire de notre civ\
+ilisation.\x5cnProd\
+uction : Blandin\
+e Masson\x5cnHistoi\
+re   d'\xc3\xa9coutes \
+- La Gr\xc3\xa8ce : Un\
+e histoire d'Uly\
+sse 1/2 (1\xc3\xa8re d\
+iffusion :   04/\
+05/2002)\x5cnIndexa\
+tion web : Sandr\
+ine England, doc\
+umentation de Ra\
+dio France\x22\x0d\x0a   \
+ },\x0d\x0a    \x2258c7b6\
+c4-a75c-44fe-a9a\
+5-43405eeefec7\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2258c7b6c4-a7\
+5c-44fe-a9a5-434\
+05eeefec7\x22,\x0d\x0a   \
+     \x22title\x22: \x22S\
+ouffleur de reve\
+s - Arthur et Pa\
+pilou -  Les sec\
+rets de l'eau\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Arthur,\
+ 5 ans, passe se\
+s vacances chez \
+Papilou et Mamou\
+chka o\xc3\xb9 il fait\
+ toujours tout u\
+n tas de d\xc3\xa9couv\
+ertes ! Et cette\
+ fois-ci, il va \
+faire une dr\xc3\xb4le\
+ de rencontre qu\
+i va lui apprend\
+re plein de chos\
+es sur ce que l'\
+on appelle le cy\
+cle de l'eau... \
+Tu veux en savoi\
+r plus ? Alors, \
+vite, \xc3\xa9coute ce\
+tte s\xc3\xa9rie-\xc3\xa9v\xc3\xa9\
+nement !\x22\x0d\x0a    }\
+,\x0d\x0a    \x228583fb07\
+-cf08-4be8-ac3a-\
+d20e30d84b38\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x228583fb07-cf08\
+-4be8-ac3a-d20e3\
+0d84b38\x22,\x0d\x0a     \
+   \x22title\x22: \x22Fra\
+nce Inter - Hist\
+oires d'animaux \
+- La faune afric\
+aine (9 histoire\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x22\x0d\
+\x0a    },\x0d\x0a    \x2298\
+e95ff4-e02b-4d90\
+-abef-9731f8a609\
+6f\x22: {\x0d\x0a        \
+\x22uuid\x22: \x2298e95ff\
+4-e02b-4d90-abef\
+-9731f8a6096f\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Bestioles Pac\
+k2022-V3 (30 his\
+toires)\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x2230 histoires \
+du podcast Besti\
+oles de France I\
+nter (Janvier \xc3\xa0\
+ Octobre 2022)\x22\x0d\
+\x0a    },\x0d\x0a    \x2227\
+4c26c0-da31-490b\
+-8253-00590e179f\
+43\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22274c26c\
+0-da31-490b-8253\
+-00590e179f43\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22La bande \xc3\xa0 B\
+lou\x22,\x0d\x0a        \x22\
+description\x22: \x22L\
+a Bande \xc3\xa0 Blou\x5c\
+n\x5cnBienvenue dan\
+s l\xe2\x80\x99univers de\
+ La Bande \xc3\xa0 Blo\
+u !\x5cnBlou est un\
+ petit koala ble\
+u gentil et mali\
+cieux et comme t\
+oi il d\xc3\xa9couvre \
+la vie \xc3\xa0 l\xe2\x80\x99\xc3\xa9\
+cole maternelle \
+avec tous ses am\
+is, sans oublier\
+ Gilou le ma\xc3\xaetr\
+e kangourou ! En\
+semble, chaque j\
+our ils vivent d\
+es nouvelles ave\
+ntures ! La Band\
+e \xc3\xa0 Blou est un\
+ podcast produit\
+ par Unique Heri\
+tage Media et Ab\
+ricot, le magazi\
+ne des ann\xc3\xa9es m\
+aternelles.\x5cn\x5cn\xc2\
+\xa9 Unique Heritag\
+e Media / La Mai\
+son du Podcast\x5cn\
+https://shows.ac\
+ast.com/la-bande\
+-a-blou\x5cnhttps:/\
+/www.fleuruspres\
+se.com/titre/abr\
+icot\x5cn\x5cnCet albu\
+m contient les 3\
+0 premiers \xc3\xa9pis\
+odes.\x5cn\x5cnPack g\xc3\
+\xa9n\xc3\xa9r\xc3\xa9 avec stu\
+dio-pack-generat\
+or-v0.2.9-x86 64\
+-windows.\x22\x0d\x0a    \
+},\x0d\x0a    \x22aac7b56\
+e-08cc-4020-813f\
+-7de724cde8a0\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22aac7b56e-08c\
+c-4020-813f-7de7\
+24cde8a0\x22,\x0d\x0a    \
+    \x22title\x22: \x22Le\
+s pyjamasques\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x228 histo\
+ires des Pyjamas\
+ques\x22\x0d\x0a    },\x0d\x0a \
+   \x228a83b0b6-a64\
+8-48ca-b11f-38ff\
+93c284f9\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+a83b0b6-a648-48c\
+a-b11f-38ff93c28\
+4f9\x22,\x0d\x0a        \x22\
+title\x22: \x22Mes p't\
+its docs \xc3\xa0 \xc3\xa9co\
+uter\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+e8932699-e378-4a\
+06-aef8-56540e94\
+a0c9\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22e8932\
+699-e378-4a06-ae\
+f8-56540e94a0c9\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les Vacance\
+s du Petit Nicol\
+as\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Lu\
+ par Beno\xc3\xaet Poe\
+lvoorde\x5cn\x5cnLa pl\
+age, c'est choue\
+tte ! En famille\
+ ou en colonie d\
+e vacances, on y\
+ trouve une mult\
+itude de copains\
+. D'abord, il y \
+a eu l'h\xc3\xb4tel Be\
+au-Rivage, \xc3\xa0 Ba\
+in-les-Mers, et \
+les nouveaux cop\
+ains : Blaise, F\
+ructueux, Mamert\
+, Ir\xc3\xa9n\xc3\xa9e, Fabr\
+ice et C\xc3\xb4me. Pu\
+is un essai manq\
+u\xc3\xa9 de germinati\
+on de haricot av\
+ant de repartir \
+avec la colonie \
+du Camp Bleu o\xc3\xb9\
+ l'on s'amuse dr\
+\xc3\xb4lement. Le soi\
+r ou les jours d\
+e pluie, on \xc3\xa9cr\
+it des lettres \xc3\
+\xa0 nos papas, \xc3\xa0 \
+nos mamans, \xc3\xa0 M\
+arie-Edwige. Et \
+c'est terrible, \
+quand on a peur,\
+ pendant les jeu\
+x de nuit... \x22\x0d\x0a\
+    },\x0d\x0a    \x22dee\
+394f7-4c1a-4cbb-\
+ac3d-5eac5a443be\
+8\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22dee394f7\
+-4c1a-4cbb-ac3d-\
+5eac5a443be8\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Petite Salaman\
+dre\x22,\x0d\x0a        \x22\
+description\x22: \x22\x22\
+\x0d\x0a    },\x0d\x0a    \x221\
+a0dc541-5679-40d\
+f-8d79-cdfc45ed7\
+7db\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x221a0dc5\
+41-5679-40df-8d7\
+9-cdfc45ed77db\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22L'\xc3\xa9cole des\
+ loisirs 2022 20\
+23\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Pl\
+usieurs histoire\
+s de l'\xc3\xa9cole de\
+s loisirs (\xc3\xa9dit\
+ion 2022-2023)\x22\x0d\
+\x0a    },\x0d\x0a    \x226b\
+65ae1e-3972-4a32\
+-a148-f14396f7e4\
+7f\x22: {\x0d\x0a        \
+\x22uuid\x22: \x226b65ae1\
+e-3972-4a32-a148\
+-f14396f7e47f\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Dorothee Et L\
+es R\xc3\xa9cr\xc3\xa9amis -\
+ Sur Le Pont d'A\
+vignon\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Chansons et co\
+mptines pour enf\
+ants\x5cnListe des \
+chansons : \x5cn1 A\
+lain Et Les R\xc3\xa9c\
+r\xc3\xa9amis \xe2\x80\x93 C'Es\
+t La M\xc3\xa8re Miche\
+l1:36\x5cn2 Doroth\xc3\
+\xa9e \xe2\x80\x93 Au Clair \
+De La Lune 1:45\x5c\
+n3 Isabelle Et D\
+oroth\xc3\xa9e \xe2\x80\x93 Meu\
+nier, Tu Dors 2:\
+10\x5cn4 Ariane, Do\
+roth\xc3\xa9e, Isabell\
+e Et Zabou \xe2\x80\x93 C\
+adet Rousselle\x5ct\
+ 2:00\x5cn5 Alain \xe2\
+\x80\x93 La Bonne Aven\
+ture, Oh ! Gai 1\
+:22\x5cn6 Zabou \xe2\x80\x93\
+ B\xc3\xa9b\xc3\xa9 Lune 2:1\
+1\x5cn7 Isabelle Et\
+ Les R\xc3\xa9cr\xc3\xa9amis\
+ \xe2\x80\x93 Sur Le Pont\
+ D'Avignon 1:30\x5c\
+n8 Doroth\xc3\xa9e \xe2\x80\x93\
+ Se Canto, Qu'Il\
+ Chante 2:02\x5cn9 \
+Doroth\xc3\xa9e & Les \
+R\xc3\xa9cr\xc3\xa9amis, Ari\
+ane, Zabou \xe2\x80\x93 N\
+ous N'Irons Plus\
+ Au Bois 1:39\x5cn1\
+0 Ariane & Les R\
+\xc3\xa9cr\xc3\xa9amis \xe2\x80\x93 A\
+h ! Les Crocodil\
+es 1:50\x5cn11 Doro\
+th\xc3\xa9e \xe2\x80\x93 Comp\xc3\xa8\
+re Guilleri 1:54\
+\x5cn12 Les R\xc3\xa9cr\xc3\xa9\
+amis \xe2\x80\x93 Dame Ta\
+rtine 1:07\x5cn13 D\
+oroth\xc3\xa9e & Les R\
+\xc3\xa9cr\xc3\xa9amis \xe2\x80\x93 L\
+a Ch\xc3\xa8vre 1:55\x5cn\
+14 Pierre Et Dor\
+oth\xc3\xa9e \xe2\x80\x93 Aupr\xc3\
+\xa8s De Ma Blonde\x5c\
+t2:06\x5cnhttps://w\
+ww.discogs.com/f\
+r/release/162655\
+6-Doroth%C3%A9e-\
+Les-R%C3%A9cr%C3\
+%A9amis-Sur-Le-P\
+ont-DAvignon\x22\x0d\x0a \
+   },\x0d\x0a    \x22632a\
+0b53-8e6b-4795-a\
+77a-4ca4b5d135db\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22632a0b53-\
+8e6b-4795-a77a-4\
+ca4b5d135db\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Anatole Latuile\
+ - Tome 4 - Reco\
+rd battu\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x2214 aventures\
+ hilarantes d'An\
+atole Latuile, u\
+n h\xc3\xa9ros J'aime \
+lire !\x5cnGarder v\
+ingt heures une \
+cacahouette sur \
+la t\xc3\xaate, rattra\
+per le prince Ha\
+rry sur une pist\
+e de ski, pulv\xc3\xa9\
+riser le chat de\
+ la voisine au t\
+ranslucidator ou\
+ traverser le mu\
+r du son avec un\
+ radiateur \xc3\xa0 ro\
+ulettes... \x5cnAna\
+tole est d\xc3\xa9cid\xc3\
+\xa9ment pr\xc3\xaat \xc3\xa0 r\
+elever tous les \
+d\xc3\xa9fis !\x5cn\x5cnAu s\
+ommaire : \x5cn- Le\
+ drakkar de la m\
+ort \x5cn- Badcat \x5c\
+n- Les vacances \
+en Espagne \x5cn- L\
+es vacances en E\
+spagne, la suite\
+ \x5cn- Op\xc3\xa9ration \
+explosion \x5cn- Le\
+ num\xc3\xa9ro de magi\
+e \x5cn- Halloween \
+\x5cn- La classe de\
+ neige \x5cn- Missi\
+on M. \x5cn- Badcat\
+, le retour \x5cn- \
+La truc-mobile \x5c\
+n- Le record du \
+monde \x5cn- Startr\
+uc tombe \xc3\xa0 pic \
+\x5cn- Le gaffethon\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+453a0b58-52d4-49\
+f0-8859-1396db8d\
+7b6d\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22453a0\
+b58-52d4-49f0-88\
+59-1396db8d7b6d\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Les histoir\
+es de la bibliot\
+h\xc3\xa8que\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x2224 histoires i\
+ssues de livres \
+audio de ma bibl\
+ioth\xc3\xa8que :\x5cn\x5cn0\
+1) Les Petites P\
+oules qui voulai\
+ent voir la mer\x5c\
+n02) Un poulaill\
+er dans les \xc3\xa9to\
+iles\x5cn03) Pierre\
+ et le Loup\x5cn04)\
+ Les elfes et le\
+ cordonnier\x5cn05)\
+ H\xc3\xa9l\xc3\xa8ne et le \
+Cheval de Troie\x5c\
+n06) Le jardin d\
+'Albert\x5cn07) La \
+boite \xc3\xa0 joujoux\
+\x5cn08) Hop dans l\
+a Lune\x5cn09) L'es\
+t o\xc3\xb9 l'Doudou D\
+'Lulu\x5cn10) Bulle\
+ et Bob dans la \
+for\xc3\xaat\x5cn11) Le G\
+ateau de Ouistit\
+i\x5cn12) Les 3 pet\
+its cochons Mous\
+tachus\x5cn13) Bonn\
+e nuit petit Kak\
+i\x5cn14) Peau d'An\
+e\x5cn15) Le myst\xc3\xa8\
+re des couleurs\x5c\
+n16) Mirlificoch\
+et M\xc3\xa9chant Sorc\
+ier!\x5cn17) Roule \
+pizza et file la\
+ cr\xc3\xaape\x5cn18) La \
+vie de ch\xc3\xa2teau\x5c\
+n19) RocKin' Joh\
+nny\x5cn20) Aldeber\
+t Ma petite comp\
+ile\x5cn21) A la bo\
+nne \xc3\xa9toile\x5cn22)\
+ Sur le dos d'un\
+e Souris\x5cn23) Ta\
+m et la voix des\
+ Dragons\x5cn24) Ti\
+mouk l'enfant au\
+ deux Royaumes\x22\x0d\
+\x0a    },\x0d\x0a    \x2273\
+cc6467-7d93-4c2e\
+-a6fa-84ce680cd9\
+21\x22: {\x0d\x0a        \
+\x22uuid\x22: \x2273cc646\
+7-7d93-4c2e-a6fa\
+-84ce680cd921\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Caroline et s\
+es amis - Saison\
+ 1 (10 \xc3\xa9pisodes\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Ret\
+rouvez 10 \xc3\xa9piso\
+des de Caroline \
+et ses amis lors\
+ de leurs aventu\
+res : \x5cn\x5cn1. Le \
+g\xc3\xa2teau d'annive\
+rsaire\x5cn3. Le fa\
+ntome gourmand\x5cn\
+4. Temp\xc3\xaate de n\
+eige\x5cn5. Le sapi\
+n de No\xc3\xabl\x5cn6. U\
+n cadeau de trop\
+\x5cn7. La lettre a\
+u P\xc3\xa8re No\xc3\xabl\x5cn9\
+. Princesse Caro\
+line\x5cn15. La mer\
+ monte\x5cn18. Sile\
+nce on tourne\x5cn2\
+4. En direct du \
+grenier\x5cn\x5cnhttps\
+://www.youtube.c\
+om/playlist?list\
+=PL 8BbB1m6YjVAd\
+7o8irkL7WspCuvf0\
+n8u\x22\x0d\x0a    },\x0d\x0a  \
+  \x220c3676e9-1a35\
+-426c-9c7f-74cd9\
+8b0d3f1\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x220c\
+3676e9-1a35-426c\
+-9c7f-74cd98b0d3\
+f1\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les aven\
+tures de Rodolph\
+e et Gala - sais\
+on 1 (8 \xc3\xa9pisode\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Le\
+s aventures de R\
+odolphe et Gala \
+Saison 1\x5cn01 Rod\
+olphe l'extrater\
+restre\x5cn02 Rodol\
+phe, Gala et le \
+terrible Comore\x5c\
+n03 A la rencont\
+re de RectoVerso\
+\x5cn04 Le lapin de\
+ l'espace\x5cn05 Le\
+ d\xc3\xa9barquement d\
+es Kibrilles\x5cn06\
+ Le Pirate de l'\
+espace\x5cn07 A la \
+poursuite de Bar\
+be Brune\x5cn08 Il \
+faut sauver Gala\
+ !\x5cn\x5cnameliorati\
+on tonyhuguenott\
+e\x22\x0d\x0a    },\x0d\x0a    \
+\x228706e558-5b12-4\
+138-a963-098e11c\
+42997\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x228706\
+e558-5b12-4138-a\
+963-098e11c42997\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22L'agent Je\
+an\x22,\x0d\x0a        \x22d\
+escription\x22: \x22L'\
+invasion de la T\
+erre par des ext\
+raterrestres mau\
+ves est le point\
+ de d\xc3\xa9part d'un\
+e formidable ave\
+nture pour l'Age\
+nt Jean. Avec se\
+s amis, il devra\
+ repousser les e\
+nvahisseurs, voy\
+ager vers une au\
+tre dimension, a\
+ider un peuple e\
+n d\xc3\xa9tresse, cro\
+iser le fer avec\
+ de vieux ennemi\
+s et sillonner l\
+'Univers afin de\
+ retrouver la Te\
+rre ! 24 \xc3\xa9pisod\
+es, 6 ans et +\x5cn\
+\x5cnhttps://ici.ra\
+dio-canada.ca/oh\
+dio/balados/7228\
+/agent-jean-pier\
+-luc-funk-france\
+-castel\x5cn\x5cnV2 : \
+Ajout des images\
+, am\xc3\xa9lioration \
+des jingles, cou\
+pure des introdu\
+ctions\x22\x0d\x0a    },\x0d\
+\x0a    \x22f37080ac-2\
+5d1-43e1-8365-04\
+c97c74848d\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22f37080ac-25d1-4\
+3e1-8365-04c97c7\
+4848d\x22,\x0d\x0a       \
+ \x22title\x22: \x22B\xc3\xa9b\xc3\
+\xa9 Louis - Volume\
+ 1\x22,\x0d\x0a        \x22d\
+escription\x22: \x2213\
+ comptines de B\xc3\
+\xa9b\xc3\xa9 Louis\x5cnhttp\
+s://www.youtube.\
+com/@LittleAngel\
+Francais/\x5cn\x5cn- L\
+es roues de l'am\
+bulance\x5cn- Qui a\
+ pris mon cupcak\
+e?\x5cn- B\xc3\xa9b\xc3\xa9 jou\
+e au docteur\x5cn- \
+Apprendre les \xc3\xa9\
+motions\x5cn- Bingo\
+ le chien\x5cn- Lav\
+e tes mains\x5cn- J\
+ohnny Johnny ave\
+c maman et papa\x5c\
+n- Johnny Johnny\
+ oui papa\x5cn- B\xc3\xa9\
+b\xc3\xa9 devient poli\
+cier\x5cn- Le camio\
+n de pompiers\x5cn-\
+ Une jolie princ\
+esse\x5cn- Les l\xc3\xa9g\
+umes\x5cn- La vache\
+ Lola\x22\x0d\x0a    },\x0d\x0a\
+    \x2218251640-f4\
+66-4489-b8bd-1a2\
+03b8f903c\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+18251640-f466-44\
+89-b8bd-1a203b8f\
+903c\x22,\x0d\x0a        \
+\x22title\x22: \x22L Ecol\
+e des loisirs - \
+S\xc3\xa9lection\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Lot de 9 a\
+lbums publi\xc3\xa9s \xc3\
+\xa0 L'\xc3\xa9cole des l\
+oisirs :\x5cn\x5cn* Ca\
+tharina Valckx, \
+Haut les pattes \
+!\x5cnR\xc3\xa9sum\xc3\xa9 : Bi\
+lly ne deviendra\
+ pas un supergan\
+gster comme moi,\
+ se d\xc3\xa9sole son \
+p\xc3\xa8re. Il a trop\
+ bon caract\xc3\xa8re,\
+ il est bien tro\
+p gentil\xe2\x80\xa6 Pour\
+tant, Papa d\xc3\xa9ci\
+de de fournir \xc3\xa0\
+ son fils une pa\
+noplie compl\xc3\xa8te\
+ et de lui donne\
+r sa premi\xc3\xa8re l\
+e\xc3\xa7on de bandit.\
+ C\xe2\x80\x99est simple \
+: il s\xe2\x80\x99agit de\
+ pointer son rev\
+olver et de dire\
+ : \xc2\xab Haut les p\
+attes ! \xc2\xbb Ce qu\
+e son p\xc3\xa8re igno\
+re, c\xe2\x80\x99est que \
+cet exercice va \
+permettre \xc3\xa0 Bil\
+ly de gagner ses\
+ galons de h\xc3\xa9ro\
+s, mais surtout \
+de se faire tout\
+e une bande d\xe2\x80\x99\
+amis !\x5cn\x5cn* Haru\
+o Yamashita, Kaz\
+uo Iwamura, Le t\
+rain des souris\x5c\
+nR\xc3\xa9sum\xc3\xa9 : Pour\
+ d\xc3\xa9cider ses se\
+pt petits \xc3\xa0 all\
+er \xc3\xa0 l'\xc3\xa9cole, \
+Maman Souris a u\
+ne id\xc3\xa9e formida\
+ble: Maman Souri\
+s invente une vo\
+ie ferr\xc3\xa9e qui p\
+asse sous un tun\
+nel. Tous les ma\
+tins, elle se me\
+t sur les rails \
+et fait la locom\
+otive. Ses sept \
+enfants et tous \
+les amis s'accro\
+chent \xc3\xa0 elle, c\
+omme des wagons.\
+\x5cn\x5cn* Claude Pon\
+ti, Ma vall\xc3\xa9e\x5cn\
+R\xc3\xa9sum\xc3\xa9 : C'est\
+ une vall\xc3\xa9e imm\
+ense, dont les h\
+abitants s'appel\
+lent les Touim's\
+. Suivez bien la\
+ carte. Vous pou\
+rrez regarder po\
+usser les Arbres\
+-\xc3\xa0-bateaux. Si \
+vous aimez les l\
+abyrinthes, rend\
+ez-vous dans la \
+For\xc3\xaat de l'Enfa\
+nt Perdu. Rencon\
+trez aussi Soyot\
+te et Smargoule.\
+..\x5cn\x5cn* Mario Ra\
+mos, C'est moi l\
+e plus beau\x5cnR\xc3\xa9\
+sum\xc3\xa9 : Un beau \
+matin, l'incorri\
+gible loup se l\xc3\
+\xa8ve de tr\xc3\xa8s bon\
+ne humeur et enf\
+ile son plus bea\
+u v\xc3\xaatement. \xc2\xab \
+Hum ! Ravissant \
+! Je vais faire \
+un petit tour po\
+ur que tout le m\
+onde puisse m'ad\
+mirer ! \xc2\xbb Chemi\
+n faisant, il cr\
+oise le Petit Ch\
+aperon Rouge. \xc2\xab\
+ Dis-moi, petite\
+ fraise des bois\
+, qui est le plu\
+s beau ? \xc2\xbb dema\
+nde le loup. \xc2\xab \
+Le plus beau, c'\
+est vous, Ma\xc3\xaetr\
+e Loup ! \xc2\xbb r\xc3\xa9p\
+ond le Petit Cha\
+peron Rouge\x5cn\x5cn*\
+ Alan Mets, Ma c\
+ulotte\x5cnR\xc3\xa9sum\xc3\xa9\
+ : O\xc3\xb9 il est qu\
+estion d'un loup\
+ amoureux, d'une\
+ belle culotte r\
+ouge, d'un gigot\
+ sur pattes qu'o\
+n enferme \xc3\xa0 cl\xc3\
+\xa9 avec du thym p\
+our lui donner b\
+on go\xc3\xbbt, d'un r\
+endez-vous galan\
+t et d'un impr\xc3\xa9\
+vu\x5cn\x5cn*  Magali \
+Bonniol, Pierre \
+Bertrand, Corneb\
+idouille contre \
+Cornebidouille\x5cn\
+R\xc3\xa9sum\xc3\xa9 : Dans \
+La vengeance de \
+Cornebidouille, \
+Pierre avait r\xc3\xa9\
+ussi \xc3\xa0 faire ma\
+nger sa propre s\
+oupe \xc3\xa0 l\xe2\x80\x99abom\
+inable Cornebido\
+uille, ce qui l\xe2\
+\x80\x99avait illico t\
+ransform\xc3\xa9e en p\
+otiron\xe2\x80\xa6 Mais u\
+ne sorci\xc3\xa8re se \
+r\xc3\xa9signe-t-elle \
+\xc3\xa0 sortir de la \
+vie de ses victi\
+mes ? Non ! Plus\
+ tard, quand sa \
+maman coupe en d\
+eux un potiron p\
+our le d\xc3\xaener et\
+ qu\xe2\x80\x99aussit\xc3\xb4t \
+une odeur \xc3\xa9pouv\
+antable se r\xc3\xa9pa\
+nd, Pierre a une\
+ intuition : Cor\
+nebidouille est \
+de retour\xe2\x80\xa6 Il \
+ne se trompe que\
+ sur un d\xc3\xa9tail.\
+ \xc3\x80 pr\xc3\xa9sent, el\
+les sont deux et\
+ elles veulent s\
+e venger. Il va \
+encore falloir r\
+user !\x5cn\x5cn* Alai\
+n Broutin, Fr\xc3\xa9d\
+\xc3\xa9ric Stehr, Cal\
+inours va \xc3\xa0 l'\xc3\
+\xa9cole\x5cnR\xc3\xa9sum\xc3\xa9 \
+: Calinours part\
+ \xc3\xa0 l'\xc3\xa9cole mai\
+s en chemin, il \
+rencontre Monsie\
+ur Sanglier, qui\
+ lui apprend \xc3\xa0 \
+peindre avec les\
+ pieds, Monsieur\
+ Renard, qui lui\
+ apprend \xc3\xa0 fair\
+e un camembert e\
+n p\xc3\xa2te \xc3\xa0 model\
+er...\x5cn\x5cn* St\xc3\xa9p\
+hanie Blake, Non\
+ pas dodo ! \x5cnR\xc3\
+\xa9sum\xc3\xa9 : Gaspard\
+ et son grand fr\
+\xc3\xa8re Simon ont p\
+ass\xc3\xa9 une journ\xc3\
+\xa9e de r\xc3\xaave \xc3\xa0 c\
+onstruire une M\xc3\
+\xa9ga Giga Grande \
+Cabane trop styl\
+\xc3\xa9e ! Mais c\xe2\x80\x99e\
+st la nuit maint\
+enant, et il fau\
+t dormir. A\xc3\xafe !\
+ Gaspard a oubli\
+\xc3\xa9 son doudou da\
+ns la cabane. Sa\
+ns doudou, pas d\
+e dodo ! Que fai\
+re ? \xc2\xab Gaspard,\
+ va chercher ma \
+cape ! \xc2\xbb dit Si\
+mon. C\xe2\x80\x99est d\xc3\xa9\
+cid\xc3\xa9. L\xe2\x80\x99heure\
+ est grave. Il e\
+st temps pour Si\
+mon de r\xc3\xa9v\xc3\xa9ler\
+ \xc3\xa0 Gaspard qu\xe2\x80\
+\x99il est Superlap\
+in, un superh\xc3\xa9r\
+os capable de br\
+aver les t\xc3\xa9n\xc3\xa8b\
+res pour rapport\
+er son doudou \xc3\xa0\
+ un petit fr\xc3\xa8re\
+ sans d\xc3\xa9fense..\
+.\x5cn\x5cn* Claude Bo\
+ujon, La chaise \
+bleue \x5cnR\xc3\xa9sum\xc3\xa9\
+ : Ce jour-l\xc3\xa0, \
+Escarbille et Ch\
+aboudo se promen\
+aient dans le d\xc3\
+\xa9sert. Et dans l\
+e d\xc3\xa9sert, il n'\
+y avait rien. Ri\
+en, sauf...une t\
+ache bleue, au l\
+oin. Ils s'appro\
+ch\xc3\xa8rent : c'\xc3\xa9t\
+ait une chaise. \
+C'est fou ce qu'\
+on peut faire av\
+ec une chaise bl\
+eue.\x5cn\x5cnV1 Flore\
+nce 32\x5cnV2 maxim\
+umthedrek : imag\
+es, jingles, nor\
+me de navigation\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+71b6aa0a-7201-42\
+22-b1c8-da1f6737\
+6afc\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2271b6a\
+a0a-7201-4222-b1\
+c8-da1f67376afc\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22Bestioles F\
+ossiles\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Podcast Franc\
+e Inter Bestiole\
+s, s\xc3\xa9rie sur le\
+s fossiles\x5cnby S\
+amC  \xc3\xa9pisodes 1\
+ \xc3\xa0 10\x5cnby oplot\
+cha \xc3\xa9pisodes 11\
+ \xc3\xa0 16\x5cn\x5cn01. Le\
+ Tyrannosaure-re\
+x\xc2\xa0: la terreur \
+sur pattes\x5cn02. \
+Le tigre \xc3\xa0 dent\
+s de sabre\xc2\xa0: le\
+ fauve a les den\
+ts longues\x5cn03. \
+Le Tric\xc3\xa9ratops\xc2\
+\xa0: une forte t\xc3\xaa\
+te\x5cn04. L\xe2\x80\x99Ammo\
+nite\xc2\xa0: coquille\
+ \xc3\xa0 propulsion\x5cn\
+05. Le mammouth \
+laineux\xc2\xa0: en ro\
+ute, mammouth\xc2\xa0!\
+  \x5cn06. Le Mosas\
+aure\xc2\xa0: fringale\
+ de future maman\
+\x5cn07. Le rhinoc\xc3\
+\xa9ros laineux\xc2\xa0: \
+la corne qui sen\
+t bon la laine\x5cn\
+08. Le Dim\xc3\xa9trod\
+on hisse la voil\
+e\xc2\xa0!\x5cn09. Vie, m\
+ort et r\xc3\xa9surrec\
+tion d\xe2\x80\x99un Tril\
+obite \x5cn10. Le P\
+t\xc3\xa9ranodon\xc2\xa0: le\
+ reptile aux ail\
+es de g\xc3\xa9ant\x5cn11\
+. Hylonomus\xc2\xa0: l\
+e minus a la t\xc3\xaa\
+te dure\xc2\xa0!\xc2\xa0\x5cn12\
+. Meganeura\xc2\xa0: l\
+a t\xc3\xaate br\xc3\xbbl\xc3\xa9e\
+ des marais\x5cn13.\
+ L\xe2\x80\x99Ichtyosaure\
+\xc2\xa0: un reptile m\
+arin d\xc3\xa9guis\xc3\xa9 e\
+n dauphin \x5cn14. \
+Eurohippus\xc2\xa0: le\
+ tout petit cous\
+in du cheval\x5cn15\
+. Le Darwinius\xc2\xa0\
+: petit singe, g\
+rands dangers\x5cn1\
+6. L\xe2\x80\x99Amplectob\
+elua\xc2\xa0: petit ma\
+is costaud\xc2\xa0!\x22\x0d\x0a\
+    },\x0d\x0a    \x22522\
+8bed9-09f8-4ca1-\
+a8a2-27907a3a121\
+6\x22: {\x0d\x0a        \x22\
+uuid\x22: \x225228bed9\
+-09f8-4ca1-a8a2-\
+27907a3a1216\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Mes \xc3\xa9motions \
+me rendent plus \
+fort\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Lorsque les enfa\
+nts sont en col\xc3\
+\xa8re, ils peuvent\
+ le manifester p\
+ar un mauvais co\
+mportement. Ils \
+peuvent crier, p\
+leurer, jeter de\
+s objets et se r\
+ouler par terre \
+ou tout cela \xc3\xa0 \
+la fois. C'est p\
+ourquoi la plupa\
+rt des parents o\
+nt besoin d'aide\
+ pour la gestion\
+ des \xc3\xa9motions e\
+t des sentiments\
+ de leurs enfant\
+s.\x5cn\x5cnAuteur : E\
+lizabeth Cole, R\
+omain Pillard, S\
+ophie Sala\xc3\xbcn \x5cn\
+\x5cn1 - Je suis pl\
+us fort que la c\
+ol\xc3\xa8re\x5cn2 - Je s\
+uis plus fort qu\
+e mes angoisses\x5c\
+n3 - La gentille\
+sse me rend plus\
+ fort\x5cn4 - La pe\
+rs\xc3\xa9v\xc3\xa9rance me \
+rend plus fort\x5cn\
+5 - Notre divers\
+it\xc3\xa9 me rend plu\
+s fort\x5cn6 - Vivr\
+e l'instant pr\xc3\xa9\
+sent me rend plu\
+s fort\x22\x0d\x0a    },\x0d\
+\x0a    \x22c638e908-8\
+b4c-4c78-96c8-a2\
+e910763102\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22c638e908-8b4c-4\
+c78-96c8-a2e9107\
+63102\x22,\x0d\x0a       \
+ \x22title\x22: \x22Mon g\
+rand livre de co\
+ntes (avec 2 CD)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Ce p\
+ack contient 24 \
+grands classique\
+s des contes pou\
+r enfants :\x5cn- A\
+ladin et la lamp\
+e magique\x5cn- Ali\
+ Baba et les qua\
+rante voleurs\x5cn-\
+ Alice au pays d\
+es merveilles\x5cn-\
+ Blanche neige e\
+t les sept nains\
+\x5cn- Boucle d'or \
+et les trois our\
+s\x5cn- Cendrillon\x5c\
+n- Hansel et Gre\
+tel\x5cn- Jack et l\
+e haricot magiqu\
+e\x5cn- La belle au\
+ bois dormant\x5cn-\
+ La petite sir\xc3\xa8\
+ne\x5cn- Le chat bo\
+tt\xc3\xa9\x5cn- Le joueu\
+r de flute de Ha\
+melin\x5cn- Le livr\
+e de la jungle\x5cn\
+- Le loup et les\
+ sept chevraux\x5cn\
+- Le petit chape\
+ron rouge\x5cn- Le \
+petit soldat de \
+plomb\x5cn- Le vila\
+in petit canard\x5c\
+n- Les habits ne\
+ufs de l'Empereu\
+r\x5cn- Les trois p\
+etits cochons\x5cn-\
+ Les voyages de \
+Gulliver\x5cn- Pete\
+r Pan\x5cn- Pinocch\
+io\x5cn- Raiponce\x5cn\
+- Tom Pouce\x22\x0d\x0a  \
+  },\x0d\x0a    \x22da053\
+d75-2976-45c9-b8\
+31-8eaa4eef5eb0\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22da053d75-2\
+976-45c9-b831-8e\
+aa4eef5eb0\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Plumes de Z\xc3\xa8bre\
+ - partie 1 (26/\
+52)\x22,\x0d\x0a        \x22\
+description\x22: \x22P\
+lumes de Z\xc3\xa8bre,\
+  26/52 histoire\
+s\x5cn\x5cn01 Clara n'\
+aime pas les pri\
+ncesses\x5cn02 Le p\
+etit gar\xc3\xa7on qui\
+ collectionnait \
+les moutons\x5cn03 \
+Hopli Hopla\x5cn04 \
+J'aime pas atten\
+dre\x5cn05 La l\xc3\xa9ge\
+nde du Bombagado\
+ss\x5cn06 Bigg Dago\
+n\x5cn07 Le comte d\
+e Trifouilli che\
+rche l'amour\x5cn08\
+ En quoi tu croi\
+s\x5cn09 Le crabe c\
+harmant\x5cn10 La r\
+eine des cr\xc3\xaapes\
+\x5cn11 Trois petit\
+es graines\x5cn12 L\
+es pandas ne son\
+t pas m\xc3\xa9chants\x5c\
+n13 Le fant\xc3\xb4me \
+de Carnaval\x5cn14 \
+La dame aux dess\
+ins anim\xc3\xa9s\x5cn15 \
+Un amour d'hippo\
+potame\x5cn16 Hyper\
+ Man\x5cn17 Les 5 s\
+ecrets des drago\
+ns\x5cn18  J'ai peu\
+r du noir\x5cn19 Un\
+e histoire de Le\
+ttre\x5cn20 Au pays\
+ des r\xc3\xaaves\x5cn21 \
+Le fils du Roi d\
+e l'Espace\x5cn22 L\
+a qu\xc3\xaate de Paul\
+ette\x5cn23 Les m\xc3\xa9\
+chants et les ge\
+ntils\x5cn24 Okc\xc3\xa9b\
+o\x5cn25 La boite d\
+e Max\x5cn26 Malala\
+po\x5cn\x22\x0d\x0a    },\x0d\x0a \
+   \x222e6f8643-213\
+9-4b8a-88b3-9df1\
+aefaf5d2\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x222\
+e6f8643-2139-4b8\
+a-88b3-9df1aefaf\
+5d2\x22,\x0d\x0a        \x22\
+title\x22: \x22Petite \
+Salamandre\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x22\x0d\x0a    },\x0d\
+\x0a    \x22885cf6f6-2\
+7d6-4319-b8a5-6c\
+767db27880\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x22885cf6f6-27d6-4\
+319-b8a5-6c767db\
+27880\x22,\x0d\x0a       \
+ \x22title\x22: \x22Grimm\
+ Academie (3 par\
+ties-27 histoire\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Bi\
+envenue \xc3\xa0 la Gr\
+imm Acad\xc3\xa9mie,\x5cn\
+\x5cnSuivez-moi dan\
+s la tour du cha\
+\xcc\x82teau. Ici, vou\
+s allez e\xcc\x81tudie\
+r les cr\xc3\xa9atures\
+ magiques et je \
+serai votre prof\
+esseur !\x5cn\x5cnJe m\
+e pre\xcc\x81sente, mo\
+n nom \xc3\xa0 moi, c'\
+est Grimm : Hans\
+el Grimm.\x22\x0d\x0a    \
+},\x0d\x0a    \x229072ce7\
+7-0b24-495f-92a9\
+-3fa69ae113eb\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x229072ce77-0b2\
+4-495f-92a9-3fa6\
+9ae113eb\x22,\x0d\x0a    \
+    \x22title\x22: \x22Di\
+sney - 365 Histo\
+ires pour le soi\
+r (19 histoires)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Pack\
+ de 19 histoires\
+ courtes, mettan\
+t en sc\xc3\xa8ne des \
+personnages de l\
+'univers Disney.\
+\x5cn\x5cn01.Bambi - l\
+a Course - 15 Ja\
+nvier\x5cn02.Le Liv\
+re de la Jungle \
+- Le Noeud du Pr\
+obl\xc3\xa8me - 18 Jan\
+vier\x5cn03.Cendril\
+lon - Un ami min\
+i mini ! - 16 Ja\
+nvier\x5cn04.Le Roi\
+ Lion - Le meill\
+eur p\xc3\xa9cheur de \
+tous - 26 F\xc3\xa9vri\
+er\x5cn05.Robin des\
+ Bois - Droit da\
+ns la cible ! - \
+28 F\xc3\xa9vrier\x5cn06.\
+Le Livre de la J\
+ungle - La chass\
+e \xc3\xa0 la mangue -\
+ 1 Mars\x5cn07.Dumb\
+o - Le Spectacle\
+ doit continuer \
+- 27 Octobre\x5cn08\
+.Basil, D\xc3\xa9ctect\
+ive Priv\xc3\xa9 - El\xc3\
+\xa9mentaire, mon c\
+her Basil - 15 M\
+ars\x5cn09.Blanche \
+Neige et le Sept\
+ Nains - Jour de\
+ printemps - 21 \
+Mars\x5cn10.La Bell\
+e et la B\xc3\xaate - \
+Chacun son Talen\
+t - 24 Mars\x5cn11.\
+Les Aristichats \
+- Le Myst\xc3\xa9me de\
+ la malle hant\xc3\xa9\
+e - 16 Mai\x5cn12.L\
+e Roi Lion - La \
+partie de Cache-\
+cache - 20 Mai\x5cn\
+13.Les 101 Dalma\
+tiens - Secret d\
+e nounou - 3 Jui\
+n\x5cn14.La belle e\
+t le Clochard - \
+Perdu et retrouv\
+\xc3\xa9 ! - 22 Juin\x5cn\
+15.Aladdin - Des\
+ Objets Dangereu\
+x... - 21 Ao\xc3\xbbt\x5c\
+n16.Alice Au Pay\
+s des Merveilles\
+ - Le\xc3\xa7on de mai\
+ntien - 22 Ao\xc3\xbbt\
+\x5cn17.Peter Pan -\
+ L'honneur de la\
+ tribu - 29 Ao\xc3\xbb\
+t\x5cn18.Pinocchio \
+- Fais de beau r\
+\xc3\xaaves Pinocchio \
+- 15 Octobre\x5cn19\
+.Merlin L'Enchan\
+teur - L'objet M\
+yst\xc3\xa9rieux - 12 \
+Novembre\x5cnCeci e\
+st un CD Audio d\
+e 19 titres qui \
+accompagne un li\
+vre de 365 Histo\
+ires pour le soi\
+r.\x22\x0d\x0a    },\x0d\x0a   \
+ \x2295495e22-bb57-\
+4344-9bc0-e82dd8\
+2b2508\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22954\
+95e22-bb57-4344-\
+9bc0-e82dd82b250\
+8\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Timot\xc3\xa9 -\
+ Les Aventures d\
+e Timot\xc3\xa9\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22V4: Ajout h\
+istoires suppl\xc3\xa9\
+mentaires. Suppr\
+ession des jingl\
+es.\x5cn\x5cnL'ensembl\
+e des livres Tim\
+ot\xc3\xa9 \xc3\xa9crites pa\
+r Emmanuelle Mas\
+sonaud, M\xc3\xa9lanie\
+ Combes et racon\
+t\xc3\xa9s par Marcha \
+Van Boven. Ils s\
+ont disponibles \
+via code sous Li\
+zzie ( https://w\
+ww.lizzie.audio/\
+search)\x5cn\xc2\xa9 2014\
+ \xc3\x89ditions Gr\xc3\xbcn\
+d, un d\xc3\xa9parteme\
+nt d\xe2\x80\x99\xc3\x89di8. \xe2\x84\
+\x97 Lizzie, un d\xc3\xa9\
+partement d\xe2\x80\x99Un\
+ivers Poche, Par\
+is, 2022 \x5cn\x5cnTim\
+ot\xc3\xa9 est un peti\
+t lapin qui, au \
+fil des \xc3\xa9pisode\
+s, partage sa vi\
+e avec ses petit\
+s lecteurs.\x5cn\x5cn1\
+ Timot\xc3\xa9 prend l\
+'avion\x5cn2 Timot\xc3\
+\xa9 prend le train\
+\x5cn3 Timot\xc3\xa9 chez\
+ les pompiers\x5cn4\
+ Timot\xc3\xa9 chez Pa\
+pi et Mamie\x5cn5 T\
+imot\xc3\xa9 et sa t\xc3\xa9\
+tine\x5cn6 Timot\xc3\xa9 \
+et ses lunettes\x5c\
+n7 Timot\xc3\xa9 \xc3\xa0 l'\
+aquarium\x5cn8 Timo\
+t\xc3\xa9 fait du v\xc3\xa9l\
+o\x5cn9 Timot\xc3\xa9 jar\
+dine\x5cn10 Timot\xc3\xa9\
+ fait du poney\x5cn\
+11 Timot\xc3\xa9 au bo\
+rd de la mer\x5cn12\
+ Timot\xc3\xa9 fait du\
+ ski\x5cn13 Timot\xc3\xa9\
+ f\xc3\xaate P\xc3\xa2ques\x5cn\
+14 Timot\xc3\xa9 visit\
+e la Bretagne\x5cn1\
+5 Timot\xc3\xa9 entre \
+\xc3\xa0 l'\xc3\xa9cole\x5cn16 \
+Timot\xc3\xa9 est tr\xc3\xa8\
+s poli\x5cn17 Timot\
+\xc3\xa9 et ses \xc3\xa9moti\
+ons\x5cn18 Timot\xc3\xa9 \
+fait des b\xc3\xaatise\
+s\x5cn19 Timot\xc3\xa9 va\
+ \xc3\xa0 la biblioth\xc3\
+\xa8que\x5cn20 Timot\xc3\xa9\
+ et le No\xc3\xabl mag\
+ique\x5cn21 Timot\xc3\xa9\
+ \xc3\xa0 la piscine\x5cn\
+22 Timot\xc3\xa9 d\xc3\xa9co\
+uvre les chiffre\
+s\x5cn23 Timot\xc3\xa9 d\xc3\
+\xa9couvre les lett\
+res\x5cn24 Timot\xc3\xa9 \
+devient grand fr\
+\xc3\xa8re\x5cn25 Timot\xc3\xa9\
+ dort chez un co\
+pain\x5cn26 Timot\xc3\xa9\
+ et la petite so\
+uris\x5cn27 Timot\xc3\xa9\
+ et son doudou\x5cn\
+28 Timot\xc3\xa9 fait \
+de la trottinett\
+e\x5cn29 Timot\xc3\xa9 fa\
+it un g\xc3\xa2teau\x5cn3\
+0 Timot\xc3\xa9 f\xc3\xaate \
+la Saint-Nicolas\
+\x5cn31 Timot\xc3\xa9 f\xc3\xaa\
+te No\xc3\xabl\x5cn32 Tim\
+ot\xc3\xa9 f\xc3\xaate son a\
+nniversaire\x5cn33 \
+Timot\xc3\xa9 joue au \
+foot\x5cn34 Timot\xc3\xa9\
+ ne veut pas dor\
+mir\x5cn35 Timot\xc3\xa9 \
+se d\xc3\xa9guise\x5cn36 \
+Timot\xc3\xa9 se prom\xc3\
+\xa8ne en for\xc3\xaat\x5cn3\
+7 Timot\xc3\xa9 va \xc3\xa0 \
+la cantine\x5cn38 T\
+imot\xc3\xa9 va au cen\
+tre de loisirs\x5cn\
+39 Timot\xc3\xa9 va au\
+ cirque\x5cn40 Timo\
+t\xc3\xa9 va au specta\
+cle\x5cn41 Timot\xc3\xa9 \
+va chez le docte\
+ur\x5cn42 Timot\xc3\xa9 v\
+isite un ch\xc3\xa2tea\
+u fort\x5cn43 Timot\
+\xc3\xa9 va sur le pot\
+\x5cn44 Timot\xc3\xa9 veu\
+t un animal\x5cn45 \
+Timot\xc3\xa9 visite l\
+e Louvre\x5cn46 Tim\
+ot\xc3\xa9 visite le z\
+oo\x5cn47 Timot\xc3\xa9 v\
+isite Paris\x5cn48 \
+Timot\xc3\xa9 aime la \
+musique\x5cn49 Timo\
+t\xc3\xa9 \xc3\xa0 la ferme\x5c\
+n50 Timot\xc3\xa9 aime\
+ tout faire tout\
+ seul\x5cn51 Timot\xc3\
+\xa9 est malade \x5cn5\
+2 Timot\xc3\xa9 et la \
+galette des rois\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+52b65660-b672-43\
+fb-8110-724a1a77\
+3dc6\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x2252b65\
+660-b672-43fb-81\
+10-724a1a773dc6\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22alma studio\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22\x22\x0d\x0a \
+   },\x0d\x0a    \x2284e8\
+e646-5d96-4c46-a\
+9e4-f6eef88350b4\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2284e8e646-\
+5d96-4c46-a9e4-f\
+6eef88350b4\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Livres Didier J\
+eunesse (8 histo\
+ires)\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x228 histoires de \
+Didier Jeunesse \
+:\x5cn- La grenouil\
+le \xc3\xa0 grande bou\
+che\x5cn- La moufle\
+\x5cn- La souris qu\
+i cherchait un m\
+ari\x5cn- La voitur\
+e de Groucho\x5cn- \
+Les deniers de c\
+omp\xc3\xa8re Lapin\x5cn-\
+ Monsieur petit \
+sou\x5cn- P'tit bis\
+cuit, l'histoire\
+ du bonhomme de \
+pain d'\xc3\xa9pice qu\
+i ne voulait pas\
+ finir en miette\
+s\x5cn- Rouge\x22\x0d\x0a   \
+ },\x0d\x0a    \x2223d119\
+d0-da5f-4a9c-adf\
+9-b4992bf2123d\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x2223d119d0-da\
+5f-4a9c-adf9-b49\
+92bf2123d\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+e Monde d'Henri \
+D\xc3\xa8s - Volume 1\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22V3: C\
+onversion en noe\
+uds stage & acti\
+on par EvilPimou\
+sse + am\xc3\xa9liorat\
+ion des images p\
+ar bambooniaks\x5cn\
+\x5cnLe Monde d'Hen\
+ri D\xc3\xa8s, ce sont\
+ des histoires, \
+des chansons, de\
+s jeux audio aut\
+our du monde d'H\
+enri D\xc3\xa8s, sorti\
+ au d\xc3\xa9but des a\
+nn\xc3\xa9es 2000, \xc3\xa0 \
+raison d'un num\xc3\
+\xa9ro tous les 15 \
+jours.\x5cn\x5cnVolume\
+ 1 : \x5c\x22Les b\xc3\xaati\
+ses \xc3\xa0 l'\xc3\xa9cole\x5c\
+\x22, et, \x5c\x22Petit J\
+eanneton\x5c\x22\x5cnVolu\
+me 2 : \x5c\x22Le croc\
+odile\x5c\x22, et, \x5c\x22M\
+a for\xc3\xaat\x5c\x22\x5cnVolu\
+me 3 : \x5c\x22La sorc\
+i\xc3\xa8re de minuit\x5c\
+\x22, et, \x5c\x22Le fant\
+\xc3\xb4me\x5c\x22\x5cnVolume 4\
+ : \x5c\x22C'est le pr\
+intemps\x5c\x22, et, \x5c\
+\x22Il pleut dehors\
+, il pleut\x5c\x22\x5cnVo\
+lume 5 : \x5c\x22Mon g\
+ros loup, mon p'\
+tit loup\x5c\x22, et, \
+\x5c\x22Les loups\x5c\x22 \x22\x0d\
+\x0a    },\x0d\x0a    \x2221\
+716966-f04d-428c\
+-9ce7-bc1ad150a9\
+f8\x22: {\x0d\x0a        \
+\x22uuid\x22: \x222171696\
+6-f04d-428c-9ce7\
+-bc1ad150a9f8\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22La Grimm Acad\
+emie Saison 2 (9\
+ histoires)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Bienvenue\
+ \xc3\xa0 la Grimm Aca\
+d\xc3\xa9mie (Saison 2\
+),\x5cn\x5cnSuivez-moi\
+ dans la tour du\
+ cha\xcc\x82teau. Ici,\
+ vous allez e\xcc\x81t\
+udier les cr\xc3\xa9at\
+ures magiques et\
+ je serai votre \
+professeur !\x5cn\x5cn\
+Je me pre\xcc\x81sente\
+, mon nom \xc3\xa0 moi\
+, c'est Grimm : \
+Hansel Grimm.\x22\x0d\x0a\
+    },\x0d\x0a    \x22fbb\
+25d41-cd07-48e5-\
+8447-550de71372c\
+7\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22fbb25d41\
+-cd07-48e5-8447-\
+550de71372c7\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Aventures \
+Nature de Camill\
+e et L\xc3\xa9o (12 \xc3\xa9\
+pisodes)\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Pars \xc3\xa0 la r\
+encontre des ani\
+maux de nos r\xc3\xa9g\
+ions avec Camill\
+e et L\xc3\xa9o !  \x5cn\x5c\
+nCamille la cita\
+dine passe ses v\
+acances chez L\xc3\xa9\
+o qui habite \xc3\xa0 \
+la campagne. Ils\
+ ont 10 ans, de \
+l\xe2\x80\x99\xc3\xa9nergie \xc3\xa0 \
+revendre, ils ai\
+ment se chamaill\
+er et crapahuter\
+ dans la nature.\
+ Les animaux, il\
+s en connaissent\
+ un rayon ! Gr\xc3\xa2\
+ce \xc3\xa0 Lili, l'hi\
+rondelle rustiqu\
+e qui les alerte\
+ en cas de probl\
+\xc3\xa8me, les deux a\
+mis vont venir e\
+n aide \xc3\xa0 la fau\
+ne sauvage. Pr\xc3\xaa\
+t \xc3\xa0 explorer le\
+s mares, les for\
+\xc3\xaats, les prairi\
+es et les montag\
+nes ? \x5cn\x5cnUn Pod\
+cast plein d\xe2\x80\x99i\
+nfos et plein d\xe2\
+\x80\x99humour pour co\
+mprendre la natu\
+re !\x5cnhttps://po\
+dcast.ausha.co/l\
+es-aventures-nat\
+ure-de-camille-e\
+t-leo\x5cn\x5cnListe d\
+es \xc3\xa9pisodes :\x5cn\
+01 Mission Greno\
+uille\x5cn02 Paniqu\
+e \xc3\xa0 la ruche\x5cn0\
+3 Temp\xc3\xaate chez \
+les Hulottes\x5cn04\
+ Alerte chez les\
+ Marmottes\x5cn05 O\
+p\xc3\xa9ration H\xc3\xa9ris\
+son\x5cn06 SOS Cana\
+rds Siffleurs\x5cn0\
+7 Gendarmes \xc3\xa0 l\
+a rescousse !\x5cn0\
+8 Un li\xc3\xa8vre en \
+p\xc3\xa9ril\x5cn09 D\xc3\xa9fi\
+ Papillon de nui\
+t\x5cn10 Exp\xc3\xa9ditio\
+n \xc3\x89cureuil\x5cn11 \
+Un cerf en gal\xc3\xa8\
+re\x5cn12 Action Gr\
+and T\xc3\xa9tras\x5cn\x5cnV\
+1 Gayel : Pack c\
+r\xc3\xa9\xc3\xa9 avec SPG +\
+ jingles voix Am\
+azon \x5c\x22Jerome\x5c\x22\x22\
+\x0d\x0a    },\x0d\x0a    \x225\
+5d4f61b-2dc9-46d\
+c-b0bb-32769baaa\
+dd4\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x2255d4f6\
+1b-2dc9-46dc-b0b\
+b-32769baaadd4\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Max et le pi\
+rate converti\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Une his\
+toire \xc3\xa0 choix q\
+ui sera diff\xc3\xa9re\
+nte selon le che\
+min choisi.\x5cn\x5cnA\
+ccompagne Max le\
+ Manchot et son \
+fid\xc3\xa8le perroque\
+t P\xc3\xa9pito dans l\
+eurs aventures s\
+ur les sept mers\
+ \xc3\xa0 la recherche\
+ du tr\xc3\xa9sor cach\
+\xc3\xa9. Pour choisir\
+ comment l'histo\
+ire continue, il\
+ suffit de chois\
+ir un chemin et \
+de retrouver son\
+ logo sur les on\
+glets sur la dro\
+ite. A la fin de\
+ chacun des 18 c\
+hapitres, c'est \
+au lecteur de d\xc3\
+\xa9cider de la sui\
+te de l'histoire\
+ en choisissant \
+le chemin que do\
+ivent prendre Ma\
+x et P\xc3\xa9pito. Av\
+ec deux fins pos\
+sibles et de nom\
+breux chemins po\
+ur y parvenir, c\
+'est le lecteur \
+qui d\xc3\xa9cide de l\
+'histoire ! \x22\x0d\x0a \
+   },\x0d\x0a    \x2240a1\
+d302-321f-43d7-b\
+9ef-4d93800574f0\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2240a1d302-\
+321f-43d7-b9ef-4\
+d93800574f0\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Tintin : Tintin\
+ au Tibet\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Tintin au T\
+ibet : les Avent\
+ures de Tintin\x5cn\
+Podcast France c\
+ulture\x5cn\x5cn\xc3\x89piso\
+de 1/3 : Le d\xc3\xa9p\
+art pour le N\xc3\xa9p\
+al\x5cn\xc3\x89pisode 2/3\
+ : L'ombre du y\xc3\
+\xa9ti\x5cn\xc3\x89pisode 3/\
+3 : Tchang d\xc3\xa9li\
+vr\xc3\xa9\x5cn\x5cnhttps://\
+www.radiofrance.\
+fr/franceculture\
+/podcasts/serie-\
+tintin-au-tibet-\
+les-aventures-de\
+-tintin\x22\x0d\x0a    },\
+\x0d\x0a    \x221ffa7e61-\
+2e21-47c4-b417-1\
+e48a0df4ed5\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x221ffa7e61-2e21-\
+47c4-b417-1e48a0\
+df4ed5\x22,\x0d\x0a      \
+  \x22title\x22: \x22Disn\
+ey - 365 Histoir\
+es pour le soir \
+: Princesses et \
+F\xc3\xa9es\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Une s\xc3\xa9lection \
+de 26 histoires \
+audio tir\xc3\xa9es du\
+ CD accompagnant\
+ le livre 365 Hi\
+stoires pour le \
+soir : Princesse\
+s et f\xc3\xa9es qui m\
+et en sc\xc3\xa8ne 8 P\
+rincesses Disney\
+ dans des histoi\
+res courtes.\x5cn\x5cn\
+1. Blanche Neige\
+ - En mission sp\
+\xc3\xa9ciale\x5cn2. Blan\
+che Neige - Une \
+journ\xc3\xa9e totalem\
+ent parfaite\x5cn3.\
+ Blanche Neige -\
+ Un h\xc3\xb4te tr\xc3\xa8s \
+attentionn\xc3\xa9\x5cn4.\
+ Cendrillon - Un\
+e aide inattendu\
+e\x5cn5. Cendrillon\
+ - Une question \
+de chapeau\x5cn6. C\
+endrillon - Vals\
+e sur glace\x5cn7. \
+Belle - Du temps\
+ \xc3\xa0 perdre\x5cn8. B\
+elle - Le vrai t\
+r\xc3\xa9sor\x5cn9. Belle\
+ - Un ami fid\xc3\xa8l\
+e\x5cn10. Jasmine -\
+ Devinette d'amo\
+ur\x5cn11. Jasmine \
+- La cit\xc3\xa9 invis\
+ible\x5cn12. Jasmin\
+e - Une soir\xc3\xa9e \
+enchant\xc3\xa9e\x5cn13. \
+Aurore - 3 \xc3\xa9nig\
+mes pour une cou\
+ronne\x5cn14. Auror\
+e - Le plus beau\
+ voeu\x5cn15. Auror\
+e - Question de \
+couleurs\x5cn16. Ra\
+iponce - La chas\
+se \xc3\xa0 l'araign\xc3\xa9\
+e\x5cn17. Raiponce \
+- L'as du camouf\
+lage\x5cn18. Raipon\
+ce - Une pr\xc3\xa9cie\
+use amiti\xc3\xa9\x5cn19.\
+ Raiponce - Un s\
+imple chignon de\
+ rien du tout\x5cn2\
+0. Ariel - Un da\
+uphin \xc3\xa0 grande \
+vitesse\x5cn21. Ari\
+el - Musique mag\
+ique\x5cn22. Ariel \
+- Retour \xc3\xa0 Atla\
+ntica\x5cn23. Tiana\
+ - Un gourmand c\
+landestin\x5cn24. T\
+iana - Rien d'im\
+possible\x5cn25. Ti\
+ana - Le swing d\
+es cuisines\x5cn26.\
+ Tiana - Une soi\
+r\xc3\xa9e reposante\x5cn\
+\x5cn+ Refonte des \
+voix de s\xc3\xa9lecti\
+on et pr\xc3\xa9sentat\
+ion\x5cn+ Ajout et \
+uniformisation d\
+es vignettes de \
+toutes les optio\
+ns et histoires\x5c\
+n+ Normalisation\
+ de tous les fic\
+hiers audio\x5cn+ R\
+emise aux nouvel\
+les normes du pa\
+ck\x22\x0d\x0a    },\x0d\x0a   \
+ \x226382f415-1e02-\
+4790-aa0c-83663c\
+8ecf15\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22638\
+2f415-1e02-4790-\
+aa0c-83663c8ecf1\
+5\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Ecole des\
+ loisirs - Minim\
+ax\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Pa\
+ck contenant 16 \
+histoires de l'\xc3\
+\xa9cole des loisir\
+s - Minimax (de \
+3 \xc3\xa0 5 ans) :\x5cn\x5c\
+nSaison 2020 :\x5cn\
+      - 01 - Mat\
+in Minet - Le Po\
+int du jour\x5cn   \
+   - 02 - Deux p\
+our moi. Un pour\
+ toi\x5cn      - 03\
+ - Palomino\x5cn   \
+   - 04 - Les to\
+utous \xc3\xa0 Paris\x5cn\
+      - 05 - Jul\
+es et le Renard\x5c\
+n      - 06 - Un\
+ g\xc3\xa2teau au go\xc3\xbb\
+ter\x5cn      - 07 \
+- Salom\xc3\xa9 veut u\
+ne histoire\x5cn   \
+   - 08 - Adieu \
+odieux diner\x5cn\x5cn\
+Saison 2021 :\x5cn \
+     - 01 - La m\
+ontagne \xc3\xa0 la me\
+r\x5cn      - 02 - \
+Moi veut \xc3\xa7a\x5cn  \
+    - 03 - Un pe\
+u beaucoup\x5cn    \
+  - 04 - Mon \xc3\xael\
+e\x5cn      - 05 - \
+Si l'hiver arriv\
+e, dis lui que j\
+e ne suis pas l\xc3\
+\xa0\x5cn      - 06 - \
+Rien que toi\x5cn  \
+    - 07 - L'oei\
+l de Berk\x5cn     \
+ - 08 - Dico Din\
+o\x22\x0d\x0a    },\x0d\x0a    \
+\x22aa4a0c20-09dd-4\
+4ba-94fe-cee4073\
+e09f6\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22aa4a\
+0c20-09dd-44ba-9\
+4fe-cee4073e09f6\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Encore une\
+ histoire - Mega\
+ Pack (57 episod\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22M\
+\xc3\xa9ga Pack repren\
+ant:\x5cn- Encore u\
+ne histoire - Ab\
+racadaPark (6 ep\
+isodes)!\x22\x0d\x0a    }\
+,\x0d\x0a    \x224957984c\
+-3fd1-452e-afc2-\
+7dc180083b89\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x224957984c-3fd1\
+-452e-afc2-7dc18\
+0083b89\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ aventures de Ro\
+dolphe et Gala, \
+saison 2 (8 \xc3\xa9pi\
+sodes)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x5c\x22Les aventure\
+s de Rodolphe et\
+ Gala\x5c\x22 : la s\xc3\xa9\
+rie audio des en\
+fants (... et de\
+ leurs parents !\
+!)\x5cnRodolphe est\
+ un petit extrat\
+errestre qui vit\
+ sur la plan\xc3\xa8te\
+ Rikiki, qui est\
+ minuscule, o\xc3\xb9 \
+il empile des ca\
+illoux toute la \
+journ\xc3\xa9e...\x5cn\x5cnM\
+ais il r\xc3\xaave d'u\
+ne plan\xc3\xa8te plus\
+ grande, remplie\
+ de milliers de \
+cailloux... il d\
+\xc3\xa9cide donc de p\
+artir \xc3\xa0 l'avent\
+ure \xc3\xa0 travers t\
+out l'univers. \xc3\
+\x80 bord du vaisse\
+au spatial de Ga\
+la, les deux ami\
+s parcourent l'u\
+nivers \xc3\xa0 la rec\
+herche de la pla\
+n\xc3\xa8te id\xc3\xa9ale o\xc3\
+\xb9 vivre (et empi\
+ler des cailloux\
+ !).\x5cn\x5cnhttps://\
+www.rodolpheetga\
+la.com\x5cn\x5cnEpisod\
+es: \x5cnEpisode 01\
+ La Plane\xcc\x80te in\
+connue\x5cnEpisode \
+02 Le myste\xcc\x80re \
+de la grotte\x5cnEp\
+isode 03 Une por\
+te vers l'inconn\
+u\x5cnEpisode 04 L'\
+incroyable de\xcc\x81c\
+ouverte\x5cnEpisode\
+ 05 La plane\xcc\x80te\
+ aux rochers noi\
+rs\x5cnEpisode 06 L\
+a Rencontre de M\
+usika\x5cnEpisode 0\
+7 Si pre\xcc\x80s du b\
+ut !\x5cnEpisode 08\
+ Le grand retour\
+\x5cn\x5cnV1 Gayel\x5cnV2\
+ pascal 974 : R\xc3\
+\xa9cup\xc3\xa9ration des\
+ jingles de psyc\
+koyic sur le meg\
+a pack saisons 1\
+ \xc3\xa0 6 + images +\
+ liste des \xc3\xa9pis\
+odes\x22\x0d\x0a    },\x0d\x0a \
+   \x2283a5ffaa-067\
+d-41a9-b447-a596\
+4acab91a\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x228\
+3a5ffaa-067d-41a\
+9-b447-a5964acab\
+91a\x22,\x0d\x0a        \x22\
+title\x22: \x22Disney \
+- Les Chefs d'Oe\
+uvre\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Vivez la magie d\
+e Disney en \xc3\xa9co\
+utant en famille\
+ ces dix formida\
+bles histoires c\
+ultes : Le Livre\
+ de la Jungle, L\
+es Aristochats, \
+Les 101 Dalmatie\
+ns, Bambi, Dumbo\
+, Le Roi Lion, A\
+laddin, Alice au\
+ Pays des Mervei\
+lles, Peter Pan \
+et Pinocchio. Co\
+nt\xc3\xa9s par deux c\
+om\xc3\xa9diens (Val\xc3\xa9\
+rie Marchant et \
+Patrick Donnay) \
+et accompagn\xc3\xa9s \
+de savoureuses m\
+usiques propres \
+\xc3\xa0 chaque univer\
+s, ces grands cl\
+assiques sauront\
+ ravir les petit\
+s et les grands \
+!\x5cn\x22\x0d\x0a    },\x0d\x0a  \
+  \x2271f61632-f6c0\
+-47ba-abdb-82d85\
+dc36f01\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2271\
+f61632-f6c0-47ba\
+-abdb-82d85dc36f\
+01\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les aven\
+tures de Rodolph\
+e et Gala, saiso\
+n 3 (8 \xc3\xa9pisodes\
+)\x22,\x0d\x0a        \x22de\
+scription\x22: \x22\x5c\x22L\
+es aventures de \
+Rodolphe et Gala\
+\x5c\x22 : la s\xc3\xa9rie a\
+udio des enfants\
+ (... et de leur\
+s parents !!)\x5cnR\
+odolphe est un p\
+etit extraterres\
+tre qui vit sur \
+la plan\xc3\xa8te Riki\
+ki, qui est minu\
+scule, o\xc3\xb9 il em\
+pile des caillou\
+x toute la journ\
+\xc3\xa9e...\x5cn\x5cnMais i\
+l r\xc3\xaave d'une pl\
+an\xc3\xa8te plus gran\
+de, remplie de m\
+illiers de caill\
+oux... il d\xc3\xa9cid\
+e donc de partir\
+ \xc3\xa0 l'aventure \xc3\
+\xa0 travers tout l\
+'univers. \xc3\x80 bor\
+d du vaisseau sp\
+atial de Gala, l\
+es deux amis par\
+courent l'univer\
+s \xc3\xa0 la recherch\
+e de la plan\xc3\xa8te\
+ id\xc3\xa9ale o\xc3\xb9 viv\
+re (et empiler d\
+es cailloux !).\x5c\
+n\x5cnhttps://www.r\
+odolpheetgala.co\
+m\x5cn\x5cnV1 Gayel\x5cnV\
+2 Dolido 8 : R\xc3\xa9\
+cup\xc3\xa9ration des \
+jingles de psyck\
+oyic sur le mega\
+ pack saisons 1 \
+\xc3\xa0 6 + images + \
+ajout du jingle \
+\x5c\x22Veux-tu \xc3\xa9cout\
+er la suite ?\x5c\x22 \
+avant de propose\
+r l'\xc3\xa9pisode sui\
+vant + Suppressi\
+on de la pub au \
+d\xc3\xa9part des \xc3\xa9pi\
+sodes 6, 7 et 8\x22\
+\x0d\x0a    },\x0d\x0a    \x22a\
+471c0ce-2b41-4cb\
+6-acc9-32187ee4b\
+fdf\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22a471c0\
+ce-2b41-4cb6-acc\
+9-32187ee4bfdf\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Les aventure\
+s de Rodolphe et\
+ Gala\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Saisons 1 \xc3\xa0 6 \
+des aventures de\
+ Rodolphe et Gal\
+a\x22\x0d\x0a    },\x0d\x0a    \
+\x229db0f636-d0ae-4\
+0b8-b703-c59c882\
+cd0c0\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x229db0\
+f636-d0ae-40b8-b\
+703-c59c882cd0c0\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Une petite\
+ souris \xc3\xa0 l'Op\xc3\
+\xa9ra (6 actes)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22MAJ V2:\
+ Am\xc3\xa9liorations \
+images de menus,\
+ des jingles (fo\
+ndu), enchaineme\
+nt des actes ave\
+c noeuds de tran\
+sition, ajout mo\
+de nuit + normal\
+isation des titr\
+es et histoires \
+avec ffmpeg-norm\
+alize\x5cn\x5cnLucie, \
+une petite souri\
+s qui r\xc3\xaave de d\
+evenir danseuse,\
+ va explorer le \
+Palais Garnier. \
+Gr\xc3\xa2ce \xc3\xa0 sa pet\
+ite taille, elle\
+ va discr\xc3\xa8temen\
+t observer les d\
+anseurs, chor\xc3\xa9g\
+raphes, chefs d\xe2\
+\x80\x99orchestre, met\
+teurs en sc\xc3\xa8ne,\
+ mais aussi les \
+techniciens et l\
+es d\xc3\xa9corateurs,\
+ acteurs souvent\
+ m\xc3\xa9connus du gr\
+and public. Ce q\
+ui se passe derr\
+i\xc3\xa8re les rideau\
+x du Palais Garn\
+ier n\xe2\x80\x99aura plu\
+s de secret pour\
+ Lucie\xe2\x80\xa6 ni pou\
+r les jeunes aud\
+iteurs. \x5cnSes av\
+entures vont la \
+mener jusqu\xe2\x80\x99\xc3\xa0\
+ Luca, le vieux \
+rat qui habite l\
+\xe2\x80\x99Op\xc3\xa9ra depuis\
+ toujours, et qu\
+i lui est bien d\
+\xc3\xa9cid\xc3\xa9 \xc3\xa0 la me\
+ttre dehors. Mai\
+s son r\xc3\xaave fou \
+de devenir chant\
+eur lyrique va l\
+e rapprocher de \
+la petite souris\
+.\x5cn\x5cn6 actes\x5cn\x5cn\
+https://www.oper\
+adeparis.fr/info\
+/une-petite-sour\
+is-a-lopera \x22\x0d\x0a \
+   },\x0d\x0a    \x224e19\
+ff2d-8324-45be-8\
+0bd-080e6a7dd1c0\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x224e19ff2d-\
+8324-45be-80bd-0\
+80e6a7dd1c0\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Mini Mondes\
+, 4-7 ans (39 pa\
+ys)\x22,\x0d\x0a        \x22\
+description\x22: \x22M\
+AJ v9 : Fix c\xc3\xb4t\
+e ouest et Indon\
+esie\x5cn\x5cnMAJ v8 :\
+ 30 D\xc3\xa9cembre 20\
+23, ajout du cho\
+ix des continent\
+s.\x5cn\x5cnQuoi de mi\
+eux que de la mu\
+sique pour voyag\
+er d\xe2\x80\x99un pays \xc3\
+\xa0 l\xe2\x80\x99autre au r\
+ythme des chanso\
+ns !\x5cn\x5cnDe la mu\
+sique, mais auss\
+i des histoires \
+et surtout du fu\
+n \xc3\xa0 gogo pour b\
+ouger son corps \
+de bas en haut !\
+ \xc3\x80 \xc3\xa9couter \xc3\xa0 \
+la maison, en vo\
+iture\xe2\x80\xa6 ou en v\
+an, bien \xc3\xa9videm\
+ment !\x5cn\x5cnAccroc\
+hez vos ceinture\
+s, \xc3\xa7a va swingu\
+er ! 39 pays \xc3\xa0 \
+d\xc3\xa9couvrir \xc3\xa0 tr\
+avers des compti\
+nes, musiques et\
+ histoires ultra\
+ chouettes que v\
+os enfants \xc3\xa9cou\
+teront avec bonh\
+eur d\xc3\xa8s qu\xe2\x80\x99il\
+s auront envie d\
+e revivre l\xe2\x80\x99av\
+enture du tour d\
+u monde (ou d\xe2\x80\x99\
+improviser une b\
+oum dans leur ch\
+ambre !) \x22\x0d\x0a    \
+},\x0d\x0a    \x222b79c23\
+f-d0b8-4282-919f\
+-5fd66cbac2a0\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x222b79c23f-d0b\
+8-4282-919f-5fd6\
+6cbac2a0\x22,\x0d\x0a    \
+    \x22title\x22: \x22Re\
+connaitre Les Ch\
+iffres\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Les packs \xc3\xa9du\
+catifs sont bien\
+ trop rares !\x5cnR\
+econnaitre les c\
+hiffres de 0 \xc3\xa0 \
+4 by tony huguen\
+otte\x5cn\x5cnDans un \
+premier temps le\
+s chiffres sont \
+affich\xc3\xa9s ainsi \
+que l'image du c\
+hiffre tout cela\
+ ce fais en bouc\
+le jusqu'a ce qu\
+'on appuie sur l\
+e bouton Maison.\
+\x5cnla suite conti\
+nue en dictant v\
+ocalement le chi\
+ffre a chercher \
+, l'enfant doit \
+tourner la molet\
+te jusqu'\xc3\xa0 ce q\
+ue le bon chiffr\
+e s'affiche puis\
+ il clique sur O\
+K.\x5cnsi c'est jus\
+te il f\xc3\xa9licite \
+l'enfant sinon i\
+l perd puis cela\
+ recommence \x22\x0d\x0a \
+   },\x0d\x0a    \x22cf33\
+fcaf-3004-4b56-a\
+994-a1175c1742b0\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x22cf33fcaf-\
+3004-4b56-a994-a\
+1175c1742b0\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22La Patpatrouill\
+e\x22,\x0d\x0a        \x22de\
+scription\x22: \x2219 \
+Histoires de la \
+Pat'Patrouille p\
+our se distraire\
+ sans \xc3\xa9crans\x5cn\x5c\
+nhttps://www.you\
+tube.com/@LiyahP\
+andore\x5cn\x5cnV1 Son\
+ior\x5cnV6 milva \x5cn\
+V7 swiip   : Ima\
+ges + jingles\x5cnv\
+8 Aleks : compre\
+ssion fichiers\x5cn\
+\x22\x0d\x0a    },\x0d\x0a    \x22\
+c593cbee-05d3-41\
+f4-a15c-800ffbe3\
+7bf9\x22: {\x0d\x0a      \
+  \x22uuid\x22: \x22c593c\
+bee-05d3-41f4-a1\
+5c-800ffbe37bf9\x22\
+,\x0d\x0a        \x22titl\
+e\x22: \x22JP Arrou-Vi\
+gnod - Enqu\xc3\xaate \
+au coll\xc3\xa8ge - Le\
+ professeur a di\
+sparu\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Enqu\xc3\xaate au col\
+l\xc3\xa8ge : le profe\
+sseur a disparu \
+de Jean-Philippe\
+ Arrou-Vignod, l\
+ue par Olivier C\
+hauvel\x5cn\x5cnUn s\xc3\xa9\
+jour \xc3\xa0 Venise !\
+ C'est le prix d\
+u concours que v\
+iennent de rempo\
+rter R\xc3\xa9mi Phara\
+mon, Mathilde Bl\
+ondin et Pierre-\
+Paul Louis de Cu\
+lbert, surnomm\xc3\xa9\
+ P.P. Cul-Vert. \
+Accompagn\xc3\xa9s de \
+leur professeur,\
+ les trois coll\xc3\
+\xa9giens prennent \
+le train pour l'\
+Italie. Mais, en\
+ pleine nuit, le\
+ professeur disp\
+ara\xc3\xaet myst\xc3\xa9rie\
+usement... R\xc3\xa9mi\
+, Mathilde et P.\
+P. se lancent \xc3\xa0\
+ la poursuite de\
+s ravisseurs.\x5cnD\
+ur\xc3\xa9e : 2h envir\
+on.\x22\x0d\x0a    },\x0d\x0a  \
+  \x22d3a11f32-a1ba\
+-403b-a49d-77a39\
+559edcc\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22d3\
+a11f32-a1ba-403b\
+-a49d-77a39559ed\
+cc\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Les aven\
+tures de Rodolph\
+e et Gala, saiso\
+n 8\x22,\x0d\x0a        \x22\
+description\x22: \x22\x5c\
+\x22Les aventures d\
+e Rodolphe et Ga\
+la\x5c\x22 : la s\xc3\xa9rie\
+ audio des enfan\
+ts (... et de le\
+urs parents !!)\x5c\
+nRodolphe est un\
+ petit extraterr\
+estre qui vit su\
+r la plan\xc3\xa8te Ri\
+kiki, qui est mi\
+nuscule, o\xc3\xb9 il \
+empile des caill\
+oux toute la jou\
+rn\xc3\xa9e...\x5cn\x5cnMais\
+ il r\xc3\xaave d'une \
+plan\xc3\xa8te plus gr\
+ande, remplie de\
+ milliers de cai\
+lloux... il d\xc3\xa9c\
+ide donc de part\
+ir \xc3\xa0 l'aventure\
+ \xc3\xa0 travers tout\
+ l'univers. \xc3\x80 b\
+ord du vaisseau \
+spatial de Gala,\
+ les deux amis p\
+arcourent l'univ\
+ers \xc3\xa0 la recher\
+che de la plan\xc3\xa8\
+te id\xc3\xa9ale o\xc3\xb9 v\
+ivre (et empiler\
+ des cailloux !)\
+.\x5cn\x5cnhttps://www\
+.rodolpheetgala.\
+com\x5cn\x5cnSaison 5,\
+ 8 \xc3\xa9pisodes\x5cn10\
+ \xc3\xa9pisodes + 3 h\
+ors s\xc3\xa9rie\x5cn\x5cnV1\
+ Gayel\x5cnV2 Simii\
+nion: R\xc3\xa9cup\xc3\xa9ra\
+tion des jingles\
+ de psyckoyic + \
+images + ajout d\
+u jingle \x5c\x22Veux-\
+tu \xc3\xa9couter la s\
+uite ?\x5c\x22 avant d\
+e proposer l'\xc3\xa9p\
+isode suivant\x22\x0d\x0a\
+    },\x0d\x0a    \x221f0\
+10427-6dea-401f-\
+adaf-7dcee35ce49\
+6\x22: {\x0d\x0a        \x22\
+uuid\x22: \x221f010427\
+-6dea-401f-adaf-\
+7dcee35ce496\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22La Petite Trou\
+ille\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+La Petite Trouil\
+le\x5cnC\xe2\x80\x99est l\xe2\x80\x99\
+heure d\xe2\x80\x99aller \
+au lit. Un papa \
+et son fils se m\
+ettent \xc3\xa0 cr\xc3\xa9er\
+ une chanson qui\
+ fiche un peu la\
+ trouille\xe2\x80\xa6 C\xe2\x80\
+\x99est pas le mome\
+nt, c\xe2\x80\x99est vrai\
+, mais c\xe2\x80\x99est a\
+musant. Ils s\xc3\xa9l\
+ectionnent des i\
+nstruments de mu\
+sique - une guit\
+are, des maillet\
+s chinois \xe2\x80\x93 et\
+ des sons aussi \
+- dentier qui cl\
+aque, voix de fa\
+nt\xc3\xb4me\xe2\x80\xa6 Soudai\
+n, un bruit r\xc3\xa9s\
+onne dans la mai\
+son : une sorci\xc3\
+\xa8re pr\xc3\xa9pare sa \
+tambouille\xe2\x80\xa6\x5cnA\
+uteur : \xc3\x89douard\
+ MANCEAU\x5cnVoix :\
+ Alexis HK, Vict\
+or\x5cnCompositeur \
+: Alexis HK\x5cnMus\
+icien : Alexis H\
+K\x5cnR\xc3\xa9alisateur \
+sonore : Ludovic\
+ ROCCA\x5cn10 minut\
+es\x22\x0d\x0a    },\x0d\x0a   \
+ \x2236014723-1ab9-\
+4d71-a2f1-397dcd\
+aeed84\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22360\
+14723-1ab9-4d71-\
+a2f1-397dcdaeed8\
+4\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Little st\
+ories for tiny p\
+eople\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Little Stories \
+for Tiny People \
+is a children's \
+podcast featurin\
+g original audio\
+ stories that wi\
+ll delight the t\
+iny people in yo\
+ur life. Perfect\
+ for bleary-eyed\
+ parents, innova\
+tive teachers, a\
+nd at-wits'-end \
+babysitters look\
+ing for an alter\
+native and non-a\
+nnoying way to e\
+ngage the toddle\
+rs and young kid\
+s they love at b\
+edtime or any ti\
+me! Each story i\
+s lovingly writt\
+en and performed\
+ with attention \
+to the whimsical\
+ senses of humor\
+ children often \
+possess. \x5cn\x5cnhtt\
+ps://www.littles\
+toriestinypeople\
+.com/ \x22\x0d\x0a    },\x0d\
+\x0a    \x2263fb9cfc-c\
+362-4970-b2e9-a9\
+f60d671ddb\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2263fb9cfc-c362-4\
+970-b2e9-a9f60d6\
+71ddb\x22,\x0d\x0a       \
+ \x22title\x22: \x22Marti\
+n le Marcassin\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Les av\
+entures de Marti\
+n et ses amis da\
+ns la grande for\
+\xc3\xaat du Plot, par\
+ Dominique Gryll\
+a\x5cn\x5cnMartin expl\
+ore la nature au\
+ gr\xc3\xa9 de sa curi\
+osit\xc3\xa9 et appren\
+d \xc3\xa0 devenir gra\
+nd par ses actio\
+ns, et ses petit\
+es b\xc3\xaatises. C'e\
+st un marcassin \
+au grand coeur t\
+oujours pr\xc3\xaat \xc3\xa0\
+ aider les autre\
+s et curieux de \
+la vie. \xc3\x89crit e\
+t r\xc3\xa9alis\xc3\xa9 par \
+Dominique Grylla\
+. Avec les voix \
+de Claire Apraha\
+mian, Marin Biec\
+hy, Mathilde Mel\
+ero et Ys\xc3\xa9e. Il\
+lustration: Sega\
+ Favre. Ce podca\
+st s'adresse aux\
+ enfants de 5 \xc3\xa0\
+ 10 ans.\x5cn\x5cnhttp\
+s://martinlemarc\
+assin.lepodcast.\
+fr/\x22\x0d\x0a    },\x0d\x0a  \
+  \x2225b9b379-67d9\
+-41e0-9da6-4e996\
+14dd1d8\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2225\
+b9b379-67d9-41e0\
+-9da6-4e99614dd1\
+d8\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Mythes &\
+ L\xc3\xa9gendes\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Ulysse, At\
+hena, Thor, Anub\
+is, le roi Arthu\
+r, et bien d'aut\
+res... Quelle Hi\
+stoire te fait d\
+\xc3\xa9couvrir les my\
+thes et l\xc3\xa9gende\
+s du monde entie\
+r, comme tu ne l\
+es as jamais ent\
+endues.\x22\x0d\x0a    },\
+\x0d\x0a    \x229a261bf1-\
+67a2-432c-899a-9\
+08aba945aec\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x229a261bf1-67a2-\
+432c-899a-908aba\
+945aec\x22,\x0d\x0a      \
+  \x22title\x22: \x22Blue\
+y - Saison 2\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Bluey sa\
+ison 1 - 52 \xc3\xa9pi\
+sodes (sans g\xc3\xa9n\
+\xc3\xa9rique)\x5cn\x5cnBlue\
+y est une petite\
+ chienne bouvier\
+ australien dot\xc3\
+\xa9e d\xe2\x80\x99une imagi\
+nation sans limi\
+te. Elle fait de\
+ la vie de famil\
+le une aventure \
+quotidienne et l\
+udique. Avec sa \
+petite s\xc5\x93ur Bin\
+go, elle explore\
+ le monde qui le\
+s entoure par le\
+ jeu.\x22\x0d\x0a    },\x0d\x0a\
+    \x2281ad0872-fb\
+ce-4e60-bb86-e47\
+044652d67\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+81ad0872-fbce-4e\
+60-bb86-e4704465\
+2d67\x22,\x0d\x0a        \
+\x22title\x22: \x22Contes\
+ musicaux (Didie\
+r Jeunesse)\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Didier Je\
+unesse Contes mu\
+sicaux  \x5cn\x5cn- Pe\
+tit Chat \xc3\xa0 la f\
+\xc3\xaate foraine\x5cn\x5cn\
+Avec son amie la\
+ Souris, Petit C\
+hat visite la f\xc3\
+\xaate foraine. Imp\
+atient,  il veut\
+ tout voir, tout\
+ essayer, le man\
+\xc3\xa8ge, le magicie\
+n, les bonbons e\
+t la p\xc3\xaache aux \
+poissons !  Mais\
+ il y a beaucoup\
+ de monde autour\
+ de lui, \xc3\xa7a se \
+bouscule et \xc3\xa7a \
+crie\xe2\x80\xa6 Heureuse\
+ment que la Peti\
+te Souris est l\xc3\
+\xa0 pour l\xe2\x80\x99aider\
+ et le rassurer \
+!\x5cnhttps://www.d\
+idier-jeunesse.c\
+om/livre/petit-c\
+hat-la-fete-fora\
+ine-livre-cd-978\
+2278126071/\x5cn\x5cn-\
+Hop, dans la Lun\
+e !\x5cn\x5cn5... 4 ..\
+. 3... 2... 1...\
+ Partez !\x5cnLa fu\
+s\xc3\xa9e monte tout \
+l\xc3\xa0-haut dans le\
+ ciel ! Lala et \
+son amie la Sour\
+is sont si conte\
+ntes d'aller sur\
+ la Lune... Mais\
+ Lala ouvre le h\
+ublot et son dou\
+dou s'envole ! V\
+ite, la Souris e\
+nfile sa combina\
+ison et part le \
+chercher...\x5cnhtt\
+ps://www.didier-\
+jeunesse.com/liv\
+re/hop-dans-la-l\
+une-livre-cd-978\
+2278129447/\x5cn\x5cn-\
+ Bonne nuit, Pet\
+it Kaki !\x5cn\x5cnPet\
+it Kaki a beau c\
+hercher partout,\
+ il n\xe2\x80\x99arrive p\
+as \xc3\xa0 trouver le\
+ sommeil\xe2\x80\xa6\x5cnSon\
+ amie la souris \
+vient l\xe2\x80\x99aider.\
+ 1,2,3, les voil\
+\xc3\xa0 tous les deux\
+ partis dans une\
+ aventure magiqu\
+e sur les toits \
+de la ville.\x5cnht\
+tps://www.didier\
+-jeunesse.com/li\
+vre/bonne-nuit-p\
+etit-kaki-livre-\
+cd-9782278129454\
+/\x5cn\x5cn- Oh hisse,\
+ petit escargot \
+!\x5cn\x5cn1, 2, 3, pa\
+rtez !\x5cnDans le \
+jardin, tous les\
+ animaux font la\
+ course. Sauf Pe\
+tit Escargot. Il\
+ a peur d\xe2\x80\x99avan\
+cer. Heureusemen\
+t, Petite souris\
+ va l\xe2\x80\x99aider\xe2\x80\xa6\
+\x5cnhttps://www.di\
+dier-jeunesse.co\
+m/livre/oh-hisse\
+-petit-escargot-\
+ecoute-en-ligne-\
+9782278121595/\x5cn\
+\x5cn- Sur le dos d\
+'une souris\x5cn\x5cnP\
+etit Ours est pe\
+rdu dans la for\xc3\
+\xaat. Il fait tout\
+ noir, il y a de\
+s bruits bizarre\
+s. \xc3\x87a fait peur\
+ ! Mais heureuse\
+ment, quand la P\
+etite Souris qui\
+ fait \xc2\xab  Tititi\
+tititi  \xc2\xbb d\xc3\xa9ba\
+rque, le chemin \
+jusqu\xe2\x80\x99\xc3\xa0 la ma\
+ison est beaucou\
+p moins effrayan\
+t\xe2\x80\xa6 et dix fois\
+ plus amusant  !\
+\x5cnhttps://www.di\
+dier-jeunesse.co\
+m/livre/sur-le-d\
+os-dune-souris-l\
+ivre-cd-97822781\
+29263/\x5cn\x5cn- Le G\
+\xc3\xa2teau de Ouisti\
+ti\x5cn\x5cnTout comme\
+ son papa, Ouist\
+iti veut faire l\
+a cuisine. Aid\xc3\xa9\
+ de son amie la \
+Souris, il d\xc3\xa9ci\
+de de pr\xc3\xa9parer \
+un g\xc3\xa2teau au ch\
+ocolat et \xc3\xa0 la \
+confiture. Aujou\
+rd\xe2\x80\x99hui, il veu\
+t tout faire tou\
+t seul : verser \
+la farine dans l\
+e saladier, cass\
+er les oeufs\xe2\x80\xa6 \
+et surtout croqu\
+er les morceaux \
+de chocolat !\x5cnh\
+ttps://www.didie\
+r-jeunesse.com/l\
+ivre/le-gateau-d\
+e-ouistiti-livre\
+-cd-978227812946\
+1/\x5cn\x5cn- La Lessi\
+ve de Petit Lapi\
+n\x5cn\x5cnPetit Lapin\
+ a bien du chagr\
+in, car sa maman\
+ a pris son doud\
+ou pour le laver\
+ ! Heureusement,\
+ la Petite Souri\
+s aide Petit Lap\
+in \xc3\xa0 r\xc3\xa9cup\xc3\xa9re\
+r son doudou ch\xc3\
+\xa9ri juste \xc3\xa0 tem\
+ps \xc3\xa0 la buander\
+ie. Et s\xe2\x80\x99ils a\
+llaient tous les\
+ deux le laver \xc3\
+\xa0 la rivi\xc3\xa8re ? \
+Une grande lessi\
+ve avec plein de\
+ mousse, \xc3\xa7a va \
+\xc3\xaatre rigolo ! F\
+rotti frotta, Pe\
+tit Lapin et la \
+Souris lavent le\
+s t\xc3\xa2ches de cho\
+colat sur la sal\
+opette et les jo\
+lies chaussettes\
+, se cachent dan\
+s les draps et s\
+autent dans leur\
+ panier-bateau \xc3\
+\xa0 la recherche d\
+\xe2\x80\x99un petit pois\
+son dans l\xe2\x80\x99eau\
+\xe2\x80\xa6 Mais voil\xc3\xa0 \
+l\xe2\x80\x99orage ! Vite\
+, il est temps d\
+e rentrer. Et le\
+ doudou, dans to\
+ut \xc3\xa7a ? Petit L\
+apin s\xe2\x80\x99est tel\
+lement amus\xc3\xa9 qu\
+\xe2\x80\x99il a compl\xc3\xa8t\
+ement oubli\xc3\xa9 de\
+ le laver ! \xc2\xab Q\
+uelle aventure !\
+ Tu n\xe2\x80\x99\xc3\xa9tais p\
+as avec moi et j\
+e n\xe2\x80\x99ai pas eu \
+si peur que \xc3\xa7a.\
+ Tu vois, je gra\
+ndis ! Demain, t\
+u resteras dans \
+mon lit ! \xc2\xbb.\x5cnh\
+ttps://www.didie\
+r-jeunesse.com/l\
+ivre/la-lessive-\
+de-petit-lapin-l\
+ivre-cd-97822781\
+26057/\x5cn\x22\x0d\x0a    }\
+,\x0d\x0a    \x228ce1a296\
+-9a3c-46f8-aca2-\
+a17d64cf4020\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x228ce1a296-9a3c\
+-46f8-aca2-a17d6\
+4cf4020\x22,\x0d\x0a     \
+   \x22title\x22: \x22Pau\
+line \xc3\xa0 la ferme\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Paul\
+ine a 6 ans et p\
+asse ses vacance\
+s dans la ferme \
+de son oncle et \
+de sa tante. Pau\
+line d\xc3\xa9couvre l\
+es animaux de la\
+ ferme et leurs \
+petits !\x5cn\x5cnCe p\
+rogramme, plein \
+de soleil, est \xc3\
+\xa0 la fois distra\
+yant et \xc3\xa9ducati\
+f : \xc3\xa0 travers l\
+es yeux d'un enf\
+ant de la ville,\
+ nous d\xc3\xa9couvron\
+s la vie \xc3\xa9tonna\
+nte, mais authen\
+tique d'une ferm\
+e avec des anima\
+ux et leurs b\xc3\xa9b\
+\xc3\xa9s. Pour Paulin\
+e chaque t\xc3\xa2che \
+quotidienne est \
+une nouvelle ave\
+nture. Elle donn\
+e \xc3\xa0 manger aux \
+poules, aide \xc3\xa0 \
+ramasser les oeu\
+fs, apprend \xc3\xa0 t\
+raire les vaches\
+ et am\xc3\xa8ne l'\xc3\xa2n\
+on et l'anesse a\
+u pr\xc3\xa9... Elle s\
+urveille le prem\
+ier bain des can\
+etons, apprend \xc3\
+\xa0 faire le froma\
+ge de ch\xc3\xa8vre et\
+ observe la tont\
+e des moutons en\
+ prot\xc3\xa8geant un \
+agneau dans ses \
+bras.\x5cn\x5cnSommair\
+e :\x5cn\x5cnAnimaux d\
+e la ferme : Ane\
+, canard, cheval\
+, ch\xc3\xa8vre, cocho\
+n, coq, lapin, m\
+outon, oie, pint\
+ade, poule, vach\
+e.\x22\x0d\x0a    },\x0d\x0a   \
+ \x229cb40766-4ed8-\
+464b-b771-a73892\
+f420dd\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x229cb\
+40766-4ed8-464b-\
+b771-a73892f420d\
+d\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Les avent\
+ures de Rodolphe\
+ et Gala, saison\
+ 6\x22,\x0d\x0a        \x22d\
+escription\x22: \x22\x5c\x22\
+Les aventures de\
+ Rodolphe et Gal\
+a\x5c\x22 : la s\xc3\xa9rie \
+audio des enfant\
+s (... et de leu\
+rs parents !!)\x5cn\
+Rodolphe est un \
+petit extraterre\
+stre qui vit sur\
+ la plan\xc3\xa8te Rik\
+iki, qui est min\
+uscule, o\xc3\xb9 il e\
+mpile des caillo\
+ux toute la jour\
+n\xc3\xa9e...\x5cn\x5cnMais \
+il r\xc3\xaave d'une p\
+lan\xc3\xa8te plus gra\
+nde, remplie de \
+milliers de cail\
+loux... il d\xc3\xa9ci\
+de donc de parti\
+r \xc3\xa0 l'aventure \
+\xc3\xa0 travers tout \
+l'univers. \xc3\x80 bo\
+rd du vaisseau s\
+patial de Gala, \
+les deux amis pa\
+rcourent l'unive\
+rs \xc3\xa0 la recherc\
+he de la plan\xc3\xa8t\
+e id\xc3\xa9ale o\xc3\xb9 vi\
+vre (et empiler \
+des cailloux !).\
+\x5cn\x5cnS06E01 L'inv\
+itation\x5cnS06E02 \
+La Plane\xcc\x80te Roc\
+\x5cnS06E03 L'e\xcc\x81qu\
+ilibre parfait\x5cn\
+S06E04 Les Scalp\
+ators\x5cnS06E05 Bi\
+envenue a\xcc\x80 Coco\
+mi\x5cnS06E06 Le Gr\
+and juge Xe\xcc\x81co\x5c\
+nS06E07 Retourne\
+ment de situatio\
+n\x5cnS06E08 De\xcc\x81no\
+uement\x5cnLa chans\
+on de Rodolphe e\
+t Gala !\x5cn\x5cnhttp\
+s://www.rodolphe\
+etgala.com\x5cn\x5cnV1\
+ Gayel\x5cnV2 Pasca\
+l 974 : R\xc3\xa9cup\xc3\xa9\
+ration des jingl\
+es de psyckoyic \
+sur le mega pack\
+ saisons 1 \xc3\xa0 6 \
++ images\x22\x0d\x0a    }\
+,\x0d\x0a    \x22fb6a91de\
+-60fe-46bf-a65c-\
+7070eb9b876a\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22fb6a91de-60fe\
+-46bf-a65c-7070e\
+b9b876a\x22,\x0d\x0a     \
+   \x22title\x22: \x22Blu\
+ey - Saison 1\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Bluey s\
+aison 1 - 52 \xc3\xa9p\
+isodes (sans g\xc3\xa9\
+n\xc3\xa9rique)\x5cn\x5cnBlu\
+ey est une petit\
+e chienne bouvie\
+r australien dot\
+\xc3\xa9e d\xe2\x80\x99une imag\
+ination sans lim\
+ite. Elle fait d\
+e la vie de fami\
+lle une aventure\
+ quotidienne et \
+ludique. Avec sa\
+ petite s\xc5\x93ur Bi\
+ngo, elle explor\
+e le monde qui l\
+es entoure par l\
+e jeu.\x22\x0d\x0a    },\x0d\
+\x0a    \x2292d65417-1\
+bbe-498e-a744-17\
+1079530421\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2292d65417-1bbe-4\
+98e-a744-1710795\
+30421\x22,\x0d\x0a       \
+ \x22title\x22: \x22Les a\
+ventures de Rodo\
+lphe et Gala, sa\
+ison 7\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22\x5c\x22Les aventure\
+s de Rodolphe et\
+ Gala\x5c\x22 : la s\xc3\xa9\
+rie audio des en\
+fants (... et de\
+ leurs parents !\
+!)\x5cnRodolphe est\
+ un petit extrat\
+errestre qui vit\
+ sur la plan\xc3\xa8te\
+ Rikiki, qui est\
+ minuscule, o\xc3\xb9 \
+il empile des ca\
+illoux toute la \
+journ\xc3\xa9e...\x5cn\x5cnM\
+ais il r\xc3\xaave d'u\
+ne plan\xc3\xa8te plus\
+ grande, remplie\
+ de milliers de \
+cailloux... il d\
+\xc3\xa9cide donc de p\
+artir \xc3\xa0 l'avent\
+ure \xc3\xa0 travers t\
+out l'univers. \xc3\
+\x80 bord du vaisse\
+au spatial de Ga\
+la, les deux ami\
+s parcourent l'u\
+nivers \xc3\xa0 la rec\
+herche de la pla\
+n\xc3\xa8te id\xc3\xa9ale o\xc3\
+\xb9 vivre (et empi\
+ler des cailloux\
+ !).\x5cn\x5cnhttps://\
+www.rodolpheetga\
+la.com\x5cn\x5cnSaison\
+ 7, 8 \xc3\xa9pisodes\x5c\
+n\x5cnV1 Gayel\x5cnV2 \
+Dolido 8 : Int\xc3\xa9\
+gration des jing\
+les de psyckoyic\
+ + images + ajou\
+t du jingle \x5c\x22Ve\
+ux-tu \xc3\xa9couter l\
+a suite ?\x5c\x22 avan\
+t de proposer l'\
+\xc3\xa9pisode suivant\
+ + suppression p\
+r\xc3\xa9sentation d\xc3\xa9\
+but \xc3\xa9pisode 1.\x22\
+\x0d\x0a    },\x0d\x0a    \x223\
+675fa12-51d1-4d1\
+9-b612-8726807dc\
+3bc\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x223675fa\
+12-51d1-4d19-b61\
+2-8726807dc3bc\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22Joue et appr\
+ends avec l'Euro\
+pe\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Jo\
+ue et apprends a\
+vec l'Europe.\x5cn\x5c\
+n5 activit\xc3\xa9s - \
+12 pays :\x5cn- Tro\
+uve le drapeau\x5cn\
+- Trouve la capi\
+tale\x5cn- Trouve l\
+e pays d'apr\xc3\xa8s \
+les indices\x5cn- A\
+pprends en d'ava\
+ntage sur les pa\
+ys\x5cn- D\xc3\xa9couvres\
+ les hymnes\x22\x0d\x0a  \
+  },\x0d\x0a    \x22509a2\
+a79-5c3f-41f8-be\
+bd-d9770e7cffc0\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22509a2a79-5\
+c3f-41f8-bebd-d9\
+770e7cffc0\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+10 histoires de \
+sorci\xc3\xa8res\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Compilatio\
+n de 10 histoire\
+s de sorci\xc3\xa8res\x5c\
+n\x5cn- Les 3 sorci\
+\xc3\xa8res (de Gr\xc3\xa9go\
+ire Solotareff)\x5c\
+n- L'eau qui ren\
+d invisible (de \
+Pierre Gripari, \
+vid\xc3\xa9o convertie\
+?)\x5cn- La f\xc3\xa9e du\
+ robinet (de Pie\
+rre Gripari, lec\
+ture de l'auteur\
+)\x5cn- La paire de\
+ chaussures (de \
+Pierre Gripari, \
+lecture de l'aut\
+eur)\x5cn- La sorci\
+\xc3\xa8re dans les ai\
+rs (de Julia Don\
+aldson, traduit \
+par Jean-Fran\xc3\xa7o\
+is M\xc3\xa9nard)\x5cn- L\
+a sorci\xc3\xa8re de l\
+a rue Mouffetard\
+ (de Pierre Grip\
+ari, lecture de \
+l'auteur)\x5cn- La \
+sorci\xc3\xa8re du pla\
+card \xc3\xa0 balais (\
+de Pierre Gripar\
+i, lecture de l'\
+auteur)\x5cn- La so\
+rci\xc3\xa8re qui rape\
+tissait les enfa\
+nts (de V\xc3\xa9roniq\
+ue Caylou)\x5cn- Le\
+ restaurant des \
+3 sorci\xc3\xa8res (le\
+s Belles Histoir\
+es num\xc3\xa9ro 550, \
+Octobre 2018)\x5cn-\
+ Le sac \xc3\xa0 sorci\
+\xc3\xa8res (de Agn\xc3\xa8s\
+ de Lestrade, Ro\
+bin)\x22\x0d\x0a    },\x0d\x0a \
+   \x2293e27c4c-33a\
+3-4b1f-b71c-d87d\
+45d67962\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x229\
+3e27c4c-33a3-4b1\
+f-b71c-d87d45d67\
+962\x22,\x0d\x0a        \x22\
+title\x22: \x22les Zin\
+strus (19 instru\
+ments)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x2219 \xc3\xa9pisodes d\
+u podcasts franc\
+e musique \x5c\x22les \
+Zinstrus\x5c\x22\x5cn-la \
+baguette\x5cn-la cl\
+arinette\x5cn-la co\
+ntrebasse\x5cn-la f\
+lute a bec\x5cn-la \
+guitare\x5cn-la har\
+pe\x5cn-la trompett\
+e\x5cn-la voix\x5cn-l'\
+accord\xc3\xa9on\x5cn-le \
+banjo\x5cn-le clave\
+cin\x5cn-le piano\x5cn\
+-le saxophone\x5cn-\
+le trombone \xc3\xa0 c\
+oulisse\x5cn-le uk\xc3\
+\xa9l\xc3\xa9l\xc3\xa9\x5cn-le vib\
+raphone\x5cn-les pe\
+rcussions\x5cn-l'ha\
+rmonica\x5cn-l'orgu\
+e (modifi\xc3\xa9)\x5cn\x22\x0d\
+\x0a    },\x0d\x0a    \x22ef\
+b43021-a397-40b5\
+-8d81-a33d394411\
+34\x22: {\x0d\x0a        \
+\x22uuid\x22: \x22efb4302\
+1-a397-40b5-8d81\
+-a33d39441134\x22,\x0d\
+\x0a        \x22title\x22\
+: \x22Petite Taupe\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x2211 hi\
+stoires de Petit\
+e Taupe : \x5cnPeti\
+te Taupe et le m\
+yst\xc3\xa9rieux incon\
+nu\x5cnLe restauran\
+t des mais de Pe\
+tite Taupe\x5cnLe v\
+oyage de Petite \
+Taupe\x5cnPetite Ta\
+upe, ouvre-moi t\
+a porte\x5cnPetite \
+Taupe ne veut pa\
+s d'amoureux\x5cnUn\
+e surprise pour \
+Petite Taupe\x5cnPe\
+tite Taupe est m\
+alade\x5cnJoyeux No\
+\xc3\xabl Petite Taupe\
+\x5cnL'aventure du \
+Grand Nord\x5cnLe f\
+acteur est pass\xc3\
+\xa9\x5cnPetite Taupe,\
+ tombe la pluie\x22\
+\x0d\x0a    },\x0d\x0a    \x22f\
+8c63499-96c8-4db\
+0-9fda-e5bfae754\
+cad\x22: {\x0d\x0a       \
+ \x22uuid\x22: \x22f8c634\
+99-96c8-4db0-9fd\
+a-e5bfae754cad\x22,\
+\x0d\x0a        \x22title\
+\x22: \x22La colo du c\
+r\xc3\xa9tac\xc3\xa9 saison \
+1\x22,\x0d\x0a        \x22de\
+scription\x22: \x22la \
+colo du cr\xc3\xa9tac\xc3\
+\xa9 la saison 1 co\
+mplete avec 8 \xc3\xa9\
+pisodes.\x22\x0d\x0a    }\
+,\x0d\x0a    \x223d711d86\
+-7b13-4be2-bef7-\
+caa735a8bc3f\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x223d711d86-7b13\
+-4be2-bef7-caa73\
+5a8bc3f\x22,\x0d\x0a     \
+   \x22title\x22: \x22Mar\
+tin le Marcassin\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Les \
+aventures de Mar\
+tin et ses amis \
+dans la grande f\
+or\xc3\xaat du Plot, p\
+ar Dominique Gry\
+lla\x5cn\x5cnMartin ex\
+plore la nature \
+au gr\xc3\xa9 de sa cu\
+riosit\xc3\xa9 et appr\
+end \xc3\xa0 devenir g\
+rand par ses act\
+ions, et ses pet\
+ites b\xc3\xaatises. C\
+'est un marcassi\
+n au grand coeur\
+ toujours pr\xc3\xaat \
+\xc3\xa0 aider les aut\
+res et curieux d\
+e la vie. \xc3\x89crit\
+ et r\xc3\xa9alis\xc3\xa9 pa\
+r Dominique Gryl\
+la. Avec les voi\
+x de Claire Apra\
+hamian, Marin Bi\
+echy, Mathilde M\
+elero et Ys\xc3\xa9e. \
+Illustration: Se\
+ga Favre. Ce pod\
+cast s'adresse a\
+ux enfants de 5 \
+\xc3\xa0 10 ans.\x5cn\x5cnht\
+tps://martinlema\
+rcassin.lepodcas\
+t.fr/\x22\x0d\x0a    },\x0d\x0a\
+    \x2289bd7d0e-d1\
+58-4734-80bc-d94\
+1e7624717\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+89bd7d0e-d158-47\
+34-80bc-d941e762\
+4717\x22,\x0d\x0a        \
+\x22title\x22: \x22Ninjag\
+o - Saison 1 : L\
+a menace des ser\
+pents\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Ninjago : Les M\
+a\xc3\xaetres du Spinj\
+itzu\x5cnSaison 1 c\
+ompl\xc3\xa8te \x5cn\x5cn\xc3\x89p\
+isode 1 : Le sou\
+l\xc3\xa8vement des Se\
+rpents\x5cn\xc3\x89pisode\
+ 2 : La famille \
+de Zane\x5cn\xc3\x89pisod\
+e 3 : La morsure\
+ du serpent\x5cn\xc3\x89p\
+isode 4 : M\xc3\xa9fie\
+z-vous des serpe\
+nts !\x5cn\xc3\x89pisode \
+5 : Le rassemble\
+ment des serpent\
+s\x5cn\xc3\x89pisode 6 : \
+Le roi serpent\x5cn\
+\xc3\x89pisode 7 : Tic\
+ tac\x5cn\xc3\x89pisode 8\
+ : La M\xc3\xa9tamorph\
+ose de Jay\x5cn\xc3\x89pi\
+sode 9 : Les For\
+gerons Royaux\x5cn\xc3\
+\x89pisode 10 : Le \
+Ninja Vert\x5cn\xc3\x89pi\
+sode 11 : Le Cho\
+ix de Garmadon\x5cn\
+\xc3\x89pisode 12 : Le\
+ R\xc3\xa9veil du Gran\
+d D\xc3\xa9voreur\x5cn\xc3\x89p\
+isode 13 : Le Jo\
+ur du Grand D\xc3\xa9v\
+oreur\x22\x0d\x0a    },\x0d\x0a\
+    \x2209fed32b-27\
+84-4679-9a7e-412\
+9c2c1f262\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+09fed32b-2784-46\
+79-9a7e-4129c2c1\
+f262\x22,\x0d\x0a        \
+\x22title\x22: \x22Racont\
+e-moi une b\xc3\xaatis\
+e (saisons 1, 2,\
+ 3, 4, 5)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22\xe2\x80\x9cRaconte-\
+moi une b\xc3\xaatise\xe2\
+\x80\x9d (5 saisons/56\
+ \xc3\xa9pisodes), le \
+podcast dr\xc3\xb4le e\
+t pas sage o\xc3\xb9 d\
+es adultes racon\
+tent leur plus b\
+elle b\xc3\xaatise d\xe2\x80\
+\x99enfance. Petits\
+, on a tous fait\
+ des b\xc3\xaatises et\
+ les enfants ado\
+rent qu\xe2\x80\x99on leu\
+r raconte. Ce po\
+dcast leur chuch\
+ote \xc3\xa0 l\xe2\x80\x99oreil\
+le les m\xc3\xa9savent\
+ures d\xe2\x80\x99enfants\
+ aujourd\xe2\x80\x99hui d\
+evenus grands. U\
+n policier, un h\
+umoriste, une ma\
+\xc3\xaetresse d\xe2\x80\x99\xc3\xa9c\
+ole, un garagist\
+e, une journalis\
+te\xe2\x80\xa6 Chacun se \
+rappelle avec ma\
+lice la b\xc3\xaatise \
+enfantine qui l\xe2\
+\x80\x99a le plus marq\
+u\xc3\xa9.Un podcast \xc3\
+\xa0 \xc3\xa9couter en fa\
+mille avant le d\
+\xc3\xaener, pendant l\
+e brossage de de\
+nts, au moment d\
+u coucher et pou\
+rquoi pas au pet\
+it-d\xc3\xa9jeuner pou\
+r d\xc3\xa9marrer la j\
+ourn\xc3\xa9e avec un \
+sourire !\x5cn\x5cnUne\
+ cr\xc3\xa9ation origi\
+nale Initial Stu\
+dio.\x5cnId\xc3\xa9e orig\
+inale : Anouk Ce\
+zilly\x5cnInterview\
+s : Sarah Petitb\
+on\x5cnR\xc3\xa9alisation\
+ : Alexandra Kan\
+dy Longuet\x5cnMusi\
+que et sound-des\
+ign : Thomas Vaq\
+ui\xc3\xa9 \x22\x0d\x0a    },\x0d\x0a\
+    \x22175cc32b-67\
+76-4064-9bd4-631\
+53860cb5a\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+175cc32b-6776-40\
+64-9bd4-63153860\
+cb5a\x22,\x0d\x0a        \
+\x22title\x22: \x22Rira B\
+ien Qui Rira Le \
+Dernier\x22,\x0d\x0a     \
+   \x22description\x22\
+: \x22Un livre-disq\
+ue joyeux autour\
+ d'une des th\xc3\xa9m\
+atiques pr\xc3\xa9f\xc3\xa9r\
+\xc3\xa9es des enfants\
+ : la ruse:\x5cn-  \
+La souris et le \
+voleur  (Jihad D\
+arwiche,  Christ\
+ian Voltz)  :\x5cnQ\
+uelle veinarde c\
+ette souris ! En\
+ faisant le m\xc3\xa9n\
+age, elle a trou\
+v\xc3\xa9 un sou. Mais\
+ pendant la nuit\
+, un voleur lui \
+d\xc3\xa9robe la moiti\
+\xc3\xa9 de la viande \
+qu'elle a achet\xc3\
+\xa9e. Un conte dr\xc3\
+\xb4lissime, d'orig\
+ine libanaise.\x5cn\
+-  La cocotte qu\
+i tap-tip-tope (\
+Coline Promeyrat\
+,  C\xc3\xa9cile Hudri\
+sier)  :\x5cnLa p't\
+ite mamie a bien\
+ du souci. Sa co\
+cotte pos\xc3\xa9e sur\
+ la cuisini\xc3\xa8re \
+n'a plus rien \xc3\xa0\
+ faire. Alors la\
+ p'tite mamie la\
+ range sur l'\xc3\xa9t\
+ag\xc3\xa8re et lui di\
+t \x5c\x22Ma cocotte j\
+olie, les ratato\
+uilles et les r\xc3\
+\xb4tis, c'est fini\
+.\x5c\x22 \x5c\x22C'est toi \
+qui l'dis, mamie\
+ ! Moi, aujourd'\
+hui, je tap-tip-\
+tope.\x5c\x22 Sacr\xc3\xa9e \
+cocotte ! Elle a\
+ la bougeotte ! \
+Galettes, cr\xc3\xa8me\
+ ou pi\xc3\xa8ces d'or\
+, elle a plus d'\
+un tour dans son\
+ sac pour ramene\
+r de quoi faire \
+la popotte. Mais\
+ gare \xc3\xa0 sa mali\
+ce !\x5cn-  La tout\
+e petite, petite\
+ bonne femme (Je\
+an-Louis Le Crav\
+er,  Delphine Gr\
+enier)  :\x5cnIl \xc3\xa9\
+tait une fois, u\
+ne toute petite,\
+ petite bonne fe\
+mme, qui avait u\
+ne toute petite,\
+ petite poule. U\
+ne toute petite,\
+ petite bonne fe\
+mme, une toute p\
+etite, petite om\
+elette, un gros,\
+ gros b\xc3\xa2ton pou\
+r un joli, joli \
+livre.\x22\x0d\x0a    },\x0d\
+\x0a    \x2259834150-e\
+b53-4ac2-a36e-b4\
+7e9731ef0e\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x2259834150-eb53-4\
+ac2-a36e-b47e973\
+1ef0e\x22,\x0d\x0a       \
+ \x22title\x22: \x22Recon\
+naitre Les Anima\
+ux de la Ferme\x22,\
+\x0d\x0a        \x22descr\
+iption\x22: \x22Cr\xc3\xa9at\
+ion de A \xc3\xa0 Z \x5cn\
+Ceci est un jeu \
+interactif qui p\
+ermet de reconna\
+itre le cri des \
+animaux de la fe\
+rme\x5cnDans un pre\
+mier temps le no\
+m et le cri des \
+animaux est pr\xc3\xa9\
+sent\xc3\xa9, quand l'\
+enfant a m\xc3\xa9mori\
+s\xc3\xa9 les animaux,\
+ il clique sur h\
+ome et peut pass\
+er au jeu, \x5cnLe \
+jeu : l'enfant e\
+ntend le son d'u\
+n animal puis av\
+ec la molette il\
+ doit trouver la\
+ bonne image et \
+cliquer OK, si i\
+l a bien r\xc3\xa9pond\
+u il est f\xc3\xa9lici\
+t\xc3\xa9. \x22\x0d\x0a    },\x0d\x0a\
+    \x22b229a3da-66\
+fd-4696-9e44-d28\
+0188f1968\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+b229a3da-66fd-46\
+96-9e44-d280188f\
+1968\x22,\x0d\x0a        \
+\x22title\x22: \x22Vocabu\
+laire d'anglais \
+10 th\xc3\xa8mes\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22Vocabulair\
+e d'anglais pour\
+ les 3 ans et pl\
+us.\x5cn\x5cnTh\xc3\xa8mes :\
+\x5cnLa famille\x5cnLa\
+ maison\x5cnLes v\xc3\xaa\
+tements\x5cnManger \
+et boire\x5cnLes an\
+imaux\x5cnLe corps\x5c\
+nLes saisons\x5cnL'\
+\xc3\xa9cole\x5cnLes chif\
+fres\x5cnLes couleu\
+rs\x22\x0d\x0a    },\x0d\x0a   \
+ \x22f86a56e0-4a71-\
+4bc4-a9b5-dbbb66\
+eeaecb\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22f86\
+a56e0-4a71-4bc4-\
+a9b5-dbbb66eeaec\
+b\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Mes premi\
+\xc3\xa8res comptines \
+avec les animaux\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x2215 c\
+omptines inconto\
+urnables \xc3\xa0 \xc3\xa9co\
+uter, \xc3\xa0 chanter\
+, et \xc3\xa0 mimer av\
+ec les petits.\x5cn\
+\x5cnhttps://www.fl\
+ammarion-jeuness\
+e.fr/mes-premier\
+es-comptines-ave\
+c-les-animaux/97\
+82081495210\x5cn\x5cn-\
+ La famille Tort\
+ue\x5cn- Sur le pla\
+ncher\x5cn- Le peti\
+t ver tout nu\x5cn-\
+ Ah ! les crocod\
+iles \x5cn- Dans la\
+ for\xc3\xaat lointain\
+e \x5cn- La m\xc3\xa8re M\
+ichel \x5cn- Une so\
+uris verte \x5cn- U\
+n pou, une puce \
+\x5cn- Do, r\xc3\xa9, mi,\
+ la perdrix \x5cn- \
+Il court, il cou\
+rt, le furet \x5cn-\
+ Alouette \x5cn- Mo\
+n petit lapin a \
+bien du chagrin \
+\x5cn- C\xe2\x80\x99est la b\
+aleine \x5cn- Y ava\
+it des gros croc\
+odiles \x5cn- Un \xc3\xa9\
+l\xc3\xa9phant qui se \
+baladait.\x22\x0d\x0a    \
+},\x0d\x0a    \x22e21373f\
+e-d8d0-4db3-8926\
+-d0c5c705f8b2\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22e21373fe-d8d\
+0-4db3-8926-d0c5\
+c705f8b2\x22,\x0d\x0a    \
+    \x22title\x22: \x22Sp\
+idey et ses amis\
+ extraordinaires\
+ (17 \xc3\xa9pisodes)\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x2217 \xc3\xa9\
+pisodes de Spide\
+y et ses amis ex\
+traordinaires\x5cnh\
+ttps://www.youtu\
+be.com/watch?v=9\
+AbHRr53Rfo\x5cn\x5cn- \
+Faire le singe\x5cn\
+- Hulk \xc3\xa0 la res\
+cousse\x5cn- Il fau\
+t arreter le doc\
+teur Octopus\x5cn- \
+L'\xc3\xa9quipe Spidey\
+\x5cn- Double missi\
+on\x5cn- L'attaque \
+du Bouffon Vert\x5c\
+n- Qui sera le p\
+lus fort?\x5cn- Sou\
+s le controle du\
+ Bouffon Vert\x5cn-\
+ Une chatastroph\
+e\x5cn- La patience\
+ de Black Panthe\
+r\x5cn- Les singes \
+araign\xc3\xa9es\x5cn- O\xc3\
+\xb9 est Bootsie?\x5cn\
+- Rhino en \xc3\xa9bul\
+ition\x5cn- Un myst\
+\xc3\xa8re \xc3\xa0 r\xc3\xa9soudr\
+e\x5cn- Web-ster\x22\x0d\x0a\
+    },\x0d\x0a    \x225ae\
+6bd69-0f87-48c2-\
+ba03-2233131f828\
+1\x22: {\x0d\x0a        \x22\
+uuid\x22: \x225ae6bd69\
+-0f87-48c2-ba03-\
+2233131f8281\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Les Podcasts d\
+'Auden\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Podcast d'Aude\
+n :\x5cn- le mange \
+doudou\x5cn- le vil\
+lage des crottes\
+ de nez\x5cn- un ma\
+mmouth dans le f\
+rigo\x5cn- la lettr\
+e au p\xc3\xa8re no\xc3\xabl\
+\x5cn- gruffalo\x22\x0d\x0a \
+   },\x0d\x0a    \x228c4c\
+ea99-0b07-4681-b\
+b65-2aba3a5602bc\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x228c4cea99-\
+0b07-4681-bb65-2\
+aba3a5602bc\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Les Contes de V\
+alerie Bonenfant\
+ - Volume 1: Con\
+tes de No\xc3\xabl\x22,\x0d\x0a\
+        \x22descrip\
+tion\x22: \x22Les Cont\
+es De Val\xc3\xa9rie B\
+onenfant, Vol. 1\
+ - Contes De No\xc3\
+\xabl lus par Fabie\
+nne Prost\x5cn\x5cnCe \
+sont sept contes\
+ de No\xc3\xabl, \xc3\xa9cri\
+ts par Val\xc3\xa9rie \
+Bonenfant, qui m\
+ettent en sc\xc3\xa8ne\
+ diff\xc3\xa9rents per\
+sonnages : un pe\
+tit gar\xc3\xa7on, qui\
+ r\xc3\xaave d\xe2\x80\x99avoir\
+ un chien, ou un\
+ chameau tent\xc3\xa9 \
+par l\xe2\x80\x99aventure\
+ du grand Nord, \
+le chaudron \xe2\x80\x98P\
+ol\xc3\xa8re\xe2\x80\x99 ou une\
+ petite marmotte\
+ surfeuse. Val\xc3\xa9\
+rie Bonenfant no\
+us transporte av\
+ec fantaisie et \
+bonheur dans son\
+ univers\x5cn\x5cnLa B\
+outique De No\xc3\xabl\
+\x5cnLes R\xc3\xa9verb\xc3\xa8r\
+es De No\xc3\xabl\x5cnMan\
+ca Blue, La Marm\
+otte Surfeuse\x5cnH\
+allouf Le Chamea\
+u\x5cnLe Chaudron P\
+olaire\x5cnLe Petit\
+ Gar\xc3\xa7on Qui R\xc3\xaa\
+vait D'Avoir Un \
+Chien\x5cnLe Cadeau\
+ Du Ciel\x22\x0d\x0a    }\
+,\x0d\x0a    \x22a588c5f6\
+-dcd8-42cb-b5e5-\
+0bb3261c7f5c\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x22a588c5f6-dcd8\
+-42cb-b5e5-0bb32\
+61c7f5c\x22,\x0d\x0a     \
+   \x22title\x22: \x22Dis\
+ney/Cars - Les A\
+ventures de Flas\
+h et Martin (9 h\
+istoires)\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x22Compilation\
+ des plus belles\
+ aventures de Ca\
+rs.\x5cnCars l'hist\
+oire du film\x5cnLa\
+ course a la glo\
+ire\x5cnL'histoire \
+de fantome\x5cnUn a\
+mi a la hauteur\x5c\
+nL'anniversaire \
+de martin\x5cnMarti\
+n cascadeur\x5cnMar\
+tin rock star\x5cnM\
+artin a la resco\
+usse\x5cnMartin avi\
+ateur\x5cn\x5cn\x22\x0d\x0a    \
+},\x0d\x0a    \x22b1aaf62\
+a-8cc9-47c6-be79\
+-163ac77a7fbd\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22b1aaf62a-8cc\
+9-47c6-be79-163a\
+c77a7fbd\x22,\x0d\x0a    \
+    \x22title\x22: \x22Ra\
+conte-moi une b\xc3\
+\xaatise (saisons 1\
+, 2, 3, 4, 5)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22\xe2\x80\x9cRaco\
+nte-moi une b\xc3\xaat\
+ise\xe2\x80\x9d (5 saison\
+s/56 \xc3\xa9pisodes),\
+ le podcast dr\xc3\xb4\
+le et pas sage o\
+\xc3\xb9 des adultes r\
+acontent leur pl\
+us belle b\xc3\xaatise\
+ d\xe2\x80\x99enfance. Pe\
+tits, on a tous \
+fait des b\xc3\xaatise\
+s et les enfants\
+ adorent qu\xe2\x80\x99on\
+ leur raconte. C\
+e podcast leur c\
+huchote \xc3\xa0 l\xe2\x80\x99o\
+reille les m\xc3\xa9sa\
+ventures d\xe2\x80\x99enf\
+ants aujourd\xe2\x80\x99h\
+ui devenus grand\
+s. Un policier, \
+un humoriste, un\
+e ma\xc3\xaetresse d\xe2\x80\
+\x99\xc3\xa9cole, un gara\
+giste, une journ\
+aliste\xe2\x80\xa6 Chacun\
+ se rappelle ave\
+c malice la b\xc3\xaat\
+ise enfantine qu\
+i l\xe2\x80\x99a le plus \
+marqu\xc3\xa9.Un podca\
+st \xc3\xa0 \xc3\xa9couter e\
+n famille avant \
+le d\xc3\xaener, penda\
+nt le brossage d\
+e dents, au mome\
+nt du coucher et\
+ pourquoi pas au\
+ petit-d\xc3\xa9jeuner\
+ pour d\xc3\xa9marrer \
+la journ\xc3\xa9e avec\
+ un sourire !\x5cn\x5c\
+nUne cr\xc3\xa9ation o\
+riginale Initial\
+ Studio.\x5cnId\xc3\xa9e \
+originale : Anou\
+k Cezilly\x5cnInter\
+views : Sarah Pe\
+titbon\x5cnR\xc3\xa9alisa\
+tion : Alexandra\
+ Kandy Longuet\x5cn\
+Musique et sound\
+-design : Thomas\
+ Vaqui\xc3\xa9 \x22\x0d\x0a    \
+},\x0d\x0a    \x22fb3d724\
+8-7ebd-40c4-925f\
+-fafda920ad6f\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x22fb3d7248-7eb\
+d-40c4-925f-fafd\
+a920ad6f\x22,\x0d\x0a    \
+    \x22title\x22: \x22St\
+ar Wars Les Aven\
+tures des Petits\
+ Jedi\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Star Wars Les A\
+ventures des Pet\
+its Jedi - Saiso\
+n 1 (19 \xc3\xa9pisode\
+s)\x22\x0d\x0a    },\x0d\x0a   \
+ \x22282aa649-8bc2-\
+45ba-be82-f44286\
+1ca1ef\x22: {\x0d\x0a    \
+    \x22uuid\x22: \x22282\
+aa649-8bc2-45ba-\
+be82-f442861ca1e\
+f\x22,\x0d\x0a        \x22ti\
+tle\x22: \x22Compilati\
+on des albums de\
+ Cornebidouille\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x225 his\
+toires de Corneb\
+idouille\x5cn5 hist\
+oires de Cornebi\
+douille petite\x5cn\
+2 chansons\x22\x0d\x0a   \
+ },\x0d\x0a    \x22a7e74d\
+1d-f7a6-4c2d-afd\
+7-10562ec86ac9\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22a7e74d1d-f7\
+a6-4c2d-afd7-105\
+62ec86ac9\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es contes a \xc3\xa9co\
+uter (3 contes) \
+26082023\x22,\x0d\x0a    \
+    \x22description\
+\x22: \x22Plusieurs co\
+ntes a \xc3\xa9couter \
+:\x5cn- Les 3 petit\
+s cochons\x5cn- Le \
+petit bonhomme e\
+n pain d'\xc3\xa9pice\x5c\
+n- Le compte de \
+Janot Lapin\x22\x0d\x0a  \
+  },\x0d\x0a    \x221b946\
+542-504e-4c75-bf\
+97-fb35b83c013a\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x221b946542-5\
+04e-4c75-bf97-fb\
+35b83c013a\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Pok\xc3\xa9mon - Les a\
+ventures de la D\
+resseuse Lou (8)\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22*Cr\xc3\
+\xa9ation originale\
+*\x5cn\x5cnUn pack qui\
+ va ravir petits\
+ et grands!\x5cnRet\
+rouvez le monde \
+magique de Pok\xc3\xa9\
+mon au travers d\
+es aventures de \
+Lou, jeune dress\
+euse venue de Ka\
+nto.\x5cn\xc3\x89pisode 1\
+ : Evoli, je te \
+choisis\x5cn\xc3\x89pisod\
+e 2 : La for\xc3\xaat \
+de Jade\x5cn\xc3\x89pisod\
+e 3 : Confrontat\
+ion \xc3\xa0 Argenta\x5cn\
+\xc3\x89pisode 4 : Un \
+pok\xc3\xa9camping ave\
+c No\xc3\xa9\x5cn\xc3\x89pisode\
+ 5 : Combat cont\
+re la Team Rocke\
+t\x5cn\xc3\x89pisode 6 : \
+Embarquement pou\
+r Alola!\x5cn\xc3\x89piso\
+de 7 : Le sauvet\
+age de Barpau\x5cn\xc3\
+\x89pisode Bonus : \
+La grande \xc3\xa9miss\
+ion du bureau Po\
+k\xc3\xa9mon\x5cn\x5cnNote :\
+ Les cinq premie\
+rs \xc3\xa9pisodes ont\
+ \xc3\xa9t\xc3\xa9 enregistr\
+\xc3\xa9s \xc3\xa0 l'ancienn\
+e depuis l'appli\
+ Lunii sans mont\
+age. Les choses \
+sont devenues pl\
+us s\xc3\xa9rieuses \xc3\xa0\
+ partir de l'\xc3\xa9p\
+isode 6. J'ai es\
+say\xc3\xa9 de rester \
+extr\xc3\xaamement fid\
+\xc3\xa8le \xc3\xa0 l'univer\
+s Pok\xc3\xa9mon, tout\
+ en prenant des \
+libert\xc3\xa9s pour f\
+aire plaisir \xc3\xa0 \
+ma fille et ses \
+copains. La s\xc3\xa9r\
+ie est toujours \
+en cours et le p\
+ack sera mis \xc3\xa0 \
+jour dans l'ann\xc3\
+\xa9e. Toutes les v\
+oix : sunstopper\
+ (sauf les voix \
+de Lou et L\xc3\xa9eo \
+dans l'\xc3\xa9pisode \
+bonus) \x5cn\x5cnEnreg\
+istrements, mont\
+age, mixage, ima\
+ges, cr\xc3\xa9ation d\
+u pack : sunstop\
+per\x22\x0d\x0a    },\x0d\x0a  \
+  \x22383e56f1-bad2\
+-4caf-9f03-bc1ad\
+40c3f98\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x2238\
+3e56f1-bad2-4caf\
+-9f03-bc1ad40c3f\
+98\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Il \xc3\xa9tai\
+t une fois Les d\
+\xc3\xa9couvreurs Part\
+ie 1\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+Audio \x5c\x22Il \xc3\xa9tai\
+t une fois... le\
+s d\xc3\xa9couvreurs\x5c\x22\
+, partie 1\x5cnCosm\
+ologie : Buffon,\
+ Galil\xc3\xa9e, Demai\
+n D\xc3\xa9j\xc3\xa0\x5cnL'huma\
+in : Darwin, Les\
+ m\xc3\xa9decins, Lore\
+nz, Marie Curie,\
+ Mendel,  Nos an\
+c\xc3\xaatres les chin\
+ois, Pasteur\x22\x0d\x0a \
+   },\x0d\x0a    \x2225fe\
+9a98-4287-403e-8\
+7b9-c56429e03d76\
+\x22: {\x0d\x0a        \x22u\
+uid\x22: \x2225fe9a98-\
+4287-403e-87b9-c\
+56429e03d76\x22,\x0d\x0a \
+       \x22title\x22: \
+\x22Chansons capfun\
+\x22,\x0d\x0a        \x22des\
+cription\x22: \x22Aman\
+ite le roi du ma\
+l\x5cnBalkos le m\xc3\xa9\
+chant homme\x5cnBar\
+berousse le bara\
+tineur\x5cnBest Fri\
+ends\x5cnBonheur fa\
+milial\x5cnBouille \
+bouille Caraboui\
+lle\x5cnBrelok la d\
+anse m\xc3\xa9canique\x5c\
+nClapou party\x5cnC\
+oeur e Farfaroll\
+e\x5cnEcoute ton co\
+eur\x5cnEnsemble\x5cnF\
+aisons danser la\
+ planete\x5cnFortic\
+he Ensorcel\xc3\xa9\x5cnF\
+rance en folie\x5cn\
+Gaufrette la gou\
+rmande\x5cnJoe Cook\
+ Coeur de pirate\
+\x5cnLa chorale de \
+plantouille\x5cnLar\
+s le petit vikin\
+g\x5cnL'\xc3\xa9ffroyable\
+ Amanite\x5cnMalina\
+gotte\x5cnMandragot\
+te la reine du m\
+al\x5cnMlle Baston \
+Sec \xc3\xa0 l'\xc3\xa9cole\x5c\
+nUn reve \xc3\xa9veill\
+\xc3\xa9\x5cnZarbi Polair\
+e\x22\x0d\x0a    },\x0d\x0a    \
+\x22ddcacb5d-92c9-4\
+822-9b0c-b96c2ab\
+db795\x22: {\x0d\x0a     \
+   \x22uuid\x22: \x22ddca\
+cb5d-92c9-4822-9\
+b0c-b96c2abdb795\
+\x22,\x0d\x0a        \x22tit\
+le\x22: \x22Georges Le\
+ Dragon (Geoffro\
+y de Pennart)\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Histoir\
+es de Georges le\
+ dragon de Geoff\
+roy de Pennart t\
+rouv\xc3\xa9es sur you\
+tube.\x5cn\x5cnContien\
+t :\x5cn- 01 - La p\
+rincesse, le dra\
+gon et le cheval\
+ier intr\xc3\xa9pide\x5cn\
+- 02 - Georges l\
+e dragon\x5cn- 03 -\
+ Jules le cheval\
+ier aga\xc3\xa7ant\x5cn- \
+04 - Au service \
+de la Couronne\x5cn\
+\x5cnhttps://www.ge\
+offroydepennart.\
+com/s%C3%A9rie-d\
+es-georges \x22\x0d\x0a  \
+  },\x0d\x0a    \x22d97a6\
+b54-2bc7-49a6-99\
+90-ec064329959c\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22d97a6b54-2\
+bc7-49a6-9990-ec\
+064329959c\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Fables de La Fon\
+taine (cont\xc3\xa9es \
+par Louis de Fun\
+\xc3\xa8s)\x22,\x0d\x0a        \
+\x22description\x22: \x22\
+10 fables de La \
+Fontaine racont\xc3\
+\xa9es en musique a\
+vec humour et po\
+\xc3\xa9sie par Louis \
+de Fun\xc3\xa8s.\x5cn\x5cn1.\
+ Le Corbeau et l\
+e Renard\x5cn2. Le \
+Loup et l'Agneau\
+\x5cn3. Le Coche et\
+ la Mouche\x5cn4. L\
+a Cigale et la F\
+ourmi\x5cn5. Le Sav\
+etier et le Fina\
+ncier\x5cn6. Le Lio\
+n et le Mouchero\
+n\x5cn7. Le Petit P\
+oisson et le P\xc3\xaa\
+cheur\x5cn8. Le Cha\
+t, la Belette et\
+ le petit Lapin\x5c\
+n9. La Montagne \
+qui accouche\x5cn10\
+. La Grenouille \
+qui veut se fair\
+e aussi grosse q\
+ue le Boeuf\x22\x0d\x0a  \
+  },\x0d\x0a    \x226fe30\
+d13-b759-4a50-b3\
+bc-b5984e2c5eeb\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x226fe30d13-b\
+759-4a50-b3bc-b5\
+984e2c5eeb\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Gruffalo et cie\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Le Gr\
+uffalo et autres\
+ histoires\x5cnpar \
+Julia Donaldson,\
+ lues par Rapha\xc3\
+\xabline Goupilleau\
+\x5cnGallimard Jeun\
+esse Audio\x5cn\x5cn- \
+Le Gruffalo\x5cn- L\
+e petit Gruffalo\
+\x5cn- Le rat sc\xc3\xa9l\
+\xc3\xa9rat\x5cn- La sorc\
+i\xc3\xa8re dans les a\
+irs\x5cn- Z\xc3\xa9bulon \
+le dragon\x5cn- Z\xc3\xa9\
+bulon et les m\xc3\xa9\
+decins volants\x5cn\
+- Monsieur Bout \
+de bois\x5cn- La ba\
+leine et l'escar\
+gote\x22\x0d\x0a    },\x0d\x0a \
+   \x22710b46de-8f1\
+7-44f6-ba37-8346\
+491a564c\x22: {\x0d\x0a  \
+      \x22uuid\x22: \x227\
+10b46de-8f17-44f\
+6-ba37-8346491a5\
+64c\x22,\x0d\x0a        \x22\
+title\x22: \x22Ecole d\
+es loisirs - B\xc3\xa9\
+b\xc3\xa9max\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Pack contenant\
+ 16 histoires de\
+ l'\xc3\xa9cole des lo\
+isirs - B\xc3\xa9b\xc3\xa9ma\
+x (de 3 \xc3\xa0 5 ans\
+) :\x5cn\x5cnSaison 20\
+20/2021 :\x5cn     \
+ - 01 - Le livre\
+ qui dit non !\x5cn\
+      - 02 - Un \
+bisou pour\x5cn    \
+  - 03 - Moi je \
+vais sur le pot\x5c\
+n      - 04 - O\xc3\
+\xb9 est pass\xc3\xa9 sau\
+cisse\x5cn      - 0\
+5 - Qui est le p\
+lus mignon ?\x5cn  \
+    - 06 - Print\
+emps\x5cn      - 07\
+ - Il est o\xc3\xb9 ch\
+at ?\x5cn      - 08\
+ - Croc croque\x5cn\
+\x5cnSaison 2021/20\
+22 :\x5cn      - 01\
+ - La cabane \xc3\xa0 \
+dodo\x5cn      - 02\
+ - Un peu, beauc\
+oup, \xc3\xa0 la folie\
+\x5cn      - 03 - B\
+on\x5cn      - 04 -\
+ Lulu dessine\x5cn \
+     - 05 - La b\
+agarre\x5cn      - \
+06 - Mon ami le \
+chat\x5cn      - 07\
+ - Petit Poupou\x5c\
+n      - 08 - Oc\
+cup\xc3\xa9\x22\x0d\x0a    },\x0d\x0a\
+    \x22995a8172-a5\
+a0-4ef4-a374-350\
+c1d2ed7da\x22: {\x0d\x0a \
+       \x22uuid\x22: \x22\
+995a8172-a5a0-4e\
+f4-a374-350c1d2e\
+d7da\x22,\x0d\x0a        \
+\x22title\x22: \x22Plumes\
+ de Z\xc3\xa8bre,  his\
+toires 27 \xc3\xa0 52\x22\
+,\x0d\x0a        \x22desc\
+ription\x22: \x22Plume\
+s de Z\xc3\xa8bre,  hi\
+stoires 27 \xc3\xa0 52\
+ \x5cnHistoires de \
+Betty Boutellier\
+ avec la voix de\
+ Elodie Sauvage\x5c\
+n\x5cnhttps://plume\
+sdezebre.wordpre\
+ss.com/les-histo\
+ires/histoire-1/\
+\x5cn\x5cn27 Le pays d\
+es Licornes\x5cn28 \
+Les Zokeyeurs\x5cn2\
+9 M\xc3\xa9li M\xc3\xa9lo\x5cn3\
+0 Mademoiselle Z\
+\xc3\xa8bre aime le ro\
+se\x5cn31 L'anniver\
+saire de Madame \
+\xc3\xa9t\xc3\xa9\x5cn32 Krac P\
+oum Boum\x5cn33 Pet\
+it Gla\xc3\xa7on\x5cn34 S\
+i\x5cn35 Les super \
+h\xc3\xa9ros\x5cn36  Les \
+meilleurs copain\
+s\x5cn37 Le secret \
+des oreilles\x5cn38\
+ \xc3\x89douard et la \
+sorci\xc3\xa8re Grazou\
+yette\x5cn39 Le lit\
+ de L\xc3\xa9a\x5cn40 Les\
+ clefs du c\xc5\x93ur\x5c\
+n41 Petit et Gra\
+nd Pardon\x5cn42 Le\
+s lunettes\x5cn43 L\
+a princesse ras \
+la casquette\x5cn44\
+ Le choix de la \
+sorci\xc3\xa8re\x5cn45 La\
+ grande arriv\xc3\xa9e\
+\x5cn46 Le coup de \
+c\xc5\x93ur de la Dame\
+ de Carreau\x5cn47 \
+Le d\xc3\xa9m\xc3\xa9nagemen\
+t\x5cn48 Une grande\
+ aventure\x5cn49 La\
+ trouille\x5cn50 La\
+ page blanche\x5cn5\
+1 Le puzzle\x5cn52 \
+Mon meilleur ami\
+ est amoureux d'\
+une baleine\x22\x0d\x0a  \
+  },\x0d\x0a    \x22a8665\
+d59-f208-4487-89\
+5b-f78a35b99769\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22a8665d59-f\
+208-4487-895b-f7\
+8a35b99769\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Les Histoires de\
+ Toudou (35 \xc3\xa9pi\
+sodes)\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Tir\xc3\xa9 du podca\
+st de Radio Fran\
+ce\x5cnhttps://www.\
+radiofrance.fr/f\
+ranceinter/podca\
+sts/serie-les-hi\
+stoires-de-toudo\
+u\x5cn\x5cn01 Toudou, \
+mon doudou\x5cn02 T\
+oudou et les mot\
+s doudous\x5cn03 To\
+udou et la col\xc3\xa8\
+re\x5cn04 Toudou et\
+ le chiffre 2\x5cn0\
+5 Toudou et la f\
+or\xc3\xaat\x5cn06 Toudou\
+ et le bain\x5cn07 \
+Toudou r\xc3\xaave en \
+\x5c\x22ou\x5c\x22\x5cn08 Toudo\
+u et Armoire\x5cn09\
+ Toudou et la ne\
+ige\x5cn10 Toudou e\
+t l'anniversaire\
+\x5cn11 Toudou touc\
+he \xc3\xa0 tout\x5cn12 T\
+oudou, les yeux \
+dans les yeux\x5cn1\
+3 Toudou et les \
+carottes\x5cn14 Tou\
+dou et le printe\
+mps\x5cn15 Toudou f\
+ait un g\xc3\xa2teau v\
+raiment d\xc3\xa9go\xc3\xbbt\
+ant\x5cn16 Toudou s\
+'ennuie\x5cn17 Toud\
+ou chez le docte\
+ur\x5cn18 Toudou ai\
+de \xc3\xa0 la maison\x5c\
+n19 Toudou et le\
+ piano\x5cn20 Fais \
+comme Toudou\x5cn21\
+ Toudou et les \xc3\
+\xa9toiles\x5cn22 Toud\
+ou \xc3\xa0 la ferme\x5cn\
+23 Toudou d\xc3\xa9cou\
+vre la mer\x5cn24 T\
+oudou va \xc3\xa0 la p\
+lage\x5cn25 Toudou \
+et les b\xc3\xa9b\xc3\xa9s o\
+iseaux\x5cn26 Toudo\
+u se balance\x5cn27\
+ Toudou fait des\
+ blagues\x5cn28 Tou\
+dou au march\xc3\xa9\x5cn\
+29 Toudou dit no\
+n\x5cn30 Toudou n'a\
+ plus peur du no\
+ir\x5cn31 Toudou se\
+ souvient\x5cn32 To\
+udou entre \xc3\xa0 l'\
+\xc3\xa9cole\x5cn33 Toudo\
+u sur le chemin \
+de l'\xc3\xa9cole\x5cn34 \
+Toudou est un su\
+per-h\xc3\xa9ros\x5cn35 T\
+oudou et le b\xc3\xa9b\
+\xc3\xa9 doudou\x22\x0d\x0a    \
+},\x0d\x0a    \x2266f761b\
+e-6b52-44b3-94c2\
+-319a3d32508b\x22: \
+{\x0d\x0a        \x22uuid\
+\x22: \x2266f761be-6b5\
+2-44b3-94c2-319a\
+3d32508b\x22,\x0d\x0a    \
+    \x22title\x22: \x22Fl\
+ibuste\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Flibuste est u\
+ne jeune pirate \
+d\xc3\xa9bordante d'\xc3\xa9\
+nergie qui s'est\
+ retrouv\xc3\xa9e \xc3\xa0 n\
+otre \xc3\xa9poque. En\
+thousiaste et av\
+entureuse, elle \
+d\xc3\xa9couvre notre \
+monde en visitan\
+t les lieux publ\
+ics qui nous ent\
+ourent. Voulant \
+tout conqu\xc3\xa9rir \
+sur son passage,\
+ elle se met la \
+plupart du temps\
+ les pieds dans \
+les plats. Heure\
+usement, son fid\
+\xc3\xa8le perroquet, \
+Rousp\xc3\xa8te, est l\
+\xc3\xa0 pour la tirer\
+ d'affaire... qu\
+and ce n'est pas\
+ lui qui s\xc3\xa8me l\
+a pagaille sur s\
+on chemin.\x22\x0d\x0a   \
+ },\x0d\x0a    \x22c77463\
+28-c633-4138-990\
+2-44f9249eb6cc\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x22c7746328-c6\
+33-4138-9902-44f\
+9249eb6cc\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es aventures de \
+Rodolphe et Gala\
+, saison 4\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x5c\x22Les aven\
+tures de Rodolph\
+e et Gala\x5c\x22 : la\
+ s\xc3\xa9rie audio de\
+s enfants (... e\
+t de leurs paren\
+ts !!)\x5cnRodolphe\
+ est un petit ex\
+traterrestre qui\
+ vit sur la plan\
+\xc3\xa8te Rikiki, qui\
+ est minuscule, \
+o\xc3\xb9 il empile de\
+s cailloux toute\
+ la journ\xc3\xa9e...\x5c\
+n\x5cnMais il r\xc3\xaave\
+ d'une plan\xc3\xa8te \
+plus grande, rem\
+plie de milliers\
+ de cailloux... \
+il d\xc3\xa9cide donc \
+de partir \xc3\xa0 l'a\
+venture \xc3\xa0 trave\
+rs tout l'univer\
+s. \xc3\x80 bord du va\
+isseau spatial d\
+e Gala, les deux\
+ amis parcourent\
+ l'univers \xc3\xa0 la\
+ recherche de la\
+ plan\xc3\xa8te id\xc3\xa9al\
+e o\xc3\xb9 vivre (et \
+empiler des cail\
+loux !).\x5cn\x5cnhttp\
+s://www.rodolphe\
+etgala.com\x5cn\x5cnSa\
+ison 4, 8 \xc3\xa9piso\
+des\x5cn\x5cnV1 Gayel\x5c\
+nV2 Dolido 8 : R\
+\xc3\xa9cup\xc3\xa9ration de\
+s jingles de psy\
+ckoyic sur le me\
+ga pack saisons \
+1 \xc3\xa0 6 + images \
++ ajout du jingl\
+e \x5c\x22Veux-tu \xc3\xa9co\
+uter la suite ?\x5c\
+\x22 avant de propo\
+ser l'\xc3\xa9pisode s\
+uivant + suppres\
+sion pub fin \xc3\xa9p\
+isode 8.\x22\x0d\x0a    }\
+,\x0d\x0a    \x2247b5b5f3\
+-b440-4155-a563-\
+8cff878cd39f\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2247b5b5f3-b440\
+-4155-a563-8cff8\
+78cd39f\x22,\x0d\x0a     \
+   \x22title\x22: \x22Pit\
+ikok (8 chapitre\
+s)\x22,\x0d\x0a        \x22d\
+escription\x22: \x22Ep\
+isode 1- Pitikok\
+ et les droles d\
+e cocos\x5cnEpisode\
+ 2- Pitikok chas\
+seur de cauchema\
+rs\x5cnEpisode 3- P\
+itikok et la Lun\
+e mal lun\xc3\xa9e\x5cnEp\
+isode 4- Pitikok\
+ et le b\xc3\xa9b\xc3\xa9 Bi\
+son\x5cnEpisode 5- \
+Pitikok et la fo\
+r\xc3\xaat enrhum\xc3\xa9e\x5cn\
+Episode 6- Pitik\
+ok et le poisson\
+ \xc3\xa0 moustache\x5cnE\
+pisode 7- Pitiko\
+k et la plume ma\
+gique\x5cnEpisode 8\
+ - La poule qui \
+voulait voir la \
+mer\x22\x0d\x0a    },\x0d\x0a  \
+  \x22fbbe0a29-1cfc\
+-4ff2-8c53-257c1\
+e916a10\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22fb\
+be0a29-1cfc-4ff2\
+-8c53-257c1e916a\
+10\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Disney -\
+ Les plus belles\
+ histoires de Wa\
+lt Disney\x22,\x0d\x0a   \
+     \x22descriptio\
+n\x22: \x2201 - Blanch\
+e-Neige et les 7\
+ nains\x5cn02 - Les\
+ 101 Dalmatiens\x5c\
+n03 - Le livre d\
+e la Jungle\x5cn04 \
+- Pinocchio\x5cn05 \
+- Bambi\x5cn06 - Al\
+addin\x5cn07 - Cend\
+rillon\x5cn08 - Le \
+Roi Lion\x5cn09 - P\
+eter Pan\x5cn\x5cnCont\
+\xc3\xa9es par Pierre \
+Tchernia.\x5cnLabel\
+ \xe2\x80\x8f : \xe2\x80\x8e Walt \
+Disney Records\x5cn\
+ASIN \xe2\x80\x8f : \xe2\x80\x8e B\
+00004UPM6 \x22\x0d\x0a   \
+ },\x0d\x0a    \x225abdbb\
+a6-88f0-4e2a-a88\
+9-b9f1fca9ea9b\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x225abdbba6-88\
+f0-4e2a-a889-b9f\
+1fca9ea9b\x22,\x0d\x0a   \
+     \x22title\x22: \x22J\
+P Arrou-Vignod -\
+ Enqu\xc3\xaate au col\
+l\xc3\xa8ge\x22,\x0d\x0a       \
+ \x22description\x22: \
+\x22Le coll\xc3\xa8ge est\
+ sous le choc : \
+on a agress\xc3\xa9 Mr\
+ Cornue, l'assis\
+tant du prof de \
+sciences nat'! P\
+our le proviseur\
+, pas de doute :\
+ c'est un intern\
+e qui a fait le \
+coup. Tout sembl\
+e accuser R\xc3\xa9mi \
+Pharamon, cancre\
+ bien connu de l\
+a 4\xc3\xa8meB. Tout e\
+t surtout, son m\
+eilleur ami, P.P\
+ Cul-Vert ! Le s\
+pectre du consei\
+l de discipline \
+n'est pas loin. \
+Il faudra toute \
+l'\xc3\xa9nergie des d\
+eux comp\xc3\xa8res et\
+ de leur amie Ma\
+thilde pour fair\
+e \xc3\xa9clater la v\xc3\
+\xa9rit\xc3\xa9.\x5cn\x5cnhttps\
+://www.gallimard\
+-jeunesse.fr/978\
+2075085724/enque\
+te-au-college.ht\
+ml\x5cnDur\xc3\xa9e : 2h \
+environ.\x22\x0d\x0a    }\
+,\x0d\x0a    \x2230ec788d\
+-61c8-4c8b-a8e2-\
+a0547bb86871\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x2230ec788d-61c8\
+-4c8b-a8e2-a0547\
+bb86871\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ Podcasts d'Aude\
+n\x22,\x0d\x0a        \x22de\
+scription\x22: \x22- l\
+e mange doudou\x5cn\
+- le village des\
+ crottes de nez\x5c\
+n- un mammouth d\
+ans le frigo\x5cn- \
+la lettre au p\xc3\xa8\
+re no\xc3\xabl\x5cn- gruf\
+falo\x5cn\x5cn\x5c\x22Arr\xc3\xaat\
+ez les \xc3\xa9crans, \
+lisez des livres\
+ et \xc3\xa9coutez les\
+ podcasts d'Aude\
+n\x5c\x22\x5cnDes petites\
+ histoires racon\
+t\xc3\xa9es par un gar\
+\xc3\xa7on de 5 ans pa\
+ssionn\xc3\xa9 de livr\
+es ! surtout pas\
+ pour les adulte\
+s !\x5cnA \xc3\xa9couter \
+sans mod\xc3\xa9ration\
+ \xc3\xa0 tout moment \
+de la journ\xc3\xa9e o\
+u juste avant de\
+ se coucher...\x5cn\
+\x5cnUne s\xc3\xa9lection\
+ des podcasts d'\
+Auden par mcdelu\
+xe62\x5cnhttps://po\
+dcast.ausha.co/l\
+es-podcasts-d-au\
+den\x22\x0d\x0a    },\x0d\x0a  \
+  \x22fbbaf098-0f41\
+-4966-8757-35dbe\
+c7a40a6\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22fb\
+baf098-0f41-4966\
+-8757-35dbec7a40\
+a6\x22,\x0d\x0a        \x22t\
+itle\x22: \x22JP Arrou\
+-Vignod - L'omel\
+ette au sucre\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Connais\
+sez-vous l'omele\
+tte au sucre? Ri\
+en de moins comp\
+liqu\xc3\xa9 \xc3\xa0 pr\xc3\xa9pa\
+rer. Prenez une \
+famille de cinq \
+gar\xc3\xa7ons. Ajoute\
+z-y un nouveau b\
+\xc3\xa9b\xc3\xa9 \xc3\xa0 na\xc3\xaetre\
+, une tortue, un\
+ cochon d'inde e\
+t une poign\xc3\xa9e d\
+e souris blanche\
+s. M\xc3\xa9langez bie\
+n le tout, sans \
+oublier une m\xc3\xa8r\
+e tr\xc3\xa8s organis\xc3\
+\xa9e, un p\xc3\xa8re cha\
+mpion du bricola\
+ge et quelques c\
+opains d'\xc3\xa9cole \
+\xc3\xa0 l'imagination\
+ d\xc3\xa9bordante. Sa\
+upoudrez d'une p\
+inc\xc3\xa9e de malice\
+ et d'\xc3\xa9motion, \
+et servez aussit\
+\xc3\xb4t. C'est pr\xc3\xaat\
+... A consommer \
+sans mod\xc3\xa9ration\
+ !\x5cnDur\xc3\xa9e d'\xc3\xa9c\
+oute : 2h20min e\
+nviron\x22\x0d\x0a    },\x0d\
+\x0a    \x228d05ae15-9\
+f9c-481d-a7c2-1c\
+1367e6c74b\x22: {\x0d\x0a\
+        \x22uuid\x22: \
+\x228d05ae15-9f9c-4\
+81d-a7c2-1c1367e\
+6c74b\x22,\x0d\x0a       \
+ \x22title\x22: \x22La co\
+nqu\xc3\xaate spatiale\
+ : \xc3\xa0 la d\xc3\xa9couv\
+erte de l'Univer\
+s\x22,\x0d\x0a        \x22de\
+scription\x22: \x22Col\
+lection \x5c\x22Quelle\
+ Histoire\x5c\x22.\x5cnL'\
+homme, qui a tou\
+jours \xc3\xa9t\xc3\xa9 fasc\
+in\xc3\xa9 par les ast\
+res, a tout fait\
+ pour partir \xc3\xa0 \
+leur rencontre !\
+ Il a construit \
+des fus\xc3\xa9es, des\
+ satellites, des\
+ robots, des sta\
+tions spatiales \
+et m\xc3\xaame des t\xc3\xa9\
+lescopes g\xc3\xa9ants\
+ pour observer l\
+es plan\xc3\xa8tes : V\
+\xc3\xa9nus, Jupiter, \
+Saturne, Mercure\
+, Mars... Dans c\
+e livre, tu d\xc3\xa9c\
+ouvriras tous le\
+s progr\xc3\xa8s r\xc3\xa9al\
+is\xc3\xa9s dans le do\
+maine spatial...\
+ et ils sont vra\
+iment incroyable\
+s !\x22\x0d\x0a    },\x0d\x0a  \
+  \x22d44cb2bb-39ae\
+-45a7-b5cb-790b0\
+53f96d1\x22: {\x0d\x0a   \
+     \x22uuid\x22: \x22d4\
+4cb2bb-39ae-45a7\
+-b5cb-790b053f96\
+d1\x22,\x0d\x0a        \x22t\
+itle\x22: \x22Gisela L\
+Limona - Cuentac\
+uentos\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Elle est une c\
+onteuse. \x5cnDans \
+ce pack, il y a \
+14 histoires et \
+c'est une versio\
+n espagnol casti\
+llan.\x5cn\x5cnhttps:/\
+/www.giselallimo\
+na.com/ca/ et \x5cn\
+https://www.yout\
+ube.com/@GiselaL\
+limona/videos\x5cn\x5c\
+n1 Luisa quiere \
+ser princesa \x5cn2\
+ El monstro de c\
+olores\x5cn3 Las pr\
+incesas tambi\xc3\xa9n\
+ se tiran pedos \
+\x5cn4 \xc2\xa1Alguien se\
+ ha tragado a Lo\
+la! \x5cn5  Una cas\
+a a la medida\x5cn6\
+ Pipi caca\x5cn7 \xc2\xbf\
+A qu\xc3\xa8 sabe la l\
+una?\x5cn8 El pez a\
+rcoiris\x5cn9 Donde\
+ vien los monstr\
+uos\x5cn10 Sue\xc3\xb1os \
+de nieve\x5cn11 Vam\
+os a cazar un os\
+a\x5cn12 Hay un oso\
+ en el cuarto os\
+curo\x5cn13 La salt\
+inadora gigante\x5c\
+n14 Ping\xc3\xbcino\x22\x0d\x0a\
+    },\x0d\x0a    \x22015\
+c1f8b-e4ad-482d-\
+9b40-61746bc7551\
+6\x22: {\x0d\x0a        \x22\
+uuid\x22: \x22015c1f8b\
+-e4ad-482d-9b40-\
+61746bc75516\x22,\x0d\x0a\
+        \x22title\x22:\
+ \x22Super canard s\
+auve la ville\x22,\x0d\
+\x0a        \x22descri\
+ption\x22: \x22Accompa\
+gne Super Canard\
+ et son ami Chat\
+ dans leur explo\
+ration de la vil\
+le en qu\xc3\xaate de \
+solutions pour a\
+m\xc3\xa9liorer la vie\
+ des animaux. Po\
+ur choisir comme\
+nt l'histoire co\
+ntinue, il suffi\
+t de choisir un \
+chemin et de ret\
+rouver son logo \
+sur les onglets \
+sur la droite. A\
+ la fin de chacu\
+n des 18 chapitr\
+es, c'est au lec\
+teur de d\xc3\xa9cider\
+ de la suite de \
+l'histoire en ch\
+oisissant le che\
+min que doivent \
+prendre Canard e\
+t Chat. Avec deu\
+x fins possibles\
+ et de nombreux \
+chemins pour y p\
+arvenir, c'est l\
+e lecteur qui d\xc3\
+\xa9cide de l'histo\
+ire !\x5cn\x22\x0d\x0a    },\
+\x0d\x0a    \x22e5443d78-\
+21dc-41a2-b9be-5\
+85a0cffff16\x22: {\x0d\
+\x0a        \x22uuid\x22:\
+ \x22e5443d78-21dc-\
+41a2-b9be-585a0c\
+ffff16\x22,\x0d\x0a      \
+  \x22title\x22: \x22Op\xc3\xa9\
+rations Math\xc3\xa9ma\
+tiques\x22,\x0d\x0a      \
+  \x22description\x22:\
+ \x22Exercices d'op\
+\xc3\xa9rations math\xc3\xa9\
+matiques (additi\
+on, soustraction\
+, multiplication\
+, comparaison) a\
+vec les chiffres\
+ de 0 \xc3\xa0 9.\x22\x0d\x0a  \
+  },\x0d\x0a    \x22d0972\
+71a-92da-4f2a-9f\
+d6-6a77dc8f1649\x22\
+: {\x0d\x0a        \x22uu\
+id\x22: \x22d097271a-9\
+2da-4f2a-9fd6-6a\
+77dc8f1649\x22,\x0d\x0a  \
+      \x22title\x22: \x22\
+Il \xc3\xa9tait une fo\
+is la vie - Le c\
+orps humain\x22,\x0d\x0a \
+       \x22descript\
+ion\x22: \x22Il \xc3\xa9tait\
+ une fois la vie\
+\x5cn14 chapitres a\
+udio de la s\xc3\xa9ri\
+e t\xc3\xa9l\xc3\xa9\x22\x0d\x0a    }\
+,\x0d\x0a    \x227caf0363\
+-5dae-4978-96cf-\
+c037d76a28dd\x22: {\
+\x0d\x0a        \x22uuid\x22\
+: \x227caf0363-5dae\
+-4978-96cf-c037d\
+76a28dd\x22,\x0d\x0a     \
+   \x22title\x22: \x22Les\
+ Aventures Natur\
+e de Camille et \
+L\xc3\xa9o (12 \xc3\xa9pisod\
+es)\x22,\x0d\x0a        \x22\
+description\x22: \x22P\
+ars \xc3\xa0 la rencon\
+tre des animaux \
+de nos r\xc3\xa9gions \
+avec Camille et \
+L\xc3\xa9o !  \x5cn\x5cnCami\
+lle la citadine \
+passe ses vacanc\
+es chez L\xc3\xa9o qui\
+ habite \xc3\xa0 la ca\
+mpagne. Ils ont \
+10 ans, de l\xe2\x80\x99\xc3\
+\xa9nergie \xc3\xa0 reven\
+dre, ils aiment \
+se chamailler et\
+ crapahuter dans\
+ la nature. Les \
+animaux, ils en \
+connaissent un r\
+ayon ! Gr\xc3\xa2ce \xc3\xa0\
+ Lili, l'hironde\
+lle rustique qui\
+ les alerte en c\
+as de probl\xc3\xa8me,\
+ les deux amis v\
+ont venir en aid\
+e \xc3\xa0 la faune sa\
+uvage. Pr\xc3\xaat \xc3\xa0 \
+explorer les mar\
+es, les for\xc3\xaats,\
+ les prairies et\
+ les montagnes ?\
+ \x5cn\x5cnUn Podcast \
+plein d\xe2\x80\x99infos \
+et plein d\xe2\x80\x99hum\
+our pour compren\
+dre la nature !\x5c\
+nhttps://podcast\
+.ausha.co/les-av\
+entures-nature-d\
+e-camille-et-leo\
+\x5cn\x5cnListe des \xc3\xa9\
+pisodes :\x5cn01 Mi\
+ssion Grenouille\
+\x5cn02 Panique \xc3\xa0 \
+la ruche\x5cn03 Tem\
+p\xc3\xaate chez les H\
+ulottes\x5cn04 Aler\
+te chez les Marm\
+ottes\x5cn05 Op\xc3\xa9ra\
+tion H\xc3\xa9risson\x5cn\
+06 SOS Canards S\
+iffleurs\x5cn07 Gen\
+darmes \xc3\xa0 la res\
+cousse !\x5cn08 Un \
+li\xc3\xa8vre en p\xc3\xa9ri\
+l\x5cn09 D\xc3\xa9fi Papi\
+llon de nuit\x5cn10\
+ Exp\xc3\xa9dition \xc3\x89c\
+ureuil\x5cn11 Un ce\
+rf en gal\xc3\xa8re\x5cn1\
+2 Action Grand T\
+\xc3\xa9tras\x5cn\x5cnV1 Gay\
+el : Pack cr\xc3\xa9\xc3\xa9\
+ avec SPG + jing\
+les voix Amazon \
+\x5c\x22Jerome\x5c\x22\x22\x0d\x0a   \
+ },\x0d\x0a    \x228c20c5\
+cd-5aaf-4052-bd8\
+9-0bac8d60fc5b\x22:\
+ {\x0d\x0a        \x22uui\
+d\x22: \x228c20c5cd-5a\
+af-4052-bd89-0ba\
+c8d60fc5b\x22,\x0d\x0a   \
+     \x22title\x22: \x22L\
+es aventures de \
+Rodolphe et Gala\
+, saison 5\x22,\x0d\x0a  \
+      \x22descripti\
+on\x22: \x22\x5c\x22Les aven\
+tures de Rodolph\
+e et Gala\x5c\x22 : la\
+ s\xc3\xa9rie audio de\
+s enfants (... e\
+t de leurs paren\
+ts !!)\x5cnRodolphe\
+ est un petit ex\
+traterrestre qui\
+ vit sur la plan\
+\xc3\xa8te Rikiki, qui\
+ est minuscule, \
+o\xc3\xb9 il empile de\
+s cailloux toute\
+ la journ\xc3\xa9e...\x5c\
+n\x5cnMais il r\xc3\xaave\
+ d'une plan\xc3\xa8te \
+plus grande, rem\
+plie de milliers\
+ de cailloux... \
+il d\xc3\xa9cide donc \
+de partir \xc3\xa0 l'a\
+venture \xc3\xa0 trave\
+rs tout l'univer\
+s. \xc3\x80 bord du va\
+isseau spatial d\
+e Gala, les deux\
+ amis parcourent\
+ l'univers \xc3\xa0 la\
+ recherche de la\
+ plan\xc3\xa8te id\xc3\xa9al\
+e o\xc3\xb9 vivre (et \
+empiler des cail\
+loux !).\x5cn\x5cnhttp\
+s://www.rodolphe\
+etgala.com\x5cn\x5cnSa\
+ison 5, 8 \xc3\xa9piso\
+des\x5cn\x5cnV1 Gayel\x5c\
+nV2 Dolido 8 : R\
+\xc3\xa9cup\xc3\xa9ration de\
+s jingles de psy\
+ckoyic sur le me\
+ga pack saisons \
+1 \xc3\xa0 6 + images \
++ ajout du jingl\
+e \x5c\x22Veux-tu \xc3\xa9co\
+uter la suite ?\x5c\
+\x22 avant de propo\
+ser l'\xc3\xa9pisode s\
+uivant + suppres\
+sion pr\xc3\xa9sentati\
+on d\xc3\xa9but \xc3\xa9piso\
+de 0.\x22\x0d\x0a    }\x0d\x0a}\
+\
 \x00\x01\x93\xb9\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -47892,10 +71884,18 @@ qt_resource_name = b"\
 \x00\x00p7\
 \x00i\
 \x00m\x00g\
+\x00\x04\
+\x00\x07\x1a^\
+\x00j\
+\x00s\x00o\x00n\
 \x00\x03\
 \x00\x00x\xc3\
 \x00r\
 \x00e\x00s\
+\x00\x0f\
+\x0cm\x1c\xfe\
+\x00u\
+\x00n\x00o\x00f\x00f\x00i\x00c\x00i\x00a\x00l\x00.\x00j\x00s\x00o\x00n\
 \x00\x0f\
 \x0f87g\
 \x00l\
@@ -47971,51 +71971,57 @@ qt_resource_name = b"\
 "
 
 qt_resource_struct = b"\
-\x00\x00\x00\x00\x00\x02\x00\x00\x00\x02\x00\x00\x00\x01\
+\x00\x00\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00\x01\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\x0e\x00\x02\x00\x00\x00\x01\x00\x00\x00\x15\
+\x00\x00\x00\x0e\x00\x02\x00\x00\x00\x01\x00\x00\x00\x18\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\
+\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x06\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\x1a\x00\x02\x00\x00\x00\x11\x00\x00\x00\x04\
+\x00\x00\x00\x1a\x00\x02\x00\x00\x00\x01\x00\x00\x00\x04\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\xb2\x00\x00\x00\x00\x00\x01\x00\x046\xf1\
+\x00\x00\x00(\x00\x02\x00\x00\x00\x01\x00\x00\x00\x05\
+\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x004\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
+\x00\x00\x01\x8d\xfb\xae\x7f:\
+\x00\x00\x00(\x00\x02\x00\x00\x00\x11\x00\x00\x00\x07\
+\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\xe4\x00\x00\x00\x00\x00\x01\x00\x0a\x12F\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x01\x86\x00\x00\x00\x00\x00\x01\x00\x06\x16a\
+\x00\x00\x01\xb8\x00\x00\x00\x00\x00\x01\x00\x0b\xf1\xb6\
 \x00\x00\x01\x8dq\x18#\xa6\
-\x00\x00\x00\x80\x00\x00\x00\x00\x00\x01\x00\x01\x9e8\
+\x00\x00\x00\xb2\x00\x00\x00\x00\x00\x01\x00\x07y\x8d\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x01\xd0\x00\x00\x00\x00\x00\x01\x00\x08\xe2w\
+\x00\x00\x02\x02\x00\x00\x00\x00\x00\x01\x00\x0e\xbd\xcc\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x014\x00\x00\x00\x00\x00\x01\x00\x04Lc\
+\x00\x00\x01f\x00\x00\x00\x00\x00\x01\x00\x0a'\xb8\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x01\xb0\x00\x00\x00\x00\x00\x01\x00\x08\xdck\
+\x00\x00\x01\xe2\x00\x00\x00\x00\x00\x01\x00\x0e\xb7\xc0\
 \x00\x00\x01\x8d;\xa8\xe6\x09\
-\x00\x00\x01\x1a\x00\x00\x00\x00\x00\x01\x00\x04I`\
+\x00\x00\x01L\x00\x00\x00\x00\x00\x01\x00\x0a$\xb5\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x00\xea\x00\x00\x00\x00\x00\x01\x00\x04B\xd8\
+\x00\x00\x01\x1c\x00\x00\x00\x00\x00\x01\x00\x0a\x1e-\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x00\xd4\x00\x00\x00\x00\x00\x01\x00\x04@}\
+\x00\x00\x01\x06\x00\x00\x00\x00\x00\x01\x00\x0a\x1b\xd2\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x01\x5c\x00\x00\x00\x00\x00\x01\x00\x06\x0df\
+\x00\x00\x01\x8e\x00\x00\x00\x00\x00\x01\x00\x0b\xe8\xbb\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x00\x98\x00\x00\x00\x00\x00\x01\x00\x043a\
+\x00\x00\x00\xca\x00\x00\x00\x00\x00\x01\x00\x0a\x0e\xb6\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x01J\x00\x00\x00\x00\x00\x01\x00\x06\x04c\
+\x00\x00\x01|\x00\x00\x00\x00\x00\x01\x00\x0b\xdf\xb8\
 \x00\x00\x01\x8d;\xa8\xe6\x0c\
-\x00\x00\x01\x04\x00\x00\x00\x00\x00\x01\x00\x04E\xd6\
+\x00\x00\x016\x00\x00\x00\x00\x00\x01\x00\x0a!+\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x01t\x00\x00\x00\x00\x00\x01\x00\x06\x12\xdc\
+\x00\x00\x01\xa6\x00\x00\x00\x00\x00\x01\x00\x0b\xee1\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x00f\x00\x00\x00\x00\x00\x01\x00\x01\x9a\xa3\
+\x00\x00\x00\x98\x00\x00\x00\x00\x00\x01\x00\x07u\xf8\
 \x00\x00\x01\x8d-4\x19\xb5\
-\x00\x00\x01\x9c\x00\x00\x00\x00\x00\x01\x00\x08\xd8\xbd\
+\x00\x00\x01\xce\x00\x00\x00\x00\x00\x01\x00\x0e\xb4\x12\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x00J\x00\x00\x00\x00\x00\x01\x00\x01\x93\xbd\
+\x00\x00\x00|\x00\x00\x00\x00\x00\x01\x00\x07o\x12\
 \x00\x00\x01\x8d-4\x19\xc5\
-\x00\x00\x00\x1a\x00\x02\x00\x00\x00\x01\x00\x00\x00\x16\
+\x00\x00\x00(\x00\x02\x00\x00\x00\x01\x00\x00\x00\x19\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00&\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
+\x00\x00\x00X\x00\x00\x00\x00\x00\x01\x00\x05\xdbU\
 \x00\x00\x01\x8d-P8\x1f\
 "
 

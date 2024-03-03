@@ -21,4 +21,7 @@
   <qresource prefix="img">
     <file>res/lunii_about.png</file>
   </qresource>
+  <qresource prefix="json">
+    <file>res/unofficial.json</file>
+  </qresource>
 </RCC>
