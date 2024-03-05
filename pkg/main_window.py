@@ -715,6 +715,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
+        self.details_last_uuid = None
         self.ts_populate()
         # update status in status bar
         # self.sb_update_summary()
