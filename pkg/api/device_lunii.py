@@ -367,6 +367,7 @@ class LuniiDevice(QtCore.QObject):
         # getting all stories
         content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
         stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        stories_dir.sort()
 
         for index, story in enumerate(stories_dir):
             # directory is a partial UUID
