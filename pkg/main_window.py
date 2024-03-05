@@ -216,7 +216,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return True
             elif event.type() == QtCore.QEvent.Resize:
                 self.tw_resize_columns()
-
+                return True
         return False
 
     def tw_resize_columns(self):
@@ -256,6 +256,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if is_inside_screen:
             self.debug_dialog.setGeometry(debug_geometry)
+
+    def changeEvent(self, event):
+        super().changeEvent(event)
+        if event.type() == event.Type.WindowStateChange:
+            if self.isMinimized() and self.debug_dialog.isVisible():
+                # Minimize the log-window when the main window is minimized
+                self.debug_dialog.showMinimized()
+            elif self.isMaximized() or self.isActiveWindow():
+                # restore the log-window when the main window is restored or maximized
+                self.debug_dialog.showNormal()
+                pass
 
     def customMoveEvent(self, event):
         # This custom slot is called when the main window is moved
