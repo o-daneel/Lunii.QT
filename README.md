@@ -220,8 +220,20 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
  |- update-comm.enc
  |- ... (other files)
 ```
-7. Power OFF, Power ON, Wait : **TADA**  
-   (if you reconnect your lunii on your pc, the `*.enc` should have been removed)
+7. Create an empty file `cable_update_complete` in /tmp
+```
+- 
+ |- etc/
+ |- str/
+ |- .mdf
+ |- update-main.enc
+ |- update-comm.enc
+ |- tmp/
+   |- cable_update_complete
+ |- ... (other files)
+```
+8. Eject USB from Flam device (USB cable must be kept connected) and update process will start : **TADA**  
+   (if you reconnect your flam on your pc, the `*.enc` should have been removed)
 
 ## Supported archive formats (Lunii)
 **NOTE :** Flam stories are not yet supported
