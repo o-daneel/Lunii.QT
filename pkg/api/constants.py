@@ -29,6 +29,7 @@ lunii_generic_key = vectkey_to_bytes(raw_key_generic)
 # import binascii
 # lunii_generic_key = binascii.unhexlify(b'00112233445566770011223344556677')
 
+OFFICIAL_TOKEN_URL = "https://server-auth-prod.lunii.com/guest/create"
 OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
 
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")

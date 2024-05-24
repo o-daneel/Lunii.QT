@@ -8,7 +8,7 @@ import requests
 from PySide6.QtCore import QFile, QTextStream
 
 from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
-    STORY_TRANSCODING_SUPPORTED
+    STORY_TRANSCODING_SUPPORTED, OFFICIAL_TOKEN_URL
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -218,13 +218,22 @@ def story_load_db(reload=False):
 
         try:
             # Set the timeout for the request
-            response = requests.get(OFFICIAL_DB_URL, timeout=30)
-            if response.status_code == 200:
-                # Load image from bytes
-                j_resp = json.loads(response.content)
-                with (open(FILE_OFFICIAL_DB, "w") as fp):
-                    db = j_resp.get('response')
-                    json.dump(db, fp)
+            token_resp = requests.get(OFFICIAL_TOKEN_URL, timeout=30)
+            if token_resp.status_code == 200:
+                auth_token = token_resp.json()['response']['token']['server']
+
+                req_headers = {"Application-Sender": "luniistore_desktop",
+                               "Accept": "application/json",
+                               'X-AUTH-TOKEN': auth_token,
+                              }
+
+                response = requests.get(OFFICIAL_DB_URL, headers=req_headers, timeout=30)
+                if response.status_code == 200:
+                    # Load image from bytes
+                    j_resp = json.loads(response.content)
+                    with (open(FILE_OFFICIAL_DB, "w") as fp):
+                        db = j_resp.get('response')
+                        json.dump(db, fp)
 
         except (requests.exceptions.Timeout, requests.exceptions.RequestException, requests.exceptions.ConnectionError):
             retVal = False
