@@ -6,6 +6,10 @@ for Windows / Linux / macOS
 (compatible with STUdio archive, **with** transcoding)
 
 
+### Warning:
+* Firmware 3.2.2 and + are introducing a new .md file version (v7). This breaks compatibility to load custom stories.
+* Avoid upgrading the lunii and keep you existing firmware + previous v6 .md file (it might help 😅)
+
 ### Hardware supported:
 * **v1, v2**  (full Support)
 * **v3**  (export requires device key file)  
