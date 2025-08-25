@@ -4,17 +4,20 @@
 A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **hide** / **firmware download**   
 for Windows / Linux / macOS  
 (compatible with STUdio archive, **with** transcoding)
-### Firmware 3.2.x
 
-Lunii.QT has been updated to support the latest firmware (3.2.2 and later).
+### ⚠️ Lunii v3 & Firmware 3.2.x ⚠️
+
+Lunii.QT has been updated to support the latest firmware (3.2.2 and later). This is only a quick and dirty workaround to keep support of custom story. A deeper analysis might reveal a simpler solution in a future update.
+
+> Reminder : Keep your v3 Firmware files safe (you can always downgrade)
 
 There are **two solutions** to ensure compatibility and keep your stories safe:
 
 1. **Keep your previous `.md` file:**  
-   If you already have a backup of your device's `.md` file from before the upgrade, simply keep it in the root directory of your Lunii **and** copy it to your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\` on Windows or `$HOME/.lunii-qt/` on Linux/macOS). This will allow Lunii.QT to continue managing your stories as before.
-
+   If you already have a backup of your device's `.md` file from before the upgrade, simply keep it in the root directory of your Lunii device (it is a hidden file—so you might need to change your file explorer settings to reveal it) **and** copy it to your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\` on Windows or `$HOME/.lunii-qt/` on Linux/macOS). This will allow Lunii.QT to continue managing your stories as before.
 2. **Download the upgrade file `fa.bin`:**  
-   If you do not have the previous `.md` file, you can download the firmware upgrade file `fa.bin` using Lunii.QT (see [Firmware upgrade](#firmware-upgrade) section above). Rename it to `fa.322.bin` (with the correct version) and place it in your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\` on Windows or `$HOME/.lunii-qt/` on Linux/macOS).
+   If you do not have the previous `.md` file, you can download the firmware upgrade file `fa.bin` using Lunii.QT (see [Firmware upgrade](#firmware-upgrade) section above, specifically the [HowTo - Lunii](#howto---lunii) instructions).  
+   Rename it to `fa.322.bin` (with the correct version) and place it in your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\` on Windows or `$HOME/.lunii-qt/` on Linux/macOS).
 
 At least one of those files must be present in your user's `.lunii-qt` directory for Lunii.QT to support import feature with firmware 3.2.2 and later.
 
@@ -22,6 +25,11 @@ At least one of those files must be present in your user's `.lunii-qt` directory
 
 > **Important:**  
 > When Lunii releases a new firmware version, Lunii.QT itself may need to be updated to support it. However, if one of the required files (`.md` or `fa.3xx.bin`) is available and import is working, any subsequent firmware update should be transparent to the user—no further action is needed unless compatibility issues arise.
+
+There is a third solution, but I'm pretty sure no one will support it (if you do, leave a message)
+
+3. **Downgrade your firmware 😎**:  
+   If you have been playing safe and downloaded your previous firmwares with this app, you can simply push it to the Lunii root dir and downgrade the firmware. You'll get back to a working device. 
 
 ### Hardware supported:
 * **v1, v2**  (full Support)
