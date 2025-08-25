@@ -169,6 +169,11 @@ class LuniiDevice(QtCore.QObject):
         vid, pid = FAH_V2_V3_USB_VID_PID
         if self.device_key:
             self.load_md_fakestory_keys()
+            # preparing bt file by ciphering fake keys with real device keys
+            buffer = reverse_bytes(self.story_key) + reverse_bytes(self.story_iv)
+            cipher = AES.new(self.device_key, AES.MODE_CBC, self.device_iv)
+            self.bt = cipher.encrypt(buffer)
+
             logger.log(logging.INFO, f"v3 key file read from {self.dev_keyfile}")
         
         if self.story_key is None:
