@@ -20,14 +20,15 @@ Il existe **deux solutions** pour conserver la compatibilité et conserver vos h
    Si vous avez déjà une sauvegarde du fichier `.md` de votre appareil avant la mise à jour, gardez-le précieusement quelque part (c'est un fichier caché à la racine de votre Lunii—vous devrez peut-être modifier les paramètres de votre explorateur de fichiers pour le voir) **et** copiez-le dans le dossier utilisateur `.lunii-qt` (par exemple `%HOME%\.lunii-qt\` sous Windows ou `$HOME/.lunii-qt/` sous Linux/macOS). Cela permettra à Lunii.QT de continuer à gérer vos histoires comme avant.
 2. **Téléchargez le fichier de mise à jour `fa.bin` :**  
    Si vous n'avez pas l'ancien fichier `.md`, vous pouvez télécharger le fichier de mise à jour du firmware `fa.bin` via Lunii.QT (voir la section [Mise à jour du firmware](#mise-à-jour-du-firmware), en particulier le guide [Guide Pratique - Lunii](#guide-pratique---lunii)).  
-   Renommez-le en `fa.322.bin` (avec la version correcte) et placez-le dans le dossier utilisateur `.lunii-qt` (par exemple `%HOME%\.lunii-qt\` sous Windows ou `$HOME/.lunii-qt/` sous Linux/macOS).
+   Renommez-le en `fa.SNU.v3x.bin` (avec le numéro de série et la version correcte, par exemple `fa.23023030012345.v322.bin`) et placez-le dans le dossier utilisateur `.lunii-qt` (par exemple `%HOME%\.lunii-qt\` sous Windows ou `$HOME/.lunii-qt/` sous Linux/macOS).
+    ⚠️ **Utiliser une version plus récente de firmware (par exemple 3.3.0) en tant que 3.2.2 ou encore utiliser un firmware d'une autre Lunii ne pourra être détecté. Toutes les histoires chargée de la sorte seront non fonctionnelles.**
 
 Au moins un de ces fichiers doit être présent dans le dossier `.lunii-qt` de votre utilisateur pour que Lunii.QT puisse importer des histoires avec le firmware 3.2.2 et suivants.
 
 > **Note :** Si la procédure n'a pas été suivie correctement, la fenêtre Log de l'application vous donnera plus de détails pour comprendre et résoudre le problème.
 
 > **Important :**  
-> Lorsqu'un nouveau firmware Lunii est publié, Lunii.QT peut nécessiter une mise à jour pour le supporter. Cependant, si l'un des fichiers requis (`.md` ou `fa.3xx.bin`) est disponible et que l'import fonctionne, toute mise à jour ultérieure du firmware devrait être transparente pour l'utilisateur—aucune action supplémentaire n'est nécessaire sauf en cas de problème de compatibilité.
+> Lorsqu'un nouveau firmware Lunii est publié, Lunii.QT peut nécessiter une mise à jour pour le supporter. Cependant, si l'un des fichiers requis (`.md` ou `fa.SNU.v3xx.bin`) est disponible et que l'import fonctionne, toute mise à jour ultérieure du firmware devrait être transparente pour l'utilisateur—aucune action supplémentaire n'est nécessaire sauf en cas de problème de compatibilité.
 
 Il existe une troisième et quatrième solution, mais je doute que quelqu'un l'utilise (si c'est le cas, laissez un message)
 

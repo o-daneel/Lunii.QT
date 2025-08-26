@@ -133,7 +133,7 @@ class LuniiDevice(QtCore.QObject):
 
         # checking for fw file for each FW_HEARDERS entry
         for key in FW_HEADERS.keys():
-            curr_firmware = os.path.join(CFG_DIR, f"fa.{key[0]}{key[1]}{key[2]}.bin")
+            curr_firmware = os.path.join(CFG_DIR, f"fa.{self.snu_str}.v{key[0]}{key[1]}{key[2]}.bin")
             if os.path.isfile(curr_firmware):
                 # getting fake keys for story bt file
                 with open(curr_firmware, "rb") as fp_fw:
@@ -177,7 +177,7 @@ class LuniiDevice(QtCore.QObject):
             logger.log(logging.INFO, f"v3 key file read from {self.dev_keyfile}")
         
         if self.story_key is None:
-            logger.log(logging.WARNING, f"🛑 no keys at all, unable to import stories")
+            logger.log(logging.WARNING, f"🛑 no keys at all, unable to import stories. See README on Github for help.")
             
         logger.log(logging.DEBUG, f"\n"
                                        f"SNU : {self.snu_str}\n"
@@ -449,7 +449,10 @@ class LuniiDevice(QtCore.QObject):
 
         # getting all stories
         content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
-        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        try:
+            stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        except FileNotFoundError:
+            return recovered
         stories_dir.sort()
 
         for index, story in enumerate(stories_dir):

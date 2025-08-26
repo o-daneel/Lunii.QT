@@ -578,11 +578,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.sb_update(f"Login success...")
 
                 # getting list of FW to download
-                fw_list = device_fw_getlist(self.audio_device.device_version, auth_token)
+                fw_list = device_fw_getlist(self.audio_device.device_version, self.audio_device.snu_str, auth_token)
 
                 # preparing save dialog
                 options = QFileDialog.Options()
-                file_dialog = QFileDialog(self, options=options)
+                file_dialog = QFileDialog(self, directory=CFG_DIR, options=options)
                 file_dialog.setAcceptMode(QFileDialog.AcceptSave)
                 if self.audio_device.device_version == FLAM_V1:
                     file_dialog.setNameFilter("Flam Firmware (*.enc);;All Files (*)")
