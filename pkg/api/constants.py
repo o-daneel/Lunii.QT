@@ -37,7 +37,6 @@ CACHE_DIR = os.path.join(CFG_DIR, "cache")
 FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
-V3_MD = os.path.join(CFG_DIR, ".md")
 
 LUNII_V1or2_UNK = 0
 LUNII_V1 = 1
