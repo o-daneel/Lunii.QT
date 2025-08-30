@@ -1,7 +1,6 @@
 :uk: [Readme in English](./README.md) :uk:
 
 # Lunii.QT
-#### (peut être version obsolète)
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
 pour Windows / Linux / MacOs 11  
@@ -12,7 +11,7 @@ pour Windows / Linux / MacOs 11
 
 Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Il s'agit d'une solution temporaire et imparfaite pour continuer à supporter les histoires non officielles. Une analyse plus approfondie pourrait permettre une solution plus simple dans une future mise à jour.
 
-> **Rappel :** `Gardez précieusement vos fichiers firmware v3` (vous pourrez toujours revenir en arrière).
+> **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours revenir en arrière). De plus prenez soin de désactiver les mises à jour automatiques.
 
 Il existe **deux solutions** pour conserver la compatibilité et conserver vos histoires :
 
@@ -425,8 +424,8 @@ En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour fo
 ### Exportation V3
 Afin de supporter l'exportation d'histoires depuis une Luniis v3, vous devez placer vos clés de périphérique ici :
 ```bash
-%HOME%\.lunii-qt\v3.keys
-$HOME/.lunii-qt/v3.keys
+%HOME%\.lunii-qt\230230300XXXXX.keys
+$HOME/.lunii-qt/230230300XXXXX.keys
 ```
 Il s'agit d'un fichier binaire avec 0x10 octets pour la clé et 0x10 octets pour l'IV.
 

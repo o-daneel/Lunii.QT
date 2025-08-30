@@ -9,7 +9,7 @@ for Windows / Linux / macOS
 
 Lunii.QT has been updated to support the latest firmware (3.2.2 and later). This is only a quick and dirty workaround to keep support of custom story. A deeper analysis might reveal a simpler solution in a future update.
 
-> Reminder : Keep your v3 Firmware files safe (you can always downgrade)
+> **Reminder :** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
 
 There are **two solutions** to ensure compatibility and keep your stories safe:
 
@@ -33,10 +33,6 @@ There is a third and forth solution, but I'm pretty sure no one will support it 
 3. **Downgrade your firmware 😎**:  
    If you have been playing safe and downloaded your previous firmwares with this app, you can simply push it to the Lunii root dir and downgrade the firmware. You'll get back to a working device. 
 4. **Using your own device keys 😎😎**
-
-### Warning:
-* Firmware 3.2.2 and + are introducing a new .md file version (v7). This breaks compatibility to load custom stories.
-* Avoid upgrading the lunii and keep you existing firmware + previous v6 .md file (it might help 😅)
 
 ### Hardware supported:
 * **v1, v2**  (full Support)
@@ -436,8 +432,8 @@ In case of any trouble, just remove this file and directory to force refresh
 ### v3 export
 In order to suport story export from Lunii v3 hardware, you must place your device keys in here :
 ```bash
-%HOME%\.lunii-qt\v3.keys
-$HOME/.lunii-qt/v3.keys
+%HOME%\.lunii-qt\230230300XXXXX.keys
+$HOME/.lunii-qt/230230300XXXXX.keys
 ```
 It is a binary file with 0x10 bytes for Key and 0x10 bytes for IV
 ### ICO creation
