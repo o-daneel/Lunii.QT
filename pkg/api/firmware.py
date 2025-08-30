@@ -1,10 +1,15 @@
 import requests
 
+from pkg.api.aes_keys import reverse_bytes
 from pkg.api.constants import *
 
 # anonymous fake lunii created to get v1 v2 fw
 V1V2_FAHID = "-NnUun90mQ56GosDyA3R"
 
+FW_HEADERS = {
+    (3, 2, 2): (reverse_bytes(b"\x00\x00\x04\x20\xD9\x52\x03\x90\xBF\xAD\x02\x90\xC1\xAD\x02\x90"),
+                reverse_bytes(b"\xEB\xAD\x02\x90\xED\xAD\x02\x90\xEF\xAD\x02\x90\x00\x00\x00\x00")),
+}
 
 def luniistore_get_authtoken(login, pwd):
     url_sign = "https://server-auth-prod.lunii.com/auth/signin"
@@ -36,7 +41,7 @@ def __lunii_vid_pid(hw_version):
         return FAH_V2_V3_USB_VID_PID
 
 
-def device_fw_getlist(hw_version, json_auth):
+def device_fw_getlist(hw_version, snu_str, json_auth):
     fw_list = []
 
     if hw_version == LUNII_V1:
@@ -45,7 +50,7 @@ def device_fw_getlist(hw_version, json_auth):
     elif hw_version == LUNII_V2:
         fw_list.append(f"fa.v{luniiv1_fw_version(hw_version, json_auth)}.bin")
     elif hw_version == LUNII_V3:
-        fw_list.append("fa.v3_x_x.bin")
+        fw_list.append(f"fa.{snu_str}.v3xx.bin")
     elif hw_version == FLAM_V1:
         fw_list.append("update-main.enc")
         fw_list.append("update-comm.enc")

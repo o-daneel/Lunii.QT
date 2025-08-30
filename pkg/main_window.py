@@ -36,7 +36,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v2.7.6"
+APP_VERSION = "v2.7.7"
 
 
 class VLine(QFrame):
@@ -578,11 +578,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.sb_update(f"Login success...")
 
                 # getting list of FW to download
-                fw_list = device_fw_getlist(self.audio_device.device_version, auth_token)
+                fw_list = device_fw_getlist(self.audio_device.device_version, self.audio_device.snu_str, auth_token)
 
                 # preparing save dialog
                 options = QFileDialog.Options()
-                file_dialog = QFileDialog(self, options=options)
+                file_dialog = QFileDialog(self, directory=CFG_DIR, options=options)
                 file_dialog.setAcceptMode(QFileDialog.AcceptSave)
                 if self.audio_device.device_version == FLAM_V1:
                     file_dialog.setNameFilter("Flam Firmware (*.enc);;All Files (*)")
@@ -654,6 +654,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # always possible to import in an empty device
         self.act_import.setEnabled(True)
+        # except if not story keys are present for v3
+        if (self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key):
+            self.act_import.setEnabled(False)   
 
         # pointing to an item
         if self.tree_stories.selectedItems():
@@ -1076,6 +1079,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def ts_drop_action(self, event):
+        if (self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key):
+            self.sb_update("🛑 Unable to import story, missing story key for Lunii v3")
+            return
+        
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
