@@ -1,4 +1,4 @@
-name: Build for Linux / MacOs
+name: Build for MacOs (Intel / ARM)
 
 on:
   push:
@@ -6,49 +6,8 @@ on:
       - v*.*.*
 
 jobs:
-  build_linux:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.1.1
-      with:
-        fetch-depth: 0
-
-    - name: Set up Python
-      uses: actions/setup-python@v5.0.0
-      with:
-        python-version: 3.11
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install pyinstaller
-
-    - name: Build Exec & Create Archive
-      run: |
-        pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
-        pyside6-rcc ./resources.qrc -o ./resources_rc.py
-        pyinstaller lunii-qt.spec
-        mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-${{ github.ref_name }}-Linux-x86_64.zip ./lunii-qt
-
-    - name: Upload Artefact
-      uses: actions/upload-artifact@v4.0.0
-      with:
-        name: Lunii.Qt-${{ github.ref_name }}-Linux-x86_64
-        path: |
-          ./lunii-qt
-
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        draft: true
-        files: Lunii.Qt-${{ github.ref_name }}-Linux-x86_64.zip
-
-  build_mac:
-    runs-on: macos-latest
+  build_mac_intel:
+    runs-on: macos-13
 
     steps:
     - name: Checkout repository
@@ -87,6 +46,48 @@ jobs:
       with:
         draft: true
         files: Lunii.Qt-${{ github.ref_name }}-Darwin-x86_64.zip
+
+
+  build_mac_arm:
+    runs-on: macos-15
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.0.0
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Build Exec & Create Archive
+      run: |
+        pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
+        pyside6-rcc ./resources.qrc -o ./resources_rc.py
+        pyinstaller lunii-qt.darwin.spec
+        mv ./dist/lunii-qt .
+        zip -9 -j Lunii.Qt-${{ github.ref_name }}-Darwin-arm64.zip ./lunii-qt
+
+    - name: Upload Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Lunii.Qt-${{ github.ref_name }}-Darwin-arm64
+        path: |
+          ./lunii-qt
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        draft: true
+        files: Lunii.Qt-${{ github.ref_name }}-Darwin-arm64.zip
 
   # build_mac_arm:
   #   runs-on: macos-latest-large
