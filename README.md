@@ -61,6 +61,7 @@ There is a third and forth solution, but I'm pretty sure no one will support it 
     * [macOS - Application Authorization](#macos---application-authorization)
     * [Third Party story metadata](#third-party-story-metadata)
     * [Cache management](#cache-management)
+    * [Linux Missing dependencies](#linux-missing-dependencies)
   * [Credits](#credits)
 * [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
@@ -428,6 +429,28 @@ This application will download once for all the official story database and any 
 * `$HOME/.lunii-qt/cache/*`
 
 In case of any trouble, just remove this file and directory to force refresh
+
+### Linux missing dependencies
+If you encounter the following error when launching Lunii.QT on Linux:
+
+```
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: offscreen, vkkhrdisplay, xcb, minimalegl, vnc, eglfs, minimal, linuxfb, wayland-egl, wayland.
+```
+
+This means that a required system library for the Qt graphical interface is missing.
+
+**Solution:**  
+Install the missing dependency by running the following command in your terminal:
+
+```bash
+sudo apt install libxcb-cursor0
+```
+
+After installing, try launching Lunii.QT again.  
+If you still experience issues, make sure all other Qt dependencies are installed.
 
 ### v3 export
 In order to suport story export from Lunii v3 hardware, you must place your device keys in here :

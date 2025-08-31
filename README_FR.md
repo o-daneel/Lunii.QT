@@ -65,6 +65,7 @@ Il existe une troisième et quatrième solution, mais je doute que quelqu'un l'u
     * [macOS - Authorisation de l'application](#macos---authorisation-de-lapplication)
     * [Métadonnées des histoires non-officielles](#métadonnées-des-histoires-non-officielles)
     * [Gestion du cache](#gestion-du-cache)
+    * [Dépendances manquantes sous Linux](#dépendances-manquantes-sous-linux)
   * [Remerciements](#remerciements)
 * [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
@@ -420,6 +421,30 @@ Cette application téléchargera une fois pour toutes la base de données des hi
 * `$HOME/.lunii-qt/cache/*`
 
 En cas de problème, il suffit de supprimer ce fichier et ce répertoire pour forcer le rafraîchissement.
+
+
+### Dépendances manquantes sous Linux
+Si vous rencontrez l’erreur suivante lors du lancement de Lunii.QT sous Linux :
+
+```
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: offscreen, vkkhrdisplay, xcb, minimalegl, vnc, eglfs, minimal, linuxfb, wayland-egl, wayland.
+```
+
+Cela signifie qu’une bibliothèque système requise pour l’interface graphique Qt est manquante.
+
+**Solution :**  
+Installez la dépendance manquante en exécutant la commande suivante dans votre terminal :
+
+```bash
+sudo apt install libxcb-cursor0
+```
+
+Après l’installation, essayez de relancer Lunii.QT.  
+Si le problème persiste, assurez-vous que toutes les autres dépendances Qt sont installées.
+
 
 ### Exportation V3
 Afin de supporter l'exportation d'histoires depuis une Luniis v3, vous devez placer vos clés de périphérique ici :
