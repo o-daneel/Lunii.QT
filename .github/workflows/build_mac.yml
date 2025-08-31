@@ -1,6 +1,7 @@
 name: Build for MacOs (Intel / ARM)
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*.*.*

@@ -1,6 +1,7 @@
 name: Build for Windows (MSI & Portable)
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - cx_freeze
