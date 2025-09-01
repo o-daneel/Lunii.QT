@@ -559,11 +559,10 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
 
 def is_flam(root_path):
-    root_path = Path(root_path)
-    md_path = root_path.joinpath(".mdf")
+    MDF_FILE = os.path.join(root_path, ".mdf")
 
     try:
-        if md_path.is_file():
+        if os.path.isfile(MDF_FILE):
             return True
     except PermissionError:
         pass

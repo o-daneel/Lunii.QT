@@ -1648,11 +1648,10 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
 
 def is_lunii(root_path):
-    root_path = Path(root_path)
-    md_path = root_path.joinpath(".md")
+    MD_FILE = os.path.join(root_path, ".md")
 
     try:
-        if md_path.is_file():
+        if os.path.isfile(MD_FILE):
             return True
     except PermissionError:
         pass

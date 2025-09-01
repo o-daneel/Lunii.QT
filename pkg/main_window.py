@@ -36,7 +36,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v2.7.7"
+APP_VERSION = "v2.7.8"
 
 
 class VLine(QFrame):
@@ -342,6 +342,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if self.combo_device.count() == 1:
                 self.setWindowIcon(self.combo_device.itemIcon(0))
                 self.combo_device.setCurrentIndex(0)
+
         else:
             self.sb_update("No Lunii detected 😥, try File/Open")
             self.combo_device.setPlaceholderText("No Lunii detected 😥")
@@ -393,6 +394,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
                 self.worker_launch(ACTION_SIZE)
+            
+            # showLog window if device is a v3 without story keys
+            if (self.audio_device and
+                self.audio_device.device_version == LUNII_V3 and
+                not self.audio_device.story_key):
+                self.cb_show_log()
 
     def cb_tree_select(self):
         # getting selection
