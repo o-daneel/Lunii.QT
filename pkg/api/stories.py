@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from typing import List
 from uuid import UUID
+from typing import List
 
 import requests
 from PySide6.QtCore import QFile, QTextStream
@@ -39,7 +40,7 @@ class StudioStory:
         self.js_anodes = None
         self.ri = dict()
         self.si = dict()
-        self.li = list()
+        self.li: List[int] = list()
 
         # depends on ffmpeg presence on host system
         self.compatible = False
@@ -198,7 +199,7 @@ class StudioStory:
         # parsing list node index
         for index in self.li:
             # Write index as signed 4-byte integer (little endian)
-            li_buffer += int(index).to_bytes(4, byteorder='little', signed=True)
+            li_buffer += index.to_bytes(4, byteorder='little', signed=True)
 
         return li_buffer
 
