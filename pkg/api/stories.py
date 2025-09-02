@@ -197,7 +197,8 @@ class StudioStory:
 
         # parsing list node index
         for index in self.li:
-            li_buffer += index.to_bytes(4, byteorder='little')
+            # Write index as signed 4-byte integer (little endian)
+            li_buffer += int(index).to_bytes(4, byteorder='little', signed=True)
 
         return li_buffer
 
