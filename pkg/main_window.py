@@ -36,7 +36,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v2.7.9a1"
+APP_VERSION = "v2.7.9a2"
 
 
 class VLine(QFrame):
@@ -713,10 +713,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # if a version was fetched
         if last_version:
-            is_alpha = APP_VERSION[-2] == "a"
+            new_update = False
 
-            if (is_alpha and last_version >= APP_VERSION[:-2] or last_version > APP_VERSION):
-                # and last_version > APP_VERSION:
+            c_versions = APP_VERSION.split("a")
+            l_versions = last_version.split("a")
+
+            c_alpha = len(c_versions) > 1
+            l_alpha = len(l_versions) > 1
+
+            # none of them are alpha (stable vs stable) : 2.7.8 2.7.9
+            # stable vs aplha : 2.7.8 2.7.9a1
+            # alpha vs stable : 2.7.9a1 2.7.9
+            # alpha vs alpha  : 2.7.9a1 2.7.9a2
+            new_update = (l_versions[0] > c_versions[0]) or \
+                (c_alpha and l_alpha and l_versions[1] > c_versions[1]) or \
+                (l_versions[0] == c_versions[0] and c_alpha and not l_alpha)
+
+            if new_update:
                 self.menuHelp.setTitle("[ Help ]")
                 self.menuUpdate.setTitle("New update is available")
                 self.act_update.setText(f"Update to {last_version}")
