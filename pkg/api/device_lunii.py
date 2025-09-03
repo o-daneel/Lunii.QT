@@ -20,7 +20,7 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.firmware import FW_HEADERS
+from pkg.api.firmware import FW_HEADERS, FW_SIZES
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
@@ -172,6 +172,10 @@ class LuniiDevice(QtCore.QObject):
         for key in FW_HEADERS.keys():
             V3_FW = os.path.join(CFG_DIR, f"fa.{self.snu_str}.v{key[0]}{key[1]}{key[2]}.bin")
             if os.path.isfile(V3_FW):
+                # checking FW size (best we can do)
+                if FW_SIZES.get(key) and os.path.getsize(V3_FW) != FW_SIZES[key]:
+                    logger.log(logging.WARNING, f"corrupted firmware (file size mismatch) for v{key[0]}.{key[1]}.{key[2]} ({V3_FW})")
+                    continue
                 # getting fake keys for story bt file
                 with open(V3_FW, "rb") as fp_fw:
                     self.bt = fp_fw.read(0x20)
@@ -180,7 +184,7 @@ class LuniiDevice(QtCore.QObject):
             else:
                 logger.log(logging.INFO, f"no Firmware file for v{key[0]}.{key[1]}.{key[2]}")
         if self.story_key is None:
-            logger.log(logging.WARNING, f"no Firmware file found ({V3_FW})")
+            logger.log(logging.WARNING, f"no working Firmware file found ({V3_FW})")
 
         #checking for md v6 file
         V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.md")

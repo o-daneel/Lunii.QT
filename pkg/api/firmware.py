@@ -11,6 +11,10 @@ FW_HEADERS = {
                 reverse_bytes(b"\xEB\xAD\x02\x90\xED\xAD\x02\x90\xEF\xAD\x02\x90\x00\x00\x00\x00")),
 }
 
+FW_SIZES = {
+    (3, 2, 2): 409664
+}
+
 def luniistore_get_authtoken(login, pwd):
     url_sign = "https://server-auth-prod.lunii.com/auth/signin"
     args1 = {'application': "luniistore_mobile",
