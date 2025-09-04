@@ -36,7 +36,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v2.7.9a2"
+APP_VERSION = "v2.7.9a3"
 
 
 class VLine(QFrame):
@@ -328,6 +328,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
         self.sb_update("")
+
+        if os.path.isdir("C:/Work/dev/lunii-sd/"):
+            dev_list.append("C:/Work/dev/lunii-sd/_flam/")
+            dev_list.append("C:/Work/dev/lunii-sd/_v1/")
+            dev_list.append("C:/Work/dev/lunii-sd/_v2/")
+            dev_list.append("C:/Work/dev/lunii-sd/_v3/")
+            dev_list.append("C:/Work/dev/lunii-sd/_v322/")
+            dev_list.append("C:/Work/dev/lunii-sd/")
 
         for dev in dev_list:
             dev_name = str(dev)

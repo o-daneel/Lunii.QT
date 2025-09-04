@@ -201,6 +201,10 @@ class StudioStory:
             # Write index as signed 4-byte integer (little endian)
             li_buffer += index.to_bytes(4, byteorder='little', signed=True)
 
+        # adding extra padding for small stories
+        while len(li_buffer) < 8:
+            li_buffer += b"\x00"
+
         return li_buffer
 
     def write_bt(self, path_ni):
