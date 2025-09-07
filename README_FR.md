@@ -11,6 +11,8 @@ pour Windows / Linux / MacOs 11
 
 Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Il s'agit d'une solution temporaire et imparfaite pour continuer à supporter les histoires non officielles. Une analyse plus approfondie pourrait permettre une solution plus simple dans une future mise à jour.
 
+> **FAQ :** Veuillez consulter les questions déjà posées dans la [FAQ GitHub](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
+
 > **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours revenir en arrière). De plus prenez soin de désactiver les mises à jour automatiques.
 
 Il existe **deux solutions** pour conserver la compatibilité et conserver vos histoires :

@@ -196,12 +196,19 @@ class LuniiDevice(QtCore.QObject):
                 if md_version != 6:
                     logger.log(logging.WARNING, f".md file is not v6 ({V3_MD})")
                 else:
-                    # moving to 0x40 from beginning
-                    fp_md.seek(0x40)
-                    self.bt = fp_md.read(0x20)
-                
-                    # forging keys based on md
-                    self.load_md_fakestory_keys()
+                    # ensure that SNU in md is the same as seleced device
+                    fp_md.seek(0x1A)
+                    md_snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
+                    
+                    if md_snu != self.snu:
+                        logger.log(logging.WARNING, f".md v6 file SNU mismatch ({binascii.hexlify(md_snu)} vs. {binascii.hexlify(self.snu)})")
+                    else:
+                        # moving to 0x40 from beginning
+                        fp_md.seek(0x40)
+                        self.bt = fp_md.read(0x20)
+                    
+                        # forging keys based on md
+                        self.load_md_fakestory_keys()
         else:
             logger.log(logging.WARNING, f"no .md v6 file found ({V3_MD})")
 

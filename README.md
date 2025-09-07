@@ -9,6 +9,8 @@ for Windows / Linux / macOS
 
 Lunii.QT has been updated to support the latest firmware (3.2.2 and later). This is only a quick and dirty workaround to keep support of custom story. A deeper analysis might reveal a simpler solution in a future update.
 
+> **FAQ :** Please refer to already asked questions on [GitHub FAQ](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
+
 > **Reminder :** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
 
 There are **two solutions** to ensure compatibility and keep your stories safe:
