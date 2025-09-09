@@ -5,40 +5,18 @@ A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including *
 for Windows / Linux / macOS  
 (compatible with STUdio archive, **with** transcoding)
 
-### ⚠️ Lunii v3 & Firmware 3.2.x ⚠️
+> **FAQ :** Please refer to already asked questions on [Discussions](https://github.com/o-daneel/Lunii.QT/discussions) section, or refer to revelant [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
 
-Lunii.QT has been updated to support the latest firmware (3.2.2 and later). This is only a quick and dirty workaround to keep support of custom story. A deeper analysis might reveal a simpler solution in a future update.
+### 😎 Lunii v3 & Firmware 3.2.x 😎
 
-> **FAQ :** Please refer to already asked questions on [GitHub FAQ](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
+Lunii.QT has been updated to support the latest firmware (3.2.2 and later). Thanks to a longer analysis (I should have spent 10 more minutes at the first sight to connect neurons), **a stable** and **VERY simple** workaround has been found.  
+Forget about all previous .md and firmware recommendations.
 
 > **Reminder :** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
 
-There are **two solutions** to ensure compatibility and keep your stories safe:
-
-1. **Keep your previous `.md` file:**  
-   If you already have a backup of your device's `.md` file from before the upgrade, simply keep it safe somewhere (it is a hidden file located in root dir—so you might need to change your file explorer settings to reveal it) **and** copy/rename it to `SNU.md`, into your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\23023030012345.md` on Windows or `$HOME/.lunii-qt/23023030012345.md` on Linux/macOS). This will allow Lunii.QT to continue managing your stories as before.  
-   You can eventually try using [Recuva](http://www.recuva.fr/) tool to recover old `.md` file from a very recent update.
-2. **Download the upgrade file `fa.bin`:**  
-   If you do not have the previous `.md` file, you can download the firmware upgrade file `fa.bin` using Lunii.QT (see [Firmware upgrade](#firmware-upgrade) section above, specifically the [HowTo - Lunii](#howto---lunii) instructions).  
-   Rename it to `fa.SNU.v3xx.bin` (with the correct snu and version e.g: `fa.23023030012345.v322.bin`) and place it in your user's directory in `.lunii-qt` (e.g. `%HOME%\.lunii-qt\` on Windows or `$HOME/.lunii-qt/` on Linux/macOS).  
-   ⚠️ **Using a new firmware release (e.g 3.3.0) as a 3.2.2 or a firmware from another Lunii won't be detected, and imported stories won't work.**
-
-At least one of those files must be present in your user's `.lunii-qt` directory for Lunii.QT to support import feature with firmware 3.2.2 and later.
-
-> **Note:** If this procedure was not correctly followed, the Log window in the application will provide more details to help you understand and resolve any issues.
-
-> **Important:**  
-> When Lunii releases a new firmware version, Lunii.QT itself may need to be updated to support it. However, if one of the required files (`SNU.md` or `fa.SNU.3xx.bin`) is available and import is working, any subsequent firmware update should be transparent to the user—no further action is needed unless compatibility issues arise. **SNU** is the unique Lunii identifier written on the device itself or available in the status bar of the application.
-
-There is a third and forth solution, but I'm pretty sure no one will support it (if you do, leave a message)
-
-3. **Downgrade your firmware 😎**:  
-   If you have been playing safe and downloaded your previous firmwares with this app, you can simply push it to the Lunii root dir and downgrade the firmware. You'll get back to a working device. 
-4. **Using your own device keys 😎😎**
-
 ### Hardware supported:
 * **v1, v2**  (full Support)
-* **v3**  (export requires device key file)  
+* **v3**  (v6 and v7 md files supported 💪🏻, export requires device key file)  
 * **Flam** (partial support, only reorder and firmware backup)
 
 ### Limitations

@@ -5,44 +5,19 @@
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
 pour Windows / Linux / MacOs 11  
 (compatible avec les archives STUdio, **avec** support de la conversion audio)
+> **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 
+### 😎 Lunii v3 & Firmware 3.2.x 😎
 
-### ⚠️ Lunii v3 & Firmware 3.2.x ⚠️
+Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Grâce à une analyse approfondie (j’aurais dû connecter les neurones et réfléchir 10 minutes de plus à la premère analyse), une solution **stable** et **TRÈS simple** a été trouvée.  
+Oubliez toutes les anciennes manipulations concernant les fichiers .md et le firmware.
 
-Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Il s'agit d'une solution temporaire et imparfaite pour continuer à supporter les histoires non officielles. Une analyse plus approfondie pourrait permettre une solution plus simple dans une future mise à jour.
-
-> **FAQ :** Veuillez consulter les questions déjà posées dans la [FAQ GitHub](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
-
-> **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours revenir en arrière). De plus prenez soin de désactiver les mises à jour automatiques.
-
-Il existe **deux solutions** pour conserver la compatibilité et conserver vos histoires :
-
-1. **A l'aide votre ancien fichier `.md` :**  
-   Si vous avez déjà une sauvegarde du fichier `.md` de votre appareil avant la mise à jour, conservez-le précieusement (il s'agit d'un fichier caché à la racine de votre Lunii—vous devrez peut-être modifier les paramètres de votre explorateur de fichiers pour le rendre visible) **et** copiez/renommez-le en `SNU.md` dans le dossier utilisateur `.lunii-qt` (par exemple `%HOME%\.lunii-qt\23023030012345.md` sous Windows ou `$HOME/.lunii-qt/23023030012345.md` sous Linux/macOS). Cela permettra à Lunii.QT de continuer à gérer vos histoires comme auparavant.  
-   Vous pouvez éventuellement essayer d'utiliser l'outil [Recuva](http://www.recuva.fr/) pour récupérer un ancien fichier `.md` juste après une mise à jour.
-2. **Téléchargez le fichier de mise à jour `fa.bin` :**  
-   Si vous n'avez pas l'ancien fichier `.md`, vous pouvez télécharger le fichier de mise à jour du firmware `fa.bin` via Lunii.QT (voir la section [Mise à jour du firmware](#mise-à-jour-du-firmware), en particulier le guide [Guide Pratique - Lunii](#guide-pratique---lunii)).  
-   Renommez-le en `fa.SNU.v3x.bin` (avec le numéro de série et la version correcte, par exemple `fa.23023030012345.v322.bin`) et placez-le dans le dossier utilisateur `.lunii-qt` (par exemple `%HOME%\.lunii-qt\` sous Windows ou `$HOME/.lunii-qt/` sous Linux/macOS).
-    ⚠️ **Utiliser une version plus récente de firmware (par exemple 3.3.0) en tant que 3.2.2 ou encore utiliser un firmware d'une autre Lunii ne pourra être détecté. Toutes les histoires chargée de la sorte seront non fonctionnelles.**
-
-Au moins un de ces fichiers doit être présent dans le dossier `.lunii-qt` de votre utilisateur pour que Lunii.QT puisse importer des histoires avec le firmware 3.2.2 et suivants.
-
-> **Note :** Si la procédure n'a pas été suivie correctement, la fenêtre Log de l'application vous donnera plus de détails pour comprendre et résoudre le problème.
-
-> **Important :**  
-> Lorsqu'un nouveau firmware Lunii est publié, Lunii.QT peut nécessiter une mise à jour pour le supporter. Cependant, si l'un des fichiers requis (`SNU.md` ou `fa.SNU.v3xx.bin`) est disponible et que l'import fonctionne, toute mise à jour ultérieure du firmware devrait être transparente pour l'utilisateur—aucune action supplémentaire n'est nécessaire sauf en cas de problème de compatibilité. Le **SNU** est l'identifiant unique Lunii inscrit sur l'appareil lui-même ou disponible dans la barre d'état, en bas de l'application.
-
-
-Il existe une troisième et quatrième solution, mais je doute que quelqu'un l'utilise (si c'est le cas, laissez un message)
-
-3. **Rétrograder votre firmware 😎 :**  
-   Si vous avez pris vos précautions et téléchargé vos anciens firmwares avec cette application, il suffit de le copier à la racine de la Lunii et de rétrograder le firmware. Vous retrouverez un appareil fonctionnel.
-4. **Utilisez les clés de votre propre Lunii 😎😎**
+> **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours rétrograder) et évitez les mises à jour automatiques.
 
 ### Matériels pris en charge :
-* Fah **v1** et **v2** (support complet)
-* Fah **v3** (l'export requiert les clés de la Fah)
-* Flam (support partiel, tri des histoires et sauvegarde du firmware)
+* **Fah v1** et **v2** (support complet)
+* **Fah v3** (fichiers md v6 et v7 supportés, l'export requiert les clés de la Fah)
+* **Flam** (support partiel, tri des histoires et sauvegarde du firmware)
 
 ### Limitations :
 * L'application <u>n'autorise plus</u> d'exporter les histoires officielles.
