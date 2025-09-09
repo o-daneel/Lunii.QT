@@ -20,7 +20,6 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.firmware import FW_HEADERS, FW_SIZES
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
 
 
@@ -160,10 +159,10 @@ class LuniiDevice(QtCore.QObject):
                                        f"HW  : v3\n"
                                        f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
-                                       f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper() if self.device_key else 'N/A'}\n"
-                                       f"Dev IV  : {binascii.hexlify(self.device_iv, ' ', 1).upper()  if self.device_iv  else 'N/A'}\n"
-                                       f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper()  if self.story_key  else 'N/A'}\n"
-                                       f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper()  if self.story_iv   else 'N/A'}")
+                                       f"Dev Key : {binascii.hexlify(self.device_key,  ' ', 1).upper() if self.device_key else 'N/A'}\n"
+                                       f"Dev IV  : {binascii.hexlify(self.device_iv,   ' ', 1).upper() if self.device_iv  else 'N/A'}\n"
+                                       f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper() if self.story_key  else 'N/A'}\n"
+                                       f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper() if self.story_iv   else 'N/A'}")
 
     def __v1v2_decipher(self, buffer, key, offset, dec_len):
         # checking offset
@@ -258,14 +257,6 @@ class LuniiDevice(QtCore.QObject):
         else:
             # forging keys based on md ciphered part
             self.load_md_fakestory_keys()
-
-    def load_fw_fakestory_keys(self):
-        # forging keys based on fw ciphered part
-        item = FW_HEADERS.get((self.fw_vers_major, self.fw_vers_minor, self.fw_vers_subminor))
-        if item is not None:
-            (self.story_key, self.story_iv) = item
-            return True
-        return False
 
     def load_md_fakestory_keys(self):
         # forging keys based on md ciphered part

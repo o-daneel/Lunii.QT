@@ -6,15 +6,6 @@ from pkg.api.constants import *
 # anonymous fake lunii created to get v1 v2 fw
 V1V2_FAHID = "-NnUun90mQ56GosDyA3R"
 
-FW_HEADERS = {
-    (3, 2, 2): (reverse_bytes(b"\x00\x00\x04\x20\xD9\x52\x03\x90\xBF\xAD\x02\x90\xC1\xAD\x02\x90"),
-                reverse_bytes(b"\xEB\xAD\x02\x90\xED\xAD\x02\x90\xEF\xAD\x02\x90\x00\x00\x00\x00")),
-}
-
-FW_SIZES = {
-    (3, 2, 2): 409664
-}
-
 def luniistore_get_authtoken(login, pwd):
     url_sign = "https://server-auth-prod.lunii.com/auth/signin"
     args1 = {'application': "luniistore_mobile",
