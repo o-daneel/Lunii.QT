@@ -42,10 +42,6 @@ APP_VERSION = "v3.0.0a1"
 
 """ 
 # TODO : 
-- update contextual menu with NightMode
-- create action
-- on action toggle nm file (create or delete)
-- support selection
 - support click on col NM to toggle
  """
 
@@ -150,6 +146,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_mv_down = next(act for act in s_actions if act.objectName() == "actionMove_Down")
         self.act_mv_bottom = next(act for act in s_actions if act.objectName() == "actionMove_Bottom")
         self.act_hide = next(act for act in s_actions if act.objectName() == "actionHide")
+        self.act_nm = next(act for act in s_actions if act.objectName() == "actionNight_Mode")
         self.act_import = next(act for act in s_actions if act.objectName() == "actionImport")
         self.act_export = next(act for act in s_actions if act.objectName() == "actionExport")
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
@@ -541,6 +538,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_move(10)
         elif act_name == "actionHide":
             self.ts_hide()
+        elif act_name == "actionNight_Mode":
+            self.ts_nm()
         elif act_name == "actionImport":
             self.ts_import()
         elif act_name == "actionExport":
@@ -684,6 +683,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_mv_down.setEnabled(True)
             self.act_mv_bottom.setEnabled(True)
             self.act_hide.setEnabled(True)
+            self.act_nm.setEnabled(True)
             self.act_remove.setEnabled(True)
 
             # v3 without keys cannot export
@@ -1044,12 +1044,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # updating story hidden state
-        item_to_hide = []
+        items_to_hide = []
         one_story = None
         for item in selection:
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.hidden = not one_story.hidden
-            item_to_hide.append(self.tree_stories.indexOfTopLevelItem(item))
+            items_to_hide.append(self.tree_stories.indexOfTopLevelItem(item))
 
         # updating pack index file and display
         self.audio_device.update_pack_index()
@@ -1059,10 +1059,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         sel_model = self.tree_stories.selectionModel()
 
         # selecting moved items
-        new_selection = [self.tree_stories.topLevelItem(index) for index in item_to_hide]
+        new_selection = [self.tree_stories.topLevelItem(index) for index in items_to_hide]
         self.tree_stories.setCurrentItem(new_selection[0])
         for item in new_selection:
-            for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
+            for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
         # updating detail panel
@@ -1070,6 +1070,50 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_picture.setDisabled(one_story.hidden)
 
         self.sb_update("✅ Stories updated...")
+
+    def ts_nm(self):
+        if not self.audio_device:
+            return
+
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        if len(selection) == 0:
+            return
+
+        # updating story nightmode state
+        items_to_toggle = []
+        one_story = None
+        for item in selection:
+            one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
+            one_story.nm = not one_story.nm
+            # managing nm file for stories
+            story_nm = os.path.join(self.audio_device.story_dir(one_story.short_uuid), "nm")
+            # if nm file exists
+            if os.path.isfile(story_nm):
+                # remove it
+                os.remove(story_nm)
+            else:
+                # create empty nm file
+                open(story_nm, 'w').close()
+
+            # keeping track of TreeView items for selection management
+            items_to_toggle.append(self.tree_stories.indexOfTopLevelItem(item))
+
+
+        self.ts_update()
+
+        # update selection
+        sel_model = self.tree_stories.selectionModel()
+
+        # selecting moved items
+        new_selection = [self.tree_stories.topLevelItem(index) for index in items_to_toggle]
+        self.tree_stories.setCurrentItem(new_selection[0])
+        for item in new_selection:
+            for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
+                sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
+
+        self.sb_update("✅ Stories updated...")
+
 
     def ts_import(self):
         if not self.audio_device:

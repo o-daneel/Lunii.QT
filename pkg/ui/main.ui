@@ -573,6 +573,7 @@
     <addaction name="actionMove_Bottom"/>
     <addaction name="separator"/>
     <addaction name="actionHide"/>
+    <addaction name="actionNight_Mode"/>
     <addaction name="separator"/>
     <addaction name="actionImport"/>
     <addaction name="actionExport"/>
@@ -866,6 +867,14 @@
    </property>
    <property name="text">
     <string>Refresh official DB</string>
+   </property>
+  </action>
+  <action name="actionNight_Mode">
+   <property name="text">
+    <string>Night Mode</string>
+   </property>
+    <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>
