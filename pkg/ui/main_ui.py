@@ -194,16 +194,17 @@ class Ui_MainWindow(object):
 
         self.tree_stories = QTreeWidget(self.centralwidget)
         __qtreewidgetitem = QTreeWidgetItem()
-        __qtreewidgetitem.setTextAlignment(3, Qt.AlignLeading|Qt.AlignVCenter);
-        __qtreewidgetitem.setText(2, u"UUID");
+        __qtreewidgetitem.setTextAlignment(4, Qt.AlignLeading|Qt.AlignVCenter);
+        __qtreewidgetitem.setText(3, u"UUID");
+        __qtreewidgetitem.setTextAlignment(2, Qt.AlignCenter);
         __qtreewidgetitem.setTextAlignment(1, Qt.AlignCenter);
         self.tree_stories.setHeaderItem(__qtreewidgetitem)
         font1 = QFont()
         font1.setFamilies([u"Consolas"])
         __qtreewidgetitem1 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem1.setFont(2, font1);
+        __qtreewidgetitem1.setFont(3, font1);
         __qtreewidgetitem2 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem2.setFont(2, font1);
+        __qtreewidgetitem2.setFont(3, font1);
         QTreeWidgetItem(self.tree_stories)
         QTreeWidgetItem(self.tree_stories)
         self.tree_stories.setObjectName(u"tree_stories")
@@ -485,31 +486,37 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.btn_db.setText("")
         ___qtreewidgetitem = self.tree_stories.headerItem()
-        ___qtreewidgetitem.setText(3, QCoreApplication.translate("MainWindow", u"Size", None));
-        ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"DB", None));
+        ___qtreewidgetitem.setText(4, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"DB", None));
+        ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"NM", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
+#if QT_CONFIG(tooltip)
+        ___qtreewidgetitem.setToolTip(2, QCoreApplication.translate("MainWindow", u"Database source (Official / Third Party)", None));
+        ___qtreewidgetitem.setToolTip(1, QCoreApplication.translate("MainWindow", u"Night Mode", None));
+#endif // QT_CONFIG(tooltip)
 
         __sortingEnabled = self.tree_stories.isSortingEnabled()
         self.tree_stories.setSortingEnabled(False)
         ___qtreewidgetitem1 = self.tree_stories.topLevelItem(0)
-        ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"75MB", None));
-        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"C4139D59-872A-4D15-8CF1-76D34CDF38C6", None));
-        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
+        ___qtreewidgetitem1.setText(4, QCoreApplication.translate("MainWindow", u"75MB", None));
+        ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"C4139D59-872A-4D15-8CF1-76D34CDF38C6", None));
+        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Suzanne et Gaston", None));
         ___qtreewidgetitem2 = self.tree_stories.topLevelItem(1)
-        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"65MB", None));
-        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9", None));
-        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
+        ___qtreewidgetitem2.setText(4, QCoreApplication.translate("MainWindow", u"65MB", None));
+        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9", None));
+        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
+        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"z", None));
         ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Panique aux 6 Royaumes", None));
         ___qtreewidgetitem3 = self.tree_stories.topLevelItem(2)
-        ___qtreewidgetitem3.setText(3, QCoreApplication.translate("MainWindow", u"124MB", None));
-        ___qtreewidgetitem3.setText(2, QCoreApplication.translate("MainWindow", u"22137B29-8646-4335-8069-4A4C9A2D7E89", None));
-        ___qtreewidgetitem3.setText(1, QCoreApplication.translate("MainWindow", u"O", None));
+        ___qtreewidgetitem3.setText(4, QCoreApplication.translate("MainWindow", u"124MB", None));
+        ___qtreewidgetitem3.setText(3, QCoreApplication.translate("MainWindow", u"22137B29-8646-4335-8069-4A4C9A2D7E89", None));
+        ___qtreewidgetitem3.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
         ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Au Pays des Loups", None));
         ___qtreewidgetitem4 = self.tree_stories.topLevelItem(3)
-        ___qtreewidgetitem4.setText(3, QCoreApplication.translate("MainWindow", u"25MB", None));
-        ___qtreewidgetitem4.setText(2, QCoreApplication.translate("MainWindow", u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C", None));
-        ___qtreewidgetitem4.setText(1, QCoreApplication.translate("MainWindow", u"C", None));
+        ___qtreewidgetitem4.setText(4, QCoreApplication.translate("MainWindow", u"25MB", None));
+        ___qtreewidgetitem4.setText(3, QCoreApplication.translate("MainWindow", u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C", None));
+        ___qtreewidgetitem4.setText(2, QCoreApplication.translate("MainWindow", u"C", None));
         ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Sur les bancs de l'\u00e9cole", None));
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 

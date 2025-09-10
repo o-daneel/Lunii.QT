@@ -207,7 +207,21 @@
       </column>
       <column>
        <property name="text">
+        <string>NM</string>
+       </property>
+       <property name="toolTip">
+        <string>Night Mode</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>DB</string>
+       </property>
+       <property name="toolTip">
+        <string>Database source (Official / Third Party)</string>
        </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
@@ -231,6 +245,9 @@
         <string>Suzanne et Gaston</string>
        </property>
        <property name="text">
+        <string/>
+       </property>
+       <property name="text">
         <string>O</string>
        </property>
        <property name="text">
@@ -248,6 +265,9 @@
       <item>
        <property name="text">
         <string>Panique aux 6 Royaumes</string>
+       </property>
+       <property name="text">
+        <string>z</string>
        </property>
        <property name="text">
         <string>O</string>
@@ -269,6 +289,9 @@
         <string>Au Pays des Loups</string>
        </property>
        <property name="text">
+        <string/>
+       </property>
+       <property name="text">
         <string>O</string>
        </property>
        <property name="text">
@@ -281,6 +304,9 @@
       <item>
        <property name="text">
         <string>Sur les bancs de l'école</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
        <property name="text">
         <string>C</string>

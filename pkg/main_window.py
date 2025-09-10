@@ -27,10 +27,12 @@ from pkg.ui.login_ui import LoginDialog
 from pkg.ui.main_ui import Ui_MainWindow
 
 COL_NAME = 0
-COL_DB = 1
-COL_UUID = 2
-COL_SIZE = 3
+COL_NM = 1
+COL_DB = 2
+COL_UUID = 3
+COL_SIZE = 4
 
+COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
@@ -116,6 +118,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
         self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.ResizeToContents)
         # self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
         # self.tree_stories.setColumnHidden(COL_DB, True)
         # self.tree_stories.setColumnWidth(COL_UUID, 250)
@@ -232,7 +235,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         col_size_size = self.tree_stories.columnWidth(COL_SIZE)
 
         # 4. update the name col while keeping uuid size
-        col_size_width = self.tree_stories.width() - COL_DB_SIZE - col_uuid_size
+        col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
         if not self.sizes_hidden:
             col_size_width -= col_size_size
         col_size_width -= COL_EXTRA
@@ -328,6 +331,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
         self.sb_update("")
+
 
         for dev in dev_list:
             dev_name = str(dev)
@@ -767,6 +771,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = QTreeWidgetItem()
 
             item.setText(COL_NAME, story.name)
+            item.setText(COL_NM, "🛏️" if story.night_mode() else "")
+            item.setTextAlignment(COL_NM, Qt.AlignCenter)
 
             if story.is_official():
                 item.setText(COL_DB, "O")

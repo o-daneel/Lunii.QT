@@ -326,10 +326,11 @@ def _uuid_match(uuid: UUID, key_part: str):
 
 
 class Story:
-    def __init__(self, uuid: UUID, hidden: bool = False, size: int = -1):
+    def __init__(self, uuid: UUID, hidden: bool = False, nm = False, size: int = -1):
         self.uuid = uuid
         self.size = size
         self.hidden = hidden
+        self.nm = nm
 
     def __eq__(self, __value: UUID):
         return self.uuid == __value
@@ -441,6 +442,9 @@ class Story:
             return json.dumps(meta)
 
         return None
+
+    def night_mode(self):
+        return self.nm
 
     def is_official(self):
         global DB_OFFICIAL

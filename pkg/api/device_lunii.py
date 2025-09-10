@@ -1624,6 +1624,33 @@ class LuniiDevice(QtCore.QObject):
         print("factory_reset")
         pass
 
+def __feed_stories_file(root_path, pi_path, hidden) -> StoryList[UUID]:
+    logger = logging.getLogger(LUNII_LOGGER)
+    story_list = StoryList()
+
+    if os.path.isfile(pi_path):
+        with open(pi_path, "rb") as fp_pi:
+            loop_again = True
+            while loop_again:
+                next_uuid = fp_pi.read(16)
+                if next_uuid:
+                    one_uuid = UUID(bytes=next_uuid)
+                    logger.log(logging.DEBUG, f"> {str(one_uuid)}")
+                    if one_uuid in story_list:
+                        logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
+                    else:
+                        one_story = Story(one_uuid, hidden)
+                        # checking for night mode 
+                        story_nm = os.path.join(root_path, ".content", one_story.short_uuid, "nm")
+                        one_story.nm = os.path.isfile(story_nm)
+                        story_list.append(one_story)
+                else:
+                    loop_again = False
+    
+    story_count = len(story_list)
+    logger.log(logging.INFO, f"Read {story_count} {'hidden ' if hidden else ''}stories")
+
+    return story_list
 
 # opens the .pi file to read all installed stories
 def feed_stories(root_path) -> StoryList[UUID]:
@@ -1636,43 +1663,9 @@ def feed_stories(root_path) -> StoryList[UUID]:
     story_list = StoryList()
 
     logger.log(logging.INFO, f"Reading Lunii loaded stories...")
+    story_list.extend(__feed_stories_file(root_path, pi_path, False))
+    story_list.extend(__feed_stories_file(root_path, pi_hidden_path, True))
 
-    # if there is a .pi
-    if os.path.isfile(pi_path):
-        with open(pi_path, "rb") as fp_pi:
-            loop_again = True
-            while loop_again:
-                next_uuid = fp_pi.read(16)
-                if next_uuid:
-                    one_uuid = UUID(bytes=next_uuid)
-                    logger.log(logging.DEBUG, f"> {str(one_uuid)}")
-                    if one_uuid in story_list:
-                        logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
-                    else:
-                        story_list.append(Story(one_uuid))
-                else:
-                    loop_again = False
-
-    story_count = len(story_list)
-    logger.log(logging.INFO, f"Read {story_count} stories")
-
-    # if there is a hidden .pi
-    if os.path.isfile(pi_hidden_path):
-        with open(pi_hidden_path, "rb") as fp_pi:
-            loop_again = True
-            while loop_again:
-                next_uuid = fp_pi.read(16)
-                if next_uuid:
-                    one_uuid = UUID(bytes=next_uuid)
-                    logger.log(logging.DEBUG, f"> {str(one_uuid)}")
-                    if one_uuid in story_list:
-                        logger.log(logging.WARNING, f"Found duplicate story, cleaning...")
-                    else:
-                        story_list.append(Story(one_uuid, hidden=True))
-                else:
-                    loop_again = False
-
-    logger.log(logging.INFO, f"Read {len(story_list) - story_count} hidden stories")
     return story_list
 
 
