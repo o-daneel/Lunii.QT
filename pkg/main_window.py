@@ -43,7 +43,6 @@ APP_VERSION = "v3.0.0a1"
 
 """ 
 # TODO : 
-- support config to enable / disable night mode
  """
 
 class VLine(QFrame):
