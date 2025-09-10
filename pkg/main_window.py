@@ -40,6 +40,14 @@ COL_EXTRA = 40
 
 APP_VERSION = "v3.0.0a1"
 
+""" 
+# TODO : 
+- update contextual menu with NightMode
+- create action
+- on action toggle nm file (create or delete)
+- support selection
+- support click on col NM to toggle
+ """
 
 class VLine(QFrame):
     def __init__(self):
@@ -956,7 +964,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 # keeping last moved
                 moved = item
                 # selecting the whole line
-                for col in [COL_NAME, COL_DB, COL_UUID, COL_SIZE]:
+                for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
                     sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
         # end = time.time()
