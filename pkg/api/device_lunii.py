@@ -75,10 +75,10 @@ class LuniiDevice(QtCore.QObject):
         with open(md_path, "rb") as fp_md:
             md_version = int.from_bytes(fp_md.read(2), 'little')
 
-            if md_version in [6, 7]:
-                self.__md6to7_parse(fp_md)
-            elif md_version >= 1:
+            if 1<= md_version <= 5:
                 self.__md1to5_parse(fp_md)
+            elif 6 <= md_version <= 7:
+                self.__md6to7_parse(fp_md)
             else:
                 self.__unsupported_md_parse(fp_md)
         return True
@@ -129,6 +129,7 @@ class LuniiDevice(QtCore.QObject):
         fp_md.seek(0x1A)
         self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
 
+        logger = logging.getLogger(LUNII_LOGGER)
         # checking if md backup file is available 
         V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.v{md_vers:d}.md")
         if not os.path.isfile(V3_MD):
@@ -138,7 +139,6 @@ class LuniiDevice(QtCore.QObject):
                 fp_md.seek(0)
                 fp_md_bak.write(fp_md.read())
 
-        logger = logging.getLogger(LUNII_LOGGER)
         # getting candidated for story bt file
         fp_md.seek(0x40)
         if md_vers == 6:
@@ -178,14 +178,16 @@ class LuniiDevice(QtCore.QObject):
         logger = logging.getLogger(LUNII_LOGGER)
 
         #checking for md file
-        V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.{version:d}.md")
+        V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.v{version}.md")
         if os.path.isfile(V3_MD):
+            logger.log(logging.INFO, f".md v{version} file found ({V3_MD})")
+
             with open(V3_MD, "rb") as fp_md:
                 # reading version as first 2 bytes
                 md_version = int.from_bytes(fp_md.read(2), 'little')
                 # ensure version is the expected one
                 if md_version != version:
-                    logger.log(logging.WARNING, f".md file is not v{version:d} ({V3_MD})")
+                    logger.log(logging.WARNING, f".md file is not v{version} ({V3_MD})")
                 else:
                     # ensure that SNU in md is the same as seleced device
                     fp_md.seek(0x1A)
@@ -213,6 +215,24 @@ class LuniiDevice(QtCore.QObject):
 
 
     def __unsupported_md_parse(self, fp_md):
+        self.device_version = LUNII_V3
+        # reading metadata version
+        fp_md.seek(0)
+        md_vers = int.from_bytes(fp_md.read(1))
+        fp_md.seek(2)
+        # reading fw version
+        self.fw_vers_major = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        fp_md.read(1)
+        self.fw_vers_minor = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        fp_md.read(1)
+        self.fw_vers_subminor = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        # reading SNU
+        fp_md.seek(0x1A)
+        self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
+    
+        logger = logging.getLogger(LUNII_LOGGER)
+        logger.log(logging.WARNING, f"⚠️ Unsupported metadata file v{md_vers}, checking for backups...")
+
         if not self.story_key:
             self.__load_mdbackup(6)
         if not self.story_key:
@@ -222,8 +242,6 @@ class LuniiDevice(QtCore.QObject):
         V3_KEYS = os.path.join(CFG_DIR, f"{self.snu_str}.keys")
         self.dev_keyfile = V3_KEYS
         self.device_key, self.device_iv = fetch_keys(self.dev_keyfile)
-
-        logger = logging.getLogger(LUNII_LOGGER)
 
         if self.device_key:
             self.load_md_fakestory_keys()
@@ -249,7 +267,6 @@ class LuniiDevice(QtCore.QObject):
                                        f"Dev IV  : {binascii.hexlify(self.device_iv,   ' ', 1).upper() if self.device_iv  else 'N/A'}\n"
                                        f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper() if self.story_key  else 'N/A'}\n"
                                        f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper() if self.story_iv   else 'N/A'}")
-        # TODO : update log with details about keys used for stories
 
 
     def __v1v2_decipher(self, buffer, key, offset, dec_len):
