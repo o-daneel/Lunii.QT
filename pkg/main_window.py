@@ -9,7 +9,7 @@ from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication
+    QDialog, QApplication, QCheckBox
 
 from pkg import versionWorker
 from pkg.api import constants
@@ -42,7 +42,7 @@ APP_VERSION = "v3.0.0a1"
 
 """ 
 # TODO : 
-- support click on col NM to toggle
+- support config to enable / disable night mode
  """
 
 class VLine(QFrame):
@@ -197,6 +197,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
+        self.tree_stories.itemClicked.connect(self.ts_clicked)
 
         # connect menu callbacks
         self.menuFile.triggered.connect(self.cb_menu_file)
@@ -336,6 +337,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
         self.sb_update("")
+        self.chk_nightmode.setEnabled(False)
 
 
         for dev in dev_list:
@@ -399,6 +401,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_update()
             self.tw_resize_columns()
             self.sb_update("")
+            self.chk_nightmode.setEnabled(True)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -820,6 +823,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusBar().setStyleSheet('border: 0; background-color: #FFF8DC;')
         self.statusBar().setStyleSheet("QStatusBar::item {border: none;}")
 
+        # Create the checkbox
+        self.chk_nightmode = QCheckBox("Night Mode", self)
+        self.chk_nightmode.setChecked(False)
+        self.chk_nightmode.setEnabled(False)
+
+        self.statusBar().addPermanentWidget(self.chk_nightmode)
         self.statusBar().addPermanentWidget(VLine())    # <---
         self.statusBar().addPermanentWidget(self.lbl_hsnu)
         self.statusBar().addPermanentWidget(self.lbl_snu)
@@ -1114,7 +1123,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.sb_update("✅ Stories updated...")
 
-
     def ts_import(self):
         if not self.audio_device:
             return
@@ -1166,6 +1174,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.sb_update("Importing stories...")
         self.worker_launch(ACTION_IMPORT, file_paths)
+
+    def ts_clicked(self, item, column):
+        if column == COL_NM:
+            self.ts_nm()
 
     def worker_check_version(self):
         # version_thread.start()

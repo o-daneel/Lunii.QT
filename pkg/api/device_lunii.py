@@ -54,6 +54,11 @@ class LuniiDevice(QtCore.QObject):
         if not self.__feed_device():
             return
 
+        # loading configuration from device
+        self.config = feed_config(self.mount_point) 
+        self.config[3] = 1
+        self.update_config()
+
         # loading internal stories + pi update for duplicates filtering
         self.stories = feed_stories(self.mount_point)
         self.update_pack_index()
