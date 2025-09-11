@@ -402,6 +402,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tw_resize_columns()
             self.sb_update("")
             self.chk_nightmode.setEnabled(True)
+            self.chk_nightmode.setChecked(self.audio_device.config[4] == 1)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -827,6 +828,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.chk_nightmode = QCheckBox("Night Mode", self)
         self.chk_nightmode.setChecked(False)
         self.chk_nightmode.setEnabled(False)
+        self.chk_nightmode.stateChanged.connect(self.cbnm_checked)
 
         self.statusBar().addPermanentWidget(self.chk_nightmode)
         self.statusBar().addPermanentWidget(VLine())    # <---
@@ -900,6 +902,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.lbl_count.setText("")
 
+    def cbnm_checked(self, state):
+        if not self.audio_device:
+            return
+
+        night_mode = self.chk_nightmode.isChecked()
+        self.audio_device.config[4] = 1 if night_mode else 0
+        # self.update_config()
+        print(f"Night mode set to {night_mode}")
+    
     def ts_move(self, offset):
         if self.worker or not self.audio_device:
             return

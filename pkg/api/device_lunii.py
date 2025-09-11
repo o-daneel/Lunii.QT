@@ -46,6 +46,7 @@ class LuniiDevice(QtCore.QObject):
         self.fw_vers_minor = 0
         self.fw_vers_subminor = 0
         self.bt = b""
+        self.config = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         self.debug_plain = False
         self.abort_process = False
@@ -55,9 +56,9 @@ class LuniiDevice(QtCore.QObject):
             return
 
         # loading configuration from device
-        self.config = feed_config(self.mount_point) 
-        self.config[3] = 1
-        self.update_config()
+        # self.config = feed_config(self.mount_point) 
+        # self.config[3] = 1
+        # self.update_config()
 
         # loading internal stories + pi update for duplicates filtering
         self.stories = feed_stories(self.mount_point)
