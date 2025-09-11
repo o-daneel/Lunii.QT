@@ -129,6 +129,15 @@ class LuniiDevice(QtCore.QObject):
         fp_md.seek(0x1A)
         self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
 
+        # checking if md backup file is available 
+        V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.v{md_vers:d}.md")
+        if not os.path.isfile(V3_MD):
+            logger.log(logging.INFO, f"No backup of v{md_vers:d} metadata file found, creating one...")
+            # creating backup of md file
+            with open(V3_MD, "wb") as fp_md_bak:
+                fp_md.seek(0)
+                fp_md_bak.write(fp_md.read())
+
         logger = logging.getLogger(LUNII_LOGGER)
         # getting candidated for story bt file
         fp_md.seek(0x40)
