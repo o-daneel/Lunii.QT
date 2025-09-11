@@ -75,12 +75,12 @@ class LuniiDevice(QtCore.QObject):
         with open(md_path, "rb") as fp_md:
             md_version = int.from_bytes(fp_md.read(2), 'little')
 
-            if md_version >= 6:
-                self.__md6toN_parse(fp_md)
+            if md_version in [6, 7]:
+                self.__md6to7_parse(fp_md)
             elif md_version >= 1:
                 self.__md1to5_parse(fp_md)
             else:
-                return False
+                self.__unsupported_md_parse(fp_md)
         return True
 
     def __md1to5_parse(self, fp_md):
@@ -113,7 +113,7 @@ class LuniiDevice(QtCore.QObject):
                                        f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
                                        f"Dev Key : {binascii.hexlify(self.device_key, ' ', 1).upper()}")
 
-    def __md6toN_parse(self, fp_md):
+    def __md6to7_parse(self, fp_md):
         self.device_version = LUNII_V3
         # reading metadata version
         fp_md.seek(0)
@@ -172,6 +172,85 @@ class LuniiDevice(QtCore.QObject):
                                        f"Dev IV  : {binascii.hexlify(self.device_iv,   ' ', 1).upper() if self.device_iv  else 'N/A'}\n"
                                        f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper() if self.story_key  else 'N/A'}\n"
                                        f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper() if self.story_iv   else 'N/A'}")
+
+
+    def __load_mdbackup(self, version):
+        logger = logging.getLogger(LUNII_LOGGER)
+
+        #checking for md file
+        V3_MD = os.path.join(CFG_DIR, f"{self.snu_str}.{version:d}.md")
+        if os.path.isfile(V3_MD):
+            with open(V3_MD, "rb") as fp_md:
+                # reading version as first 2 bytes
+                md_version = int.from_bytes(fp_md.read(2), 'little')
+                # ensure version is the expected one
+                if md_version != version:
+                    logger.log(logging.WARNING, f".md file is not v{version:d} ({V3_MD})")
+                else:
+                    # ensure that SNU in md is the same as seleced device
+                    fp_md.seek(0x1A)
+                    md_snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
+                    
+                    if md_snu != self.snu:
+                        logger.log(logging.WARNING, f".md file SNU mismatch ({binascii.hexlify(md_snu)} vs. {binascii.hexlify(self.snu)})")
+                    else:
+                        # metadata file validated, we can setup keys
+                        fp_md.seek(0x40)
+
+                        if version == 6:
+                            # moving to 0x40 from beginning
+                            self.bt = fp_md.read(0x20)
+                            # forging keys based on md
+                            self.load_md_fakestory_keys()
+                        if version == 7:
+                            self.story_key = reverse_bytes(fp_md.read(0x10))
+                            self.story_iv = reverse_bytes(fp_md.read(0x10))
+                            # forging bt file based on plain part of md (SNU x2)
+                            self.bt = binascii.hexlify(self.snu) + b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" + binascii.hexlify(self.snu)[:8]
+
+        else:
+            logger.log(logging.WARNING, f"no .md v{version} file found ({V3_MD})")
+
+
+    def __unsupported_md_parse(self, fp_md):
+        if not self.story_key:
+            self.__load_mdbackup(6)
+        if not self.story_key:
+            self.__load_mdbackup(7)
+
+        # real keys if available
+        V3_KEYS = os.path.join(CFG_DIR, f"{self.snu_str}.keys")
+        self.dev_keyfile = V3_KEYS
+        self.device_key, self.device_iv = fetch_keys(self.dev_keyfile)
+
+        logger = logging.getLogger(LUNII_LOGGER)
+
+        if self.device_key:
+            self.load_md_fakestory_keys()
+            # preparing bt file by ciphering fake keys with real device keys
+            buffer = reverse_bytes(self.story_key) + reverse_bytes(self.story_iv)
+            cipher = AES.new(self.device_key, AES.MODE_CBC, self.device_iv)
+            self.bt = cipher.encrypt(buffer)
+
+            logger.log(logging.INFO, f"v3 key file read from {self.dev_keyfile}")
+        
+        if self.story_key is None:
+            logger.log(logging.WARNING, f"🛑 no keys at all, unable to import stories. See README on Github for help.")
+        else:
+            logger.log(logging.INFO, f"🟩 story keys found, import supported.")
+            
+        vid, pid = FAH_V2_V3_USB_VID_PID
+        logger.log(logging.DEBUG, f"\n"
+                                       f"SNU : {self.snu_str}\n"
+                                       f"HW  : v3\n"
+                                       f"FW  : v{self.fw_vers_major}.{self.fw_vers_minor}.{self.fw_vers_subminor}\n"
+                                       f"VID/PID : 0x{vid:04X} / 0x{pid:04X}\n"
+                                       f"Dev Key : {binascii.hexlify(self.device_key,  ' ', 1).upper() if self.device_key else 'N/A'}\n"
+                                       f"Dev IV  : {binascii.hexlify(self.device_iv,   ' ', 1).upper() if self.device_iv  else 'N/A'}\n"
+                                       f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper() if self.story_key  else 'N/A'}\n"
+                                       f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper() if self.story_iv   else 'N/A'}")
+        # TODO : update log with details about keys used for stories
+
 
     def __v1v2_decipher(self, buffer, key, offset, dec_len):
         # checking offset
