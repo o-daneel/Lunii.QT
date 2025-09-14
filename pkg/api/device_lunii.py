@@ -46,7 +46,7 @@ class LuniiDevice(QtCore.QObject):
         self.fw_vers_minor = 0
         self.fw_vers_subminor = 0
         self.bt = b""
-        self.config = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.config = None
 
         self.debug_plain = False
         self.abort_process = False
@@ -56,9 +56,7 @@ class LuniiDevice(QtCore.QObject):
             return
 
         # loading configuration from device
-        # self.config = feed_config(self.mount_point) 
-        # self.config[3] = 1
-        # self.update_config()
+        self.config = feed_config(self.mount_point) 
 
         # loading internal stories + pi update for duplicates filtering
         self.stories = feed_stories(self.mount_point)
@@ -443,6 +441,16 @@ class LuniiDevice(QtCore.QObject):
                     fp_pi.write(story.uuid.bytes)
         return
 
+    def update_config(self):
+        cfg_path = Path(self.mount_point).joinpath(".cfg")
+        cfg_path.unlink(missing_ok=True)
+        with open(cfg_path, "wb") as fp_cfg:
+            fp_cfg.write(b'\x00\x01')  # version
+            for item in range(len(self.config)):
+                fp_cfg.write(item.to_bytes(2, 'little'))
+                fp_cfg.write(self.config[item].to_bytes(2, 'little'))
+        return
+    
     def __valid_story(self, story_path):
         # getting all files in story
         story_files = glob.glob(os.path.join(story_path, "**/*"), recursive=True)
@@ -1684,6 +1692,46 @@ def feed_stories(root_path) -> StoryList[UUID]:
 
     return story_list
 
+# opens the .cfg file to read all settings
+def feed_config(root_path) -> StoryList[UUID]:
+    config = [300, # 2B - Idle time before sleep (in s)
+              60,  # 2B - TBD
+              5,   # 2B - Time to display Low-Battery message (in s)
+              0,   # 1B - Night mode (bool)
+              0,   # 2B - Night mode - volume level
+              3,   # 2B - Night mode - stories to play 
+              0,   # 2B - Night mode - TBD (volume related?)
+              1,   # 1B - TBD
+              1,   # 1B - Night mode - recreate nm files
+              1]   # 1B - TBD
+
+    logger = logging.getLogger(LUNII_LOGGER)
+
+    mount_path = Path(root_path)
+    cfg_path = mount_path.joinpath(".cfg")
+
+    if not os.path.isfile(cfg_path):
+        logger.log(logging.DEBUG, f"Config file not found, using default values")
+        return config
+
+    with open(cfg_path, "rb") as fp_cfg:
+        cfg_version = int.from_bytes(fp_cfg.read(2), 'little')
+        if cfg_version != 0x100:    
+            logger.log(logging.ERROR, f"🛑 Unsupported config version {cfg_version}, using default values")
+            return config
+        
+        logger.log(logging.DEBUG, f"Reading Lunii config...")
+        # while end of cfg file not reached
+        while True:
+            cfg_index = int.from_bytes(fp_cfg.read(2), 'little')
+            config[cfg_index] = int.from_bytes(fp_cfg.read(2), 'little')
+            # end of file reached ?
+            if fp_cfg.tell() == os.path.getsize(cfg_path):
+                break
+
+        # config file read !
+
+    return config
 
 def is_lunii(root_path):
     MD_FILE = os.path.join(root_path, ".md")

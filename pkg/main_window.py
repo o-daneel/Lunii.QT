@@ -402,7 +402,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tw_resize_columns()
             self.sb_update("")
             self.chk_nightmode.setEnabled(True)
-            self.chk_nightmode.setChecked(self.audio_device.config[4] == 1)
+            self.chk_nightmode.setChecked(self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -907,8 +907,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         night_mode = self.chk_nightmode.isChecked()
-        self.audio_device.config[4] = 1 if night_mode else 0
-        # self.update_config()
+        self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] = 1 if night_mode else 0
+        self.audio_device.update_config()
         print(f"Night mode set to {night_mode}")
     
     def ts_move(self, offset):
