@@ -337,7 +337,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.audio_device = None
 
         dev: WindowsPath
-        self.combo_device.setPlaceholderText("Select your Lunii")
+        self.combo_device.setPlaceholderText(self.tr("Select your Lunii"))
         self.sb_update("")
         self.nm_dialog.remove_audioDevice()
 
@@ -349,7 +349,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.setWindowIcon(self.iconLunii)
         if self.combo_device.count():
-            self.combo_device.setPlaceholderText("Select your Lunii")
+            self.combo_device.setPlaceholderText(self.tr("Select your Lunii"))
 
             # automatic select if only one device
             if self.combo_device.count() == 1:
@@ -357,8 +357,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.combo_device.setCurrentIndex(0)
 
         else:
-            self.sb_update("No Lunii detected 😥, try File/Open")
-            self.combo_device.setPlaceholderText("No Lunii detected 😥")
+            self.sb_update(self.tr("No Lunii detected 😥, try File/Open"))
+            self.combo_device.setPlaceholderText(self.tr("No Lunii detected 😥"))
 
 
     def cb_dev_select(self):

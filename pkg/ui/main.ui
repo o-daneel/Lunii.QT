@@ -89,12 +89,12 @@
         </property>
         <item>
          <property name="text">
-          <string>D:\</string>
+          <string notr="true">D:\</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>F:\</string>
+          <string notr="true">F:\</string>
          </property>
         </item>
        </widget>
@@ -239,7 +239,7 @@
       </column>
       <column>
        <property name="text">
-        <string>NM</string>
+        <string notr="true">NM</string>
        </property>
        <property name="toolTip">
         <string>Night Mode</string>
@@ -250,7 +250,7 @@
       </column>
       <column>
        <property name="text">
-        <string>DB</string>
+        <string notr="true">DB</string>
        </property>
        <property name="toolTip">
         <string>Database source (Official / Third Party)</string>
@@ -274,16 +274,16 @@
       </column>
       <item>
        <property name="text">
-        <string>Suzanne et Gaston</string>
+        <string notr="true">Suzanne et Gaston</string>
        </property>
        <property name="text">
-        <string/>
+        <string notr="true"/>
        </property>
        <property name="text">
-        <string>O</string>
+        <string notr="true">O</string>
        </property>
        <property name="text">
-        <string>C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
+        <string notr="true">C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
        </property>
        <property name="font">
         <font>
@@ -291,21 +291,21 @@
         </font>
        </property>
        <property name="text">
-        <string>75MB</string>
+        <string notr="true">75MB</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Panique aux 6 Royaumes</string>
+        <string notr="true">Panique aux 6 Royaumes</string>
        </property>
        <property name="text">
-        <string>z</string>
+        <string notr="true">z</string>
        </property>
        <property name="text">
-        <string>O</string>
+        <string notr="true">O</string>
        </property>
        <property name="text">
-        <string>03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
+        <string notr="true">03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
        </property>
        <property name="font">
         <font>
@@ -313,41 +313,41 @@
         </font>
        </property>
        <property name="text">
-        <string>65MB</string>
+        <string notr="true">65MB</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Au Pays des Loups</string>
+        <string notr="true">Au Pays des Loups</string>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="text">
-        <string>O</string>
+        <string notr="true">O</string>
        </property>
        <property name="text">
-        <string>22137B29-8646-4335-8069-4A4C9A2D7E89</string>
+        <string notr="true">22137B29-8646-4335-8069-4A4C9A2D7E89</string>
        </property>
        <property name="text">
-        <string>124MB</string>
+        <string notr="true">124MB</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Sur les bancs de l'école</string>
+        <string notr="true">Sur les bancs de l'école</string>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="text">
-        <string>C</string>
+        <string notr="true">C</string>
        </property>
        <property name="text">
-        <string>29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+        <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
        </property>
        <property name="text">
-        <string>25MB</string>
+        <string notr="true">25MB</string>
        </property>
       </item>
      </widget>
@@ -424,7 +424,7 @@
              <enum>QFrame::Sunken</enum>
             </property>
             <property name="text">
-             <string>8B_UUID</string>
+             <string notr="true">8B_UUID</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -639,7 +639,7 @@
     <string>Exit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -657,7 +657,7 @@
     <string>Import</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+I</string>
+    <string notr="true">Ctrl+I</string>
    </property>
   </action>
   <action name="actionExport">
@@ -669,7 +669,7 @@
     <string>Export</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="actionExport_All">
@@ -681,7 +681,7 @@
     <string>Export All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionMove_Up">
@@ -693,7 +693,7 @@
     <string>Move Up</string>
    </property>
    <property name="shortcut">
-    <string>Alt+Up</string>
+    <string notr="true">Alt+Up</string>
    </property>
   </action>
   <action name="actionMove_Down">
@@ -705,7 +705,7 @@
     <string>Move Down</string>
    </property>
    <property name="shortcut">
-    <string>Alt+Down</string>
+    <string notr="true">Alt+Down</string>
    </property>
   </action>
   <action name="actionRemove">
@@ -717,7 +717,7 @@
     <string>Remove</string>
    </property>
    <property name="shortcut">
-    <string>Del</string>
+    <string notr="true">Del</string>
    </property>
   </action>
   <action name="actionShow_size">
@@ -772,7 +772,7 @@
     <string>Move Top</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Up</string>
+    <string notr="true">Ctrl+Up</string>
    </property>
   </action>
   <action name="actionMove_Bottom">
@@ -784,7 +784,7 @@
     <string>Move Bottom</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Down</string>
+    <string notr="true">Ctrl+Down</string>
    </property>
   </action>
   <action name="actionOpen_Lunii">
@@ -799,7 +799,7 @@
     <string>Open Lunii or Flam device</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
    <property name="shortcutVisibleInContextMenu">
     <bool>true</bool>
@@ -814,7 +814,7 @@
     <string>Show Log</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+L</string>
+    <string notr="true">Ctrl+L</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -880,7 +880,7 @@
     <string>Hide / Show</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+H</string>
+    <string notr="true">Ctrl+H</string>
    </property>
   </action>
   <action name="actionImport_DB">

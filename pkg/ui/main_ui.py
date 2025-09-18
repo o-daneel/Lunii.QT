@@ -35,6 +35,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowIcon(icon)
         self.actionExit = QAction(MainWindow)
         self.actionExit.setObjectName(u"actionExit")
+#if QT_CONFIG(shortcut)
+        self.actionExit.setShortcut(u"Ctrl+Q")
+#endif // QT_CONFIG(shortcut)
         self.actionExit.setMenuRole(QAction.QuitRole)
         self.actionExit.setShortcutVisibleInContextMenu(True)
         self.actionImport = QAction(MainWindow)
@@ -42,29 +45,47 @@ class Ui_MainWindow(object):
         icon1 = QIcon()
         icon1.addFile(u":/icon/res/import.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionImport.setIcon(icon1)
+#if QT_CONFIG(shortcut)
+        self.actionImport.setShortcut(u"Ctrl+I")
+#endif // QT_CONFIG(shortcut)
         self.actionExport = QAction(MainWindow)
         self.actionExport.setObjectName(u"actionExport")
         icon2 = QIcon()
         icon2.addFile(u":/icon/res/export.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionExport.setIcon(icon2)
+#if QT_CONFIG(shortcut)
+        self.actionExport.setShortcut(u"Ctrl+S")
+#endif // QT_CONFIG(shortcut)
         self.actionExport_All = QAction(MainWindow)
         self.actionExport_All.setObjectName(u"actionExport_All")
         self.actionExport_All.setIcon(icon2)
+#if QT_CONFIG(shortcut)
+        self.actionExport_All.setShortcut(u"Ctrl+Shift+S")
+#endif // QT_CONFIG(shortcut)
         self.actionMove_Up = QAction(MainWindow)
         self.actionMove_Up.setObjectName(u"actionMove_Up")
         icon3 = QIcon()
         icon3.addFile(u":/icon/res/up.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionMove_Up.setIcon(icon3)
+#if QT_CONFIG(shortcut)
+        self.actionMove_Up.setShortcut(u"Alt+Up")
+#endif // QT_CONFIG(shortcut)
         self.actionMove_Down = QAction(MainWindow)
         self.actionMove_Down.setObjectName(u"actionMove_Down")
         icon4 = QIcon()
         icon4.addFile(u":/icon/res/down.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionMove_Down.setIcon(icon4)
+#if QT_CONFIG(shortcut)
+        self.actionMove_Down.setShortcut(u"Alt+Down")
+#endif // QT_CONFIG(shortcut)
         self.actionRemove = QAction(MainWindow)
         self.actionRemove.setObjectName(u"actionRemove")
         icon5 = QIcon()
         icon5.addFile(u":/icon/res/remove.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionRemove.setIcon(icon5)
+#if QT_CONFIG(shortcut)
+        self.actionRemove.setShortcut(u"Del")
+#endif // QT_CONFIG(shortcut)
         self.actionShow_size = QAction(MainWindow)
         self.actionShow_size.setObjectName(u"actionShow_size")
         self.actionShow_size.setCheckable(True)
@@ -85,22 +106,34 @@ class Ui_MainWindow(object):
         icon7 = QIcon()
         icon7.addFile(u":/icon/res/top.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionMove_Top.setIcon(icon7)
+#if QT_CONFIG(shortcut)
+        self.actionMove_Top.setShortcut(u"Ctrl+Up")
+#endif // QT_CONFIG(shortcut)
         self.actionMove_Bottom = QAction(MainWindow)
         self.actionMove_Bottom.setObjectName(u"actionMove_Bottom")
         icon8 = QIcon()
         icon8.addFile(u":/icon/res/bottom.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionMove_Bottom.setIcon(icon8)
+#if QT_CONFIG(shortcut)
+        self.actionMove_Bottom.setShortcut(u"Ctrl+Down")
+#endif // QT_CONFIG(shortcut)
         self.actionOpen_Lunii = QAction(MainWindow)
         self.actionOpen_Lunii.setObjectName(u"actionOpen_Lunii")
         icon9 = QIcon()
         icon9.addFile(u":/icon/res/open.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionOpen_Lunii.setIcon(icon9)
+#if QT_CONFIG(shortcut)
+        self.actionOpen_Lunii.setShortcut(u"Ctrl+O")
+#endif // QT_CONFIG(shortcut)
         self.actionOpen_Lunii.setShortcutVisibleInContextMenu(True)
         self.actionShow_Log = QAction(MainWindow)
         self.actionShow_Log.setObjectName(u"actionShow_Log")
         icon10 = QIcon()
         icon10.addFile(u":/icon/res/debug_log.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionShow_Log.setIcon(icon10)
+#if QT_CONFIG(shortcut)
+        self.actionShow_Log.setShortcut(u"Ctrl+L")
+#endif // QT_CONFIG(shortcut)
         self.actionAbout = QAction(MainWindow)
         self.actionAbout.setObjectName(u"actionAbout")
         icon11 = QIcon()
@@ -127,6 +160,9 @@ class Ui_MainWindow(object):
         self.actionFind_stories.setObjectName(u"actionFind_stories")
         self.actionHide = QAction(MainWindow)
         self.actionHide.setObjectName(u"actionHide")
+#if QT_CONFIG(shortcut)
+        self.actionHide.setShortcut(u"Ctrl+H")
+#endif // QT_CONFIG(shortcut)
         self.actionImport_DB = QAction(MainWindow)
         self.actionImport_DB.setObjectName(u"actionImport_DB")
         self.actionImport_DB.setIcon(icon1)
@@ -137,6 +173,9 @@ class Ui_MainWindow(object):
         self.actionRefresh_DB.setIcon(icon13)
         self.actionNight_Mode = QAction(MainWindow)
         self.actionNight_Mode.setObjectName(u"actionNight_Mode")
+#if QT_CONFIG(shortcut)
+        self.actionNight_Mode.setShortcut(u"Ctrl+N")
+#endif // QT_CONFIG(shortcut)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -159,8 +198,8 @@ class Ui_MainWindow(object):
         self.top_layout.addWidget(self.btn_refresh)
 
         self.combo_device = QComboBox(self.centralwidget)
-        self.combo_device.addItem("")
-        self.combo_device.addItem("")
+        self.combo_device.addItem(u"D:\\")
+        self.combo_device.addItem(u"F:\\")
         self.combo_device.setObjectName(u"combo_device")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -211,17 +250,36 @@ class Ui_MainWindow(object):
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setTextAlignment(4, Qt.AlignLeading|Qt.AlignVCenter);
         __qtreewidgetitem.setText(3, u"UUID");
+        __qtreewidgetitem.setText(2, u"DB");
         __qtreewidgetitem.setTextAlignment(2, Qt.AlignCenter);
+        __qtreewidgetitem.setText(1, u"NM");
         __qtreewidgetitem.setTextAlignment(1, Qt.AlignCenter);
         self.tree_stories.setHeaderItem(__qtreewidgetitem)
         font1 = QFont()
         font1.setFamilies([u"Consolas"])
         __qtreewidgetitem1 = QTreeWidgetItem(self.tree_stories)
+        __qtreewidgetitem1.setText(4, u"75MB");
+        __qtreewidgetitem1.setText(3, u"C4139D59-872A-4D15-8CF1-76D34CDF38C6");
         __qtreewidgetitem1.setFont(3, font1);
+        __qtreewidgetitem1.setText(2, u"O");
+        __qtreewidgetitem1.setText(0, u"Suzanne et Gaston");
         __qtreewidgetitem2 = QTreeWidgetItem(self.tree_stories)
+        __qtreewidgetitem2.setText(4, u"65MB");
+        __qtreewidgetitem2.setText(3, u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9");
         __qtreewidgetitem2.setFont(3, font1);
-        QTreeWidgetItem(self.tree_stories)
-        QTreeWidgetItem(self.tree_stories)
+        __qtreewidgetitem2.setText(2, u"O");
+        __qtreewidgetitem2.setText(1, u"z");
+        __qtreewidgetitem2.setText(0, u"Panique aux 6 Royaumes");
+        __qtreewidgetitem3 = QTreeWidgetItem(self.tree_stories)
+        __qtreewidgetitem3.setText(4, u"124MB");
+        __qtreewidgetitem3.setText(3, u"22137B29-8646-4335-8069-4A4C9A2D7E89");
+        __qtreewidgetitem3.setText(2, u"O");
+        __qtreewidgetitem3.setText(0, u"Au Pays des Loups");
+        __qtreewidgetitem4 = QTreeWidgetItem(self.tree_stories)
+        __qtreewidgetitem4.setText(4, u"25MB");
+        __qtreewidgetitem4.setText(3, u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C");
+        __qtreewidgetitem4.setText(2, u"C");
+        __qtreewidgetitem4.setText(0, u"Sur les bancs de l'\u00e9cole");
         self.tree_stories.setObjectName(u"tree_stories")
         self.tree_stories.setMinimumSize(QSize(0, 150))
         self.tree_stories.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -275,6 +333,7 @@ class Ui_MainWindow(object):
         self.lbl_story.setMinimumSize(QSize(80, 0))
         self.lbl_story.setFrameShape(QFrame.Panel)
         self.lbl_story.setFrameShadow(QFrame.Sunken)
+        self.lbl_story.setText(u"8B_UUID")
         self.lbl_story.setAlignment(Qt.AlignCenter)
 
         self.storyLayout.addWidget(self.lbl_story)
@@ -417,33 +476,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Lunii Qt-Manager", None))
         self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
-#if QT_CONFIG(shortcut)
-        self.actionExit.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Q", None))
-#endif // QT_CONFIG(shortcut)
         self.actionImport.setText(QCoreApplication.translate("MainWindow", u"Import", None))
-#if QT_CONFIG(shortcut)
-        self.actionImport.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+I", None))
-#endif // QT_CONFIG(shortcut)
         self.actionExport.setText(QCoreApplication.translate("MainWindow", u"Export", None))
-#if QT_CONFIG(shortcut)
-        self.actionExport.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
-#endif // QT_CONFIG(shortcut)
         self.actionExport_All.setText(QCoreApplication.translate("MainWindow", u"Export All", None))
-#if QT_CONFIG(shortcut)
-        self.actionExport_All.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+S", None))
-#endif // QT_CONFIG(shortcut)
         self.actionMove_Up.setText(QCoreApplication.translate("MainWindow", u"Move Up", None))
-#if QT_CONFIG(shortcut)
-        self.actionMove_Up.setShortcut(QCoreApplication.translate("MainWindow", u"Alt+Up", None))
-#endif // QT_CONFIG(shortcut)
         self.actionMove_Down.setText(QCoreApplication.translate("MainWindow", u"Move Down", None))
-#if QT_CONFIG(shortcut)
-        self.actionMove_Down.setShortcut(QCoreApplication.translate("MainWindow", u"Alt+Down", None))
-#endif // QT_CONFIG(shortcut)
         self.actionRemove.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-#if QT_CONFIG(shortcut)
-        self.actionRemove.setShortcut(QCoreApplication.translate("MainWindow", u"Del", None))
-#endif // QT_CONFIG(shortcut)
         self.actionShow_size.setText(QCoreApplication.translate("MainWindow", u"Show size", None))
 #if QT_CONFIG(tooltip)
         self.actionShow_size.setToolTip(QCoreApplication.translate("MainWindow", u"Show size for each stories", None))
@@ -454,24 +492,12 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.actionShow_story_details.setText(QCoreApplication.translate("MainWindow", u"Show story details", None))
         self.actionMove_Top.setText(QCoreApplication.translate("MainWindow", u"Move Top", None))
-#if QT_CONFIG(shortcut)
-        self.actionMove_Top.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Up", None))
-#endif // QT_CONFIG(shortcut)
         self.actionMove_Bottom.setText(QCoreApplication.translate("MainWindow", u"Move Bottom", None))
-#if QT_CONFIG(shortcut)
-        self.actionMove_Bottom.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Down", None))
-#endif // QT_CONFIG(shortcut)
         self.actionOpen_Lunii.setText(QCoreApplication.translate("MainWindow", u"Open device", None))
 #if QT_CONFIG(tooltip)
         self.actionOpen_Lunii.setToolTip(QCoreApplication.translate("MainWindow", u"Open Lunii or Flam device", None))
 #endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(shortcut)
-        self.actionOpen_Lunii.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+O", None))
-#endif // QT_CONFIG(shortcut)
         self.actionShow_Log.setText(QCoreApplication.translate("MainWindow", u"Show Log", None))
-#if QT_CONFIG(shortcut)
-        self.actionShow_Log.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+L", None))
-#endif // QT_CONFIG(shortcut)
         self.actionAbout.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.actionUpdate.setText(QCoreApplication.translate("MainWindow", u"Update to v2.X.X", None))
         self.actionTranscode.setText(QCoreApplication.translate("MainWindow", u"FFMPEG detected", None))
@@ -480,9 +506,6 @@ class Ui_MainWindow(object):
         self.actionFactory_reset.setText(QCoreApplication.translate("MainWindow", u"Factory Reset", None))
         self.actionFind_stories.setText(QCoreApplication.translate("MainWindow", u"Find", None))
         self.actionHide.setText(QCoreApplication.translate("MainWindow", u"Hide / Show", None))
-#if QT_CONFIG(shortcut)
-        self.actionHide.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+H", None))
-#endif // QT_CONFIG(shortcut)
         self.actionImport_DB.setText(QCoreApplication.translate("MainWindow", u"Import STUdio DB", None))
         self.actionRefresh_DB.setText(QCoreApplication.translate("MainWindow", u"Refresh official DB", None))
         self.actionNight_Mode.setText(QCoreApplication.translate("MainWindow", u"Force Night Mode", None))
@@ -493,8 +516,6 @@ class Ui_MainWindow(object):
         self.btn_refresh.setToolTip(QCoreApplication.translate("MainWindow", u"Refresh connected devices", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_refresh.setText("")
-        self.combo_device.setItemText(0, QCoreApplication.translate("MainWindow", u"D:\\", None))
-        self.combo_device.setItemText(1, QCoreApplication.translate("MainWindow", u"F:\\", None))
 
 #if QT_CONFIG(tooltip)
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
@@ -510,8 +531,6 @@ class Ui_MainWindow(object):
         self.btn_db.setText("")
         ___qtreewidgetitem = self.tree_stories.headerItem()
         ___qtreewidgetitem.setText(4, QCoreApplication.translate("MainWindow", u"Size", None));
-        ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"DB", None));
-        ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"NM", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
 #if QT_CONFIG(tooltip)
         ___qtreewidgetitem.setToolTip(2, QCoreApplication.translate("MainWindow", u"Database source (Official / Third Party)", None));
@@ -520,31 +539,9 @@ class Ui_MainWindow(object):
 
         __sortingEnabled = self.tree_stories.isSortingEnabled()
         self.tree_stories.setSortingEnabled(False)
-        ___qtreewidgetitem1 = self.tree_stories.topLevelItem(0)
-        ___qtreewidgetitem1.setText(4, QCoreApplication.translate("MainWindow", u"75MB", None));
-        ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"C4139D59-872A-4D15-8CF1-76D34CDF38C6", None));
-        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
-        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Suzanne et Gaston", None));
-        ___qtreewidgetitem2 = self.tree_stories.topLevelItem(1)
-        ___qtreewidgetitem2.setText(4, QCoreApplication.translate("MainWindow", u"65MB", None));
-        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9", None));
-        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
-        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"z", None));
-        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Panique aux 6 Royaumes", None));
-        ___qtreewidgetitem3 = self.tree_stories.topLevelItem(2)
-        ___qtreewidgetitem3.setText(4, QCoreApplication.translate("MainWindow", u"124MB", None));
-        ___qtreewidgetitem3.setText(3, QCoreApplication.translate("MainWindow", u"22137B29-8646-4335-8069-4A4C9A2D7E89", None));
-        ___qtreewidgetitem3.setText(2, QCoreApplication.translate("MainWindow", u"O", None));
-        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Au Pays des Loups", None));
-        ___qtreewidgetitem4 = self.tree_stories.topLevelItem(3)
-        ___qtreewidgetitem4.setText(4, QCoreApplication.translate("MainWindow", u"25MB", None));
-        ___qtreewidgetitem4.setText(3, QCoreApplication.translate("MainWindow", u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C", None));
-        ___qtreewidgetitem4.setText(2, QCoreApplication.translate("MainWindow", u"C", None));
-        ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Sur les bancs de l'\u00e9cole", None));
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
         self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
-        self.lbl_story.setText(QCoreApplication.translate("MainWindow", u"8B_UUID", None))
 #if QT_CONFIG(tooltip)
         self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
 #endif // QT_CONFIG(tooltip)
