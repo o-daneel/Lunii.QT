@@ -35,6 +35,7 @@ class StudioStory:
         self.description = ""
         self.factory_pack = 1
         self.uuid = None
+        self.nm = False # night mode
 
         self.js_snodes = None
         self.js_anodes = None
@@ -69,6 +70,7 @@ class StudioStory:
         self.pack_version = story_json.get('version')
         self.title = story_json.get('title')
         self.description = story_json.get('description')
+        self.nm = story_json.get('nightModeAvailable', False)
 
         # looping stage nodes
         self.js_snodes = story_json.get('stageNodes')

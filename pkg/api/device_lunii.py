@@ -1341,8 +1341,15 @@ class LuniiDevice(QtCore.QObject):
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
-        # # updating .pi file to add new UUID
-        self.stories.append(Story(one_story.uuid))
+        # creating night mode file
+        if one_story.nm:
+            self.signal_logger.emit(logging.INFO, "Night mode file creation...")
+            # creating empty nm file
+            with open(output_path.joinpath("nm"), "wb") as fp_nm:
+                pass
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
         self.update_pack_index()
 
         return True
@@ -1466,8 +1473,15 @@ class LuniiDevice(QtCore.QObject):
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
-        # # updating .pi file to add new UUID
-        self.stories.append(Story(one_story.uuid))
+        # creating night mode file
+        if one_story.nm:
+            self.signal_logger.emit(logging.INFO, "Night mode file creation...")
+            # creating empty nm file
+            with open(output_path.joinpath("nm"), "wb") as fp_nm:
+                pass
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
         self.update_pack_index()
 
         return True
