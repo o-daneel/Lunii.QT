@@ -392,7 +392,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     self.audio_device = FlamDevice(dev_name)
             except PermissionError:
-                error = "🛑 PermissionError : Unable to open this device"
+                error = self.tr("🛑 PermissionError : Unable to open this device")
                 self.logger.log(logging.ERROR, error)
                 self.statusbar.showMessage(error)
                 return
@@ -469,10 +469,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
                 self.lbl_picture.setPixmap(scaled_pixmap)
             else:
-                self.lbl_picture.setText("Failed to fetch BMP file.")
+                self.lbl_picture.setText(self.tr("Failed to fetch BMP file."))
 
     def cb_db_refresh(self):
-        self.sb_update("Fetching official Lunii DB...")
+        self.sb_update(self.tr("Fetching official Lunii DB..."))
         self.pbar_total.setVisible(True)
         self.pbar_total.setRange(0, 100)
         self.pbar_total.setValue(10)
@@ -490,15 +490,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.pbar_total.setVisible(False)
         if retVal:
-            self.sb_update("👍 Lunii DB refreshed.")
+            self.sb_update(self.tr("👍 Lunii DB refreshed."))
         else:
-            self.sb_update("🛑 Lunii DB failed.")
+            self.sb_update(self.tr("🛑 Lunii DB failed."))
 
     def cb_lbl_click(self, event):
         if self.audio_device:
             msg = str(self.audio_device)
             self.logger.log(logging.INFO, msg)
-            self.statusbar.showMessage("Device info sent to clipboard.")
+            self.statusbar.showMessage(self.tr("Device info sent to clipboard."))
             clipboard = QApplication.clipboard()
             clipboard.setText(msg)
 
@@ -508,14 +508,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # file_filter = "Lunii Metadata (.md);;All files (*)"
             # file, _ = QFileDialog.getOpenFileName(self, "Open Lunii device", "", file_filter)
-            dev_dir = QFileDialog.getExistingDirectory(self, "Open Lunii device", "",
+            dev_dir = QFileDialog.getExistingDirectory(self, self.tr("Open Lunii device"), "",
                                                        QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
             if not dev_dir:
                 return
 
             # check if path is a recognized device
             if not is_lunii(dev_dir) and not is_flam(dev_dir):
-                self.sb_update("Not a Lunii, nor Flam or unsupported one 😥")
+                self.sb_update(self.tr("Not a Lunii, nor Flam or unsupported one 😥"))
                 return
 
             # add device to list
@@ -527,7 +527,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif act_name == "actionImport_DB":
             file_filter = "STUdio DB (unofficial.json);;All DBs (*.json);;All files (*)"
             STUDIO_DIR: Path = os.path.join(Path.home(), ".studio/db")
-            file, _ = QFileDialog.getOpenFileName(self, "Open STUdio DB", STUDIO_DIR, file_filter)
+            file, _ = QFileDialog.getOpenFileName(self, self.tr("Open STUdio DB"), STUDIO_DIR, file_filter)
             if not file:
                 return
 
@@ -601,9 +601,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 # getting auth token
                 auth_token = luniistore_get_authtoken(login, password)
                 if not auth_token:
-                    self.sb_update(f"⚠️ Login failed, please check your credentials")
+                    self.sb_update(self.tr("⚠️ Login failed, please check your credentials"))
                     return
-                self.sb_update(f"Login success...")
+                self.sb_update(self.tr("Login success..."))
 
                 # getting list of FW to download
                 fw_list = device_fw_getlist(self.audio_device.device_version, self.audio_device.snu_str, auth_token)
@@ -626,15 +626,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         selected_file = file_dialog.selectedFiles()[0]
                         if device_fw_download(self.audio_device.device_version, self.audio_device.snu_str, auth_token,
                                               selected_file, index != 0):
-                            self.sb_update(f"✅ Firmware downloaded to {os.path.basename(selected_file)}")
+                            dld = self.tr("✅ Firmware downloaded to")
+                            self.sb_update(dld + f" {os.path.basename(selected_file)}")
                         else:
-                            self.sb_update(f"🛑 Fail to download update")
+                            self.sb_update(self.tr("🛑 Fail to download update"))
                     else:
                         self.sb_update("")
                         return
 
             except requests.exceptions.ConnectionError:
-                self.sb_update(f"🛑 Network error...")
+                self.sb_update(self.tr("🛑 Network error..."))
 
         elif act_name == "actionTranscode":
             website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
@@ -726,9 +727,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def cb_menu_help_update(self, last_version):
         if last_version:
-            self.logger.log(logging.INFO, f"Latest Github release {last_version}")
+            self.logger.log(logging.INFO, self.tr("Latest Github release") + f" {last_version}")
         else:
-            self.logger.log(logging.WARN, f"🛑 Unable to fetch version from Github")
+            self.logger.log(logging.WARN, self.tr("🛑 Unable to fetch version from Github"))
 
         # hidden by default
         self.act_update.setVisible(False)
@@ -752,9 +753,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 (l_versions[0] == c_versions[0] and c_alpha and not l_alpha)
 
             if new_update:
-                self.menuHelp.setTitle("[ Help ]")
-                self.menuUpdate.setTitle("New update is available")
-                self.act_update.setText(f"Update to {last_version}")
+                self.menuHelp.setTitle(self.tr("[ Help ]"))
+                self.menuUpdate.setTitle(self.tr("Update is available"))
+                self.act_update.setText(self.tr("Update to {}").format(last_version))
                 self.act_update.setVisible(True)
 
     def ts_update(self):
@@ -806,7 +807,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if story.hidden:
                 grey_color = QColor(128, 128, 128)
                 for column in range(item.columnCount()):
-                    item.setToolTip(column, "Story is hidden for LuniiStore synchronization")
+                    item.setToolTip(column, self.tr("Story is hidden for LuniiStore synchronization"))
                     item.setForeground(column, grey_color)
 
             self.tree_stories.addTopLevelItem(item)
@@ -816,7 +817,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_hsnu = QLabel("SNU:")
         self.lbl_snu = QLabel()
         self.lbl_version = QLabel()
-        self.lbl_hfs = QLabel("Free :")
+        self.lbl_hfs = QLabel(self.tr("Free :"))
         self.lbl_fs = QLabel()
         self.lbl_count = QLabel()
         self.lbl_hsnu.setStyleSheet('border: 0; color:  grey;')
@@ -897,7 +898,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Story count
         count_items = self.tree_stories.topLevelItemCount()
         if count_items:
-            self.lbl_count.setText(f"{count_items} stories")
+            self.lbl_count.setText(f"{count_items} " + self.tr("stories"))
         else:
             self.lbl_count.setText("")
     
@@ -1006,16 +1007,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # preparing validation window
         dlg = QMessageBox(self)
-        dlg.setWindowTitle("Delete stories")
-        message = "You are requesting to delete : \n"
+        dlg.setWindowTitle(self.tr("Delete stories"))
+        message = self.tr("You are requesting to delete : \n")
         for item in selection:
             message += f"- {item.text(COL_NAME)}\n"
 
         if len(message) > 512:
             message = message[:768] + "..."
-            message += "\n(and too many others)\n"
+            message += self.tr("\n(and too many others)\n")
 
-        message += "\nDo you want to proceed ?"
+        message += self.tr("\nDo you want to proceed ?")
         dlg.setText(message)
         dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         dlg.setIcon(QMessageBox.Warning)
@@ -1042,7 +1043,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             to_export = [item.text(COL_UUID) for item in selection]
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
         else:
-            self.sb_update("🛑 Export cancelled")
+            self.sb_update(self.tr("🛑 Export cancelled"))
 
     def ts_export_all(self):
         # getting selection
@@ -1060,7 +1061,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 to_export.append(item.text(COL_UUID))
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
         else:
-            self.sb_update("🛑 Export All cancelled")
+            self.sb_update(self.tr("🛑 Export All cancelled"))
 
     def ts_hide(self):
         if not self.audio_device:
@@ -1097,7 +1098,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.te_story_details.setDisabled(one_story.hidden)
         self.lbl_picture.setDisabled(one_story.hidden)
 
-        self.sb_update("✅ Stories updated...")
+        self.sb_update(self.tr("✅ Stories updated..."))
 
     def ts_nm(self):
         if not self.audio_device:
@@ -1140,7 +1141,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
 
-        self.sb_update("✅ Stories updated...")
+        self.sb_update(self.tr("✅ Stories updated..."))
 
     def ts_import(self):
         if not self.audio_device:
@@ -1150,12 +1151,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             file_filter = "All supported (*.7z *.zip);;All files (*)"
         else:
             file_filter = "All supported (*.pk *.7z *.zip);;PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All files (*)"
-        files, _ = QFileDialog.getOpenFileNames(self, "Open Stories", "", file_filter)
+        files, _ = QFileDialog.getOpenFileNames(self, self.tr("Open Stories"), "", file_filter)
 
         if not files:
             return
 
-        self.sb_update("Importing stories...")
+        self.sb_update(self.tr("Importing stories..."))
         self.worker_launch(ACTION_IMPORT, files)
 
     def ts_dragenter_action(self, event):
@@ -1185,13 +1186,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_drop_action(self, event):
         if (self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key):
-            self.sb_update("🛑 Unable to import story, missing story key for Lunii v3")
+            self.sb_update(self.tr("🛑 Unable to import story, missing story key for Lunii v3"))
             return
         
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
-        self.sb_update("Importing stories...")
+        self.sb_update(self.tr("Importing stories..."))
         self.worker_launch(ACTION_IMPORT, file_paths)
 
     def ts_clicked(self, item, column):
@@ -1254,7 +1255,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         # pushing message
-        self.sb_update("Abort requested, please wait...")
+        self.sb_update(self.tr("Abort requested, please wait..."))
 
         # trying to abort current process
         self.worker.abort_process = True

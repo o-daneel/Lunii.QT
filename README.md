@@ -353,6 +353,12 @@ $ apt install libxcb-cursor0
 $ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
+### Build Translation files
+```bash
+$ pyside6-lupdate.exe ./pkg/ui/main_ui.py ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/api/devices.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py -ts ./locales/fr_FR.ts
+$ pyside6-linguist.exe ./locales/fr_FR.ts 
+$ pyside6-lrelease.exe ./locales/fr_FR.ts ./locales/fr_FR.qm  
+```
 ### Run
 ```bash
 $ python lunii-qt.py

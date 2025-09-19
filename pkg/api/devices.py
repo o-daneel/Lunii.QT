@@ -13,7 +13,7 @@ def find_devices(extra_path=None):
     dev_list = []
 
     current_os = platform.system()
-    logger.log(logging.INFO, f"Finding devices...")
+    logger.log(logging.INFO, "Finding devices...")
 
     if current_os == "Windows":
         # checking all drive letters

@@ -26,4 +26,7 @@
   <qresource prefix="json">
     <file>res/unofficial.json</file>
   </qresource>
+  <qresource prefix="translations">
+    <file>locales/fr_FR.qm</file>
+  </qresource>
 </RCC>

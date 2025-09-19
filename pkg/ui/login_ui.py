@@ -7,7 +7,7 @@ class LoginDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle("LuniiStore credentials")
+        self.setWindowTitle(self.tr("LuniiStore credentials"))
         icon = QIcon()
         icon.addFile(u":/icon/res/logo.ico", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
@@ -20,7 +20,7 @@ class LoginDialog(QDialog):
         layout.addWidget(self.login_label)
         layout.addWidget(self.login_edit)
 
-        self.password_label = QLabel("Password:", self)
+        self.password_label = QLabel(self.tr("Password:"), self)
         self.password_edit = QLineEdit(self)
         self.password_edit.setEchoMode(QLineEdit.Password)
         layout.addWidget(self.password_label)

@@ -52,7 +52,7 @@ class DebugDialog(QWidget):
         self.logger.setLevel(logging.DEBUG)
 
         # window config
-        self.setWindowTitle("Debug Log")
+        self.setWindowTitle(self.tr("Debug Log"))
         icon = QIcon()
         icon.addFile(u":/icon/res/debug_log.png", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
@@ -63,8 +63,8 @@ class DebugDialog(QWidget):
         self.cb_level = QComboBox(self)
         self.le_filter = QLineEdit(self)
         self.le_filter.setClearButtonEnabled(True)
-        self.le_filter.setPlaceholderText("(Log filter text)")
-        self.le_filter.setToolTip("Try \"error\" or \"fail\".")
+        self.le_filter.setPlaceholderText(self.tr("(Log filter text)"))
+        self.le_filter.setToolTip(self.tr("Try \"error\" or \"fail\"."))
 
         horizontalSpacer = QSpacerItem(80, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
@@ -79,7 +79,7 @@ class DebugDialog(QWidget):
         self.te_Logger.setObjectName(u"textEdit")
         self.te_Logger.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.te_Logger.setReadOnly(True)
-        self.te_Logger.setPlaceholderText("Application Log Empty ...")
+        self.te_Logger.setPlaceholderText(self.tr("Application Log Empty ..."))
 
         # adding contents to vertical layout
         self.verticalLayout.addLayout(upper_layout)
@@ -89,9 +89,11 @@ class DebugDialog(QWidget):
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Close |
-                                          QDialogButtonBox.Reset |
-                                          QDialogButtonBox.Save)
+        # Remove standard buttons and add custom ones with defined text
+        self.buttonBox.clear()
+        self.btn_close = self.buttonBox.addButton(self.tr("Close"), QDialogButtonBox.RejectRole)
+        self.btn_reset = self.buttonBox.addButton(self.tr("Clear"), QDialogButtonBox.ResetRole)
+        self.btn_save = self.buttonBox.addButton(self.tr("Save"), QDialogButtonBox.AcceptRole)
         # callbacks on buttons
         self.buttonBox.clicked.connect(self.button_clicked)
 
@@ -166,7 +168,7 @@ class DebugDialog(QWidget):
             self.save_log()
 
     def save_log(self):
-        filename, _ = QFileDialog.getSaveFileName(self, "Save Log", "", "Text Files (*.txt);;All Files (*)")
+        filename, _ = QFileDialog.getSaveFileName(self, self.tr("Save Log"), "", self.tr("Text Files (*.txt);;All Files (*)"))
         if filename:
             with open(filename, 'wb') as file:
                 file.write(self.te_Logger.full_log.encode('utf-8'))

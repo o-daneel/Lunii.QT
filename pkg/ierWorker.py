@@ -70,8 +70,8 @@ class ierWorker(QObject):
         except Exception as e:
             # Abort requested
             self.signal_showlog.emit()
-            self.signal_message.emit(f"🛑 Critical error : {e}")
-            self.signal_message.emit(f"Trace\n{traceback.format_exc()}")
+            self.signal_message.emit(self.tr("🛑 Critical error : {}").format(e))
+            self.signal_message.emit(self.tr("Trace\n{}").format(traceback.format_exc()))
             traceback.print_exc()
             self.exit_requested()
             return
@@ -82,7 +82,7 @@ class ierWorker(QObject):
     def exit_requested(self):
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit("🛑 Aborted")
+        self.signal_message.emit(self.tr("🛑 Aborted"))
         QThread.currentThread().quit()
 
     def _task_import(self):
@@ -98,12 +98,12 @@ class ierWorker(QObject):
             ts_start = time.time()
             if self.audio_device.import_story(file):
                 ts_end = time.time()
-                self.signal_message.emit(f"Time to import : {round(ts_end-ts_start, 3)}s'")
-                self.signal_message.emit(f"👍 New story imported : '{file}'")
+                self.signal_message.emit(self.tr("Time to import : {}s").format(round(ts_end-ts_start, 3)))
+                self.signal_message.emit(self.tr("👍 New story imported : '{}'").format(file))
                 success += 1
             else:
                 self.signal_showlog.emit()
-                self.signal_message.emit(f"🛑 Failed to import : '{file}'")
+                self.signal_message.emit(self.tr("🛑 Failed to import : '{}'").format(file))
 
             self.signal_refresh.emit()
 
@@ -118,7 +118,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Import done : {success}/{len(self.items)}")
+        self.signal_message.emit(self.tr("✅ Import done : {}/{}").format(success, len(self.items)))
 
     def _task_export(self):
         success = 0
@@ -132,7 +132,7 @@ class ierWorker(QObject):
             # Official story export is forbidden
             story_to_export = self.audio_device.stories.get_story(str_uuid)
             if not constants.REFRESH_CACHE and story_to_export.is_official():
-                self.signal_message.emit(f"🛑 Forbidden to export : '{story_to_export.name}'")
+                self.signal_message.emit(self.tr("🛑 Forbidden to export : '{}'").format(story_to_export.name))
                 self.signal_refresh.emit()
                 continue
 
@@ -140,11 +140,11 @@ class ierWorker(QObject):
             
             res = self.audio_device.export_story(str_uuid, self.out_dir)
             if res:
-                self.signal_message.emit(f"👍 Story exported to '{res}'")
+                self.signal_message.emit(self.tr("👍 Story exported to '{}'").format(res))
                 success += 1
             else:
                 self.signal_showlog.emit()
-                self.signal_message.emit(f"🛑 Failed to export : '{story_to_export.name}'")
+                self.signal_message.emit(self.tr("🛑 Failed to export : '{}'").format(story_to_export.name))
             self.signal_refresh.emit()
 
         if self.abort_process:
@@ -154,7 +154,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Export done : {success}/{len(self.items)}")
+        self.signal_message.emit(self.tr("✅ Export done : {}/{}").format(success, len(self.items)))
 
     def _task_remove(self):
         success = 0
@@ -169,11 +169,11 @@ class ierWorker(QObject):
             story_to_remove = self.audio_device.stories.get_story(str_uuid)
             res = self.audio_device.remove_story(str_uuid)
             if res:
-                self.signal_message.emit(f"👍 Story removed: '{story_to_remove.name}'")
+                self.signal_message.emit(self.tr("👍 Story removed: '{}'").format(story_to_remove.name))
                 success += 1
             else:
                 self.signal_showlog.emit()
-                self.signal_message.emit(f"🛑 Failed to remove : '{story_to_remove.name}'")
+                self.signal_message.emit(self.tr("🛑 Failed to remove : '{}'").format(story_to_remove.name))
             self.signal_refresh.emit()
 
         if self.abort_process:
@@ -183,7 +183,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ {success} stories removed")
+        self.signal_message.emit(self.tr("✅ {} stories removed").format(success))
 
     def _task_size(self):
         # processing all stories
@@ -218,10 +218,10 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Stories parsed, sizes updated")
+        self.signal_message.emit(self.tr("✅ Stories parsed, sizes updated"))
 
     def _task_recover(self, dry_run=False):
-        self.signal_message.emit(f"🚧 Analyzing storage ...")
+        self.signal_message.emit(self.tr("🚧 Analyzing storage ..."))
         count = self.audio_device.recover_stories(dry_run)
         if not dry_run:
             self.audio_device.update_pack_index()
@@ -229,17 +229,17 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Storage parsed, {count} lost stories {'found (try to recover them)' if dry_run else 'recovered'}")
+        self.signal_message.emit(self.tr("✅ Storage parsed, {} lost stories {}").format(count, self.tr('found (try to recover them)') if dry_run else self.tr('recovered')))
 
 
     def _task_cleanup(self):
-        self.signal_message.emit(f"🚧 Cleaning storage ...")
+        self.signal_message.emit(self.tr("🚧 Cleaning storage ..."))
         count, size = self.audio_device.cleanup_stories()
 
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Storage parsed, {count} lost stories removed, {size} MB recovered")
+        self.signal_message.emit(self.tr("✅ Storage parsed, {} lost stories removed, {} MB recovered").format(count, size))
 
         pass
 
@@ -249,7 +249,7 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ Factory reset performed, device is empty")
+        self.signal_message.emit(self.tr("✅ Factory reset performed, device is empty"))
 
 
     def _task_db_import(self):
@@ -264,7 +264,7 @@ class ierWorker(QObject):
         print(list(db_stories.keys()))
         if "response" in list(db_stories.keys()):
             self.signal_finished.emit()
-            self.signal_message.emit(f"🛑 Failed to import DB (wrong file ?)")
+            self.signal_message.emit(self.tr("🛑 Failed to import DB (wrong file ?)"))
             return
 
         # for each entry
@@ -309,4 +309,4 @@ class ierWorker(QObject):
         # done
         self.signal_finished.emit()
         self.signal_refresh.emit()
-        self.signal_message.emit(f"✅ STUdio DB imported ({count}/{len(db_stories.keys())}).")
+        self.signal_message.emit(self.tr("✅ STUdio DB imported ({}/{}).").format(count, len(db_stories.keys())))
