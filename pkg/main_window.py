@@ -197,7 +197,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
-        self.tree_stories.itemClicked.connect(self.ts_clicked)
+        # self.tree_stories.itemClicked.connect(self.ts_clicked)
 
         # connect menu callbacks
         self.menuFile.triggered.connect(self.cb_menu_file)
