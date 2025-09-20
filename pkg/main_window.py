@@ -112,7 +112,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
-        self.setWindowTitle(f"Lunii Qt-Manager {APP_VERSION}")
+        title = f"Lunii Qt-Manager {APP_VERSION}"
+        self.setWindowTitle(title)
+        self.logger.log(logging.INFO, title)
 
         self.menuUpdate.setVisible(False)
         self.menuUpdate.setTitle("")
