@@ -822,6 +822,8 @@ class LuniiDevice(QtCore.QObject):
             return self.import_story_studio_7z(story_path)
 
     def import_story_plain(self, story_path):
+        night_mode = False
+
         # checking if archive is OK
         try:
             with zipfile.ZipFile(file=story_path):
@@ -881,6 +883,8 @@ class LuniiDevice(QtCore.QObject):
                 # skipping .plain.pk specific files 
                 if file in [FILE_UUID, FILE_META, FILE_THUMB]:
                     continue
+                if file.endswith("nm"):
+                    night_mode = True
 
                 # Extract each zip file
                 data_plain = zip_file.read(file)
@@ -910,12 +914,14 @@ class LuniiDevice(QtCore.QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid))
+        self.stories.append(Story(new_uuid, nm=night_mode))
         self.update_pack_index()
 
         return True
 
     def import_story_zip(self, story_path):
+        night_mode = False
+
         # checking if archive is OK
         try:
             with zipfile.ZipFile(file=story_path):
@@ -964,13 +970,18 @@ class LuniiDevice(QtCore.QObject):
 
                 if file == FILE_UUID or file.endswith("bt"):
                     continue
+                if file.endswith("nm"):
+                    night_mode = True
 
                 # Extract each zip file
                 data_v2 = zip_file.read(file)
 
+                # need to transcipher ?
                 if file.endswith("ni") or file.endswith("nm"):
+                    # plain files
                     data_plain = data_v2
                 else:
+                    # to be ciphered
                     data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                 # updating filename, and ciphering header if necessary
                 data = self.__get_ciphered_data(file, data_plain)
@@ -997,12 +1008,14 @@ class LuniiDevice(QtCore.QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid))
+        self.stories.append(Story(new_uuid, nm=night_mode))
         self.update_pack_index()
 
         return True
 
     def import_story_7z(self, story_path):
+        night_mode = False
+
         # checking if archive is OK
         try:
             with py7zr.SevenZipFile(story_path, mode='r'):
@@ -1056,6 +1069,8 @@ class LuniiDevice(QtCore.QObject):
 
                 if fname.endswith("bt"):
                     continue
+                if fname.endswith("nm"):
+                    night_mode = True
 
                 # Extract each zip file
                 data_v2 = bio.read()
@@ -1070,10 +1085,12 @@ class LuniiDevice(QtCore.QObject):
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
-                    # need to transcipher for v3
+                    # need to transcipher for v3 ?
                     if file.endswith("ni") or file.endswith("nm"):
+                        # plain files
                         data_plain = data_v2
                     else:
+                        # to be ciphered
                         data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
@@ -1100,12 +1117,14 @@ class LuniiDevice(QtCore.QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid))
+        self.stories.append(Story(new_uuid, nm=night_mode))
         self.update_pack_index()
 
         return True
 
     def import_story_v2(self, story_path):
+        night_mode = False
+
         # checking if archive is OK
         try:
             with zipfile.ZipFile(file=story_path):
@@ -1161,6 +1180,8 @@ class LuniiDevice(QtCore.QObject):
                     continue
                 if file.endswith("bt"):
                     continue
+                if file.endswith("nm"):
+                    night_mode = True
 
                 # Extract each zip file
                 data_v2 = zip_file.read(file)
@@ -1175,10 +1196,12 @@ class LuniiDevice(QtCore.QObject):
                     # from v2 to v2, data can be kept as it is
                     data = data_v2
                 else:
-                    # need to transcipher for v3
+                    # need to transcipher for v3 ?
                     if file.endswith("ni") or file.endswith("nm"):
+                        # plain files
                         data_plain = data_v2
                     else:
+                        # to be ciphered
                         data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
@@ -1205,7 +1228,7 @@ class LuniiDevice(QtCore.QObject):
             fp_bt.write(self.bt)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid))
+        self.stories.append(Story(new_uuid, nm=night_mode))
         self.update_pack_index()
 
         return True
