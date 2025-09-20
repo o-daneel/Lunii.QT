@@ -871,7 +871,7 @@
   </action>
   <action name="actionNight_Mode">
    <property name="text">
-    <string>Night Mode</string>
+    <string>Force Night Mode</string>
    </property>
     <property name="shortcut">
     <string>Ctrl+N</string>

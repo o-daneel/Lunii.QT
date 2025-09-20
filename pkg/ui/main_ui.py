@@ -472,7 +472,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(shortcut)
         self.actionImport_DB.setText(QCoreApplication.translate("MainWindow", u"Import STUdio DB", None))
         self.actionRefresh_DB.setText(QCoreApplication.translate("MainWindow", u"Refresh official DB", None))
-        self.actionNight_Mode.setText(QCoreApplication.translate("MainWindow", u"Night Mode", None))
+        self.actionNight_Mode.setText(QCoreApplication.translate("MainWindow", u"Force Night Mode", None))
 #if QT_CONFIG(shortcut)
         self.actionNight_Mode.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+N", None))
 #endif // QT_CONFIG(shortcut)
