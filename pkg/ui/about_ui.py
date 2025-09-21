@@ -21,8 +21,8 @@ Logos are provided by <b>malexxx</b><br /><br />
 """
 
 
-def about_dlg():
-    msg_box = QMessageBox(QMessageBox.Information, "About", LUNIIQT_ABOUT_INFO_HTML, QMessageBox.Ok)
+def about_dlg(parent=None):
+    msg_box = QMessageBox(QMessageBox.Information, "About", LUNIIQT_ABOUT_INFO_HTML, QMessageBox.Ok, parent)
 
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap(":/icon/res/about.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)

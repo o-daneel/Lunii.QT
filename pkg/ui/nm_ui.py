@@ -20,22 +20,23 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QDialog, QFrame,
     QSizePolicy, QSpacerItem, QSpinBox, QVBoxLayout,
     QWidget)
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        if not Dialog.objectName():
-            Dialog.setObjectName(u"Dialog")
-        Dialog.resize(400, 390)
-        Dialog.setMinimumSize(QSize(400, 0))
-        self.verticalLayout = QVBoxLayout(Dialog)
+class Ui_nightMode(object):
+    def setupUi(self, nightMode):
+        if not nightMode.objectName():
+            nightMode.setObjectName(u"nightMode")
+        nightMode.resize(400, 390)
+        nightMode.setMinimumSize(QSize(400, 0))
+        nightMode.setModal(True)
+        self.verticalLayout = QVBoxLayout(nightMode)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.lbl_Header = QLabel(Dialog)
+        self.lbl_Header = QLabel(nightMode)
         self.lbl_Header.setObjectName(u"lbl_Header")
         self.lbl_Header.setAlignment(Qt.AlignCenter)
         self.lbl_Header.setMargin(10)
 
         self.verticalLayout.addWidget(self.lbl_Header)
 
-        self.groupBox = QGroupBox(Dialog)
+        self.groupBox = QGroupBox(nightMode)
         self.groupBox.setObjectName(u"groupBox")
         self.verticalLayout_2 = QVBoxLayout(self.groupBox)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -140,6 +141,7 @@ class Ui_Dialog(object):
         self.sbox_maxstories.setObjectName(u"sbox_maxstories")
         self.sbox_maxstories.setMinimumSize(QSize(60, 0))
         self.sbox_maxstories.setAlignment(Qt.AlignCenter)
+        self.sbox_maxstories.setMinimum(1)
         self.sbox_maxstories.setMaximum(8)
         self.sbox_maxstories.setValue(3)
 
@@ -194,7 +196,7 @@ class Ui_Dialog(object):
 
         self.hl_button.addItem(self.horizontalSpacer)
 
-        self.btn_save = QPushButton(Dialog)
+        self.btn_save = QPushButton(nightMode)
         self.btn_save.setObjectName(u"btn_save")
 
         self.hl_button.addWidget(self.btn_save)
@@ -203,23 +205,23 @@ class Ui_Dialog(object):
         self.verticalLayout.addLayout(self.hl_button)
 
 
-        self.retranslateUi(Dialog)
+        self.retranslateUi(nightMode)
 
-        QMetaObject.connectSlotsByName(Dialog)
+        QMetaObject.connectSlotsByName(nightMode)
     # setupUi
 
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.lbl_Header.setText(QCoreApplication.translate("Dialog", u"<h2>Configure Night Mode</h2>", None))
+    def retranslateUi(self, nightMode):
+        nightMode.setWindowTitle(QCoreApplication.translate("nightMode", u"Dialog", None))
+        self.lbl_Header.setText(QCoreApplication.translate("nightMode", u"<h2>Configure Night Mode</h2>", None))
         self.groupBox.setTitle("")
-        self.lbl_enable.setText(QCoreApplication.translate("Dialog", u"<h4>Nigth mode", None))
-        self.lbl_limit.setText(QCoreApplication.translate("Dialog", u"<h4>Limit Volume", None))
-        self.lbl_desc_limit.setText(QCoreApplication.translate("Dialog", u"The volume will be kept low for a calm listening experience conducive to falling asleep.", None))
-        self.lbl_autoplay.setText(QCoreApplication.translate("Dialog", u"<h4>Keep playing with next", None))
-        self.lbl_desc_autoplay.setText(QCoreApplication.translate("Dialog", u"You can choose how many stories will be read before the device shuts down.", None))
-        self.lbl_maxstories.setText(QCoreApplication.translate("Dialog", u"Max stories to play", None))
-        self.lbl_turnoff.setText(QCoreApplication.translate("Dialog", u"<h4>Turn off after sleep", None))
-        self.lbl_desc_turnoff.setText(QCoreApplication.translate("Dialog", u"By enabling this feature, the device will automatically return to Day Mode after shutting down.", None))
-        self.btn_save.setText(QCoreApplication.translate("Dialog", u"Save", None))
+        self.lbl_enable.setText(QCoreApplication.translate("nightMode", u"<h4>Nigth mode", None))
+        self.lbl_limit.setText(QCoreApplication.translate("nightMode", u"<h4>Limit Volume", None))
+        self.lbl_desc_limit.setText(QCoreApplication.translate("nightMode", u"The volume will be kept low for a calm listening experience conducive to falling asleep.", None))
+        self.lbl_autoplay.setText(QCoreApplication.translate("nightMode", u"<h4>Keep playing with next", None))
+        self.lbl_desc_autoplay.setText(QCoreApplication.translate("nightMode", u"You can choose how many stories will be read before the device shuts down.", None))
+        self.lbl_maxstories.setText(QCoreApplication.translate("nightMode", u"Max stories to play", None))
+        self.lbl_turnoff.setText(QCoreApplication.translate("nightMode", u"<h4>Turn off after sleep", None))
+        self.lbl_desc_turnoff.setText(QCoreApplication.translate("nightMode", u"By enabling this feature, the device will automatically return to Day Mode after shutting down.", None))
+        self.btn_save.setText(QCoreApplication.translate("nightMode", u"Save", None))
     # retranslateUi
 

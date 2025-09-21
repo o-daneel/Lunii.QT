@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>nightMode</class>
+ <widget class="QDialog" name="nightMode">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,6 +18,9 @@
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -198,6 +201,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="minimum">
+           <number>1</number>
           </property>
           <property name="maximum">
            <number>8</number>

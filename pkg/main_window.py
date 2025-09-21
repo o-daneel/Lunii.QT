@@ -6,7 +6,7 @@ from pathlib import WindowsPath
 import psutil
 import requests
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QCheckBox
@@ -21,6 +21,7 @@ from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, devic
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
+from pkg.nm_window import NightModeWindow
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -63,8 +64,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.iconLunii = QIcon(":/icon/res/lunii.ico")
         self.iconFlam = QIcon(":/icon/res/flam.ico")
         self.debug_dialog = DebugDialog()
-        self.login_dialog = LoginDialog()
-        # self.debug_dialog.show()
+        self.login_dialog = LoginDialog(self)
+        self.nm_dialog = NightModeWindow(self)
 
         # class instance vars init
         self.audio_device: LuniiDevice = None
@@ -73,7 +74,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.version_worker: versionWorker = None
         self.version_thread: QtCore.QThread = None
         self.app = app
-        # app config
+
+        # self.debug_dialog.show() # class instance vars init self.audio_device: LuniiDevice = None self.worker: ierWorker = None self.thread: QtCore.QThread = None self.version_worker: versionWorker = None self.version_thread: QtCore.QThread = None self.app = app # app config
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
@@ -188,6 +190,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_refresh.clicked.connect(self.cb_device_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
         self.btn_abort.clicked.connect(self.worker_abort)
+        self.btn_nightmode.clicked.connect(self.nm_dialog.exec)
 
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
@@ -338,6 +341,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.setPlaceholderText("Select your Lunii")
         self.sb_update("")
         self.chk_nightmode.setEnabled(False)
+        self.nm_dialog.remove_audioDevice()
 
 
         for dev in dev_list:
@@ -411,9 +415,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
                 self.btn_nightmode.setIcon(icon_nm)
 
-
+            # night mode section
             self.chk_nightmode.setEnabled(True)
             self.chk_nightmode.setChecked(self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1)
+            self.nm_dialog.set_audioDevice(self.audio_device)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -670,7 +675,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_menu_help(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionAbout":
-            about_dlg()
+            about_dlg(self)
         elif act_name == "actionUpdate":
             website_url = QUrl('https://github.com/o-daneel/Lunii.QT/releases/latest')
             # Open the URL in the default web browser
@@ -920,7 +925,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         night_mode = self.chk_nightmode.isChecked()
         self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] = 1 if night_mode else 0
         self.audio_device.update_config()
-        print(f"Night mode set to {night_mode}")
     
     def ts_move(self, offset):
         if self.worker or not self.audio_device:
