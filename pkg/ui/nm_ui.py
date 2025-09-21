@@ -44,15 +44,21 @@ class Ui_nightMode(object):
         self.hl_nm_mode.setObjectName(u"hl_nm_mode")
         self.lbl_enable = QLabel(self.groupBox)
         self.lbl_enable.setObjectName(u"lbl_enable")
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lbl_enable.sizePolicy().hasHeightForWidth())
+        self.lbl_enable.setSizePolicy(sizePolicy)
 
         self.hl_nm_mode.addWidget(self.lbl_enable)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.hl_nm_mode.addItem(self.horizontalSpacer_2)
-
         self.cbox_enable = QCheckBox(self.groupBox)
         self.cbox_enable.setObjectName(u"cbox_enable")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.cbox_enable.sizePolicy().hasHeightForWidth())
+        self.cbox_enable.setSizePolicy(sizePolicy1)
         self.cbox_enable.setText(u"")
 
         self.hl_nm_mode.addWidget(self.cbox_enable)
@@ -71,15 +77,15 @@ class Ui_nightMode(object):
         self.hl_volume.setObjectName(u"hl_volume")
         self.lbl_limit = QLabel(self.groupBox)
         self.lbl_limit.setObjectName(u"lbl_limit")
+        sizePolicy.setHeightForWidth(self.lbl_limit.sizePolicy().hasHeightForWidth())
+        self.lbl_limit.setSizePolicy(sizePolicy)
 
         self.hl_volume.addWidget(self.lbl_limit)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.hl_volume.addItem(self.horizontalSpacer_3)
-
         self.cbox_limit = QCheckBox(self.groupBox)
         self.cbox_limit.setObjectName(u"cbox_limit")
+        sizePolicy1.setHeightForWidth(self.cbox_limit.sizePolicy().hasHeightForWidth())
+        self.cbox_limit.setSizePolicy(sizePolicy1)
         self.cbox_limit.setText(u"")
 
         self.hl_volume.addWidget(self.cbox_limit)
@@ -104,12 +110,10 @@ class Ui_nightMode(object):
         self.hl_autoplay.setObjectName(u"hl_autoplay")
         self.lbl_autoplay = QLabel(self.groupBox)
         self.lbl_autoplay.setObjectName(u"lbl_autoplay")
+        sizePolicy.setHeightForWidth(self.lbl_autoplay.sizePolicy().hasHeightForWidth())
+        self.lbl_autoplay.setSizePolicy(sizePolicy)
 
         self.hl_autoplay.addWidget(self.lbl_autoplay)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.hl_autoplay.addItem(self.horizontalSpacer_4)
 
         self.cbox_autoplay = QCheckBox(self.groupBox)
         self.cbox_autoplay.setObjectName(u"cbox_autoplay")
@@ -130,12 +134,10 @@ class Ui_nightMode(object):
         self.hl_maxstories.setObjectName(u"hl_maxstories")
         self.lbl_maxstories = QLabel(self.groupBox)
         self.lbl_maxstories.setObjectName(u"lbl_maxstories")
+        sizePolicy.setHeightForWidth(self.lbl_maxstories.sizePolicy().hasHeightForWidth())
+        self.lbl_maxstories.setSizePolicy(sizePolicy)
 
         self.hl_maxstories.addWidget(self.lbl_maxstories)
-
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.hl_maxstories.addItem(self.horizontalSpacer_5)
 
         self.sbox_maxstories = QSpinBox(self.groupBox)
         self.sbox_maxstories.setObjectName(u"sbox_maxstories")
@@ -161,12 +163,10 @@ class Ui_nightMode(object):
         self.hl_sleep.setObjectName(u"hl_sleep")
         self.lbl_turnoff = QLabel(self.groupBox)
         self.lbl_turnoff.setObjectName(u"lbl_turnoff")
+        sizePolicy.setHeightForWidth(self.lbl_turnoff.sizePolicy().hasHeightForWidth())
+        self.lbl_turnoff.setSizePolicy(sizePolicy)
 
         self.hl_sleep.addWidget(self.lbl_turnoff)
-
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.hl_sleep.addItem(self.horizontalSpacer_6)
 
         self.cbox_turnoff_nm = QCheckBox(self.groupBox)
         self.cbox_turnoff_nm.setObjectName(u"cbox_turnoff_nm")
@@ -214,7 +214,7 @@ class Ui_nightMode(object):
         nightMode.setWindowTitle(QCoreApplication.translate("nightMode", u"Dialog", None))
         self.lbl_Header.setText(QCoreApplication.translate("nightMode", u"<h2>Configure Night Mode</h2>", None))
         self.groupBox.setTitle("")
-        self.lbl_enable.setText(QCoreApplication.translate("nightMode", u"<h4>Nigth mode", None))
+        self.lbl_enable.setText(QCoreApplication.translate("nightMode", u"<h4>Night mode", None))
         self.lbl_limit.setText(QCoreApplication.translate("nightMode", u"<h4>Limit Volume", None))
         self.lbl_desc_limit.setText(QCoreApplication.translate("nightMode", u"The volume will be kept low for a calm listening experience conducive to falling asleep.", None))
         self.lbl_autoplay.setText(QCoreApplication.translate("nightMode", u"<h4>Keep playing with next", None))

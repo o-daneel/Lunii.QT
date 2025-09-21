@@ -34,9 +34,17 @@ class NightModeWindow(QDialog, Ui_nightMode):
     # connecting slots and signals
     def setup_connections(self):
         self.btn_save.clicked.connect(self.accept)
+
+        self.lbl_enable.mousePressEvent = lambda event: self.cbox_enable.click() if event.button() == Qt.MouseButton.LeftButton else None
         self.cbox_enable.clicked.connect(self.cb_nm_enable)
+        
+        self.lbl_limit.mousePressEvent = lambda event: self.cbox_limit.click() if event.button() == Qt.MouseButton.LeftButton else None
         self.cbox_limit.clicked.connect(self.cb_limit)
+
+        self.lbl_autoplay.mousePressEvent = lambda event: self.cbox_autoplay.click() if event.button() == Qt.MouseButton.LeftButton else None
         self.cbox_autoplay.clicked.connect(self.cb_autoplay)
+        
+        self.lbl_turnoff.mousePressEvent = lambda event: self.cbox_turnoff_nm.click() if event.button() == Qt.MouseButton.LeftButton else None
         self.cbox_turnoff_nm.clicked.connect(self.cb_tunoff)
 
     @property
@@ -91,27 +99,30 @@ class NightModeWindow(QDialog, Ui_nightMode):
         self.cb_tunoff()
 
     def cb_limit(self):
+        nm_enabled = self.cbox_enable.checkState() == Qt.CheckState.Checked
         limit_enabled = self.cbox_limit.checkState() == Qt.CheckState.Checked and \
                         self.cbox_enable.checkState() == Qt.CheckState.Checked
 
         # limit section
-        self.lbl_limit.setEnabled(limit_enabled)
+        self.lbl_limit.setEnabled(nm_enabled)
         self.lbl_desc_limit.setEnabled(limit_enabled)
         
     def cb_autoplay(self):
+        nm_enabled = self.cbox_enable.checkState() == Qt.CheckState.Checked
         autoplay_enabled = self.cbox_autoplay.checkState() == Qt.CheckState.Checked and \
                            self.cbox_enable.checkState() == Qt.CheckState.Checked
 
         # autoplay section
-        self.lbl_autoplay.setEnabled(autoplay_enabled)
+        self.lbl_autoplay.setEnabled(nm_enabled)
         self.lbl_desc_autoplay.setEnabled(autoplay_enabled)
         self.lbl_maxstories.setEnabled(autoplay_enabled)
         self.sbox_maxstories.setEnabled(autoplay_enabled)
 
     def cb_tunoff(self):
+        nm_enabled = self.cbox_enable.checkState() == Qt.CheckState.Checked
         turnoff_enabled = self.cbox_turnoff_nm.checkState() == Qt.CheckState.Checked and \
                           self.cbox_enable.checkState() == Qt.CheckState.Checked
 
         # turnoff section
-        self.lbl_turnoff.setEnabled(turnoff_enabled)
+        self.lbl_turnoff.setEnabled(nm_enabled)
         self.lbl_desc_turnoff.setEnabled(turnoff_enabled)
