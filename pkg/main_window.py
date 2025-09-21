@@ -340,7 +340,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dev: WindowsPath
         self.combo_device.setPlaceholderText("Select your Lunii")
         self.sb_update("")
-        self.chk_nightmode.setEnabled(False)
         self.nm_dialog.remove_audioDevice()
 
 
@@ -406,14 +405,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tw_resize_columns()
             self.sb_update("")
 
+            # night mode section
             if self.audio_device.device_version != FLAM_V1:
+                self.nm_dialog.set_audioDevice(self.audio_device)
                 self.btn_nightmode.setEnabled(True)
                 self.cb_nm_update_btn()
-
-            # night mode section
-            self.chk_nightmode.setEnabled(True)
-            self.chk_nightmode.setChecked(self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1)
-            self.nm_dialog.set_audioDevice(self.audio_device)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -835,13 +831,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusBar().setStyleSheet('border: 0; background-color: #FFF8DC;')
         self.statusBar().setStyleSheet("QStatusBar::item {border: none;}")
 
-        # Create the checkbox
-        self.chk_nightmode = QCheckBox("Night Mode", self)
-        self.chk_nightmode.setChecked(False)
-        self.chk_nightmode.setEnabled(False)
-        self.chk_nightmode.stateChanged.connect(self.cbnm_checked)
-
-        self.statusBar().addPermanentWidget(self.chk_nightmode)
         self.statusBar().addPermanentWidget(VLine())    # <---
         self.statusBar().addPermanentWidget(self.lbl_hsnu)
         self.statusBar().addPermanentWidget(self.lbl_snu)
@@ -917,11 +906,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         result = self.nm_dialog.exec()
 
         if result == QDialog.Accepted:
-            print("Validate, update conf")
-            old_config = self.audio_device.config 
-            new_config = self.nm_dialog.config
-            print(old_config)
-            print(new_config)
             self.audio_device.config = self.nm_dialog.config
             self.audio_device.update_config()
 
@@ -935,15 +919,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_nightmode.setIcon(icon_nm)
-
-
-    def cbnm_checked(self, state):
-        if not self.audio_device:
-            return
-
-        night_mode = self.chk_nightmode.isChecked()
-        self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] = 1 if night_mode else 0
-        self.audio_device.update_config()
     
     def ts_move(self, offset):
         if self.worker or not self.audio_device:
