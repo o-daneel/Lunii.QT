@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Night mode settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>

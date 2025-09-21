@@ -24,8 +24,6 @@ class NightModeWindow(QDialog, Ui_nightMode):
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
-        self.setWindowTitle(self.tr("Night mode settings"))
-
         self.iconLunii = QIcon(":/icon/res/lunii.ico")
         self.setWindowIcon(self.iconLunii)
 

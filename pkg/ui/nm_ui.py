@@ -211,17 +211,17 @@ class Ui_nightMode(object):
     # setupUi
 
     def retranslateUi(self, nightMode):
-        nightMode.setWindowTitle(QCoreApplication.translate("nightMode", u"Dialog", None))
-        self.lbl_Header.setText(QCoreApplication.translate("nightMode", u"<h2>Configure Night Mode</h2>", None))
+        nightMode.setWindowTitle(QCoreApplication.translate("nightMode", "Night mode settings", None))
+        self.lbl_Header.setText(QCoreApplication.translate("nightMode", "<h2>Configure Night Mode</h2>", None))
         self.groupBox.setTitle("")
-        self.lbl_enable.setText(QCoreApplication.translate("nightMode", u"<h4>Night mode", None))
-        self.lbl_limit.setText(QCoreApplication.translate("nightMode", u"<h4>Limit Volume", None))
-        self.lbl_desc_limit.setText(QCoreApplication.translate("nightMode", u"The volume will be kept low for a calm listening experience conducive to falling asleep.", None))
-        self.lbl_autoplay.setText(QCoreApplication.translate("nightMode", u"<h4>Keep playing with next", None))
-        self.lbl_desc_autoplay.setText(QCoreApplication.translate("nightMode", u"You can choose how many stories will be read before the device shuts down.", None))
-        self.lbl_maxstories.setText(QCoreApplication.translate("nightMode", u"Max stories to play", None))
-        self.lbl_turnoff.setText(QCoreApplication.translate("nightMode", u"<h4>Turn off after sleep", None))
-        self.lbl_desc_turnoff.setText(QCoreApplication.translate("nightMode", u"By enabling this feature, the device will automatically return to Day Mode after shutting down.", None))
-        self.btn_save.setText(QCoreApplication.translate("nightMode", u"Save", None))
+        self.lbl_enable.setText(QCoreApplication.translate("nightMode", "<h4>Night mode", None))
+        self.lbl_limit.setText(QCoreApplication.translate("nightMode", "<h4>Limit Volume", None))
+        self.lbl_desc_limit.setText(QCoreApplication.translate("nightMode", "The volume will be kept low for a calm listening experience conducive to falling asleep.", None))
+        self.lbl_autoplay.setText(QCoreApplication.translate("nightMode", "<h4>Keep playing with next", None))
+        self.lbl_desc_autoplay.setText(QCoreApplication.translate("nightMode", "You can choose how many stories will be read before the device shuts down.", None))
+        self.lbl_maxstories.setText(QCoreApplication.translate("nightMode", "Max stories to play", None))
+        self.lbl_turnoff.setText(QCoreApplication.translate("nightMode", "<h4>Turn off after sleep", None))
+        self.lbl_desc_turnoff.setText(QCoreApplication.translate("nightMode", "By enabling this feature, the device will automatically return to Day Mode after shutting down.", None))
+        self.btn_save.setText(QCoreApplication.translate("nightMode", "Save", None))
     # retranslateUi
 
