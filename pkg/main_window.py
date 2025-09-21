@@ -401,6 +401,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_update()
             self.tw_resize_columns()
             self.sb_update("")
+
+            if self.audio_device.device_version != FLAM_V1:
+                self.btn_nightmode.setEnabled(True)
+                icon_nm = QIcon()
+                if self.audio_device.device_version != FLAM_V1 and self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1:
+                    icon_nm.addFile(u":/icon/res/mode_night.png", QSize(), QIcon.Normal, QIcon.Off)
+                else:
+                    icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.btn_nightmode.setIcon(icon_nm)
+
+
             self.chk_nightmode.setEnabled(True)
             self.chk_nightmode.setChecked(self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1)
 

@@ -2,6 +2,8 @@
   <qresource prefix="icon">
     <file>res/flam.ico</file>
     <file>res/fw.png</file>
+    <file>res/mode_day.png</file>
+    <file>res/mode_night.png</file>
     <file>res/bottom.png</file>
     <file>res/top.png</file>
     <file>res/about.png</file>

@@ -172,6 +172,19 @@ class Ui_MainWindow(object):
 
         self.top_layout.addWidget(self.combo_device)
 
+        self.btn_nightmode = QPushButton(self.centralwidget)
+        self.btn_nightmode.setObjectName(u"btn_nightmode")
+        self.btn_nightmode.setEnabled(False)
+        self.btn_nightmode.setMaximumSize(QSize(55, 25))
+        self.btn_nightmode.setText(u"")
+        icon15 = QIcon()
+        icon15.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_nightmode.setIcon(icon15)
+        self.btn_nightmode.setIconSize(QSize(150, 22))
+        self.btn_nightmode.setFlat(True)
+
+        self.top_layout.addWidget(self.btn_nightmode)
+
         self.horizontalSpacer = QSpacerItem(80, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
         self.top_layout.addItem(self.horizontalSpacer)
@@ -487,6 +500,9 @@ class Ui_MainWindow(object):
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
+#if QT_CONFIG(shortcut)
+        self.btn_nightmode.setShortcut(QCoreApplication.translate("MainWindow", u"Backspace", None))
+#endif // QT_CONFIG(shortcut)
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Story Name or UUID filter text)", None))
 #if QT_CONFIG(tooltip)
         self.btn_db.setToolTip(QCoreApplication.translate("MainWindow", u"Force official Lunii DB to be refreshed", None))
