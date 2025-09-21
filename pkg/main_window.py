@@ -190,7 +190,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_refresh.clicked.connect(self.cb_device_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
         self.btn_abort.clicked.connect(self.worker_abort)
-        self.btn_nightmode.clicked.connect(self.nm_dialog.exec)
+        self.btn_nightmode.clicked.connect(self.cb_nm)
 
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
@@ -408,12 +408,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if self.audio_device.device_version != FLAM_V1:
                 self.btn_nightmode.setEnabled(True)
-                icon_nm = QIcon()
-                if self.audio_device.device_version != FLAM_V1 and self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1:
-                    icon_nm.addFile(u":/icon/res/mode_night.png", QSize(), QIcon.Normal, QIcon.Off)
-                else:
-                    icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
-                self.btn_nightmode.setIcon(icon_nm)
+                self.cb_nm_update_btn()
 
             # night mode section
             self.chk_nightmode.setEnabled(True)
@@ -917,6 +912,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_count.setText(f"{count_items} stories")
         else:
             self.lbl_count.setText("")
+    
+    def cb_nm(self):
+        result = self.nm_dialog.exec()
+
+        if result == QDialog.Accepted:
+            print("Validate, update conf")
+            old_config = self.audio_device.config 
+            new_config = self.nm_dialog.config
+            print(old_config)
+            print(new_config)
+            self.audio_device.config = self.nm_dialog.config
+            self.audio_device.update_config()
+
+            # updating button image
+            self.cb_nm_update_btn()
+
+    def cb_nm_update_btn(self):
+        icon_nm = QIcon()
+        if self.audio_device.device_version != FLAM_V1 and self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1:
+            icon_nm.addFile(u":/icon/res/mode_night.png", QSize(), QIcon.Normal, QIcon.Off)
+        else:
+            icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_nightmode.setIcon(icon_nm)
+
 
     def cbnm_checked(self, state):
         if not self.audio_device:

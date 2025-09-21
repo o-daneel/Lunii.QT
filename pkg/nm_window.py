@@ -33,6 +33,7 @@ class NightModeWindow(QDialog, Ui_nightMode):
 
     # connecting slots and signals
     def setup_connections(self):
+        self.btn_save.clicked.connect(self.accept)
         self.cbox_enable.clicked.connect(self.cb_nm_enable)
         self.cbox_limit.clicked.connect(self.cb_limit)
         self.cbox_autoplay.clicked.connect(self.cb_autoplay)
@@ -40,7 +41,15 @@ class NightModeWindow(QDialog, Ui_nightMode):
 
     @property
     def config(self):
-        return None
+        new_config = list(self.audio_device.config)
+        # updating config with current window widget
+        new_config[LUNII_CFGPOS_NM_ENABLED] = 1 if self.cbox_enable.checkState() == Qt.CheckState.Checked else 0
+        new_config[LUNII_CFGPOS_NM_VOL_LIMIT] = 30 if self.cbox_limit.checkState() == Qt.CheckState.Checked else 0
+        new_config[LUNII_CFGPOS_NM_AUTOPLAY] = 1 if self.cbox_autoplay.checkState() == Qt.CheckState.Checked else 0
+        new_config[LUNII_CFGPOS_NM_STORYCOUNT] = self.sbox_maxstories.value()
+        new_config[LUNII_CFGPOS_NM_TURNOFF_NM] = 1 if self.cbox_turnoff_nm.checkState() == Qt.CheckState.Checked else 0
+
+        return new_config
 
     def remove_audioDevice(self):
         self.audio_device = None
