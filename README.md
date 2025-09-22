@@ -356,7 +356,7 @@ $ pyside6-uic pkg/ui/nm.ui   -o pkg/ui/nm_ui.py
 ### Build Translation files
 ```bash
 $ pyside6-lupdate.exe ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py -ts ./locales/fr_FR.ts
-$ pyside6-linguist.exe ./locales/fr_FR.ts 
+$ pyside6-linguist.exe ./locales/fr_FR.ts  # optionnaly, update translations
 $ pyside6-lrelease.exe ./locales/fr_FR.ts ./locales/fr_FR.qm  
 ```
 ### Build UI files
