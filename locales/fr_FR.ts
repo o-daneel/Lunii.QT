@@ -641,57 +641,61 @@ Voulez-vous continuer ?</translation>
 <context>
     <name>nightMode</name>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="214"/>
+        <location filename="../pkg/ui/nm_ui.py" line="243"/>
         <source>Night mode settings</source>
         <translation>Paramètres du mode nuit</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="215"/>
         <source>&lt;h2&gt;Configure Night Mode&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Configurer le mode nuit&lt;/h2&gt;</translation>
+        <translation type="vanished">&lt;h2&gt;Configurer le mode nuit&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="217"/>
+        <location filename="../pkg/ui/nm_ui.py" line="244"/>
+        <source>&lt;h2&gt;Configure&lt;br&gt;Night Mode&lt;/h2&gt;</source>
+        <translation>&lt;h2&gt;Configurer&lt;br&gt;le mode nuit&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ui/nm_ui.py" line="247"/>
         <source>&lt;h4&gt;Night mode</source>
         <translation>&lt;h4&gt;Mode nuit</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="218"/>
+        <location filename="../pkg/ui/nm_ui.py" line="248"/>
         <source>&lt;h4&gt;Limit Volume</source>
         <translation>&lt;h4&gt;Limiter le volume</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="219"/>
+        <location filename="../pkg/ui/nm_ui.py" line="249"/>
         <source>The volume will be kept low for a calm listening experience conducive to falling asleep.</source>
         <translation>Le volume sera limité pour une écoute calme et propice à l&apos;endormissement.</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="220"/>
+        <location filename="../pkg/ui/nm_ui.py" line="250"/>
         <source>&lt;h4&gt;Keep playing with next</source>
         <translation>&lt;h4&gt;Enchainer les histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="221"/>
+        <location filename="../pkg/ui/nm_ui.py" line="251"/>
         <source>You can choose how many stories will be read before the device shuts down.</source>
         <translation>Vous pouvez choisir combien d&apos;histoires seront lues avant que l&apos;appareil ne s&apos;arrête</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="222"/>
+        <location filename="../pkg/ui/nm_ui.py" line="252"/>
         <source>Max stories to play</source>
         <translation>Nombre d&apos;histoires maximum</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="223"/>
+        <location filename="../pkg/ui/nm_ui.py" line="253"/>
         <source>&lt;h4&gt;Turn off after sleep</source>
         <translation>&lt;h4&gt;Désactiver aprèes la mise en veille</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="224"/>
+        <location filename="../pkg/ui/nm_ui.py" line="254"/>
         <source>By enabling this feature, the device will automatically return to Day Mode after shutting down.</source>
         <translation>En activant cette fonction, l&apos;appareil repassera automatiquement en Mode Jour après s&apos;être arrêté.</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/nm_ui.py" line="225"/>
+        <location filename="../pkg/ui/nm_ui.py" line="255"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
