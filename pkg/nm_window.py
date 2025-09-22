@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QDialog
 
 from pkg.api.constants import LUNII_CFGPOS_NM_AUTOPLAY, LUNII_CFGPOS_NM_ENABLED, LUNII_CFGPOS_NM_ENABLED, LUNII_CFGPOS_NM_STORYCOUNT, LUNII_CFGPOS_NM_TURNOFF_NM, LUNII_CFGPOS_NM_VOL_LIMIT
@@ -83,6 +83,11 @@ class NightModeWindow(QDialog, Ui_nightMode):
 
     def cb_nm_enable(self):
         nm_enabled = self.cbox_enable.checkState() == Qt.CheckState.Checked
+
+        if nm_enabled:
+            self.lbl_imgHeader.setPixmap(QPixmap(u":/img/res/bg_night_mode.png"))
+        else:
+            self.lbl_imgHeader.setPixmap(QPixmap(u":/img/res/bg_day_mode.png"))
 
         # propagate nm mode to all elements
         self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] = nm_enabled

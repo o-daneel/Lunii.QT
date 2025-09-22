@@ -21,6 +21,8 @@
     <file>res/logo.png</file>
   </qresource>
   <qresource prefix="img">
+    <file>res/bg_day_mode.png</file>
+    <file>res/bg_night_mode.png</file>
     <file>res/lunii_about.png</file>
   </qresource>
   <qresource prefix="json">
