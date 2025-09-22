@@ -2,7 +2,11 @@ from PySide6 import QtGui, QtCore, QtWidgets
 from PySide6.QtWidgets import QMessageBox
 from PySide6.QtCore import QCoreApplication
 
-LUNIIQT_ABOUT_INFO_HTML = """
+
+def about_dlg(parent=None):
+    msg_box = QMessageBox(QMessageBox.Information, 
+                          QCoreApplication.translate("AboutDialog", "About", None), 
+                          QCoreApplication.translate("AboutDialog", """
 <h2><b>Lunii Qt-Manager</b></h2>
 <br />
 
@@ -19,13 +23,7 @@ Icons are provided freely by <a href="www.icons8.com">icon8</a><br />
 Logos are provided by <b>malexxx</b><br /><br />
 
 <b>URL : </b><a href="https://github.com/o-daneel/Lunii.QT">https://github.com/o-daneel/Lunii.QT</a>
-"""
-
-
-def about_dlg(parent=None):
-    msg_box = QMessageBox(QMessageBox.Information, 
-                          QCoreApplication.translate("AboutDialog", "About", None), 
-                          QCoreApplication.translate("AboutDialog", LUNIIQT_ABOUT_INFO_HTML, None),
+""", None),
                           QMessageBox.Ok,
                           parent)
 

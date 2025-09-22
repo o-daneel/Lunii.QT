@@ -15,6 +15,45 @@
         <source>About</source>
         <translation>A propos</translation>
     </message>
+    <message>
+        <location filename="../pkg/ui/about_ui.py" line="45"/>
+        <source>
+&lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
+&lt;br /&gt;
+
+
+This application is a PoC that allows to manage the contents of your own Lunii Storyteller,
+including changing stories order, backup (for personal usage only), restore, and downloading 
+your latest Lunii firmware (to eventually restore from a broken device).&lt;br /&gt;
+  
+&lt;br /&gt;Powered by Python 3.11, PySide 6&lt;br /&gt;
+&lt;br /&gt;
+
+Icons are provided freely by &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+ 
+Logos are provided by &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;URL : &lt;/b&gt;&lt;a href=&quot;https://github.com/o-daneel/Lunii.QT&quot;&gt;https://github.com/o-daneel/Lunii.QT&lt;/a&gt;
+</source>
+        <translation>
+&lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
+&lt;br /&gt;
+
+Cette application est une preuve de concept (PoC) qui permet de gérer le contenu de votre 
+Fabrique à histoires Lunii, modifier l’ordre des histoires, effectuer une sauvegarde 
+(à usage strictement personnel), restaurer et télécharger la dernière version du firmware Lunii 
+(afin de pouvoir éventuellement restaurer un appareil défectueux).&lt;br /&gt;
+  
+&lt;br /&gt;Développé avec Python 3.11, PySide 6&lt;br /&gt;
+&lt;br /&gt;
+
+Les icônes sont fournies gratuitement par &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+ 
+Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;URL : &lt;/b&gt;&lt;a href=&quot;https://github.com/o-daneel/Lunii.QT&quot;&gt;https://github.com/o-daneel/Lunii.QT&lt;/a&gt;
+</translation>
+    </message>
 </context>
 <context>
     <name>DebugDialog</name>
