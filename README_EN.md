@@ -96,7 +96,7 @@ Forget about all previous .md and firmware recommendations.
 | `Ctrl+S`       | Export the selection             |
 | `Ctrl+Shift+S` | Export all the stories           |
 | `Ctrl+H`       | Hide/Show selected stories       |
-| `Ctrl+N`       | Toggle NightMode on stories      |
+| `Ctrl+N`       | Force NightMode on stories       |
 | `Delete`       | Remove the selected item(s)      |
 |                |                                  |
 | `Ctrl+O`       | Open a Lunii/Flam device         |
