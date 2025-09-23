@@ -92,7 +92,7 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 | `Ctrl+S`       | Exporte la sélection                                |
 | `Ctrl+Shift+S` | Exporte toutes les histoires                        |
 | `Ctrl+H`       | Masquer/Démasquer les histoires sélectionnées       |
-| `Ctrl+N`       | Ajouter les histoires sélectionnées au mode nuit    |
+| `Ctrl+N`       | Forcer le mode nuit d'une histoire                  |
 | `Delete`       | Supprime les histoires sélectionnées                |
 |                |                                                     |
 | `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                  |
