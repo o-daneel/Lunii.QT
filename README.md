@@ -21,39 +21,44 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 
 ### Limitations :
 * L'application <u>n'autorise plus</u> d'exporter les histoires officielles.
-* Le transcodage audio nécessite la présence de [FFMPEG v6](#vérification)
+* Le transcodage audio nécessite la présence de [FFMPEG](#vérification)
 
 
 ### Table des matières
 <!-- TOC -->
-* [Lunii.QT](#luniiqt)
-  * [Interface Utilisateur](#interface-utilisateur)
-  * [Raccourcis clavier](#raccourcis-clavier)
-  * [Fonctionnalités](#fonctionnalités)
-  * [Transcodage audio](#transcodage-audio)
-    * [Installation](#installation)
-    * [Vérification](#vérification)
-  * [Mise à jour du firmware](#mise-à-jour-du-firmware)
-    * [Guide Pratique - Lunii](#guide-pratique---lunii)
-    * [Guide Pratique - Flam](#guide-pratique---flam)
-  * [Formats d'archives pris en charge (Lunii)](#formats-darchives-pris-en-charge-lunii)
-  * [Python ? Guide Pratique](#python--guide-pratique)
-  * [Astuces](#astuces)
-    * [macOS - Authorisation de l'application](#macos---authorisation-de-lapplication)
-    * [Métadonnées des histoires non-officielles](#métadonnées-des-histoires-non-officielles)
-    * [Gestion du cache](#gestion-du-cache)
-    * [Dépendances manquantes sous Linux](#dépendances-manquantes-sous-linux)
-  * [Remerciements](#remerciements)
-* [Liens / Dépôts similaires](#liens--dépôts-similaires)
+- [Lunii.QT](#luniiqt)
+  - [Interface Utilisateur](#interface-utilisateur)
+    - [Fenêtre principale](#fenêtre-principale)
+    - [Mode Nuit](#mode-nuit)
+  - [Raccourcis clavier](#raccourcis-clavier)
+  - [Fonctionnalités](#fonctionnalités)
+  - [Transcodage audio](#transcodage-audio)
+  - [Mise à jour du firmware](#mise-à-jour-du-firmware)
+  - [Formats d'archives pris en charge (Lunii)](#formats-darchives-pris-en-charge-lunii)
+  - [Python ? Guide Pratique](#python--guide-pratique)
+    - [Préparation de l'environnement](#préparation-de-lenvironnement)
+    - [Génération des UI](#génération-des-ui)
+    - [Exécution](#exécution)
+    - [Générer un exécutable GUI](#générer-un-exécutable-gui)
+  - [Astuces](#astuces)
+    - [macOS - Authorisation de l'application](#macos---authorisation-de-lapplication)
+    - [Métadonnées des histoires non-officielles](#métadonnées-des-histoires-non-officielles)
+    - [Gestion du cache](#gestion-du-cache)
+    - [Dépendances manquantes sous Linux](#dépendances-manquantes-sous-linux)
+    - [Exportation V3](#exportation-v3)
+    - [Création de l'ICO](#création-de-lico)
+  - [Remerciements](#remerciements)
+- [Liens / Dépôts similaires](#liens--dépôts-similaires)
 <!-- TOC -->
 
 ## Interface Utilisateur
 
-<img src="./res/screenshot_about.png" width="450">  
+<img src="./res/screenshot_about.png" width="450">   
 <img src="./res/screenshot_main.png" width="600">  
+<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300">  
 <img src="./res/screenshot_debug.png" width="600"> 
 
-### Description
+### Fenêtre principale
 
 <img src="./res/screenshot_interface.png" width="600">  
 
@@ -61,8 +66,9 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
    (il suffit d'aller dans Menu About/Update to v2.X.X)
 2. **L'emplacement de votre Lunii/Flam** lorsqu'elle est connectée.   
    Le bouton à gauche relance la détection automatique.
-3. Actualisation de la **base de données Officielle** : Met à jour la liste des histoires et leurs descriptions depuis le Luniistore. Utilisez ce bouton lorsque certaines histoires officielles ne sont pas reconnues.
-4. La **liste de vos histoires** avec l'UUID et le type d'histoire (DB).  
+3. Gestion du **Mode nuit** ([ici](#mode-nuit))
+4. Actualisation de la **base de données Officielle** : Met à jour la liste des histoires et leurs descriptions depuis le Luniistore. Utilisez ce bouton lorsque certaines histoires officielles ne sont pas reconnues.
+5. La **liste de vos histoires** avec l'UUID et le type d'histoire (DB).  
    L'UUID : Un identifiant unique permettant de lier les histoires à leur dossier sur la Lunii/Flam. Les huit derniers caractères de l'UUID composent le nom du dossier de l'histoire.
 
    **DB** signifie **Base de données**. Cette application prend en charge deux bases de données différentes
@@ -70,14 +76,21 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
         (Toutes les métadonnées proviennent des serveurs de Lunii).
      - **T** - base de données **T**ierce, également connue sous Non officielles ou Custom  
         (Ces métadonnées ne peuvent pas être récupérées, elles sont complétées lors de l'importation de l'histoire)
-5. Dans la **barre d'état**, vous trouverez  
+6. L'icône 🛏️ indique que **l'histoire supporte le Mode Nuit**. Il est possible de forcer ce status depuis le menu contextuel
+7. **Histoires cachées** (les entrées grisées dans la liste).   
+   Cette fonctionnalité est activable par le biais du menu contextuel sur une histoire.  
+   Son usage est double:  
+   1. Masquer certaines histoires pour éviter que l'enfant ne passe trop de temps à sélectionner une histoire le soir. Cela évite de la supprimer et la recopier de nouveau.  
+   2. Eviter la suppresion d'histoires non officielles pendant une synchronisation avec l'application Luniistore. Les histoires cachées sont toujours physiquement présente dans l'appareil, mais ne seront pas visible par Luniistore. N'oubliez pas de bien "cacher" vos histoires avant de cliquer sur "synchroniser" !
+8. Dans la **barre d'état**, vous trouverez  
    * Votre SNU (numéro de série),
    * La version du firmware de votre Lunii/Flam
    * L'espace disponible sur la SD
    * Le nombre d'histoires
 
-6. **Histoires cachées** (les entrées grisées dans la liste) sont toujours physiquement présente dans l'appareil, mais ne seront pas visible par l'application Luniistore. De la sorte, les histoires non officielles ne seront pas supprimées lors de la synchronisation. N'oubliez pas de bien "cacher" vos histoires avant de cliquer sur "synchroniser" !
 
+### Mode Nuit
+<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300">  
 
 ## Raccourcis clavier
 
@@ -105,6 +118,7 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 * **Import** / **Export** / **Suppression** des histoires
 * Support des archives au format **STUdio**, et **importez la base d'histoire de STUdio**
 * **Réorganisez** vos histoires dans votre ordre préféré
+* Gérer le **mode nuit**
 * **Cachez** les histoires  
   Dans le but de ne pas subir une suppression forcée des histoires non officielles durant la synchronisation avec l'application Luniistore, vous pouvez désormais "cacher" temporairement certaines histoires  
   (tous les fichiers sont conservés sur l'appareil)
