@@ -496,27 +496,31 @@ class LuniiDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.WARN, f"Missing {pattern} in {story_path}")
                 return False
 
-        # parsing ri file - each resource must exist
-        ri_plain = self.__get_plain_data(os.path.join(story_path, "ri")).decode("utf-8")
-        ri_plain = ri_plain.rstrip('\x00')
-        ri_lines = [ri_plain[i:i+12] for i in range(0, len(ri_plain), 12)]
-        for res in ri_lines:
-            res = res.replace('\\', '/')
-            res_path = os.path.join(story_path, "rf", res)
-            if not os.path.isfile(res_path):
-                self.signal_logger.emit(logging.WARN, f"Missing rf/{res} in {story_path}")
-                return False
+        try:
+            # parsing ri file - each resource must exist
+            ri_plain = self.__get_plain_data(os.path.join(story_path, "ri")).decode("utf-8")
+            ri_plain = ri_plain.rstrip('\x00')
+            ri_lines = [ri_plain[i:i+12] for i in range(0, len(ri_plain), 12)]
+            for res in ri_lines:
+                res = res.replace('\\', '/')
+                res_path = os.path.join(story_path, "rf", res)
+                if not os.path.isfile(res_path):
+                    self.signal_logger.emit(logging.WARN, f"Missing rf/{res} in {story_path}")
+                    return False
 
-        # parsing si file - each resource must exist
-        si_plain = self.__get_plain_data(os.path.join(story_path, "si")).decode("utf-8")
-        si_plain = si_plain.rstrip('\x00')
-        si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
-        for res in si_lines:
-            res = res.replace('\\', '/')
-            res_path = os.path.join(story_path, "sf", res)
-            if not os.path.isfile(res_path):
-                self.signal_logger.emit(logging.WARN, f"Missing sf/{res} in {story_path}")
-                return False
+            # parsing si file - each resource must exist
+            si_plain = self.__get_plain_data(os.path.join(story_path, "si")).decode("utf-8")
+            si_plain = si_plain.rstrip('\x00')
+            si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
+            for res in si_lines:
+                res = res.replace('\\', '/')
+                res_path = os.path.join(story_path, "sf", res)
+                if not os.path.isfile(res_path):
+                    self.signal_logger.emit(logging.WARN, f"Missing sf/{res} in {story_path}")
+                    return False
+        except UnicodeDecodeError:
+            self.signal_logger.emit(logging.WARN, f"Failed to decode ri or si file")
+            return False
 
         # all requested files are there, including auth file ans resources
         return True

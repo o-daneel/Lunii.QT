@@ -227,7 +227,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/ui/main_ui.py" line="504"/>
         <source>Recover</source>
-        <translation>Retrouver</translation>
+        <translation>Récupérer</translation>
     </message>
     <message>
         <location filename="../pkg/ui/main_ui.py" line="506"/>
@@ -237,7 +237,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/ui/main_ui.py" line="507"/>
         <source>Find</source>
-        <translation>Analyser</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <location filename="../pkg/ui/main_ui.py" line="508"/>
@@ -726,7 +726,7 @@ Voulez-vous continuer ?</translation>
     <message>
         <location filename="../pkg/ui/nm_ui.py" line="253"/>
         <source>&lt;h4&gt;Turn off after sleep</source>
-        <translation>&lt;h4&gt;Désactiver aprèes la mise en veille</translation>
+        <translation>&lt;h4&gt;Désactiver après la mise en veille</translation>
     </message>
     <message>
         <location filename="../pkg/ui/nm_ui.py" line="254"/>
