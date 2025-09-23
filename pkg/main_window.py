@@ -39,7 +39,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v3.0.0a1"
+APP_VERSION = "v3.0.0a2"
 
 """ 
 # TODO : 
@@ -246,6 +246,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # 4. update the name col while keeping uuid size
         col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
+        if self.audio_device and self.audio_device.device_version == FLAM_V1:
+            col_size_width += COL_NM_SIZE
         if not self.sizes_hidden:
             col_size_width -= col_size_size
         col_size_width -= COL_EXTRA
@@ -364,6 +366,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     def cb_dev_select(self):
+        # cleanup
+        self.audio_device = None
+        self.nm_dialog.remove_audioDevice()
+        # updating UI for default
+        self.btn_nightmode.setEnabled(False)
+        self.cb_nm_update_btn()
+    
         # getting current device
         dev_name = self.combo_device.currentText()
 
@@ -411,6 +420,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.nm_dialog.set_audioDevice(self.audio_device)
                 self.btn_nightmode.setEnabled(True)
                 self.cb_nm_update_btn()
+                self.tree_stories.setColumnHidden(COL_NM, False)
+            else:
+                self.tree_stories.setColumnHidden(COL_NM, True)
 
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
@@ -916,7 +928,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def cb_nm_update_btn(self):
         icon_nm = QIcon()
-        if self.audio_device.device_version != FLAM_V1 and self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1:
+        if self.audio_device and self.audio_device.device_version != FLAM_V1 and self.audio_device.config[LUNII_CFGPOS_NM_ENABLED] == 1:
             icon_nm.addFile(u":/icon/res/mode_night.png", QSize(), QIcon.Normal, QIcon.Off)
         else:
             icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
