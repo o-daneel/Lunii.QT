@@ -1,10 +1,12 @@
 import os
 import shutil
+import zlib
 from pathlib import Path
 
 # this logger MUST not be used from worker thread.
 LUNII_LOGGER = "lunii-qt"
 REFRESH_CACHE = False
+CACHE_CRC32 = 0x0F77E60C
 
 STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
 
@@ -12,6 +14,9 @@ def toggle_refresh_cache():
     global REFRESH_CACHE
     REFRESH_CACHE = True
 
+def check_refresh_cache(snu):
+    global REFRESH_CACHE
+    REFRESH_CACHE = (zlib.crc32(snu) == CACHE_CRC32)
 
 def vectkey_to_bytes(key_vect):
     joined = [k.to_bytes(4, 'little') for k in key_vect]

@@ -68,6 +68,8 @@ class LuniiDevice(QtCore.QObject):
 
     @property
     def snu_str(self):
+        if self.snu == b'\x00' * 16:
+            return "empty"
         return self.snu.hex().upper().lstrip("0")
 
     def story_dir(self, short_uuid):
@@ -88,10 +90,12 @@ class LuniiDevice(QtCore.QObject):
 
         with open(md_path, "rb") as fp_md:
             md_version = int.from_bytes(fp_md.read(2), 'little')
+            fp_md.seek(0, os.SEEK_END)
+            md_size = fp_md.tell()
 
-            if 1<= md_version <= 5:
+            if 1<= md_version <= 5 and md_size == 512:
                 self.__md1to5_parse(fp_md)
-            elif 6 <= md_version <= 7:
+            elif 6 <= md_version <= 7 and md_size in [112, 128]:
                 self.__md6to7_parse(fp_md)
             else:
                 self.__unsupported_md_parse(fp_md)
@@ -229,23 +233,28 @@ class LuniiDevice(QtCore.QObject):
 
 
     def __unsupported_md_parse(self, fp_md):
+        logger = logging.getLogger(LUNII_LOGGER)
+
         self.device_version = LUNII_V3
         # reading metadata version
         fp_md.seek(0)
         md_vers = int.from_bytes(fp_md.read(1))
         fp_md.seek(2)
         # reading fw version
-        self.fw_vers_major = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        self.fw_vers_major = int.from_bytes(fp_md.read(1), 'little') & ~0x30
         fp_md.read(1)
-        self.fw_vers_minor = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        self.fw_vers_minor = int.from_bytes(fp_md.read(1), 'little') & ~0x30
         fp_md.read(1)
-        self.fw_vers_subminor = int.from_bytes(fp_md.read(1), 'little') - 0x30
+        self.fw_vers_subminor = int.from_bytes(fp_md.read(1), 'little') & ~0x30
         # reading SNU
         fp_md.seek(0x1A)
-        self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
-    
-        logger = logging.getLogger(LUNII_LOGGER)
-        logger.log(logging.WARNING, f"⚠️ Unsupported metadata file v{md_vers}, checking for backups...")
+        try:
+            self.snu = binascii.unhexlify(fp_md.read(14).decode('utf-8'))
+        except (EOFError, binascii.Error):
+            self.snu = b'\x00' * 16
+            logger.log(logging.ERROR, f"🛑 corrupted metadata file ? (maybe SD corruption)")
+
+        logger.log(logging.WARNING, f"⚠️ Unsupported or corrupted metadata file v{md_vers}, checking for backups...")
 
         if not self.story_key:
             self.__load_mdbackup(6)
@@ -269,7 +278,7 @@ class LuniiDevice(QtCore.QObject):
         if self.story_key is None:
             logger.log(logging.WARNING, f"🛑 no keys at all, unable to import stories. See README on Github for help.")
         else:
-            logger.log(logging.INFO, f"🟩 story keys found, import supported.")
+            logger.log(logging.INFO, f"✅ story keys found, import supported.")
             
         vid, pid = FAH_V2_V3_USB_VID_PID
         logger.log(logging.DEBUG, f"\n"

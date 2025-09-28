@@ -39,7 +39,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v3.0.0a2"
+APP_VERSION = "v3.0.0a3"
 
 """ 
 # TODO : 
@@ -400,6 +400,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             try:
                 if is_lunii(dev_name):
                     self.audio_device = LuniiDevice(dev_name, V3_KEYS)
+                    check_refresh_cache(self.audio_device.snu)
                 else:
                     self.audio_device = FlamDevice(dev_name)
             except PermissionError:
