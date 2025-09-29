@@ -39,7 +39,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v3.0.0a3"
+APP_VERSION = "v3.0.0"
 
 """ 
 # TODO : 
@@ -718,10 +718,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
                 self.act_export.setEnabled(True)
 
-            # Official story export is forbidden
-            if not constants.REFRESH_CACHE:
+            # Official story export is forbidden for Luniis (no piracy on Flam)
+            if self.audio_device.device_version < LUNII_V3:
                 selected = self.tree_stories.selectedItems()
-                if len(selected) == 1:
+                if len(selected) == 1 and not constants.REFRESH_CACHE:
                     one_story = self.audio_device.stories.get_story(selected[0].text(COL_UUID))
                     if one_story.is_official():
                         self.act_export.setEnabled(False)
