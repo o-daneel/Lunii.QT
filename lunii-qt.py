@@ -9,6 +9,7 @@ from pkg.main_window import MainWindow
 
 if __name__ == "__main__":
     app = QApplication([])
+    app.setStyle("WindowsVista")   # ou "fusion", "Windows", "macos", "gtk"
 
     translator = QTranslator(app)
     locale = QLocale.system().name()  # e.g., 'fr_FR'
