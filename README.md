@@ -1,4 +1,4 @@
-:uk: [Readme in English](./README.md) :uk:
+:uk: [English README](./README_EN.md) :uk:
 
 # Lunii.QT
 
@@ -15,12 +15,13 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 > **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours rétrograder) et évitez les mises à jour automatiques.
 
 ### Matériels pris en charge :
-* **Fah v1** et **v2** (support complet)
+* **Fah v1** et **v2** (support complet mais export bloqué)
 * **Fah v3** (fichiers md v6 et v7 supportés, l'export requiert les clés de la Fah)
-* **Flam** (support partiel, tri des histoires et sauvegarde du firmware)
+* **Flam** (support partiel avec sauvegardes personnelles, tri des histoires et sauvegarde du firmware)
 
 ### Limitations :
-* L'application <u>n'autorise plus</u> d'exporter les histoires officielles.
+* L'application <u>n'autorise plus</u> d'exporter les histoires officielles pour les Lunii, à cause du piratage.  
+Les Flams <u>pourront</u> sauvegarder et restaurer leurs histoires mais ne fonctionneront que sur le device d'origine.
 * Le transcodage audio nécessite la présence de [FFMPEG](#vérification)
 
 
@@ -34,7 +35,9 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
   - [Fonctionnalités](#fonctionnalités)
   - [Transcodage audio](#transcodage-audio)
   - [Mise à jour du firmware](#mise-à-jour-du-firmware)
-  - [Formats d'archives pris en charge (Lunii)](#formats-darchives-pris-en-charge-lunii)
+  - [Formats d'archives pris en charge](#formats-darchives-pris-en-charge)
+    - [for Lunii](#for-lunii)
+    - [for Flam](#for-flam)
   - [Python ? Guide Pratique](#python--guide-pratique)
     - [Préparation de l'environnement](#préparation-de-lenvironnement)
     - [Génération des UI](#génération-des-ui)
@@ -53,9 +56,10 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 
 ## Interface Utilisateur
 
-<img src="./res/screenshot_about.png" width="450">   
-<img src="./res/screenshot_main.png" width="600">  
-<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300">  
+<img src="./res/screenshot_about.png" width="450"><br> 
+
+<img src="./res/screenshot_main.png" width="600"><br>  
+<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300"><br>  
 <img src="./res/screenshot_debug.png" width="600"> 
 
 ### Fenêtre principale
@@ -110,6 +114,7 @@ Oubliez toutes les anciennes manipulations concernant les fichiers .md et le fir
 |                |                                                     |
 | `Ctrl+O`       | Ouvre le dossier d'une Lunii/Flamm                  |
 | `Ctrl+L`       | Ouvre la fenêtre de debug                           |
+| `Ctrl+Q`       | Fermer l'application                                |
 | `F1`           | À propos de l'application                           |
 | `F5`           | Réactualise les appareils                           |
 
@@ -240,17 +245,30 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
  |- update-comm.enc
  |- ... (other files)
 ```
-7. Éteindre, rallumer, attendre : **TADA**  
+7. Créer un fichier vide `cable_update_complete` dans /tmp
+```
+- 
+ |- etc/
+ |- str/
+ |- .mdf
+ |- update-main.enc
+ |- update-comm.enc
+ |- tmp/
+   |- cable_update_complete
+ |- ... (other files)
+```
+8. Éteindre, rallumer, attendre : **TADA**  
    (si vous reconnectez votre lunii sur votre pc, les `*.enc` devraient avoir été supprimés)
-      
    
-## Formats d'archives pris en charge (Lunii)
-**NOTE :** Les histoires Flam ne sont pas encore supportées
-### .plain.pk
+## Formats d'archives pris en charge
+### pour Lunii
+#### .plain.pk
 **Filename** :  `story_name.8B_UUID.plain.pk`  
 **Ciphering** : None / Plain  
 **Structure** :  
 
+      _thumbnail.png
+      _metadata.json
       uuid.bin
       ni
       li.plain
@@ -258,7 +276,8 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       si.plain
       rf/000/XXYYXXYY.bmp
       sf/000/XXYYXXYY.mp3
-### .v1.pk / .v2.pk
+
+#### .v1.pk / .v2.pk
 **Filename** :  
 * `LONG_UUID.v2.pk`  
 * `LONG_UUID.v2.pk`  
@@ -273,7 +292,8 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       00000000000000000000000000000000/si
       00000000000000000000000000000000/rf/000/XXYYXXYY
       00000000000000000000000000000000/sf/000/XXYYXXYY
-### ZIP (old Lunii.QT)
+
+#### ZIP (old Lunii.QT)
 **Filename** :  `8B_UUID - story_name.zip`  
 **Ciphering** : Generic Key  
 **Structure** :  
@@ -286,7 +306,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       rf/000/XXYYXXYY
       sf/000/XXYYXXYY
 
-### ZIP (alternate)
+#### ZIP (alternate)
 **Filename** :  `AGE+] story_title DASHED_UUID.zip`  
 **Ciphering** : Generic Key  
 **Structure** : (same as [.v1.pk / .v2.pk](#v1pk--v2pk))
@@ -298,7 +318,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
       00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
 
-### 7z
+#### 7z
 **Filename** : `AGE+] story_title DASHED_UUID.7z`  
 **Ciphering** : Generic Key  
 **Structure** :  
@@ -310,15 +330,31 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
       00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
 
-### STUdio (ZIP / 7z)
+#### STUdio (ZIP / 7z)
 **Filename** : `AGE+] story_title DASHED_UUID.zip .7z`  
 **Ciphering** : None  
 
 **Structure** :  
 
         assets/
-        stroy.json
+        story.json
         thumbnail.png
+      
+### pour Flam
+**NOTE :** Le format des histoires de la Flam reste inconnu. Seul les sauvegardes personnelles sont supportées
+#### .zip
+**Filename** :  `story_name.8B_UUID.zip`  
+**Ciphering** : Story Key (unknown)  
+**Structure** :  
+      00000000-0000-0000-0000-000000000000/info
+      00000000-0000-0000-0000-000000000000/main.lsf
+      00000000-0000-0000-0000-000000000000/version
+      00000000-0000-0000-0000-000000000000/key
+      00000000-0000-0000-0000-000000000000/img/*.lif
+      00000000-0000-0000-0000-000000000000/img/script/*.lif
+      00000000-0000-0000-0000-000000000000/script/*.lsf
+      00000000-0000-0000-0000-000000000000/sounds/*.mp3
+      00000000-0000-0000-0000-000000000000/sounds/*.mp3map
 
 ## TODO
 * Fichier de configuration pour sauvegarder la configuration du menu (tailles / détails)
@@ -353,6 +389,16 @@ $ apt install libxcb-cursor0
 ### Génération des UI
 ```bash
 $ pyside6-uic pkg/ui/main.ui -o pkg/ui/main_ui.py
+$ pyside6-uic pkg/ui/nm.ui   -o pkg/ui/nm_ui.py
+```
+### Génération des fichiers de tranduction
+```bash
+$ pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py -ts ./locales/fr_FR.ts
+$ pyside6-linguist ./locales/fr_FR.ts  # optionnaly, update translations
+$ pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
+```
+### Génération du fichier de ressource
+```bash
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
 ### Exécution

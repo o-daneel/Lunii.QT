@@ -1,4 +1,4 @@
-:fr: [README en français](README_FR.md) :fr:
+:fr: [README en français](README.md) :fr:
 
 # Lunii.QT
 A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **hide** / **firmware download**   
@@ -15,48 +15,54 @@ Forget about all previous .md and firmware recommendations.
 > **Reminder :** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
 
 ### Hardware supported:
-* **v1, v2**  (full Support)
+* **v1, v2**  (full Support, but export blocked)
 * **v3**  (v6 and v7 md files supported 💪🏻, export requires device key file)  
-* **Flam** (partial support, only reorder and firmware backup)
+* **Flam** (partial support with personal backup, only reorder and firmware backup)
 
 ### Limitations
-* Application <u>no longer</u> allows Official stories to be exported
+* Application <u>no longer</u> allows Lunii Official stories to be exported (due to piracy)  
+  Flam devices <u>can</u> back up and restore their stories, but they will only work on the original device.
 * Audio transcoding requires FFMPEG v6 to be present ([more details](#audio-transcoding))
 
 ### Table of contents
 <!-- TOC -->
-* [Lunii.QT](#luniiqt)
-  * [User Interface](#user-interface)
-  * [Shortcuts](#shortcuts)
-  * [Features](#features)
-  * [Audio Transcoding](#audio-transcoding)
-    * [Installation](#installation)
-    * [Checking](#checking-)
-  * [Firmware upgrade](#firmware-upgrade)
-    * [HowTo - Lunii](#howto---lunii)
-    * [HowTo - Flam](#howto---flam)
-  * [Supported archive formats (Lunii)](#supported-archive-formats-lunii)
-  * [Python ? HowTo](#python--howto)
-  * [Tricks](#tricks)
-    * [macOS - Application Authorization](#macos---application-authorization)
-    * [Third Party story metadata](#third-party-story-metadata)
-    * [Cache management](#cache-management)
-    * [Linux Missing dependencies](#linux-missing-dependencies)
-  * [Credits](#credits)
-* [Links / Similar repos](#links--similar-repos)
+- [Lunii.QT](#luniiqt)
+  - [User Interface](#user-interface)
+    - [Main window](#main-window)
+    - [Night mode](#night-mode)
+  - [Shortcuts](#shortcuts)
+  - [Features](#features)
+  - [Audio Transcoding](#audio-transcoding)
+  - [Firmware upgrade](#firmware-upgrade)
+  - [Supported archive formats (Lunii)](#supported-archive-formats-lunii)
+  - [Python ? HowTo](#python--howto)
+    - [Prepare env](#prepare-env)
+    - [Build UI files](#build-ui-files)
+    - [Build Translation files](#build-translation-files)
+    - [Build UI files](#build-ui-files-1)
+    - [Run](#run)
+    - [Build GUI executable](#build-gui-executable)
+  - [Tricks](#tricks)
+    - [macOS - Application Authorization](#macos---application-authorization)
+    - [Third Party story metadata](#third-party-story-metadata)
+    - [Cache management](#cache-management)
+    - [Linux missing dependencies](#linux-missing-dependencies)
+    - [v3 export](#v3-export)
+    - [ICO creation](#ico-creation)
+  - [Credits](#credits)
+- [Links / Similar repos](#links--similar-repos)
 <!-- TOC -->
 
 
 ## User Interface
 
-<img src="./res/screenshot_about.png" width="450">  
+<img src="./res/screenshot_about.png" width="450"><br>  
+  
+<img src="./res/screenshot_main.png" width="600"><br>    
+<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300"><br>  
+<img src="./res/screenshot_debug.png" width="600"> 
 
- .  
-<img src="./res/screenshot_main.png" width="600">  
-<img src="./res/screenshot_debug.png" width="600">  
-
-
-### Description
+### Main window
 
 <img src="./res/screenshot_interface.png" width="600">  
 
@@ -64,8 +70,9 @@ Forget about all previous .md and firmware recommendations.
    (just get it with Menu About/Update to v2.X.X)
 2. The **location of your Lunii/Flam** when it's connected.   
    The button on the left updates automatic detection.
-3. **Official DB refresh** : Updates the list of stories and related information from the official Lunii Store. Use it when some official are not recognized.
-4. The **list of your stories** with UUID and Database (DB) origin.  
+3. Configuring **Night mode** ([here](#night-mode))
+4. **Official DB refresh** : Updates the list of stories and related information from the official Lunii Store. Use it when some official are not recognized.
+5. The **list of your stories** with UUID and Database (DB) origin.  
    The UUID: This unique identifier allows you to associate stories with their folder on the Lunii, thanks to the last eight characters that make up the name of the folder associated with that story.
 
    * **DB** stands for **Database**. This application supports two different databases
@@ -74,14 +81,22 @@ Forget about all previous .md and firmware recommendations.
      - **T** - **T**hirdparty Database, also known as Unofficial or Custom Stories  
         _(Those metadata can't be fetched. They are completed upon story import)_
 
+6. The 🛏️ icon indicates that **the story supports Night Mode**. You can force this status from the context menu.
 
-5. The **status bar**, you'll find 
+7. **Hidden stories** (the greyed-out entries in the list).  
+   This feature can be activated via the context menu on a story.  
+   It has two uses:  
+   1. Hide certain stories to prevent the child from spending too much time choosing a story at night. This avoids having to delete and copy them again later.  
+   2. Prevent the deletion of unofficial stories during synchronization with the Luniistore application. Hidden stories are still physically present on the device, but will not be visible to Luniistore. Don't forget to "hide" your stories before clicking "synchronize"!
+
+8. The **status bar**, you'll find 
    * your SNU (serial number)
    * the firmware version of your Lunii/Flam
    * the available space  
    * the number of stories it contains
 
-6. **Hidden stories** (greyed items in the list) are still stored on the device, but won't be visible by Luniistore app. That will avoid getting third party stories to be removed during synchronization. Just remember to hide them before hitting sync button !
+### Night mode
+<img src="./res/screenshot_nm_off.png" width="300"><img src="./res/screenshot_nm_on.png" width="300">  
 
 ## Shortcuts
 
@@ -245,13 +260,15 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
 8. Eject USB from Flam device (USB cable must be kept connected) and update process will start : **TADA**  
    (if you reconnect your flam on your pc, the `*.enc` should have been removed)
 
-## Supported archive formats (Lunii)
-**NOTE :** Flam stories are not yet supported
-### .plain.pk
+## Supported archive formats
+### for Lunii
+#### .plain.pk
 **Filename** :  `story_name.8B_UUID.plain.pk`  
 **Ciphering** : None / Plain  
 **Structure** :  
 
+      _thumbnail.png
+      _metadata.json
       uuid.bin
       ni
       li.plain
@@ -259,7 +276,8 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
       si.plain
       rf/000/XXYYXXYY.bmp
       sf/000/XXYYXXYY.mp3
-### .v1.pk / .v2.pk
+
+#### .v1.pk / .v2.pk
 **Filename** :  
 * `LONG_UUID.v2.pk`  
 * `LONG_UUID.v2.pk`  
@@ -274,7 +292,8 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
       00000000000000000000000000000000/si
       00000000000000000000000000000000/rf/000/XXYYXXYY
       00000000000000000000000000000000/sf/000/XXYYXXYY
-### ZIP (old Lunii.QT)
+
+#### ZIP (old Lunii.QT)
 **Filename** :  `8B_UUID - story_name.zip`  
 **Ciphering** : Generic Key  
 **Structure** :  
@@ -287,7 +306,7 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
       rf/000/XXYYXXYY
       sf/000/XXYYXXYY
 
-### ZIP (alternate)
+#### ZIP (alternate)
 **Filename** :  `AGE+] story_title DASHED_UUID.zip`  
 **Ciphering** : Generic Key  
 **Structure** : (same as [.v1.pk / .v2.pk](#v1pk--v2pk))
@@ -299,7 +318,7 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
       00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
       00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
 
-### 7z
+#### 7z
 **Filename** : `AGE+] story_title DASHED_UUID.7z`  
 **Ciphering** : Generic Key  
 **Structure** :  
@@ -311,16 +330,31 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
       00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
       00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
 
-### STUdio (ZIP / 7z)
+#### STUdio (ZIP / 7z)
 **Filename** : `AGE+] story_title DASHED_UUID.zip .7z`  
 **Ciphering** : None  
 
 **Structure** :  
 
         assets/
-        stroy.json
+        story.json
         thumbnail.png
-
+      
+### for Flam
+**NOTE :** Le format des histoires de la Flam reste inconnu. Seul les sauvegardes personnelles sont supportées
+#### .zip
+**Filename** :  `story_name.8B_UUID.zip`  
+**Ciphering** : Story Key (unknown)  
+**Structure** :  
+      00000000-0000-0000-0000-000000000000/info
+      00000000-0000-0000-0000-000000000000/main.lsf
+      00000000-0000-0000-0000-000000000000/version
+      00000000-0000-0000-0000-000000000000/key
+      00000000-0000-0000-0000-000000000000/img/*.lif
+      00000000-0000-0000-0000-000000000000/img/script/*.lif
+      00000000-0000-0000-0000-000000000000/script/*.lsf
+      00000000-0000-0000-0000-000000000000/sounds/*.mp3
+      00000000-0000-0000-0000-000000000000/sounds/*.mp3map
 
 ## Python ? HowTo
 
@@ -339,7 +373,7 @@ Switch to your venv
   `.\venv\Scripts\activate.bat`
 
 Install dependencies
-****```
+```
 $ pip install -r requirements.txt
 ```
 
@@ -359,7 +393,7 @@ $ pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/
 $ pyside6-linguist ./locales/fr_FR.ts  # optionnaly, update translations
 $ pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
 ```
-### Build UI files
+### Build resource files
 ```bash
 $ pyside6-rcc resources.qrc -o resources_rc.py
 ```
