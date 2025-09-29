@@ -203,7 +203,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
 
 ### Guide Pratique - Lunii
 1. Sélectionnez une Lunii
-2. Menu **Tools/Get FW Update**
+2. Menu **Outils/Récupérer le firmware**
 3. Vous serez invité à vous connecter  
 <img src="./res/screenshot_login.png" width="170">
 
@@ -226,8 +226,8 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
    
 
 ### Guide Pratique - Flam
-1. Sélectionnez une Lunii
-2. Menu **Tools/Get FW Update**
+1. Sélectionnez votre Flam dans la liste des appareils
+2. Menu **Outils/Récupérer le firmware**
 3. Vous serez invité à vous connecter  
 <img src="./res/screenshot_login.png" width="170">
 
@@ -346,6 +346,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
 **Filename** :  `story_name.8B_UUID.zip`  
 **Ciphering** : Story Key (unknown)  
 **Structure** :  
+
       00000000-0000-0000-0000-000000000000/info
       00000000-0000-0000-0000-000000000000/main.lsf
       00000000-0000-0000-0000-000000000000/version

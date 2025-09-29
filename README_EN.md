@@ -341,11 +341,12 @@ Lunii.QT offers you the possibility to backup and upgrade your Firmware without 
         thumbnail.png
       
 ### for Flam
-**NOTE :** Le format des histoires de la Flam reste inconnu. Seul les sauvegardes personnelles sont supportées
+**NOTE :** The Flam story format is still unknown. Only personal backup are supported.
 #### .zip
 **Filename** :  `story_name.8B_UUID.zip`  
 **Ciphering** : Story Key (unknown)  
 **Structure** :  
+
       00000000-0000-0000-0000-000000000000/info
       00000000-0000-0000-0000-000000000000/main.lsf
       00000000-0000-0000-0000-000000000000/version
