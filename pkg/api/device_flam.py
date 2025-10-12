@@ -37,6 +37,10 @@ class FlamDevice(QtCore.QObject):
         self.fw_comm = "?.?.?"
         self.memory_left = 0
 
+        self.story_key = None
+        self.story_iv = None
+        self.keyfile = b""
+
         self.abort_process = False
 
         # internal device details
@@ -74,14 +78,10 @@ class FlamDevice(QtCore.QObject):
             return False
 
         with open(mdf_path, "rb") as fp_mdf:
-            mdf_version = int.from_bytes(fp_mdf.read(2), 'little')
-
-            if mdf_version == 1:
-                self.__md1_parse(fp_mdf)
-
+            self.__mdf_parse(fp_mdf)
         return True
 
-    def __md1_parse(self, fp_mdf):
+    def __mdf_parse(self, fp_mdf):
         fp_mdf.seek(2)
 
         # parsing firmware versions
@@ -102,12 +102,34 @@ class FlamDevice(QtCore.QObject):
         vid = int.from_bytes(fp_mdf.read(2), 'little')
         pid = int.from_bytes(fp_mdf.read(2), 'little')
 
+        logger = logging.getLogger(LUNII_LOGGER)
+
+        # major v2 use decipher trick
+        if self.fw_main.startswith("1."):
+            fp_mdf.seek(0x4E)
+            self.keyfile = fp_mdf.read(32)
+            self.story_key = binascii.hexlify(self.snu) + b"\x00\x00"
+            self.story_iv  = b"\x00\x00\x00\x00\x00\x00\x00\x00" + binascii.hexlify(self.snu)[:8]
+        else:
+            fp_mdf.seek(0x4E)
+            self.keyfile = binascii.hexlify(self.snu) + b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" + binascii.hexlify(self.snu)[:8]
+            self.story_key = fp_mdf.read(16)
+            self.story_iv = fp_mdf.read(16)
+
+        # checking if md backup file is available 
+        FLAM_MD = os.path.join(CFG_DIR, f"{self.snu_str}.v{self.fw_main}.mdf")
+        if not os.path.isfile(FLAM_MD):
+            logger.log(logging.INFO, f"No backup of v{self.fw_main} metadata file found, creating one...")
+            # creating backup of md file
+            with open(FLAM_MD, "wb") as fp_mdf_bak:
+                fp_mdf.seek(0)
+                fp_mdf_bak.write(fp_mdf.read())
+
         if (vid, pid) == FLAM_USB_VID_PID:
             self.device_version = FLAM_V1
         else:
             self.device_version = UNDEF_DEV
 
-        logger = logging.getLogger(LUNII_LOGGER)
         logger.log(logging.DEBUG, f"\n"
                                        f"SNU : {self.snu_str}\n"
                                        f"HW  : v{self.device_version-(FLAM_V1-1)}\n"
