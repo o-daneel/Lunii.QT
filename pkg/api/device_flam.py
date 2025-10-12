@@ -1,3 +1,4 @@
+import json
 import os.path
 import shutil
 import zipfile
@@ -7,12 +8,15 @@ from uuid import UUID
 
 import psutil
 import py7zr
+
+from Crypto.Cipher import AES
 from PySide6 import QtCore
 
 from pkg.api import stories
+from pkg.api.aes_keys import reverse_bytes
 from pkg.api.constants import *
 from pkg.api.device_lunii import secure_filename
-from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
+from pkg.api.stories import FILE_META, FILE_THUMB, FILE_UUID, StoryList, Story, story_is_studio, story_is_lunii
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -41,6 +45,7 @@ class FlamDevice(QtCore.QObject):
         self.story_iv = None
         self.keyfile = b""
 
+        self.debug_plain = False
         self.abort_process = False
 
         # internal device details
@@ -249,6 +254,101 @@ class FlamDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
+    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
+        # checking offset
+        if offset > len(buffer):
+            offset = len(buffer)
+        # checking len
+        if offset + enc_len > len(buffer):
+            enc_len = len(buffer) - offset
+        # checking padding
+        if enc_len % 16 != 0:
+            padlen = 16 - len(buffer) % 16
+            buffer += b"\x00" * padlen
+            enc_len += padlen
+        # if something to be done
+        if offset < len(buffer) and offset + enc_len <= len(buffer):
+            cipher = AES.new(key, AES.MODE_CBC, iv)
+            ciphered = cipher.encrypt(buffer[offset:enc_len])
+            ba_buffer = bytearray(buffer)
+            ba_buffer[offset:enc_len] = ciphered
+            buffer = bytes(ba_buffer)
+        return buffer
+
+    def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
+        if self.debug_plain:
+            return buffer
+
+        return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+
+    def __get_ciphered_data(self, file, data, endian_swap=False):
+        # FLAM
+        if endian_swap:
+            key = reverse_bytes(self.story_key)
+            iv = reverse_bytes(self.story_iv)
+        else:
+            key = self.story_key
+            iv = self.story_iv
+
+        if file.endswith("ni") or file.endswith("nm"):
+            key = None
+
+        # process file with correct key
+        if key:
+            return self.cipher(data, key, iv)
+
+        return data
+
+    def __get_ciphered_name(self, file: str, studio_ri=False, studio_si=False):
+        file = file.removesuffix('.plain')
+
+        if studio_ri:
+            file = f"rf/000/{file}"
+        if studio_si:
+            file = f"sf/000/{file}"
+
+        file = file.lower().removesuffix('.mp3')
+        file = file.lower().removesuffix('.bmp')
+
+        # upcasing filename
+        bn = os.path.basename(file)
+        if len(bn) >= 8:
+            file = os.path.join(os.path.dirname(file), bn.upper())
+
+        # upcasing uuid dir if present
+        dn = os.path.dirname(file)
+        if len(dn) >= 8:
+            dir_head = file[0:8]
+            if "/" not in dir_head and "\\" not in dir_head:
+                file = dir_head.upper() + file[8:]
+        file = file.replace("\\", "/")
+
+        # self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
+        return file
+
+    def __archive_check_plain(self, story_path):
+        archive_type = TYPE_UNK
+        
+        # trying to guess plain contents
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+
+            if not [entry for entry in zip_contents if entry.lower().endswith(FILE_UUID)]:
+                return TYPE_UNK
+
+            # lua files ?
+            lua_files = [entry for entry in zip_contents if entry.lower().endswith(".lua")]
+            if lua_files:
+                archive_type = TYPE_FLAM_PLAIN
+            
+            # lunii files ?
+            lunii_files = [entry for entry in zip_contents if entry.lower().endswith("i.plain")]
+            if lunii_files:
+                archive_type = TYPE_LUNII_PLAIN
+
+        return archive_type
+
     def import_story(self, story_path):
         archive_type = TYPE_UNK
 
@@ -261,21 +361,148 @@ class FlamDevice(QtCore.QObject):
             return False
 
         # identifying based on filename
-        if story_path.lower().endswith(EXT_ZIP):
-            archive_type = TYPE_FLAM_ZIP
+        if story_path.lower().endswith(EXT_PK_PLAIN):
+            archive_type = self.__archive_check_plain(story_path)
+        elif story_path.lower().endswith(EXT_ZIP):
+            archive_type = TYPE_FLAM_BK_ZIP
         elif story_path.lower().endswith(EXT_7z):
-            archive_type = TYPE_FLAM_7Z
+            archive_type = TYPE_FLAM_BK_7Z
 
         # processing story
-        if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z]:
+        if archive_type in [TYPE_FLAM_BK_ZIP, TYPE_FLAM_BK_7Z, TYPE_FLAM_PLAIN]:
             self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...")
 
-        if archive_type == TYPE_FLAM_ZIP:
+        print(archive_type)
+
+        # processing story
+        if archive_type == TYPE_LUNII_PLAIN:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_PLAIN")
+            return self.import_lunii_plain(story_path)
+        elif archive_type == TYPE_FLAM_PLAIN:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_PLAIN")
+            return self.import_flam_plain(story_path)
+        elif archive_type == TYPE_FLAM_BK_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
             return self.import_flam_zip(story_path)
-        elif archive_type == TYPE_FLAM_7Z:
+        elif archive_type == TYPE_FLAM_BK_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_7Z")
             return self.import_flam_7z(story_path)
+
+        return None
+    
+    def import_lunii_plain(self, story_path):
+        # checking if archive is OK
+        try:
+            with zipfile.ZipFile(file=story_path):
+                pass  # If opening succeeds, the archive is valid
+        except zipfile.BadZipFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+
+        
+        # opening zip file
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+            if FILE_UUID not in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "No UUID file found in archive. Unable to add this story.")
+                return False
+
+            # getting UUID file
+            try:
+                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
+            except ValueError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+
+            # checking if UUID already loaded
+            if str(new_uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
+                return False
+
+            # thirdparty story ?
+            if FILE_META in zip_contents:
+                # creating story entry in thirdparty db
+                meta = zip_file.read(FILE_META)
+                s_meta = json.loads(meta)
+                if s_meta.get("uuid").upper() != str(new_uuid).upper():
+                    return False
+                stories.thirdparty_db_add_story(new_uuid, s_meta.get("title"), s_meta.get("description"))
+            if FILE_THUMB in zip_contents:
+                # creating story picture in cache
+                image_data = zip_file.read(FILE_THUMB)
+                stories.thirdparty_db_add_thumb(new_uuid, image_data)
+
+            # decompressing story contents
+            long_uuid = str(new_uuid).lower()
+            short_uuid = long_uuid[28:]
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{long_uuid}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
+                # skipping .plain.pk specific files 
+                if file in [FILE_UUID, FILE_META, FILE_THUMB]:
+                    continue
+                if file.endswith("bt"):
+                    continue
+
+                # checking zip content
+                info = zip_file.getinfo(file)
+                if info.is_dir():
+                    continue
+
+                # Extract each zip file
+                data_plain = zip_file.read(file)
+
+                # updating filename, and ciphering header if necessary
+                data = self.__get_ciphered_data(file, data_plain, True)
+                file_newname = self.__get_ciphered_name(file)
+
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
+                with open(target, "wb") as f_dst:
+                    f_dst.write(data)
+
+        # keyfile creation
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        bt_path = output_path.joinpath("key")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.keyfile)
+
+        # story creation
+        loaded_story = Story(new_uuid)
+
+        # creating info file creation
+        info_path = output_path.joinpath("info")
+        with open(info_path, "w") as fp_info:
+            fp_info.write(f"{loaded_story.name}\n")
+            fp_info.write(f"{loaded_story.name}\n")
+            fp_info.write("0\n")
+            fp_info.write(f"{loaded_story.name}\n")
+            fp_info.write(loaded_story.author)
+
+        # updating .pi file to add new UUID
+        self.stories.append(loaded_story)
+        self.update_pack_index()
+
+        return True
+
+    def import_flam_plain(self, story_path):
+        pass
 
     def import_flam_zip(self, story_path):
         # checking if archive is OK

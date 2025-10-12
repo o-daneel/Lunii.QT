@@ -13,6 +13,7 @@ from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
+AUTHOR_NOT_FOUND = "No author found."
 
 # https://server-data-prod.lunii.com/v2/packs
 DB_OFFICIAL = {}
@@ -385,6 +386,10 @@ class Story:
                         return desc
 
         return DESC_NOT_FOUND
+
+    @property
+    def author(self):
+        return AUTHOR_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
         image_data = None

@@ -746,15 +746,15 @@ class LuniiDevice(QtCore.QObject):
 
         # identifying based on filename
         if story_path.lower().endswith(EXT_PK_PLAIN):
-            archive_type = TYPE_PLAIN
+            archive_type = TYPE_LUNII_PLAIN
         elif story_path.lower().endswith(EXT_PK_V2):
-            archive_type = TYPE_V2
+            archive_type = TYPE_LUNII_V2
         elif story_path.lower().endswith(EXT_PK_V1):
-            archive_type = TYPE_V2
+            archive_type = TYPE_LUNII_V2
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = TYPE_ZIP
+            archive_type = TYPE_LUNII_ZIP
         elif story_path.lower().endswith(EXT_7z):
-            archive_type = TYPE_7Z
+            archive_type = TYPE_LUNII_7Z
         elif story_path.lower().endswith(EXT_PK_VX):
             # trying to guess version v1/2 or v3 based on bt contents
             with zipfile.ZipFile(file=story_path) as zip_file:
@@ -766,9 +766,9 @@ class LuniiDevice(QtCore.QObject):
                 if bt_files:
                     bt_size = zip_file.getinfo(bt_files[0]).file_size
                     if bt_size == 0x20:
-                        archive_type = TYPE_V3
+                        archive_type = TYPE_LUNII_V3
                     else:
-                        archive_type = TYPE_V2
+                        archive_type = TYPE_LUNII_V2
                 # based on ri
                 elif (any(file.endswith("ri") for file in zip_contents) and
                       any(file.endswith("si") for file in zip_contents) and
@@ -780,14 +780,14 @@ class LuniiDevice(QtCore.QObject):
                     ri_ciphered = zip_file.read(ri_file)
                     ri_plain = self.__v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
                     if ri_plain[:4] == b"000\\":
-                        archive_type = TYPE_V2
+                        archive_type = TYPE_LUNII_V2
                     else:
-                        archive_type = TYPE_V3
+                        archive_type = TYPE_LUNII_V3
                 else:
                     archive_type = TYPE_UNK
 
         # supplementary verification for zip
-        if archive_type == TYPE_ZIP:
+        if archive_type == TYPE_LUNII_ZIP:
             # trying to figure out based on zip contents
             with zipfile.ZipFile(file=story_path) as zip_file:
                 # reading all available files
@@ -797,11 +797,11 @@ class LuniiDevice(QtCore.QObject):
                 if FILE_STUDIO_JSON in zip_contents and any('assets/' in entry for entry in zip_contents):
                     archive_type = TYPE_STUDIO_ZIP
                 elif FILE_UUID in zip_contents:
-                    archive_type = TYPE_ZIP
+                    archive_type = TYPE_LUNII_ZIP
                 else:
-                    archive_type = TYPE_V2
+                    archive_type = TYPE_LUNII_V2
         # supplementary verification for 7z
-        elif archive_type == TYPE_7Z:
+        elif archive_type == TYPE_LUNII_7Z:
             # trying to figure out based on 7z contents
             with py7zr.SevenZipFile(story_path, 'r') as archive:
                 # reading all available files
@@ -812,19 +812,19 @@ class LuniiDevice(QtCore.QObject):
                     archive_type = TYPE_STUDIO_7Z
 
         # processing story
-        if archive_type == TYPE_PLAIN:
+        if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
             return self.import_story_plain(story_path)
-        elif archive_type == TYPE_ZIP:
+        elif archive_type == TYPE_LUNII_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_ZIP")
             return self.import_story_zip(story_path)
-        elif archive_type == TYPE_7Z:
+        elif archive_type == TYPE_LUNII_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_7Z")
             return self.import_story_7z(story_path)
-        elif archive_type == TYPE_V2:
+        elif archive_type == TYPE_LUNII_V2:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2")
             return self.import_story_v2(story_path)
-        elif archive_type == TYPE_V3:
+        elif archive_type == TYPE_LUNII_V3:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V3")
             return self.import_story_v3(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
@@ -898,6 +898,11 @@ class LuniiDevice(QtCore.QObject):
                     continue
                 if file.endswith("nm"):
                     night_mode = True
+
+                # checking zip content
+                info = zip_file.getinfo(file)
+                if info.is_dir():
+                    continue
 
                 # Extract each zip file
                 data_plain = zip_file.read(file)

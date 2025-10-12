@@ -56,17 +56,17 @@ FAH_V2_V3_USB_VID_PID   = (0x0483, 0xa341)
 FLAM_USB_VID_PID        = (0x303A, 0x819E)
 
 
-TYPE_UNK    = 0
-TYPE_PLAIN  = 1
-TYPE_V2     = 2
-TYPE_V3     = 3
-TYPE_ZIP    = 10
-TYPE_7Z     = 11
-TYPE_STUDIO_ZIP = 20
-TYPE_STUDIO_7Z  = 21
-TYPE_FLAM_ZIP   = 30
-TYPE_FLAM_7Z    = 31
-
+TYPE_UNK         = 0    # undefined
+TYPE_LUNII_PLAIN = 0x01 # Lunii plain story
+TYPE_LUNII_V2    = 0x02 # Lunii v2 backup (xxtea)
+TYPE_LUNII_V3    = 0x03 # Lunii v3 backup (aes)
+TYPE_LUNII_ZIP   = 0x10 # Lunii v2 zip 
+TYPE_LUNII_7Z    = 0x11 # Lunii v2 7zip
+TYPE_STUDIO_ZIP  = 0x20 # Studio format
+TYPE_STUDIO_7Z   = 0x21 # Studio format
+TYPE_FLAM_BK_ZIP = 0x40 # Flam backup as zip
+TYPE_FLAM_BK_7Z  = 0x41 # Flam backup as 7z
+TYPE_FLAM_PLAIN  = 0x42 # Flam plain story
 
 EXT_PK_PLAIN = ".plain.pk"
 EXT_PK_V2    = ".v2.pk"
@@ -76,7 +76,7 @@ EXT_ZIP      = ".zip"
 EXT_7z       = ".7z"
 
 LUNII_SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_V1, EXT_PK_V2, EXT_PK_PLAIN, EXT_PK_VX]
-FLAM_SUPPORTED_EXT = [EXT_ZIP, EXT_7z]
+FLAM_SUPPORTED_EXT = [EXT_ZIP, EXT_7z, EXT_PK_PLAIN]
 
 LUNII_CFGPOS_IDLE_TIME      = 0
 LUNII_CFGPOS_LOWBAT_TIME    = 2
