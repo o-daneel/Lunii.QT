@@ -389,6 +389,20 @@ class Story:
 
     @property
     def author(self):
+        one_uuid = str(self.uuid).upper()
+
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            # checking current db
+            if one_uuid in db:
+                if db[one_uuid].get("authors"):
+                    key = list(db[one_uuid]["authors"].keys())[0]
+                    author: str = db[one_uuid]["authors"][key].get("name")
+                    return author
+                else:
+                    author = db[one_uuid].get("author")
+                    if author:
+                        return author
+
         return AUTHOR_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
