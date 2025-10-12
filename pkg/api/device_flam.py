@@ -275,13 +275,29 @@ class FlamDevice(QtCore.QObject):
             buffer = bytes(ba_buffer)
         return buffer
 
+    def decipher(self, buffer, key, iv, offset, dec_len):
+        # checking offset
+        if offset > len(buffer):
+            offset = len(buffer)
+        # checking len
+        if offset + dec_len > len(buffer):
+            dec_len = len(buffer) - offset
+        # if something to be done
+        if offset < len(buffer) and offset + dec_len <= len(buffer):
+            decipher = AES.new(key, AES.MODE_CBC, iv)
+            plain = decipher.decrypt(buffer[offset:dec_len])
+            ba_buffer = bytearray(buffer)
+            ba_buffer[offset:dec_len] = plain
+            buffer = bytes(ba_buffer)
+        return buffer
+    
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
         if self.debug_plain:
             return buffer
 
         return self.__v3_cipher(buffer, key, iv, offset, enc_len)
 
-    def __get_ciphered_data(self, file, data, flam_story):
+    def __get_ciphered_data(self, file, data, flam_story, force=False):
         if not flam_story:
             # LUNII
             key = reverse_bytes(self.story_key)
@@ -292,7 +308,7 @@ class FlamDevice(QtCore.QObject):
         else:
             # FLAM
             key = None
-            if file.endswith(".lua") or file.endswith(".plain"):
+            if file.endswith(".lua") or file.endswith(".plain") or force:
                 key = self.story_key
                 iv = self.story_iv
 
@@ -363,6 +379,24 @@ class FlamDevice(QtCore.QObject):
 
         return archive_type
 
+    def __archive_check_flam_zipcontent(self, story_path):
+        archive_type = TYPE_UNK
+        
+        # trying to guess plain contents
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+
+            # lsf files ?
+            lsf_files = [entry for entry in zip_contents if entry.lower().endswith(".lsf")]
+            if lsf_files:
+                archive_type = TYPE_FLAM_ZIP
+            else:
+                # lunii files ?
+                archive_type = TYPE_LUNII_ZIP
+
+        return archive_type
+
     def import_story(self, story_path):
         archive_type = TYPE_UNK
 
@@ -378,12 +412,12 @@ class FlamDevice(QtCore.QObject):
         if story_path.lower().endswith(EXT_PK_PLAIN):
             archive_type = self.__archive_check_plain(story_path)
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = TYPE_FLAM_BK_ZIP
+            archive_type = self.__archive_check_flam_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7z):
-            archive_type = TYPE_FLAM_BK_7Z
+            archive_type = TYPE_FLAM_7Z
 
         # processing story
-        if archive_type in [TYPE_FLAM_BK_ZIP, TYPE_FLAM_BK_7Z, TYPE_FLAM_PLAIN]:
+        if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN]:
             self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...")
 
         # processing story
@@ -393,12 +427,14 @@ class FlamDevice(QtCore.QObject):
         elif archive_type == TYPE_FLAM_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_PLAIN")
             return self.import_flam_plain(story_path)
-        elif archive_type == TYPE_FLAM_BK_ZIP:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
+        elif archive_type == TYPE_FLAM_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_BK_ZIP")
             return self.import_flam_zip(story_path)
-        elif archive_type == TYPE_FLAM_BK_7Z:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_7Z")
+        elif archive_type == TYPE_FLAM_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_BK_7Z")
             return self.import_flam_7z(story_path)
+        else:
+            self.signal_logger.emit(logging.DEBUG, "Archive => Unsupported type")
 
         return None
     
@@ -617,6 +653,20 @@ class FlamDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.ERROR, f"Archive seems to be made of Lunii story (not compatible with Flam)")
                 return False
 
+            # checking for keyfile
+            storykeys_file = [entry for entry in zip_contents if entry.endswith("bt")]
+            if storykeys_file:
+                self.signal_logger.emit(logging.INFO, "Transciphering Flam story")
+                data = zip_file.read(storykeys_file[0])
+                story_key = data[:16]
+                story_iv = data[16:]
+            else:
+                keyfile = [entry for entry in zip_contents if entry.endswith("key")]
+                if not keyfile:
+                    self.signal_logger.emit(logging.ERROR, "Flam story backup is incomplete, missing key file.")
+                    return False
+                self.signal_logger.emit(logging.INFO, "Restoring Flam story backup")
+
             # getting UUID from path
             uuid_path = Path(zip_contents[0])
             uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
@@ -655,12 +705,21 @@ class FlamDevice(QtCore.QObject):
 
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
 
-                if file.endswith("/"):
+                if zip_file.getinfo(file).is_dir():
                     continue
 
                 # Extract each zip file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file}")
                 data = zip_file.read(file)
+
+                # transcoding if necessary
+                if storykeys_file:
+                    if (file.endswith(".lsf") or file.endswith("info")):
+                        self.signal_logger.emit(logging.DEBUG, f"Transciphering file {file}")
+                        # decipher
+                        data_plain = self.decipher(data, story_key, story_iv, 0, len(data))
+                        # cipher
+                        data = self.__get_ciphered_data(file, data_plain, True, True)
 
                 target: Path = output_path.joinpath(file)
 
@@ -670,6 +729,13 @@ class FlamDevice(QtCore.QObject):
                 # write target file
                 with open(target, "wb") as f_dst:
                     f_dst.write(data)
+
+        # keyfile creation due to transciphering
+        if storykeys_file:
+            self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+            new_keyfile = os.path.join(output_path, str(new_uuid), "key")
+            with open(new_keyfile, "wb") as fp_key:
+                fp_key.write(self.keyfile)
 
         # updating .pi file to add new UUID
         self.stories.append(Story(new_uuid))

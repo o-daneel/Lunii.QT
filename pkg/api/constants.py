@@ -64,8 +64,8 @@ TYPE_LUNII_ZIP   = 0x10 # Lunii v2 zip
 TYPE_LUNII_7Z    = 0x11 # Lunii v2 7zip
 TYPE_STUDIO_ZIP  = 0x20 # Studio format
 TYPE_STUDIO_7Z   = 0x21 # Studio format
-TYPE_FLAM_BK_ZIP = 0x40 # Flam backup as zip
-TYPE_FLAM_BK_7Z  = 0x41 # Flam backup as 7z
+TYPE_FLAM_ZIP    = 0x40 # Flam backup as zip
+TYPE_FLAM_7Z     = 0x41 # Flam backup as 7z
 TYPE_FLAM_PLAIN  = 0x42 # Flam plain story
 
 EXT_PK_PLAIN = ".plain.pk"
