@@ -15,6 +15,7 @@ from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import StoryList, Story, story_is_studio, story_is_lunii
 
 LIB_BASEDIR = "etc/library/"
+LIB_CACHE = "usr/0/library.cache"
 
 
 class FlamDevice(QtCore.QObject):
@@ -116,11 +117,20 @@ class FlamDevice(QtCore.QObject):
 
     def update_pack_index(self):
         lib_path = Path(self.mount_point).joinpath(LIB_BASEDIR)
+
+        # deleting previous files
         list_path = lib_path.joinpath("list")
         list_hidden_path = lib_path.joinpath("list.hidden")
         list_path.unlink(missing_ok=True)
         list_hidden_path.unlink(missing_ok=True)
+        # cleaning library cache
+        lib_cache = lib_path.joinpath(LIB_CACHE)
+        lib_cache.unlink(missing_ok=True)
+        
+        # creating target dir
         lib_path.mkdir(parents=True, exist_ok=True)
+
+        # writing file
         with open(list_path, "w", newline='\n') as fp, open(list_hidden_path, "w", newline='\n') as fp_hidden:
             for story in self.stories:
                 if story.hidden:
