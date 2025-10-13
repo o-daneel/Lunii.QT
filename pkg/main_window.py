@@ -102,6 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # refresh devices
         self.cb_device_refresh()
 
+        # DEBUG : comment out this thread to allow python debug
         # starting thread to fetch version
         self.worker_check_version()
 

@@ -762,6 +762,27 @@ class FlamDevice(QtCore.QObject):
 
             # reading all available files
             zip_contents = zip.list()
+
+            # checking for keyfile
+            storykeys_file = [entry for entry in zip_contents if entry.filename.endswith("bt")]
+            if storykeys_file:
+                self.signal_logger.emit(logging.INFO, "Transciphering Flam story")
+                dict = zip.read([storykeys_file[0].filename])
+                data = dict[storykeys_file[0].filename].read()
+                story_key = data[:16]
+                story_iv = data[16:]
+            else:
+                keyfile = [entry for entry in zip_contents if entry.filename.endswith("key")]
+                if not keyfile:
+                    self.signal_logger.emit(logging.ERROR, "Flam story backup is incomplete, missing key file.")
+                    return False
+                self.signal_logger.emit(logging.INFO, "Restoring Flam story backup")
+
+        # reopening zip file (SevenZip must work sequentially)
+        with py7zr.SevenZipFile(story_path, mode='r') as zip:
+            # reading all available files
+            zip_contents = zip.list()
+
             # getting UUID from path
             uuid_path = Path(zip_contents[0].filename)
             uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
@@ -794,6 +815,7 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.INFO, "Reading 7zip archive... (takes time)")
             contents = zip.readall().items()
             for index, (fname, bio) in enumerate(contents):
+
                 # abort requested ? early exit
                 if self.abort_process:
                     self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
@@ -802,11 +824,19 @@ class FlamDevice(QtCore.QObject):
 
                 self.signal_story_progress.emit(short_uuid, index, len(contents))
 
-                if zip_contents[index].is_directory:
-                    continue
-
                 # Extract each zip file
+                data = bio.read()
+
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {fname}")
+
+                # transcoding if necessary
+                if storykeys_file:
+                    if (fname.endswith(".lsf") or fname.endswith("info")):
+                        self.signal_logger.emit(logging.DEBUG, f"Transciphering file {fname}")
+                        # decipher
+                        data_plain = self.decipher(data, story_key, story_iv, 0, len(data))
+                        # cipher
+                        data = self.__get_ciphered_data(fname, data_plain, True, True)
 
                 target: Path = output_path.joinpath(fname)
 
@@ -815,7 +845,14 @@ class FlamDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 with open(target, "wb") as f_dst:
-                    f_dst.write(bio.read())
+                    f_dst.write(data)
+
+        # keyfile creation due to transciphering
+        if storykeys_file:
+            self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+            new_keyfile = os.path.join(output_path, str(new_uuid), "key")
+            with open(new_keyfile, "wb") as fp_key:
+                fp_key.write(self.keyfile)
 
         # updating .pi file to add new UUID
         self.stories.append(Story(new_uuid))
