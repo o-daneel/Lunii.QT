@@ -16,7 +16,7 @@ from pkg.api import stories
 from pkg.api.aes_keys import reverse_bytes
 from pkg.api.constants import *
 from pkg.api.device_lunii import secure_filename
-from pkg.api.stories import FILE_META, FILE_THUMB, FILE_UUID, StoryList, Story, story_is_studio, story_is_lunii
+from pkg.api.stories import FILE_META, FILE_THUMB, FILE_UUID, StoryList, Story, story_is_flam, story_is_flam_plain, story_is_lunii_plain, story_is_plain, story_is_studio, story_is_lunii
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -364,17 +364,14 @@ class FlamDevice(QtCore.QObject):
             # reading all available files
             zip_contents = zip_file.namelist()
 
-            if not [entry for entry in zip_contents if entry.lower().endswith(FILE_UUID)]:
+            if not story_is_plain(zip_contents):
                 return TYPE_UNK
 
             # lua files ?
-            lua_files = [entry for entry in zip_contents if entry.lower().endswith(".lua")]
-            if lua_files:
+            if story_is_flam_plain(zip_contents):
                 archive_type = TYPE_FLAM_PLAIN
-            
             # lunii files ?
-            lunii_files = [entry for entry in zip_contents if entry.lower().endswith("i.plain")]
-            if lunii_files:
+            elif story_is_lunii_plain(zip_contents):
                 archive_type = TYPE_LUNII_PLAIN
 
         return archive_type
@@ -388,12 +385,34 @@ class FlamDevice(QtCore.QObject):
             zip_contents = zip_file.namelist()
 
             # lsf files ?
-            lsf_files = [entry for entry in zip_contents if entry.lower().endswith(".lsf")]
-            if lsf_files:
+            if story_is_flam(zip_contents):
                 archive_type = TYPE_FLAM_ZIP
-            else:
-                # lunii files ?
+            # lunii files ?
+            elif story_is_lunii(zip_contents):
                 archive_type = TYPE_LUNII_ZIP
+            # studio files ?
+            elif story_is_studio(zip_contents):
+                archive_type = TYPE_STUDIO_ZIP
+
+        return archive_type
+
+    def __archive_check_flam_7zcontent(self, story_path):
+        archive_type = TYPE_UNK
+        
+        # opening zip file
+        with py7zr.SevenZipFile(story_path, mode='r') as zip:
+            # reading all available files
+            zip_contents = zip.getnames()
+
+            # lsf files ?
+            if story_is_flam(zip_contents):
+                archive_type = TYPE_FLAM_7Z
+            # lunii files ?
+            elif story_is_lunii(zip_contents):
+                archive_type = TYPE_LUNII_7Z
+            # studio files ?
+            elif story_is_studio(zip_contents):
+                archive_type = TYPE_STUDIO_7Z
 
         return archive_type
 
@@ -414,7 +433,7 @@ class FlamDevice(QtCore.QObject):
         elif story_path.lower().endswith(EXT_ZIP):
             archive_type = self.__archive_check_flam_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7z):
-            archive_type = TYPE_FLAM_7Z
+            archive_type = self.__archive_check_flam_7zcontent(story_path)
 
         # processing story
         if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN]:
@@ -428,11 +447,27 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_PLAIN")
             return self.import_flam_plain(story_path)
         elif archive_type == TYPE_FLAM_ZIP:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_BK_ZIP")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_ZIP")
             return self.import_flam_zip(story_path)
         elif archive_type == TYPE_FLAM_7Z:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_BK_7Z")
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_7Z")
             return self.import_flam_7z(story_path)
+        elif archive_type == TYPE_LUNII_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_ZIP")
+            return None
+            # return self.import_lunii_zip(story_path)
+        elif archive_type == TYPE_LUNII_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_7Z")
+            return None
+            # return self.import_lunii_7z(story_path)
+        elif archive_type == TYPE_STUDIO_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
+            return None
+            # return self.import_story_studio_zip(story_path)
+        elif archive_type == TYPE_STUDIO_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
+            return None
+            # return self.import_story_studio_7z(story_path)
         else:
             self.signal_logger.emit(logging.DEBUG, "Archive => Unsupported type")
 

@@ -501,7 +501,18 @@ def story_is_studio(contents):
 
     return False
 
+def story_is_plain(contents):
+    return all(any(file.lower().endswith(pattern) for file in contents) for pattern in [FILE_UUID])
+
+def story_is_flam(contents):
+    return all(any(file.lower().endswith(pattern) for file in contents) for pattern in [".lsf"])
+
+def story_is_flam_plain(contents):
+    return all(any(file.lower().endswith(pattern) for file in contents) for pattern in [".lua"])
+
 
 def story_is_lunii(contents):
-    return all(any(file.endswith(pattern) for file in contents) for pattern in ["ri", "si", "li", "ni"])
+    return all(any(file.lower().endswith(pattern) for file in contents) for pattern in ["ri", "si", "li", "ni"])
 
+def story_is_lunii_plain(contents):
+    return all(any(file.lower().endswith(pattern) for file in contents) for pattern in ["ri.plain", "si.plain", "li.plain"])
