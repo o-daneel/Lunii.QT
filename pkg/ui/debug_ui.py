@@ -27,10 +27,16 @@ class QTextEditHandler(logging.Handler):
         self.text_edit.filter = ""
 
     def emit(self, record):
-        msg = self.format(record)
+        msg = '\n' + self.format(record)
 
+        # special process for progression message
+        lines = self.text_edit.full_log.split('\n')
+        if lines[-1].startswith("[INFO] Progress"):
+            self.text_edit.full_log = '\n'.join(lines[:-1]) + msg
+        else:
+            self.text_edit.full_log += msg
         # saving in internal buffer
-        self.text_edit.full_log += msg + "\n"
+        # self.text_edit.full_log += "\n"
         # filtering
         log = filter_log(self.text_edit.full_log, self.text_edit.filter)
         # showing
