@@ -15,8 +15,10 @@ from PySide6 import QtCore
 from pkg.api import stories
 from pkg.api.aes_keys import reverse_bytes
 from pkg.api.constants import *
+from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_required, transcoding_required
+from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.device_lunii import secure_filename
-from pkg.api.stories import FILE_META, FILE_THUMB, FILE_UUID, StoryList, Story, story_is_flam, story_is_flam_plain, story_is_lunii_plain, story_is_plain, story_is_studio, story_is_lunii
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, story_is_flam, story_is_flam_plain, story_is_lunii_plain, story_is_plain, story_is_studio, story_is_lunii
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -462,12 +464,10 @@ class FlamDevice(QtCore.QObject):
             # return self.import_lunii_7z(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
-            return None
-            # return self.import_story_studio_zip(story_path)
+            return self.import_story_studio_zip(story_path)
         elif archive_type == TYPE_STUDIO_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
-            return None
-            # return self.import_story_studio_7z(story_path)
+            return self.import_story_studio_7z(story_path)
         else:
             self.signal_logger.emit(logging.DEBUG, "Archive => Unsupported type")
 
@@ -894,6 +894,305 @@ class FlamDevice(QtCore.QObject):
         self.update_pack_index()
 
         return True
+
+    def import_story_studio_zip(self, story_path):
+        # checking if archive is OK
+        try:
+            with zipfile.ZipFile(file=story_path):
+                pass  # If opening succeeds, the archive is valid
+        except zipfile.BadZipFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+        
+        # opening zip file
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+            if FILE_UUID in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "plain.pk format detected ! Unable to add this story.")
+                return False
+            if FILE_STUDIO_JSON not in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "missing 'story.json'. Unable to add this story.")
+                return False
+
+            # getting UUID file
+            try:
+                story_json = json.loads(zip_file.read(FILE_STUDIO_JSON))
+            except ValueError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+
+            one_story = StudioStory(story_json)
+            if not one_story.compatible:
+                self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                return False
+
+            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
+            # checking if UUID already loaded
+            if str(one_story.uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
+                return False
+
+            # decompressing story contents
+            long_uuid = str(one_story.uuid).lower()
+            short_uuid = one_story.short_uuid
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{long_uuid}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(one_story.uuid)
+                    return False
+
+                if zip_file.getinfo(file).is_dir():
+                    continue
+                if file.endswith(FILE_STUDIO_JSON):
+                    continue
+                if file.endswith(FILE_STUDIO_THUMB):
+                    # adding thumb to DB
+                    data = zip_file.read(file)
+                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    continue
+                if not file.startswith("assets"):
+                    continue
+
+                # Extract each zip file
+                data = zip_file.read(file)
+
+                # stripping extra "assets/" chars
+                file = file[7:]
+                if file in one_story.ri:
+                    file_newname = self.__get_lunii_ciphered_name(one_story.ri[file][0], studio_ri=True)
+                    # transcode image if necessary
+                    data = image_to_bitmap_rle4(data)
+                elif file in one_story.si:
+                    file_newname = self.__get_lunii_ciphered_name(one_story.si[file][0], studio_si=True)
+                    # transcode audio if necessary
+                    if transcoding_required(file, data):
+                        if not STORY_TRANSCODING_SUPPORTED:
+                            self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                            return False
+
+                        self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
+                        # len_before = len(data)//1024
+                        data = audio_to_mp3(data)
+                        # print(f"Transcoded from {len_before:4}KB to {len(data)//1024:4}KB")
+                    # removing tags if necessary
+                    if tags_removal_required(data):
+                        self.signal_logger.emit(logging.WARN, f"⌛ Removing tags from audio {file_newname}")
+                        data = mp3_tag_cleanup(data)
+
+                else:
+                    # unexpected file, skipping
+                    continue
+
+                # updating filename, and ciphering header if necessary
+                data_ciphered = self.__get_ciphered_data(file, data, False)
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
+                with open(target, "wb") as f_dst:
+                    f_dst.write(data_ciphered)
+
+        # creating lunii index files : ri
+        ri_data = one_story.get_ri_data()
+        self.__write(ri_data, output_path, "ri")
+
+        # creating lunii index files : si, ni, li
+        self.__write(one_story.get_si_data(), output_path, "si")
+        self.__write(one_story.get_li_data(), output_path, "li")
+        self.__write(one_story.get_ni_data(), output_path, "ni")
+
+        # creating authorization file : bt
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        bt_path = output_path.joinpath("bt")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.keyfile)
+
+        # creating night mode file
+        if one_story.nm:
+            self.signal_logger.emit(logging.INFO, "Night mode file creation...")
+            # creating empty nm file
+            with open(output_path.joinpath("nm"), "wb") as fp_nm:
+                pass
+                
+        # creating info file creation
+        info_path = output_path.joinpath("info")
+        with open(info_path, "w") as fp_info:
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write("0\n")
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write(one_story.author)
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
+        self.update_pack_index()
+
+        return True
+
+    def import_story_studio_7z(self, story_path):
+        # checking if archive is OK
+        try:
+            with py7zr.SevenZipFile(story_path, mode='r'):
+                pass  # If opening succeeds, the archive is valid
+        except py7zr.exceptions.Bad7zFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+
+        # opening zip file
+        with py7zr.SevenZipFile(story_path, mode='r') as zip:
+            # reading all available files
+            zip_contents = zip.readall()
+            if FILE_UUID in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "plain.pk format detected ! Unable to add this story.")
+                return False
+            if FILE_STUDIO_JSON not in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "missing 'story.json'. Unable to add this story.")
+                return False
+  
+            # getting UUID file
+            try:
+                story_json = json.loads(zip_contents[FILE_STUDIO_JSON].read())
+            except ValueError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+
+            one_story = StudioStory(story_json)
+            if not one_story.compatible:
+                self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                return False
+
+            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
+            # checking if UUID already loaded
+            if str(one_story.uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
+                return False
+
+            # decompressing story contents
+            long_uuid = str(one_story.uuid).lower()
+            short_uuid = one_story.short_uuid
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{long_uuid}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            contents = zip_contents.items()
+            for index, (fname, bio) in enumerate(contents):
+                self.signal_story_progress.emit(short_uuid, index, len(contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(one_story.uuid)
+                    return False
+
+                if fname.endswith(FILE_STUDIO_JSON):
+                    continue
+                if fname.endswith(FILE_STUDIO_THUMB):
+                    # adding thumb to DB
+                    data = bio.read()
+                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    continue
+                if not fname.startswith("assets"):
+                    continue
+
+                # Extract each zip file
+                data = bio.read()
+
+                # stripping extra "assets/" chars
+                fname = fname[7:]
+                if fname in one_story.ri:
+                    file_newname = self.__get_lunii_ciphered_name(one_story.ri[fname][0], studio_ri=True)
+                    # transcode image if necessary
+                    data = image_to_bitmap_rle4(data)
+                elif fname in one_story.si:
+                    file_newname = self.__get_lunii_ciphered_name(one_story.si[fname][0], studio_si=True)
+                    # transcode audio if necessary
+                    if transcoding_required(fname, data):
+                        if not STORY_TRANSCODING_SUPPORTED:
+                            self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
+                            return False
+
+                        self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
+                        data = audio_to_mp3(data)
+                else:
+                    # unexpected file, skipping
+                    continue
+
+                # updating filename, and ciphering header if necessary
+                data_ciphered = self.__get_ciphered_data(fname, data, False)
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
+
+                block_size = 50 * 1024  # 50KB
+                total_size = len(data_ciphered)
+                written = 0
+                with open(target, "wb") as f_dst:
+                    while written < total_size:
+                        chunk = data_ciphered[written:written + block_size]
+                        f_dst.write(chunk)
+                        written += len(chunk)
+                        self.signal_logger.emit(logging.INFO, f"Progress {written//1024}/{total_size//1024}KB to {file_newname}")
+
+        # creating lunii index files : ri
+        ri_data = one_story.get_ri_data()
+        self.__write(ri_data, output_path, "ri")
+
+        # creating lunii index files : si, ni, li
+        self.__write(one_story.get_si_data(), output_path, "si")
+        self.__write(one_story.get_li_data(), output_path, "li")
+        self.__write(one_story.get_ni_data(), output_path, "ni")
+
+        # creating authorization file : bt
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        bt_path = output_path.joinpath("bt")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.keyfile)
+
+        # creating night mode file
+        if one_story.nm:
+            self.signal_logger.emit(logging.INFO, "Night mode file creation...")
+            # creating empty nm file
+            with open(output_path.joinpath("nm"), "wb") as fp_nm:
+                pass
+                
+        # creating info file creation
+        info_path = output_path.joinpath("info")
+        with open(info_path, "w") as fp_info:
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write("0\n")
+            fp_info.write(f"{one_story.name}\n")
+            fp_info.write(one_story.author)
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
+        self.update_pack_index()
+
+        return True
+
+    def __write(self, data_plain, output_path, file):
+        path_file = os.path.join(output_path, file)
+        with open(path_file, "wb") as fp:
+            data = self.__get_ciphered_data(path_file, data_plain, False)
+            # data =  data_plain
+            fp.write(data)
 
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
