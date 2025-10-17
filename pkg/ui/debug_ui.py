@@ -31,7 +31,7 @@ class QTextEditHandler(logging.Handler):
 
         # special process for progression message
         lines = self.text_edit.full_log.split('\n')
-        if lines[-1].startswith("[INFO] Progress"):
+        if lines[-1].startswith("[DEBUG] Progress"):
             self.text_edit.full_log = '\n'.join(lines[:-1]) + msg
         else:
             self.text_edit.full_log += msg
