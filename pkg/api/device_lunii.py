@@ -1338,7 +1338,9 @@ class LuniiDevice(QtCore.QObject):
 
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
                         # len_before = len(data)//1024
+                        self.signal_file_progress.emit(f"⌛ FFMPEG", 0, 0)
                         data = audio_to_mp3(data)
+                        self.signal_file_progress.emit(f"", 0, 0)
                         # print(f"Transcoded from {len_before:4}KB to {len(data)//1024:4}KB")
                     # removing tags if necessary
                     if tags_removal_required(data):
@@ -1475,7 +1477,10 @@ class LuniiDevice(QtCore.QObject):
                             return False
 
                         self.signal_logger.emit(logging.WARN, f"⌛ Transcoding audio {file_newname} : {len(data)//1024:4} KB ...")
+                        self.signal_file_progress.emit(f"⌛ FFMPEG", 0, 0)
                         data = audio_to_mp3(data)
+                        self.signal_file_progress.emit(f"", 0, 0)
+
                 else:
                     # unexpected file, skipping
                     continue

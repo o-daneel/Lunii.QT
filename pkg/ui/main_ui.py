@@ -316,8 +316,8 @@ class Ui_MainWindow(object):
 
         self.pbar_total = QProgressBar(self.centralwidget)
         self.pbar_total.setObjectName(u"pbar_total")
-        self.pbar_total.setMaximumSize(QSize(16777215, 15))
-        self.pbar_total.setValue(24)
+        self.pbar_total.setMaximumSize(QSize(16777215, 10))
+        self.pbar_total.setValue(12)
         self.pbar_total.setTextVisible(False)
 
         self.totalLayout.addWidget(self.pbar_total)
@@ -353,7 +353,8 @@ class Ui_MainWindow(object):
         self.pbar_file.setObjectName(u"pbar_file")
         self.pbar_file.setMaximumSize(QSize(16777215, 6))
         self.pbar_file.setBaseSize(QSize(0, 0))
-        self.pbar_file.setValue(24)
+        self.pbar_file.setStyleSheet(u"QProgressBar::chunk { background-color: #6c6c6c; }")
+        self.pbar_file.setValue(48)
         self.pbar_file.setTextVisible(False)
 
         self.verticalLayout.addWidget(self.pbar_file)

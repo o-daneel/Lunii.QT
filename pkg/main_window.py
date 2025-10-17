@@ -1302,9 +1302,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lbl_story.setVisible(True)
         self.lbl_story.setText(speed)
 
-        self.pbar_file.setVisible(True)
-        self.pbar_file.setRange(0, file_max_val)
-        self.pbar_file.setValue(file_current if file_current < file_max_val else 0)
+        if file_max_val:
+            self.pbar_file.setVisible(True)
+            self.pbar_file.setRange(0, file_max_val)
+            self.pbar_file.setValue(file_current if file_current < file_max_val else 0)
+        else:
+            self.pbar_file.setVisible(False)
 
         
     def slot_finished(self):
@@ -1320,6 +1323,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+        self.pbar_file.setVisible(False)
         self.btn_abort.setVisible(False)
 
         try:

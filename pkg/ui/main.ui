@@ -388,14 +388,14 @@
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>15</height>
+              <height>10</height>
              </size>
             </property>
             <property name="toolTip">
              <string>Operation progress</string>
             </property>
             <property name="value">
-             <number>24</number>
+             <number>12</number>
             </property>
             <property name="textVisible">
              <bool>false</bool>
@@ -475,8 +475,11 @@
               <property name="toolTip">
                <string>File progress</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QProgressBar::chunk { background-color: #6c6c6c; }</string>
+              </property>
               <property name="value">
-               <number>24</number>
+               <number>48</number>
               </property>
               <property name="textVisible">
                <bool>false</bool>
