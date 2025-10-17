@@ -98,7 +98,14 @@ class ierWorker(QObject):
             ts_start = time.time()
             if self.audio_device.import_story(file):
                 ts_end = time.time()
-                self.signal_message.emit(self.tr("Time to import : {}s").format(round(ts_end-ts_start, 3)))
+                duration = ts_end - ts_start
+                if duration > 120:
+                    minutes = int(duration // 60)
+                    seconds = int(duration % 60)
+                    time_msg = "{} min {} s".format(minutes, seconds)
+                else:
+                    time_msg = "{} s".format(seconds)
+                self.signal_message.emit(self.tr("Time to import : {}").format(time_msg))
                 self.signal_message.emit(self.tr("👍 New story imported : '{}'").format(file))
                 success += 1
             else:

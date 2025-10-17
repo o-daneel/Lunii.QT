@@ -1,6 +1,7 @@
 import json
 import os.path
 import shutil
+import time
 import zipfile
 import binascii
 import logging
@@ -11,6 +12,8 @@ import py7zr
 
 from Crypto.Cipher import AES
 from PySide6 import QtCore
+
+from unidecode import unidecode
 
 from pkg.api import stories
 from pkg.api.aes_keys import reverse_bytes
@@ -153,7 +156,7 @@ class FlamDevice(QtCore.QObject):
         list_path.unlink(missing_ok=True)
         list_hidden_path.unlink(missing_ok=True)
         # cleaning library cache
-        lib_cache = lib_path.joinpath(LIB_CACHE)
+        lib_cache = Path(self.mount_point).joinpath(LIB_CACHE)
         lib_cache.unlink(missing_ok=True)
         
         # creating target dir
@@ -557,8 +560,7 @@ class FlamDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
         # keyfile creation
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
@@ -570,13 +572,7 @@ class FlamDevice(QtCore.QObject):
         loaded_story = Story(new_uuid)
 
         # creating info file creation
-        info_path = output_path.joinpath("info")
-        with open(info_path, "w") as fp_info:
-            fp_info.write(f"{loaded_story.name}\n")
-            fp_info.write(f"{loaded_story.name}\n")
-            fp_info.write("0\n")
-            fp_info.write(f"{loaded_story.name}\n")
-            fp_info.write(loaded_story.author)
+        self.__write_info(loaded_story, output_path)
 
         # updating .pi file to add new UUID
         self.stories.append(loaded_story)
@@ -652,14 +648,13 @@ class FlamDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
         # keyfile creation
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
-        bt_path = output_path.joinpath("key")
-        with open(bt_path, "wb") as fp_bt:
-            fp_bt.write(self.keyfile)
+        key_path = output_path.joinpath("key")
+        with open(key_path, "wb") as fp_key:
+            fp_key.write(self.keyfile)
 
         # story creation
         loaded_story = Story(new_uuid)
@@ -762,8 +757,7 @@ class FlamDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
         # keyfile creation due to transciphering
         if storykeys_file:
@@ -879,8 +873,7 @@ class FlamDevice(QtCore.QObject):
                 if not target.parent.exists():
                     target.parent.mkdir(parents=True)
                 # write target file
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
         # keyfile creation due to transciphering
         if storykeys_file:
@@ -1001,8 +994,7 @@ class FlamDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data_ciphered)
+                self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
         ri_data = one_story.get_ri_data()
@@ -1013,11 +1005,11 @@ class FlamDevice(QtCore.QObject):
         self.__write(one_story.get_li_data(), output_path, "li")
         self.__write(one_story.get_ni_data(), output_path, "ni")
 
-        # creating authorization file : bt
+        # creating authorization file : key
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
-        bt_path = output_path.joinpath("bt")
-        with open(bt_path, "wb") as fp_bt:
-            fp_bt.write(self.keyfile)
+        key_path = output_path.joinpath("key")
+        with open(key_path, "wb") as fp_key:
+            fp_key.write(self.keyfile)
 
         # creating night mode file
         if one_story.nm:
@@ -1027,13 +1019,7 @@ class FlamDevice(QtCore.QObject):
                 pass
                 
         # creating info file creation
-        info_path = output_path.joinpath("info")
-        with open(info_path, "w") as fp_info:
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write("0\n")
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write(one_story.author)
+        self.__write_info(one_story, output_path)
 
         # updating .pi file to add new UUID
         self.stories.append(Story(one_story.uuid, nm = one_story.nm))
@@ -1139,16 +1125,7 @@ class FlamDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
-
-                block_size = 50 * 1024  # 50KB
-                total_size = len(data_ciphered)
-                written = 0
-                with open(target, "wb") as f_dst:
-                    while written < total_size:
-                        chunk = data_ciphered[written:written + block_size]
-                        f_dst.write(chunk)
-                        written += len(chunk)
-                        self.signal_logger.emit(logging.INFO, f"Progress {written//1024}/{total_size//1024}KB to {file_newname}")
+                self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
         ri_data = one_story.get_ri_data()
@@ -1159,11 +1136,11 @@ class FlamDevice(QtCore.QObject):
         self.__write(one_story.get_li_data(), output_path, "li")
         self.__write(one_story.get_ni_data(), output_path, "ni")
 
-        # creating authorization file : bt
+        # creating authorization file : key
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
-        bt_path = output_path.joinpath("bt")
-        with open(bt_path, "wb") as fp_bt:
-            fp_bt.write(self.keyfile)
+        key_path = output_path.joinpath("key")
+        with open(key_path, "wb") as fp_key:
+            fp_key.write(self.keyfile)
 
         # creating night mode file
         if one_story.nm:
@@ -1173,13 +1150,7 @@ class FlamDevice(QtCore.QObject):
                 pass
                 
         # creating info file creation
-        info_path = output_path.joinpath("info")
-        with open(info_path, "w") as fp_info:
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write("0\n")
-            fp_info.write(f"{one_story.name}\n")
-            fp_info.write(one_story.author)
+        self.__write_info(one_story, output_path)
 
         # updating .pi file to add new UUID
         self.stories.append(Story(one_story.uuid, nm = one_story.nm))
@@ -1187,12 +1158,50 @@ class FlamDevice(QtCore.QObject):
 
         return True
 
+    def __write_info(self, one_story, output_path):
+        info_path = output_path.joinpath("info")
+
+        story_name = unidecode(one_story.name)
+        story_author = unidecode(one_story.author)
+
+        with open(info_path, "w") as fp_info:
+            fp_info.write(f"{story_name}\n")
+            fp_info.write(f"{story_name}\n")
+            fp_info.write("0\n")
+            fp_info.write(f"{story_name}\n")
+            fp_info.write(story_author)
+
     def __write(self, data_plain, output_path, file):
         path_file = os.path.join(output_path, file)
         with open(path_file, "wb") as fp:
             data = self.__get_ciphered_data(path_file, data_plain, False)
             # data =  data_plain
             fp.write(data)
+
+    def __write_with_progress(self, target, data):
+        block_size = 10 * 1024  # 50KB
+        total_size = len(data)
+        written = 0
+        start_time = last_emit = time.time()
+        last_written = 0
+
+        fname = os.path.basename(target)
+
+        with open(target, "wb") as f_dst:
+            while written < total_size:
+                chunk = data[written:written + block_size]
+                f_dst.write(chunk)
+                written += len(chunk)
+                now = time.time()
+                if now - last_emit >= 1 or written == total_size:
+                    elapsed = now - last_emit
+                    speed = (written - last_written) / elapsed if elapsed > 0 else 0
+                    self.signal_logger.emit(
+                        logging.INFO,
+                        f"Progress on {fname} - {written:,} / {total_size:,} Bytes ({speed/1024:,.2f} KB/s)"
+                    )
+                    last_emit = now
+                    last_written = written
 
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
