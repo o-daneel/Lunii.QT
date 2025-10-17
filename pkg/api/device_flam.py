@@ -31,6 +31,7 @@ class FlamDevice(QtCore.QObject):
     STORIES_BASEDIR = "str/"
 
     signal_story_progress = QtCore.Signal(str, int, int)
+    signal_file_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
 
@@ -1179,7 +1180,9 @@ class FlamDevice(QtCore.QObject):
             fp.write(data)
 
     def __write_with_progress(self, target, data):
-        block_size = 10 * 1024  # 50KB
+        time_span_s = 0.250
+        block_size = 10 * 1024  # 10KB
+
         total_size = len(data)
         written = 0
         start_time = last_emit = time.time()
@@ -1193,12 +1196,14 @@ class FlamDevice(QtCore.QObject):
                 f_dst.write(chunk)
                 written += len(chunk)
                 now = time.time()
-                if now - last_emit >= 1 or written == total_size:
+                if now - last_emit >= time_span_s or written == total_size:
                     elapsed = now - last_emit
-                    speed = (written - last_written) / elapsed if elapsed > 0 else 0
+                    speed = ((written - last_written) / elapsed) // 1024 if elapsed > 0 else 0
+
+                    self.signal_file_progress.emit(f"{speed:,} KB/s", written, total_size)
                     self.signal_logger.emit(
-                        logging.INFO,
-                        f"Progress on {fname} - {written:,} / {total_size:,} Bytes ({speed/1024:,.2f} KB/s)"
+                        logging.DEBUG,
+                        f"Progress on {fname} - {written:,} / {total_size:,} Bytes ( {speed:,} KB/s )"
                     )
                     last_emit = now
                     last_written = written

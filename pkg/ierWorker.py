@@ -104,7 +104,7 @@ class ierWorker(QObject):
                     seconds = int(duration % 60)
                     time_msg = "{} min {} s".format(minutes, seconds)
                 else:
-                    time_msg = "{} s".format(seconds)
+                    time_msg = "{} s".format(duration)
                 self.signal_message.emit(self.tr("Time to import : {}").format(time_msg))
                 self.signal_message.emit(self.tr("👍 New story imported : '{}'").format(file))
                 success += 1

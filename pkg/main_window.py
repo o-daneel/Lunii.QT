@@ -141,6 +141,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_total.setVisible(False)
         self.lbl_story.setVisible(False)
         self.pbar_story.setVisible(False)
+        self.pbar_file.setVisible(False)
         self.btn_abort.setVisible(False)
 
         # finding menu actions
@@ -1253,6 +1254,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # UI update slots
         if self.audio_device:
             self.audio_device.signal_story_progress.connect(self.slot_story_progress)
+            self.audio_device.signal_file_progress.connect(self.slot_file_progress)
             self.audio_device.signal_logger.connect(self.logger.log)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
         self.worker.signal_finished.connect(self.thread.quit)
@@ -1284,17 +1286,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.btn_abort.setVisible(True)
 
-    def slot_story_progress(self, uuid, current, max_val):
+    def slot_story_progress(self, uuid, story_current, story_max_val):
         # updating UI
         self.lbl_story.setVisible(True)
         self.lbl_story.setText(uuid)
 
         self.pbar_story.setVisible(True)
-        self.pbar_story.setRange(0, max_val)
-        self.pbar_story.setValue(current+1)
+        self.pbar_story.setRange(0, story_max_val)
+        self.pbar_story.setValue(story_current+1)
 
         self.btn_abort.setVisible(True)
 
+    def slot_file_progress(self, speed, file_current, file_max_val):
+        # updating UI
+        self.lbl_story.setVisible(True)
+        self.lbl_story.setText(speed)
+
+        self.pbar_file.setVisible(True)
+        self.pbar_file.setRange(0, file_max_val)
+        self.pbar_file.setValue(file_current if file_current < file_max_val else 0)
+
+        
     def slot_finished(self):
         # print("SLOT FINISHED")
         # updating UI

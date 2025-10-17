@@ -316,7 +316,7 @@ class Ui_MainWindow(object):
 
         self.pbar_total = QProgressBar(self.centralwidget)
         self.pbar_total.setObjectName(u"pbar_total")
-        self.pbar_total.setMaximumSize(QSize(16777215, 10))
+        self.pbar_total.setMaximumSize(QSize(16777215, 15))
         self.pbar_total.setValue(24)
         self.pbar_total.setTextVisible(False)
 
@@ -338,13 +338,28 @@ class Ui_MainWindow(object):
 
         self.storyLayout.addWidget(self.lbl_story)
 
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setSpacing(1)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.pbar_story = QProgressBar(self.centralwidget)
         self.pbar_story.setObjectName(u"pbar_story")
         self.pbar_story.setMaximumSize(QSize(16777215, 10))
         self.pbar_story.setValue(24)
         self.pbar_story.setTextVisible(False)
 
-        self.storyLayout.addWidget(self.pbar_story)
+        self.verticalLayout.addWidget(self.pbar_story)
+
+        self.pbar_file = QProgressBar(self.centralwidget)
+        self.pbar_file.setObjectName(u"pbar_file")
+        self.pbar_file.setMaximumSize(QSize(16777215, 6))
+        self.pbar_file.setBaseSize(QSize(0, 0))
+        self.pbar_file.setValue(24)
+        self.pbar_file.setTextVisible(False)
+
+        self.verticalLayout.addWidget(self.pbar_file)
+
+
+        self.storyLayout.addLayout(self.verticalLayout)
 
 
         self.progressLayout.addLayout(self.storyLayout)
@@ -536,6 +551,18 @@ class Ui_MainWindow(object):
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
         self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
+#if QT_CONFIG(tooltip)
+        self.pbar_total.setToolTip(QCoreApplication.translate("MainWindow", u"Operation progress", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.lbl_story.setToolTip(QCoreApplication.translate("MainWindow", u"Writing speed", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.pbar_story.setToolTip(QCoreApplication.translate("MainWindow", u"Story progress", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.pbar_file.setToolTip(QCoreApplication.translate("MainWindow", u"File progress", None))
+#endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
 #endif // QT_CONFIG(tooltip)

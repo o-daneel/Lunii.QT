@@ -3,6 +3,7 @@ import json
 import os.path
 import shutil
 from string import hexdigits
+import time
 import zipfile
 import psutil
 import py7zr
@@ -27,6 +28,7 @@ class LuniiDevice(QtCore.QObject):
     STORIES_BASEDIR = ".content/"
 
     signal_story_progress = QtCore.Signal(str, int, int)
+    signal_file_progress = QtCore.Signal(str, int, int)
     signal_logger = QtCore.Signal(int, str)
     stories: StoryList
 
@@ -918,8 +920,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
                 # in case of v2 device, we need to prepare bt file 
                 if self.device_version <= LUNII_V2 and file.endswith("ri.plain"):
@@ -1012,8 +1013,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
                 # in case of v2 device, we need to prepare bt file 
                 if self.device_version <= LUNII_V2 and file.endswith("ri"):
@@ -1121,8 +1121,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
                 # in case of v2 device, we need to prepare bt file 
                 if self.device_version <= LUNII_V2 and file.endswith("ri"):
@@ -1232,8 +1231,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data)
+                self.__write_with_progress(target, data)
 
                 # in case of v2 device, we need to prepare bt file 
                 if self.device_version <= LUNII_V2 and file.endswith("ri"):
@@ -1360,8 +1358,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data_ciphered)
+                self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
         ri_data = one_story.get_ri_data()
@@ -1492,8 +1489,7 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
-                with open(target, "wb") as f_dst:
-                    f_dst.write(data_ciphered)
+                self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
         ri_data = one_story.get_ri_data()
@@ -1533,6 +1529,35 @@ class LuniiDevice(QtCore.QObject):
             data = self.__get_ciphered_data(path_file, data_plain)
             # data =  data_plain
             fp.write(data)
+
+    def __write_with_progress(self, target, data):
+        time_span_s = 0.250
+        block_size = 10 * 1024  # 10KB
+
+        total_size = len(data)
+        written = 0
+        start_time = last_emit = time.time()
+        last_written = 0
+
+        fname = os.path.basename(target)
+
+        with open(target, "wb") as f_dst:
+            while written < total_size:
+                chunk = data[written:written + block_size]
+                f_dst.write(chunk)
+                written += len(chunk)
+                now = time.time()
+                if now - last_emit >= time_span_s or written == total_size:
+                    elapsed = now - last_emit
+                    speed = ((written - last_written) / elapsed) // 1024 if elapsed > 0 else 0
+
+                    self.signal_file_progress.emit(f"{speed:,} KB/s", written, total_size)
+                    self.signal_logger.emit(
+                        logging.DEBUG,
+                        f"Progress on {fname} - {written:,} / {total_size:,} Bytes ( {speed:,} KB/s )"
+                    )
+                    last_emit = now
+                    last_written = written
 
     def __story_check_v3key(self, story_path: Path, key, iv):
         # Trying to decipher RI/SI for path check

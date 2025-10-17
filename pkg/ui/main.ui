@@ -388,8 +388,11 @@
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>10</height>
+              <height>15</height>
              </size>
+            </property>
+            <property name="toolTip">
+             <string>Operation progress</string>
             </property>
             <property name="value">
              <number>24</number>
@@ -414,6 +417,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>Writing speed</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Panel</enum>
             </property>
@@ -429,20 +435,55 @@
            </widget>
           </item>
           <item>
-           <widget class="QProgressBar" name="pbar_story">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>10</height>
-             </size>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="spacing">
+             <number>1</number>
             </property>
-            <property name="value">
-             <number>24</number>
-            </property>
-            <property name="textVisible">
-             <bool>false</bool>
-            </property>
-           </widget>
+            <item>
+             <widget class="QProgressBar" name="pbar_story">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Story progress</string>
+              </property>
+              <property name="value">
+               <number>24</number>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QProgressBar" name="pbar_file">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>6</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>File progress</string>
+              </property>
+              <property name="value">
+               <number>24</number>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>

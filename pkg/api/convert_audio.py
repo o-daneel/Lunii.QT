@@ -22,6 +22,10 @@ def transcoding_required(filename: str, audio_data):
     audio = MP3(audio_bytesio)
     # print(f"MP3 {audio.info.bitrate // 1000}Kbps ({audio.info.bitrate_mode} / {audio.info.mode}) for {filename}")
 
+    # not a 44,1 KHz
+    if audio.info.sample_rate < 44100:
+        return True
+
     # not the correct mode
     if not audio.info.bitrate_mode in [BitrateMode.UNKNOWN, BitrateMode.VBR, BitrateMode.CBR]:
         return True
@@ -74,6 +78,7 @@ def audio_to_mp3(audio_data):
                 write_xing='0',
                 id3v2_version='0'
                )
+        .global_args('-threads', '0')
         .compile()
     )
 
