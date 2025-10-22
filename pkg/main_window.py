@@ -1,5 +1,4 @@
 import logging
-import os.path
 import time
 from pathlib import WindowsPath
 
@@ -7,12 +6,13 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QStandardItem, QStandardItemModel, QPainter
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication, QCheckBox
+    QDialog, QApplication, QButtonGroup, QListView
 
 from pkg import versionWorker
 from pkg.api import constants
+from pkg.api import stories
 from pkg.api.constants import *
 from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
@@ -32,6 +32,13 @@ COL_NM = 1
 COL_DB = 2
 COL_UUID = 3
 COL_SIZE = 4
+
+COL_OFFICIAL_AGE = 0
+COL_OFFICIAL_NAME = 1
+COL_OFFICIAL_LANGUAGE = 2
+COL_OFFICIAL_INSTALLED = 3
+COL_OFFICIAL_PATH = 4
+COL_OFFICIAL_UUID = 5
 
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
@@ -101,9 +108,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # refresh devices
         self.cb_device_refresh()
+        self.ts_update()
 
         # starting thread to fetch version
         self.worker_check_version()
+
+        self.showMaximized()
 
     def init_ui(self):
         self.setupUi(self)
@@ -132,7 +142,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
         # self.tree_stories.setColumnWidth(COL_SIZE, 50)
 
+        self.radio_tree_official_stories = QButtonGroup()
+        self.radio_tree_official_stories.addButton(self.radio_tree_table)
+        self.radio_tree_official_stories.addButton(self.radio_tree_gallery)
+        
+        self.list_stories_official.setViewMode(QListView.IconMode)
+        self.list_stories_official.setIconSize(QSize(512, 512))
+        self.list_stories_official.setResizeMode(QListView.Adjust)
+        self.list_stories_official.setVisible(False)
+
+        self.local_db_line_edit.setText(stories.DB_LOCAL_PATH)
+        self.official_story_details.setOpenExternalLinks(True)
+
+        # QTreeWidget for stories
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, 300)
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, 250)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)
+        
         self.lbl_picture.setVisible(False)
+        self.te_story_details.setVisible(False)
         self.te_story_details.setVisible(False)
 
         # clean progress bars
@@ -196,6 +228,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
+        self.tree_stories_official.itemDoubleClicked.connect(self.cb_tree_stories_install)
+        self.list_stories_official.doubleClicked.connect(self.cb_tree_stories_install)
+
+        self.add_story_button.clicked.connect(self.cb_tree_stories_install)
+        self.remove_story_button.clicked.connect(self.cb_tree_stories_install)
+
+
+        self.tree_stories_official.itemSelectionChanged.connect(self.official_story_selected)
+
+        self.local_db_choose_folder_button.clicked.connect(self.ts_open_local_folder)
+        self.local_db_line_edit.editingFinished.connect(self.ts_open_local_folder_changed)
+
+        self.radio_tree_official_stories.buttonToggled.connect(self.stories_toggle_mode)
+
         QApplication.instance().focusChanged.connect(self.onFocusChanged)
 
         # Connect the context menu
@@ -231,6 +277,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.tw_resize_columns()
                 return True
         return False
+    
+    def stories_toggle_mode(self, button, checked):
+        self.official_story_details.setText("")
+        self.add_story_button.setEnabled(False)
+        self.remove_story_button.setEnabled(False)
+        if checked:
+            if button == self.radio_tree_table:
+                self.tree_stories_official.show()
+                self.list_stories_official.hide()
+                
+            else:
+                self.tree_stories_official.hide()
+                self.list_stories_official.show()
 
     def tw_resize_columns(self):
         # Adjusting cols based on widget size
@@ -434,7 +493,76 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.audio_device.device_version == LUNII_V3 and
                 not self.audio_device.story_key):
                 self.cb_show_log()
+    
+    def cb_tree_stories_install(self):
+        if not self.audio_device:
+            return
+                
+        if self.radio_tree_official_stories.checkedButton() == self.radio_tree_table:
+            current = self.tree_stories_official.currentItem()
+            name = current.text(1)
+            installationId = current.text(3)
+            installationPath = stories.DB_LOCAL_PATH + "\\" + current.text(4)
+            if installationId != "" and installationPath != "":
+                self.sb_update(self.tr("Removing story '" + installationId + " - " + name + "'..."))
+                self.worker_launch(ACTION_IMPORT, installationPath)
+            elif installationPath != "":
+                self.sb_update(self.tr("Importing story '" + name + "' from '" + installationPath + "'..."))
+                self.worker_launch(ACTION_IMPORT, installationPath)
 
+        elif self.radio_tree_official_stories.checkedButton() == self.radio_tree_gallery:
+            selection_model = self.list_stories_official.selectionModel()
+            current_index = selection_model.currentIndex()
+            if current_index.isValid():
+                name = current_index.data()
+                data = current_index.data(Qt.UserRole)
+             
+                local_db_path = data["local_db_path"]
+                lunii_story_id = data["lunii_story_id"]
+                installationPath = stories.DB_LOCAL_PATH + "\\" + local_db_path
+                if lunii_story_id is not None and installationPath is None:
+                    self.sb_update(self.tr("Removing story '" + lunii_story_id + " - " + name + "'..."))
+                    self.worker_launch(ACTION_IMPORT, installationPath)
+                elif installationPath is not None:
+                    self.sb_update(self.tr("Importing story '" + name + "' from '" + installationPath + "'..."))
+                    self.worker_launch(ACTION_IMPORT, installationPath)
+        return
+    
+    def official_story_selected(self):
+        id = None
+        
+        if self.radio_tree_official_stories.checkedButton() == self.radio_tree_table:
+            current = self.tree_stories_official.currentItem()
+            if current is not None:
+                id = current.text(5)
+                local_db_path = current.text(4)
+                lunii_story_id = current.text(3)
+                self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
+                self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
+
+        elif self.radio_tree_official_stories.checkedButton() == self.radio_tree_gallery:
+            selection_model = self.list_stories_official.selectionModel()
+            current_index = selection_model.currentIndex()
+            if current_index.isValid():
+                data = current_index.data(Qt.UserRole)
+                id = data["id"]
+                self.add_story_button.setEnabled(self.audio_device is not None and data["local_db_path"] is not None and data["lunii_story_id"] is None)
+                self.remove_story_button.setEnabled(self.audio_device is not None and data["lunii_story_id"] is not None)
+
+        
+        if id is not None:
+            locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
+            description = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("description")
+            title = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("title")
+            subtitle = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("subtitle")
+            url = os.path.join(CACHE_DIR, id)
+            self.official_story_details.setHtml(
+                "<img src=\"" + url + "\"/><br>"
+                + "<h2>" + title + "</h2>"
+                + "<h3>" + subtitle + "</h3>" 
+                + description)
+        return
+    
     def cb_tree_select(self):
         # getting selection
         selection = self.tree_stories.selectedItems()
@@ -776,8 +904,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
+        self.tree_stories_official.clear()
+        model = self.list_stories_official.model()
+        if model is not None:
+            model.clear() 
         self.details_last_uuid = None
         self.ts_populate()
+        self.ts_populate_official()
+
+        selectionModel = self.list_stories_official.selectionModel()
+        if selectionModel is not None:
+            selectionModel.currentChanged.connect(self.official_story_selected)
+
         # update status in status bar
         # self.sb_update_summary()
 
@@ -826,6 +964,110 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     item.setForeground(column, grey_color)
 
             self.tree_stories.addTopLevelItem(item)
+
+    def ts_open_local_folder(self):
+        folder = QFileDialog.getExistingDirectory(self, self.tr("Open Local DB"), "",  QFileDialog.Option.ShowDirsOnly)
+
+        if not folder:
+            return
+        
+        self.local_db_line_edit.setText(folder)
+        self.ts_open_local_folder_changed()
+
+    def ts_open_local_folder_changed(self):
+        stories.DB_LOCAL_PATH = self.local_db_line_edit.text()
+        stories.story_load_local_db()
+        self.ts_update()
+
+    def ts_populate_official(self):
+        
+        # creating font
+        console_font = QFont()
+        console_font.setFamilies([u"Consolas"])
+
+        # getting filter text
+        le_filter = self.le_filter.text()
+
+        list_stories_official_model = QStandardItemModel()
+
+        # adding items
+        for id in stories.DB_OFFICIAL:
+            name = stories.DB_OFFICIAL[id]["title"]
+
+            # filtering 
+            if (le_filter and
+                not le_filter.lower() in name.lower() and
+                not le_filter.lower() in id.lower() ):
+                continue
+
+            local_story = stories.get_story_in_local_db(name)
+            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+
+            # create and add item to treeWidget
+            item = QTreeWidgetItem()
+
+            item.setText(COL_OFFICIAL_NAME, name)
+            item.setText(COL_OFFICIAL_UUID, id)
+            item.setFont(COL_OFFICIAL_UUID, console_font)
+            item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
+            item.setText(COL_OFFICIAL_INSTALLED, lunii_story)
+
+            if local_story != []:
+                item.setText(COL_OFFICIAL_PATH, local_story[1])
+                item.setText(COL_OFFICIAL_LANGUAGE, local_story[3])
+
+            
+            self.tree_stories_official.addTopLevelItem(item)
+            pixmap = QPixmap()
+            pixmap.loadFromData(stories.get_picture(id))
+            scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
+            icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story != [], lunii_story is not None))
+            item = QStandardItem(QIcon(icon_with_banner), name)
+            item.setData({"id": id, "local_db_path": None if local_story == [] else local_story[1], "lunii_story_id": lunii_story}, Qt.UserRole)
+
+            list_stories_official_model.appendRow(item)
+
+        self.list_stories_official.setModel(list_stories_official_model)
+
+    def create_icon_with_banner(self, base_pixmap, available, installed):
+        pixmap = base_pixmap.copy()
+        w = pixmap.width()
+        h = pixmap.height()
+        banner_width = h // 2
+        banner_height = 30
+
+        if available:
+            painter = QPainter(pixmap)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+            font = QFont()
+            font.setBold(True)
+            font.setPointSize(10)
+            painter.translate(w - banner_width // 1.8,  -20)
+            painter.rotate(45)
+            painter.fillRect(0, 0, banner_width, banner_height, QColor(255, 0, 0, 180))
+            painter.setPen(Qt.GlobalColor.white)
+            painter.setFont(font)
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, "Disponible")
+            painter.end()
+        
+        if installed:
+            painter = QPainter(pixmap)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        
+            font = QFont()
+            font.setBold(True)
+            font.setPointSize(10)
+            painter.translate(0, h - banner_width // 1.5)
+            painter.rotate(45)
+            painter.fillRect(0, 0, banner_width, banner_height, QColor(0, 255, 0, 180))
+            painter.setPen(Qt.GlobalColor.black)
+            painter.setFont(font)
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, "Sur la Lunii")
+            painter.end()
+        
+        return pixmap
+
 
     def sb_create(self):
         self.statusBar().showMessage("bla-bla bla")
