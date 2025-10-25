@@ -502,13 +502,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             current = self.tree_stories_official.currentItem()
             name = current.text(1)
             installationId = current.text(3)
-            installationPath = stories.DB_LOCAL_PATH + "\\" + current.text(4)
+            installationPath = os.path.join(stories.DB_LOCAL_PATH, current.text(4))
             if installationId != "" and installationPath != "":
                 self.sb_update(self.tr("Removing story '" + installationId + " - " + name + "'..."))
-                self.worker_launch(ACTION_IMPORT, installationPath)
+                self.worker_launch(ACTION_REMOVE, [installationId])
             elif installationPath != "":
                 self.sb_update(self.tr("Importing story '" + name + "' from '" + installationPath + "'..."))
-                self.worker_launch(ACTION_IMPORT, installationPath)
+                self.worker_launch(ACTION_IMPORT, [installationPath])
 
         elif self.radio_tree_official_stories.checkedButton() == self.radio_tree_gallery:
             selection_model = self.list_stories_official.selectionModel()
@@ -519,13 +519,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
              
                 local_db_path = data["local_db_path"]
                 lunii_story_id = data["lunii_story_id"]
-                installationPath = stories.DB_LOCAL_PATH + "\\" + local_db_path
+                installationPath = os.path.join(stories.DB_LOCAL_PATH, local_db_path)
                 if lunii_story_id is not None and installationPath is None:
                     self.sb_update(self.tr("Removing story '" + lunii_story_id + " - " + name + "'..."))
-                    self.worker_launch(ACTION_IMPORT, installationPath)
+                    self.worker_launch(ACTION_REMOVE, [lunii_story_id])
                 elif installationPath is not None:
                     self.sb_update(self.tr("Importing story '" + name + "' from '" + installationPath + "'..."))
-                    self.worker_launch(ACTION_IMPORT, installationPath)
+                    self.worker_launch(ACTION_IMPORT, [installationPath])
         return
     
     def official_story_selected(self):
@@ -1010,7 +1010,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(COL_OFFICIAL_UUID, id)
             item.setFont(COL_OFFICIAL_UUID, console_font)
             item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
-            item.setText(COL_OFFICIAL_INSTALLED, lunii_story)
+            if lunii_story is not None:
+                item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
 
             if local_story != []:
                 item.setText(COL_OFFICIAL_PATH, local_story[1])
