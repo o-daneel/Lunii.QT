@@ -461,6 +461,11 @@ class FlamDevice(QtCore.QObject):
         if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN]:
             self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...")
 
+        # is flam firmware enough to support Lunii stories ?
+        if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_ZIP, TYPE_LUNII_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:
+            self.signal_logger.emit(logging.ERROR, "Please update your Flam with v2.x.x to support Lunii Stories")
+            return
+
         # processing story
         if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_PLAIN")
