@@ -24,16 +24,16 @@ def image_to_liff(image_data):
     width, height = img.size
 
     # reading image format
-    img_format = img.format
+    # img_format = img.format
 
-    print(f"Image format: {img_format}, size: {width}x{height} (total {len(image_data)} bytes)")
+    # print(f"Image format: {img_format}, size: {width}x{height} (total {len(image_data)} bytes)")
 
     # Resize the image to have a max width or height of 104 pixels
     max_size = 104
     img.thumbnail((max_size, max_size), Image.Resampling.BICUBIC)
 
     width, height = img.size
-    print(f"Updated image: {img_format}, size: {width}x{height} (total {len(img.tobytes())} bytes)")
+    # print(f"Updated image: {img_format}, size: {width}x{height} (total {len(img.tobytes())} bytes)")
 
     # write LIFF header as bytes
     liff_data = b"liff"  # LIFF magic number
@@ -62,7 +62,7 @@ def image_to_liff(image_data):
     liff_data += b"\x00" * 7
     liff_data += b"\x01"
 
-    print(f"Converted LIFF size: {len(liff_data)} bytes")
+    # print(f"Converted LIFF size: {len(liff_data)} bytes")
     return liff_data
 
 def image_to_bitmap_rle4(image_data):
