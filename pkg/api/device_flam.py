@@ -1114,7 +1114,7 @@ class FlamDevice(QtCore.QObject):
         self.__write_thumbnail(loaded_story, output_path)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid, nm=night_mode))
+        self.stories.append(loaded_story)
         self.update_pack_index()
 
         return True
@@ -1146,21 +1146,21 @@ class FlamDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
 
-            one_story = StudioStory(story_json)
-            if not one_story.compatible:
+            studio_story = StudioStory(story_json)
+            if not studio_story.compatible:
                 self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
                 return False
 
-            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+            stories.thirdparty_db_add_story(studio_story.uuid, studio_story.title, studio_story.description)
 
             # checking if UUID already loaded
-            if str(one_story.uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
+            if str(studio_story.uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{studio_story.name}' is already loaded !")
                 return False
 
             # decompressing story contents
-            long_uuid = str(one_story.uuid).lower()
-            short_uuid = one_story.short_uuid
+            long_uuid = str(studio_story.uuid).lower()
+            short_uuid = studio_story.short_uuid
             output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{long_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
@@ -1171,7 +1171,7 @@ class FlamDevice(QtCore.QObject):
                 # abort requested ? early exit
                 if self.abort_process:
                     self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
-                    self.__clean_up_story_dir(one_story.uuid)
+                    self.__clean_up_story_dir(studio_story.uuid)
                     return False
 
                 if zip_file.getinfo(file).is_dir():
@@ -1181,7 +1181,7 @@ class FlamDevice(QtCore.QObject):
                 if file.endswith(FILE_STUDIO_THUMB):
                     # adding thumb to DB
                     data = zip_file.read(file)
-                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    stories.thirdparty_db_add_thumb(studio_story.uuid, data)
                     continue
                 if not file.startswith("assets"):
                     continue
@@ -1191,12 +1191,12 @@ class FlamDevice(QtCore.QObject):
 
                 # stripping extra "assets/" chars
                 file = file[7:]
-                if file in one_story.ri:
-                    file_newname = self.__get_lunii_ciphered_name(one_story.ri[file][0], studio_ri=True)
+                if file in studio_story.ri:
+                    file_newname = self.__get_lunii_ciphered_name(studio_story.ri[file][0], studio_ri=True)
                     # transcode image if necessary
                     data = image_to_bitmap_rle4(data)
-                elif file in one_story.si:
-                    file_newname = self.__get_lunii_ciphered_name(one_story.si[file][0], studio_si=True)
+                elif file in studio_story.si:
+                    file_newname = self.__get_lunii_ciphered_name(studio_story.si[file][0], studio_si=True)
                     # transcode audio if necessary
                     if transcoding_required(file, data):
                         if not STORY_TRANSCODING_SUPPORTED:
@@ -1230,13 +1230,13 @@ class FlamDevice(QtCore.QObject):
                 self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
-        ri_data = one_story.get_ri_data()
+        ri_data = studio_story.get_ri_data()
         self.__write(ri_data, output_path, "ri")
 
         # creating lunii index files : si, ni, li
-        self.__write(one_story.get_si_data(), output_path, "si")
-        self.__write(one_story.get_li_data(), output_path, "li")
-        self.__write(one_story.get_ni_data(), output_path, "ni")
+        self.__write(studio_story.get_si_data(), output_path, "si")
+        self.__write(studio_story.get_li_data(), output_path, "li")
+        self.__write(studio_story.get_ni_data(), output_path, "ni")
 
         # creating authorization file : key
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
@@ -1245,12 +1245,15 @@ class FlamDevice(QtCore.QObject):
             fp_key.write(self.keyfile)
 
         # creating night mode file
-        if one_story.nm:
+        if studio_story.nm:
             self.signal_logger.emit(logging.INFO, "Night mode file creation...")
             # creating empty nm file
             with open(output_path.joinpath("nm"), "wb") as fp_nm:
                 pass
                 
+        # story creation
+        one_story = Story(studio_story.uuid, nm = studio_story.nm)
+
         # creating info file creation
         self.__write_info(one_story, output_path)
 
@@ -1258,7 +1261,7 @@ class FlamDevice(QtCore.QObject):
         self.__write_thumbnail(one_story, output_path)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
+        self.stories.append(one_story)
         self.update_pack_index()
 
         return True
@@ -1290,21 +1293,21 @@ class FlamDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
 
-            one_story = StudioStory(story_json)
-            if not one_story.compatible:
+            studio_story = StudioStory(story_json)
+            if not studio_story.compatible:
                 self.signal_logger.emit(logging.ERROR, "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md")
                 return False
 
-            stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+            stories.thirdparty_db_add_story(studio_story.uuid, studio_story.title, studio_story.description)
 
             # checking if UUID already loaded
-            if str(one_story.uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, f"'{one_story.name}' is already loaded !")
+            if str(studio_story.uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{studio_story.name}' is already loaded !")
                 return False
 
             # decompressing story contents
-            long_uuid = str(one_story.uuid).lower()
-            short_uuid = one_story.short_uuid
+            long_uuid = str(studio_story.uuid).lower()
+            short_uuid = studio_story.short_uuid
             output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{long_uuid}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
@@ -1316,7 +1319,7 @@ class FlamDevice(QtCore.QObject):
                 # abort requested ? early exit
                 if self.abort_process:
                     self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
-                    self.__clean_up_story_dir(one_story.uuid)
+                    self.__clean_up_story_dir(studio_story.uuid)
                     return False
 
                 if fname.endswith(FILE_STUDIO_JSON):
@@ -1324,7 +1327,7 @@ class FlamDevice(QtCore.QObject):
                 if fname.endswith(FILE_STUDIO_THUMB):
                     # adding thumb to DB
                     data = bio.read()
-                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    stories.thirdparty_db_add_thumb(studio_story.uuid, data)
                     continue
                 if not fname.startswith("assets"):
                     continue
@@ -1334,12 +1337,12 @@ class FlamDevice(QtCore.QObject):
 
                 # stripping extra "assets/" chars
                 fname = fname[7:]
-                if fname in one_story.ri:
-                    file_newname = self.__get_lunii_ciphered_name(one_story.ri[fname][0], studio_ri=True)
+                if fname in studio_story.ri:
+                    file_newname = self.__get_lunii_ciphered_name(studio_story.ri[fname][0], studio_ri=True)
                     # transcode image if necessary
                     data = image_to_bitmap_rle4(data)
-                elif fname in one_story.si:
-                    file_newname = self.__get_lunii_ciphered_name(one_story.si[fname][0], studio_si=True)
+                elif fname in studio_story.si:
+                    file_newname = self.__get_lunii_ciphered_name(studio_story.si[fname][0], studio_si=True)
                     # transcode audio if necessary
                     if transcoding_required(fname, data):
                         if not STORY_TRANSCODING_SUPPORTED:
@@ -1366,13 +1369,13 @@ class FlamDevice(QtCore.QObject):
                 self.__write_with_progress(target, data_ciphered)
 
         # creating lunii index files : ri
-        ri_data = one_story.get_ri_data()
+        ri_data = studio_story.get_ri_data()
         self.__write(ri_data, output_path, "ri")
 
         # creating lunii index files : si, ni, li
-        self.__write(one_story.get_si_data(), output_path, "si")
-        self.__write(one_story.get_li_data(), output_path, "li")
-        self.__write(one_story.get_ni_data(), output_path, "ni")
+        self.__write(studio_story.get_si_data(), output_path, "si")
+        self.__write(studio_story.get_li_data(), output_path, "li")
+        self.__write(studio_story.get_ni_data(), output_path, "ni")
 
         # creating authorization file : key
         self.signal_logger.emit(logging.INFO, "Authorization file creation...")
@@ -1381,12 +1384,15 @@ class FlamDevice(QtCore.QObject):
             fp_key.write(self.keyfile)
 
         # creating night mode file
-        if one_story.nm:
+        if studio_story.nm:
             self.signal_logger.emit(logging.INFO, "Night mode file creation...")
             # creating empty nm file
             with open(output_path.joinpath("nm"), "wb") as fp_nm:
                 pass
-                
+
+        # story creation
+        one_story = Story(studio_story.uuid, nm = studio_story.nm)
+
         # creating info file creation
         self.__write_info(one_story, output_path)
 
@@ -1394,7 +1400,7 @@ class FlamDevice(QtCore.QObject):
         self.__write_thumbnail(one_story, output_path)
 
         # updating .pi file to add new UUID
-        self.stories.append(Story(one_story.uuid, nm = one_story.nm))
+        self.stories.append(one_story)
         self.update_pack_index()
 
         return True
