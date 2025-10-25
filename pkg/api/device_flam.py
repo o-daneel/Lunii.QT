@@ -9,6 +9,7 @@ from uuid import UUID
 
 import psutil
 import py7zr
+import xxtea
 
 from Crypto.Cipher import AES
 from PySide6 import QtCore
@@ -19,7 +20,7 @@ from pkg.api import stories
 from pkg.api.aes_keys import reverse_bytes
 from pkg.api.constants import *
 from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_required, transcoding_required
-from pkg.api.convert_image import image_to_bitmap_rle4
+from pkg.api.convert_image import image_to_bitmap_rle4, image_to_liff
 from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, story_is_flam, story_is_flam_plain, story_is_lunii_plain, story_is_plain, story_is_studio, story_is_lunii
 
@@ -281,7 +282,22 @@ class FlamDevice(QtCore.QObject):
             buffer = bytes(ba_buffer)
         return buffer
 
-    def decipher(self, buffer, key, iv, offset, dec_len):
+    def __xxtea_decipher(self, buffer, key, offset, dec_len):
+        # checking offset
+        if offset > len(buffer):
+            offset = len(buffer)
+        # checking len
+        if offset + dec_len > len(buffer):
+            dec_len = len(buffer) - offset
+        # if something to be done
+        if offset < len(buffer) and offset + dec_len <= len(buffer):
+            plain = xxtea.decrypt(buffer[offset:dec_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:dec_len]))
+            ba_buffer = bytearray(buffer)
+            ba_buffer[offset:dec_len] = plain
+            buffer = bytes(ba_buffer)
+        return buffer
+
+    def __aes_decipher(self, buffer, key, iv, offset, dec_len):
         # checking offset
         if offset > len(buffer):
             offset = len(buffer)
@@ -460,18 +476,16 @@ class FlamDevice(QtCore.QObject):
             return self.import_flam_7z(story_path)
         elif archive_type == TYPE_LUNII_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_ZIP")
-            return None
-            # return self.import_lunii_zip(story_path)
+            return self.import_lunii_zip(story_path)
         elif archive_type == TYPE_LUNII_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_7Z")
-            return None
-            # return self.import_lunii_7z(story_path)
+            return self.import_lunii_7z(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
-            return self.import_story_studio_zip(story_path)
+            return self.import_studio_zip(story_path)
         elif archive_type == TYPE_STUDIO_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
-            return self.import_story_studio_7z(story_path)
+            return self.import_studio_7z(story_path)
         else:
             self.signal_logger.emit(logging.DEBUG, "Archive => Unsupported type")
 
@@ -574,6 +588,9 @@ class FlamDevice(QtCore.QObject):
 
         # creating info file creation
         self.__write_info(loaded_story, output_path)
+
+        # creating thumbnail image
+        self.__write_thumbnail(loaded_story, output_path)
 
         # updating .pi file to add new UUID
         self.stories.append(loaded_story)
@@ -748,7 +765,7 @@ class FlamDevice(QtCore.QObject):
                     if (file.endswith(".lsf") or file.endswith("info")):
                         self.signal_logger.emit(logging.DEBUG, f"Transciphering file {file}")
                         # decipher
-                        data_plain = self.decipher(data, story_key, story_iv, 0, len(data))
+                        data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
                         # cipher
                         data = self.__get_ciphered_data(file, data_plain, True, True)
 
@@ -864,7 +881,7 @@ class FlamDevice(QtCore.QObject):
                     if (fname.endswith(".lsf") or fname.endswith("info")):
                         self.signal_logger.emit(logging.DEBUG, f"Transciphering file {fname}")
                         # decipher
-                        data_plain = self.decipher(data, story_key, story_iv, 0, len(data))
+                        data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
                         # cipher
                         data = self.__get_ciphered_data(fname, data_plain, True, True)
 
@@ -889,7 +906,220 @@ class FlamDevice(QtCore.QObject):
 
         return True
 
-    def import_story_studio_zip(self, story_path):
+    def import_lunii_zip(self, story_path):
+        night_mode = False
+
+        # checking if archive is OK
+        try:
+            with zipfile.ZipFile(file=story_path):
+                pass  # If opening succeeds, the archive is valid
+        except zipfile.BadZipFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+        
+        # opening zip file
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+            if FILE_UUID not in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "No UUID file found in archive. Unable to add this story.")
+                return False
+            if FILE_STUDIO_JSON in zip_contents:
+                self.signal_logger.emit(logging.ERROR, "Studio story format is not supported. Unable to add this story.")
+                return False
+
+            # getting UUID file
+            try:
+                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
+            except ValueError as e:
+                self.signal_logger.emit(logging.ERROR, e)
+                return False
+        
+            # checking if UUID already loaded
+            if str(new_uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
+                return False
+
+            # decompressing story contents
+            long_uuid = str(new_uuid).lower()
+            short_uuid = long_uuid[28:]
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}/{long_uuid}")
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
+                if file == FILE_UUID or file.endswith("bt"):
+                    continue
+                if file.endswith("nm"):
+                    night_mode = True
+
+                # Extract each zip file
+                data_v2 = zip_file.read(file)
+
+                # need to transcipher ?
+                if file.endswith("ni") or file.endswith("nm"):
+                    # plain files
+                    data_plain = data_v2
+                else:
+                    # to be deciphered
+                    data_plain = self.__xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
+                # updating filename, and ciphering header if necessary
+                data = self.__get_ciphered_data(file, data_plain, False)
+                file_newname = self.__get_lunii_ciphered_name(file)
+
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(zip_contents)} > {file_newname}")
+                self.__write_with_progress(target, data)
+
+        # creating authorization file : bt
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        bt_path = output_path.joinpath("key")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.keyfile)
+
+        # story creation
+        loaded_story = Story(new_uuid, nm=night_mode)
+
+        # creating info file creation
+        self.__write_info(loaded_story, output_path)
+
+        # creating thumbnail image
+        self.__write_thumbnail(loaded_story, output_path)
+
+        # updating .pi file to add new UUID
+        self.stories.append(loaded_story)
+        self.update_pack_index()
+
+        return True
+
+    def import_lunii_7z(self, story_path):
+        night_mode = False
+
+        # checking if archive is OK
+        try:
+            with py7zr.SevenZipFile(story_path, mode='r'):
+                pass  # If opening succeeds, the archive is valid
+        except py7zr.exceptions.Bad7zFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+
+        # opening zip file
+        with py7zr.SevenZipFile(story_path, mode='r') as zip:
+            # reading all available files
+            archive_contents = zip.list()
+
+            # getting UUID from path
+            uuid_path = Path(archive_contents[0].filename)
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                try:
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
+                    else:
+                        new_uuid = UUID(uuid_str)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, f"UUID parse error {e}")
+                    return False
+            else:
+                self.signal_logger.emit(logging.ERROR, "UUID directory is missing in archive !")
+                return False
+
+            # checking if UUID already loaded
+            if str(new_uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, f"'{self.stories.get_story(new_uuid).name}' is already loaded !")
+                return False
+            
+            # decompressing story contents
+            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
+            # {str(new_uuid).upper()[28:]
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            long_uuid = str(new_uuid).lower()
+            short_uuid = long_uuid[28:]
+            contents = zip.readall().items()
+            for index, (fname, bio) in enumerate(contents):
+                self.signal_story_progress.emit(short_uuid, index, len(contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, f"Import aborted, performing cleanup on current story...")
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
+                if fname.endswith("bt"):
+                    continue
+                if fname.endswith("nm"):
+                    night_mode = True
+
+                # Extract each zip file
+                data_v2 = bio.read()
+
+                # stripping extra uuid chars
+                if "-" not in fname:
+                    file = fname[24:]
+                else:
+                    file = fname[28:]
+
+                if self.device_version <= LUNII_V2:
+                    # from v2 to v2, data can be kept as it is
+                    data = data_v2
+                else:
+                    # need to transcipher for v3 ?
+                    if file.endswith("ni") or file.endswith("nm"):
+                        # plain files
+                        data_plain = data_v2
+                    else:
+                        # to be ciphered
+                        data_plain = self.__xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
+                    # updating filename, and ciphering header if necessary
+                    data = self.__get_ciphered_data(file, data_plain)
+
+                file_newname = self.__get_lunii_ciphered_name(file)
+                target: Path = output_path.joinpath(file_newname)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, f"File {index+1}/{len(contents)} > {file_newname}")
+                self.__write_with_progress(target, data)
+
+        # creating authorization file : bt
+        self.signal_logger.emit(logging.INFO, "Authorization file creation...")
+        bt_path = output_path.joinpath("key")
+        with open(bt_path, "wb") as fp_bt:
+            fp_bt.write(self.keyfile)
+
+        # story creation
+        loaded_story = Story(new_uuid, nm=night_mode)
+
+        # creating info file creation
+        self.__write_info(loaded_story, output_path)
+        
+        # creating thumbnail image
+        self.__write_thumbnail(loaded_story, output_path)
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(new_uuid, nm=night_mode))
+        self.update_pack_index()
+
+        return True
+
+    def import_studio_zip(self, story_path):
         # checking if archive is OK
         try:
             with zipfile.ZipFile(file=story_path):
@@ -1024,13 +1254,16 @@ class FlamDevice(QtCore.QObject):
         # creating info file creation
         self.__write_info(one_story, output_path)
 
+        # creating thumbnail image
+        self.__write_thumbnail(one_story, output_path)
+
         # updating .pi file to add new UUID
         self.stories.append(Story(one_story.uuid, nm = one_story.nm))
         self.update_pack_index()
 
         return True
 
-    def import_story_studio_7z(self, story_path):
+    def import_studio_7z(self, story_path):
         # checking if archive is OK
         try:
             with py7zr.SevenZipFile(story_path, mode='r'):
@@ -1157,6 +1390,9 @@ class FlamDevice(QtCore.QObject):
         # creating info file creation
         self.__write_info(one_story, output_path)
 
+        # creating thumbnail image
+        self.__write_thumbnail(one_story, output_path)
+
         # updating .pi file to add new UUID
         self.stories.append(Story(one_story.uuid, nm = one_story.nm))
         self.update_pack_index()
@@ -1175,6 +1411,16 @@ class FlamDevice(QtCore.QObject):
             fp_info.write("0\n")
             fp_info.write(f"{story_name}\n")
             fp_info.write(story_author)
+
+    def __write_thumbnail(self, one_story, output_path):
+        thumb_path = output_path.joinpath("img")
+        thumb_path.mkdir(parents=True, exist_ok=True)
+        thumb_path = thumb_path.joinpath("thumbnail.lif")
+
+        with open(thumb_path, "wb") as fp:
+            data = one_story.get_picture()
+            lif_data = image_to_liff(data)
+            fp.write(lif_data)
 
     def __write(self, data_plain, output_path, file):
         path_file = os.path.join(output_path, file)
