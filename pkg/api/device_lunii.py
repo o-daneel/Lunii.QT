@@ -1280,6 +1280,14 @@ class LuniiDevice(QtCore.QObject):
             one_story = StudioStory(story_json)
             stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
+            # Loop over each file
+            for index, file in enumerate(zip_contents):
+                if file.endswith(FILE_STUDIO_THUMB):
+                    # adding thumb to DB
+                    data = zip_file.read(file)
+                    stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                    continue
+                
             return one_story.uuid
 
         return ""

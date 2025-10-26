@@ -486,6 +486,8 @@ class Ui_MainWindow(object):
         self.story_details.setSizePolicy(sizePolicy1)
         self.story_details.setMinimumSize(QSize(300, 192))
         self.story_details.setMaximumSize(QSize(16777215, 16777215))
+        self.story_details.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.story_details.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
 
         self.verticalLayout_6.addWidget(self.story_details)
 
