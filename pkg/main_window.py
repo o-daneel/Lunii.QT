@@ -654,6 +654,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.processEvents()
 
         retVal = story_load_db(True)
+        self.load_missing_ids()
 
         self.pbar_total.setValue(90)
         self.app.processEvents()
@@ -664,10 +665,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.processEvents()
 
         self.pbar_total.setVisible(False)
+
+
         if retVal:
             self.sb_update(self.tr("👍 Lunii DB refreshed."))
         else:
             self.sb_update(self.tr("🛑 Lunii DB failed."))
+
+    def load_missing_ids(self):
+        refresh_needed = False
+        for encoded_name in stories.DB_THIRD_PARTY_LOCAL_BY_NAME:
+            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][0]
+            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][1]
+            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2]
+            if uuid == "":
+                uuid = str(self.audio_device.get_uuid_from_story_studio_zip(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))).upper()
+                stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2] = uuid
+                if " # " not in path:
+                    new_path = path.replace(".zip", " # " + uuid + ".zip")
+                    os.rename(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path), os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, new_path))
+                    self.sb_update("Renaming " + name + " to " + new_path)
+                    refresh_needed = True
+
+        if refresh_needed:
+            stories.story_load_third_party_local_db()
+            self.ts_update()
 
     def cb_lbl_click(self, event):
         if self.audio_device:

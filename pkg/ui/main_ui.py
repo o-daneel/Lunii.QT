@@ -312,7 +312,7 @@ class Ui_MainWindow(object):
         self.tree_stories.setIndentation(20)
         self.tree_stories.setRootIsDecorated(True)
         self.tree_stories.setItemsExpandable(True)
-        self.tree_stories.setSortingEnabled(True)
+        self.tree_stories.setSortingEnabled(False)
         self.tree_stories.setAllColumnsShowFocus(True)
         self.tree_stories.header().setStretchLastSection(False)
 

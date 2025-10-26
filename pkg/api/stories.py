@@ -256,7 +256,8 @@ def story_load_third_party_local_db():
                 if " # " in filename:
                     elems = filename_without_age.split(" # ")
                     name = elems[0]
-                    uuid = elems[1].replace(EXT_ZIP, "")
+                    uuid = elems[1].replace(EXT_ZIP, "").upper()
+
                     DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, uuid, age]
                     DB_THIRD_PARTY_LOCAL_BY_ID[uuid.lower()] = [name, filename, uuid, age]
                 else:
