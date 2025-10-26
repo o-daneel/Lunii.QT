@@ -162,6 +162,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.setVisible(False)
 
         self.local_db_line_edit.setText(stories.DB_LOCAL_PATH)
+        self.third_party_db_line_edit.setText(stories.DB_THIRD_PARTY_LOCAL_PATH)
         self.story_details.setOpenExternalLinks(True)
 
         # QTreeWidget for stories
@@ -271,6 +272,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.local_db_choose_folder_button.clicked.connect(self.ts_open_local_folder)
         self.local_db_line_edit.editingFinished.connect(self.ts_open_local_folder_changed)
+        self.third_party_db_choose_folder_button.clicked.connect(self.ts_open_third_party_local_folder)
+        self.third_party_db_line_edit.editingFinished.connect(self.ts_open_third_party_local_folder_changed)
 
         self.radio_tree_official_stories.buttonToggled.connect(self.stories_toggle_mode)
 
@@ -1001,9 +1004,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_open_local_folder_changed(self):
         stories.DB_LOCAL_PATH = self.local_db_line_edit.text()
+        self.lock_ui()
         stories.story_load_local_db()
         self.ts_update()
+        self.unlock_ui()
 
+    def ts_open_third_party_local_folder(self):
+        folder = QFileDialog.getExistingDirectory(self, self.tr("Open Third Party Local DB"), "",  QFileDialog.Option.ShowDirsOnly)
+
+        if not folder:
+            return
+        
+        self.third_party_db_line_edit.setText(folder)
+        self.ts_open_third_party_local_folder_changed()
+
+    def ts_open_third_party_local_folder_changed(self):
+        stories.DB_THIRD_PARTY_LOCAL_PATH = self.third_party_db_line_edit.text()
+        self.lock_ui()
+        stories.story_load_third_party_local_db()
+        self.ts_update()
+        self.unlock_ui()
+      
     def ts_populate_official(self):
         # creating font
         console_font = QFont()
@@ -1561,6 +1582,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if column == COL_NM:
             self.ts_nm()
 
+    def lock_ui(self):
+        self.btn_db.setEnabled(False)
+        self.tree_stories.setEnabled(False)
+        self.tree_stories_official.setEnabled(False)
+        self.tree_stories_third_party.setEnabled(False)
+        self.list_stories_official.setEnabled(False)
+        self.tabWidget.setEnabled(False)
+        self.radio_tree_gallery.setEnabled(False)
+        self.radio_tree_table.setEnabled(False)
+        self.add_story_button.setEnabled(False)
+        self.remove_story_button.setEnabled(False)
+        self.btn_refresh.setEnabled(False)
+        self.combo_device.setEnabled(False)
+
+    def unlock_ui(self):
+        self.tree_stories.setEnabled(True)
+        self.tree_stories_official.setEnabled(True)
+        self.tree_stories_third_party.setEnabled(True)
+        self.list_stories_official.setEnabled(True)
+        self.tabWidget.setEnabled(True)
+        self.radio_tree_gallery.setEnabled(True)
+        self.radio_tree_table.setEnabled(True)
+        self.add_story_button.setEnabled(True)
+        self.remove_story_button.setEnabled(True)
+        self.btn_db.setEnabled(True)
+        self.btn_refresh.setEnabled(True)
+        self.combo_device.setEnabled(True)
+
     def worker_check_version(self):
         # version_thread.start()
         self.version_worker = versionWorker.VersionChecker()
@@ -1588,18 +1637,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker.moveToThread(self.thread)
 
         # UI limitations
-        self.btn_db.setEnabled(False)
-        self.tree_stories.setEnabled(False)
-        self.tree_stories_official.setEnabled(False)
-        self.tree_stories_third_party.setEnabled(False)
-        self.list_stories_official.setEnabled(False)
-        self.tabWidget.setEnabled(False)
-        self.radio_tree_gallery.setEnabled(False)
-        self.radio_tree_table.setEnabled(False)
-        self.add_story_button.setEnabled(False)
-        self.remove_story_button.setEnabled(False)
-        self.btn_refresh.setEnabled(False)
-        self.combo_device.setEnabled(False)
+        self.lock_ui()
 
         # connecting slots
         self.thread.started.connect(self.worker.process)
@@ -1655,18 +1693,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def slot_finished(self):
         # print("SLOT FINISHED")
         # updating UI
-        self.tree_stories.setEnabled(True)
-        self.tree_stories_official.setEnabled(True)
-        self.tree_stories_third_party.setEnabled(True)
-        self.list_stories_official.setEnabled(True)
-        self.tabWidget.setEnabled(True)
-        self.radio_tree_gallery.setEnabled(True)
-        self.radio_tree_table.setEnabled(True)
-        self.add_story_button.setEnabled(True)
-        self.remove_story_button.setEnabled(True)
-        self.btn_db.setEnabled(True)
-        self.btn_refresh.setEnabled(True)
-        self.combo_device.setEnabled(True)
+        self.unlock_ui()
 
         # hiding progress
         self.lbl_total.setVisible(False)
