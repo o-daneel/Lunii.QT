@@ -1,4 +1,5 @@
 import logging
+import re
 import time
 from pathlib import WindowsPath
 
@@ -18,7 +19,7 @@ from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
-from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
+from pkg.api.stories import story_load_db, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.nm_window import NightModeWindow
@@ -61,6 +62,16 @@ APP_VERSION = "- @Yakoo - v3.0.0"
 # TODO : 
  """
 
+def natural_sort_key(s):
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
+
+class NaturalSortTreeWidgetItem(QTreeWidgetItem):
+    def __lt__(self, other):
+        col = self.treeWidget().sortColumn()
+        self_data = self.text(col)
+        other_data = other.text(col)
+        return natural_sort_key(self_data) < natural_sort_key(other_data)
+    
 class VLine(QFrame):
     def __init__(self):
         super(VLine, self).__init__()
@@ -1072,7 +1083,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
 
             # create and add item to treeWidget
-            item = QTreeWidgetItem()
+            item = NaturalSortTreeWidgetItem()
 
             item.setText(COL_OFFICIAL_NAME, name)
             item.setText(COL_OFFICIAL_UUID, id)
@@ -1134,7 +1145,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 lunii_story = self.audio_device.stories.get_story(local_story[2])
  
             # create and add item to treeWidget
-            item = QTreeWidgetItem()
+            item = NaturalSortTreeWidgetItem()
 
             if local_story != []:
                 item.setText(COL_THIRD_PARTY_NAME, local_story[0])
@@ -1173,7 +1184,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in id.lower() ):
                 continue
 
-            item = QTreeWidgetItem()
+            item = NaturalSortTreeWidgetItem()
             item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_PATH, path)
             item.setText(COL_THIRD_PARTY_SIZE, f"{size}MB")
