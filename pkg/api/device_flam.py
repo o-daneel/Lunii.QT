@@ -1,3 +1,4 @@
+from glob import glob
 import json
 import os.path
 import shutil
@@ -1465,35 +1466,15 @@ class FlamDevice(QtCore.QObject):
                     last_emit = now
                     last_written = written
 
-    def export_story(self, uuid, out_path):
-        # is UUID part of existing stories
-        if uuid not in self.stories:
-            return None
-
-        slist = self.stories.matching_stories(uuid)
-        if len(slist) > 1:
-            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
-            for st in slist:
-                self.signal_logger.emit(logging.ERROR, f"[{st.str_uuid} - {st.name}]")
-            return None
-
-        one_story = slist[0]
-
-        # checking that .content dir exist
-        content_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
-        if not content_path.is_dir():
-            return None
-        story_path = content_path.joinpath(str(one_story.uuid))
-        if not story_path.is_dir():
-            return None
-
+    def export_backup_story(self, one_story, out_path):
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, f"🚧 Exporting {one_story.short_uuid} - {one_story.name}")
 
         # Preparing zip file
         sname = one_story.name
         sname = secure_filename(sname)
 
-        zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.zip")
+        zip_path = Path(out_path).joinpath(f"{self.snu_str}.{sname}.{one_story.short_uuid}.zip")
         # if os.path.isfile(zip_path):
         #     self.signal_logger.emit(logging.WARNING, f"Already exported")
         #     return None
@@ -1526,6 +1507,221 @@ class FlamDevice(QtCore.QObject):
             return None
 
         return zip_path
+    
+    def export_flam_plainstory(self, one_story, out_path, story_key, story_iv):
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
+        self.signal_logger.emit(logging.INFO, f"🚧 Exporting {one_story.uuid} - {one_story.name}")
+
+        # Preparing zip file
+        sname = one_story.name
+        sname = secure_filename(sname)
+
+        zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.plain.pk")
+        # if os.path.isfile(zip_path):
+        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
+        #     return None
+        
+        # preparing file list
+        story_flist = []
+        story_arcnames = []
+        for root, _, filenames in os.walk(story_path):
+            for filename in filenames:
+                # skipping some of them
+                if filename in ["key", "bt"]:
+                    continue
+
+                abs_file = os.path.join(root, filename)
+
+                # source files list
+                story_flist.append(abs_file)
+
+                # target file in zip
+                file = abs_file.split(str(one_story.uuid).lower())[1]
+                while file.startswith("\\") or file.startswith("/"):
+                    file = file[1:]
+
+                if file.endswith(".lsf"):
+                    file = file.replace(".lsf", ".lua")
+                if file.endswith("info"):
+                    file += ".plain"
+                    
+                story_arcnames.append(file)
+
+        try:
+            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+                self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
+                for index, file in enumerate(story_flist):
+                    self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
+                    # abort requested ? early exit
+                    if self.abort_process:
+                        return None
+
+                    # target file 
+                    target_file = story_arcnames[index]
+
+                    # Extract each file to another directory
+                    # decipher if necessary (*.lsf / info)
+                    with open(file, "rb") as fp:
+                        data = fp.read()
+                    if file.endswith(".lsf") or file.endswith("info"):
+                        data = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
+
+                    zip_out.writestr(target_file, data)
+
+                # adding uuid file
+                self.signal_logger.emit(logging.DEBUG, "> Adding UUID ...")
+                zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
+
+        except PermissionError as e:
+            self.signal_logger.emit(logging.ERROR, f"failed to create ZIP - {e}")
+            return None
+        
+        return zip_path
+
+    def export_lunii_plainstory(self, one_story, out_path, story_key, story_iv):
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
+        self.signal_logger.emit(logging.INFO, f"🚧 Exporting {one_story.uuid} - {one_story.name}")
+
+        # Preparing zip file
+        sname = one_story.name
+        sname = secure_filename(sname)
+
+        zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.plain.pk")
+        # if os.path.isfile(zip_path):
+        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
+        #     return None
+        
+        # preparing file list
+        story_flist = []
+        story_arcnames = []
+        for root, _, filenames in os.walk(story_path):
+            if "img" in root:
+                continue
+
+            for filename in filenames:
+                # skipping some of them
+                if filename in ["key", "bt", "info"]:
+                    continue
+
+                abs_file = os.path.join(root, filename)
+
+                # source files list
+                story_flist.append(abs_file)
+
+                # target file in zip
+                file = abs_file.split(str(one_story.uuid).lower())[1]
+                while file.startswith("\\") or file.startswith("/"):
+                    file = file[1:]
+
+                if "rf/" in file or "rf\\" in file:
+                    file = file+".bmp"
+                if "sf/" in file or "sf\\" in file:
+                    file = file+".mp3"
+                if file.endswith("li") or file.endswith("ri") or file.endswith("si"):
+                    file = file+".plain"
+                    
+                story_arcnames.append(file)
+
+        try:
+            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+                self.signal_logger.emit(logging.DEBUG, "> Zipping story ...")
+                for index, file in enumerate(story_flist):
+                    self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
+                    # abort requested ? early exit
+                    if self.abort_process:
+                        return None
+
+                    # target file 
+                    target_file = story_arcnames[index]
+
+                    # Extract each file to another directory
+                    with open(file, "rb") as fp:
+                        data = fp.read()
+                    if target_file.endswith(".mp3") or target_file.endswith(".bmp") or target_file.endswith(".plain"):
+                        data = self.__aes_decipher(data, story_key, story_iv, 0, 0x200)
+
+                    zip_out.writestr(target_file, data)
+
+                # adding uuid file
+                self.signal_logger.emit(logging.DEBUG, "> Adding UUID ...")
+                zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
+
+                # more files to be added for thirdparty stories
+                if not one_story.is_official():
+                    self.signal_logger.emit(logging.DEBUG, "> Adding thumbnail ...")
+                    pict_data = one_story.get_picture()
+                    if pict_data:
+                        zip_out.writestr(FILE_THUMB, pict_data)
+
+                    self.signal_logger.emit(logging.DEBUG, "> Adding metadata ...")
+                    meta = one_story.get_meta()
+                    if meta:
+                        zip_out.writestr(FILE_META, meta)
+
+        except PermissionError as e:
+            self.signal_logger.emit(logging.ERROR, f"failed to create ZIP - {e}")
+            return None
+        
+        return zip_path
+    
+        print("export_lunii_plainstory")
+        # check for official lunii story
+        if one_story.is_official():
+            # add specific files
+            pass
+        pass
+
+    def export_story(self, uuid, out_path):
+        # is UUID part of existing stories
+        if uuid not in self.stories:
+            return None
+
+        slist = self.stories.matching_stories(uuid)
+        if len(slist) > 1:
+            self.signal_logger.emit(logging.ERROR, f"at least {len(slist)} match your pattern. Try a longer UUID.")
+            for st in slist:
+                self.signal_logger.emit(logging.ERROR, f"[{st.str_uuid} - {st.name}]")
+            return None
+
+        one_story = slist[0]
+
+        # is story path existing ?
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(uuid))
+
+        if os.path.isdir(story_path):
+            # list all files in story directory including subdirs using glob
+            story_files = glob(os.path.join(story_path, "**"), recursive=True)
+
+            # checking for known keys ?
+            exportable = False
+            # reading keyfile in story and compare with known keys
+            story_keyfile = os.path.join(story_path, "key")
+            if os.path.isfile(story_keyfile):  
+                with open(story_keyfile, "rb") as fp_key:
+                    story_keydata = fp_key.read()
+                    exportable = (story_keydata == self.keyfile)
+                    story_key = self.story_key
+                    story_iv = self.story_iv
+            # checking for bt file exists in flam stories
+            story_btfile = os.path.join(story_path, "bt")
+            if not exportable and os.path.isfile(story_btfile):
+                exportable = True
+                with open(story_btfile, "rb") as fp_bt:
+                    story_key = fp_bt.read(16)
+                    story_iv = fp_bt.read(16)
+
+            if not exportable:
+                return self.export_backup_story(one_story, out_path)
+            else:
+                if story_is_flam(story_files):
+                    return self.export_flam_plainstory(one_story, out_path, story_key, story_iv)
+                elif story_is_lunii(story_files):
+                    return self.export_lunii_plainstory(one_story, out_path, reverse_bytes(story_key), reverse_bytes(story_iv))
+                else:
+                    self.signal_logger.emit(logging.ERROR, "This story format is not supported for export.")
+        
+        return None
+    
 
     def __clean_up_story_dir(self, story_uuid: UUID):
         story_dir = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{str(story_uuid)}")

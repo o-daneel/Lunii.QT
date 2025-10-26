@@ -144,10 +144,10 @@ class ierWorker(QObject):
 
             # Official story export is forbidden
             story_to_export = self.audio_device.stories.get_story(str_uuid)
-            if not constants.REFRESH_CACHE and story_to_export.is_official():
-                self.signal_message.emit(self.tr("🛑 Forbidden to export : '{}'").format(story_to_export.name))
-                self.signal_refresh.emit()
-                continue
+            # if not constants.REFRESH_CACHE and story_to_export.is_official():
+            #     self.signal_message.emit(self.tr("🛑 Forbidden to export : '{}'").format(story_to_export.name))
+            #     self.signal_refresh.emit()
+            #     continue
 
             self.signal_total_progress.emit(index, len(self.items))
             
