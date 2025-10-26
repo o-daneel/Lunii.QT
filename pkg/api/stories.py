@@ -458,9 +458,10 @@ class Story:
         return DESC_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
-        return get_picture(self.uuid, reload)
+        one_uuid = str(self.uuid).upper()
+        return get_picture(one_uuid, reload)
 
-    def picture_url(self, uuid: str):
+    def picture_url(self):
         return picture_url(self.uuid)
 
     def get_meta(self):
