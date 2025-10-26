@@ -41,7 +41,7 @@ class FlamDevice(QtCore.QObject):
         self.mount_point = mount_point
 
         # dummy values
-        self.lunii_version = 0
+        self.device_version = UNDEF_DEV
         self.UUID = ""
         self.snu = b""
         self.fw_main = "?.?.?"
@@ -456,10 +456,6 @@ class FlamDevice(QtCore.QObject):
             archive_type = self.__archive_check_flam_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7z):
             archive_type = self.__archive_check_flam_7zcontent(story_path)
-
-        # processing story
-        if archive_type in [TYPE_FLAM_ZIP, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN]:
-            self.signal_logger.emit(logging.WARN, "😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...")
 
         # is flam firmware enough to support Lunii stories ?
         if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_ZIP, TYPE_LUNII_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:

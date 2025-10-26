@@ -88,6 +88,12 @@ class ierWorker(QObject):
     def _task_import(self):
         success = 0
 
+        # on flam device, import is very long. Showing log to notify user
+        if len(self.items) and self.audio_device.device_version == FLAM_V1:
+            self.signal_showlog.emit()
+            self.signal_message.emit(self.tr("😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ..."))
+            self.signal_message.emit(self.tr("Importing stories..."))
+
         # importing selected files
         for index, file in enumerate(self.items):
             if self.abort_process:
