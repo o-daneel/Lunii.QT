@@ -5,7 +5,7 @@ from pathlib import WindowsPath
 import psutil
 import requests
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QTimer
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QStandardItem, QStandardItemModel, QPainter
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QButtonGroup, QListView
@@ -41,11 +41,12 @@ COL_OFFICIAL_PATH = 4
 COL_OFFICIAL_UUID = 5
 COL_OFFICIAL_SIZE = 6
 
-COL_THIRD_PARTY_NAME = 0
-COL_THIRD_PARTY_INSTALLED = 1
-COL_THIRD_PARTY_PATH = 2
-COL_THIRD_PARTY_UUID = 3
-COL_THIRD_PARTY_SIZE = 4
+COL_THIRD_PARTY_AGE = 0
+COL_THIRD_PARTY_NAME = 1
+COL_THIRD_PARTY_INSTALLED = 2
+COL_THIRD_PARTY_PATH = 3
+COL_THIRD_PARTY_UUID = 4
+COL_THIRD_PARTY_SIZE = 5
 
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
@@ -120,6 +121,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker_check_version()
 
         self.showMaximized()
+        self.tw_resize_columns()
 
     def init_ui(self):
         self.setupUi(self)
@@ -158,28 +160,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.setVisible(False)
 
         self.local_db_line_edit.setText(stories.DB_LOCAL_PATH)
-        self.official_story_details.setOpenExternalLinks(True)
+        self.story_details.setOpenExternalLinks(True)
 
         # QTreeWidget for stories
-        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, 300)
+        # self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, 300)
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, 250)
-        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_SIZE, 50)
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
+        # self.tree_stories_official.setColumnWidth(COL_OFFICIAL_SIZE, 50)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.Fixed)  
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
 
-        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, 300)
+        # self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, 300)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, 250)
-        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_SIZE, 50)
-        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
+        # self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_SIZE, 50)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.ResizeToContents)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_PATH, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_UUID, QHeaderView.Fixed)
-        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.Fixed)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
 
         # clean progress bars
         self.lbl_total.setVisible(False)
@@ -229,13 +232,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
 
+        self.splitter.setStretchFactor(0, 0)
+        self.splitter.setStretchFactor(1, 1)
+
+
     # connecting slots and signals
     def setup_connections(self):
 
         self.tabWidget.currentChanged.connect(self.on_tab_changed)
 
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
-        self.le_filter.textChanged.connect(self.ts_update)
+
+        # Adding delay to avoid refreshing on each filter's letters
+        self.filter_timer = QTimer()
+        self.filter_timer.setSingleShot(True)
+        self.filter_timer.setInterval(300)
+
+        self.le_filter.textChanged.connect(self.on_filter_text_changed)
+        self.filter_timer.timeout.connect(self.ts_update)
 
         self.btn_refresh.clicked.connect(self.cb_device_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
@@ -296,13 +310,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return True
         return False
     
+    def on_filter_text_changed(self):
+        self.filter_timer.start()
+    
     def on_tab_changed(self):
-        self.official_story_details.setText("")
+        self.story_details.setText("")
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
 
     def stories_toggle_mode(self, button, checked):
-        self.official_story_details.setText("")
+        self.story_details.setText("")
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
         if checked:
@@ -319,13 +336,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # 1. forcing UUID to be at min size by huge name size
         self.tree_stories.setColumnWidth(COL_NAME, 4096)
+        self.tree_stories_official.resizeColumnToContents(COL_OFFICIAL_NAME)
+        self.tree_stories_third_party.resizeColumnToContents(COL_THIRD_PARTY_NAME)
         # 2. force resize to content
         self.tree_stories.resizeColumnToContents(COL_UUID)
         self.tree_stories.resizeColumnToContents(COL_SIZE)
+        self.tree_stories_official.resizeColumnToContents(COL_OFFICIAL_SIZE)
+        self.tree_stories_third_party.resizeColumnToContents(COL_THIRD_PARTY_SIZE)
         # 3. get cur size
         col_uuid_size = self.tree_stories.columnWidth(COL_UUID)
         col_size_size = self.tree_stories.columnWidth(COL_SIZE)
-
         # 4. update the name col while keeping uuid size
         col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
         if self.audio_device and self.audio_device.device_version == FLAM_V1:
@@ -579,7 +599,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     title = stories.DB_OFFICIAL[uuid]["localized_infos"][locale].get("title", "")
                     subtitle = stories.DB_OFFICIAL[uuid]["localized_infos"][locale].get("subtitle", "")
                     url = os.path.join(CACHE_DIR, uuid)
-                    self.official_story_details.setHtml(
+                    self.story_details.setHtml(
                         "<img src=\"" + url + "\"/><br>"
                         + "<h2>" + title + "</h2>"
                         + "<h3>" + subtitle + "</h3>" 
@@ -588,12 +608,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     description = stories.DB_THIRD_PARTY[uuid].get("description")
                     title = stories.DB_THIRD_PARTY[uuid].get("title")
                     url = os.path.join(CACHE_DIR, uuid)
-                    self.official_story_details.setHtml(
+                    self.story_details.setHtml(
                         "<img src=\"" + url + "\"/><br>"
                         + "<h2>" + title + "</h2>"
                         + description)
                 else:
-                    self.official_story_details.setHtml("")
+                    self.story_details.setHtml("")
 
         elif self.tabWidget.currentIndex() == 1:
             id = None
@@ -622,7 +642,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 title = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("title", "")
                 subtitle = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("subtitle", "")
                 url = os.path.join(CACHE_DIR, id)
-                self.official_story_details.setHtml(
+                self.story_details.setHtml(
                     "<img src=\"" + url + "\"/><br>"
                     + "<h2>" + title + "</h2>"
                     + "<h3>" + subtitle + "</h3>" 
@@ -642,10 +662,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
                 title = stories.DB_THIRD_PARTY[id].get("title", "")
                 url = os.path.join(CACHE_DIR, id)
-                self.official_story_details.setHtml(
+                self.story_details.setHtml(
                     "<img src=\"" + url + "\"/><br>"
                     + "<h2>" + title + "</h2>"
                     + description)
+            else:
+                self.story_details.setHtml("")
+
         return
     
     def cb_db_refresh(self):
@@ -1073,12 +1096,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # getting filter text
         le_filter = self.le_filter.text()
 
-        files_in_local_db = []
+        files_in_local_db_by_name = []
+        files_in_local_db_by_id = []
 
         # adding items from DB
         for id in stories.DB_THIRD_PARTY:
             name = stories.DB_THIRD_PARTY[id]["title"]
-            files_in_local_db.append(stories.encode_name(name))
+            files_in_local_db_by_name.append(stories.encode_name(name))
+            files_in_local_db_by_id.append(id)
 
             # filtering 
             if (le_filter and name is not None and name != "" and
@@ -1086,13 +1111,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in id.lower() ):
                 continue
 
-            local_story = stories.get_story_in_local_third_party_db(name)
-            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+            local_story = stories.get_story_by_id_in_local_third_party_db(id)
 
+            if local_story == []:
+                local_story = stories.get_story_by_name_in_local_third_party_db(name)
+ 
+            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+            if lunii_story is None and self.audio_device is not None and len(local_story) > 0 and local_story[2] != "":
+                lunii_story = self.audio_device.stories.get_story(local_story[2])
+ 
             # create and add item to treeWidget
             item = QTreeWidgetItem()
 
-            item.setText(COL_THIRD_PARTY_NAME, name)
+            if local_story != []:
+                item.setText(COL_THIRD_PARTY_NAME, local_story[0])
+            else:
+                item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_UUID, id)
             item.setFont(COL_THIRD_PARTY_UUID, console_font)
             if lunii_story is not None:
@@ -1101,6 +1135,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if local_story != []:
                 path = local_story[1]
                 item.setText(COL_THIRD_PARTY_PATH, local_story[1])
+                item.setText(COL_THIRD_PARTY_AGE, local_story[3])
                 item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))/1024/1024, 1)}MB")
             elif self.unavailable_hidden:
                 continue
@@ -1108,12 +1143,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tree_stories_third_party.addTopLevelItem(item)
 
         # adding items from Local Path
-        for encoded_name in stories.DB_THIRD_PARTY_LOCAL:
-            if encoded_name in files_in_local_db:
+        for encoded_name in stories.DB_THIRD_PARTY_LOCAL_BY_NAME:
+            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][0]
+            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][1]
+            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2]
+            age = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][3]
+            
+            if encoded_name in files_in_local_db_by_name or uuid in files_in_local_db_by_id:
                 continue
 
-            name = stories.DB_THIRD_PARTY_LOCAL[encoded_name][0]
-            path = stories.DB_THIRD_PARTY_LOCAL[encoded_name][1]
             size = round(os.path.getsize(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))/1024/1024, 1)
 
             # filtering 
@@ -1126,6 +1164,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_PATH, path)
             item.setText(COL_THIRD_PARTY_SIZE, f"{size}MB")
+            item.setText(COL_THIRD_PARTY_UUID, uuid)
+            item.setText(COL_THIRD_PARTY_AGE, age)
 
             self.tree_stories_third_party.addTopLevelItem(item)
 
@@ -1581,6 +1621,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # UI limitations
         self.btn_db.setEnabled(False)
         self.tree_stories.setEnabled(False)
+        self.tree_stories_official.setEnabled(False)
+        self.tree_stories_third_party.setEnabled(False)
+        self.list_stories_official.setEnabled(False)
+        self.tabWidget.setEnabled(False)
+        self.radio_tree_gallery.setEnabled(False)
+        self.radio_tree_table.setEnabled(False)
+        self.add_story_button.setEnabled(False)
+        self.remove_story_button.setEnabled(False)
         self.btn_refresh.setEnabled(False)
         self.combo_device.setEnabled(False)
 
@@ -1639,6 +1687,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # print("SLOT FINISHED")
         # updating UI
         self.tree_stories.setEnabled(True)
+        self.tree_stories_official.setEnabled(True)
+        self.tree_stories_third_party.setEnabled(True)
+        self.list_stories_official.setEnabled(True)
+        self.tabWidget.setEnabled(True)
+        self.radio_tree_gallery.setEnabled(True)
+        self.radio_tree_table.setEnabled(True)
+        self.add_story_button.setEnabled(True)
+        self.remove_story_button.setEnabled(True)
         self.btn_db.setEnabled(True)
         self.btn_refresh.setEnabled(True)
         self.combo_device.setEnabled(True)

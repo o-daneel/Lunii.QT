@@ -19,7 +19,8 @@ DB_OFFICIAL = {}
 DB_THIRD_PARTY = {}
 DB_LOCAL = {}
 DB_LOCAL_PATH = DEFAULT_DB_LOCAL_PATH
-DB_THIRD_PARTY_LOCAL = {}
+DB_THIRD_PARTY_LOCAL_BY_NAME = {}
+DB_THIRD_PARTY_LOCAL_BY_ID = {}
 DB_THIRD_PARTY_LOCAL_PATH = DEFAULT_THIRD_PARTY_DB_LOCAL_PATH
 
 NODE_SIZE = 0x2C
@@ -237,15 +238,30 @@ def story_load_local_db():
                     DB_LOCAL[encode_name(name)] = [name, filename, "", ""]
                     
 def story_load_third_party_local_db():
-    global DB_THIRD_PARTY_LOCAL
-    DB_THIRD_PARTY_LOCAL = {}
+    global DB_THIRD_PARTY_LOCAL_BY_NAME, DB_THIRD_PARTY_LOCAL_BY_ID
+    DB_THIRD_PARTY_LOCAL_BY_NAME = {}
+    DB_THIRD_PARTY_LOCAL_BY_ID = {}
 
     if os.path.isdir(DB_THIRD_PARTY_LOCAL_PATH):
         for filename in os.listdir(DB_THIRD_PARTY_LOCAL_PATH):
             if os.path.isfile(os.path.join(DB_THIRD_PARTY_LOCAL_PATH, filename)) and EXT_ZIP in filename:
-                name = filename.replace(EXT_ZIP, "")
-                DB_THIRD_PARTY_LOCAL[encode_name(name)] = [name, filename, "", ""]
+                if "+ " in filename:
+                    elems = filename.split("+ ")
+                    age = elems[0]
+                    filename_without_age = elems[1]
+                else:
+                    age = ""
+                    filename_without_age = filename
 
+                if " # " in filename:
+                    elems = filename_without_age.split(" # ")
+                    name = elems[0]
+                    uuid = elems[1].replace(EXT_ZIP, "")
+                    DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, uuid, age]
+                    DB_THIRD_PARTY_LOCAL_BY_ID[uuid.lower()] = [name, filename, uuid, age]
+                else:
+                    name = filename_without_age.replace(EXT_ZIP, "")
+                    DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, "", age]
 
 def story_load_db(reload=False):
     global DB_OFFICIAL
@@ -326,10 +342,13 @@ def get_story_in_local_db(name: str):
 
     return [] if not encoded_name in DB_LOCAL else DB_LOCAL[encoded_name]
 
-def get_story_in_local_third_party_db(name: str):
+def get_story_by_name_in_local_third_party_db(name: str):
     encoded_name = encode_name(name)
 
-    return [] if not encoded_name in DB_THIRD_PARTY_LOCAL else DB_THIRD_PARTY_LOCAL[encoded_name]
+    return [] if not encoded_name in DB_THIRD_PARTY_LOCAL_BY_NAME else DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name]
+
+def get_story_by_id_in_local_third_party_db(id: str):
+    return [] if not id.lower() in DB_THIRD_PARTY_LOCAL_BY_ID else DB_THIRD_PARTY_LOCAL_BY_ID[id.lower()]
 
 def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
     # creating cache dir if necessary
