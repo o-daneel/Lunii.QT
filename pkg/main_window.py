@@ -1096,6 +1096,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.hidden = not one_story.hidden
             items_to_hide.append(self.tree_stories.indexOfTopLevelItem(item))
+            
+            # moving to hidden directory
+            story_dir = os.path.join(self.audio_device.mount_point, self.audio_device.STORIES_BASEDIR)
+            story_hiddendir = os.path.join(self.audio_device.mount_point, self.audio_device.HIDDEN_STORIES_BASEDIR)
+
+            # moving story directory to hidden directory
+            try:
+                if one_story.hidden:
+                    # creating hidden dir if not exists
+                    os.makedirs(story_hiddendir, exist_ok=True)
+                    story_dir = os.path.join(story_dir, one_story.str_uuid.lower() if self.audio_device.device_version == FLAM_V1 else one_story.short_uuid)
+                    if os.path.isdir(story_dir):
+                        shutil.move(story_dir, story_hiddendir)
+                    else:
+                        one_story.hidden = not one_story.hidden
+                        self.logger.log(logging.ERROR, f"Story dir {story_dir} does not exist or already hidden")
+                        self.logger.log(logging.INFO, f"💡 Try to use menu 'Tools/Recover or Remove lost stories' to fix it")
+                        self.sb_update(self.tr("🛑 Unable to update story ..."))
+                        self.cb_show_log()
+                        return
+                else:
+                    # moving back to stories dir
+                    os.makedirs(story_dir, exist_ok=True)
+                    story_hiddendir = os.path.join(story_hiddendir, one_story.str_uuid.lower() if self.audio_device.device_version == FLAM_V1 else one_story.short_uuid)
+                    if os.path.isdir(story_hiddendir):
+                        shutil.move(story_hiddendir, story_dir)
+                    else:
+                        one_story.hidden = not one_story.hidden
+                        self.logger.log(logging.ERROR, f"Hidden story dir {story_hiddendir} does not exist or already visible")
+                        self.logger.log(logging.INFO, f"💡 Try to use menu 'Tools/Recover or Remove lost stories' to fix it")
+                        self.sb_update(self.tr("🛑 Unable to update story ..."))
+                        self.cb_show_log()
+                        return
+            except shutil.Error as e:
+                one_story.hidden = not one_story.hidden
+                self.logger.log(logging.ERROR, f"Error occurred while moving story directories: {e}")
+                self.logger.log(logging.INFO, f"💡 Try to use menu 'Tools/Recover or Remove lost stories' to fix it")
+                self.sb_update(self.tr("🛑 Unable to update story ..."))
+                self.cb_show_log()
+                return
 
         # updating pack index file and display
         self.audio_device.update_pack_index()

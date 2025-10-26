@@ -31,6 +31,7 @@ LIB_CACHE = "usr/0/library.cache"
 
 class FlamDevice(QtCore.QObject):
     STORIES_BASEDIR = "str/"
+    HIDDEN_STORIES_BASEDIR = "str.hidden/"
 
     signal_story_progress = QtCore.Signal(str, int, int)
     signal_file_progress = QtCore.Signal(str, int, int)
@@ -177,16 +178,30 @@ class FlamDevice(QtCore.QObject):
     def __valid_story(self, story_dir):
         return True
 
+    # try to recover lost stories from ./str and ./str.hidden directory
     def recover_stories(self, dry_run: bool):
         recovered = 0
 
+        stories_uuid_found = []
         # getting all stories
         content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
-        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        try:
+            contents = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+            stories_uuid_found.extend(contents)
+            stories_active = [os.path.join(content_dir, entry) for entry in contents]
+        except FileNotFoundError:
+            return recovered
+        # getting all hidden stories
+        hidden_content_dir = os.path.join(self.mount_point, self.HIDDEN_STORIES_BASEDIR)
+        try:
+            stories_uuid_found.extend([entry for entry in os.listdir(hidden_content_dir) if os.path.isdir(os.path.join(hidden_content_dir, entry))])
+        except FileNotFoundError:
+            return recovered
+        stories_uuid_found.sort()
 
-        for index, story in enumerate(stories_dir):
+        for index, story in enumerate(stories_uuid_found):
             # directory is a partial UUID
-            self.signal_story_progress.emit(story, index, len(stories_dir))
+            self.signal_story_progress.emit(story, index, len(stories_uuid_found))
 
             str_uuid = None
             # looking complete UUID in official DB
@@ -205,8 +220,12 @@ class FlamDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.DEBUG, f"Not a valid UUID - {str_uuid}")
                 continue
 
-            one_story = Story(full_uuid)
-            story_dir = os.path.join(content_dir, story)
+            hidden = os.path.join(self.mount_point, self.STORIES_BASEDIR, story) not in stories_active
+            if hidden:
+                story_dir = os.path.join(hidden_content_dir, story)
+            else:
+                story_dir = os.path.join(content_dir, story)
+            one_story = Story(full_uuid, hidden=hidden)
 
             if str_uuid not in self.stories:
                 # Lost Story
@@ -215,7 +234,7 @@ class FlamDevice(QtCore.QObject):
                     # is it a dry run ?
                     if not dry_run:
                         self.signal_logger.emit(logging.INFO, f"Recovered - {str(full_uuid).upper()} - {one_story.name}")
-                        self.stories.append(Story(full_uuid))
+                        self.stories.append(one_story)
                     else:
                         self.signal_logger.emit(logging.INFO, f"Found - {str(full_uuid).upper()} - {one_story.name}")
                     recovered += 1
@@ -234,18 +253,31 @@ class FlamDevice(QtCore.QObject):
         removed = 0
         recovered_size = 0
 
+        stories_uuid_found = []
         # getting all stories
         content_dir = os.path.join(self.mount_point, self.STORIES_BASEDIR)
-        stories_dir = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        contents = [entry for entry in os.listdir(content_dir) if os.path.isdir(os.path.join(content_dir, entry))]
+        stories_uuid_found.extend(contents)
+        stories_active = [os.path.join(content_dir, entry) for entry in contents]
 
-        for index, story in enumerate(stories_dir):
+        # getting all hidden stories
+        hidden_content_dir = os.path.join(self.mount_point, self.HIDDEN_STORIES_BASEDIR)
+        stories_uuid_found.extend([entry for entry in os.listdir(hidden_content_dir) if os.path.isdir(os.path.join(hidden_content_dir, entry))])
+        
+        stories_uuid_found.sort()
+
+        for index, story in enumerate(stories_uuid_found):
             # directory is a partial UUID
-            self.signal_story_progress.emit(story, index, len(stories_dir))
+            self.signal_story_progress.emit(story, index, len(stories_uuid_found))
 
             if story not in self.stories:
                 # remove it
                 try:
-                    lost_story_path = os.path.join(content_dir, story)
+                    hidden = os.path.join(self.mount_point, self.STORIES_BASEDIR, story) not in stories_active
+                    if hidden:
+                        lost_story_path = os.path.join(hidden_content_dir, story)
+                    else:
+                        lost_story_path = os.path.join(content_dir, story)
 
                     # computing lost size
                     for parent_dir, _, files in os.walk(lost_story_path):

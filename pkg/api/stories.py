@@ -475,7 +475,6 @@ class Story:
         global DB_OFFICIAL
         return str(self.uuid).upper() in DB_OFFICIAL
 
-
 class StoryList(List[Story]):
     def __init__(self):
         super().__init__()
