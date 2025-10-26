@@ -7,17 +7,20 @@ for Windows / Linux / macOS
 
 > **FAQ :** Please refer to already asked questions on [Discussions](https://github.com/o-daneel/Lunii.QT/discussions) section, or refer to revelant [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
 
-### 😎 Lunii v3 & Firmware 3.2.x 😎
+# Breaking news
+* 😎 **Flam support** 😎  
+The application now allows importing Lunii stories onto your Flam, provided it is running firmware v2.x.x.  
+   > **Warning:** the Flam is VERY slow over USB. Please be patient.
 
+* 😎 **Lunii v3 & Firmware 3.2.x** 😎  
 Lunii.QT has been updated to support the latest firmware (3.2.2 and later). Thanks to a longer analysis (I should have spent 10 more minutes at the first sight to connect neurons), **a stable** and **VERY simple** workaround has been found.  
 Forget about all previous .md and firmware recommendations.
-
-> **Reminder :** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
+   > **Reminder:** Keep your v3 Firmware files safe (you can always downgrade) and keep away from automatic upgrades
 
 ### Hardware supported:
-* **v1, v2**  (full Support, but export blocked)
-* **v3**  (v6 and v7 md files supported 💪🏻, export requires device key file)  
-* **Flam** (partial support with personal backup, only reorder and firmware backup)
+* **v1, v2**  (full Support)
+* **v3**  (v6 and v7 md files supported 💪🏻, personal backup only)  
+* **Flam** (full Support, personal backup only)
 
 ### Limitations
 * Application <u>no longer</u> allows Lunii Official stories to be exported (due to piracy)  

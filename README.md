@@ -7,17 +7,20 @@ pour Windows / Linux / MacOs 11
 (compatible avec les archives STUdio, **avec** support de la conversion audio)
 > **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 
-### 😎 Lunii v3 & Firmware 3.2.x 😎
+# Nouveautés
+*  😎 **Flam support** 😎  
+L'application permet désormais d'importer les histoires Lunii sur votre Flam, sous réserve qu'elle soit en firmware v2.x.x  
+    > **Attention :** la Flam est TRES lente en usb. Il faut etre patient.
 
+* 😎 **Lunii v3 & Firmware 3.2.x** 😎  
 Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Grâce à une analyse approfondie (j’aurais dû connecter les neurones et réfléchir 10 minutes de plus à la premère analyse), une solution **stable** et **TRÈS simple** a été trouvée.  
 Oubliez toutes les anciennes manipulations concernant les fichiers .md et le firmware.
-
-> **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours rétrograder) et évitez les mises à jour automatiques.
+  > **Rappel :** Gardez précieusement vos fichiers firmware v3 (vous pourrez toujours rétrograder) et évitez les mises à jour automatiques.
 
 ### Matériels pris en charge :
-* **Fah v1** et **v2** (support complet mais export bloqué)
-* **Fah v3** (fichiers md v6 et v7 supportés, l'export requiert les clés de la Fah)
-* **Flam** (support partiel avec sauvegardes personnelles, tri des histoires et sauvegarde du firmware)
+* **Fah v1** et **v2** (support complet)
+* **Fah v3** (fichiers md v6 et v7 supportés, sauvegardes personnelles uniquement)
+* **Flam** (support complet, sauvegardes personnelles uniquement)
 
 ### Limitations :
 * L'application <u>n'autorise plus</u> d'exporter les histoires officielles pour les Lunii, à cause du piratage.  
