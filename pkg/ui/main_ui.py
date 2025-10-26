@@ -646,7 +646,7 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(MainWindow.close)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

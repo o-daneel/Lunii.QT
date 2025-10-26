@@ -51,6 +51,7 @@ COL_THIRD_PARTY_SIZE = 5
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
+COL_NAME_MIN_SIZE = 500
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
@@ -140,6 +141,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
+        self.tree_stories.setColumnWidth(COL_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories.header().setSectionResizeMode(COL_NAME, QHeaderView.Stretch)
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
         self.tree_stories.header().setSectionResizeMode(COL_NM, QHeaderView.Fixed)
@@ -164,6 +166,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # QTreeWidget for stories
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
@@ -173,6 +176,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
 
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
+        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_PATH, QHeaderView.ResizeToContents)
@@ -939,9 +943,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selectionModel = self.list_stories_official.selectionModel()
         if selectionModel is not None:
             selectionModel.currentChanged.connect(self.story_selected)
-
-        # update status in status bar
-        # self.sb_update_summary()
 
     def ts_populate(self):
         # empty device
