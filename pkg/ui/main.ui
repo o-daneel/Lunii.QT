@@ -267,9 +267,15 @@
            <property name="itemsExpandable">
             <bool>true</bool>
            </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
            <property name="allColumnsShowFocus">
             <bool>true</bool>
            </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
            <column>
             <property name="text">
              <string>Story Name</string>
@@ -334,6 +340,23 @@
            </item>
            <item>
             <property name="text">
+             <string notr="true">Sur les bancs de l'école</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="text">
+             <string notr="true">C</string>
+            </property>
+            <property name="text">
+             <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+            </property>
+            <property name="text">
+             <string notr="true">25MB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
              <string notr="true">Panique aux 6 Royaumes</string>
             </property>
             <property name="text">
@@ -369,23 +392,6 @@
             </property>
             <property name="text">
              <string notr="true">124MB</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string notr="true">Sur les bancs de l'école</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="text">
-             <string notr="true">C</string>
-            </property>
-            <property name="text">
-             <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
-            </property>
-            <property name="text">
-             <string notr="true">25MB</string>
             </property>
            </item>
           </widget>
@@ -554,7 +560,7 @@
                 <bool>true</bool>
                </property>
                <property name="itemsExpandable">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="sortingEnabled">
                 <bool>true</bool>
@@ -563,8 +569,11 @@
                 <bool>true</bool>
                </property>
                <property name="expandsOnDoubleClick">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
+               <attribute name="headerStretchLastSection">
+                <bool>false</bool>
+               </attribute>
                <column>
                 <property name="text">
                  <string>Age</string>
@@ -715,7 +724,7 @@
             <bool>true</bool>
            </property>
            <property name="itemsExpandable">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="sortingEnabled">
             <bool>true</bool>
@@ -724,8 +733,11 @@
             <bool>true</bool>
            </property>
            <property name="expandsOnDoubleClick">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
            <column>
             <property name="text">
              <string>Age</string>

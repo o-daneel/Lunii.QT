@@ -121,7 +121,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker_check_version()
 
         self.showMaximized()
-        self.tw_resize_columns()
+        self.debug_dialog.hide()
 
     def init_ui(self):
         self.setupUi(self)
@@ -140,15 +140,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
+        self.tree_stories.header().setSectionResizeMode(COL_NAME, QHeaderView.Stretch)
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
-        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.ResizeToContents)
-        # self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.header().setSectionResizeMode(COL_NM, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_SIZE, QHeaderView.Fixed)
+        self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
-        # self.tree_stories.setColumnHidden(COL_DB, True)
-        # self.tree_stories.setColumnWidth(COL_UUID, 250)
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
-        # self.tree_stories.setColumnWidth(COL_SIZE, 50)
 
         self.radio_tree_official_stories = QButtonGroup()
         self.radio_tree_official_stories.addButton(self.radio_tree_table)
@@ -163,10 +163,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.story_details.setOpenExternalLinks(True)
 
         # QTreeWidget for stories
-        # self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, 300)
-        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, 250)
-        # self.tree_stories_official.setColumnWidth(COL_OFFICIAL_SIZE, 50)
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.ResizeToContents)
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
@@ -174,10 +172,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
 
-        # self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, 300)
-        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, 250)
-        # self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_SIZE, 50)
-        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.ResizeToContents)
+        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_AGE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_PATH, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_INSTALLED, QHeaderView.ResizeToContents)
@@ -305,9 +301,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             elif event.type() == QtCore.QEvent.Drop:
                 self.ts_drop_action(event)
                 return True
-            elif event.type() == QtCore.QEvent.Resize:
-                self.tw_resize_columns()
-                return True
         return False
     
     def on_filter_text_changed(self):
@@ -330,30 +323,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 self.tree_stories_official.hide()
                 self.list_stories_official.show()
-
-    def tw_resize_columns(self):
-        # Adjusting cols based on widget size
-
-        # 1. forcing UUID to be at min size by huge name size
-        self.tree_stories.setColumnWidth(COL_NAME, 4096)
-        self.tree_stories_official.resizeColumnToContents(COL_OFFICIAL_NAME)
-        self.tree_stories_third_party.resizeColumnToContents(COL_THIRD_PARTY_NAME)
-        # 2. force resize to content
-        self.tree_stories.resizeColumnToContents(COL_UUID)
-        self.tree_stories.resizeColumnToContents(COL_SIZE)
-        self.tree_stories_official.resizeColumnToContents(COL_OFFICIAL_SIZE)
-        self.tree_stories_third_party.resizeColumnToContents(COL_THIRD_PARTY_SIZE)
-        # 3. get cur size
-        col_uuid_size = self.tree_stories.columnWidth(COL_UUID)
-        col_size_size = self.tree_stories.columnWidth(COL_SIZE)
-        # 4. update the name col while keeping uuid size
-        col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
-        if self.audio_device and self.audio_device.device_version == FLAM_V1:
-            col_size_width += COL_NM_SIZE
-        if not self.sizes_hidden:
-            col_size_width -= col_size_size
-        col_size_width -= COL_EXTRA
-        self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
 
     def __set_dbg_wndSize(self):
         # Move the sub-window alongside the main window
@@ -515,7 +484,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # widgets update with new device
             self.ts_update()
-            self.tw_resize_columns()
             self.sb_update("")
 
             # night mode section

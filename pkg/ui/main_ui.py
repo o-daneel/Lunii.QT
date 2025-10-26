@@ -283,22 +283,22 @@ class Ui_MainWindow(object):
         __qtreewidgetitem1.setText(2, u"O");
         __qtreewidgetitem1.setText(0, u"Suzanne et Gaston");
         __qtreewidgetitem2 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem2.setText(4, u"65MB");
-        __qtreewidgetitem2.setText(3, u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9");
-        __qtreewidgetitem2.setFont(3, font1);
-        __qtreewidgetitem2.setText(2, u"O");
-        __qtreewidgetitem2.setText(1, u"z");
-        __qtreewidgetitem2.setText(0, u"Panique aux 6 Royaumes");
+        __qtreewidgetitem2.setText(4, u"25MB");
+        __qtreewidgetitem2.setText(3, u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C");
+        __qtreewidgetitem2.setText(2, u"C");
+        __qtreewidgetitem2.setText(0, u"Sur les bancs de l'\u00e9cole");
         __qtreewidgetitem3 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem3.setText(4, u"124MB");
-        __qtreewidgetitem3.setText(3, u"22137B29-8646-4335-8069-4A4C9A2D7E89");
+        __qtreewidgetitem3.setText(4, u"65MB");
+        __qtreewidgetitem3.setText(3, u"03933BA4-4FBF-475F-9ECC-35EFB4D11DC9");
+        __qtreewidgetitem3.setFont(3, font1);
         __qtreewidgetitem3.setText(2, u"O");
-        __qtreewidgetitem3.setText(0, u"Au Pays des Loups");
+        __qtreewidgetitem3.setText(1, u"z");
+        __qtreewidgetitem3.setText(0, u"Panique aux 6 Royaumes");
         __qtreewidgetitem4 = QTreeWidgetItem(self.tree_stories)
-        __qtreewidgetitem4.setText(4, u"25MB");
-        __qtreewidgetitem4.setText(3, u"29264ADF-5A9F-451A-B1EC-2AE21BBA473C");
-        __qtreewidgetitem4.setText(2, u"C");
-        __qtreewidgetitem4.setText(0, u"Sur les bancs de l'\u00e9cole");
+        __qtreewidgetitem4.setText(4, u"124MB");
+        __qtreewidgetitem4.setText(3, u"22137B29-8646-4335-8069-4A4C9A2D7E89");
+        __qtreewidgetitem4.setText(2, u"O");
+        __qtreewidgetitem4.setText(0, u"Au Pays des Loups");
         self.tree_stories.setObjectName(u"tree_stories")
         self.tree_stories.setMinimumSize(QSize(0, 150))
         self.tree_stories.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -312,7 +312,9 @@ class Ui_MainWindow(object):
         self.tree_stories.setIndentation(20)
         self.tree_stories.setRootIsDecorated(True)
         self.tree_stories.setItemsExpandable(True)
+        self.tree_stories.setSortingEnabled(True)
         self.tree_stories.setAllColumnsShowFocus(True)
+        self.tree_stories.header().setStretchLastSection(False)
 
         self.verticalLayout_3.addWidget(self.tree_stories)
 
@@ -399,10 +401,11 @@ class Ui_MainWindow(object):
         self.tree_stories_official.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.tree_stories_official.setIndentation(20)
         self.tree_stories_official.setRootIsDecorated(True)
-        self.tree_stories_official.setItemsExpandable(False)
+        self.tree_stories_official.setItemsExpandable(True)
         self.tree_stories_official.setSortingEnabled(True)
         self.tree_stories_official.setAllColumnsShowFocus(True)
-        self.tree_stories_official.setExpandsOnDoubleClick(False)
+        self.tree_stories_official.setExpandsOnDoubleClick(True)
+        self.tree_stories_official.header().setStretchLastSection(False)
 
         self.verticalLayout.addWidget(self.tree_stories_official)
 
@@ -460,10 +463,11 @@ class Ui_MainWindow(object):
         self.tree_stories_third_party.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.tree_stories_third_party.setIndentation(20)
         self.tree_stories_third_party.setRootIsDecorated(True)
-        self.tree_stories_third_party.setItemsExpandable(False)
+        self.tree_stories_third_party.setItemsExpandable(True)
         self.tree_stories_third_party.setSortingEnabled(True)
         self.tree_stories_third_party.setAllColumnsShowFocus(True)
-        self.tree_stories_third_party.setExpandsOnDoubleClick(False)
+        self.tree_stories_third_party.setExpandsOnDoubleClick(True)
+        self.tree_stories_third_party.header().setStretchLastSection(False)
 
         self.verticalLayout_5.addWidget(self.tree_stories_third_party)
 
@@ -642,7 +646,7 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(MainWindow.close)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
