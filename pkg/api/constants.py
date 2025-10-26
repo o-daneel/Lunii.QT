@@ -39,6 +39,7 @@ OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
 
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
 DEFAULT_DB_LOCAL_PATH = os.path.join(CFG_DIR, "Lunii Library")
+DEFAULT_THIRD_PARTY_DB_LOCAL_PATH = os.path.join(CFG_DIR, "Third Party Library")
 CACHE_DIR = os.path.join(CFG_DIR, "cache")
 FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")

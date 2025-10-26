@@ -18,18 +18,18 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QLineEdit, QListView, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QStatusBar,
-    QTabWidget, QTextBrowser, QTreeWidget, QTreeWidgetItem,
-    QVBoxLayout, QWidget)
+    QLineEdit, QListView, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QRadioButton,
+    QSizePolicy, QSpacerItem, QStatusBar, QTabWidget,
+    QTextBrowser, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(917, 587)
+        MainWindow.resize(917, 589)
         MainWindow.setMinimumSize(QSize(500, 0))
         icon = QIcon()
         icon.addFile(u":/icon/res/lunii.ico", QSize(), QIcon.Normal, QIcon.Off)
@@ -98,10 +98,10 @@ class Ui_MainWindow(object):
         icon6 = QIcon()
         icon6.addFile(u":/icon/res/fw.png", QSize(), QIcon.Normal, QIcon.Off)
         self.actionGet_firmware.setIcon(icon6)
-        self.actionShow_story_details = QAction(MainWindow)
-        self.actionShow_story_details.setObjectName(u"actionShow_story_details")
-        self.actionShow_story_details.setCheckable(True)
-        self.actionShow_story_details.setChecked(True)
+        self.actionShow_unavailable = QAction(MainWindow)
+        self.actionShow_unavailable.setObjectName(u"actionShow_unavailable")
+        self.actionShow_unavailable.setCheckable(True)
+        self.actionShow_unavailable.setChecked(True)
         self.actionMove_Top = QAction(MainWindow)
         self.actionMove_Top.setObjectName(u"actionMove_Top")
         icon7 = QIcon()
@@ -247,6 +247,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.top_layout)
 
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabLuniiContent = QWidget()
@@ -311,105 +313,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.tree_stories)
 
-        self.prognstopLayout = QHBoxLayout()
-        self.prognstopLayout.setObjectName(u"prognstopLayout")
-        self.progressLayout = QVBoxLayout()
-        self.progressLayout.setSpacing(0)
-        self.progressLayout.setObjectName(u"progressLayout")
-        self.totalLayout = QHBoxLayout()
-        self.totalLayout.setSpacing(6)
-        self.totalLayout.setObjectName(u"totalLayout")
-        self.lbl_total = QLabel(self.tabLuniiContent)
-        self.lbl_total.setObjectName(u"lbl_total")
-        self.lbl_total.setMinimumSize(QSize(80, 0))
-        self.lbl_total.setFrameShape(QFrame.Shape.Panel)
-        self.lbl_total.setFrameShadow(QFrame.Shadow.Sunken)
-        self.lbl_total.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.totalLayout.addWidget(self.lbl_total)
-
-        self.pbar_total = QProgressBar(self.tabLuniiContent)
-        self.pbar_total.setObjectName(u"pbar_total")
-        self.pbar_total.setMaximumSize(QSize(16777215, 10))
-        self.pbar_total.setValue(24)
-        self.pbar_total.setTextVisible(False)
-
-        self.totalLayout.addWidget(self.pbar_total)
-
-
-        self.progressLayout.addLayout(self.totalLayout)
-
-        self.storyLayout = QHBoxLayout()
-        self.storyLayout.setSpacing(6)
-        self.storyLayout.setObjectName(u"storyLayout")
-        self.lbl_story = QLabel(self.tabLuniiContent)
-        self.lbl_story.setObjectName(u"lbl_story")
-        self.lbl_story.setMinimumSize(QSize(80, 0))
-        self.lbl_story.setFrameShape(QFrame.Shape.Panel)
-        self.lbl_story.setFrameShadow(QFrame.Shadow.Sunken)
-        self.lbl_story.setText(u"8B_UUID")
-        self.lbl_story.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.storyLayout.addWidget(self.lbl_story)
-
-        self.pbar_story = QProgressBar(self.tabLuniiContent)
-        self.pbar_story.setObjectName(u"pbar_story")
-        self.pbar_story.setMaximumSize(QSize(16777215, 10))
-        self.pbar_story.setValue(24)
-        self.pbar_story.setTextVisible(False)
-
-        self.storyLayout.addWidget(self.pbar_story)
-
-
-        self.progressLayout.addLayout(self.storyLayout)
-
-
-        self.prognstopLayout.addLayout(self.progressLayout)
-
-        self.btn_abort = QPushButton(self.tabLuniiContent)
-        self.btn_abort.setObjectName(u"btn_abort")
-        self.btn_abort.setIcon(icon5)
-        self.btn_abort.setIconSize(QSize(24, 24))
-
-        self.prognstopLayout.addWidget(self.btn_abort)
-
-
-        self.verticalLayout_3.addLayout(self.prognstopLayout)
-
-        self.details_layout = QHBoxLayout()
-        self.details_layout.setObjectName(u"details_layout")
-        self.details_layout.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
-        self.lbl_picture = QLabel(self.tabLuniiContent)
-        self.lbl_picture.setObjectName(u"lbl_picture")
-        self.lbl_picture.setEnabled(True)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.lbl_picture.sizePolicy().hasHeightForWidth())
-        self.lbl_picture.setSizePolicy(sizePolicy2)
-        self.lbl_picture.setMinimumSize(QSize(192, 0))
-        font2 = QFont()
-        font2.setPointSize(12)
-        self.lbl_picture.setFont(font2)
-        self.lbl_picture.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.details_layout.addWidget(self.lbl_picture)
-
-        self.te_story_details = QTextBrowser(self.tabLuniiContent)
-        self.te_story_details.setObjectName(u"te_story_details")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.te_story_details.sizePolicy().hasHeightForWidth())
-        self.te_story_details.setSizePolicy(sizePolicy3)
-        self.te_story_details.setOpenExternalLinks(True)
-        self.te_story_details.setOpenLinks(False)
-
-        self.details_layout.addWidget(self.te_story_details)
-
-
-        self.verticalLayout_3.addLayout(self.details_layout)
-
         self.tabWidget.addTab(self.tabLuniiContent, "")
         self.tabOfficialStories = QWidget()
         self.tabOfficialStories.setObjectName(u"tabOfficialStories")
@@ -446,11 +349,11 @@ class Ui_MainWindow(object):
 
         self.local_db_choose_folder_button = QPushButton(self.tabOfficialStories)
         self.local_db_choose_folder_button.setObjectName(u"local_db_choose_folder_button")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.local_db_choose_folder_button.sizePolicy().hasHeightForWidth())
-        self.local_db_choose_folder_button.setSizePolicy(sizePolicy4)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.local_db_choose_folder_button.sizePolicy().hasHeightForWidth())
+        self.local_db_choose_folder_button.setSizePolicy(sizePolicy2)
         self.local_db_choose_folder_button.setMinimumSize(QSize(25, 25))
         self.local_db_choose_folder_button.setMaximumSize(QSize(25, 25))
 
@@ -487,8 +390,8 @@ class Ui_MainWindow(object):
         self.tree_stories_official.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tree_stories_official.setProperty("showDropIndicator", False)
         self.tree_stories_official.setDragEnabled(False)
-        self.tree_stories_official.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
-        self.tree_stories_official.setDefaultDropAction(Qt.DropAction.MoveAction)
+        self.tree_stories_official.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tree_stories_official.setDefaultDropAction(Qt.DropAction.IgnoreAction)
         self.tree_stories_official.setAlternatingRowColors(True)
         self.tree_stories_official.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.tree_stories_official.setIndentation(20)
@@ -503,44 +406,166 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addLayout(self.verticalLayout)
 
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout)
+
+        self.tabWidget.addTab(self.tabOfficialStories, "")
+        self.tabThirdPartyStories = QWidget()
+        self.tabThirdPartyStories.setObjectName(u"tabThirdPartyStories")
+        self.verticalLayout_5 = QVBoxLayout(self.tabThirdPartyStories)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.third_party_db_layout = QHBoxLayout()
+        self.third_party_db_layout.setSpacing(2)
+        self.third_party_db_layout.setObjectName(u"third_party_db_layout")
+        self.third_party_db_line_edit = QLineEdit(self.tabThirdPartyStories)
+        self.third_party_db_line_edit.setObjectName(u"third_party_db_line_edit")
+        sizePolicy.setHeightForWidth(self.third_party_db_line_edit.sizePolicy().hasHeightForWidth())
+        self.third_party_db_line_edit.setSizePolicy(sizePolicy)
+
+        self.third_party_db_layout.addWidget(self.third_party_db_line_edit)
+
+        self.third_party_db_choose_folder_button = QPushButton(self.tabThirdPartyStories)
+        self.third_party_db_choose_folder_button.setObjectName(u"third_party_db_choose_folder_button")
+        sizePolicy2.setHeightForWidth(self.third_party_db_choose_folder_button.sizePolicy().hasHeightForWidth())
+        self.third_party_db_choose_folder_button.setSizePolicy(sizePolicy2)
+        self.third_party_db_choose_folder_button.setMinimumSize(QSize(25, 25))
+        self.third_party_db_choose_folder_button.setMaximumSize(QSize(25, 25))
+
+        self.third_party_db_layout.addWidget(self.third_party_db_choose_folder_button)
+
+
+        self.verticalLayout_5.addLayout(self.third_party_db_layout)
+
+        self.tree_stories_third_party = QTreeWidget(self.tabThirdPartyStories)
+        __qtreewidgetitem6 = QTreeWidgetItem()
+        __qtreewidgetitem6.setText(3, u"UUID");
+        self.tree_stories_third_party.setHeaderItem(__qtreewidgetitem6)
+        self.tree_stories_third_party.setObjectName(u"tree_stories_third_party")
+        sizePolicy1.setHeightForWidth(self.tree_stories_third_party.sizePolicy().hasHeightForWidth())
+        self.tree_stories_third_party.setSizePolicy(sizePolicy1)
+        self.tree_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.tree_stories_third_party.setFrameShape(QFrame.Shape.NoFrame)
+        self.tree_stories_third_party.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.tree_stories_third_party.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tree_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tree_stories_third_party.setProperty("showDropIndicator", False)
+        self.tree_stories_third_party.setDragEnabled(False)
+        self.tree_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tree_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.tree_stories_third_party.setAlternatingRowColors(True)
+        self.tree_stories_third_party.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tree_stories_third_party.setIndentation(20)
+        self.tree_stories_third_party.setRootIsDecorated(True)
+        self.tree_stories_third_party.setItemsExpandable(False)
+        self.tree_stories_third_party.setSortingEnabled(True)
+        self.tree_stories_third_party.setAllColumnsShowFocus(True)
+        self.tree_stories_third_party.setExpandsOnDoubleClick(False)
+
+        self.verticalLayout_5.addWidget(self.tree_stories_third_party)
+
+        self.tabWidget.addTab(self.tabThirdPartyStories, "")
+
+        self.horizontalLayout_2.addWidget(self.tabWidget)
+
         self.verticalLayout4 = QVBoxLayout()
         self.verticalLayout4.setObjectName(u"verticalLayout4")
-        self.official_story_details = QTextBrowser(self.tabOfficialStories)
+        self.official_story_details = QTextBrowser(self.centralwidget)
         self.official_story_details.setObjectName(u"official_story_details")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Expanding)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.official_story_details.sizePolicy().hasHeightForWidth())
-        self.official_story_details.setSizePolicy(sizePolicy5)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.official_story_details.sizePolicy().hasHeightForWidth())
+        self.official_story_details.setSizePolicy(sizePolicy3)
         self.official_story_details.setMinimumSize(QSize(192, 192))
         self.official_story_details.setMaximumSize(QSize(500, 16777215))
 
         self.verticalLayout4.addWidget(self.official_story_details)
 
-        self.verticalLayout5 = QHBoxLayout()
-        self.verticalLayout5.setObjectName(u"verticalLayout5")
-        self.add_story_button = QPushButton(self.tabOfficialStories)
+        self.horizontalLayout5 = QHBoxLayout()
+        self.horizontalLayout5.setObjectName(u"horizontalLayout5")
+        self.add_story_button = QPushButton(self.centralwidget)
         self.add_story_button.setObjectName(u"add_story_button")
 
-        self.verticalLayout5.addWidget(self.add_story_button)
+        self.horizontalLayout5.addWidget(self.add_story_button)
 
-        self.remove_story_button = QPushButton(self.tabOfficialStories)
+        self.remove_story_button = QPushButton(self.centralwidget)
         self.remove_story_button.setObjectName(u"remove_story_button")
 
-        self.verticalLayout5.addWidget(self.remove_story_button)
+        self.horizontalLayout5.addWidget(self.remove_story_button)
 
 
-        self.verticalLayout4.addLayout(self.verticalLayout5)
+        self.verticalLayout4.addLayout(self.horizontalLayout5)
+
+        self.prognstopLayout = QHBoxLayout()
+        self.prognstopLayout.setObjectName(u"prognstopLayout")
+        self.progressLayout = QVBoxLayout()
+        self.progressLayout.setSpacing(0)
+        self.progressLayout.setObjectName(u"progressLayout")
+        self.totalLayout = QHBoxLayout()
+        self.totalLayout.setSpacing(6)
+        self.totalLayout.setObjectName(u"totalLayout")
+        self.lbl_total = QLabel(self.centralwidget)
+        self.lbl_total.setObjectName(u"lbl_total")
+        self.lbl_total.setMinimumSize(QSize(80, 0))
+        self.lbl_total.setFrameShape(QFrame.Shape.Panel)
+        self.lbl_total.setFrameShadow(QFrame.Shadow.Sunken)
+        self.lbl_total.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.totalLayout.addWidget(self.lbl_total)
+
+        self.pbar_total = QProgressBar(self.centralwidget)
+        self.pbar_total.setObjectName(u"pbar_total")
+        self.pbar_total.setMaximumSize(QSize(16777215, 10))
+        self.pbar_total.setValue(24)
+        self.pbar_total.setTextVisible(False)
+
+        self.totalLayout.addWidget(self.pbar_total)
 
 
-        self.horizontalLayout.addLayout(self.verticalLayout4)
+        self.progressLayout.addLayout(self.totalLayout)
+
+        self.storyLayout = QHBoxLayout()
+        self.storyLayout.setSpacing(6)
+        self.storyLayout.setObjectName(u"storyLayout")
+        self.lbl_story = QLabel(self.centralwidget)
+        self.lbl_story.setObjectName(u"lbl_story")
+        self.lbl_story.setMinimumSize(QSize(80, 0))
+        self.lbl_story.setFrameShape(QFrame.Shape.Panel)
+        self.lbl_story.setFrameShadow(QFrame.Shadow.Sunken)
+        self.lbl_story.setText(u"8B_UUID")
+        self.lbl_story.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.storyLayout.addWidget(self.lbl_story)
+
+        self.pbar_story = QProgressBar(self.centralwidget)
+        self.pbar_story.setObjectName(u"pbar_story")
+        self.pbar_story.setMaximumSize(QSize(16777215, 10))
+        self.pbar_story.setValue(24)
+        self.pbar_story.setTextVisible(False)
+
+        self.storyLayout.addWidget(self.pbar_story)
 
 
-        self.verticalLayout_4.addLayout(self.horizontalLayout)
+        self.progressLayout.addLayout(self.storyLayout)
 
-        self.tabWidget.addTab(self.tabOfficialStories, "")
 
-        self.verticalLayout_2.addWidget(self.tabWidget)
+        self.prognstopLayout.addLayout(self.progressLayout)
+
+        self.btn_abort = QPushButton(self.centralwidget)
+        self.btn_abort.setObjectName(u"btn_abort")
+        self.btn_abort.setIcon(icon5)
+        self.btn_abort.setIconSize(QSize(24, 24))
+
+        self.prognstopLayout.addWidget(self.btn_abort)
+
+
+        self.verticalLayout4.addLayout(self.prognstopLayout)
+
+
+        self.horizontalLayout_2.addLayout(self.verticalLayout4)
+
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -583,7 +608,7 @@ class Ui_MainWindow(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuTools.addAction(self.actionShow_size)
-        self.menuTools.addAction(self.actionShow_story_details)
+        self.menuTools.addAction(self.actionShow_unavailable)
         self.menuTools.addSeparator()
         self.menuTools.addAction(self.actionShow_Log)
         self.menuTools.addAction(self.actionGet_firmware)
@@ -615,7 +640,7 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(MainWindow.close)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -638,7 +663,10 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.actionGet_firmware.setToolTip(QCoreApplication.translate("MainWindow", u"Get firmaware update for current Lunii", None))
 #endif // QT_CONFIG(tooltip)
-        self.actionShow_story_details.setText(QCoreApplication.translate("MainWindow", u"Show story details", None))
+        self.actionShow_unavailable.setText(QCoreApplication.translate("MainWindow", u"Show unavailable stories", None))
+#if QT_CONFIG(tooltip)
+        self.actionShow_unavailable.setToolTip(QCoreApplication.translate("MainWindow", u"Show unavailable stories", None))
+#endif // QT_CONFIG(tooltip)
         self.actionMove_Top.setText(QCoreApplication.translate("MainWindow", u"Move Top", None))
         self.actionMove_Bottom.setText(QCoreApplication.translate("MainWindow", u"Move Bottom", None))
         self.actionOpen_Lunii.setText(QCoreApplication.translate("MainWindow", u"Open device", None))
@@ -683,27 +711,34 @@ class Ui_MainWindow(object):
         self.tree_stories.setSortingEnabled(False)
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
-        self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
-#if QT_CONFIG(tooltip)
-        self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
-#endif // QT_CONFIG(tooltip)
-        self.btn_abort.setText("")
-        self.lbl_picture.setText(QCoreApplication.translate("MainWindow", u"No Thumb", None))
-        self.te_story_details.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Story description", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabLuniiContent), QCoreApplication.translate("MainWindow", u"My Lunii", None))
         self.radio_tree_table.setText(QCoreApplication.translate("MainWindow", u"List", None))
         self.radio_tree_gallery.setText(QCoreApplication.translate("MainWindow", u"Gallery", None))
         self.local_db_line_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Local Story Library path)", None))
         self.local_db_choose_folder_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         ___qtreewidgetitem1 = self.tree_stories_official.headerItem()
+        ___qtreewidgetitem1.setText(6, QCoreApplication.translate("MainWindow", u"Size", None));
         ___qtreewidgetitem1.setText(4, QCoreApplication.translate("MainWindow", u"Path", None));
         ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"Installation Id", None));
         ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"Language", None));
         ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOfficialStories), QCoreApplication.translate("MainWindow", u"Official Store", None))
+        self.third_party_db_line_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Third Party Story Library path)", None))
+        self.third_party_db_choose_folder_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        ___qtreewidgetitem2 = self.tree_stories_third_party.headerItem()
+        ___qtreewidgetitem2.setText(4, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"Path", None));
+        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"Installation Id", None));
+        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Story Name", None));
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabThirdPartyStories), QCoreApplication.translate("MainWindow", u"Third Party Store", None))
         self.add_story_button.setText(QCoreApplication.translate("MainWindow", u"Add Story", None))
         self.remove_story_button.setText(QCoreApplication.translate("MainWindow", u"Remove Story", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOfficialStories), QCoreApplication.translate("MainWindow", u"Official Store", None))
+        self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
+#if QT_CONFIG(tooltip)
+        self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_abort.setText("")
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
         self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"&Tools", None))
         self.menuLost_stories.setTitle(QCoreApplication.translate("MainWindow", u"Lost stories", None))

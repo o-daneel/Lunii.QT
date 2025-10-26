@@ -8,7 +8,7 @@ from typing import List
 import requests
 from PySide6.QtCore import QFile, QTextStream
 
-from pkg.api.constants import DEFAULT_DB_LOCAL_PATH, EXT_PK_PLAIN, EXT_ZIP, OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
+from pkg.api.constants import DEFAULT_THIRD_PARTY_DB_LOCAL_PATH, DEFAULT_DB_LOCAL_PATH, EXT_PK_PLAIN, EXT_ZIP, OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
     STORY_TRANSCODING_SUPPORTED, OFFICIAL_TOKEN_URL
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
@@ -19,6 +19,8 @@ DB_OFFICIAL = {}
 DB_THIRD_PARTY = {}
 DB_LOCAL = {}
 DB_LOCAL_PATH = DEFAULT_DB_LOCAL_PATH
+DB_THIRD_PARTY_LOCAL = {}
+DB_THIRD_PARTY_LOCAL_PATH = DEFAULT_THIRD_PARTY_DB_LOCAL_PATH
 
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
@@ -214,6 +216,9 @@ class StudioStory:
     def write_bt(self, path_ni):
         pass
 
+def encode_name(name: str):
+    return name.lower().replace(":", "-").replace("/", "-").replace("?", "")
+
 def story_load_local_db():
     global DB_LOCAL
     DB_LOCAL = {}
@@ -224,14 +229,24 @@ def story_load_local_db():
                 if "+ " in filename:
                     elems = filename.split("+ ")
                     name = elems[1].replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
-                    encoded_name = name.replace(":", "-").replace("/", "-").replace("?", "")
                     age = elems[0] if not " " in elems[0] else elems[0].split(" ")[1]
                     lang = "fr_FR" if not " " in elems[0] else elems[0].split(" ")[0]
-                    DB_LOCAL[encoded_name] = [name, filename, age, lang]
+                    DB_LOCAL[encode_name(name)] = [name, filename, age, lang]
                 else:
                     name = filename.replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
-                    DB_LOCAL[encoded_name] = [name, filename, "", ""]
+                    DB_LOCAL[encode_name(name)] = [name, filename, "", ""]
                     
+def story_load_third_party_local_db():
+    global DB_THIRD_PARTY_LOCAL
+    DB_THIRD_PARTY_LOCAL = {}
+
+    if os.path.isdir(DB_THIRD_PARTY_LOCAL_PATH):
+        for filename in os.listdir(DB_THIRD_PARTY_LOCAL_PATH):
+            if os.path.isfile(os.path.join(DB_THIRD_PARTY_LOCAL_PATH, filename)) and EXT_ZIP in filename:
+                name = filename.replace(EXT_ZIP, "")
+                DB_THIRD_PARTY_LOCAL[encode_name(name)] = [name, filename, "", ""]
+
+
 def story_load_db(reload=False):
     global DB_OFFICIAL
     global DB_THIRD_PARTY
@@ -298,15 +313,23 @@ def story_load_db(reload=False):
             db = Path(FILE_THIRD_PARTY_DB)
             db.unlink(FILE_THIRD_PARTY_DB)
 
+    if DB_THIRD_PARTY_LOCAL_PATH != "":
+        story_load_third_party_local_db()
+
     if DB_LOCAL_PATH != "":
         story_load_local_db()
 
     return retVal
 
 def get_story_in_local_db(name: str):
-    encoded_name = name.replace(":", "-").replace("/", "-").replace("?", "")
+    encoded_name = encode_name(name)
 
     return [] if not encoded_name in DB_LOCAL else DB_LOCAL[encoded_name]
+
+def get_story_in_local_third_party_db(name: str):
+    encoded_name = encode_name(name)
+
+    return [] if not encoded_name in DB_THIRD_PARTY_LOCAL else DB_THIRD_PARTY_LOCAL[encoded_name]
 
 def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
     # creating cache dir if necessary
