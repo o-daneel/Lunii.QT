@@ -218,7 +218,9 @@ class StudioStory:
         pass
 
 def encode_name(name: str):
-    return name.lower().replace(":", "-").replace("/", "-").replace("?", "")
+    if name is not None:
+        return name.lower().replace(":", "-").replace("/", "-").replace("?", "")
+    return name
 
 def story_load_local_db():
     global DB_LOCAL
@@ -227,16 +229,19 @@ def story_load_local_db():
     if os.path.isdir(DB_LOCAL_PATH):
         for filename in os.listdir(DB_LOCAL_PATH):
             if os.path.isfile(os.path.join(DB_LOCAL_PATH, filename)) and (EXT_ZIP in filename or EXT_PK_PLAIN in filename):
-                if "+ " in filename:
-                    elems = filename.split("+ ")
-                    name = elems[1].replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
-                    age = elems[0] if not " " in elems[0] else elems[0].split(" ")[1]
-                    lang = "fr_FR" if not " " in elems[0] else elems[0].split(" ")[0]
-                    DB_LOCAL[encode_name(name)] = [name, filename, age, lang]
-                else:
-                    name = filename.replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
-                    DB_LOCAL[encode_name(name)] = [name, filename, "", ""]
-                    
+                try:
+                    if "+ " in filename:
+                        elems = filename.split("+ ")
+                        name = elems[1].replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
+                        age = elems[0] if not " " in elems[0] else elems[0].split(" ")[1]
+                        lang = "fr_FR" if not " " in elems[0] else elems[0].split(" ")[0]
+                        DB_LOCAL[encode_name(name)] = [name, filename, age, lang]
+                    else:
+                        name = filename.replace(EXT_ZIP, "").replace(EXT_PK_PLAIN, "")
+                        DB_LOCAL[encode_name(name)] = [name, filename, "", ""]
+                except:
+                    print("Failed to process '" + filename + "' while loading Official Stories Local DB.")
+
 def story_load_third_party_local_db():
     global DB_THIRD_PARTY_LOCAL_BY_NAME, DB_THIRD_PARTY_LOCAL_BY_ID
     DB_THIRD_PARTY_LOCAL_BY_NAME = {}
@@ -245,24 +250,27 @@ def story_load_third_party_local_db():
     if os.path.isdir(DB_THIRD_PARTY_LOCAL_PATH):
         for filename in os.listdir(DB_THIRD_PARTY_LOCAL_PATH):
             if os.path.isfile(os.path.join(DB_THIRD_PARTY_LOCAL_PATH, filename)) and EXT_ZIP in filename:
-                if "+ " in filename:
-                    elems = filename.split("+ ")
-                    age = elems[0]
-                    filename_without_age = elems[1]
-                else:
-                    age = ""
-                    filename_without_age = filename
+                try:
+                    if "+ " in filename:
+                        elems = filename.split("+ ")
+                        age = elems[0]
+                        filename_without_age = str.join("+ ", elems[1:])
+                    else:
+                        age = ""
+                        filename_without_age = filename
 
-                if " # " in filename:
-                    elems = filename_without_age.split(" # ")
-                    name = elems[0]
-                    uuid = elems[1].replace(EXT_ZIP, "").upper()
+                    if " # " in filename:
+                        elems = filename_without_age.split(" # ")
+                        name = elems[0]
+                        uuid = elems[1].replace(EXT_ZIP, "").upper()
 
-                    DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, uuid, age]
-                    DB_THIRD_PARTY_LOCAL_BY_ID[uuid.lower()] = [name, filename, uuid, age]
-                else:
-                    name = filename_without_age.replace(EXT_ZIP, "")
-                    DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, "", age]
+                        DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, uuid, age]
+                        DB_THIRD_PARTY_LOCAL_BY_ID[uuid.lower()] = [name, filename, uuid, age]
+                    else:
+                        name = filename_without_age.replace(EXT_ZIP, "")
+                        DB_THIRD_PARTY_LOCAL_BY_NAME[encode_name(name)] = [name, filename, "", age]
+                except:
+                    print("Failed to process '" + filename + "' while loading Third Party Stories Local DB.")
 
 def story_load_db(reload=False):
     global DB_OFFICIAL

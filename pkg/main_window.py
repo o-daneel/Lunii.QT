@@ -56,7 +56,7 @@ COL_NAME_MIN_SIZE = 510
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "- @Yakoo - v3.0.0"
+APP_VERSION = "v3.0.0"
 
 """ 
 # TODO : 
@@ -666,7 +666,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.processEvents()
 
         retVal = story_load_db(True)
-        self.load_missing_ids()
+
+        if self.audio_device:
+            self.load_missing_ids()
 
         self.pbar_total.setValue(90)
         self.app.processEvents()
@@ -691,11 +693,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][1]
             uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2]
             if uuid == "":
-                uuid = str(self.audio_device.get_uuid_from_story_studio_zip(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))).upper()
+                try:
+                    uuid = str(self.audio_device.get_uuid_from_story_studio_zip(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))).upper()
+                except:
+                    self.sb_update(self.tr("⚠️ Failed to extract UUID from " + path))
+
                 stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2] = uuid
-                if " # " not in path:
+                if " # " not in path or " # .zip" in path:
                     new_path = path.replace(".zip", " # " + uuid + ".zip")
-                    os.rename(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path), os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, new_path))
+                    try:
+                        os.rename(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path), os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, new_path))
+                    except:
+                        self.sb_update(self.tr("⚠️ Failed to rename '" + path + "' to '" + new_path + "'"))
                     self.sb_update("Renaming " + name + " to " + new_path)
                     refresh_needed = True
 
@@ -1126,11 +1135,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # adding items from DB
         for id in stories.DB_THIRD_PARTY:
             name = stories.DB_THIRD_PARTY[id]["title"]
+            if name is not None and name != "":
+                continue
+
             files_in_local_db_by_name.append(stories.encode_name(name))
             files_in_local_db_by_id.append(id)
 
             # filtering 
-            if (le_filter and name is not None and name != "" and
+            if (le_filter and
                 not le_filter.lower() in name.lower() and
                 not le_filter.lower() in id.lower() ):
                 continue
@@ -1212,7 +1224,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             painter.fillRect(0, 0, banner_width, banner_height, QColor(255, 0, 0, 180))
             painter.setPen(Qt.GlobalColor.white)
             painter.setFont(font)
-            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, "Disponible")
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Disponible"))
             painter.end()
         
         if installed:
@@ -1227,7 +1239,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             painter.fillRect(0, 0, banner_width, banner_height, QColor(0, 255, 0, 180))
             painter.setPen(Qt.GlobalColor.black)
             painter.setFont(font)
-            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, "Sur la Lunii")
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Sur la Lunii"))
             painter.end()
         
         return pixmap
