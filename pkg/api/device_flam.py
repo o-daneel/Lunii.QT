@@ -1121,7 +1121,7 @@ class FlamDevice(QtCore.QObject):
                         # to be ciphered
                         data_plain = self.__xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
-                    data = self.__get_ciphered_data(file, data_plain)
+                    data = self.__get_ciphered_data(file, data_plain, False)
 
                 file_newname = self.__get_lunii_ciphered_name(file)
                 target: Path = output_path.joinpath(file_newname)
