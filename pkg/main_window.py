@@ -689,16 +689,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def load_missing_ids(self):
         refresh_needed = False
         for encoded_name in stories.DB_THIRD_PARTY_LOCAL_BY_NAME:
-            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][0]
-            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][1]
-            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2]
+            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_NAME]
+            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_PATH]
+            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_UUID]
             if uuid == "":
                 try:
                     uuid = str(self.audio_device.get_uuid_from_story_studio_zip(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))).upper()
                 except:
                     self.sb_update(self.tr("⚠️ Failed to extract UUID from " + path))
 
-                stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2] = uuid
+                stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_UUID] = uuid
                 if " # " not in path or " # .zip" in path:
                     new_path = path.replace(".zip", " # " + uuid + ".zip")
                     try:
@@ -1102,9 +1102,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
 
             if local_story != []:
-                path = local_story[1]
+                path = local_story[stories.DB_LOCAL_COL_PATH]
                 item.setText(COL_OFFICIAL_PATH, path)
-                item.setText(COL_OFFICIAL_LANGUAGE, local_story[3])
+                item.setText(COL_OFFICIAL_LANGUAGE, local_story[stories.DB_LOCAL_COL_LANG])
                 item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(os.path.join(stories.DB_LOCAL_PATH, path))/1024/1024, 1)}MB")
             elif self.unavailable_hidden:
                 continue
@@ -1115,7 +1115,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
             icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story != [], lunii_story is not None))
             item = QStandardItem(QIcon(icon_with_banner), name)
-            item.setData({"id": id, "local_db_path": None if local_story == [] else local_story[1], "lunii_story_id": lunii_story}, Qt.UserRole)
+            item.setData({"id": id, "local_db_path": None if local_story == [] else local_story[stories.DB_LOCAL_COL_PATH], "lunii_story_id": lunii_story}, Qt.UserRole)
 
             list_stories_official_model.appendRow(item)
 
@@ -1135,7 +1135,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # adding items from DB
         for id in stories.DB_THIRD_PARTY:
             name = stories.DB_THIRD_PARTY[id]["title"]
-            if name is not None and name != "":
+            if name is None or name == "":
                 continue
 
             files_in_local_db_by_name.append(stories.encode_name(name))
@@ -1151,16 +1151,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if local_story == []:
                 local_story = stories.get_story_by_name_in_local_third_party_db(name)
- 
+                if local_story == []:
+                    self.logger.log(logging.DEBUG, self.tr("Failed to associated local file to story '" + name + "'"))
+                else:
+                    self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by Name to story '" + name + "'"))
+            else:
+                self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by ID to story '" + name + "'"))
+
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
-            if lunii_story is None and self.audio_device is not None and len(local_story) > 0 and local_story[2] != "":
-                lunii_story = self.audio_device.stories.get_story(local_story[2])
+            if lunii_story is None and self.audio_device is not None and len(local_story) > 0 and local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID] != "":
+                lunii_story = self.audio_device.stories.get_story(local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID])
  
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
 
             if local_story != []:
-                item.setText(COL_THIRD_PARTY_NAME, local_story[0])
+                item.setText(COL_THIRD_PARTY_NAME, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_NAME])
             else:
                 item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_UUID, id)
@@ -1169,9 +1175,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
 
             if local_story != []:
-                path = local_story[1]
-                item.setText(COL_THIRD_PARTY_PATH, local_story[1])
-                item.setText(COL_THIRD_PARTY_AGE, local_story[3])
+                path = local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH]
+                item.setText(COL_THIRD_PARTY_PATH, path)
+                item.setText(COL_THIRD_PARTY_AGE, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_AGE])
                 item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))/1024/1024, 1)}MB")
             elif self.unavailable_hidden:
                 continue
@@ -1180,10 +1186,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # adding items from Local Path
         for encoded_name in stories.DB_THIRD_PARTY_LOCAL_BY_NAME:
-            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][0]
-            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][1]
-            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][2]
-            age = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][3]
+            name = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_NAME]
+            path = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_PATH]
+            uuid = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_UUID]
+            age = stories.DB_THIRD_PARTY_LOCAL_BY_NAME[encoded_name][stories.DB_THIRD_PARTY_LOCAL_COL_AGE]
             
             if encoded_name in files_in_local_db_by_name or uuid in files_in_local_db_by_id:
                 continue
