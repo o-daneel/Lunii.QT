@@ -1017,9 +1017,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.clear()
 
         if self.list_stories_official.model() is not None:
-            self.list_stories_official.model().clear() 
+            self.list_stories_official.model().sourceModel().clear() 
         if self.list_stories_third_party.model() is not None:
-            self.list_stories_third_party.model().clear() 
+            self.list_stories_third_party.model().sourceModel().clear() 
         
         self.ts_populate()
         self.ts_populate_official()
