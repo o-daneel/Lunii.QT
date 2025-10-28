@@ -1,6 +1,5 @@
 import glob
 import json
-import os.path
 import shutil
 from string import hexdigits
 import zipfile

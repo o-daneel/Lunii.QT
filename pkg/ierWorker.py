@@ -11,7 +11,7 @@ from PySide6.QtCore import QObject, QThread
 from pkg.api import constants
 from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice
-from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, story_load_db
+from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2

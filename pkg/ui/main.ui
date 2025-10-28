@@ -422,7 +422,7 @@
                 <number>2</number>
                </property>
                <item>
-                <widget class="QRadioButton" name="radio_tree_table">
+                <widget class="QRadioButton" name="radio_official_table">
                  <property name="text">
                   <string>List</string>
                  </property>
@@ -432,7 +432,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="radio_tree_gallery">
+                <widget class="QRadioButton" name="radio_official_gallery">
                  <property name="text">
                   <string>Gallery</string>
                  </property>
@@ -634,6 +634,26 @@
             <number>2</number>
            </property>
            <item>
+            <widget class="QRadioButton" name="radio_third_party_table">
+             <property name="text">
+              <string>List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio_third_party_gallery">
+             <property name="text">
+              <string>Gallery</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QLineEdit" name="third_party_db_line_edit">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -672,6 +692,34 @@
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QListView" name="list_stories_third_party">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QTreeWidget" name="tree_stories_third_party">

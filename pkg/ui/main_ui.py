@@ -333,17 +333,17 @@ class Ui_MainWindow(object):
         self.local_db_layout = QHBoxLayout()
         self.local_db_layout.setSpacing(2)
         self.local_db_layout.setObjectName(u"local_db_layout")
-        self.radio_tree_table = QRadioButton(self.tabOfficialStories)
-        self.radio_tree_table.setObjectName(u"radio_tree_table")
-        self.radio_tree_table.setChecked(True)
+        self.radio_official_table = QRadioButton(self.tabOfficialStories)
+        self.radio_official_table.setObjectName(u"radio_official_table")
+        self.radio_official_table.setChecked(True)
 
-        self.local_db_layout.addWidget(self.radio_tree_table)
+        self.local_db_layout.addWidget(self.radio_official_table)
 
-        self.radio_tree_gallery = QRadioButton(self.tabOfficialStories)
-        self.radio_tree_gallery.setObjectName(u"radio_tree_gallery")
-        self.radio_tree_gallery.setChecked(False)
+        self.radio_official_gallery = QRadioButton(self.tabOfficialStories)
+        self.radio_official_gallery.setObjectName(u"radio_official_gallery")
+        self.radio_official_gallery.setChecked(False)
 
-        self.local_db_layout.addWidget(self.radio_tree_gallery)
+        self.local_db_layout.addWidget(self.radio_official_gallery)
 
         self.local_db_line_edit = QLineEdit(self.tabOfficialStories)
         self.local_db_line_edit.setObjectName(u"local_db_line_edit")
@@ -423,6 +423,18 @@ class Ui_MainWindow(object):
         self.third_party_db_layout = QHBoxLayout()
         self.third_party_db_layout.setSpacing(2)
         self.third_party_db_layout.setObjectName(u"third_party_db_layout")
+        self.radio_third_party_table = QRadioButton(self.tabThirdPartyStories)
+        self.radio_third_party_table.setObjectName(u"radio_third_party_table")
+        self.radio_third_party_table.setChecked(True)
+
+        self.third_party_db_layout.addWidget(self.radio_third_party_table)
+
+        self.radio_third_party_gallery = QRadioButton(self.tabThirdPartyStories)
+        self.radio_third_party_gallery.setObjectName(u"radio_third_party_gallery")
+        self.radio_third_party_gallery.setChecked(False)
+
+        self.third_party_db_layout.addWidget(self.radio_third_party_gallery)
+
         self.third_party_db_line_edit = QLineEdit(self.tabThirdPartyStories)
         self.third_party_db_line_edit.setObjectName(u"third_party_db_line_edit")
         sizePolicy.setHeightForWidth(self.third_party_db_line_edit.sizePolicy().hasHeightForWidth())
@@ -441,6 +453,18 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_5.addLayout(self.third_party_db_layout)
+
+        self.list_stories_third_party = QListView(self.tabThirdPartyStories)
+        self.list_stories_third_party.setObjectName(u"list_stories_third_party")
+        self.list_stories_third_party.setEnabled(True)
+        self.list_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.list_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories_third_party.setProperty("showDropIndicator", False)
+        self.list_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories_third_party.setWordWrap(True)
+
+        self.verticalLayout_5.addWidget(self.list_stories_third_party)
 
         self.tree_stories_third_party = QTreeWidget(self.tabThirdPartyStories)
         __qtreewidgetitem6 = QTreeWidgetItem()
@@ -648,7 +672,7 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(MainWindow.close)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -720,8 +744,8 @@ class Ui_MainWindow(object):
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabLuniiContent), QCoreApplication.translate("MainWindow", u"My Lunii", None))
-        self.radio_tree_table.setText(QCoreApplication.translate("MainWindow", u"List", None))
-        self.radio_tree_gallery.setText(QCoreApplication.translate("MainWindow", u"Gallery", None))
+        self.radio_official_table.setText(QCoreApplication.translate("MainWindow", u"List", None))
+        self.radio_official_gallery.setText(QCoreApplication.translate("MainWindow", u"Gallery", None))
         self.local_db_line_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Local Story Library path)", None))
         self.local_db_choose_folder_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         ___qtreewidgetitem1 = self.tree_stories_official.headerItem()
@@ -732,6 +756,8 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOfficialStories), QCoreApplication.translate("MainWindow", u"Official Store", None))
+        self.radio_third_party_table.setText(QCoreApplication.translate("MainWindow", u"List", None))
+        self.radio_third_party_gallery.setText(QCoreApplication.translate("MainWindow", u"Gallery", None))
         self.third_party_db_line_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Third Party Story Library path)", None))
         self.third_party_db_choose_folder_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         ___qtreewidgetitem2 = self.tree_stories_third_party.headerItem()
