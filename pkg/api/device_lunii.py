@@ -846,27 +846,27 @@ class LuniiDevice(QtCore.QObject):
         # processing story
         if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
-            return self.import_story_plain(story_path)
+            return self.import_lunii_plain(story_path)
         elif archive_type == TYPE_LUNII_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_ZIP")
-            return self.import_story_zip(story_path)
+            return self.import_lunii_zip(story_path)
         elif archive_type == TYPE_LUNII_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_7Z")
-            return self.import_story_7z(story_path)
+            return self.import_lunii_v2_7z(story_path)
         elif archive_type == TYPE_LUNII_V2:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2")
-            return self.import_story_v2(story_path)
+            return self.import_lunii_v2_zip(story_path)
         elif archive_type == TYPE_LUNII_V3:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V3")
-            return self.import_story_v3(story_path)
+            return self.import_lunii_v3(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
-            return self.import_story_studio_zip(story_path)
+            return self.import_studio_zip(story_path)
         elif archive_type == TYPE_STUDIO_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
-            return self.import_story_studio_7z(story_path)
+            return self.import_studio_7z(story_path)
 
-    def import_story_plain(self, story_path):
+    def import_lunii_plain(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -968,7 +968,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_story_zip(self, story_path):
+    def import_lunii_zip(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -1061,7 +1061,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_story_7z(self, story_path):
+    def import_lunii_v2_7z(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -1169,7 +1169,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_story_v2(self, story_path):
+    def import_lunii_v2_zip(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -1279,11 +1279,11 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_story_v3(self, story_path):
+    def import_lunii_v3(self, story_path):
         self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "unsupported story format"))
         return False
 
-    def import_story_studio_zip(self, story_path):
+    def import_studio_zip(self, story_path):
         # checking if archive is OK
         try:
             with zipfile.ZipFile(file=story_path):
@@ -1424,7 +1424,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_story_studio_7z(self, story_path):
+    def import_studio_7z(self, story_path):
         # checking if archive is OK
         try:
             with py7zr.SevenZipFile(story_path, mode='r'):

@@ -511,10 +511,10 @@ class FlamDevice(QtCore.QObject):
             return self.import_flam_7z(story_path)
         elif archive_type == TYPE_LUNII_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_ZIP")
-            return self.import_lunii_zip(story_path)
+            return self.import_lunii_v2_zip(story_path)
         elif archive_type == TYPE_LUNII_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_7Z")
-            return self.import_lunii_7z(story_path)
+            return self.import_lunii_v2_7z(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
             return self.import_studio_zip(story_path)
@@ -941,7 +941,7 @@ class FlamDevice(QtCore.QObject):
 
         return True
 
-    def import_lunii_zip(self, story_path):
+    def import_lunii_v2_zip(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -1049,7 +1049,7 @@ class FlamDevice(QtCore.QObject):
 
         return True
 
-    def import_lunii_7z(self, story_path):
+    def import_lunii_v2_7z(self, story_path):
         night_mode = False
 
         # checking if archive is OK
