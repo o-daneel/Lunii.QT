@@ -956,20 +956,26 @@ class FlamDevice(QtCore.QObject):
         with zipfile.ZipFile(file=story_path) as zip_file:
             # reading all available files
             zip_contents = zip_file.namelist()
-            if FILE_UUID not in zip_contents:
-                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "No UUID file found in archive. Unable to add this story."))
-                return False
             if FILE_STUDIO_JSON in zip_contents:
                 self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "Corrupted file format. Unable to add this story."))
                 return False
-
-            # getting UUID file
-            try:
-                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
-            except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
+      
+            # getting UUID from path
+            uuid_path = Path(zip_contents[0])
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                try:
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
+                    else:
+                        new_uuid = UUID(uuid_str)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "UUID parse error {}").format(e))
+                    return False
+            else:
+                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "UUID directory is missing in archive !"))
                 return False
-        
+            
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
                 self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("FlamDevice", "'{}' is already loaded !").format(self.stories.get_story(new_uuid).name))
@@ -978,7 +984,7 @@ class FlamDevice(QtCore.QObject):
             # decompressing story contents
             long_uuid = str(new_uuid).lower()
             short_uuid = long_uuid[28:]
-            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}/{long_uuid}")
+            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}")
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
@@ -990,7 +996,9 @@ class FlamDevice(QtCore.QObject):
                     self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("FlamDevice", "Import aborted, performing cleanup on current story..."))
                     self.__clean_up_story_dir(new_uuid)
                     return False
-
+                
+                if zip_file.getinfo(file).is_dir():
+                    continue
                 if file == FILE_UUID or file.endswith("bt"):
                     continue
                 if file.endswith("nm"):
@@ -1021,7 +1029,8 @@ class FlamDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "Authorization file creation..."))
-        bt_path = output_path.joinpath("key")
+        story_path = output_path.joinpath(long_uuid)
+        bt_path = story_path.joinpath("key")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.keyfile)
 
@@ -1029,10 +1038,10 @@ class FlamDevice(QtCore.QObject):
         loaded_story = Story(new_uuid, nm=night_mode)
 
         # creating info file creation
-        self.__write_info(loaded_story, output_path)
+        self.__write_info(loaded_story, story_path)
 
         # creating thumbnail image
-        self.__write_thumbnail(loaded_story, output_path)
+        self.__write_thumbnail(loaded_story, story_path)
 
         # updating .pi file to add new UUID
         self.stories.append(loaded_story)
