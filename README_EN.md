@@ -10,7 +10,7 @@ for Windows / Linux / macOS
 # Breaking news
 * 😎 **Flam support** 😎  
 The application now allows importing Lunii stories onto your Flam, provided it is running firmware v2.x.x.  
-   > **Warning:** the Flam is VERY slow over USB. Please be patient.
+   > **Warning:** the Flam is VERY slow over USB. Please be patient. (around 4min for 80MB)
 
 * 😎 **Lunii v3 & Firmware 3.2.x** 😎  
 Lunii.QT has been updated to support the latest firmware (3.2.2 and later). Thanks to a longer analysis (I should have spent 10 more minutes at the first sight to connect neurons), **a stable** and **VERY simple** workaround has been found.  
