@@ -211,9 +211,18 @@ class ierWorker(QObject):
             if story.size != -1:
                 continue
 
+            # which BASEDIR ? hidden or not ?
+            basedir = self.audio_device.STORIES_BASEDIR
+            if story.hidden: 
+                basedir = self.audio_device.HIDDEN_STORIES_BASEDIR
+            uuid = story.short_uuid
+            if self.audio_device.device_version == FLAM_V1:
+                uuid = str(story.uuid)
+            story_path = os.path.join(self.audio_device.mount_point, basedir, uuid)
+
             # processing all files in a story
             story.size = 0
-            for parent_dir, _, files in os.walk(f"{self.audio_device.mount_point}/{self.audio_device.STORIES_BASEDIR}/{str(story.uuid) if self.audio_device.device_version == FLAM_V1 else story.short_uuid }"):
+            for parent_dir, _, files in os.walk(story_path):
                 for file in files:
                     story.size += os.path.getsize(os.path.join(parent_dir, file))
 
