@@ -1,3 +1,8 @@
+![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
+[![luniiQt v3.1.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.0/total?label=luniiQt%20v3.1.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.0)
+[![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
+[![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
+
 :uk: [English README](./README_EN.md) :uk:
 
 # Lunii.QT
@@ -514,5 +519,5 @@ Merci à :
 * [STUdio - Story Teller Unleashed](https://marian-m12l.github.io/studio-website/)
 * [(GitHub) STUdio, Story Teller Unleashed](https://github.com/marian-m12l/studio)
 * [Lunii Admin](https://github.com/olup/lunii-admin) (Une alternative en Go de STUdio)
-* [Lunii Admin Web](https://github.com/olup/lunii-admin) (même chose que précédemment, mais à partir d'un navigateur)
+* [Lunii Admin Web](https://github.com/olup/lunii-admin-web) (même chose que précédemment, mais à partir d'un navigateur)
 * Astuce de l'icone dans le workflow avec  **[rcedit](https://github.com/electron/rcedit)**
