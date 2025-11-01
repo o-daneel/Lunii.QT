@@ -478,13 +478,13 @@ class LuniiDevice(QtCore.QObject):
             # loading story keys
             self.load_story_keys(os.path.join(story_path, "bt"))
             # are keys usable ?
-            if not self.__story_check_v3key(Path(story_path), self.story_key, self.story_iv):
+            if not self.__story_check_v3key(story_path, self.story_key, self.story_iv):
                 # not the trick keys or dev keys unknown... can't get further
                 return True
 
         # checking auth file (if possible) + fix
         if self.device_version <= LUNII_V2:
-            if not self.__story_check_v2bt(Path(story_path)):
+            if not self.__story_check_v2bt(story_path):
                 self.signal_logger.emit(logging.WARN, QCoreApplication.translate("LuniiDevice", "Bad authorization file bt in {}").format(story_path))
 
                 # Fixing bt file
@@ -1504,9 +1504,9 @@ class LuniiDevice(QtCore.QObject):
                     last_emit = now
                     last_written = written
 
-    def __story_check_v3key(self, story_path: Path, key, iv):
+    def __story_check_v3key(self, story_path, key, iv):
         # Trying to decipher RI/SI for path check
-        ri_path = story_path.joinpath("ri")
+        ri_path = os.path.join(story_path, "ri")
         if not os.path.isfile(ri_path):
             return False
         
@@ -1516,16 +1516,16 @@ class LuniiDevice(QtCore.QObject):
         plain = self.decipher(ri_content, key, iv)
         return plain[:3] == b"000"
 
-    def __story_check_v2bt(self, story_path: Path):
-        bt_path = story_path.joinpath("bt")
+    def __story_check_v2bt(self, story_path):
+        bt_path = os.path.join(story_path, "bt")
         if not os.path.isfile(bt_path):
             return False
-        ri_path = story_path.joinpath("ri")
+        ri_path = os.path.join(story_path, "ri")
         if not os.path.isfile(ri_path):
             return False
 
         # reading reference data
-        with open(os.path.join(story_path, "ri"), 'rb') as fp:
+        with open(ri_path, 'rb') as fp:
             ri_data = fp.read(0x40)
 
         # Trying to decipher BT
@@ -1587,7 +1587,7 @@ class LuniiDevice(QtCore.QObject):
         # for Lunii v3, checking keys (original or trick)
         if self.device_version == LUNII_V3:
             # loading story keys
-            self.load_story_keys(str(story_path.joinpath("bt")))
+            self.load_story_keys(os.path.join(story_path, "bt"))
             # are keys usable ?
             if not self.__story_check_v3key(story_path, self.story_key, self.story_iv):
                 self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Lunii v3 requires Device Key for genuine story export."))
