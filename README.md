@@ -270,7 +270,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
    
 ## Formats d'archives pris en charge
 ### pour Lunii
-#### .plain.pk
+#### .plain.pk [TYPE_LUNII_PLAIN]
 **Filename** :  `story_name.8B_UUID.plain.pk`  
 **Ciphering** : None / Plain  
 **Structure** :  
@@ -285,7 +285,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       rf/000/XXYYXXYY.bmp
       sf/000/XXYYXXYY.mp3
 
-#### .v1.pk / .v2.pk
+#### .v1.pk / .v2.pk [TYPE_LUNII_V2_ZIP]
 **Filename** :  
 * `LONG_UUID.v2.pk`  
 * `LONG_UUID.v2.pk`  
@@ -301,21 +301,8 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       00000000000000000000000000000000/rf/000/XXYYXXYY
       00000000000000000000000000000000/sf/000/XXYYXXYY
 
-#### ZIP (old Lunii.QT)
-**Filename** :  `8B_UUID - story_name.zip`  
-**Ciphering** : Generic Key  
-**Structure** :  
-
-      uuid.bin
-      ni
-      li
-      ri
-      si
-      rf/000/XXYYXXYY
-      sf/000/XXYYXXYY
-
-#### ZIP (alternate)
-**Filename** :  `AGE+] story_title DASHED_UUID.zip`  
+#### Alternate Lunii archive (ZIP / 7z) [TYPE_LUNII_V2_ZIP/TYPE_LUNII_V2_7Z]
+**Filename** :  `AGE+] story_title DASHED_UUID.zip .7z`  
 **Ciphering** : Generic Key  
 **Structure** : (same as [.v1.pk / .v2.pk](#v1pk--v2pk))
 
@@ -326,19 +313,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
       00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
 
-#### 7z
-**Filename** : `AGE+] story_title DASHED_UUID.7z`  
-**Ciphering** : Generic Key  
-**Structure** :  
-
-      00000000-0000-0000-0000-000000000000/ni
-      00000000-0000-0000-0000-000000000000/li
-      00000000-0000-0000-0000-000000000000/ri
-      00000000-0000-0000-0000-000000000000/si
-      00000000-0000-0000-0000-000000000000/rf/000/XXYYXXYY
-      00000000-0000-0000-0000-000000000000/sf/000/XXYYXXYY
-
-#### STUdio (ZIP / 7z)
+#### STUdio (ZIP / 7z) [TYPE_STUDIO_ZIP/TYPE_STUDIO_7Z]
 **Filename** : `AGE+] story_title DASHED_UUID.zip .7z`  
 **Ciphering** : None  
 
@@ -350,7 +325,7 @@ Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Fi
       
 ### pour Flam
 **NOTE :** Le format des histoires de la Flam reste inconnu. Seul les sauvegardes personnelles sont supportées
-#### .zip
+#### Sauvegarde personnelle (ZIP / 7z) [TYPE_FLAM_ZIP/TYPE_FLAM_7z]
 **Filename** :  `story_name.8B_UUID.zip`  
 **Ciphering** : Story Key (unknown)  
 **Structure** :  

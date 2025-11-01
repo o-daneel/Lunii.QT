@@ -777,13 +777,13 @@ class LuniiDevice(QtCore.QObject):
         if story_path.lower().endswith(EXT_PK_PLAIN):
             archive_type = TYPE_LUNII_PLAIN
         elif story_path.lower().endswith(EXT_PK_V2):
-            archive_type = TYPE_LUNII_V2
+            archive_type = TYPE_LUNII_V2_ZIP
         elif story_path.lower().endswith(EXT_PK_V1):
-            archive_type = TYPE_LUNII_V2
+            archive_type = TYPE_LUNII_V2_ZIP
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = TYPE_LUNII_ZIP
-        elif story_path.lower().endswith(EXT_7z):
-            archive_type = TYPE_LUNII_7Z
+            archive_type = TYPE_LUNII_V2_ZIP
+        elif story_path.lower().endswith(EXT_7Z):
+            archive_type = TYPE_LUNII_V2_7Z
         elif story_path.lower().endswith(EXT_PK_VX):
             # trying to guess version v1/2 or v3 based on bt contents
             with zipfile.ZipFile(file=story_path) as zip_file:
@@ -795,10 +795,11 @@ class LuniiDevice(QtCore.QObject):
                 if bt_files:
                     bt_size = zip_file.getinfo(bt_files[0]).file_size
                     if bt_size == 0x20:
-                        archive_type = TYPE_LUNII_V3
+                        archive_type = TYPE_LUNII_V3_ZIP
                     else:
-                        archive_type = TYPE_LUNII_V2
-                # based on ri
+                        archive_type = TYPE_LUNII_V2_ZIP
+
+                # no bt file, so trying to guess based on ri
                 elif (any(file.endswith("ri") for file in zip_contents) and
                       any(file.endswith("si") for file in zip_contents) and
                       any(file.endswith("ni") for file in zip_contents) and
@@ -809,14 +810,14 @@ class LuniiDevice(QtCore.QObject):
                     ri_ciphered = zip_file.read(ri_file)
                     ri_plain = self.__v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
                     if ri_plain[:4] == b"000\\":
-                        archive_type = TYPE_LUNII_V2
+                        archive_type = TYPE_LUNII_V2_ZIP
                     else:
-                        archive_type = TYPE_LUNII_V3
+                        archive_type = TYPE_LUNII_V3_ZIP
                 else:
                     archive_type = TYPE_UNK
 
         # supplementary verification for zip
-        if archive_type == TYPE_LUNII_ZIP:
+        if archive_type == TYPE_LUNII_V2_ZIP:
             # trying to figure out based on zip contents
             with zipfile.ZipFile(file=story_path) as zip_file:
                 # reading all available files
@@ -825,8 +826,6 @@ class LuniiDevice(QtCore.QObject):
                 # checking for STUdio format
                 if FILE_STUDIO_JSON in zip_contents and any('assets/' in entry for entry in zip_contents):
                     archive_type = TYPE_STUDIO_ZIP
-                elif FILE_UUID in zip_contents:
-                    archive_type = TYPE_LUNII_ZIP
                 else:
                     # might be Lunii v2/v3
 
@@ -835,12 +834,12 @@ class LuniiDevice(QtCore.QObject):
                     if bt_files:
                         bt_size = zip_file.getinfo(bt_files[0]).file_size
                         if bt_size == 0x20:
-                            archive_type = TYPE_LUNII_V3
+                            archive_type = TYPE_LUNII_V3_ZIP
                         else:
-                            archive_type = TYPE_LUNII_V2
+                            archive_type = TYPE_LUNII_V2_ZIP
 
         # supplementary verification for 7z
-        elif archive_type == TYPE_LUNII_7Z:
+        elif archive_type == TYPE_LUNII_V2_7Z:
             # trying to figure out based on 7z contents
             with py7zr.SevenZipFile(story_path, 'r') as archive:
                 # reading all available files
@@ -854,17 +853,14 @@ class LuniiDevice(QtCore.QObject):
         if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
             return self.import_lunii_plain(story_path)
-        elif archive_type == TYPE_LUNII_ZIP:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_ZIP")
-            return self.import_lunii_zip(story_path)
-        elif archive_type == TYPE_LUNII_7Z:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_7Z")
-            return self.import_lunii_v2_7z(story_path)
-        elif archive_type == TYPE_LUNII_V2:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2")
+        elif archive_type == TYPE_LUNII_V2_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2_ZIP")
             return self.import_lunii_v2_zip(story_path)
-        elif archive_type == TYPE_LUNII_V3:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V3")
+        elif archive_type == TYPE_LUNII_V2_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V2_7Z")
+            return self.import_lunii_v2_7z(story_path)
+        elif archive_type == TYPE_LUNII_V3_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_V3_ZIP")
             return self.import_lunii_v3(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
@@ -975,7 +971,7 @@ class LuniiDevice(QtCore.QObject):
 
         return True
 
-    def import_lunii_zip(self, story_path):
+    def import_lunii_v2_zip(self, story_path):
         night_mode = False
 
         # checking if archive is OK
@@ -990,32 +986,37 @@ class LuniiDevice(QtCore.QObject):
         with zipfile.ZipFile(file=story_path) as zip_file:
             # reading all available files
             zip_contents = zip_file.namelist()
-            if FILE_UUID not in zip_contents:
-                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "No UUID file found in archive. Unable to add this story."))
-                return False
-            if FILE_STUDIO_JSON in zip_contents:
-                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Archive seems to be a STUdio story (Lunii story expected)."))
+
+            # getting UUID from path
+            uuid_path = Path(zip_contents[0])
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, uuid_str)
+                try:
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
+                    else:
+                        new_uuid = UUID(uuid_str)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID parse error {}").format(e))
+                    return False
+            else:
+                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID directory is missing in archive !"))
                 return False
 
-            # getting UUID file
-            try:
-                new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
-            except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
-        
             # checking if UUID already loaded
             if str(new_uuid) in self.stories:
                 self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "'{}' is already loaded !").format(self.stories.get_story(new_uuid).name))
                 return False
 
             # decompressing story contents
-            short_uuid = str(new_uuid).upper()[28:]
-            output_path = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}/{short_uuid}")
+            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
+            # {str(new_uuid).upper()[28:]
             if not output_path.exists():
                 output_path.mkdir(parents=True)
 
             # Loop over each file
+            short_uuid = str(new_uuid).upper()[28:]
             for index, file in enumerate(zip_contents):
                 self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
                 # abort requested ? early exit
@@ -1024,7 +1025,9 @@ class LuniiDevice(QtCore.QObject):
                     self.__clean_up_story_dir(new_uuid)
                     return False
 
-                if file == FILE_UUID or file.endswith("bt"):
+                if zip_file.getinfo(file).is_dir():
+                    continue
+                if file.endswith("bt"):
                     continue
                 if file.endswith("nm"):
                     night_mode = True
@@ -1032,17 +1035,27 @@ class LuniiDevice(QtCore.QObject):
                 # Extract each zip file
                 data_v2 = zip_file.read(file)
 
-                # need to transcipher ?
-                if file.endswith("ni") or file.endswith("nm"):
-                    # plain files
-                    data_plain = data_v2
+                # stripping extra uuid chars
+                if "-" not in file:
+                    file = file[24:]
                 else:
-                    # to be ciphered
-                    data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
-                # updating filename, and ciphering header if necessary
-                data = self.__get_ciphered_data(file, data_plain)
-                file_newname = self.__get_ciphered_name(file)
+                    file = file[28:]
 
+                if self.device_version <= LUNII_V2:
+                    # from v2 to v2, data can be kept as it is
+                    data = data_v2
+                else:
+                    # need to transcipher for v3 ?
+                    if file.endswith("ni") or file.endswith("nm"):
+                        # plain files
+                        data_plain = data_v2
+                    else:
+                        # to be ciphered
+                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                    # updating filename, and ciphering header if necessary
+                    data = self.__get_ciphered_data(file, data_plain)
+
+                file_newname = self.__get_ciphered_name(file)
                 target: Path = output_path.joinpath(file_newname)
 
                 # create target directory
@@ -1058,7 +1071,7 @@ class LuniiDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "Authorization file creation..."))
-        bt_path = output_path.joinpath("bt")
+        bt_path = output_path.joinpath(str(new_uuid).upper()[28:]+"/bt")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.bt)
 
@@ -1158,116 +1171,6 @@ class LuniiDevice(QtCore.QObject):
                     target.parent.mkdir(parents=True)
                 # write target file
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("LuniiDevice", "File {}/{} > {}").format(index+1, len(contents), file_newname))
-                self.__write_with_progress(target, data)
-
-                # in case of v2 device, we need to prepare bt file 
-                if self.device_version <= LUNII_V2 and file.endswith("ri"):
-                    self.bt = self.cipher(data[0:0x40], self.device_key)
-
-        # creating authorization file : bt
-        self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "Authorization file creation..."))
-        bt_path = output_path.joinpath(str(new_uuid).upper()[28:]+"/bt")
-        with open(bt_path, "wb") as fp_bt:
-            fp_bt.write(self.bt)
-
-        # updating .pi file to add new UUID
-        self.stories.append(Story(new_uuid, nm=night_mode))
-        self.update_pack_index()
-
-        return True
-
-    def import_lunii_v2_zip(self, story_path):
-        night_mode = False
-
-        # checking if archive is OK
-        try:
-            with zipfile.ZipFile(file=story_path):
-                pass  # If opening succeeds, the archive is valid
-        except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
-            return False
-        
-        # opening zip file
-        with zipfile.ZipFile(file=story_path) as zip_file:
-            # reading all available files
-            zip_contents = zip_file.namelist()
-
-            # getting UUID from path
-            uuid_path = Path(zip_contents[0])
-            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
-            if len(uuid_str) >= 16:  # long enough to be a UUID
-                # self.signal_logger.emit(logging.DEBUG, uuid_str)
-                try:
-                    if "-" not in uuid_str:
-                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
-                    else:
-                        new_uuid = UUID(uuid_str)
-                except ValueError as e:
-                    self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID parse error {}").format(e))
-                    return False
-            else:
-                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID directory is missing in archive !"))
-                return False
-
-            # checking if UUID already loaded
-            if str(new_uuid) in self.stories:
-                self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "'{}' is already loaded !").format(self.stories.get_story(new_uuid).name))
-                return False
-
-            # decompressing story contents
-            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
-            # {str(new_uuid).upper()[28:]
-            if not output_path.exists():
-                output_path.mkdir(parents=True)
-
-            # Loop over each file
-            short_uuid = str(new_uuid).upper()[28:]
-            for index, file in enumerate(zip_contents):
-                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
-                # abort requested ? early exit
-                if self.abort_process:
-                    self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "Import aborted, performing cleanup on current story..."))
-                    self.__clean_up_story_dir(new_uuid)
-                    return False
-
-                if zip_file.getinfo(file).is_dir():
-                    continue
-                if file.endswith("bt"):
-                    continue
-                if file.endswith("nm"):
-                    night_mode = True
-
-                # Extract each zip file
-                data_v2 = zip_file.read(file)
-
-                # stripping extra uuid chars
-                if "-" not in file:
-                    file = file[24:]
-                else:
-                    file = file[28:]
-
-                if self.device_version <= LUNII_V2:
-                    # from v2 to v2, data can be kept as it is
-                    data = data_v2
-                else:
-                    # need to transcipher for v3 ?
-                    if file.endswith("ni") or file.endswith("nm"):
-                        # plain files
-                        data_plain = data_v2
-                    else:
-                        # to be ciphered
-                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
-                    # updating filename, and ciphering header if necessary
-                    data = self.__get_ciphered_data(file, data_plain)
-
-                file_newname = self.__get_ciphered_name(file)
-                target: Path = output_path.joinpath(file_newname)
-
-                # create target directory
-                if not target.parent.exists():
-                    target.parent.mkdir(parents=True)
-                # write target file
-                self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("LuniiDevice", "File {}/{} > {}").format(index+1, len(zip_contents), file_newname))
                 self.__write_with_progress(target, data)
 
                 # in case of v2 device, we need to prepare bt file 

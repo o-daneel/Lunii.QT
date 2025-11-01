@@ -432,7 +432,7 @@ class FlamDevice(QtCore.QObject):
 
         return archive_type
 
-    def __archive_check_flam_zipcontent(self, story_path):
+    def __archive_check_zipcontent(self, story_path):
         archive_type = TYPE_UNK
         
         # trying to guess plain contents
@@ -445,14 +445,23 @@ class FlamDevice(QtCore.QObject):
                 archive_type = TYPE_FLAM_ZIP
             # lunii files ?
             elif story_is_lunii(zip_contents):
-                archive_type = TYPE_LUNII_ZIP
+                # based on bt file
+                bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
+                if bt_files:
+                    bt_size = zip_file.getinfo(bt_files[0]).file_size
+                    if bt_size == 0x20:
+                        archive_type = TYPE_LUNII_V3_ZIP
+                    else:
+                        archive_type = TYPE_LUNII_V2_ZIP
+                else:
+                    archive_type = TYPE_UNK
             # studio files ?
             elif story_is_studio(zip_contents):
                 archive_type = TYPE_STUDIO_ZIP
 
         return archive_type
 
-    def __archive_check_flam_7zcontent(self, story_path):
+    def __archive_check_7zcontent(self, story_path):
         archive_type = TYPE_UNK
         
         # opening zip file
@@ -465,7 +474,7 @@ class FlamDevice(QtCore.QObject):
                 archive_type = TYPE_FLAM_7Z
             # lunii files ?
             elif story_is_lunii(zip_contents):
-                archive_type = TYPE_LUNII_7Z
+                archive_type = TYPE_LUNII_V2_7Z
             # studio files ?
             elif story_is_studio(zip_contents):
                 archive_type = TYPE_STUDIO_7Z
@@ -487,12 +496,12 @@ class FlamDevice(QtCore.QObject):
         if story_path.lower().endswith(EXT_PK_PLAIN):
             archive_type = self.__archive_check_plain(story_path)
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = self.__archive_check_flam_zipcontent(story_path)
-        elif story_path.lower().endswith(EXT_7z):
-            archive_type = self.__archive_check_flam_7zcontent(story_path)
+            archive_type = self.__archive_check_zipcontent(story_path)
+        elif story_path.lower().endswith(EXT_7Z):
+            archive_type = self.__archive_check_7zcontent(story_path)
 
         # is flam firmware enough to support Lunii stories ?
-        if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_ZIP, TYPE_LUNII_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:
+        if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_V2_ZIP, TYPE_LUNII_V2_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "Please update your Flam with v2.x.x to support Lunii Stories"))
             return
 
@@ -509,11 +518,11 @@ class FlamDevice(QtCore.QObject):
         elif archive_type == TYPE_FLAM_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_FLAM_7Z")
             return self.import_flam_7z(story_path)
-        elif archive_type == TYPE_LUNII_ZIP:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_ZIP")
+        elif archive_type == TYPE_LUNII_V2_ZIP:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_V2_ZIP")
             return self.import_lunii_v2_zip(story_path)
-        elif archive_type == TYPE_LUNII_7Z:
-            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_7Z")
+        elif archive_type == TYPE_LUNII_V2_7Z:
+            self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_LUNII_V2_7Z")
             return self.import_lunii_v2_7z(story_path)
         elif archive_type == TYPE_STUDIO_ZIP:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_ZIP")
