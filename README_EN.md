@@ -1,5 +1,5 @@
 ![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
-[![luniiQt v3.1.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.0/total?label=luniiQt%20v3.1.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.0)
+[![luniiQt v3.1.1](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.1/total?label=luniiQt%20v3.1.1)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.1)
 [![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
 [![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
 
