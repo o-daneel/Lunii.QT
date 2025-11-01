@@ -1537,7 +1537,7 @@ class LuniiDevice(QtCore.QObject):
         return False
 
     def export_backup_story(self, one_story, out_path):
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, one_story.short_uuid)
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, one_story.short_uuid)
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "🚧 Exporting {} - {}").format(one_story.short_uuid, one_story.name))
 
         # Preparing zip file
@@ -1581,14 +1581,7 @@ class LuniiDevice(QtCore.QObject):
     def export_plain_story(self, one_story, out_path):
         uuid = one_story.str_uuid[28:]
 
-        # checking that .content dir exist
-        content_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
-        if not content_path.is_dir():
-            return None
-        story_path = content_path.joinpath(uuid)
-        if not story_path.is_dir():
-            return None
-
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, uuid)
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "🚧 Exporting {} - {}").format(uuid, one_story.name))
 
         # for Lunii v3, checking keys (original or trick)
@@ -1668,7 +1661,7 @@ class LuniiDevice(QtCore.QObject):
         one_story = slist[0]
 
         # is story path existing ?
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, one_story.short_uuid)
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, one_story.short_uuid)
 
         if os.path.isdir(story_path):
             # checking for known keys ?
@@ -1683,15 +1676,18 @@ class LuniiDevice(QtCore.QObject):
 
     def __clean_up_story_dir(self, story_uuid: UUID):
         story_dir = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{story_uuid.hex.upper()[-8:]}")
-        if os.path.isdir(story_dir):
-            try:
+        hidden_story_dir = Path(self.mount_point).joinpath(f"{self.HIDDEN_STORIES_BASEDIR}{story_uuid.hex.upper()[-8:]}")
+        try:
+            if os.path.isdir(story_dir):
                 shutil.rmtree(story_dir)
-            except OSError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
-            except PermissionError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
+            if os.path.isdir(hidden_story_dir):
+                shutil.rmtree(hidden_story_dir)
+        except OSError as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+        except PermissionError as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
         return True
 
     def remove_story(self, short_uuid):

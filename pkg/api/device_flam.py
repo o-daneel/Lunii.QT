@@ -1518,7 +1518,7 @@ class FlamDevice(QtCore.QObject):
                     last_written = written
 
     def export_backup_story(self, one_story, out_path):
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.short_uuid, one_story.name))
 
         # Preparing zip file
@@ -1560,7 +1560,7 @@ class FlamDevice(QtCore.QObject):
         return zip_path
     
     def export_flam_plainstory(self, one_story, out_path, story_key, story_iv):
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.uuid, one_story.name))
 
         # Preparing zip file
@@ -1630,7 +1630,7 @@ class FlamDevice(QtCore.QObject):
         return zip_path
 
     def export_lunii_plainstory(self, one_story, out_path, story_key, story_iv):
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(one_story.uuid))
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.uuid, one_story.name))
 
         # Preparing zip file
@@ -1727,7 +1727,7 @@ class FlamDevice(QtCore.QObject):
         one_story = slist[0]
 
         # is story path existing ?
-        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR, str(uuid))
+        story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(uuid))
 
         if os.path.isdir(story_path):
             # list all files in story directory including subdirs using glob
@@ -1763,18 +1763,20 @@ class FlamDevice(QtCore.QObject):
         
         return None
     
-
     def __clean_up_story_dir(self, story_uuid: UUID):
         story_dir = Path(self.mount_point).joinpath(f"{self.STORIES_BASEDIR}{str(story_uuid)}")
-        if os.path.isdir(story_dir):
-            try:
+        hidden_story_dir = Path(self.mount_point).joinpath(f"{self.HIDDEN_STORIES_BASEDIR}{str(story_uuid)}")
+        try:
+            if os.path.isdir(story_dir):
                 shutil.rmtree(story_dir)
-            except OSError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
-            except PermissionError as e:
-                self.signal_logger.emit(logging.ERROR, e)
-                return False
+            if os.path.isdir(hidden_story_dir):
+                shutil.rmtree(hidden_story_dir)
+        except OSError as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+        except PermissionError as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
         return True
 
     def remove_story(self, short_uuid):
