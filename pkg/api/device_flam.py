@@ -1708,9 +1708,6 @@ class FlamDevice(QtCore.QObject):
 
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
-        if uuid not in self.stories:
-            return None
-
         slist = self.stories.matching_stories(uuid)
         if len(slist) > 1:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "at least {} match your pattern. Try a longer UUID.").format(len(slist)))
