@@ -1190,7 +1190,7 @@ class LuniiDevice(QtCore.QObject):
         return True
 
     def import_lunii_v3(self, story_path):
-        self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "unsupported story format"))
+        self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Lunii v3 personnal backup can't be imported."))
         return False
 
     def import_studio_zip(self, story_path):
