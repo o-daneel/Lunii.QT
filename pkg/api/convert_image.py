@@ -2,19 +2,18 @@
 from io import BytesIO
 from PIL import Image
 
-def pixel_toABRG3553(r, g, b, a):
-    """Convert 24-bit RGB8888 (r,g,b,a) to 16-bit ABR3553"""
+def pixel_toRGB565(r, g, b, a):
+    """Convert 24-bit RGB8888 (r,g,b,a) to 16-bit RGB565"""
     # Truncate to 5/6 bits
-    a3 = (a * 7) // 255
-    b5 = (b * 31) // 255
-    r5 = (r * 31) // 255
-    g3 = (g * 7) // 255
+    r5 = (r * 32) // 256
+    g6 = (g * 64) // 256
+    b5 = (b * 32) // 256
 
-    # Pack in BGR565 order: [AAAB BBBB RRRR RGGG]
-    value = (a3 << 13) | (b5 << 8) | (r5 << 3) | g3
+    # Pack in BGR565 order: [RRRR RGGG GGGB BBBB]
+    value = (r5 << 11) | (g6 << 5) | b5
 
-    # Return as two bytes (MSB first)
-    return value.to_bytes(2, byteorder='big')
+    # Return as two bytes (LSB first to reproduce same error as on FLAM)
+    return value.to_bytes(2, byteorder='little')
 
 def image_to_liff(image_data):
     image_bytesio = BytesIO(image_data)
@@ -55,8 +54,8 @@ def image_to_liff(image_data):
             raise ValueError(f"Unsupported image mode: {img.mode}")
 
         liff_data += b"\xFE"  # prefix byte
-        # encode pixel from RGB to BRG565
-        liff_data += pixel_toABRG3553(r, g, b, a)
+        # encode pixel from RGB888 to RGB565
+        liff_data += pixel_toRGB565(r, g, b, a)
 
     # writing footer
     liff_data += b"\x00" * 7
