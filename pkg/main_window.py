@@ -713,12 +713,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.act_hide.setEnabled(True)
             self.act_nm.setEnabled(True)
             self.act_remove.setEnabled(True)
-
-            # v3 without keys cannot export
-            if (self.audio_device.device_version == FLAM_V1 or
-                self.audio_device.device_version < LUNII_V3 or
-                    (self.audio_device.device_version == LUNII_V3 and self.audio_device.device_key)):
-                self.act_export.setEnabled(True)
+            self.act_export.setEnabled(True)
 
             # Official story export is forbidden for Luniis (no piracy on Flam)
             if self.audio_device.device_version < LUNII_V3:

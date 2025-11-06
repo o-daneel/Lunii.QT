@@ -1190,8 +1190,87 @@ class LuniiDevice(QtCore.QObject):
         return True
 
     def import_lunii_v3(self, story_path):
-        self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Lunii v3 personnal backup can't be imported."))
-        return False
+        # extract filename and check if it starts with snu and snu is the same as the current device
+        filename = os.path.basename(story_path)
+        if not filename.lower().startswith(self.snu_str):
+            self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Lunii v3 personnal backup can't be imported on this device (SNU mismatch)."))
+            return False
+
+        night_mode = False
+        self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "Restoring Lunii v3 personnal backup..."))
+
+        # checking if archive is OK
+        try:
+            with zipfile.ZipFile(file=story_path):
+                pass  # If opening succeeds, the archive is valid
+        except zipfile.BadZipFile as e:
+            self.signal_logger.emit(logging.ERROR, e)
+            return False
+        
+        # opening zip file
+        with zipfile.ZipFile(file=story_path) as zip_file:
+            # reading all available files
+            zip_contents = zip_file.namelist()
+
+            # getting UUID from path
+            uuid_path = Path(zip_contents[0])
+            uuid_str = uuid_path.parents[0].name if uuid_path.parents[0].name else uuid_path.name
+            if len(uuid_str) >= 16:  # long enough to be a UUID
+                # self.signal_logger.emit(logging.DEBUG, uuid_str)
+                try:
+                    if "-" not in uuid_str:
+                        new_uuid = UUID(bytes=binascii.unhexlify(uuid_str))
+                    else:
+                        new_uuid = UUID(uuid_str)
+                except ValueError as e:
+                    self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID parse error {}").format(e))
+                    return False
+            else:
+                self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "UUID directory is missing in archive !"))
+                return False
+
+            # checking if UUID already loaded
+            if str(new_uuid) in self.stories:
+                self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "'{}' is already loaded !").format(self.stories.get_story(new_uuid).name))
+                return False
+
+            # decompressing story contents
+            output_path = Path(self.mount_point).joinpath(self.STORIES_BASEDIR)
+            # {str(new_uuid).upper()[28:]
+            if not output_path.exists():
+                output_path.mkdir(parents=True)
+
+            # Loop over each file
+            short_uuid = str(new_uuid).upper()[28:]
+            for index, file in enumerate(zip_contents):
+                self.signal_story_progress.emit(short_uuid, index, len(zip_contents))
+                # abort requested ? early exit
+                if self.abort_process:
+                    self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "Import aborted, performing cleanup on current story..."))
+                    self.__clean_up_story_dir(new_uuid)
+                    return False
+
+                if zip_file.getinfo(file).is_dir():
+                    continue
+                if file.endswith("nm"):
+                    night_mode = True
+
+                # Extract each zip file
+                data = zip_file.read(file)
+                target: Path = output_path.joinpath(file)
+
+                # create target directory
+                if not target.parent.exists():
+                    target.parent.mkdir(parents=True)
+                # write target file
+                self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("LuniiDevice", "File {}/{} > {}").format(index+1, len(zip_contents), file))
+                self.__write_with_progress(target, data)
+
+        # updating .pi file to add new UUID
+        self.stories.append(Story(new_uuid, nm=night_mode))
+        self.update_pack_index()
+
+        return True
 
     def import_studio_zip(self, story_path):
         # checking if archive is OK
