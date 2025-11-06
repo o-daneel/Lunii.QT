@@ -203,7 +203,7 @@ Dans l'application, le menu `Tools` affiche l'état de la détection.
 
 ## Mise à jour du firmware
 
-Lunii.QT vous offre la possibilité de sauvegarder et de mettre à jour votre Firmware sans vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **expérimentale** mais jusqu'à présent personne n'a rencontré de problèmes.
+Lunii.QT vous offre la possibilité de sauvegarder votre Firmware. Par extension, ayant votre firmware enregistré, il est donc possible de manuellement l'installer sur votre appareil sans avoir à vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **manuelle** et **expérimentale** mais jusqu'à présent personne n'a rencontré de problème.
 
 **NOTE 1:** Pensez à garder une sauvegarde de votre firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. <u>Vous serez en mesure de rétrograder.</u>  
 **NOTE 2:** Vous ne pouvez pas choisir la version du firmware. Vous n'obtiendrez que la **dernière version disponible** sur les serveurs de Lunii.

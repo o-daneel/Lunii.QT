@@ -203,7 +203,7 @@ Within the application, the Tools menu will display the status of detection.
 
 ## Firmware upgrade
 
-Lunii.QT offers you the possibility to backup and upgrade your Firmware without connecting to LuniiStore (you won't lost your non official loaded stories). This procedure is experimental but so far no one faced issues.
+Lunii.QT allows you to back up your device firmware. With your firmware saved, you can manually install it on your device without connecting to LuniiStore (you will not lose your loaded unofficial stories). This procedure is **manual** and **experimental**, but so far no one has reported any issues.
 
 **NOTE 1:** Remember to keep a backup of your firmware for Lunii v3 and FLAMs, in cas of a release that would break to third party stories trick. <u>You will be able to downgrade.</u>  
 **NOTE 2:** You cannot choose the firmware version. You'll only get the latest available from Lunii servers.
