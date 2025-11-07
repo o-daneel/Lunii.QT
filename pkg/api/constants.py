@@ -8,8 +8,6 @@ LUNII_LOGGER = "lunii-qt"
 REFRESH_CACHE = False
 CACHE_CRC32 = 0x0F77E60C
 
-STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
-
 def toggle_refresh_cache():
     global REFRESH_CACHE
     REFRESH_CACHE = True
@@ -38,10 +36,13 @@ OFFICIAL_TOKEN_URL = "https://server-auth-prod.lunii.com/guest/create"
 OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
 
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
+FFMPEG_PATH = os.path.join(CFG_DIR, "ffmpeg.exe")
 CACHE_DIR = os.path.join(CFG_DIR, "cache")
 FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
+
+STORY_TRANSCODING_SUPPORTED = os.path.isfile(FFMPEG_PATH)
 
 LUNII_V1or2_UNK = 0
 LUNII_V1 = 1
