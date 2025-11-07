@@ -1,5 +1,4 @@
 import logging
-import os.path
 import time
 from pathlib import WindowsPath
 
@@ -7,7 +6,7 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QCheckBox
 
@@ -133,8 +132,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
         # self.tree_stories.setColumnWidth(COL_SIZE, 50)
 
-        self.lbl_picture.setVisible(False)
-        self.te_story_details.setVisible(False)
+        self.story_details.setOpenExternalLinks(True)
 
         # clean progress bars
         self.lbl_total.setVisible(False)
@@ -170,9 +168,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_transcode.setEnabled(not self.ffmpeg_present)
         act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
 
-        act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
-        act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
         # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
         # act_log.setVisible(False)
@@ -438,22 +434,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.cb_show_log()
 
     def cb_tree_select(self):
-        # getting selection
-        selection = self.tree_stories.selectedItems()
-        show_details = len(selection) == 1 and not self.details_hidden
-        self.te_story_details.setVisible(show_details)
-        self.lbl_picture.setVisible(show_details)
 
-        if show_details:
+        selection = self.tree_stories.selectedItems()
+        if selection is not None and len(selection) > 0:
             item = selection[0]
             uuid = item.text(COL_UUID)
-
-            # update selection to show cursor if hidden by UI
-            self.tree_stories.scrollToItem(item)
-
-            # early exit if no changes on story
-            if uuid == self.details_last_uuid:
-                return
+            story_name = item.text(COL_NAME)
 
             # keeping track of currently displayed story
             self.details_last_uuid = uuid
@@ -461,32 +447,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # feeding story image and desc
             one_story = self.audio_device.stories.get_story(uuid)
             if not one_story:
-                return
-            one_story_desc = one_story.desc
-            one_story_image = one_story.get_picture()
-
-            # nothing to display
-            if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_image:
-                self.te_story_details.setVisible(False)
-                self.lbl_picture.setVisible(False)
+                self.story_details.setHtml("")
                 return
 
-            # hidden story
-            self.te_story_details.setDisabled(one_story.hidden)
-            self.lbl_picture.setDisabled(one_story.hidden)
+            url = os.path.join(CACHE_DIR, uuid)
+            self.story_details.setHtml(
+                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width(), QImage(url).width())) + "\" /><br>"
+                + "<h2>" + story_name + "</h2>"
+                + one_story.desc)
 
-            # Update story description
-            self.te_story_details.setText(one_story_desc)
-
-            # Display image from URL or cache
-            if one_story_image:
-                pixmap = QPixmap()
-                pixmap.loadFromData(one_story_image)
-
-                scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                self.lbl_picture.setPixmap(scaled_pixmap)
-            else:
-                self.lbl_picture.setText(self.tr("Failed to fetch BMP file."))
 
     def cb_db_refresh(self):
         self.sb_update(self.tr("Fetching official Lunii DB..."))
@@ -587,14 +556,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.worker_launch(ACTION_SIZE)
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
-
-        elif act_name == "actionShow_story_details":
-            self.details_hidden = not action.isChecked()
-
-            selection = self.tree_stories.selectedItems()
-            show_details = len(selection) == 1 and not self.details_hidden
-            self.te_story_details.setVisible(show_details)
-            self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionShow_Log":
             # already visible ? so hide it
@@ -1145,10 +1106,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for item in new_selection:
             for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
-
-        # updating detail panel
-        self.te_story_details.setDisabled(one_story.hidden)
-        self.lbl_picture.setDisabled(one_story.hidden)
 
         self.sb_update(self.tr("✅ Stories updated..."))
 

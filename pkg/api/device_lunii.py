@@ -139,7 +139,7 @@ class LuniiDevice(QtCore.QObject):
         self.device_version = LUNII_V3
         # reading metadata version
         fp_md.seek(0)
-        md_vers = int.from_bytes(fp_md.read(1))
+        md_vers = int.from_bytes(fp_md.read(1), 'little')
         fp_md.seek(2)
         # reading fw version
         self.fw_vers_major = int.from_bytes(fp_md.read(1), 'little') - 0x30
