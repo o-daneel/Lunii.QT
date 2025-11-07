@@ -452,7 +452,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             url = os.path.join(CACHE_DIR, uuid)
             self.story_details.setHtml(
-                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width(), QImage(url).width())) + "\" /><br>"
+                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" /><br>"
                 + "<h2>" + story_name + "</h2>"
                 + one_story.desc)
 
