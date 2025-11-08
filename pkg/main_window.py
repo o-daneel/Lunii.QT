@@ -439,7 +439,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if selection is not None and len(selection) > 0:
             item = selection[0]
             uuid = item.text(COL_UUID)
-            story_name = item.text(COL_NAME)
 
             # keeping track of currently displayed story
             self.details_last_uuid = uuid
@@ -453,7 +452,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             url = os.path.join(CACHE_DIR, uuid)
             self.story_details.setHtml(
                 "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" /><br>"
-                + "<h2>" + story_name + "</h2>"
+                + "<h2>" + one_story.name + "</h2>"
+                + "<h3>" + one_story.subtitle + "</h3>"
+                + "<h4>" + one_story.author + "</h4>"
                 + one_story.desc)
 
 

@@ -370,6 +370,25 @@ class Story:
         return STORY_UNKNOWN
 
     @property
+    def subtitle(self):
+        one_uuid = str(self.uuid).upper()
+
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            # checking current db
+            if one_uuid in db:
+                if db[one_uuid].get("locales_available") and db[one_uuid].get("localized_infos"):
+                    locale = list(db[one_uuid]["locales_available"].keys())[0]
+                    title = db[one_uuid]["localized_infos"][locale].get("subtitle")
+                    return title
+                else:
+                    title = db[one_uuid].get("subtitle")
+                    if title:
+                        return title
+
+
+        return ""
+
+    @property
     def desc(self):
         one_uuid = str(self.uuid).upper()
 
