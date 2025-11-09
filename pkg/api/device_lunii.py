@@ -22,7 +22,7 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam
 
 
 class LuniiDevice(QtCore.QObject):
@@ -775,15 +775,15 @@ class LuniiDevice(QtCore.QObject):
 
         # identifying based on filename
         if story_path.lower().endswith(EXT_PK_PLAIN):
-            archive_type = TYPE_LUNII_PLAIN
+            archive_type = archive_check_plain(story_path)
         elif story_path.lower().endswith(EXT_PK_V2):
             archive_type = TYPE_LUNII_V2_ZIP
         elif story_path.lower().endswith(EXT_PK_V1):
             archive_type = TYPE_LUNII_V2_ZIP
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = TYPE_LUNII_V2_ZIP
+            archive_type = archive_check_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7Z):
-            archive_type = TYPE_LUNII_V2_7Z
+            archive_type = archive_check_7zcontent(story_path)
         elif story_path.lower().endswith(EXT_PK_VX):
             # trying to guess version v1/2 or v3 based on bt contents
             with zipfile.ZipFile(file=story_path) as zip_file:
@@ -816,39 +816,6 @@ class LuniiDevice(QtCore.QObject):
                 else:
                     archive_type = TYPE_UNK
 
-        # supplementary verification for zip
-        if archive_type == TYPE_LUNII_V2_ZIP:
-            # trying to figure out based on zip contents
-            with zipfile.ZipFile(file=story_path) as zip_file:
-                # reading all available files
-                zip_contents = zip_file.namelist()
-
-                # checking for STUdio format
-                if FILE_STUDIO_JSON in zip_contents and any('assets/' in entry for entry in zip_contents):
-                    archive_type = TYPE_STUDIO_ZIP
-                else:
-                    # might be Lunii v2/v3
-
-                    # based on bt file
-                    bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
-                    if bt_files:
-                        bt_size = zip_file.getinfo(bt_files[0]).file_size
-                        if bt_size == 0x20:
-                            archive_type = TYPE_LUNII_V3_ZIP
-                        else:
-                            archive_type = TYPE_LUNII_V2_ZIP
-
-        # supplementary verification for 7z
-        elif archive_type == TYPE_LUNII_V2_7Z:
-            # trying to figure out based on 7z contents
-            with py7zr.SevenZipFile(story_path, 'r') as archive:
-                # reading all available files
-                contents = archive.getnames()
-
-                # checking for STUdio format
-                if FILE_STUDIO_JSON in contents and any('assets/' in entry for entry in contents):
-                    archive_type = TYPE_STUDIO_7Z
-
         # processing story
         if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
@@ -868,6 +835,10 @@ class LuniiDevice(QtCore.QObject):
         elif archive_type == TYPE_STUDIO_7Z:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
             return self.import_studio_7z(story_path)
+        else:
+            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:2X}".format(archive_type))
+
+        return None
 
     def import_lunii_plain(self, story_path):
         night_mode = False
