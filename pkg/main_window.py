@@ -670,7 +670,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # always possible to import in an empty device
         self.act_import.setEnabled(True)
         # except if not story keys are present for v3
-        if (self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key):
+        if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.act_import.setEnabled(False)   
 
         # pointing to an item
@@ -1199,7 +1199,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def ts_drop_action(self, event):
-        if (self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key):
+        if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.sb_update(self.tr("🛑 Unable to import story, missing story key for Lunii v3"))
             return
         
