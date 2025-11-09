@@ -378,7 +378,7 @@ $ pyside6-uic pkg/ui/nm.ui   -o pkg/ui/nm_ui.py
 ### Génération des fichiers de tranduction
 ```bash
 $ pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
-$ pyside6-linguist ./locales/fr_FR.ts  # optionnaly, update translations
+$ pyside6-linguist -style WindowsVista ./locales/fr_FR.ts  # optionnaly, update translations
 $ pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
 ```
 ### Génération du fichier de ressource
