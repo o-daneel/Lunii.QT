@@ -16,7 +16,45 @@
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/about_ui.py" line="26"/>
+        <location filename="../pkg/ui/about_ui.py" line="9"/>
+        <source>
+&lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
+&lt;br /&gt;
+
+
+This application is a PoC that allows to manage the contents of your own Lunii Storyteller,
+including changing stories order, backup (for personal usage only), restore, and downloading 
+your latest Lunii firmware (to eventually restore from a broken device).&lt;br /&gt;
+  
+&lt;br /&gt;Powered by Python 3.11, PySide 6.10&lt;br /&gt;
+&lt;br /&gt;
+
+Icons are provided freely by &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+ 
+Logos are provided by &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;URL : &lt;/b&gt;&lt;a href=&quot;https://github.com/o-daneel/Lunii.QT&quot;&gt;https://github.com/o-daneel/Lunii.QT&lt;/a&gt;
+</source>
+        <translation>
+&lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
+&lt;br /&gt;
+
+Cette application est une preuve de concept (PoC) qui permet de gérer le contenu de votre 
+Fabrique à histoires Lunii, modifier l’ordre des histoires, effectuer une sauvegarde 
+(à usage strictement personnel), restaurer et télécharger la dernière version du firmware Lunii 
+(afin de pouvoir éventuellement restaurer un appareil défectueux).&lt;br /&gt;
+  
+&lt;br /&gt;Développé avec Python 3.11, PySide 6.10&lt;br /&gt;
+&lt;br /&gt;
+
+Les icônes sont fournies gratuitement par &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+ 
+Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;URL : &lt;/b&gt;&lt;a href=&quot;https://github.com/o-daneel/Lunii.QT&quot;&gt;https://github.com/o-daneel/Lunii.QT&lt;/a&gt;
+</translation>
+    </message>
+    <message>
         <source>
 &lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
 &lt;br /&gt;
@@ -35,7 +73,7 @@ Logos are provided by &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 
 &lt;b&gt;URL : &lt;/b&gt;&lt;a href=&quot;https://github.com/o-daneel/Lunii.QT&quot;&gt;https://github.com/o-daneel/Lunii.QT&lt;/a&gt;
 </source>
-        <translation>
+        <translation type="vanished">
 &lt;h2&gt;&lt;b&gt;Lunii Qt-Manager&lt;/b&gt;&lt;/h2&gt;
 &lt;br /&gt;
 
@@ -378,7 +416,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/api/device_flam.py" line="1829"/>
         <source>Reading Flam loaded stories...</source>
-        <translation>Lecture des histoires chargées dans la Flam</translation>
+        <translation>Lecture des histoires chargées dans la Flam...</translation>
     </message>
     <message>
         <location filename="../pkg/api/device_flam.py" line="1839"/>
@@ -407,7 +445,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/ui/login_ui.py" line="23"/>
         <source>Password:</source>
-        <translation>Mot de passe</translation>
+        <translation>Mot de passe :</translation>
     </message>
 </context>
 <context>
@@ -690,12 +728,12 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1196"/>
         <source>Lunii v3 personnal backup can&apos;t be imported on this device (SNU mismatch).</source>
-        <translation>Cette sauvegarde personnel Lunii v3 ne peut être importée (le SNU ne correspond pas)</translation>
+        <translation>Cette sauvegarde personnel Lunii v3 ne peut être importée (le SNU ne correspond pas).</translation>
     </message>
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1200"/>
         <source>Restoring Lunii v3 personnal backup...</source>
-        <translation>Restauration d&apos;une sauvegarde personnelle Lunii v3</translation>
+        <translation>Restauration d&apos;une sauvegarde personnelle Lunii v3...</translation>
     </message>
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1710"/>
@@ -745,7 +783,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1846"/>
         <source>Reading Lunii loaded stories...</source>
-        <translation>Lecture des histoires chargées dans la Lunii</translation>
+        <translation>Lecture des histoires chargées dans la Lunii...</translation>
     </message>
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1871"/>
@@ -760,7 +798,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/api/device_lunii.py" line="1880"/>
         <source>Reading Lunii config...</source>
-        <translation>Lecture de la configuration de la Lunii</translation>
+        <translation>Lecture de la configuration de la Lunii...</translation>
     </message>
 </context>
 <context>
@@ -771,251 +809,251 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Lunii Qt-Manager</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="680"/>
+        <location filename="../pkg/ui/main.ui" line="683"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="698"/>
+        <location filename="../pkg/ui/main.ui" line="701"/>
         <source>Import</source>
         <translation>Importer</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="710"/>
+        <location filename="../pkg/ui/main.ui" line="713"/>
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="722"/>
+        <location filename="../pkg/ui/main.ui" line="725"/>
         <source>Export All</source>
         <translation>Tout Exporter</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="734"/>
+        <location filename="../pkg/ui/main.ui" line="737"/>
         <source>Move Up</source>
         <translation>Déplacer vers le haut</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="746"/>
+        <location filename="../pkg/ui/main.ui" line="749"/>
         <source>Move Down</source>
         <translation>Déplacer vers le bas</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="758"/>
-        <location filename="../pkg/ui/main.ui" line="903"/>
+        <location filename="../pkg/ui/main.ui" line="761"/>
+        <location filename="../pkg/ui/main.ui" line="906"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="775"/>
+        <location filename="../pkg/ui/main.ui" line="778"/>
         <source>Show size</source>
         <translation>Afficher les tailles</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="778"/>
+        <location filename="../pkg/ui/main.ui" line="781"/>
         <source>Show size for each stories</source>
         <translation>Afficher les tailles pour chaques histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="790"/>
+        <location filename="../pkg/ui/main.ui" line="793"/>
         <source>Get FW Update</source>
         <translation>Récupérer le firmware</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="793"/>
+        <location filename="../pkg/ui/main.ui" line="796"/>
         <source>Get firmaware update for current Lunii</source>
         <translation>Récupérer la mise à jour du firmware pour la Lunii connectée</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="804"/>
+        <location filename="../pkg/ui/main.ui" line="807"/>
         <source>Show story details</source>
         <translation>Détails des histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="813"/>
+        <location filename="../pkg/ui/main.ui" line="816"/>
         <source>Move Top</source>
         <translation>Déplacer en haut</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="825"/>
+        <location filename="../pkg/ui/main.ui" line="828"/>
         <source>Move Bottom</source>
         <translation>Déplacer en bas</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="837"/>
+        <location filename="../pkg/ui/main.ui" line="840"/>
         <source>Open device</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="840"/>
+        <location filename="../pkg/ui/main.ui" line="843"/>
         <source>Open Lunii or Flam device</source>
         <translation>Ouvre une Lunii ou une Flam</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="855"/>
+        <location filename="../pkg/ui/main.ui" line="858"/>
         <source>Show Log</source>
         <translation>Afficher le journal</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="867"/>
+        <location filename="../pkg/ui/main.ui" line="870"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="879"/>
+        <location filename="../pkg/ui/main.ui" line="882"/>
         <source>Update to v2.X.X</source>
         <translation>Mise à jour vers v2.X.X</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="893"/>
+        <location filename="../pkg/ui/main.ui" line="896"/>
         <source>FFMPEG detected</source>
         <translation>FFMPEG détecté</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="898"/>
+        <location filename="../pkg/ui/main.ui" line="901"/>
         <source>Recover</source>
         <translation>Récupérer</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="911"/>
+        <location filename="../pkg/ui/main.ui" line="914"/>
         <source>Factory Reset</source>
         <translation>Réinitialisation</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="916"/>
+        <location filename="../pkg/ui/main.ui" line="919"/>
         <source>Find</source>
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="921"/>
+        <location filename="../pkg/ui/main.ui" line="924"/>
         <source>Hide / Show</source>
         <translation>Cacher / Montrer</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="933"/>
+        <location filename="../pkg/ui/main.ui" line="936"/>
         <source>Import STUdio DB</source>
         <translation>Importer une DB STUdio</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="942"/>
+        <location filename="../pkg/ui/main.ui" line="945"/>
         <source>Refresh official DB</source>
         <translation>Rafraichir la DB officielle</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="947"/>
+        <location filename="../pkg/ui/main.ui" line="950"/>
         <source>Force Night Mode</source>
         <translation>Force le mode nuit</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="242"/>
+        <location filename="../pkg/ui/main.ui" line="245"/>
         <source>Night Mode</source>
         <translation>Mode nuit</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="47"/>
+        <location filename="../pkg/ui/main.ui" line="50"/>
         <source>Refresh connected devices</source>
         <translation>Rafraichir les appareils</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="82"/>
-        <location filename="../pkg/ui/main.ui" line="88"/>
+        <location filename="../pkg/ui/main.ui" line="85"/>
+        <location filename="../pkg/ui/main.ui" line="91"/>
         <location filename="../pkg/main_window.py" line="346"/>
         <location filename="../pkg/main_window.py" line="358"/>
         <source>Select your Lunii</source>
         <translation>Sélectionner votre Lunii</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="150"/>
+        <location filename="../pkg/ui/main.ui" line="153"/>
         <source>(Story Name or UUID filter text)</source>
         <translation>(filtre &quot;Nom d&apos;une histoire&quot;  ou  &quot;UUID&quot;)</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="166"/>
+        <location filename="../pkg/ui/main.ui" line="169"/>
         <source>Force official Lunii DB to be refreshed</source>
         <translation>Forcer la base officielle Lunii a être rechargée</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="266"/>
+        <location filename="../pkg/ui/main.ui" line="269"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="234"/>
+        <location filename="../pkg/ui/main.ui" line="237"/>
         <source>Story Name</source>
         <translation>Nom de l&apos;histoire</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="253"/>
+        <location filename="../pkg/ui/main.ui" line="256"/>
         <source>Database source (Official / Third Party)</source>
         <translation>Base d&apos;origine (Officielle / Tierce)</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="379"/>
+        <location filename="../pkg/ui/main.ui" line="382"/>
         <source>Total</source>
         <translation>Total</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="395"/>
+        <location filename="../pkg/ui/main.ui" line="398"/>
         <source>Operation progress</source>
         <translation>Avancement de l&apos;opération</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="421"/>
+        <location filename="../pkg/ui/main.ui" line="424"/>
         <source>Writing speed</source>
         <translation>Vitesse d&apos;écriture</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="451"/>
+        <location filename="../pkg/ui/main.ui" line="454"/>
         <source>Story progress</source>
         <translation>Histoire en cours</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="476"/>
+        <location filename="../pkg/ui/main.ui" line="479"/>
         <source>File progress</source>
         <translation>Fichier en cours</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="498"/>
+        <location filename="../pkg/ui/main.ui" line="501"/>
         <source>Abort current process</source>
         <translation>Annuler la tâche en cours</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="545"/>
+        <location filename="../pkg/ui/main.ui" line="548"/>
         <source>No Thumb</source>
         <translation>Pas d&apos;image</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="567"/>
+        <location filename="../pkg/ui/main.ui" line="570"/>
         <source>Story description</source>
         <translation>Description de l&apos;histoire</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="600"/>
+        <location filename="../pkg/ui/main.ui" line="603"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="618"/>
+        <location filename="../pkg/ui/main.ui" line="621"/>
         <source>&amp;Tools</source>
         <translation>&amp;Outils</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="622"/>
+        <location filename="../pkg/ui/main.ui" line="625"/>
         <source>Lost stories</source>
         <translation>Histoires perdues</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="641"/>
+        <location filename="../pkg/ui/main.ui" line="644"/>
         <source>&amp;Stories</source>
         <translation>&amp;Histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="661"/>
+        <location filename="../pkg/ui/main.ui" line="664"/>
         <source>Update 2.2.X is released</source>
         <translation>Mise à jour v2.X.X disponible</translation>
     </message>
     <message>
-        <location filename="../pkg/ui/main.ui" line="666"/>
+        <location filename="../pkg/ui/main.ui" line="669"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
@@ -1030,19 +1068,19 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Aucune Lunii détectée 😥</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="410"/>
+        <location filename="../pkg/main_window.py" line="409"/>
         <source>🛑 PermissionError : Unable to open this device</source>
         <translation>🛑 PermissionError : Impossible d&apos;ouvrir cet appareil</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="489"/>
         <source>Failed to fetch BMP file.</source>
-        <translation>Echec durant la récupération de l&apos;image</translation>
+        <translation>Echec durant la récupération de l&apos;image.</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="492"/>
         <source>Fetching official Lunii DB...</source>
-        <translation>Récupération de la base officielle Lunii</translation>
+        <translation>Récupération de la base officielle Lunii...</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="510"/>
@@ -1085,7 +1123,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Identifié....</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="647"/>
+        <location filename="../pkg/main_window.py" line="646"/>
         <source>✅ Firmware downloaded to</source>
         <translation>✅ Firmware téléchargé dans</translation>
     </message>
@@ -1153,14 +1191,14 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Supprimer les histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1024"/>
+        <location filename="../pkg/main_window.py" line="1023"/>
         <source>You are requesting to delete : 
 </source>
         <translation>Souhaitez vous supprimer : 
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1031"/>
+        <location filename="../pkg/main_window.py" line="1029"/>
         <source>
 (and too many others)
 </source>
@@ -1169,7 +1207,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1032"/>
+        <location filename="../pkg/main_window.py" line="1031"/>
         <source>
 Do you want to proceed ?</source>
         <translation>
@@ -1190,13 +1228,13 @@ Voulez-vous continuer ?</translation>
         <location filename="../pkg/main_window.py" line="1124"/>
         <location filename="../pkg/main_window.py" line="1131"/>
         <source>🛑 Unable to update story ...</source>
-        <translation>🛑 Impossible de mettre à jour l&apos;histoire</translation>
+        <translation>🛑 Impossible de mettre à jour l&apos;histoire...</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="1153"/>
         <location filename="../pkg/main_window.py" line="1196"/>
         <source>✅ Stories updated...</source>
-        <translation>✅ Histoire(s) mise(s) à jour</translation>
+        <translation>✅ Histoire(s) mise(s) à jour...</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="1203"/>
@@ -1207,7 +1245,7 @@ Voulez-vous continuer ?</translation>
         <location filename="../pkg/main_window.py" line="1208"/>
         <location filename="../pkg/main_window.py" line="1244"/>
         <source>Importing stories...</source>
-        <translation>Import d&apos;histoires</translation>
+        <translation>Import d&apos;histoires...</translation>
     </message>
     <message>
         <location filename="../pkg/main_window.py" line="1238"/>
@@ -1264,7 +1302,7 @@ Voulez-vous continuer ?</translation>
     <message>
         <location filename="../pkg/ierWorker.py" line="95"/>
         <source>Importing stories...</source>
-        <translation>Import d&apos;histoires</translation>
+        <translation>Import d&apos;histoires...</translation>
     </message>
     <message>
         <location filename="../pkg/ierWorker.py" line="114"/>
@@ -1419,7 +1457,7 @@ Voulez-vous continuer ?</translation>
     <message>
         <location filename="../pkg/ui/nm.ui" line="271"/>
         <source>You can choose how many stories will be read before the device shuts down.</source>
-        <translation>Vous pouvez choisir combien d&apos;histoires seront lues avant que l&apos;appareil ne s&apos;arrête</translation>
+        <translation>Vous pouvez choisir combien d&apos;histoires seront lues avant que l&apos;appareil ne s&apos;arrête.</translation>
     </message>
     <message>
         <location filename="../pkg/ui/nm.ui" line="289"/>
