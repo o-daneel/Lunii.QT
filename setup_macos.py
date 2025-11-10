@@ -6,7 +6,7 @@ OPTIONS = {
     'argv_emulation': True,
     'iconfile': 'res/lunii.ico',
     'plist': {
-        'CFBundleName': 'Lunii Qt',
+        'CFBundleName': 'luniiQt',
         'CFBundleDisplayName': 'Lunii Qt',
         'CFBundleIdentifier': 'com.o-daneel.luniiqt',
         'CFBundleVersion': '1.0.0',
