@@ -1,4 +1,5 @@
 import logging
+import re
 import time
 from pathlib import WindowsPath
 
@@ -7,19 +8,21 @@ import requests
 import base64
 
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, \
+    QStandardItemModel, QStandardItem
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication, QCheckBox
+    QDialog, QApplication, QListView, QAbstractItemView
 
 from pkg import versionWorker
 from pkg.api import constants
+from pkg.api import stories
 from pkg.api.constants import *
 from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
-from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
+from pkg.api.stories import story_load_db, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.nm_window import NightModeWindow
@@ -34,6 +37,14 @@ COL_DB = 2
 COL_UUID = 3
 COL_SIZE = 4
 
+COL_OFFICIAL_AGE = 0
+COL_OFFICIAL_NAME = 1
+COL_OFFICIAL_LANGUAGE = 2
+COL_OFFICIAL_INSTALLED = 3
+COL_OFFICIAL_PATH = 4
+COL_OFFICIAL_UUID = 5
+COL_OFFICIAL_SIZE = 6
+
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
@@ -47,6 +58,23 @@ APP_VERSION = "v3.1.2"
 """
 # TODO :
  """
+
+def natural_sort_key(s):
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
+
+class NaturalSortTreeWidgetItem(QTreeWidgetItem):
+    def __lt__(self, other):
+        col = self.treeWidget().sortColumn()
+        self_data = self.text(col)
+        other_data = other.text(col)
+        return natural_sort_key(self_data) < natural_sort_key(other_data)
+
+class NaturalSortProxyModel(QSortFilterProxyModel):
+    def lessThan(self, left: QModelIndex, right: QModelIndex) -> bool:
+        left_data = self.sourceModel().data(left)
+        right_data = self.sourceModel().data(right)
+        return natural_sort_key(left_data) < natural_sort_key(right_data)
+
 
 class VLine(QFrame):
     def __init__(self):
@@ -79,7 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # self.debug_dialog.show() # class instance vars init self.audio_device: LuniiDevice = None self.worker: ierWorker = None self.thread: QtCore.QThread = None self.version_worker: versionWorker = None self.version_thread: QtCore.QThread = None self.app = app # app config
         self.sizes_hidden = True
-        self.details_hidden = False
+        self.show_gallery = False
         self.details_last_uuid = None
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
 
@@ -137,8 +165,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
-        
         self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
+
+        self.list_stories_official.setViewMode(QListView.IconMode)
+        self.list_stories_official.setIconSize(QSize(512, 512))
+        self.list_stories_official.setResizeMode(QListView.Adjust)
+        self.list_stories_official.setVisible(False)
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
+        self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, COL_NAME_MIN_SIZE)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
+
+        self.list_stories_official.setViewMode(QListView.IconMode)
+        self.list_stories_official.setIconSize(QSize(512, 512))
+        self.list_stories_official.setResizeMode(QListView.Adjust)
+        self.list_stories_official.setDragEnabled(False)
+        self.list_stories_official.setAcceptDrops(False)
+        self.list_stories_official.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.list_stories_official.setVisible(False)
+
 
         self.story_details.setOpenExternalLinks(True)
 
@@ -178,6 +228,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_size.setChecked(not self.sizes_hidden)
+        act_gallery = next(act for act in t_actions if act.objectName() == "actionShow_gallery")
+        act_gallery.setChecked(self.show_gallery)
         # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
         # act_log.setVisible(False)
 
@@ -195,6 +247,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # connecting slots and signals
     def setup_connections(self):
+        self.tabWidget.currentChanged.connect(self.cb_tab_changed)
+
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
         self.le_filter.textChanged.connect(self.ts_update)
 
@@ -203,8 +257,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_abort.clicked.connect(self.worker_abort)
         self.btn_nightmode.clicked.connect(self.cb_nm)
 
-        self.splitter.splitterMoved.connect(self.cb_tree_select)
-        self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
+        self.splitter.splitterMoved.connect(self.cb_story_select)
+        self.tree_stories.itemSelectionChanged.connect(self.cb_story_select)
+        self.tree_stories_official.itemSelectionChanged.connect(self.cb_story_select)
+
         self.tree_stories.installEventFilter(self)
 
         QApplication.instance().focusChanged.connect(self.onFocusChanged)
@@ -239,7 +295,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                QTimer.singleShot(0, self.cb_tree_select)
+                QTimer.singleShot(0, self.cb_story_select)
                 return False
         return False
 
@@ -305,6 +361,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
 
         event.accept()
+
+    def cb_tab_changed(self):
+        self.story_details.setText("")
 
     def cb_show_context_menu(self, point):
         # change active menu based on selection
@@ -427,50 +486,78 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not self.audio_device.story_key):
                 self.cb_show_log()
 
-    def cb_tree_select(self):
-
-        selection = self.tree_stories.selectedItems()
-        if selection is not None:
-            if len(selection) == 1:
-                item = selection[0]
-                uuid = item.text(COL_UUID)
-
-                # keeping track of currently displayed story
-                self.details_last_uuid = uuid
-
-                # feeding story image and desc
-                one_story = self.audio_device.stories.get_story(uuid)
-                if not one_story:
-                    self.story_details.setHtml("")
-                    return
-
-                url = os.path.join(CACHE_DIR, uuid)
-                width = min(self.story_details.width() - 20, QImage(url).width())
-                self.story_details.setHtml(
-                    f'<img src="{url}" width="{width}" />'
-                    + f"<h2>{one_story.name}</h2>"
-                    + f"<h3>{one_story.subtitle}</h3>"
-                    + f"<h4>{one_story.author}</h4>"
-                    + one_story.desc)
-            else:
-                paths = []
-                names = []
-                for i, item in enumerate(selection):
+    def cb_story_select(self):
+        if self.tabWidget.currentIndex() == 0:
+            selection = self.tree_stories.selectedItems()
+            if selection is not None:
+                if len(selection) == 1:
+                    item = selection[0]
                     uuid = item.text(COL_UUID)
-                    paths.append(os.path.join(CACHE_DIR, uuid))
-                    names.append(item.text(COL_NAME))
 
-                data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
-                if data_uri is None:
-                    self.story_details.setHtml("")
-                    return
+                    # keeping track of currently displayed story
+                    self.details_last_uuid = uuid
 
-                html = f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
-                for name in names:
-                    html += f"<BR/><b>{name}</b>"
-                self.story_details.setHtml(html)
-        else:
-            self.story_details.setHtml("")
+                    # feeding story image and desc
+                    one_story = self.audio_device.stories.get_story(uuid)
+                    if not one_story:
+                        self.story_details.setHtml("")
+                        return
+
+                    url = os.path.join(CACHE_DIR, uuid)
+                    width = min(self.story_details.width() - 20, QImage(url).width())
+                    self.story_details.setHtml(
+                        f'<img src="{url}" width="{width}" />'
+                        + f"<h2>{one_story.name}</h2>"
+                        + f"<h3>{one_story.subtitle}</h3>"
+                        + f"<h4>{one_story.author}</h4>"
+                        + one_story.desc)
+                else:
+                    paths = []
+                    names = []
+                    for i, item in enumerate(selection):
+                        uuid = item.text(COL_UUID)
+                        paths.append(os.path.join(CACHE_DIR, uuid))
+                        names.append(item.text(COL_NAME))
+
+                    data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
+                    if data_uri is None:
+                        self.story_details.setHtml("")
+                        return
+
+                    html = f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
+                    for name in names:
+                        html += f"<BR/><b>{name}</b>"
+                    self.story_details.setHtml(html)
+            else:
+                self.story_details.setHtml("")
+        
+        elif self.tabWidget.currentIndex() == 1:
+            id = None
+            
+            if self.show_gallery:
+                selection_model = self.list_stories_official.selectionModel()
+                current_index = selection_model.currentIndex()
+                if current_index.isValid():
+                    data = current_index.data(Qt.UserRole)
+                    id = data["id"]
+            else:
+                current = self.tree_stories_official.currentItem()
+                if current is not None:
+                    id = current.text(COL_OFFICIAL_UUID)
+
+            if id is not None:
+                locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
+                description = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("description", "")
+                title = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("title", "")
+                subtitle = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("subtitle", "")
+                url = os.path.join(CACHE_DIR, id)
+                width = min(self.story_details.width() - 20, QImage(url).width())
+
+                self.story_details.setHtml(
+                    f'<img src="{url}" width="{width}" /><br>'
+                    + f'<h2>{title}</h2>'
+                    + f'<h3>{subtitle}</h3>'
+                    + description)
 
     def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
         if not image_paths:
@@ -625,6 +712,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.worker_launch(ACTION_SIZE)
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
+
+        if act_name == "actionShow_gallery":
+            self.show_gallery = action.isChecked()
+            self.tree_stories_official.setVisible(not self.show_gallery)
+            self.list_stories_official.setVisible(self.show_gallery)
+            self.story_details.setText("")
 
         elif act_name == "actionShow_Log":
             # already visible ? so hide it
@@ -803,10 +896,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
+        self.tree_stories_official.clear()
+
+        if self.list_stories_official.model() is not None:
+            self.list_stories_official.model().sourceModel().clear() 
+
         self.details_last_uuid = None
         self.ts_populate()
-        # update status in status bar
-        # self.sb_update_summary()
+        self.ts_populate_official()
+
+        self.list_stories_official.selectionModel().currentChanged.connect(self.cb_story_select)
+
 
     def ts_populate(self):
         # empty device
@@ -853,6 +953,57 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     item.setForeground(column, grey_color)
 
             self.tree_stories.addTopLevelItem(item)
+
+    def ts_populate_official(self):
+        # creating font
+        console_font = QFont()
+        console_font.setFamilies([u"Consolas"])
+
+        # getting filter text
+        le_filter = self.le_filter.text()
+
+        # adding items
+        list_stories_model = QStandardItemModel()
+
+        for id in stories.DB_OFFICIAL:
+            name = stories.DB_OFFICIAL[id]["title"]
+
+            # filtering 
+            if (le_filter and
+                not le_filter.lower() in name.lower() and
+                not le_filter.lower() in id.lower() ):
+                continue
+
+            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+
+            # create and add item to treeWidget
+            item = NaturalSortTreeWidgetItem()
+
+            item.setText(COL_OFFICIAL_NAME, name)
+            item.setText(COL_OFFICIAL_UUID, id)
+            item.setFont(COL_OFFICIAL_UUID, console_font)
+            item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
+            if lunii_story is not None:
+                item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
+
+            self.tree_stories_official.addTopLevelItem(item)
+
+            local_db_path = item.text(COL_OFFICIAL_PATH)
+            lunii_story_id = item.text(COL_OFFICIAL_INSTALLED)
+            
+            pixmap = QPixmap()
+            pixmap.loadFromData(stories.get_picture(id))
+            scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
+            itemList = QStandardItem(QIcon(scaled_pixmap), name)
+            itemList.setData({"id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id}, Qt.UserRole)
+
+            list_stories_model.appendRow(itemList)
+
+        sorted_model = NaturalSortProxyModel()
+        sorted_model.setSourceModel(list_stories_model)
+        sorted_model.sort(0)  
+
+        self.list_stories_official.setModel(sorted_model)
 
     def sb_create(self):
         self.statusBar().showMessage("bla-bla bla")
