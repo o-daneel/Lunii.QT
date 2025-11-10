@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'nm.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.10.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -32,7 +32,7 @@ class Ui_nightMode(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.hl_header = QHBoxLayout()
         self.hl_header.setObjectName(u"hl_header")
-        self.horizontalSpacer_3 = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.hl_header.addItem(self.horizontalSpacer_3)
 
@@ -40,7 +40,7 @@ class Ui_nightMode(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.lbl_Header = QLabel(nightMode)
         self.lbl_Header.setObjectName(u"lbl_Header")
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lbl_Header.sizePolicy().hasHeightForWidth())
@@ -53,7 +53,7 @@ class Ui_nightMode(object):
 
         self.lbl_guide = QLabel(nightMode)
         self.lbl_guide.setObjectName(u"lbl_guide")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.lbl_guide.sizePolicy().hasHeightForWidth())
@@ -63,7 +63,7 @@ class Ui_nightMode(object):
 
         self.verticalLayout_3.addWidget(self.lbl_guide)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_3.addItem(self.verticalSpacer_2)
 
@@ -72,7 +72,7 @@ class Ui_nightMode(object):
 
         self.lbl_imgHeader = QLabel(nightMode)
         self.lbl_imgHeader.setObjectName(u"lbl_imgHeader")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.lbl_imgHeader.sizePolicy().hasHeightForWidth())
@@ -84,7 +84,7 @@ class Ui_nightMode(object):
 
         self.hl_header.addWidget(self.lbl_imgHeader)
 
-        self.horizontalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.hl_header.addItem(self.horizontalSpacer_2)
 
@@ -99,7 +99,7 @@ class Ui_nightMode(object):
         self.hl_nm_mode.setObjectName(u"hl_nm_mode")
         self.lbl_enable = QLabel(self.groupBox)
         self.lbl_enable.setObjectName(u"lbl_enable")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.lbl_enable.sizePolicy().hasHeightForWidth())
@@ -109,7 +109,7 @@ class Ui_nightMode(object):
 
         self.cbox_enable = QCheckBox(self.groupBox)
         self.cbox_enable.setObjectName(u"cbox_enable")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.cbox_enable.sizePolicy().hasHeightForWidth())
@@ -123,8 +123,8 @@ class Ui_nightMode(object):
 
         self.line_2 = QFrame(self.groupBox)
         self.line_2.setObjectName(u"line_2")
-        self.line_2.setFrameShape(QFrame.HLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_2.addWidget(self.line_2)
 
@@ -156,8 +156,8 @@ class Ui_nightMode(object):
 
         self.line = QFrame(self.groupBox)
         self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_2.addWidget(self.line)
 
@@ -209,8 +209,8 @@ class Ui_nightMode(object):
 
         self.line_3 = QFrame(self.groupBox)
         self.line_3.setObjectName(u"line_3")
-        self.line_3.setFrameShape(QFrame.HLine)
-        self.line_3.setFrameShadow(QFrame.Sunken)
+        self.line_3.setFrameShape(QFrame.Shape.HLine)
+        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_2.addWidget(self.line_3)
 
@@ -241,13 +241,13 @@ class Ui_nightMode(object):
 
         self.verticalLayout.addWidget(self.groupBox)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
         self.hl_button = QHBoxLayout()
         self.hl_button.setObjectName(u"hl_button")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.hl_button.addItem(self.horizontalSpacer)
 

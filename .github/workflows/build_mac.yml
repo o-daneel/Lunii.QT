@@ -35,12 +35,12 @@ jobs:
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.darwin.spec
         mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-${{ github.ref_name }}-Darwin-x86_64.zip ./lunii-qt
+        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-${{ github.ref_name }}-Darwin-x86_64
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64
         path: |
           ./lunii-qt
 
@@ -49,7 +49,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
-        files: Lunii.Qt-${{ github.ref_name }}-Darwin-x86_64.zip
+        files: Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip
 
 
   build_mac_arm:
@@ -80,12 +80,12 @@ jobs:
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.darwin.spec
         mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-${{ github.ref_name }}-Darwin-arm64.zip ./lunii-qt
+        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./lunii-qt
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-${{ github.ref_name }}-Darwin-arm64
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64
         path: |
           ./lunii-qt
 
@@ -94,7 +94,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
-        files: Lunii.Qt-${{ github.ref_name }}-Darwin-arm64.zip
+        files: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip
 
   # build_mac_arm:
   #   runs-on: macos-latest-large

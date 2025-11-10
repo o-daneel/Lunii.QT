@@ -4,12 +4,14 @@ from pathlib import Path
 from typing import List
 from uuid import UUID
 from typing import List
+import zipfile
 
+import py7zr
 import requests
 from PySide6.QtCore import QFile, QTextStream
 
 from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
-    STORY_TRANSCODING_SUPPORTED, OFFICIAL_TOKEN_URL
+    STORY_TRANSCODING_SUPPORTED, OFFICIAL_TOKEN_URL, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN, TYPE_FLAM_ZIP, TYPE_LUNII_PLAIN, TYPE_LUNII_V2_7Z, TYPE_LUNII_V2_ZIP, TYPE_LUNII_V3_ZIP, TYPE_STUDIO_7Z, TYPE_STUDIO_ZIP, TYPE_UNK
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -538,3 +540,73 @@ def story_is_lunii(contents):
 
 def story_is_lunii_plain(contents):
     return all(any(file.lower().endswith(pattern) for file in contents) for pattern in ["ri.plain", "si.plain", "li.plain"])
+
+def archive_check_plain(story_path):
+    archive_type = TYPE_UNK
+    
+    # trying to guess plain contents
+    with zipfile.ZipFile(file=story_path) as zip_file:
+        # reading all available files
+        zip_contents = zip_file.namelist()
+
+        if not story_is_plain(zip_contents):
+            return TYPE_UNK
+
+        # lua files ?
+        if story_is_flam_plain(zip_contents):
+            archive_type = TYPE_FLAM_PLAIN
+        # lunii files ?
+        elif story_is_lunii_plain(zip_contents):
+            archive_type = TYPE_LUNII_PLAIN
+
+    return archive_type
+
+
+def archive_check_zipcontent(story_path):
+    archive_type = TYPE_UNK
+    
+    # trying to guess plain contents
+    with zipfile.ZipFile(file=story_path) as zip_file:
+        # reading all available files
+        zip_contents = zip_file.namelist()
+
+        # lsf files ?
+        if story_is_flam(zip_contents):
+            archive_type = TYPE_FLAM_ZIP
+        # lunii files ?
+        elif story_is_lunii(zip_contents):
+            # based on bt file
+            bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
+            if bt_files:
+                bt_size = zip_file.getinfo(bt_files[0]).file_size
+                if bt_size == 0x20:
+                    archive_type = TYPE_LUNII_V3_ZIP
+                else:
+                    archive_type = TYPE_LUNII_V2_ZIP
+            else:
+                archive_type = TYPE_UNK
+        # studio files ?
+        elif story_is_studio(zip_contents):
+            archive_type = TYPE_STUDIO_ZIP
+
+    return archive_type
+
+def archive_check_7zcontent(story_path):
+    archive_type = TYPE_UNK
+    
+    # opening zip file
+    with py7zr.SevenZipFile(story_path, mode='r') as zip:
+        # reading all available files
+        zip_contents = zip.getnames()
+
+        # lsf files ?
+        if story_is_flam(zip_contents):
+            archive_type = TYPE_FLAM_7Z
+        # lunii files ?
+        elif story_is_lunii(zip_contents):
+            archive_type = TYPE_LUNII_V2_7Z
+        # studio files ?
+        elif story_is_studio(zip_contents):
+            archive_type = TYPE_STUDIO_7Z
+
+    return archive_type

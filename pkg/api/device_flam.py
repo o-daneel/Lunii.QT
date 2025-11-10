@@ -24,7 +24,8 @@ from pkg.api.constants import *
 from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_required, transcoding_required
 from pkg.api.convert_image import image_to_bitmap_rle4, image_to_liff
 from pkg.api.device_lunii import secure_filename
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, story_is_flam, story_is_flam_plain, story_is_lunii_plain, story_is_plain, story_is_studio, story_is_lunii
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, \
+    StudioStory, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -412,75 +413,6 @@ class FlamDevice(QtCore.QObject):
         # self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
         return file
 
-    def __archive_check_plain(self, story_path):
-        archive_type = TYPE_UNK
-        
-        # trying to guess plain contents
-        with zipfile.ZipFile(file=story_path) as zip_file:
-            # reading all available files
-            zip_contents = zip_file.namelist()
-
-            if not story_is_plain(zip_contents):
-                return TYPE_UNK
-
-            # lua files ?
-            if story_is_flam_plain(zip_contents):
-                archive_type = TYPE_FLAM_PLAIN
-            # lunii files ?
-            elif story_is_lunii_plain(zip_contents):
-                archive_type = TYPE_LUNII_PLAIN
-
-        return archive_type
-
-    def __archive_check_zipcontent(self, story_path):
-        archive_type = TYPE_UNK
-        
-        # trying to guess plain contents
-        with zipfile.ZipFile(file=story_path) as zip_file:
-            # reading all available files
-            zip_contents = zip_file.namelist()
-
-            # lsf files ?
-            if story_is_flam(zip_contents):
-                archive_type = TYPE_FLAM_ZIP
-            # lunii files ?
-            elif story_is_lunii(zip_contents):
-                # based on bt file
-                bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
-                if bt_files:
-                    bt_size = zip_file.getinfo(bt_files[0]).file_size
-                    if bt_size == 0x20:
-                        archive_type = TYPE_LUNII_V3_ZIP
-                    else:
-                        archive_type = TYPE_LUNII_V2_ZIP
-                else:
-                    archive_type = TYPE_UNK
-            # studio files ?
-            elif story_is_studio(zip_contents):
-                archive_type = TYPE_STUDIO_ZIP
-
-        return archive_type
-
-    def __archive_check_7zcontent(self, story_path):
-        archive_type = TYPE_UNK
-        
-        # opening zip file
-        with py7zr.SevenZipFile(story_path, mode='r') as zip:
-            # reading all available files
-            zip_contents = zip.getnames()
-
-            # lsf files ?
-            if story_is_flam(zip_contents):
-                archive_type = TYPE_FLAM_7Z
-            # lunii files ?
-            elif story_is_lunii(zip_contents):
-                archive_type = TYPE_LUNII_V2_7Z
-            # studio files ?
-            elif story_is_studio(zip_contents):
-                archive_type = TYPE_STUDIO_7Z
-
-        return archive_type
-
     def import_story(self, story_path):
         archive_type = TYPE_UNK
 
@@ -494,16 +426,16 @@ class FlamDevice(QtCore.QObject):
 
         # identifying based on filename
         if story_path.lower().endswith(EXT_PK_PLAIN):
-            archive_type = self.__archive_check_plain(story_path)
+            archive_type = archive_check_plain(story_path)
         elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = self.__archive_check_zipcontent(story_path)
+            archive_type = archive_check_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7Z):
-            archive_type = self.__archive_check_7zcontent(story_path)
+            archive_type = archive_check_7zcontent(story_path)
 
         # is flam firmware enough to support Lunii stories ?
         if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_V2_ZIP, TYPE_LUNII_V2_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "Please update your Flam with v2.x.x to support Lunii Stories"))
-            return
+            return None
 
         # processing story
         if archive_type == TYPE_LUNII_PLAIN:
@@ -531,7 +463,7 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
             return self.import_studio_7z(story_path)
         else:
-            self.signal_logger.emit(logging.DEBUG, "Archive => Unsupported type")
+            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:2X}".format(archive_type))
 
         return None
     
@@ -806,7 +738,7 @@ class FlamDevice(QtCore.QObject):
 
                 # transcoding if necessary
                 if storykeys_file:
-                    if (file.endswith(".lsf") or file.endswith("info")):
+                    if file.endswith(".lsf") or file.endswith("info"):
                         self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "Transciphering file {}").format(file))
                         # decipher
                         data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
@@ -922,7 +854,7 @@ class FlamDevice(QtCore.QObject):
 
                 # transcoding if necessary
                 if storykeys_file:
-                    if (fname.endswith(".lsf") or fname.endswith("info")):
+                    if fname.endswith(".lsf") or fname.endswith("info"):
                         self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "Transciphering file {}").format(fname))
                         # decipher
                         data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
