@@ -336,6 +336,51 @@ def _uuid_match(uuid: UUID, key_part: str):
 
     return key_part in uuid
 
+def get_picture(uuid: str, reload: bool = False):
+    image_data = None
+
+    # creating cache dir if necessary
+    if not os.path.isdir(CACHE_DIR):
+        Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
+
+    # checking if present in cache
+    res_file = os.path.join(CACHE_DIR, uuid)
+
+    if reload or not os.path.isfile(res_file):
+        # downloading the image to a file
+        one_story_imageURL = picture_url(uuid)
+        # print(f"Downloading for {uuid} to {res_file}")
+        try:
+            # Set the timeout for the request
+            response = requests.get(one_story_imageURL, timeout=2)
+            if response.status_code == 200:
+                # Load image from bytes
+                image_data = response.content
+                with open(res_file, "wb") as fp:
+                    fp.write(image_data)
+            else:
+                pass
+        except requests.exceptions.Timeout:
+            pass
+        except requests.exceptions.RequestException:
+            pass
+
+    if not image_data and os.path.isfile(res_file):
+        # print(f"in cache {res_file}")
+        # returning file content
+        with open(res_file, "rb") as fp:
+            image_data = fp.read()
+
+    return image_data
+
+def picture_url(uuid: str):
+    if uuid in DB_OFFICIAL:
+        locale = list(DB_OFFICIAL[uuid]["locales_available"].keys())[0]
+        image = DB_OFFICIAL[uuid]["localized_infos"][locale].get("image")
+        if image:
+            url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
+            return url
+    return None
 
 class Story:
     def __init__(self, uuid: UUID, hidden: bool = False, nm = False, size: int = -1):
@@ -434,53 +479,12 @@ class Story:
         return AUTHOR_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
-        image_data = None
-
-        # creating cache dir if necessary
-        if not os.path.isdir(CACHE_DIR):
-            Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
-
-        # checking if present in cache
         one_uuid = str(self.uuid).upper()
-        res_file = os.path.join(CACHE_DIR, one_uuid)
-
-        if reload or not os.path.isfile(res_file):
-            # downloading the image to a file
-            one_story_imageURL = self.picture_url()
-            # print(f"Downloading for {one_uuid} to {res_file}")
-            try:
-                # Set the timeout for the request
-                response = requests.get(one_story_imageURL, timeout=2)
-                if response.status_code == 200:
-                    # Load image from bytes
-                    image_data = response.content
-                    with open(res_file, "wb") as fp:
-                        fp.write(image_data)
-                else:
-                    pass
-            except requests.exceptions.Timeout:
-                pass
-            except requests.exceptions.RequestException:
-                pass
-
-        if not image_data and os.path.isfile(res_file):
-            # print(f"in cache {res_file}")
-            # returning file content
-            with open(res_file, "rb") as fp:
-                image_data = fp.read()
-
-        return image_data
+        return get_picture(one_uuid, reload)
 
     def picture_url(self):
-        one_uuid = str(self.uuid).upper()
+        return picture_url(self.uuid)
 
-        if one_uuid in DB_OFFICIAL:
-            locale = list(DB_OFFICIAL[one_uuid]["locales_available"].keys())[0]
-            image = DB_OFFICIAL[one_uuid]["localized_infos"][locale].get("image")
-            if image:
-                url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
-                return url
-        return None
 
     def get_meta(self):
         one_uuid = self.str_uuid
