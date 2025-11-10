@@ -181,6 +181,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
 
+        # Setup splitter priority        
+        self.splitter.setStretchFactor(0, 0)
+        self.splitter.setStretchFactor(1, 1)
+
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
@@ -191,6 +195,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_abort.clicked.connect(self.worker_abort)
         self.btn_nightmode.clicked.connect(self.cb_nm)
 
+        self.splitter.splitterMoved.connect(self.cb_tree_select)
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
@@ -436,7 +441,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_tree_select(self):
 
         selection = self.tree_stories.selectedItems()
-        if selection is not None and len(selection) > 0:
+        if selection is not None and len(selection) == 1:
             item = selection[0]
             uuid = item.text(COL_UUID)
 
@@ -451,11 +456,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             url = os.path.join(CACHE_DIR, uuid)
             self.story_details.setHtml(
-                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" /><br>"
+                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" />"
                 + "<h2>" + one_story.name + "</h2>"
                 + "<h3>" + one_story.subtitle + "</h3>"
                 + "<h4>" + one_story.author + "</h4>"
                 + one_story.desc)
+        else:
+            self.story_details.setHtml("")
 
 
     def cb_db_refresh(self):
