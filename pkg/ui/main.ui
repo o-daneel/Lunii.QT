@@ -815,6 +815,7 @@
      <addaction name="actionRemove_stories"/>
     </widget>
     <addaction name="actionShow_size"/>
+    <addaction name="actionShow_gallery"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
@@ -1014,6 +1015,23 @@
    </property>
    <property name="toolTip">
     <string>Show stories that are not available in the local library</string>
+   </property>
+  </action>
+  <action name="actionShow_gallery">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show gallery</string>
+   </property>
+   <property name="toolTip">
+    <string>Show stories in gallery or table view</string>
    </property>
   </action>
   <action name="actionGet_firmware">

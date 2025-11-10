@@ -538,6 +538,7 @@ class Ui_MainWindow(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuTools.addAction(self.actionShow_size)
+        self.menuTools.addAction(self.actionShow_gallery)
         self.menuTools.addSeparator()
         self.menuTools.addAction(self.actionShow_Log)
         self.menuTools.addAction(self.actionGet_firmware)
