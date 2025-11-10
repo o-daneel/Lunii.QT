@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='lunii-qt',
+    name='lunii-qt.app',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

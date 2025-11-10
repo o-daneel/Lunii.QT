@@ -34,15 +34,15 @@ jobs:
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.darwin.spec
-        mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip ./lunii-qt
+        mv ./dist/lunii-qt.app .
+        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip ./lunii-qt.app
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64
         path: |
-          ./lunii-qt
+          ./lunii-qt.app
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -79,15 +79,15 @@ jobs:
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         pyinstaller lunii-qt.darwin.spec
-        mv ./dist/lunii-qt .
-        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./lunii-qt
+        mv ./dist/lunii-qt.app .
+        zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./lunii-qt.app
 
     - name: Upload Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64
         path: |
-          ./lunii-qt
+          ./lunii-qt.app
 
     - name: Release
       uses: softprops/action-gh-release@v1
