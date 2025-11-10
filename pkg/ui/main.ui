@@ -376,7 +376,7 @@
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>512</width>
          <height>16777215</height>
         </size>
        </property>
@@ -570,7 +570,7 @@
      <x>0</x>
      <y>0</y>
      <width>865</width>
-     <height>33</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
