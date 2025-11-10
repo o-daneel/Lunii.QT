@@ -239,6 +239,9 @@
        <property name="allColumnsShowFocus">
         <bool>true</bool>
        </property>
+       <attribute name="headerStretchLastSection">
+        <bool>false</bool>
+       </attribute>
        <column>
         <property name="text">
          <string>Story Name</string>
@@ -567,7 +570,7 @@
      <x>0</x>
      <y>0</y>
      <width>865</width>
-     <height>21</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -35,13 +35,15 @@ COL_SIZE = 4
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
+COL_NAME_MIN_SIZE = 510
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
+PREVIEW_MIN_SIZE = 256
 
 APP_VERSION = "v3.1.2"
 
-""" 
-# TODO : 
+"""
+# TODO :
  """
 
 class VLine(QFrame):
@@ -100,6 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # refresh devices
         self.cb_device_refresh()
+        self.ts_update()
 
         # DEBUG : comment out this thread to allow python debug
         # starting thread to fetch version
@@ -122,15 +125,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
+        self.tree_stories.setColumnWidth(COL_NAME, COL_NAME_MIN_SIZE)
+        self.tree_stories.header().setSectionResizeMode(COL_NAME, QHeaderView.Stretch)
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
-        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.ResizeToContents)
-        # self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.header().setSectionResizeMode(COL_NM, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_SIZE, QHeaderView.Fixed)
+        self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
-        # self.tree_stories.setColumnHidden(COL_DB, True)
-        # self.tree_stories.setColumnWidth(COL_UUID, 250)
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
-        # self.tree_stories.setColumnWidth(COL_SIZE, 50)
+        
+        self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
 
         self.story_details.setOpenExternalLinks(True)
 
@@ -231,30 +237,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                self.tw_resize_columns()
-                return True
+                self.cb_tree_select()
+                return False
         return False
-
-    def tw_resize_columns(self):
-        # Adjusting cols based on widget size
-
-        # 1. forcing UUID to be at min size by huge name size
-        self.tree_stories.setColumnWidth(COL_NAME, 4096)
-        # 2. force resize to content
-        self.tree_stories.resizeColumnToContents(COL_UUID)
-        self.tree_stories.resizeColumnToContents(COL_SIZE)
-        # 3. get cur size
-        col_uuid_size = self.tree_stories.columnWidth(COL_UUID)
-        col_size_size = self.tree_stories.columnWidth(COL_SIZE)
-
-        # 4. update the name col while keeping uuid size
-        col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
-        if self.audio_device and self.audio_device.device_version == FLAM_V1:
-            col_size_width += COL_NM_SIZE
-        if not self.sizes_hidden:
-            col_size_width -= col_size_size
-        col_size_width -= COL_EXTRA
-        self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
 
     def __set_dbg_wndSize(self):
         # Move the sub-window alongside the main window
@@ -375,7 +360,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # updating UI for default
         self.btn_nightmode.setEnabled(False)
         self.cb_nm_update_btn()
-    
+
         # getting current device
         dev_name = self.combo_device.currentText()
 
@@ -416,7 +401,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # widgets update with new device
             self.ts_update()
-            self.tw_resize_columns()
             self.sb_update("")
 
             # night mode section
@@ -431,7 +415,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
                 self.worker_launch(ACTION_SIZE)
-            
+
             # showLog window if device is a v3 without story keys
             if (self.audio_device and
                 self.audio_device.device_version == LUNII_V3 and
@@ -671,7 +655,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_import.setEnabled(True)
         # except if not story keys are present for v3
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
-            self.act_import.setEnabled(False)   
+            self.act_import.setEnabled(False)
 
         # pointing to an item
         if self.tree_stories.selectedItems():
@@ -761,7 +745,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # adding items
         for story in self.audio_device.stories:
-            # filtering 
+            # filtering
             if (le_filter and
                 not le_filter.lower() in story.name.lower() and
                 not le_filter.lower() in story.str_uuid.lower() ):
