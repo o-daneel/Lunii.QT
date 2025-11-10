@@ -797,6 +797,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
 
+        if act_name == "actionShow_gallery":
+            self.show_gallery = action.isChecked()
+            self.tree_stories_official.setVisible(not self.show_gallery)
+            self.list_stories_official.setVisible(self.show_gallery)
+            self.story_details.setText("")
+
         elif act_name == "actionShow_Log":
             # already visible ? so hide it
             if self.debug_dialog.isVisible():
