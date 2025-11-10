@@ -18,9 +18,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
-    QSpacerItem, QStatusBar, QTextBrowser, QTreeWidget,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
+    QSplitter, QStatusBar, QTextBrowser, QTreeWidget,
     QTreeWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(665, 600)
+        MainWindow.resize(865, 600)
         MainWindow.setMinimumSize(QSize(500, 0))
         icon = QIcon()
         icon.addFile(u":/icon/res/lunii.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.actionExit.setShortcut(u"Ctrl+Q")
 #endif // QT_CONFIG(shortcut)
-        self.actionExit.setMenuRole(QAction.QuitRole)
+        self.actionExit.setMenuRole(QAction.MenuRole.QuitRole)
         self.actionExit.setShortcutVisibleInContextMenu(True)
         self.actionImport = QAction(MainWindow)
         self.actionImport.setObjectName(u"actionImport")
@@ -97,10 +97,6 @@ class Ui_MainWindow(object):
         icon6 = QIcon()
         icon6.addFile(u":/icon/res/fw.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.actionGet_firmware.setIcon(icon6)
-        self.actionShow_story_details = QAction(MainWindow)
-        self.actionShow_story_details.setObjectName(u"actionShow_story_details")
-        self.actionShow_story_details.setCheckable(True)
-        self.actionShow_story_details.setChecked(True)
         self.actionMove_Top = QAction(MainWindow)
         self.actionMove_Top.setObjectName(u"actionMove_Top")
         icon7 = QIcon()
@@ -139,7 +135,7 @@ class Ui_MainWindow(object):
         icon11 = QIcon()
         icon11.addFile(u":/icon/res/about.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.actionAbout.setIcon(icon11)
-        self.actionAbout.setMenuRole(QAction.AboutRole)
+        self.actionAbout.setMenuRole(QAction.MenuRole.AboutRole)
         self.actionUpdate = QAction(MainWindow)
         self.actionUpdate.setObjectName(u"actionUpdate")
         self.actionUpdate.setIcon(icon6)
@@ -246,7 +242,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.top_layout)
 
-        self.tree_stories = QTreeWidget(self.centralwidget)
+        self.splitter = QSplitter(self.centralwidget)
+        self.splitter.setObjectName(u"splitter")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.splitter.sizePolicy().hasHeightForWidth())
+        self.splitter.setSizePolicy(sizePolicy1)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
+        self.tree_stories = QTreeWidget(self.splitter)
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setTextAlignment(4, Qt.AlignLeading|Qt.AlignVCenter);
         __qtreewidgetitem.setText(3, u"UUID");
@@ -282,20 +286,31 @@ class Ui_MainWindow(object):
         __qtreewidgetitem4.setText(0, u"Sur les bancs de l'\u00e9cole");
         self.tree_stories.setObjectName(u"tree_stories")
         self.tree_stories.setMinimumSize(QSize(0, 150))
-        self.tree_stories.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.tree_stories.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        self.tree_stories.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tree_stories.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tree_stories.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tree_stories.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tree_stories.setDragEnabled(True)
-        self.tree_stories.setDragDropMode(QAbstractItemView.DropOnly)
-        self.tree_stories.setDefaultDropAction(Qt.MoveAction)
+        self.tree_stories.setDragDropMode(QAbstractItemView.DragDropMode.DropOnly)
+        self.tree_stories.setDefaultDropAction(Qt.DropAction.MoveAction)
         self.tree_stories.setAlternatingRowColors(True)
-        self.tree_stories.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.tree_stories.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.tree_stories.setIndentation(20)
         self.tree_stories.setRootIsDecorated(True)
         self.tree_stories.setItemsExpandable(True)
         self.tree_stories.setAllColumnsShowFocus(True)
+        self.splitter.addWidget(self.tree_stories)
+        self.tree_stories.header().setStretchLastSection(False)
+        self.story_details = QTextBrowser(self.splitter)
+        self.story_details.setObjectName(u"story_details")
+        sizePolicy1.setHeightForWidth(self.story_details.sizePolicy().hasHeightForWidth())
+        self.story_details.setSizePolicy(sizePolicy1)
+        self.story_details.setMinimumSize(QSize(300, 192))
+        self.story_details.setMaximumSize(QSize(16777215, 16777215))
+        self.story_details.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.story_details.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
+        self.splitter.addWidget(self.story_details)
 
-        self.verticalLayout_2.addWidget(self.tree_stories)
+        self.verticalLayout_2.addWidget(self.splitter)
 
         self.prognstopLayout = QHBoxLayout()
         self.prognstopLayout.setObjectName(u"prognstopLayout")
@@ -308,9 +323,9 @@ class Ui_MainWindow(object):
         self.lbl_total = QLabel(self.centralwidget)
         self.lbl_total.setObjectName(u"lbl_total")
         self.lbl_total.setMinimumSize(QSize(80, 0))
-        self.lbl_total.setFrameShape(QFrame.Panel)
-        self.lbl_total.setFrameShadow(QFrame.Sunken)
-        self.lbl_total.setAlignment(Qt.AlignCenter)
+        self.lbl_total.setFrameShape(QFrame.Shape.Panel)
+        self.lbl_total.setFrameShadow(QFrame.Shadow.Sunken)
+        self.lbl_total.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.totalLayout.addWidget(self.lbl_total)
 
@@ -331,10 +346,10 @@ class Ui_MainWindow(object):
         self.lbl_story = QLabel(self.centralwidget)
         self.lbl_story.setObjectName(u"lbl_story")
         self.lbl_story.setMinimumSize(QSize(80, 0))
-        self.lbl_story.setFrameShape(QFrame.Panel)
-        self.lbl_story.setFrameShadow(QFrame.Sunken)
+        self.lbl_story.setFrameShape(QFrame.Shape.Panel)
+        self.lbl_story.setFrameShadow(QFrame.Shadow.Sunken)
         self.lbl_story.setText(u"8B_UUID")
-        self.lbl_story.setAlignment(Qt.AlignCenter)
+        self.lbl_story.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.storyLayout.addWidget(self.lbl_story)
 
@@ -378,50 +393,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.prognstopLayout)
 
-        self.details_layout = QHBoxLayout()
-        self.details_layout.setObjectName(u"details_layout")
-        self.details_layout.setSizeConstraint(QLayout.SetMinimumSize)
-        self.lbl_picture = QLabel(self.centralwidget)
-        self.lbl_picture.setObjectName(u"lbl_picture")
-        self.lbl_picture.setEnabled(True)
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.lbl_picture.sizePolicy().hasHeightForWidth())
-        self.lbl_picture.setSizePolicy(sizePolicy1)
-        self.lbl_picture.setMinimumSize(QSize(192, 0))
-        font2 = QFont()
-        font2.setPointSize(12)
-        self.lbl_picture.setFont(font2)
-        self.lbl_picture.setAlignment(Qt.AlignCenter)
-
-        self.details_layout.addWidget(self.lbl_picture)
-
-        self.te_story_details = QTextBrowser(self.centralwidget)
-        self.te_story_details.setObjectName(u"te_story_details")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.te_story_details.sizePolicy().hasHeightForWidth())
-        self.te_story_details.setSizePolicy(sizePolicy2)
-        self.te_story_details.setMaximumSize(QSize(16777215, 192))
-        self.te_story_details.setOpenExternalLinks(True)
-        self.te_story_details.setOpenLinks(False)
-
-        self.details_layout.addWidget(self.te_story_details)
-
-
-        self.verticalLayout_2.addLayout(self.details_layout)
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        self.statusbar.setLayoutDirection(Qt.LeftToRight)
+        self.statusbar.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
         self.menuBar.setEnabled(True)
-        self.menuBar.setGeometry(QRect(0, 0, 665, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 865, 33))
         self.menuFile = QMenu(self.menuBar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuFile.setSeparatorsCollapsible(True)
@@ -454,7 +434,6 @@ class Ui_MainWindow(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuTools.addAction(self.actionShow_size)
-        self.menuTools.addAction(self.actionShow_story_details)
         self.menuTools.addSeparator()
         self.menuTools.addAction(self.actionShow_Log)
         self.menuTools.addAction(self.actionGet_firmware)
@@ -506,7 +485,6 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.actionGet_firmware.setToolTip(QCoreApplication.translate("MainWindow", u"Get firmaware update for current Lunii", None))
 #endif // QT_CONFIG(tooltip)
-        self.actionShow_story_details.setText(QCoreApplication.translate("MainWindow", u"Show story details", None))
         self.actionMove_Top.setText(QCoreApplication.translate("MainWindow", u"Move Top", None))
         self.actionMove_Bottom.setText(QCoreApplication.translate("MainWindow", u"Move Bottom", None))
         self.actionOpen_Lunii.setText(QCoreApplication.translate("MainWindow", u"Open device", None))
@@ -568,8 +546,6 @@ class Ui_MainWindow(object):
         self.btn_abort.setToolTip(QCoreApplication.translate("MainWindow", u"Abort current process", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_abort.setText("")
-        self.lbl_picture.setText(QCoreApplication.translate("MainWindow", u"No Thumb", None))
-        self.te_story_details.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Story description", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
         self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"&Tools", None))
         self.menuLost_stories.setTitle(QCoreApplication.translate("MainWindow", u"Lost stories", None))

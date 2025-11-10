@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>665</width>
+    <width>865</width>
     <height>600</height>
    </rect>
   </property>
@@ -131,10 +131,10 @@
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+         <enum>QSizePolicy::Policy::Minimum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -186,167 +186,207 @@
      </layout>
     </item>
     <item>
-     <widget class="QTreeWidget" name="tree_stories">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>150</height>
-       </size>
+     <widget class="QSplitter" name="splitter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
       </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <property name="dragEnabled">
-       <bool>true</bool>
-      </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::DropOnly</enum>
-      </property>
-      <property name="defaultDropAction">
-       <enum>Qt::MoveAction</enum>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ExtendedSelection</enum>
-      </property>
-      <property name="indentation">
-       <number>20</number>
-      </property>
-      <property name="rootIsDecorated">
-       <bool>true</bool>
-      </property>
-      <property name="itemsExpandable">
-       <bool>true</bool>
-      </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>Story Name</string>
+      <widget class="QTreeWidget" name="tree_stories">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>150</height>
+        </size>
        </property>
-      </column>
-      <column>
-       <property name="text">
-        <string notr="true">NM</string>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
        </property>
-       <property name="toolTip">
-        <string>Night Mode</string>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
        </property>
-       <property name="textAlignment">
-        <set>AlignCenter</set>
+       <property name="editTriggers">
+        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
        </property>
-      </column>
-      <column>
-       <property name="text">
-        <string notr="true">DB</string>
+       <property name="dragEnabled">
+        <bool>true</bool>
        </property>
-       <property name="toolTip">
-        <string>Database source (Official / Third Party)</string>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragDropMode::DropOnly</enum>
        </property>
-       <property name="textAlignment">
-        <set>AlignCenter</set>
+       <property name="defaultDropAction">
+        <enum>Qt::DropAction::MoveAction</enum>
        </property>
-      </column>
-      <column>
-       <property name="text">
-        <string notr="true">UUID</string>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
        </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Size</string>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
        </property>
-       <property name="textAlignment">
-        <set>AlignLeading|AlignVCenter</set>
+       <property name="indentation">
+        <number>20</number>
        </property>
-      </column>
-      <item>
-       <property name="text">
-        <string notr="true">Suzanne et Gaston</string>
+       <property name="rootIsDecorated">
+        <bool>true</bool>
        </property>
-       <property name="text">
-        <string notr="true"/>
+       <property name="itemsExpandable">
+        <bool>true</bool>
        </property>
-       <property name="text">
-        <string notr="true">O</string>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
        </property>
-       <property name="text">
-        <string notr="true">C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
+       <attribute name="headerStretchLastSection">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Story Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string notr="true">NM</string>
+        </property>
+        <property name="toolTip">
+         <string>Night Mode</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string notr="true">DB</string>
+        </property>
+        <property name="toolTip">
+         <string>Database source (Official / Third Party)</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string notr="true">UUID</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Size</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <item>
+        <property name="text">
+         <string notr="true">Suzanne et Gaston</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">O</string>
+        </property>
+        <property name="text">
+         <string notr="true">C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">75MB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">Panique aux 6 Royaumes</string>
+        </property>
+        <property name="text">
+         <string notr="true">z</string>
+        </property>
+        <property name="text">
+         <string notr="true">O</string>
+        </property>
+        <property name="text">
+         <string notr="true">03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">65MB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">Au Pays des Loups</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="text">
+         <string notr="true">O</string>
+        </property>
+        <property name="text">
+         <string notr="true">22137B29-8646-4335-8069-4A4C9A2D7E89</string>
+        </property>
+        <property name="text">
+         <string notr="true">124MB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">Sur les bancs de l'école</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="text">
+         <string notr="true">C</string>
+        </property>
+        <property name="text">
+         <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+        </property>
+        <property name="text">
+         <string notr="true">25MB</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QTextBrowser" name="story_details">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="font">
-        <font>
-         <family>Consolas</family>
-        </font>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>192</height>
+        </size>
        </property>
-       <property name="text">
-        <string notr="true">75MB</string>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string notr="true">Panique aux 6 Royaumes</string>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
        </property>
-       <property name="text">
-        <string notr="true">z</string>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
        </property>
-       <property name="text">
-        <string notr="true">O</string>
-       </property>
-       <property name="text">
-        <string notr="true">03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
-       </property>
-       <property name="font">
-        <font>
-         <family>Consolas</family>
-        </font>
-       </property>
-       <property name="text">
-        <string notr="true">65MB</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string notr="true">Au Pays des Loups</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="text">
-        <string notr="true">O</string>
-       </property>
-       <property name="text">
-        <string notr="true">22137B29-8646-4335-8069-4A4C9A2D7E89</string>
-       </property>
-       <property name="text">
-        <string notr="true">124MB</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string notr="true">Sur les bancs de l'école</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="text">
-        <string notr="true">C</string>
-       </property>
-       <property name="text">
-        <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
-       </property>
-       <property name="text">
-        <string notr="true">25MB</string>
-       </property>
-      </item>
+      </widget>
      </widget>
     </item>
     <item>
@@ -370,16 +410,16 @@
              </size>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Panel</enum>
+             <enum>QFrame::Shape::Panel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
+             <enum>QFrame::Shadow::Sunken</enum>
             </property>
             <property name="text">
              <string>Total</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -421,16 +461,16 @@
              <string>Writing speed</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Panel</enum>
+             <enum>QFrame::Shape::Panel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
+             <enum>QFrame::Shadow::Sunken</enum>
             </property>
             <property name="text">
              <string notr="true">8B_UUID</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -514,73 +554,11 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="details_layout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
-      </property>
-      <item>
-       <widget class="QLabel" name="lbl_picture">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>192</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>No Thumb</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTextBrowser" name="te_story_details">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>192</height>
-         </size>
-        </property>
-        <property name="placeholderText">
-         <string>Story description</string>
-        </property>
-        <property name="openExternalLinks">
-         <bool>true</bool>
-        </property>
-        <property name="openLinks">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
    </property>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -591,8 +569,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>665</width>
-     <height>22</height>
+     <width>865</width>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -626,7 +604,6 @@
      <addaction name="actionRemove_stories"/>
     </widget>
     <addaction name="actionShow_size"/>
-    <addaction name="actionShow_story_details"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
@@ -683,7 +660,7 @@
     <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::QuitRole</enum>
+    <enum>QAction::MenuRole::QuitRole</enum>
    </property>
    <property name="shortcutVisibleInContextMenu">
     <bool>true</bool>
@@ -793,17 +770,6 @@
     <string>Get firmaware update for current Lunii</string>
    </property>
   </action>
-  <action name="actionShow_story_details">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show story details</string>
-   </property>
-  </action>
   <action name="actionMove_Top">
    <property name="icon">
     <iconset resource="../../resources.qrc">
@@ -867,7 +833,7 @@
     <string>About</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutRole</enum>
+    <enum>QAction::MenuRole::AboutRole</enum>
    </property>
   </action>
   <action name="actionUpdate">

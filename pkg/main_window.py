@@ -1,5 +1,4 @@
 import logging
-import os.path
 import time
 from pathlib import WindowsPath
 
@@ -7,7 +6,7 @@ import psutil
 import requests
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, QPixmap, Qt, QDesktopServices, QIcon, QGuiApplication, QColor
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QCheckBox
 
@@ -36,13 +35,15 @@ COL_SIZE = 4
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
+COL_NAME_MIN_SIZE = 510
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
+PREVIEW_MIN_SIZE = 256
 
 APP_VERSION = "v3.1.2"
 
-""" 
-# TODO : 
+"""
+# TODO :
  """
 
 class VLine(QFrame):
@@ -101,6 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # refresh devices
         self.cb_device_refresh()
+        self.ts_update()
 
         # DEBUG : comment out this thread to allow python debug
         # starting thread to fetch version
@@ -123,18 +125,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
+        self.tree_stories.setColumnWidth(COL_NAME, COL_NAME_MIN_SIZE)
+        self.tree_stories.header().setSectionResizeMode(COL_NAME, QHeaderView.Stretch)
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
-        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.ResizeToContents)
-        # self.tree_stories.setColumnWidth(COL_NAME, 300)
+        self.tree_stories.header().setSectionResizeMode(COL_NM, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_UUID, QHeaderView.Fixed)
+        self.tree_stories.header().setSectionResizeMode(COL_SIZE, QHeaderView.Fixed)
+        self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
-        # self.tree_stories.setColumnHidden(COL_DB, True)
-        # self.tree_stories.setColumnWidth(COL_UUID, 250)
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
-        # self.tree_stories.setColumnWidth(COL_SIZE, 50)
+        
+        self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
 
-        self.lbl_picture.setVisible(False)
-        self.te_story_details.setVisible(False)
+        self.story_details.setOpenExternalLinks(True)
 
         # clean progress bars
         self.lbl_total.setVisible(False)
@@ -170,9 +174,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_transcode.setEnabled(not self.ffmpeg_present)
         act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
 
-        act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
-        act_details.setChecked(not self.details_hidden)
         act_size.setChecked(not self.sizes_hidden)
         # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
         # act_log.setVisible(False)
@@ -185,6 +187,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
 
+        # Setup splitter priority        
+        self.splitter.setStretchFactor(0, 0)
+        self.splitter.setStretchFactor(1, 1)
+
     # connecting slots and signals
     def setup_connections(self):
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
@@ -195,6 +201,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_abort.clicked.connect(self.worker_abort)
         self.btn_nightmode.clicked.connect(self.cb_nm)
 
+        self.splitter.splitterMoved.connect(self.cb_tree_select)
         self.tree_stories.itemSelectionChanged.connect(self.cb_tree_select)
         self.tree_stories.installEventFilter(self)
 
@@ -230,30 +237,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                self.tw_resize_columns()
-                return True
+                self.cb_tree_select()
+                return False
         return False
-
-    def tw_resize_columns(self):
-        # Adjusting cols based on widget size
-
-        # 1. forcing UUID to be at min size by huge name size
-        self.tree_stories.setColumnWidth(COL_NAME, 4096)
-        # 2. force resize to content
-        self.tree_stories.resizeColumnToContents(COL_UUID)
-        self.tree_stories.resizeColumnToContents(COL_SIZE)
-        # 3. get cur size
-        col_uuid_size = self.tree_stories.columnWidth(COL_UUID)
-        col_size_size = self.tree_stories.columnWidth(COL_SIZE)
-
-        # 4. update the name col while keeping uuid size
-        col_size_width = self.tree_stories.width() - COL_NM_SIZE - COL_DB_SIZE - col_uuid_size
-        if self.audio_device and self.audio_device.device_version == FLAM_V1:
-            col_size_width += COL_NM_SIZE
-        if not self.sizes_hidden:
-            col_size_width -= col_size_size
-        col_size_width -= COL_EXTRA
-        self.tree_stories.setColumnWidth(COL_NAME, col_size_width)
 
     def __set_dbg_wndSize(self):
         # Move the sub-window alongside the main window
@@ -374,7 +360,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # updating UI for default
         self.btn_nightmode.setEnabled(False)
         self.cb_nm_update_btn()
-    
+
         # getting current device
         dev_name = self.combo_device.currentText()
 
@@ -415,7 +401,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # widgets update with new device
             self.ts_update()
-            self.tw_resize_columns()
             self.sb_update("")
 
             # night mode section
@@ -430,7 +415,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # computing sizes if necessary
             if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
                 self.worker_launch(ACTION_SIZE)
-            
+
             # showLog window if device is a v3 without story keys
             if (self.audio_device and
                 self.audio_device.device_version == LUNII_V3 and
@@ -438,22 +423,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.cb_show_log()
 
     def cb_tree_select(self):
-        # getting selection
-        selection = self.tree_stories.selectedItems()
-        show_details = len(selection) == 1 and not self.details_hidden
-        self.te_story_details.setVisible(show_details)
-        self.lbl_picture.setVisible(show_details)
 
-        if show_details:
+        selection = self.tree_stories.selectedItems()
+        if selection is not None and len(selection) == 1:
             item = selection[0]
             uuid = item.text(COL_UUID)
-
-            # update selection to show cursor if hidden by UI
-            self.tree_stories.scrollToItem(item)
-
-            # early exit if no changes on story
-            if uuid == self.details_last_uuid:
-                return
 
             # keeping track of currently displayed story
             self.details_last_uuid = uuid
@@ -461,32 +435,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # feeding story image and desc
             one_story = self.audio_device.stories.get_story(uuid)
             if not one_story:
-                return
-            one_story_desc = one_story.desc
-            one_story_image = one_story.get_picture()
-
-            # nothing to display
-            if (not one_story_desc or one_story_desc == DESC_NOT_FOUND) and not one_story_image:
-                self.te_story_details.setVisible(False)
-                self.lbl_picture.setVisible(False)
+                self.story_details.setHtml("")
                 return
 
-            # hidden story
-            self.te_story_details.setDisabled(one_story.hidden)
-            self.lbl_picture.setDisabled(one_story.hidden)
+            url = os.path.join(CACHE_DIR, uuid)
+            self.story_details.setHtml(
+                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" />"
+                + "<h2>" + one_story.name + "</h2>"
+                + "<h3>" + one_story.subtitle + "</h3>"
+                + "<h4>" + one_story.author + "</h4>"
+                + one_story.desc)
+        else:
+            self.story_details.setHtml("")
 
-            # Update story description
-            self.te_story_details.setText(one_story_desc)
-
-            # Display image from URL or cache
-            if one_story_image:
-                pixmap = QPixmap()
-                pixmap.loadFromData(one_story_image)
-
-                scaled_pixmap = pixmap.scaled(192, 192, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                self.lbl_picture.setPixmap(scaled_pixmap)
-            else:
-                self.lbl_picture.setText(self.tr("Failed to fetch BMP file."))
 
     def cb_db_refresh(self):
         self.sb_update(self.tr("Fetching official Lunii DB..."))
@@ -587,14 +548,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.worker_launch(ACTION_SIZE)
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
-
-        elif act_name == "actionShow_story_details":
-            self.details_hidden = not action.isChecked()
-
-            selection = self.tree_stories.selectedItems()
-            show_details = len(selection) == 1 and not self.details_hidden
-            self.te_story_details.setVisible(show_details)
-            self.lbl_picture.setVisible(show_details)
 
         elif act_name == "actionShow_Log":
             # already visible ? so hide it
@@ -702,7 +655,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_import.setEnabled(True)
         # except if not story keys are present for v3
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
-            self.act_import.setEnabled(False)   
+            self.act_import.setEnabled(False)
 
         # pointing to an item
         if self.tree_stories.selectedItems():
@@ -792,7 +745,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # adding items
         for story in self.audio_device.stories:
-            # filtering 
+            # filtering
             if (le_filter and
                 not le_filter.lower() in story.name.lower() and
                 not le_filter.lower() in story.str_uuid.lower() ):
@@ -1145,10 +1098,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for item in new_selection:
             for col in [COL_NAME, COL_NM, COL_DB, COL_UUID, COL_SIZE]:
                 sel_model.select(self.tree_stories.indexFromItem(item, col), QItemSelectionModel.Select)
-
-        # updating detail panel
-        self.te_story_details.setDisabled(one_story.hidden)
-        self.lbl_picture.setDisabled(one_story.hidden)
 
         self.sb_update(self.tr("✅ Stories updated..."))
 
