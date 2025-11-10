@@ -5,9 +5,9 @@ Remove-Item -ErrorAction SilentlyContinue -Force Lunii*.msi
 Remove-Item -ErrorAction SilentlyContinue -Force Lunii*_portable.zip
 
 # msi build
-..\lunii-venv\Scripts\python.exe .\setup.py build_exe
+..\lunii-venv\311\Scripts\python.exe .\setup.py build_exe
 tools\rcedit-x64.exe build\exe.win-amd64-3.11\Lunii-Qt.exe --set-icon res\lunii.ico
-..\lunii-venv\Scripts\python.exe .\setup.py bdist_msi
+..\lunii-venv\311\Scripts\python.exe .\setup.py bdist_msi
 
 # prep for zip
 move build\exe.win-amd64-3.11 "build\Lunii Qt"
