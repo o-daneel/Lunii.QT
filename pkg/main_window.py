@@ -587,7 +587,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # # do we need to compute sizes ?
             if not self.sizes_hidden:
-                self.worker_launch(ACTION_SIZE)
+                # update sizes only if a device is selected
+                if self.audio_device:
+                    self.worker_launch(ACTION_SIZE)
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
 
