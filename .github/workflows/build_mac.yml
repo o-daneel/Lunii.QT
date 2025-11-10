@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install pyinstaller
+        pip install py2app
 
     - name: Build Exec & Create Archive
       run: |
@@ -33,7 +33,7 @@ jobs:
         pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
-        pyinstaller lunii-qt.darwin.spec
+        python setup_macos.py py2app
         mv ./dist/lunii-qt.app .
         zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip ./lunii-qt.app
 
@@ -69,7 +69,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install pyinstaller
+        pip install py2app
 
     - name: Build Exec & Create Archive
       run: |
@@ -78,7 +78,7 @@ jobs:
         pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
-        pyinstaller lunii-qt.darwin.spec
+        python setup_macos.py py2app
         mv ./dist/lunii-qt.app .
         zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./lunii-qt.app
 
