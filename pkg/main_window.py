@@ -277,7 +277,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def changeEvent(self, event):
         super().changeEvent(event)
         if event.type() == event.Type.WindowStateChange:
-            if self.isMinimized() and self.debug_dialog.isVisible():
+            if not self.debug_dialog.isVisible():
+                return
+            
+            if self.isMinimized():
                 # Minimize the log-window when the main window is minimized
                 self.debug_dialog.showMinimized()
             elif self.isMaximized() or self.isActiveWindow():
