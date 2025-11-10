@@ -4,9 +4,11 @@ from pathlib import WindowsPath
 
 import psutil
 import requests
+import base64
+
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QCheckBox
 
@@ -428,29 +430,99 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_tree_select(self):
 
         selection = self.tree_stories.selectedItems()
-        if selection is not None and len(selection) == 1:
-            item = selection[0]
-            uuid = item.text(COL_UUID)
+        if selection is not None:
+            if len(selection) == 1:
+                item = selection[0]
+                uuid = item.text(COL_UUID)
 
-            # keeping track of currently displayed story
-            self.details_last_uuid = uuid
+                # keeping track of currently displayed story
+                self.details_last_uuid = uuid
 
-            # feeding story image and desc
-            one_story = self.audio_device.stories.get_story(uuid)
-            if not one_story:
-                self.story_details.setHtml("")
-                return
+                # feeding story image and desc
+                one_story = self.audio_device.stories.get_story(uuid)
+                if not one_story:
+                    self.story_details.setHtml("")
+                    return
 
-            url = os.path.join(CACHE_DIR, uuid)
-            self.story_details.setHtml(
-                "<img src=\"" + url + "\" width=\"" + str(min(self.story_details.width() - 20, QImage(url).width())) + "\" />"
-                + "<h2>" + one_story.name + "</h2>"
-                + "<h3>" + one_story.subtitle + "</h3>"
-                + "<h4>" + one_story.author + "</h4>"
-                + one_story.desc)
+                url = os.path.join(CACHE_DIR, uuid)
+                width = min(self.story_details.width() - 20, QImage(url).width())
+                self.story_details.setHtml(
+                    f'<img src="{url}" width="{width}" />'
+                    + f"<h2>{one_story.name}</h2>"
+                    + f"<h3>{one_story.subtitle}</h3>"
+                    + f"<h4>{one_story.author}</h4>"
+                    + one_story.desc)
+            else:
+                paths = []
+                names = []
+                for i, item in enumerate(selection):
+                    uuid = item.text(COL_UUID)
+                    paths.append(os.path.join(CACHE_DIR, uuid))
+                    names.append(item.text(COL_NAME))
+
+                data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
+                if data_uri is None:
+                    self.story_details.setHtml("")
+                    return
+
+                html = f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
+                for name in names:
+                    html += f"<BR/><b>{name}</b>"
+                self.story_details.setHtml(html)
         else:
             self.story_details.setHtml("")
 
+    def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
+        if not image_paths:
+            return None
+        
+        pixmaps = [QPixmap(p) for p in image_paths if not QPixmap(p).isNull()]
+        if not pixmaps:
+            return None
+        displayed_images = min(len(pixmaps), max_images)
+        scaled_pixmaps = [pixmap.scaledToWidth(target_width, Qt.SmoothTransformation) for pixmap in pixmaps[:displayed_images]]
+        max_width = max(p.width() for p in scaled_pixmaps)
+        max_height = max(p.height() for p in scaled_pixmaps)
+        width = max_width + offset_step * (displayed_images -1)
+        height = max_height + offset_step * (displayed_images -1)
+
+        final_image = QPixmap(width, height)
+        final_image.fill(Qt.transparent)
+
+        painter = QPainter(final_image)
+        x_offset = 0
+        y_offset = 0
+        for scaled_pixmap in scaled_pixmaps:
+            painter.drawPixmap(x_offset, y_offset, scaled_pixmap)
+            x_offset += offset_step
+            y_offset += offset_step
+
+        text = str(len(pixmaps))
+        padding = 8
+        font = QFont()
+        font.setBold(True)
+        font.setPointSize(32)
+        painter.setFont(font)
+        metrics = painter.fontMetrics()
+        rect_width = metrics.horizontalAdvance(text) + 4 * padding
+        rect_height = metrics.height() + 2 * padding
+        x = width - rect_width - 2 * padding
+        y = height - rect_height - 2* padding
+        painter.setRenderHint(QPainter.Antialiasing)
+        painter.setPen(Qt.NoPen)
+        painter.setBrush(QColor("white"))
+        painter.drawRoundedRect(QRect(x, y, rect_width, rect_height), padding, padding)
+        painter.setPen(QColor("black"))
+        painter.drawText(QRect(x, y, rect_width, rect_height), Qt.AlignCenter, text)
+        painter.end()
+        buffer = QBuffer()
+        buffer.open(QIODevice.WriteOnly)
+        final_image.save(buffer, "PNG")
+        buffer.close()
+
+        base64_data = base64.b64encode(buffer.data()).decode()
+        data_uri = f"data:image/png;base64,{base64_data}"
+        return data_uri
 
     def cb_db_refresh(self):
         self.sb_update(self.tr("Fetching official Lunii DB..."))
