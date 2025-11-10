@@ -7,7 +7,7 @@ import requests
 import base64
 
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QCheckBox
@@ -239,7 +239,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                self.cb_tree_select()
+                QTimer.singleShot(0, self.cb_tree_select)
                 return False
         return False
 
