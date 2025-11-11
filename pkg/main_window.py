@@ -22,9 +22,9 @@ from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
-from pkg.api.stories import story_load_db, StoryList
+from pkg.api.stories import DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
-    ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
+    ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
@@ -123,6 +123,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_remove = None
         self.act_getfw = None
         self.act_update = None
+        self.act_import_in_library = None
 
         # loading DB
         story_load_db(False)
@@ -200,6 +201,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_file.setVisible(False)
         self.btn_abort.setVisible(False)
 
+        # Update statusbar
+        self.sb_create()
+
         # finding menu actions
         s_actions = self.menuStory.actions()
         self.act_mv_top = next(act for act in s_actions if act.objectName() == "actionMove_Top")
@@ -213,8 +217,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
 
-        # Update statusbar
-        self.sb_create()
+
+        l_actions = self.menuLibrary.actions()
+        self.act_import_in_library = next(act for act in l_actions if act.objectName() == "actionImportInLibrary")
+        act_gallery = next(act for act in l_actions if act.objectName() == "actionShow_gallery")
+        act_gallery.setChecked(self.show_gallery)
 
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
@@ -228,10 +235,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
         act_size.setChecked(not self.sizes_hidden)
-        act_gallery = next(act for act in t_actions if act.objectName() == "actionShow_gallery")
-        act_gallery.setChecked(self.show_gallery)
-        # act_log = next(act for act in t_actions if act.objectName() == "actionShow_Log")
-        # act_log.setVisible(False)
 
         # Help Menu
         t_actions = self.menuHelp.actions()
@@ -274,6 +277,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuFile.triggered.connect(self.cb_menu_file)
         self.menuStory.triggered.connect(self.cb_menu_story)
         self.menuStory.aboutToShow.connect(self.cb_menu_story_update)
+        self.menuLibrary.triggered.connect(self.cb_menu_library)
+        self.menuLibrary.aboutToShow.connect(self.cb_menu_library_update)
         self.menuTools.triggered.connect(self.cb_menu_tools)
         self.menuTools.aboutToShow.connect(self.cb_menu_tools_update)
         self.menuLost_stories.triggered.connect(self.cb_menu_lost)
@@ -699,6 +704,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif act_name == "actionRemove":
             self.ts_remove()
 
+    def cb_menu_library(self, action: QtGui.QAction):
+        act_name = action.objectName()
+        if act_name == "actionShow_gallery":
+            self.show_gallery = action.isChecked()
+            self.tree_stories_official.setVisible(not self.show_gallery)
+            self.list_stories_official.setVisible(self.show_gallery)
+            self.story_details.setText("")
+        elif act_name == "actionImportInLibrary":
+            self.ts_import_in_library()
+        
     def cb_menu_tools(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionShow_size":
@@ -712,12 +727,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.worker_launch(ACTION_SIZE)
             else:
                 self.app.postEvent(self.tree_stories, QtCore.QEvent(QtCore.QEvent.Resize))
-
-        if act_name == "actionShow_gallery":
-            self.show_gallery = action.isChecked()
-            self.tree_stories_official.setVisible(not self.show_gallery)
-            self.list_stories_official.setVisible(self.show_gallery)
-            self.story_details.setText("")
 
         elif act_name == "actionShow_Log":
             # already visible ? so hide it
@@ -860,6 +869,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
 
+    def cb_menu_library_update(self):
+        device_selected: bool = self.audio_device is not None
+
+        self.act_getfw.setEnabled(device_selected)
+        self.act_factory.setEnabled(False)
+        self.menuLost_stories.setEnabled(device_selected)
+
     def cb_menu_help_update(self, last_version):
         if last_version:
             self.logger.log(logging.INFO, self.tr("Latest Github release") + f" {last_version}")
@@ -983,8 +999,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(COL_OFFICIAL_UUID, id)
             item.setFont(COL_OFFICIAL_UUID, console_font)
             item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
+            item.setText(COL_OFFICIAL_LANGUAGE, list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0])
+
             if lunii_story is not None:
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
+
+            if id in stories.DB_LOCAL_LIBRARY:
+                item.setText(COL_OFFICIAL_PATH, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH])
 
             self.tree_stories_official.addTopLevelItem(item)
 
@@ -1385,6 +1406,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update(self.tr("Importing stories..."))
         self.worker_launch(ACTION_IMPORT, files)
 
+    def ts_import_in_library(self):
+        file_filter = "All supported (*.pk *.7z *.zip);;PK files (*.plain.pk *.pk);;Archive files (*.7z *.zip);;All files (*)"
+        files, _ = QFileDialog.getOpenFileNames(self, self.tr("Open Stories"), "", file_filter)
+
+        if files:
+            self.sb_update(self.tr("Importing stories in local library..."))
+            self.worker_launch(ACTION_IMPORT_IN_LIBRAIRY, files)
+
+        self.ts_update()
+
     def ts_dragenter_action(self, event):
         # a Lunii must be selected
         if not self.audio_device:
@@ -1468,11 +1499,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_device.signal_story_progress.connect(self.slot_story_progress)
             self.audio_device.signal_file_progress.connect(self.slot_file_progress)
             self.audio_device.signal_logger.connect(self.logger.log)
-        self.worker.signal_total_progress.connect(self.slot_total_progress)
-        self.worker.signal_finished.connect(self.thread.quit)
-        self.worker.signal_refresh.connect(self.ts_update)
-        self.worker.signal_message.connect(self.sb_update)
-        self.worker.signal_showlog.connect(self.cb_show_log)
+        self.worker.signal_total_progress.connect(self.slot_total_progress, QtCore.Qt.QueuedConnection)
+        self.worker.signal_finished.connect(self.thread.quit, QtCore.Qt.QueuedConnection)
+        self.worker.signal_refresh.connect(self.ts_update, QtCore.Qt.QueuedConnection)
+        self.worker.signal_message.connect(self.sb_update, QtCore.Qt.QueuedConnection)
+        self.worker.signal_showlog.connect(self.cb_show_log, QtCore.Qt.QueuedConnection)
 
         # running
         self.thread.start()

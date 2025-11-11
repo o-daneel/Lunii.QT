@@ -8,10 +8,9 @@ from uuid import UUID
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
 
-from pkg.api import constants
 from pkg.api.constants import FLAM_V1
-from pkg.api.device_lunii import LuniiDevice
-from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, story_load_db
+from pkg.api.device_lunii import LuniiDevice, get_uuid_from_file
+from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, local_library_db_add
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
@@ -22,6 +21,7 @@ ACTION_RECOVER = 6
 ACTION_CLEANUP = 7
 ACTION_FACTORY = 8
 ACTION_DB_IMPORT = 9
+ACTION_IMPORT_IN_LIBRAIRY = 10
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
@@ -66,6 +66,8 @@ class ierWorker(QObject):
                 self._task_factory_reset()
             elif self.action == ACTION_DB_IMPORT:
                 self._task_db_import()
+            elif self.action == ACTION_IMPORT_IN_LIBRAIRY:
+                self._task_import_in_library()
 
         except Exception as e:
             # Abort requested
@@ -332,3 +334,35 @@ class ierWorker(QObject):
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit(self.tr("✅ STUdio DB imported ({}/{}).").format(count, len(db_stories.keys())))
+
+    def _task_import_in_library(self):
+        success = 0
+
+        # importing selected files
+        for index, file in enumerate(self.items):
+            if self.abort_process:
+                self.exit_requested()
+                return
+
+            uuid = str(get_uuid_from_file(file)).upper()
+            if uuid == "":
+                self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
+            else:
+                local_library_db_add(uuid, file)
+                self.signal_message.emit(self.tr("👍 New story imported in local Library : '{}'").format(file))
+                success += 1
+            self.signal_total_progress.emit(index, len(self.items))
+            self.signal_refresh.emit()
+
+        if self.abort_process:
+            self.exit_requested()
+            return
+
+        # size to be updated ?
+        if self.update_size:
+            self._task_size()
+
+        # done
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit(self.tr("✅ Import in local Library done : {}/{}").format(success, len(self.items)))
