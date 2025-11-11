@@ -23,6 +23,9 @@ AUTHOR_NOT_FOUND = "No authors."
 # https://server-data-prod.lunii.com/v2/packs
 DB_OFFICIAL = {}
 DB_THIRD_PARTY = {}
+DB_LOCAL_LIBRARY = {}
+
+DB_LOCAL_LIBRARY_COL_PATH = "path"
 
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
@@ -226,6 +229,7 @@ class StudioStory:
 def story_load_db(reload=False):
     global DB_OFFICIAL
     global DB_THIRD_PARTY
+    global DB_LOCAL_LIBRARY
     retVal = True
 
     # fetching db if necessary
@@ -289,7 +293,27 @@ def story_load_db(reload=False):
             db = Path(FILE_THIRD_PARTY_DB)
             db.unlink(FILE_THIRD_PARTY_DB)
 
+    # trying to load local library DB
+    if os.path.isfile(FILE_LOCAL_LIBRAIRY_DB):
+        try:
+            with open(FILE_LOCAL_LIBRAIRY_DB, encoding='utf-8') as fp_db:
+                db_stories = json.load(fp_db)
+                DB_LOCAL_LIBRARY = {db_stories[key]["uuid"].upper(): value for (key, value) in db_stories.items()}
+        except:
+            db = Path(FILE_LOCAL_LIBRAIRY_DB)
+            db.unlink(FILE_LOCAL_LIBRAIRY_DB)
+
     return retVal
+
+def local_library_db_add(uuid: str, path: str):
+    if uuid not in DB_LOCAL_LIBRARY:
+        DB_LOCAL_LIBRARY[uuid] = {}
+    DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
+    local_library_db_save()
+
+def local_library_db_save():
+    with open(FILE_LOCAL_LIBRAIRY_DB, "w", encoding="utf-8") as f:
+        json.dump(DB_LOCAL_LIBRARY, f, indent=4)
 
 
 def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
