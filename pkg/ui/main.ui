@@ -791,7 +791,6 @@
      <addaction name="actionRemove_stories"/>
     </widget>
     <addaction name="actionShow_size"/>
-    <addaction name="actionShow_gallery"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
@@ -800,6 +799,14 @@
     <addaction name="actionFactory_reset"/>
     <addaction name="separator"/>
     <addaction name="actionTranscode"/>
+   </widget>
+   <widget class="QMenu" name="menuLibrary">
+    <property name="title">
+     <string>&amp;Library</string>
+    </property>
+    <addaction name="actionShow_gallery"/>
+    <addaction name="separator"/>
+    <addaction name="actionImportInLibrary"/>
    </widget>
    <widget class="QMenu" name="menuStory">
     <property name="title">
@@ -836,6 +843,7 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuStory"/>
+   <addaction name="menuLibrary"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
    <addaction name="menuUpdate"/>
@@ -941,6 +949,15 @@
    </property>
    <property name="toolTip">
     <string>Show size for each stories</string>
+   </property>
+  </action>  
+  <action name="actionImportInLibrary">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/import.png</normaloff>:/icon/res/import.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import in Library</string>
    </property>
   </action>
   <action name="actionShow_gallery">
