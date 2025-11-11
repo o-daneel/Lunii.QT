@@ -8,9 +8,10 @@ from uuid import UUID
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
 
+from pkg.api import stories
 from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice, get_uuid_from_file
-from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, local_library_db_add
+from pkg.api.stories import local_library_db_add_or_update, thirdparty_db_add_story, thirdparty_db_add_thumb
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
@@ -348,9 +349,13 @@ class ierWorker(QObject):
             if uuid == "":
                 self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
             else:
-                local_library_db_add(uuid, file)
+                if uuid in stories.DB_LOCAL_LIBRARY:
+                    self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden: '{}'...").format(file))
+
+                local_library_db_add_or_update(uuid, file)
                 self.signal_message.emit(self.tr("👍 New story imported in local Library : '{}'").format(file))
                 success += 1
+            
             self.signal_total_progress.emit(index, len(self.items))
             self.signal_refresh.emit()
 
@@ -358,9 +363,9 @@ class ierWorker(QObject):
             self.exit_requested()
             return
 
-        # size to be updated ?
-        if self.update_size:
-            self._task_size()
+        # # size to be updated ?
+        # if self.update_size:
+        #     self._task_size()
 
         # done
         self.signal_finished.emit()
