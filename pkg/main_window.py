@@ -512,10 +512,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     current = selection[0]
                     name = current.text(COL_NAME)
                     installationId = self.audio_device.stories.get_story(current.text(COL_UUID)).short_uuid
-                    if installationId != "" and installationPath != "":
-                        self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
-                        self.worker_launch(ACTION_REMOVE, [installationId])
-            #TODO handle multiple stories
+                    self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
+                    self.worker_launch(ACTION_REMOVE, [installationId])
+                else:
+                    ids = []
+                    names = []
+                    for i, item in enumerate(selection):
+                        ids.append(self.audio_device.stories.get_story(item.text(COL_UUID)).short_uuid)
+                        names.append(item.text(COL_NAME))
+
+                    self.sb_update(self.tr(f'Removing stories "{names}"...'))
+                    self.worker_launch(ACTION_REMOVE, ids)
+
         elif self.tabWidget.currentIndex() == 1:
             if self.show_gallery:
                 selection_model = self.list_stories_official.selectionModel()
