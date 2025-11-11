@@ -82,17 +82,12 @@ jobs:
         echo "SIZE POST-BUILD"
         du -sh dist
 
-    - name: Create Portable Archive
-      run: |
-        cd dist
-        zip -9 -r Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./luniiQt.app
-
     - name: Upload Portable Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Portable
         path: |
-          ./dist/Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip
+          ./dist
  
     - name: Create DMG
       run: |
@@ -105,7 +100,7 @@ jobs:
         --icon-size 100 \
         --icon "luniiQt.app" 100 200 \
         --app-drop-link 400 200 \
-        "luniiQt.dmg" \
+        "dist/luniiQt.dmg" \
         "dist/"
         
     - name: Upload DMG Artefact
@@ -113,7 +108,7 @@ jobs:
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_DMG
         path: |
-          ./luniiQt.dmg
+          ./dist/luniiQt.dmg
 
     - name: Release
       uses: softprops/action-gh-release@v1
