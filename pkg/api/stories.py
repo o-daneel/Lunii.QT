@@ -294,11 +294,10 @@ def story_load_db(reload=False):
     if os.path.isfile(FILE_LOCAL_LIBRAIRY_DB):
         try:
             with open(FILE_LOCAL_LIBRAIRY_DB, encoding='utf-8') as fp_db:
-                db_stories = json.load(fp_db)
-                DB_LOCAL_LIBRARY = {db_stories[key]["uuid"].upper(): value for (key, value) in db_stories.items()}
+                DB_LOCAL_LIBRARY = json.load(fp_db)
+                print(DB_LOCAL_LIBRARY)
         except:
-            db = Path(FILE_LOCAL_LIBRAIRY_DB)
-            db.unlink(FILE_LOCAL_LIBRAIRY_DB)
+            DB_LOCAL_LIBRARY = {}
 
     return retVal
 
