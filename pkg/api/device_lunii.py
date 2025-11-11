@@ -23,7 +23,6 @@ from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_remov
 from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_cipher, xxtea_decipher
 
-
 class LuniiDevice(QtCore.QObject):
     STORIES_BASEDIR = ".content/"
     HIDDEN_STORIES_BASEDIR = ".content.hidden/"
@@ -1816,7 +1815,7 @@ def process_archive_type(story_path):
 
                 ri_file = next(file for file in zip_contents if file.endswith("ri"))
                 ri_ciphered = zip_file.read(ri_file)
-                ri_plain = __v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
+                ri_plain = v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
                 if ri_plain[:4] == b"000\\":
                     archive_type = TYPE_LUNII_V2_ZIP
                 else:
@@ -1949,7 +1948,7 @@ def get_uuid_from_studio_7z(story_path):
 
     return ""
 
-def __v1v2_decipher(buffer, key, offset, dec_len):
+def v1v2_decipher(buffer, key, offset, dec_len):
     # checking offset
     if offset > len(buffer):
         offset = len(buffer)
@@ -1964,7 +1963,7 @@ def __v1v2_decipher(buffer, key, offset, dec_len):
         buffer = bytes(ba_buffer)
     return buffer
 
-def __v3_decipher(buffer, key, iv, offset, dec_len):
+def v3_decipher(buffer, key, iv, offset, dec_len):
     # checking offset
     if offset > len(buffer):
         offset = len(buffer)
@@ -1980,7 +1979,7 @@ def __v3_decipher(buffer, key, iv, offset, dec_len):
         buffer = bytes(ba_buffer)
     return buffer
 
-def __v1v2_cipher(buffer, key, offset, enc_len):
+def v1v2_cipher(buffer, key, offset, enc_len):
     # checking offset
     if offset > len(buffer):
         offset = len(buffer)
@@ -1995,7 +1994,7 @@ def __v1v2_cipher(buffer, key, offset, enc_len):
         buffer = bytes(ba_buffer)
     return buffer
 
-def __v3_cipher(buffer, key, iv, offset, enc_len):
+def v3_cipher(buffer, key, iv, offset, enc_len):
     # checking offset
     if offset > len(buffer):
         offset = len(buffer)
