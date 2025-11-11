@@ -70,6 +70,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install py2app
+        pip install cx_freeze
 
     - name: Build Exec
       run: |
@@ -79,36 +80,51 @@ jobs:
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         python setup_macos.py py2app
+        ls -al ./dist/
         echo "SIZE POST-BUILD"
-        du -sh dist
+        du -sh ./dist/luniiQt*
 
     - name: Upload Portable Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Portable
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Py2App
         path: |
-          ./dist
- 
-    - name: Create DMG
+          ./dist/*.app
+
+    - name: Freeze Exec
       run: |
-        brew install create-dmg
-        create-dmg \
-        --volname "LuniiQt Installer" \
-        --volicon "res/Lunii.ico" \
-        --window-pos 200 120 \
-        --window-size 600 400 \
-        --icon-size 100 \
-        --icon "luniiQt.app" 100 200 \
-        --app-drop-link 400 200 \
-        "dist/luniiQt.dmg" \
-        "dist/"
+        python setup.py build_exe
+        ls -al ./build/
+        echo "SIZE POST-BUILD"
+        du -sh ./build/exe.macosx*
         
-    - name: Upload DMG Artefact
+    - name: Upload Frozen Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_DMG
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_cxFreeze
         path: |
-          ./dist/luniiQt.dmg
+          ./build/exe.macosx*
+
+    # - name: Create DMG
+    #   run: |
+    #     brew install create-dmg
+    #     create-dmg \
+    #     --volname "LuniiQt Installer" \
+    #     --volicon "res/Lunii.ico" \
+    #     --window-pos 200 120 \
+    #     --window-size 600 400 \
+    #     --icon-size 100 \
+    #     --icon "luniiQt.app" 100 200 \
+    #     --app-drop-link 400 200 \
+    #     "dist/luniiQt.dmg" \
+    #     "dist/"
+        
+    # - name: Upload DMG Artefact
+    #   uses: actions/upload-artifact@v4.0.0
+    #   with:
+    #     name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_DMG
+    #     path: |
+    #       ./dist/luniiQt.dmg
 
     - name: Release
       uses: softprops/action-gh-release@v1
