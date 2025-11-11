@@ -18,17 +18,23 @@ framework_patterns = [
     "QtPdf.*",
     "QtQml.*",
     "QtQuick*.*",
-    "QtWebEngineCore.*",
-    "QtWebEngineWidgets.*",
+    "QtWebEngine*.*",
     "QtMultimedia.*",
-    "Qt3D*.*"
+    "Qt3D*.*",
+    "QtOpenGL*.*",
+    "Qt/lib/QtBluetooth.framework",
+    "Qt/lib/QtCharts*.framework",
+    "Qt/lib/QtDesigner*.framework",
+    "Qt/lib/QtGraph*.framework",
+    "Qt/lib/QtOpenGL*.framework",
     "Qt/lib/QtPdf.framework",
     "Qt/lib/QtQml.framework",
     "Qt/lib/QtQuick*.framework",
-    "Qt/lib/QtWebEngineCore.framework",
-    "Qt/lib/QtWebEngineWidgets.framework",
+    "Qt/lib/QtWebEngine*.framework",
     "Qt/lib/QtMultimedia.framework",
-    "Qt/lib/Qt3D*.framework"
+    "Qt/lib/Qt3D*.framework",
+    "Qt/lib/QtQml*.framework",
+    "Qt/lib/libavcodec.*.dylib",
 ]
 frameworks_dir = os.path.join(APP_PATH, "Resources/lib/python3.11/PySide6")
 for pattern in framework_patterns:
