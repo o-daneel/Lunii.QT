@@ -1,4 +1,5 @@
 import os
+import platform
 import shutil
 import zlib
 from pathlib import Path
@@ -36,13 +37,20 @@ OFFICIAL_TOKEN_URL = "https://server-auth-prod.lunii.com/guest/create"
 OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
 
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
-FFMPEG_PATH = os.path.join(CFG_DIR, "ffmpeg.exe")
 CACHE_DIR = os.path.join(CFG_DIR, "cache")
 FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
 
-STORY_TRANSCODING_SUPPORTED = os.path.isfile(FFMPEG_PATH)
+FFMPEG_BINARY="ffmpeg"
+if platform.system() == "Windows" :
+    FFMPEG_BINARY += ".exe"
+FFMPEG_LOCAL_BINARY  = shutil.which(os.path.join(CFG_DIR, FFMPEG_BINARY))
+FFMPEG_SYSTEM_BINARY = shutil.which(FFMPEG_BINARY)
+FFMPEG_BINARY = FFMPEG_LOCAL_BINARY if FFMPEG_LOCAL_BINARY else FFMPEG_SYSTEM_BINARY
+
+STORY_TRANSCODING_SUPPORTED = FFMPEG_BINARY is not None
+
 
 LUNII_V1or2_UNK = 0
 LUNII_V1 = 1
