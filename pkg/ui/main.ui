@@ -815,7 +815,6 @@
      <addaction name="actionRemove_stories"/>
     </widget>
     <addaction name="actionShow_size"/>
-    <addaction name="actionShow_gallery"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Log"/>
     <addaction name="actionGet_firmware"/>
