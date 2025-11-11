@@ -371,7 +371,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         event.accept()
 
     def cb_tab_changed(self):
-        self.story_details.setText("")
+        self.cb_story_select()
 
     def cb_show_context_menu(self, point):
         # change active menu based on selection
@@ -717,7 +717,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         elif act_name == "actionImportInLibrary":
             self.ts_import_in_library()
-            
+
         elif act_name == "actionShow_unavailable_stories":
             self.show_unavailable_stories = action.isChecked()
             self.ts_update()
@@ -1505,6 +1505,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_clicked(self, item, column):
         if column == COL_NM:
             self.ts_nm()
+            
+    def lock_ui(self):
+        self.tree_stories.setEnabled(False)
+        self.tree_stories_official.setEnabled(False)
+        self.list_stories_official.setEnabled(False)
+        self.tabWidget.setEnabled(False)
+        self.btn_db.setEnabled(False)
+        self.btn_refresh.setEnabled(False)
+        self.combo_device.setEnabled(False)
+
+    def unlock_ui(self):
+        self.tree_stories.setEnabled(True)
+        self.tree_stories_official.setEnabled(True)
+        self.list_stories_official.setEnabled(True)
+        self.tabWidget.setEnabled(True)
+        self.btn_db.setEnabled(True)
+        self.btn_refresh.setEnabled(True)
+        self.combo_device.setEnabled(True)
+
 
     def worker_check_version(self):
         # version_thread.start()
@@ -1533,10 +1552,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.worker.moveToThread(self.thread)
 
         # UI limitations
-        self.btn_db.setEnabled(False)
-        self.tree_stories.setEnabled(False)
-        self.btn_refresh.setEnabled(False)
-        self.combo_device.setEnabled(False)
+        self.lock_ui()
 
         # connecting slots
         self.thread.started.connect(self.worker.process)
@@ -1606,10 +1622,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def slot_finished(self):
         # print("SLOT FINISHED")
         # updating UI
-        self.tree_stories.setEnabled(True)
-        self.btn_db.setEnabled(True)
-        self.btn_refresh.setEnabled(True)
-        self.combo_device.setEnabled(True)
+        self.unlock_ui()
 
         # hiding progress
         self.lbl_total.setVisible(False)
