@@ -79,14 +79,16 @@ jobs:
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         python macos_setup.py py2app
-
-    - name: Cleanup Exec
-      run: |
-        echo "SIZE PRE-CLEANUP"
+        echo "SIZE POST-BUILD"
         du -sh dist
-        python macos_cleanup.py 
-        echo "SIZE POST-CLEANUP"
-        du -sh dist
+    
+    # - name: Cleanup Exec
+    #   run: |
+    #     echo "SIZE PRE-CLEANUP"
+    #     du -sh dist
+    #     python macos_cleanup.py 
+    #     echo "SIZE POST-CLEANUP"
+    #     du -sh dist
 
     # - name: Create Archive
     #   run: |
@@ -98,7 +100,7 @@ jobs:
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Portable
         path: |
-          ./dist/luniiQt.app
+          ./dist/
  
     - name: Create DMG
       run: |
