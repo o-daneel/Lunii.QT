@@ -1002,12 +1002,7 @@ class FlamDevice(QtCore.QObject):
 
                 # Extract each zip file
                 data_v2 = bio.read()
-
-                # stripping extra uuid chars
-                if "-" not in fname:
-                    file = fname[24:]
-                else:
-                    file = fname[28:]
+                file = fname
 
                 if self.device_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
@@ -1035,7 +1030,8 @@ class FlamDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "Authorization file creation..."))
-        bt_path = output_path.joinpath("key")
+        story_path = output_path.joinpath(long_uuid)
+        bt_path = story_path.joinpath("key")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.keyfile)
 
@@ -1043,10 +1039,10 @@ class FlamDevice(QtCore.QObject):
         loaded_story = Story(new_uuid, nm=night_mode)
 
         # creating info file creation
-        self.__write_info(loaded_story, output_path)
+        self.__write_info(loaded_story, story_path)
         
         # creating thumbnail image
-        self.__write_thumbnail(loaded_story, output_path)
+        self.__write_thumbnail(loaded_story, story_path)
 
         # updating .pi file to add new UUID
         self.stories.append(loaded_story)
