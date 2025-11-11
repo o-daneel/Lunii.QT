@@ -4,14 +4,17 @@ from pathlib import Path
 from typing import List
 from uuid import UUID
 from typing import List
-import zipfile
+
+from Crypto.Cipher import AES
+import xxtea
 
 import py7zr
+import zipfile
 import requests
+
 from PySide6.QtCore import QFile, QTextStream
 
-from pkg.api.constants import OFFICIAL_DB_URL, CFG_DIR, CACHE_DIR, FILE_OFFICIAL_DB, FILE_THIRD_PARTY_DB, \
-    STORY_TRANSCODING_SUPPORTED, OFFICIAL_TOKEN_URL, TYPE_FLAM_7Z, TYPE_FLAM_PLAIN, TYPE_FLAM_ZIP, TYPE_LUNII_PLAIN, TYPE_LUNII_V2_7Z, TYPE_LUNII_V2_ZIP, TYPE_LUNII_V3_ZIP, TYPE_STUDIO_7Z, TYPE_STUDIO_ZIP, TYPE_UNK
+from pkg.api.constants import *
 
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
@@ -496,6 +499,36 @@ class StoryList(List[Story]):
         slist = [one_story for one_story in self if _uuid_match(one_story.uuid, short_uuid)]
         return slist
 
+def xxtea_decipher(buffer, key, offset, dec_len):
+    # checking offset
+    if offset > len(buffer):
+        offset = len(buffer)
+    # checking len
+    if offset + dec_len > len(buffer):
+        dec_len = len(buffer) - offset
+    # if something to be done
+    if offset < len(buffer) and offset + dec_len <= len(buffer):
+        plain = xxtea.decrypt(buffer[offset:dec_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:dec_len]))
+        ba_buffer = bytearray(buffer)
+        ba_buffer[offset:dec_len] = plain
+        buffer = bytes(ba_buffer)
+    return buffer
+
+def aes_decipher(buffer, key, iv, offset, dec_len):
+    # checking offset
+    if offset > len(buffer):
+        offset = len(buffer)
+    # checking len
+    if offset + dec_len > len(buffer):
+        dec_len = len(buffer) - offset
+    # if something to be done
+    if offset < len(buffer) and offset + dec_len <= len(buffer):
+        decipher = AES.new(key, AES.MODE_CBC, iv)
+        plain = decipher.decrypt(buffer[offset:dec_len])
+        ba_buffer = bytearray(buffer)
+        ba_buffer[offset:dec_len] = plain
+        buffer = bytes(ba_buffer)
+    return buffer
 
 def story_is_studio(contents):
     file: str
@@ -514,7 +547,6 @@ def story_is_flam(contents):
 
 def story_is_flam_plain(contents):
     return all(any(file.lower().endswith(pattern) for file in contents) for pattern in [".lua"])
-
 
 def story_is_lunii(contents):
     return all(any(file.lower().endswith(pattern) for file in contents) for pattern in ["ri", "si", "li", "ni"])
@@ -565,7 +597,14 @@ def archive_check_zipcontent(story_path):
                 else:
                     archive_type = TYPE_LUNII_V2_ZIP
             else:
-                archive_type = TYPE_UNK
+                # no bt file, so trying to guess based on ri
+                ri_file = next(file for file in zip_contents if file.endswith("ri"))
+                ri_ciphered = zip_file.read(ri_file)
+                ri_plain = xxtea_decipher(ri_ciphered, lunii_generic_key, 0, 512)
+                if ri_plain[:4] == b"000\\":
+                    archive_type = TYPE_LUNII_V2_ZIP
+                else:
+                    archive_type = TYPE_UNK
         # studio files ?
         elif story_is_studio(zip_contents):
             archive_type = TYPE_STUDIO_ZIP
