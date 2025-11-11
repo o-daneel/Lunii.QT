@@ -25,7 +25,7 @@ from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_re
 from pkg.api.convert_image import image_to_bitmap_rle4, image_to_liff
 from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, \
-    StudioStory, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent
+    StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent, xxtea_decipher
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -296,63 +296,11 @@ class FlamDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
-    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # checking padding
-        if enc_len % 16 != 0:
-            padlen = 16 - len(buffer) % 16
-            buffer += b"\x00" * padlen
-            enc_len += padlen
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            cipher = AES.new(key, AES.MODE_CBC, iv)
-            ciphered = cipher.encrypt(buffer[offset:enc_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
-
-    def __xxtea_decipher(self, buffer, key, offset, dec_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + dec_len > len(buffer):
-            dec_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + dec_len <= len(buffer):
-            plain = xxtea.decrypt(buffer[offset:dec_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:dec_len]))
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:dec_len] = plain
-            buffer = bytes(ba_buffer)
-        return buffer
-
-    def __aes_decipher(self, buffer, key, iv, offset, dec_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + dec_len > len(buffer):
-            dec_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + dec_len <= len(buffer):
-            decipher = AES.new(key, AES.MODE_CBC, iv)
-            plain = decipher.decrypt(buffer[offset:dec_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:dec_len] = plain
-            buffer = bytes(ba_buffer)
-        return buffer
-    
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
         if self.debug_plain:
             return buffer
 
-        return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+        return aes_cipher(buffer, key, iv, offset, enc_len)
 
     def __get_ciphered_data(self, file, data, flam_story, force=False):
         if not flam_story:
@@ -403,12 +351,12 @@ class FlamDevice(QtCore.QObject):
             file = os.path.join(os.path.dirname(file), bn.upper())
 
         # upcasing uuid dir if present
-        dn = os.path.dirname(file)
-        if len(dn) >= 8:
-            dir_head = file[0:8]
-            if "/" not in dir_head and "\\" not in dir_head:
-                file = dir_head.upper() + file[8:]
-        file = file.replace("\\", "/")
+        # dn = os.path.dirname(file)
+        # if len(dn) >= 8:
+        #     dir_head = file[0:8]
+        #     if "/" not in dir_head and "\\" not in dir_head:
+        #         file = dir_head.upper() + file[8:]
+        # file = file.replace("\\", "/")
 
         # self.signal_logger.emit(logging.DEBUG, f"Target file : {file}")
         return file
@@ -431,6 +379,8 @@ class FlamDevice(QtCore.QObject):
             archive_type = archive_check_zipcontent(story_path)
         elif story_path.lower().endswith(EXT_7Z):
             archive_type = archive_check_7zcontent(story_path)
+        elif story_path.lower().endswith(EXT_PK_VX):
+            archive_type = archive_check_zipcontent(story_path)
 
         # is flam firmware enough to support Lunii stories ?
         if self.fw_main.startswith("1.") and archive_type in [TYPE_LUNII_PLAIN, TYPE_LUNII_V2_ZIP, TYPE_LUNII_V2_7Z, TYPE_STUDIO_ZIP, TYPE_STUDIO_7Z]:
@@ -463,7 +413,7 @@ class FlamDevice(QtCore.QObject):
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
             return self.import_studio_7z(story_path)
         else:
-            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:2X}".format(archive_type))
+            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:02X}".format(archive_type))
 
         return None
     
@@ -741,7 +691,7 @@ class FlamDevice(QtCore.QObject):
                     if file.endswith(".lsf") or file.endswith("info"):
                         self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "Transciphering file {}").format(file))
                         # decipher
-                        data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
+                        data_plain = aes_decipher(data, story_key, story_iv, 0, len(data))
                         # cipher
                         data = self.__get_ciphered_data(file, data_plain, True, True)
 
@@ -857,7 +807,7 @@ class FlamDevice(QtCore.QObject):
                     if fname.endswith(".lsf") or fname.endswith("info"):
                         self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "Transciphering file {}").format(fname))
                         # decipher
-                        data_plain = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
+                        data_plain = aes_decipher(data, story_key, story_iv, 0, len(data))
                         # cipher
                         data = self.__get_ciphered_data(fname, data_plain, True, True)
 
@@ -954,11 +904,11 @@ class FlamDevice(QtCore.QObject):
                     data_plain = data_v2
                 else:
                     # to be deciphered
-                    data_plain = self.__xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
+                    data_plain = xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
                 # updating filename, and ciphering header if necessary
                 data = self.__get_ciphered_data(file, data_plain, False)
-                file_newname = self.__get_lunii_ciphered_name(file)
 
+                file_newname = self.__get_lunii_ciphered_name(file.replace(uuid_str, str(new_uuid)))
                 target: Path = output_path.joinpath(file_newname)
 
                 # create target directory
@@ -1052,12 +1002,7 @@ class FlamDevice(QtCore.QObject):
 
                 # Extract each zip file
                 data_v2 = bio.read()
-
-                # stripping extra uuid chars
-                if "-" not in fname:
-                    file = fname[24:]
-                else:
-                    file = fname[28:]
+                file = fname
 
                 if self.device_version <= LUNII_V2:
                     # from v2 to v2, data can be kept as it is
@@ -1069,11 +1014,11 @@ class FlamDevice(QtCore.QObject):
                         data_plain = data_v2
                     else:
                         # to be ciphered
-                        data_plain = self.__xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
+                        data_plain = xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain, False)
 
-                file_newname = self.__get_lunii_ciphered_name(file)
+                file_newname = self.__get_lunii_ciphered_name(file.replace(uuid_str, str(new_uuid)))
                 target: Path = output_path.joinpath(file_newname)
 
                 # create target directory
@@ -1085,7 +1030,8 @@ class FlamDevice(QtCore.QObject):
 
         # creating authorization file : bt
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "Authorization file creation..."))
-        bt_path = output_path.joinpath("key")
+        story_path = output_path.joinpath(long_uuid)
+        bt_path = story_path.joinpath("key")
         with open(bt_path, "wb") as fp_bt:
             fp_bt.write(self.keyfile)
 
@@ -1093,10 +1039,10 @@ class FlamDevice(QtCore.QObject):
         loaded_story = Story(new_uuid, nm=night_mode)
 
         # creating info file creation
-        self.__write_info(loaded_story, output_path)
+        self.__write_info(loaded_story, story_path)
         
         # creating thumbnail image
-        self.__write_thumbnail(loaded_story, output_path)
+        self.__write_thumbnail(loaded_story, story_path)
 
         # updating .pi file to add new UUID
         self.stories.append(loaded_story)
@@ -1547,7 +1493,7 @@ class FlamDevice(QtCore.QObject):
                     with open(file, "rb") as fp:
                         data = fp.read()
                     if file.endswith(".lsf") or file.endswith("info"):
-                        data = self.__aes_decipher(data, story_key, story_iv, 0, len(data))
+                        data = aes_decipher(data, story_key, story_iv, 0, len(data))
 
                     zip_out.writestr(target_file, data)
 
@@ -1621,7 +1567,7 @@ class FlamDevice(QtCore.QObject):
                     with open(file, "rb") as fp:
                         data = fp.read()
                     if target_file.endswith(".mp3") or target_file.endswith(".bmp") or target_file.endswith(".plain"):
-                        data = self.__aes_decipher(data, story_key, story_iv, 0, 0x200)
+                        data = aes_decipher(data, story_key, story_iv, 0, 0x200)
 
                     zip_out.writestr(target_file, data)
 

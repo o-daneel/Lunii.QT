@@ -22,7 +22,7 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_cipher, xxtea_decipher
 
 
 class LuniiDevice(QtCore.QObject):
@@ -293,87 +293,20 @@ class LuniiDevice(QtCore.QObject):
                                        f"Story Key : {binascii.hexlify(self.story_key, ' ', 1).upper() if self.story_key  else 'N/A'}\n"
                                        f"Story IV  : {binascii.hexlify(self.story_iv,  ' ', 1).upper() if self.story_iv   else 'N/A'}")
 
-    def __v1v2_decipher(self, buffer, key, offset, dec_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + dec_len > len(buffer):
-            dec_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + dec_len <= len(buffer):
-            plain = xxtea.decrypt(buffer[offset:dec_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:dec_len]))
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:dec_len] = plain
-            buffer = bytes(ba_buffer)
-        return buffer
-
-    def __v3_decipher(self, buffer, key, iv, offset, dec_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + dec_len > len(buffer):
-            dec_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + dec_len <= len(buffer):
-            decipher = AES.new(key, AES.MODE_CBC, iv)
-            plain = decipher.decrypt(buffer[offset:dec_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:dec_len] = plain
-            buffer = bytes(ba_buffer)
-        return buffer
-
     def decipher(self, buffer, key, iv=None, offset=0, dec_len=512):
         if self.device_version == LUNII_V3:
-            return self.__v3_decipher(buffer, key, iv, offset, dec_len)
+            return aes_decipher(buffer, key, iv, offset, dec_len)
         else:
-            return self.__v1v2_decipher(buffer, key, offset, dec_len)
-
-    def __v1v2_cipher(self, buffer, key, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            ciphered = xxtea.encrypt(buffer[offset:enc_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:enc_len]))
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
-
-    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # checking padding
-        if enc_len % 16 != 0:
-            padlen = 16 - len(buffer) % 16
-            buffer += b"\x00" * padlen
-            enc_len += padlen
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            cipher = AES.new(key, AES.MODE_CBC, iv)
-            ciphered = cipher.encrypt(buffer[offset:enc_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
+            return xxtea_decipher(buffer, key, offset, dec_len)
 
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
         if self.debug_plain:
             return buffer
 
         if self.device_version == LUNII_V3:
-            return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+            return aes_cipher(buffer, key, iv, offset, enc_len)
         else:
-            return self.__v1v2_cipher(buffer, key, offset, enc_len)
+            return xxtea_cipher(buffer, key, offset, enc_len)
 
     def load_story_keys(self, bt_file_path):
         if self.device_key and self.device_iv and bt_file_path and os.path.isfile(bt_file_path):
@@ -785,36 +718,7 @@ class LuniiDevice(QtCore.QObject):
         elif story_path.lower().endswith(EXT_7Z):
             archive_type = archive_check_7zcontent(story_path)
         elif story_path.lower().endswith(EXT_PK_VX):
-            # trying to guess version v1/2 or v3 based on bt contents
-            with zipfile.ZipFile(file=story_path) as zip_file:
-                # reading all available files
-                zip_contents = zip_file.namelist()
-
-                # based on bt file
-                bt_files = [entry for entry in zip_contents if entry.endswith("bt")]
-                if bt_files:
-                    bt_size = zip_file.getinfo(bt_files[0]).file_size
-                    if bt_size == 0x20:
-                        archive_type = TYPE_LUNII_V3_ZIP
-                    else:
-                        archive_type = TYPE_LUNII_V2_ZIP
-
-                # no bt file, so trying to guess based on ri
-                elif (any(file.endswith("ri") for file in zip_contents) and
-                      any(file.endswith("si") for file in zip_contents) and
-                      any(file.endswith("ni") for file in zip_contents) and
-                      any(file.endswith("li") for file in zip_contents)):
-                    # trying to decipher ri with v2
-
-                    ri_file = next(file for file in zip_contents if file.endswith("ri"))
-                    ri_ciphered = zip_file.read(ri_file)
-                    ri_plain = self.__v1v2_decipher(ri_ciphered, lunii_generic_key, 0, 512)
-                    if ri_plain[:4] == b"000\\":
-                        archive_type = TYPE_LUNII_V2_ZIP
-                    else:
-                        archive_type = TYPE_LUNII_V3_ZIP
-                else:
-                    archive_type = TYPE_UNK
+            archive_type = archive_check_zipcontent(story_path)
 
         # processing story
         if archive_type == TYPE_LUNII_PLAIN:
@@ -836,7 +740,7 @@ class LuniiDevice(QtCore.QObject):
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_STUDIO_7Z")
             return self.import_studio_7z(story_path)
         else:
-            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:2X}".format(archive_type))
+            self.signal_logger.emit(logging.ERROR, "Archive => Unsupported type 0x{:02X}".format(archive_type))
 
         return None
 
@@ -1022,7 +926,7 @@ class LuniiDevice(QtCore.QObject):
                         data_plain = data_v2
                     else:
                         # to be ciphered
-                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                        data_plain = xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
 
@@ -1130,7 +1034,7 @@ class LuniiDevice(QtCore.QObject):
                         data_plain = data_v2
                     else:
                         # to be ciphered
-                        data_plain = self.__v1v2_decipher(data_v2, lunii_generic_key, 0, 512)
+                        data_plain = xxtea_decipher(data_v2, lunii_generic_key, 0, 512)
                     # updating filename, and ciphering header if necessary
                     data = self.__get_ciphered_data(file, data_plain)
 
