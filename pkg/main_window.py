@@ -108,6 +108,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.debug_dialog.show() # class instance vars init self.audio_device: LuniiDevice = None self.worker: ierWorker = None self.thread: QtCore.QThread = None self.version_worker: versionWorker = None self.version_thread: QtCore.QThread = None self.app = app # app config
         self.sizes_hidden = True
         self.show_gallery = False
+        self.show_unavailable_stories = True
         self.details_last_uuid = None
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
 
@@ -222,6 +223,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_import_in_library = next(act for act in l_actions if act.objectName() == "actionImportInLibrary")
         act_gallery = next(act for act in l_actions if act.objectName() == "actionShow_gallery")
         act_gallery.setChecked(self.show_gallery)
+        act_show_unavailable_stories = next(act for act in l_actions if act.objectName() == "actionShow_unavailable_stories")
+        act_show_unavailable_stories.setChecked(self.show_unavailable_stories)
 
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
@@ -711,8 +714,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tree_stories_official.setVisible(not self.show_gallery)
             self.list_stories_official.setVisible(self.show_gallery)
             self.story_details.setText("")
+
         elif act_name == "actionImportInLibrary":
             self.ts_import_in_library()
+            
+        elif act_name == "actionShow_unavailable_stories":
+            self.show_unavailable_stories = action.isChecked()
+            self.ts_update()
         
     def cb_menu_tools(self, action: QtGui.QAction):
         act_name = action.objectName()
@@ -1006,7 +1014,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if id in stories.DB_LOCAL_LIBRARY:
                 item.setText(COL_OFFICIAL_PATH, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH])
-
+            elif not self.show_unavailable_stories:
+                continue
+            
             self.tree_stories_official.addTopLevelItem(item)
 
             local_db_path = item.text(COL_OFFICIAL_PATH)
