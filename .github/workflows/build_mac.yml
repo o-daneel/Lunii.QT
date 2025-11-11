@@ -71,7 +71,7 @@ jobs:
         pip install -r requirements.txt
         pip install py2app
 
-    - name: Build Exec & Create Archive
+    - name: Build Exec
       run: |
         pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
         pyside6-uic ./pkg/ui/nm.ui   -o ./pkg/ui/nm_ui.py
@@ -79,6 +79,17 @@ jobs:
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
         python macos_setup.py py2app
+
+    - name: Cleanup Exec
+      run: |
+        echo "SIZE PRE-CLEANUP"
+        du -sh dist
+        python macos_cleanup.py 
+        echo "SIZE POST-CLEANUP"
+        du -sh dist
+
+    - name: Create Archive
+      run: |
         cd dist
         zip -9 -r Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./luniiQt.app
 
