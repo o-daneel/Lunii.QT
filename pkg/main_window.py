@@ -778,7 +778,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         elif act_name == "actionImportInLibrary":
             self.ts_import_in_library()
-
         elif act_name == "actionShow_unavailable_stories":
             self.show_unavailable_stories = action.isChecked()
             self.ts_update()
