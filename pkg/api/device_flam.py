@@ -25,7 +25,7 @@ from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_re
 from pkg.api.convert_image import image_to_bitmap_rle4, image_to_liff
 from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, \
-    StudioStory, aes_decipher, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent, xxtea_decipher
+    StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent, xxtea_decipher
 
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
@@ -296,32 +296,11 @@ class FlamDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
-    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # checking padding
-        if enc_len % 16 != 0:
-            padlen = 16 - len(buffer) % 16
-            buffer += b"\x00" * padlen
-            enc_len += padlen
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            cipher = AES.new(key, AES.MODE_CBC, iv)
-            ciphered = cipher.encrypt(buffer[offset:enc_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
-
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
         if self.debug_plain:
             return buffer
 
-        return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+        return aes_cipher(buffer, key, iv, offset, enc_len)
 
     def __get_ciphered_data(self, file, data, flam_story, force=False):
         if not flam_story:

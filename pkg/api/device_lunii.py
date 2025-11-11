@@ -22,7 +22,7 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_decipher
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_cipher, xxtea_decipher
 
 
 class LuniiDevice(QtCore.QObject):
@@ -299,50 +299,14 @@ class LuniiDevice(QtCore.QObject):
         else:
             return xxtea_decipher(buffer, key, offset, dec_len)
 
-    def __v1v2_cipher(self, buffer, key, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            ciphered = xxtea.encrypt(buffer[offset:enc_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:enc_len]))
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
-
-    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
-        # checking offset
-        if offset > len(buffer):
-            offset = len(buffer)
-        # checking len
-        if offset + enc_len > len(buffer):
-            enc_len = len(buffer) - offset
-        # checking padding
-        if enc_len % 16 != 0:
-            padlen = 16 - len(buffer) % 16
-            buffer += b"\x00" * padlen
-            enc_len += padlen
-        # if something to be done
-        if offset < len(buffer) and offset + enc_len <= len(buffer):
-            cipher = AES.new(key, AES.MODE_CBC, iv)
-            ciphered = cipher.encrypt(buffer[offset:enc_len])
-            ba_buffer = bytearray(buffer)
-            ba_buffer[offset:enc_len] = ciphered
-            buffer = bytes(ba_buffer)
-        return buffer
-
     def cipher(self, buffer, key, iv=None, offset=0, enc_len=512):
         if self.debug_plain:
             return buffer
 
         if self.device_version == LUNII_V3:
-            return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+            return aes_cipher(buffer, key, iv, offset, enc_len)
         else:
-            return self.__v1v2_cipher(buffer, key, offset, enc_len)
+            return xxtea_cipher(buffer, key, offset, enc_len)
 
     def load_story_keys(self, bt_file_path):
         if self.device_key and self.device_iv and bt_file_path and os.path.isfile(bt_file_path):

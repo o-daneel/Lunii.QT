@@ -514,6 +514,21 @@ def xxtea_decipher(buffer, key, offset, dec_len):
         buffer = bytes(ba_buffer)
     return buffer
 
+def xxtea_cipher(buffer, key, offset, enc_len):
+    # checking offset
+    if offset > len(buffer):
+        offset = len(buffer)
+    # checking len
+    if offset + enc_len > len(buffer):
+        enc_len = len(buffer) - offset
+    # if something to be done
+    if offset < len(buffer) and offset + enc_len <= len(buffer):
+        ciphered = xxtea.encrypt(buffer[offset:enc_len], key, padding=False, rounds=lunii_tea_rounds(buffer[offset:enc_len]))
+        ba_buffer = bytearray(buffer)
+        ba_buffer[offset:enc_len] = ciphered
+        buffer = bytes(ba_buffer)
+    return buffer
+
 def aes_decipher(buffer, key, iv, offset, dec_len):
     # checking offset
     if offset > len(buffer):
@@ -530,6 +545,27 @@ def aes_decipher(buffer, key, iv, offset, dec_len):
         buffer = bytes(ba_buffer)
     return buffer
 
+def aes_cipher(buffer, key, iv, offset, enc_len):
+    # checking offset
+    if offset > len(buffer):
+        offset = len(buffer)
+    # checking len
+    if offset + enc_len > len(buffer):
+        enc_len = len(buffer) - offset
+    # checking padding
+    if enc_len % 16 != 0:
+        padlen = 16 - len(buffer) % 16
+        buffer += b"\x00" * padlen
+        enc_len += padlen
+    # if something to be done
+    if offset < len(buffer) and offset + enc_len <= len(buffer):
+        cipher = AES.new(key, AES.MODE_CBC, iv)
+        ciphered = cipher.encrypt(buffer[offset:enc_len])
+        ba_buffer = bytearray(buffer)
+        ba_buffer[offset:enc_len] = ciphered
+        buffer = bytes(ba_buffer)
+    return buffer
+    
 def story_is_studio(contents):
     file: str
     for file in contents:
@@ -573,7 +609,6 @@ def archive_check_plain(story_path):
             archive_type = TYPE_LUNII_PLAIN
 
     return archive_type
-
 
 def archive_check_zipcontent(story_path):
     archive_type = TYPE_UNK
