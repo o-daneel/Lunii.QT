@@ -20,6 +20,8 @@ OPTIONS = {
         'CFBundleDevelopmentRegion': 'English',
         'CFBundleDocumentTypes': [],
     },
+    'packages': ['PySide6'],
+    'excludes': ['tkinter', 'pytest', 'unittest', 'email', 'sqlite3'],
 }
 
 setup(

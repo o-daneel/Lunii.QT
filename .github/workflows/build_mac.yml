@@ -78,12 +78,8 @@ jobs:
         pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
-        python setup_macos.py py2app
-        ls -al ./dist/
-        ls -al ./dist/luniiQt.app/
-        mv ./dist/luniiQt.app .
-        ls -al ./dist/
-        ls -al ./luniiQt.app/
+        python macos_setup.py py2app
+        cd dist
         zip -9 -r Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./luniiQt.app
 
     - name: Upload Artefact
@@ -91,7 +87,7 @@ jobs:
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64
         path: |
-          ./Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip
+          ./dist/Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip
  
     - name: Release
       uses: softprops/action-gh-release@v1
