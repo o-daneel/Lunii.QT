@@ -88,18 +88,39 @@ jobs:
         echo "SIZE POST-CLEANUP"
         du -sh dist
 
-    - name: Create Archive
-      run: |
-        cd dist
-        zip -9 -r Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./luniiQt.app
+    # - name: Create Archive
+    #   run: |
+    #     cd dist
+    #     zip -9 -r Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip ./luniiQt.app
 
-    - name: Upload Artefact
+    - name: Upload Portable Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Portable
         path: |
-          ./dist/Lunii.Qt-${{ github.ref_name }}-MacOs-arm64.zip
+          ./dist/luniiQt.app
  
+    - name: Create DMG
+      run: |
+        brew install create-dmg
+        create-dmg \
+        --volname "LuniiQt Installer" \
+        --volicon "res/Lunii.ico" \
+        --window-pos 200 120 \
+        --window-size 600 400 \
+        --icon-size 100 \
+        --icon "luniiQt.app" 100 200 \
+        --app-drop-link 400 200 \
+        "dist/luniiQt.dmg" \
+        "dist/"
+        
+    - name: Upload DMG Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_DMG
+        path: |
+          ./dist/luniiQt.dmg
+
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
