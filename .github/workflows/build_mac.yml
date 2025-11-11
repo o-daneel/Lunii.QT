@@ -33,7 +33,7 @@ jobs:
   #       pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
   #       pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
   #       pyside6-rcc ./resources.qrc -o ./resources_rc.py
-  #       python setup_macos.py py2app
+  #       python macos_setup.py py2app
   #       mv ./dist/*.app .
   #       zip -9 -j Lunii.Qt-${{ github.ref_name }}-MacOs-x86_64.zip ./*.app
 
@@ -79,7 +79,7 @@ jobs:
         pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
         pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
         pyside6-rcc ./resources.qrc -o ./resources_rc.py
-        python setup_macos.py py2app
+        python macos_setup.py py2app
         ls -al ./dist/
         echo "SIZE POST-BUILD"
         du -sh ./dist/luniiQt*
@@ -88,6 +88,22 @@ jobs:
       uses: actions/upload-artifact@v4.0.0
       with:
         name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Py2App
+        path: |
+          ./dist/*.app
+
+    - name: Cleanup Exec
+      run: |
+        echo "SIZE PRE-CLEANUP"
+        du -sh ./dist/luniiQt*
+        python macos_cleanup.py
+        ls -al ./dist/
+        echo "SIZE POST-CLEANUP"
+        du -sh ./dist/luniiQt*
+
+    - name: Upload Portable Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: Lunii.Qt-${{ github.ref_name }}-MacOs-arm64_Py2App_Light
         path: |
           ./dist/*.app
 
