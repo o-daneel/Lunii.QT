@@ -548,31 +548,55 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QTextBrowser" name="story_details">
+      <widget class="QWidget" name="layoutWidget_story_details">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>300</width>
-         <height>192</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>1024</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_story_details">
+        <item>
+          <widget class="QTextBrowser" name="story_details">
+          <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+            <size>
+            <width>300</width>
+            <height>192</height>
+            </size>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+          </property>
+          </widget>
+        </item>
+         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_add_remove_buttons">
+          <item>
+           <widget class="QPushButton" name="add_story_button">
+            <property name="text">
+             <string>Add Story</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="remove_story_button">
+            <property name="text">
+             <string>Remove Story</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

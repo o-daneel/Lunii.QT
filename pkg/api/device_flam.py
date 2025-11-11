@@ -296,7 +296,7 @@ class FlamDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
-    def __v3_cipher(self, buffer, key, iv, offset, enc_len):
+    def v3_cipher(self, buffer, key, iv, offset, enc_len):
         # checking offset
         if offset > len(buffer):
             offset = len(buffer)
@@ -352,7 +352,7 @@ class FlamDevice(QtCore.QObject):
         if self.debug_plain:
             return buffer
 
-        return self.__v3_cipher(buffer, key, iv, offset, enc_len)
+        return self.v3_cipher(buffer, key, iv, offset, enc_len)
 
     def __get_ciphered_data(self, file, data, flam_story, force=False):
         if not flam_story:
