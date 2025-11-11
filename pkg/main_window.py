@@ -506,6 +506,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
             if selection is not None:
+                self.remove_story_button.setEnabled(True)
+
                 if len(selection) == 1:
                     current = selection[0]
                     name = current.text(COL_NAME)
