@@ -1015,7 +1015,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             pixmap = QPixmap()
             pixmap.loadFromData(stories.get_picture(id))
             scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-            itemList = QStandardItem(QIcon(scaled_pixmap), name)
+            icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_db_path != "", lunii_story_id != ""))
+            itemList = QStandardItem(QIcon(icon_with_banner), name)
             itemList.setData({"id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id}, Qt.UserRole)
 
             list_stories_model.appendRow(itemList)
@@ -1026,6 +1027,45 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.list_stories_official.setModel(sorted_model)
 
+    def create_icon_with_banner(self, base_pixmap, available, installed):
+        pixmap = base_pixmap.copy()
+        w = pixmap.width()
+        h = pixmap.height()
+        banner_width = h // 2
+        banner_height = 30
+
+        if available:
+            painter = QPainter(pixmap)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+            font = QFont()
+            font.setBold(True)
+            font.setPointSize(10)
+            painter.translate(w - banner_width // 1.8,  -20)
+            painter.rotate(45)
+            painter.fillRect(0, 0, banner_width, banner_height, QColor(255, 0, 0, 180))
+            painter.setPen(Qt.GlobalColor.white)
+            painter.setFont(font)
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Disponible"))
+            painter.end()
+        
+        if installed:
+            painter = QPainter(pixmap)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        
+            font = QFont()
+            font.setBold(True)
+            font.setPointSize(10)
+            painter.translate(0, h - banner_width // 1.5)
+            painter.rotate(45)
+            painter.fillRect(0, 0, banner_width, banner_height, QColor(0, 255, 0, 180))
+            painter.setPen(Qt.GlobalColor.black)
+            painter.setFont(font)
+            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Sur la Lunii"))
+            painter.end()
+        
+        return pixmap
+    
     def sb_create(self):
         self.statusBar().showMessage("bla-bla bla")
         self.lbl_hsnu = QLabel("SNU:")

@@ -298,13 +298,12 @@ def story_load_db(reload=False):
         try:
             with open(FILE_LOCAL_LIBRAIRY_DB, encoding='utf-8') as fp_db:
                 DB_LOCAL_LIBRARY = json.load(fp_db)
-                print(DB_LOCAL_LIBRARY)
         except:
             DB_LOCAL_LIBRARY = {}
 
     return retVal
 
-def local_library_db_add(uuid: str, path: str):
+def local_library_db_add_or_update(uuid: str, path: str):
     if uuid not in DB_LOCAL_LIBRARY:
         DB_LOCAL_LIBRARY[uuid] = {}
     DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
