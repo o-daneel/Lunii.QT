@@ -805,6 +805,7 @@
      <string>&amp;Library</string>
     </property>
     <addaction name="actionShow_gallery"/>
+    <addaction name="actionShow_unavailable_stories"/>
     <addaction name="separator"/>
     <addaction name="actionImportInLibrary"/>
    </widget>
@@ -975,6 +976,20 @@
    </property>
    <property name="toolTip">
     <string>Show stories in gallery or table view</string>
+   </property>
+  </action>
+  <action name="actionShow_unavailable_stories">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show unavailable stories</string>
+   </property>
+   <property name="toolTip">
+    <string>Show stories that are not available in the local library</string>
    </property>
   </action>
   <action name="actionGet_firmware">
