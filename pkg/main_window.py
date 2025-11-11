@@ -177,7 +177,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_AGE, QHeaderView.ResizeToContents)
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.ResizeToContents)
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.Stretch)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
@@ -268,6 +268,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.itemSelectionChanged.connect(self.cb_story_select)
 
         self.tree_stories.installEventFilter(self)
+
+        self.tree_stories_official.itemDoubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
+        self.list_stories_official.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
+        self.add_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
+        self.remove_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
 
         QApplication.instance().focusChanged.connect(self.onFocusChanged)
 
@@ -494,10 +499,49 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not self.audio_device.story_key):
                 self.cb_show_log()
 
+    def cb_install_or_remove_story_on_lunii(self):
+        if not self.audio_device:
+            return
+        
+        if self.tabWidget.currentIndex() == 1:
+            if self.show_gallery:
+                selection_model = self.list_stories_official.selectionModel()
+                current_index = selection_model.currentIndex()
+                if current_index.isValid():
+                    name = current_index.data()
+                    data = current_index.data(Qt.UserRole)
+                
+                    lunii_story_id = data["lunii_story_id"]
+                    installationPath = data["local_db_path"]
+                    if lunii_story_id is not None and installationPath is None:
+                        self.sb_update(self.tr(f'Removing story "{lunii_story_id} - {name}"...'))
+                        self.worker_launch(ACTION_REMOVE, [lunii_story_id])
+                    elif installationPath is not None:
+                        self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
+                        self.worker_launch(ACTION_IMPORT, [installationPath])
+            else:
+                current = self.tree_stories_official.currentItem()
+                name = current.text(COL_OFFICIAL_NAME)
+                installationId = current.text(COL_OFFICIAL_INSTALLED)
+                installationPath = current.text(COL_OFFICIAL_PATH)
+                if installationId != "" and installationPath != "":
+                    self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
+                    self.worker_launch(ACTION_REMOVE, [installationId])
+                elif installationPath != "":
+                    self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
+                    self.worker_launch(ACTION_IMPORT, [installationPath])
+                
+        return
+
     def cb_story_select(self):
+        self.add_story_button.setEnabled(False)
+        self.remove_story_button.setEnabled(False)
+
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
             if selection is not None:
+                self.remove_story_button.setEnabled(True)
+
                 if len(selection) == 1:
                     item = selection[0]
                     uuid = item.text(COL_UUID)
@@ -548,10 +592,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if current_index.isValid():
                     data = current_index.data(Qt.UserRole)
                     id = data["id"]
+                    self.add_story_button.setEnabled(self.audio_device is not None and data["local_db_path"] is not None and data["lunii_story_id"] is None)
+                    self.remove_story_button.setEnabled(self.audio_device is not None and data["lunii_story_id"] is not None)
             else:
                 current = self.tree_stories_official.currentItem()
                 if current is not None:
                     id = current.text(COL_OFFICIAL_UUID)
+                    local_db_path = current.text(COL_OFFICIAL_PATH)
+                    lunii_story_id = current.text(COL_OFFICIAL_INSTALLED)
+                    self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
+                    self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
 
             if id is not None:
                 locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
@@ -1514,6 +1564,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_db.setEnabled(False)
         self.btn_refresh.setEnabled(False)
         self.combo_device.setEnabled(False)
+        self.add_story_button.setEnabled(False)
+        self.remove_story_button.setEnabled(False)
 
     def unlock_ui(self):
         self.tree_stories.setEnabled(True)
@@ -1523,7 +1575,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_db.setEnabled(True)
         self.btn_refresh.setEnabled(True)
         self.combo_device.setEnabled(True)
-
+        self.add_story_button.setEnabled(True)
+        self.remove_story_button.setEnabled(True)
 
     def worker_check_version(self):
         # version_thread.start()
