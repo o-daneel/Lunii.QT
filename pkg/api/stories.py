@@ -19,6 +19,7 @@ from pkg.api.constants import *
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
 AUTHOR_NOT_FOUND = "No authors."
+AGE_NOT_FOUND = "No age found."
 
 # https://server-data-prod.lunii.com/v2/packs
 DB_OFFICIAL = {}
@@ -499,6 +500,16 @@ class Story:
                         return author
 
         return AUTHOR_NOT_FOUND
+    
+    @property
+    def age(self):
+        one_uuid = str(self.uuid).upper()
+
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            if one_uuid in db and db[one_uuid].get("age_min"):
+                return db[one_uuid].get("age_min")
+
+        return AGE_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
         one_uuid = str(self.uuid).upper()

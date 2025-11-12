@@ -22,7 +22,7 @@ from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
-from pkg.api.stories import DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
+from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
@@ -189,6 +189,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)
+        self.tree_stories_official.sortItems(COL_OFFICIAL_AGE, QtCore.Qt.AscendingOrder)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
@@ -197,6 +198,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_UUID, QHeaderView.Fixed)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
+        self.tree_stories_third_party.sortItems(COL_THIRD_PARTY_NAME, QtCore.Qt.AscendingOrder)
 
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(512, 512))
@@ -212,7 +214,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_third_party.setAcceptDrops(False)
         self.list_stories_third_party.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_third_party.setVisible(False)
-
 
         self.story_details.setOpenExternalLinks(True)
 
@@ -286,9 +287,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_nightmode.clicked.connect(self.cb_nm)
 
         self.splitter.splitterMoved.connect(self.cb_story_select)
-        self.tree_stories.itemSelectionChanged.connect(self.cb_story_select)
-        self.tree_stories_official.itemSelectionChanged.connect(self.cb_story_select)
-        self.tree_stories_third_party.itemSelectionChanged.connect(self.cb_story_select)
+        self.tree_stories.selectionModel().selectionChanged.connect(self.cb_story_select)
+        self.tree_stories_official.selectionModel().selectionChanged.connect(self.cb_story_select)
+        self.tree_stories_third_party.selectionModel().selectionChanged.connect(self.cb_story_select)
 
         self.tree_stories.installEventFilter(self)
 
@@ -333,7 +334,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                QTimer.singleShot(0, self.cb_story_select)
+                self.cb_story_select
                 return False
         return False
 
@@ -580,6 +581,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return
 
     def cb_story_select(self):
+        # Add asynchronous system to handle the delay on the UI
+        QTimer.singleShot(0, self.process_story_select)
+
+    def process_story_select(self):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
 
@@ -603,9 +608,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                     url = os.path.join(CACHE_DIR, uuid)
                     width = min(self.story_details.width() - 20, QImage(url).width())
+                    age = "" if one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
                     self.story_details.setHtml(
                         f'<img src="{url}" width="{width}" />'
-                        + f"<h2>{one_story.name}</h2>"
+                        + f"<h2>{age}{one_story.name}</h2>"
                         + f"<h3>{one_story.subtitle}</h3>"
                         + f"<h4>{one_story.author}</h4>"
                         + one_story.desc)
@@ -614,8 +620,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     names = []
                     for i, item in enumerate(selection):
                         uuid = item.text(COL_UUID)
+                        one_story = self.audio_device.stories.get_story(uuid)
+                        age = "" if not one_story or one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
                         paths.append(os.path.join(CACHE_DIR, uuid))
-                        names.append(item.text(COL_NAME))
+                        names.append(age + item.text(COL_NAME))
 
                     data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
                     if data_uri is None:
@@ -660,10 +668,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 subtitle = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("subtitle", "")
                 url = os.path.join(CACHE_DIR, id)
                 width = min(self.story_details.width() - 20, QImage(url).width())
+                age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
 
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'
-                    + f'<h2>{title}</h2>'
+                    + f"<h2>{age}{title}</h2>"
                     + f'<h3>{subtitle}</h3>'
                     + description)
                 
@@ -1249,9 +1258,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             list_stories_model.appendRow(itemList)
 
-        for id in stories.DB_LOCAL_LIBRARY:
-            if id not in stories.DB_THIRD_PARTY and id not in stories.DB_OFFICIAL:
-                print(stories.DB_LOCAL_LIBRARY[id]["path"])
+        # for id in stories.DB_LOCAL_LIBRARY:
+        #     if id not in stories.DB_THIRD_PARTY and id not in stories.DB_OFFICIAL:
+        #         print(stories.DB_LOCAL_LIBRARY[id]["path"])
 
         sorted_model = NaturalSortProxyModel()
         sorted_model.setSourceModel(list_stories_model)
