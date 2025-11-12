@@ -45,6 +45,13 @@ COL_OFFICIAL_PATH = 4
 COL_OFFICIAL_UUID = 5
 COL_OFFICIAL_SIZE = 6
 
+COL_THIRD_PARTY_AGE = 0
+COL_THIRD_PARTY_NAME = 1
+COL_THIRD_PARTY_INSTALLED = 2
+COL_THIRD_PARTY_PATH = 3
+COL_THIRD_PARTY_UUID = 4
+COL_THIRD_PARTY_SIZE = 5
+
 COL_NM_SIZE = 20
 COL_DB_SIZE = 20
 COL_UUID_SIZE = 250
@@ -182,6 +189,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
+        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
+        self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, COL_NAME_MIN_SIZE)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_AGE, QHeaderView.ResizeToContents)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_PATH, QHeaderView.Stretch)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_INSTALLED, QHeaderView.ResizeToContents)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_UUID, QHeaderView.Fixed)
+        self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
 
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(512, 512))
@@ -190,6 +205,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.setAcceptDrops(False)
         self.list_stories_official.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_official.setVisible(False)
+        self.list_stories_third_party.setViewMode(QListView.IconMode)
+        self.list_stories_third_party.setIconSize(QSize(512, 512))
+        self.list_stories_third_party.setResizeMode(QListView.Adjust)
+        self.list_stories_third_party.setVisible(False)
 
 
         self.story_details.setOpenExternalLinks(True)
@@ -266,11 +285,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.splitter.splitterMoved.connect(self.cb_story_select)
         self.tree_stories.itemSelectionChanged.connect(self.cb_story_select)
         self.tree_stories_official.itemSelectionChanged.connect(self.cb_story_select)
+        self.tree_stories_third_party.itemSelectionChanged.connect(self.cb_story_select)
 
         self.tree_stories.installEventFilter(self)
 
         self.tree_stories_official.itemDoubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.list_stories_official.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
+        self.tree_stories_third_party.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
+        self.list_stories_third_party.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.add_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.remove_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
 
@@ -606,7 +628,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         elif self.tabWidget.currentIndex() == 1:
             id = None
-            
             if self.show_gallery:
                 selection_model = self.list_stories_official.selectionModel()
                 current_index = selection_model.currentIndex()
@@ -637,6 +658,38 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     + f'<h2>{title}</h2>'
                     + f'<h3>{subtitle}</h3>'
                     + description)
+                
+        elif self.tabWidget.currentIndex() == 2:
+            id = None
+            if self.show_gallery:
+                selection_model = self.list_stories_third_party.selectionModel()
+                current_index = selection_model.currentIndex()
+                if current_index.isValid():
+                    data = current_index.data(Qt.UserRole)
+                    id = data["id"]
+                    self.add_story_button.setEnabled(self.audio_device is not None and data["local_db_path"] is not None and data["lunii_story_id"] is None)
+                    self.remove_story_button.setEnabled(self.audio_device is not None and data["lunii_story_id"] is not None)
+            else:
+                current = self.tree_stories_third_party.currentItem()
+                if current is not None:
+                    id = current.text(COL_THIRD_PARTY_UUID)
+                    local_db_path = current.text(COL_THIRD_PARTY_PATH)
+                    lunii_story_id = current.text(COL_THIRD_PARTY_INSTALLED)
+                    self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
+                    self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
+            
+            if id is not None and id in stories.DB_THIRD_PARTY:
+                description = stories.DB_THIRD_PARTY[id].get("description", "")
+                title = stories.DB_THIRD_PARTY[id].get("title", "")
+                url = os.path.join(CACHE_DIR, id)
+                width = min(self.story_details.width() - 20, QImage(url).width())
+
+                self.story_details.setHtml(
+                    f'<img src="{url}" width="{width}" /><br>'
+                    + f'<h2>{title}</h2>'
+                    + description)
+            else:
+                self.story_details.setHtml("")
 
     def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
         if not image_paths:
@@ -783,7 +836,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if act_name == "actionShow_gallery":
             self.show_gallery = action.isChecked()
             self.tree_stories_official.setVisible(not self.show_gallery)
-            self.list_stories_official.setVisible(self.show_gallery)
+            self.list_stories_official.setVisible(self.show_gallery)            
+            self.tree_stories_third_party.setVisible(not self.show_gallery)
+            self.list_stories_third_party.setVisible(self.show_gallery)
             self.story_details.setText("")
 
         elif act_name == "actionImportInLibrary":
@@ -991,16 +1046,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # clear previous story list
         self.tree_stories.clear()
         self.tree_stories_official.clear()
+        self.tree_stories_third_party.clear()
 
         if self.list_stories_official.model() is not None:
             self.list_stories_official.model().sourceModel().clear() 
+        if self.list_stories_third_party.model() is not None:
+            self.list_stories_third_party.model().sourceModel().clear() 
 
         self.details_last_uuid = None
         self.ts_populate()
         self.ts_populate_official()
+        self.ts_populate_third_party()
 
         self.list_stories_official.selectionModel().currentChanged.connect(self.cb_story_select)
-
+        self.list_stories_third_party.selectionModel().currentChanged.connect(self.cb_story_select)
 
     def ts_populate(self):
         # empty device
@@ -1106,6 +1165,103 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         sorted_model.sort(0)  
 
         self.list_stories_official.setModel(sorted_model)
+
+    def ts_populate_third_party(self):
+        # creating font
+        console_font = QFont()
+        console_font.setFamilies([u"Consolas"])
+
+        # getting filter text
+        le_filter = self.le_filter.text()
+
+        list_stories_model = QStandardItemModel()
+
+        # files_in_local_db_by_name = []
+        # files_in_local_db_by_id = []
+
+        # adding items from DB
+        for id in stories.DB_THIRD_PARTY:
+            name = stories.DB_THIRD_PARTY[id]["title"]
+            if name is None or name == "":
+                continue
+
+            # files_in_local_db_by_name.append(stories.encode_name(name))
+            # files_in_local_db_by_id.append(id)
+
+            # filtering 
+            if (le_filter and
+                not le_filter.lower() in name.lower() and
+                not le_filter.lower() in id.lower() ):
+                continue
+
+            # local_story = stories.get_story_by_id_in_local_third_party_db(id)
+
+            # if local_story == []:
+            #     local_story = stories.get_story_by_name_in_local_third_party_db(name)
+            #     if local_story == []:
+            #         self.logger.log(logging.DEBUG, self.tr("Failed to associated local file to story '" + name + "'"))
+            #     else:
+            #         self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by Name to story '" + name + "'"))
+            # else:
+            #     self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by ID to story '" + name + "'"))
+
+            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+            # if lunii_story is None and self.audio_device is not None and len(local_story) > 0 and local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID] != "":
+            #     lunii_story = self.audio_device.stories.get_story(local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID])
+ 
+            # create and add item to treeWidget
+            item = NaturalSortTreeWidgetItem()
+
+            # if local_story != []:
+            #     item.setText(COL_THIRD_PARTY_NAME, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_NAME])
+            # else:
+            item.setText(COL_THIRD_PARTY_NAME, name)
+            item.setText(COL_THIRD_PARTY_UUID, id)
+            item.setFont(COL_THIRD_PARTY_UUID, console_font)
+            #item[COL_THIRD_PARTY_NAME].setFlags(item[COL_THIRD_PARTY_NAME].flags() | QtCore.Qt.ItemIsEditable)
+            
+            if lunii_story is not None:
+                item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
+
+            if id in stories.DB_LOCAL_LIBRARY:
+                item.setText(COL_THIRD_PARTY_PATH, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH])
+            elif not self.show_unavailable_stories:
+                continue
+
+            # if local_story != []:
+            #     path = local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH]
+            #     item.setText(COL_THIRD_PARTY_PATH, path)
+            #     item.setText(COL_THIRD_PARTY_AGE, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_AGE])
+            #     item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))/1024/1024, 1)}MB")
+            # elif self.unavailable_hidden:
+            #     continue
+
+            self.tree_stories_third_party.addTopLevelItem(item)
+
+            pixmap = QPixmap()
+            image = stories.get_picture(id)
+            if image:
+                pixmap.loadFromData(image)
+                scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
+                #icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story != [], lunii_story is not None))
+                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, False, lunii_story is not None))
+                itemList = QStandardItem(QIcon(icon_with_banner), item.text(COL_THIRD_PARTY_NAME))
+            else:
+                itemList = QStandardItem(QIcon(), item.text(COL_THIRD_PARTY_NAME))
+            itemList.setData({"id": id, "local_db_path": item.text(COL_THIRD_PARTY_PATH), "lunii_story_id": item.text(COL_THIRD_PARTY_INSTALLED)}, Qt.UserRole)
+
+            list_stories_model.appendRow(itemList)
+
+        for id in stories.DB_LOCAL_LIBRARY:
+            if id not in stories.DB_THIRD_PARTY and id not in stories.DB_OFFICIAL:
+                print(stories.DB_LOCAL_LIBRARY[id]["path"])
+
+        sorted_model = NaturalSortProxyModel()
+        sorted_model.setSourceModel(list_stories_model)
+        sorted_model.sort(0)  
+        
+        self.list_stories_third_party.setModel(sorted_model)
+
 
     def create_icon_with_banner(self, base_pixmap, available, installed):
         pixmap = base_pixmap.copy()

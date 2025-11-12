@@ -371,11 +371,59 @@ class Ui_MainWindow(object):
         self.tree_stories_official.setSortingEnabled(True)
         self.tree_stories_official.setAllColumnsShowFocus(True)
         self.tree_stories_official.setExpandsOnDoubleClick(True)
+        self.tree_stories_official.setSupportedDragActions(Qt.DropAction.IgnoreAction)
         self.tree_stories_official.header().setStretchLastSection(False)
 
         self.verticalLayout_tabOfficialStories.addWidget(self.tree_stories_official)
 
         self.tabWidget.addTab(self.tabOfficialStories, "")
+        self.tabThirdPartyStories = QWidget()
+        self.tabThirdPartyStories.setObjectName(u"tabThirdPartyStories")
+        self.verticalLayout_tabThirdPartyStories = QVBoxLayout(self.tabThirdPartyStories)
+        self.verticalLayout_tabThirdPartyStories.setObjectName(u"verticalLayout_tabThirdPartyStories")
+        self.list_stories_third_party = QListView(self.tabThirdPartyStories)
+        self.list_stories_third_party.setObjectName(u"list_stories_third_party")
+        self.list_stories_third_party.setEnabled(True)
+        self.list_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.list_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories_third_party.setProperty(u"showDropIndicator", False)
+        self.list_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories_third_party.setWordWrap(True)
+
+        self.verticalLayout_tabThirdPartyStories.addWidget(self.list_stories_third_party)
+
+        self.tree_stories_third_party = QTreeWidget(self.tabThirdPartyStories)
+        __qtreewidgetitem6 = QTreeWidgetItem()
+        __qtreewidgetitem6.setText(4, u"UUID");
+        __qtreewidgetitem6.setTextAlignment(0, Qt.AlignLeading|Qt.AlignVCenter);
+        self.tree_stories_third_party.setHeaderItem(__qtreewidgetitem6)
+        self.tree_stories_third_party.setObjectName(u"tree_stories_third_party")
+        sizePolicy1.setHeightForWidth(self.tree_stories_third_party.sizePolicy().hasHeightForWidth())
+        self.tree_stories_third_party.setSizePolicy(sizePolicy1)
+        self.tree_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.tree_stories_third_party.setFrameShape(QFrame.Shape.NoFrame)
+        self.tree_stories_third_party.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.tree_stories_third_party.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tree_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.AllEditTriggers)
+        self.tree_stories_third_party.setProperty(u"showDropIndicator", False)
+        self.tree_stories_third_party.setDragEnabled(False)
+        self.tree_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tree_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.tree_stories_third_party.setAlternatingRowColors(True)
+        self.tree_stories_third_party.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tree_stories_third_party.setIndentation(20)
+        self.tree_stories_third_party.setRootIsDecorated(True)
+        self.tree_stories_third_party.setItemsExpandable(False)
+        self.tree_stories_third_party.setSortingEnabled(True)
+        self.tree_stories_third_party.setAllColumnsShowFocus(True)
+        self.tree_stories_third_party.setExpandsOnDoubleClick(False)
+        self.tree_stories_third_party.setSupportedDragActions(Qt.DropAction.IgnoreAction)
+        self.tree_stories_third_party.header().setStretchLastSection(False)
+
+        self.verticalLayout_tabThirdPartyStories.addWidget(self.tree_stories_third_party)
+
+        self.tabWidget.addTab(self.tabThirdPartyStories, "")
         self.splitter.addWidget(self.tabWidget)
         self.layoutWidget_story_details = QWidget(self.splitter)
         self.layoutWidget_story_details.setObjectName(u"layoutWidget_story_details")
@@ -658,6 +706,13 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOfficialStories), QCoreApplication.translate("MainWindow", u"Official Store", None))
+        ___qtreewidgetitem2 = self.tree_stories_third_party.headerItem()
+        ___qtreewidgetitem2.setText(5, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"Path", None));
+        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"Installation Id", None));
+        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
+        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabThirdPartyStories), QCoreApplication.translate("MainWindow", u"Third Party Store", None))
         self.add_story_button.setText(QCoreApplication.translate("MainWindow", u"Add Story", None))
         self.remove_story_button.setText(QCoreApplication.translate("MainWindow", u"Remove Story", None))
         self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
