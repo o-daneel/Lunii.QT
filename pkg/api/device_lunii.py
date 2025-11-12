@@ -1934,7 +1934,7 @@ def get_uuid_from_studio_zip(story_path):
             if one_story.uuid not in stories.DB_THIRD_PARTY:
                 stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
-            if not os.path.join(CACHE_DIR, str(one_story.uuid)):
+            if not os.path.isfile(os.path.join(CACHE_DIR, str(one_story.uuid))):
                 # Loop over each file
                 for _, file in enumerate(zip_contents):
                     if file.endswith(FILE_STUDIO_THUMB):
@@ -1969,7 +1969,7 @@ def get_uuid_from_studio_7z(story_path):
             if one_story.uuid not in stories.DB_THIRD_PARTY:
                 stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
-            if not os.path.join(CACHE_DIR, str(one_story.uuid)):
+            if not os.path.isfile(os.path.join(CACHE_DIR, str(one_story.uuid))):
                 # Loop over each file
                 for _, file in enumerate(zip_contents):
                     if file.endswith(FILE_STUDIO_THUMB):

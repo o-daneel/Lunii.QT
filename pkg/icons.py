@@ -11,7 +11,7 @@ class SimpleLazyLoadingModel(QStandardItemModel):
     def __init__(self, data_list, max_concurrent = 5):
         super().__init__()
         self._data = data_list
-        self._cache = {}
+        self._loaded = {}
         self._loading = set()
         self._queue = deque()
         self._max_concurrent = max_concurrent
@@ -33,10 +33,10 @@ class SimpleLazyLoadingModel(QStandardItemModel):
         if role == Qt.DecorationRole:
             data = self._data[index.row()]
             id_ = data["id"]
-            if id_ in self._cache:
-                return self._cache[id_]
+            if id_ in self._loaded:
+                return self.generate_listview_icon(data["id"], data["local_db_path"] != "", data["lunii_story_id"] != "")
             elif id_ not in self._loading and id_ not in self._queue:
-                self._queue.append((id_, index, data))
+                self._queue.append((id_, index))
                 self.try_start_loading()
             return None
 
@@ -47,35 +47,16 @@ class SimpleLazyLoadingModel(QStandardItemModel):
 
     def try_start_loading(self):
         while len(self._loading) < self._max_concurrent and self._queue:
-            id_, index, data = self._queue.popleft()
+            id_, index = self._queue.popleft()
             self._loading.add(id_)
-            worker = ImageLoaderWorker(id_, data, index, self.signals)
+            worker = ImageLoaderWorker(id_, index, self.signals)
             self.threadpool.start(worker)
 
-    def on_image_loaded(self, id_, pixmap, index):
-        self._cache[id_] = pixmap
+    def on_image_loaded(self, id_, index):
+        self._loaded[id_] = id_
         self._loading.discard(id_)
         self.dataChanged.emit(index, index, [Qt.DecorationRole])
         self.try_start_loading()
-
-class FixedSizeDelegate(QStyledItemDelegate):
-    def sizeHint(self, option, index):
-        return QSize(320, 360)
-
-class ImageLoaderSignals(QObject):
-    loaded = Signal(str, QPixmap, object)
-
-class ImageLoaderWorker(QRunnable):
-    def __init__(self, id, data, index, signals):
-        super().__init__()
-        self.id_ = id
-        self.data = data
-        self.index = index
-        self.signals = signals
-
-    def run(self):
-        pixmap = self.generate_listview_icon(self.data["id"], self.data["local_db_path"] != "", self.data["lunii_story_id"] != "")
-        self.signals.loaded.emit(self.id_, pixmap, self.index)
 
     def generate_listview_icon(self, uuid: str, available: bool, installed: bool):
         image = stories.get_picture(uuid)
@@ -125,3 +106,23 @@ class ImageLoaderWorker(QRunnable):
             painter.end()
         
         return pixmap
+
+
+class FixedSizeDelegate(QStyledItemDelegate):
+    def sizeHint(self, option, index):
+        return QSize(320, 360)
+
+class ImageLoaderSignals(QObject):
+    loaded = Signal(str, object)
+
+class ImageLoaderWorker(QRunnable):
+    def __init__(self, id, index, signals):
+        super().__init__()
+        self.id_ = id
+        self.index = index
+        self.signals = signals
+
+    def run(self):
+        stories.get_picture(self.id_)
+        self.signals.loaded.emit(self.id_, self.index)
+
