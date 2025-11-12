@@ -536,52 +536,49 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
-            if selection is not None:
-                self.remove_story_button.setEnabled(True)
+            if len(selection) == 1:
+                current = selection[0]
+                name = current.text(COL_NAME)
+                installationId = self.audio_device.stories.get_story(current.text(COL_UUID)).short_uuid
+                self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
+                self.worker_launch(ACTION_REMOVE, [installationId])
 
-                if len(selection) == 1:
-                    current = selection[0]
-                    name = current.text(COL_NAME)
-                    installationId = self.audio_device.stories.get_story(current.text(COL_UUID)).short_uuid
-                    self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
-                    self.worker_launch(ACTION_REMOVE, [installationId])
-                else:
-                    ids = []
-                    names = []
-                    for i, item in enumerate(selection):
-                        ids.append(self.audio_device.stories.get_story(item.text(COL_UUID)).short_uuid)
-                        names.append(item.text(COL_NAME))
+            elif len(selection) > 1:
+                ids = []
+                names = []
+                for _, item in enumerate(selection):
+                    ids.append(self.audio_device.stories.get_story(item.text(COL_UUID)).short_uuid)
+                    names.append(item.text(COL_NAME))
 
-                    self.sb_update(self.tr(f'Removing stories "{names}"...'))
-                    self.worker_launch(ACTION_REMOVE, ids)
+                self.sb_update(self.tr(f'Removing stories "{names}"...'))
+                self.worker_launch(ACTION_REMOVE, ids)
 
-        elif self.tabWidget.currentIndex() == 1:
+        else:
             if self.show_gallery:
-                selection_model = self.list_stories_official.selectionModel()
+                selection_model = self.list_stories_official.selectionModel() if self.tabWidget.currentIndex() == 1 else self.list_stories_third_party.selectionModel()
                 current_index = selection_model.currentIndex()
-                if current_index.isValid():
-                    name = current_index.data()
-                    data = current_index.data(Qt.UserRole)
-                
-                    lunii_story_id = data["lunii_story_id"]
-                    installationPath = data["local_db_path"]
-                    if lunii_story_id is not None and installationPath is None:
-                        self.sb_update(self.tr(f'Removing story "{lunii_story_id} - {name}"...'))
-                        self.worker_launch(ACTION_REMOVE, [lunii_story_id])
-                    elif installationPath is not None:
-                        self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
-                        self.worker_launch(ACTION_IMPORT, [installationPath])
+                name = current_index.data()
+                data = current_index.data(Qt.UserRole)
+                installationId = data["lunii_story_id"]
+                installationPath = data["local_db_path"]
             else:
-                current = self.tree_stories_official.currentItem()
-                name = current.text(COL_OFFICIAL_NAME)
-                installationId = current.text(COL_OFFICIAL_INSTALLED)
-                installationPath = current.text(COL_OFFICIAL_PATH)
-                if installationId != "" and installationPath != "":
-                    self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
-                    self.worker_launch(ACTION_REMOVE, [installationId])
-                elif installationPath != "":
-                    self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
-                    self.worker_launch(ACTION_IMPORT, [installationPath])
+                if self.tabWidget.currentIndex() == 1:
+                    current = self.tree_stories_official.currentItem()
+                    name = current.text(COL_OFFICIAL_NAME)
+                    installationId = current.text(COL_OFFICIAL_INSTALLED)
+                    installationPath = current.text(COL_OFFICIAL_PATH)
+                else:
+                    current = self.tree_stories_third_party.currentItem()
+                    name = current.text(COL_THIRD_PARTY_NAME)
+                    installationId = current.text(COL_THIRD_PARTY_INSTALLED)
+                    installationPath = current.text(COL_THIRD_PARTY_PATH)
+
+            if installationId != "" and installationPath != "":
+                self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
+                self.worker_launch(ACTION_REMOVE, [installationId])
+            elif installationPath != "":
+                self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
+                self.worker_launch(ACTION_IMPORT, [installationPath])
                 
         return
 
