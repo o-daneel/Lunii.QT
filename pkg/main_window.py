@@ -188,7 +188,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)  
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
@@ -1127,6 +1127,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in id.lower() ):
                 continue
 
+            local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
 
             # create and add item to treeWidget
@@ -1141,8 +1142,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if lunii_story is not None:
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
 
-            if id in stories.DB_LOCAL_LIBRARY:
-                item.setText(COL_OFFICIAL_PATH, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH])
+            if local_story is not None:
+                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
+                item.setText(COL_OFFICIAL_PATH, path)
+                item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
             elif not self.show_unavailable_stories:
                 continue
             
@@ -1194,27 +1197,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in id.lower() ):
                 continue
 
-            # local_story = stories.get_story_by_id_in_local_third_party_db(id)
-
-            # if local_story == []:
-            #     local_story = stories.get_story_by_name_in_local_third_party_db(name)
-            #     if local_story == []:
-            #         self.logger.log(logging.DEBUG, self.tr("Failed to associated local file to story '" + name + "'"))
-            #     else:
-            #         self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by Name to story '" + name + "'"))
-            # else:
-            #     self.logger.log(logging.DEBUG, self.tr("Local file '" + local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH] + "' associated by ID to story '" + name + "'"))
-
+            local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
-            # if lunii_story is None and self.audio_device is not None and len(local_story) > 0 and local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID] != "":
-            #     lunii_story = self.audio_device.stories.get_story(local_story[stories.DB_THIRD_PARTY_LOCAL_COL_UUID])
  
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
 
-            # if local_story != []:
-            #     item.setText(COL_THIRD_PARTY_NAME, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_NAME])
-            # else:
             item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_UUID, id)
             item.setFont(COL_THIRD_PARTY_UUID, console_font)
@@ -1223,18 +1211,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if lunii_story is not None:
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
 
-            if id in stories.DB_LOCAL_LIBRARY:
-                item.setText(COL_THIRD_PARTY_PATH, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH])
+            if local_story is not None:
+                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
+                item.setText(COL_THIRD_PARTY_PATH, path)
+                item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
             elif not self.show_unavailable_stories:
                 continue
-
-            # if local_story != []:
-            #     path = local_story[stories.DB_THIRD_PARTY_LOCAL_COL_PATH]
-            #     item.setText(COL_THIRD_PARTY_PATH, path)
-            #     item.setText(COL_THIRD_PARTY_AGE, local_story[stories.DB_THIRD_PARTY_LOCAL_COL_AGE])
-            #     item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(os.path.join(stories.DB_THIRD_PARTY_LOCAL_PATH, path))/1024/1024, 1)}MB")
-            # elif self.unavailable_hidden:
-            #     continue
 
             self.tree_stories_third_party.addTopLevelItem(item)
 
@@ -1243,8 +1225,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if image:
                 pixmap.loadFromData(image)
                 scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                #icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story != [], lunii_story is not None))
-                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, False, lunii_story is not None))
+                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story is not None, lunii_story is not None))
                 itemList = QStandardItem(QIcon(icon_with_banner), item.text(COL_THIRD_PARTY_NAME))
             else:
                 itemList = QStandardItem(QIcon(), item.text(COL_THIRD_PARTY_NAME))
