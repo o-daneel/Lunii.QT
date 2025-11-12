@@ -1925,7 +1925,25 @@ def get_uuid_from_studio_zip(story_path):
                 return ""
 
             # getting UUID file
-            return StudioStory(json.loads(zip_file.read(FILE_STUDIO_JSON))).uuid
+            try:
+                story_json = json.loads(zip_file.read(FILE_STUDIO_JSON))
+            except ValueError as e:
+                return ""
+
+            one_story = StudioStory(story_json)
+            if one_story.uuid not in stories.DB_THIRD_PARTY:
+                stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
+            if not os.path.join(CACHE_DIR, str(one_story.uuid)):
+                # Loop over each file
+                for _, file in enumerate(zip_contents):
+                    if file.endswith(FILE_STUDIO_THUMB):
+                        # adding thumb to DB
+                        data = zip_file.read(file)
+                        stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                        continue
+                    
+            return one_story.uuid
         
     except (ValueError, zipfile.BadZipFile):
         return ""
@@ -1934,16 +1952,34 @@ def get_uuid_from_studio_zip(story_path):
 
 def get_uuid_from_studio_7z(story_path):
     try:
-        with py7zr.SevenZipFile(story_path, mode='r') as zip:
-            zip_contents = zip.readall()
+        with py7zr.SevenZipFile(story_path, mode='r') as zip_file:
+            zip_contents = zip_file.readall()
             if FILE_UUID in zip_contents:
                 return ""
             if FILE_STUDIO_JSON not in zip_contents:
                 return ""
   
             # getting UUID file
-            return StudioStory(json.loads(zip_contents[FILE_STUDIO_JSON].read())).uuid
-    except py7zr.exceptions.Bad7zFile as e:
+            try:
+                story_json = json.loads(zip_file.read(FILE_STUDIO_JSON))
+            except ValueError as e:
+                return ""
+
+            one_story = StudioStory(story_json)
+            if one_story.uuid not in stories.DB_THIRD_PARTY:
+                stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
+
+            if not os.path.join(CACHE_DIR, str(one_story.uuid)):
+                # Loop over each file
+                for _, file in enumerate(zip_contents):
+                    if file.endswith(FILE_STUDIO_THUMB):
+                        # adding thumb to DB
+                        data = zip_file.read(file)
+                        stories.thirdparty_db_add_thumb(one_story.uuid, data)
+                        continue
+                
+            return one_story.uuid
+    except (ValueError, py7zr.exceptions.Bad7zFile):
         return ""
 
     return ""

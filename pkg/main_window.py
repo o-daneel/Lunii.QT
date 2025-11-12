@@ -695,10 +695,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
                 title = stories.DB_THIRD_PARTY[id].get("title", "")
                 url = os.path.join(CACHE_DIR, id)
-                width = min(self.story_details.width() - 20, QImage(url).width())
+                img_tag = f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>' if os.path.isfile(url) else ""
 
                 self.story_details.setHtml(
-                    f'<img src="{url}" width="{width}" /><br>'
+                    img_tag
                     + f'<h2>{title}</h2>'
                     + description)
             else:
