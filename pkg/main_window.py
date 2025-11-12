@@ -11,8 +11,8 @@ from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, \
     QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
-    QDialog, QApplication, QListView, QAbstractItemView
+from PySide6.QtWidgets import QMainWindow, QTreeWidget, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
+    QDialog, QApplication, QListView, QAbstractItemView, QStyledItemDelegate
 
 from pkg import versionWorker
 from pkg.api import constants
@@ -22,7 +22,7 @@ from pkg.api.device_flam import is_flam, FlamDevice
 from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
-from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
+from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_NAME, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
@@ -82,6 +82,15 @@ class NaturalSortProxyModel(QSortFilterProxyModel):
         right_data = self.sourceModel().data(right)
         return natural_sort_key(left_data) < natural_sort_key(right_data)
 
+class ColumnEditableDelegate(QStyledItemDelegate):
+    def __init__(self, editable_columns, parent=None):
+        super().__init__(parent)
+        self.editable_columns = set(editable_columns)
+
+    def createEditor(self, parent, option, index):
+        if index.column() in self.editable_columns:
+            return super().createEditor(parent, option, index)
+        return None
 
 class VLine(QFrame):
     def __init__(self):
@@ -199,6 +208,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_UUID, QHeaderView.Fixed)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.sortItems(COL_THIRD_PARTY_NAME, QtCore.Qt.AscendingOrder)
+        self.tree_stories_third_party.setItemDelegate(ColumnEditableDelegate(editable_columns={COL_THIRD_PARTY_AGE, COL_THIRD_PARTY_NAME}))
+        self.tree_stories_third_party.setEditTriggers(QTreeWidget.AllEditTriggers)
 
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(512, 512))
@@ -297,6 +308,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.selectionModel().selectionChanged.connect(self.cb_story_select)
 
         self.tree_stories.installEventFilter(self)
+
+        self.tree_stories_third_party.itemChanged.connect(self.cb_item_changed)
 
         self.tree_stories_official.itemDoubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.list_stories_official.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
@@ -405,6 +418,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
 
         event.accept()
+
+    def cb_item_changed(self, item, column):
+        age = item.text(COL_THIRD_PARTY_AGE)
+        name = item.text(COL_THIRD_PARTY_NAME)
+        uuid = item.text(COL_THIRD_PARTY_UUID)
+
+        stories.local_library_db_add_or_update(uuid, age= age, name= name)
+
 
     def cb_tab_changed(self):
         self.cb_story_select()
@@ -1227,21 +1248,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
  
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
-
-            item.setText(COL_THIRD_PARTY_NAME, name)
+            item.setFlags(item.flags() | Qt.ItemIsEditable)
+            if local_story is not None and DB_LOCAL_LIBRARY_COL_NAME in local_story:
+                item.setText(COL_THIRD_PARTY_NAME, local_story[DB_LOCAL_LIBRARY_COL_NAME])
+            else:
+                item.setText(COL_THIRD_PARTY_NAME, name)
             item.setText(COL_THIRD_PARTY_UUID, id)
             item.setFont(COL_THIRD_PARTY_UUID, console_font)
-            #item[COL_THIRD_PARTY_NAME].setFlags(item[COL_THIRD_PARTY_NAME].flags() | QtCore.Qt.ItemIsEditable)
-            
+
+            if local_story is not None and DB_LOCAL_LIBRARY_COL_AGE in local_story:
+                item.setText(COL_THIRD_PARTY_AGE, local_story[DB_LOCAL_LIBRARY_COL_AGE])
+
             if lunii_story is not None:
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
 
-            if local_story is not None:
+            if local_story is not None and DB_LOCAL_LIBRARY_COL_PATH in local_story:
                 path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
                 item.setText(COL_THIRD_PARTY_PATH, path)
                 item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
             elif not self.show_unavailable_stories:
                 continue
+
 
             self.tree_stories_third_party.addTopLevelItem(item)
             

@@ -27,6 +27,8 @@ DB_THIRD_PARTY = {}
 DB_LOCAL_LIBRARY = {}
 
 DB_LOCAL_LIBRARY_COL_PATH = "path"
+DB_LOCAL_LIBRARY_COL_AGE = "age"
+DB_LOCAL_LIBRARY_COL_NAME = "name"
 
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
@@ -304,10 +306,17 @@ def story_load_db(reload=False):
 
     return retVal
 
-def local_library_db_add_or_update(uuid: str, path: str):
+def local_library_db_add_or_update(uuid: str, path: str = "", age: str = "", name: str = ""):
     if uuid not in DB_LOCAL_LIBRARY:
         DB_LOCAL_LIBRARY[uuid] = {}
-    DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
+        
+    if path != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
+    if age != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] = age
+    if name != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_NAME] = name
+
     local_library_db_save()
 
 def local_library_db_save():
