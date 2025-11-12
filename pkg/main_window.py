@@ -637,7 +637,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         html += f"<BR/><b>{name}</b>"
                     self.story_details.setHtml(html)
             else:
-                self.story_details.setHtml("")
+                self.story_details.setText("")
         
         elif self.tabWidget.currentIndex() == 1:
             id = None
@@ -706,14 +706,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
                 title = stories.DB_THIRD_PARTY[id].get("title", "")
                 url = os.path.join(CACHE_DIR, id)
-                img_tag = f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>' if os.path.isfile(url) else ""
-
-                self.story_details.setHtml(
-                    img_tag
-                    + f'<h2>{title}</h2>'
-                    + description)
+                img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
+                title_tag = "" if title is None else f'<h2>{title}</h2>'
+                desc_tag = "" if description is None else description
+                self.story_details.setHtml(img_tag + title_tag + desc_tag)
             else:
-                self.story_details.setHtml("")
+                self.story_details.setText("")
 
     def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
         if not image_paths:
