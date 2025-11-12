@@ -24,6 +24,7 @@ from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_NAME, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
+from pkg.icons import SimpleLazyLoadingModel, FixedSizeDelegate
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
@@ -98,8 +99,7 @@ class VLine(QFrame):
         super(VLine, self).__init__()
         self.setFrameShape(QFrame.VLine)
         self.setFrameShadow(QFrame.Sunken)
-
-
+        
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
@@ -192,10 +192,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
         self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
 
-        self.list_stories_official.setViewMode(QListView.IconMode)
-        self.list_stories_official.setIconSize(QSize(512, 512))
-        self.list_stories_official.setResizeMode(QListView.Adjust)
-        self.list_stories_official.setVisible(False)
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_NAME, QHeaderView.Stretch)
@@ -218,14 +214,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.setItemDelegate(ColumnEditableDelegate(editable_columns={COL_THIRD_PARTY_AGE, COL_THIRD_PARTY_NAME}))
 
         self.list_stories_official.setViewMode(QListView.IconMode)
-        self.list_stories_official.setIconSize(QSize(512, 512))
+        self.list_stories_official.setIconSize(QSize(300, 300))
+        self.list_stories_official.setGridSize(QSize(320, 360))
         self.list_stories_official.setResizeMode(QListView.Adjust)
         self.list_stories_official.setDragEnabled(False)
         self.list_stories_official.setAcceptDrops(False)
         self.list_stories_official.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_official.setVisible(False)
         self.list_stories_third_party.setViewMode(QListView.IconMode)
-        self.list_stories_third_party.setIconSize(QSize(512, 512))
+        self.list_stories_third_party.setIconSize(QSize(300, 300))
+        self.list_stories_third_party.setGridSize(QSize(320, 360))
         self.list_stories_third_party.setResizeMode(QListView.Adjust)
         self.list_stories_third_party.setDragEnabled(False)
         self.list_stories_third_party.setAcceptDrops(False)
@@ -709,6 +707,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     local_db_path = data["local_db_path"]
                     lunii_story_id = data["lunii_story_id"]
                 else:
+                    self.story_details.setText("")
                     return
             else:
                 current = self.tree_stories_official.currentItem()
@@ -717,6 +716,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     local_db_path = current.text(COL_OFFICIAL_PATH)
                     lunii_story_id = current.text(COL_OFFICIAL_INSTALLED)
                 else:
+                    self.story_details.setText("")
                     return
 
             self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
@@ -748,6 +748,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     local_db_path = data["local_db_path"]
                     lunii_story_id = data["lunii_story_id"]
                 else:
+                    self.story_details.setText("")
                     return
             else:
                 current = self.tree_stories_third_party.currentItem()
@@ -756,6 +757,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     local_db_path = current.text(COL_THIRD_PARTY_PATH)
                     lunii_story_id = current.text(COL_THIRD_PARTY_INSTALLED)
                 else:
+                    self.story_details.setText("")
                     return
 
             self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
@@ -1145,6 +1147,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.selectionModel().currentChanged.connect(self.cb_story_select)
         self.list_stories_third_party.selectionModel().currentChanged.connect(self.cb_story_select)
 
+        self.cb_story_select()
+
     def ts_populate(self):
         # empty device
         if not self.audio_device or not self.audio_device.stories or len(self.audio_device.stories) == 0:
@@ -1201,8 +1205,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         le_filter = self.le_filter.text()
 
         # adding items
-        list_stories_model = QStandardItemModel()
-
+        data_list = []
         for id in stories.DB_OFFICIAL:
             name = stories.DB_OFFICIAL[id]["title"]
 
@@ -1239,21 +1242,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             local_db_path = item.text(COL_OFFICIAL_PATH)
             lunii_story_id = item.text(COL_OFFICIAL_INSTALLED)
             
-            pixmap = QPixmap()
-            pixmap.loadFromData(stories.get_picture(id))
-            scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-            icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_db_path != "", lunii_story_id != ""))
-            itemList = QStandardItem(QIcon(icon_with_banner), name)
-            itemList.setData({"id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id}, Qt.UserRole)
+            display_name = item.text(COL_OFFICIAL_AGE) + "+ " + item.text(COL_OFFICIAL_NAME)
+            data_list.append({"name": display_name, "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
 
-            list_stories_model.appendRow(itemList)
-
+        model = SimpleLazyLoadingModel(data_list)
         sorted_model = NaturalSortProxyModel()
-        sorted_model.setSourceModel(list_stories_model)
-        sorted_model.sort(0)  
-
+        sorted_model.setSourceModel(model)
+        sorted_model.sort(0)
+        self.list_stories_official.setItemDelegate(FixedSizeDelegate())
         self.list_stories_official.setModel(sorted_model)
-
+    
     def ts_populate_third_party(self):
         # creating font
         console_font = QFont()
@@ -1262,12 +1260,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # getting filter text
         le_filter = self.le_filter.text()
 
-        list_stories_model = QStandardItemModel()
-
-        # files_in_local_db_by_name = []
-        # files_in_local_db_by_id = []
-
-        # adding items from DB
+        # adding items
+        data_list = []
         for id in stories.DB_THIRD_PARTY:
             name = stories.DB_THIRD_PARTY[id]["title"]
             if name is None or name == "":
@@ -1311,68 +1305,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             local_db_path = item.text(COL_THIRD_PARTY_PATH)
             lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
 
-            pixmap = QPixmap()
-            image = stories.get_picture(id)
-            if image:
-                pixmap.loadFromData(image)
-                scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_db_path != "", lunii_story_id != ""))
-                itemList = QStandardItem(QIcon(icon_with_banner), item.text(COL_THIRD_PARTY_NAME))
-            else:
-                itemList = QStandardItem(QIcon(), item.text(COL_THIRD_PARTY_NAME))
-            itemList.setData({"id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id}, Qt.UserRole)
+            data_list.append({"name": item.text(COL_THIRD_PARTY_NAME), "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
 
-            list_stories_model.appendRow(itemList)
-
-        # for id in stories.DB_LOCAL_LIBRARY:
-        #     if id not in stories.DB_THIRD_PARTY and id not in stories.DB_OFFICIAL:
-        #         print(stories.DB_LOCAL_LIBRARY[id]["path"])
-
+        model = SimpleLazyLoadingModel(data_list)
         sorted_model = NaturalSortProxyModel()
-        sorted_model.setSourceModel(list_stories_model)
+        sorted_model.setSourceModel(model)
         sorted_model.sort(0)  
-        
+        self.list_stories_third_party.setItemDelegate(FixedSizeDelegate())
         self.list_stories_third_party.setModel(sorted_model)
-
-
-    def create_icon_with_banner(self, base_pixmap, available, installed):
-        pixmap = base_pixmap.copy()
-        w = pixmap.width()
-        h = pixmap.height()
-        banner_width = h // 2
-        banner_height = 30
-
-        if available:
-            painter = QPainter(pixmap)
-            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-
-            font = QFont()
-            font.setBold(True)
-            font.setPointSize(10)
-            painter.translate(w - banner_width // 1.8,  -20)
-            painter.rotate(45)
-            painter.fillRect(0, 0, banner_width, banner_height, QColor(255, 0, 0, 180))
-            painter.setPen(Qt.GlobalColor.white)
-            painter.setFont(font)
-            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Disponible"))
-            painter.end()
-        
-        if installed:
-            painter = QPainter(pixmap)
-            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-        
-            font = QFont()
-            font.setBold(True)
-            font.setPointSize(10)
-            painter.translate(0, h - banner_width // 1.5)
-            painter.rotate(45)
-            painter.fillRect(0, 0, banner_width, banner_height, QColor(0, 255, 0, 180))
-            painter.setPen(Qt.GlobalColor.black)
-            painter.setFont(font)
-            painter.drawText(0, 0, banner_width, banner_height, Qt.AlignmentFlag.AlignCenter, self.tr("Sur la Lunii"))
-            painter.end()
-        
-        return pixmap
     
     def sb_create(self):
         self.statusBar().showMessage("bla-bla bla")
