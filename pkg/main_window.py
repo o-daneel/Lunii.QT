@@ -208,6 +208,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_third_party.setViewMode(QListView.IconMode)
         self.list_stories_third_party.setIconSize(QSize(512, 512))
         self.list_stories_third_party.setResizeMode(QListView.Adjust)
+        self.list_stories_third_party.setDragEnabled(False)
+        self.list_stories_third_party.setAcceptDrops(False)
+        self.list_stories_third_party.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_third_party.setVisible(False)
 
 
@@ -634,16 +637,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if current_index.isValid():
                     data = current_index.data(Qt.UserRole)
                     id = data["id"]
-                    self.add_story_button.setEnabled(self.audio_device is not None and data["local_db_path"] is not None and data["lunii_story_id"] is None)
-                    self.remove_story_button.setEnabled(self.audio_device is not None and data["lunii_story_id"] is not None)
+                    local_db_path = data["local_db_path"]
+                    lunii_story_id = data["lunii_story_id"]
+                else:
+                    return
             else:
                 current = self.tree_stories_official.currentItem()
                 if current is not None:
                     id = current.text(COL_OFFICIAL_UUID)
                     local_db_path = current.text(COL_OFFICIAL_PATH)
                     lunii_story_id = current.text(COL_OFFICIAL_INSTALLED)
-                    self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
-                    self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
+                else:
+                    return
+
+            self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
+            self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
 
             if id is not None:
                 locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
@@ -667,16 +675,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if current_index.isValid():
                     data = current_index.data(Qt.UserRole)
                     id = data["id"]
-                    self.add_story_button.setEnabled(self.audio_device is not None and data["local_db_path"] is not None and data["lunii_story_id"] is None)
-                    self.remove_story_button.setEnabled(self.audio_device is not None and data["lunii_story_id"] is not None)
+                    local_db_path = data["local_db_path"]
+                    lunii_story_id = data["lunii_story_id"]
+                else:
+                    return
             else:
                 current = self.tree_stories_third_party.currentItem()
                 if current is not None:
                     id = current.text(COL_THIRD_PARTY_UUID)
                     local_db_path = current.text(COL_THIRD_PARTY_PATH)
                     lunii_story_id = current.text(COL_THIRD_PARTY_INSTALLED)
-                    self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
-                    self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
+                else:
+                    return
+
+            self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
+            self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
             
             if id is not None and id in stories.DB_THIRD_PARTY:
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
@@ -1219,17 +1232,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 continue
 
             self.tree_stories_third_party.addTopLevelItem(item)
+            
+            local_db_path = item.text(COL_THIRD_PARTY_PATH)
+            lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
 
             pixmap = QPixmap()
             image = stories.get_picture(id)
             if image:
                 pixmap.loadFromData(image)
                 scaled_pixmap = pixmap.scaled(300, 300, aspectMode=Qt.KeepAspectRatio, mode=Qt.SmoothTransformation)
-                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_story is not None, lunii_story is not None))
+                icon_with_banner = QIcon(self.create_icon_with_banner(scaled_pixmap, local_db_path != "", lunii_story_id != ""))
                 itemList = QStandardItem(QIcon(icon_with_banner), item.text(COL_THIRD_PARTY_NAME))
             else:
                 itemList = QStandardItem(QIcon(), item.text(COL_THIRD_PARTY_NAME))
-            itemList.setData({"id": id, "local_db_path": item.text(COL_THIRD_PARTY_PATH), "lunii_story_id": item.text(COL_THIRD_PARTY_INSTALLED)}, Qt.UserRole)
+            itemList.setData({"id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id}, Qt.UserRole)
 
             list_stories_model.appendRow(itemList)
 
