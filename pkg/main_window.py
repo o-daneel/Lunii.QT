@@ -277,9 +277,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # connecting slots and signals
     def setup_connections(self):
         self.tabWidget.currentChanged.connect(self.cb_tab_changed)
-
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
-        self.le_filter.textChanged.connect(self.ts_update)
+
+        # Adding delay to avoid refreshing on each filter's letters
+        self.filter_timer = QTimer()
+        self.filter_timer.setSingleShot(True)
+        self.filter_timer.setInterval(300)
+        self.le_filter.textChanged.connect(self.cb_filter_text_changed)
+        self.filter_timer.timeout.connect(self.ts_update)
 
         self.btn_refresh.clicked.connect(self.cb_device_refresh)
         self.btn_db.clicked.connect(self.cb_db_refresh)
@@ -1063,7 +1068,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.menuUpdate.setTitle(self.tr("Update is available"))
                 self.act_update.setText(self.tr("Update to {}").format(last_version))
                 self.act_update.setVisible(True)
-
+    
+    def cb_filter_text_changed(self):
+        self.filter_timer.start()
+    
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
