@@ -306,10 +306,16 @@ def story_load_db(reload=False):
 
     return retVal
 
+def local_library_db_delete(uuid: str):
+    if uuid in DB_LOCAL_LIBRARY:
+        del DB_LOCAL_LIBRARY[uuid]
+
+    local_library_db_save()
+
 def local_library_db_add_or_update(uuid: str, path: str = "", age: str = "", name: str = ""):
     if uuid not in DB_LOCAL_LIBRARY:
         DB_LOCAL_LIBRARY[uuid] = {}
-        
+
     if path != "":
         DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
     if age != "":
@@ -338,6 +344,33 @@ def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
         with open(res_file, "wb") as fp:
             fp.write(image_data)
 
+
+def thirdparty_db_del_story(uuid: UUID):
+    db_stories = dict()
+
+    # trying to load third-party DB
+    if os.path.isfile(FILE_THIRD_PARTY_DB):
+        try:
+            with open(FILE_THIRD_PARTY_DB, encoding='utf-8') as fp_db:
+                db_stories = json.load(fp_db)
+        except:
+            db = Path(FILE_THIRD_PARTY_DB)
+            db.unlink(FILE_THIRD_PARTY_DB)
+
+    # delete the entry (testing 3 uuid format)
+    if uuid.hex in db_stories:
+        del db_stories[uuid.hex]
+    if str(uuid) in db_stories:
+        del db_stories[str(uuid)]
+    if str(uuid).upper() in db_stories:
+        del db_stories[str(uuid).upper()]
+
+    # saving updated db
+    with open(FILE_THIRD_PARTY_DB, "w", encoding='utf-8') as fp_db:
+        json.dump(db_stories, fp_db)
+
+    # reloading DBs
+    story_load_db()
 
 def thirdparty_db_add_story(uuid: UUID, title: str, desc: str):
     db_stories = dict()

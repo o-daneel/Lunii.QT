@@ -2,13 +2,14 @@ import logging
 import re
 import time
 from pathlib import WindowsPath
+import uuid
 
 import psutil
 import requests
 import base64
 
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel, QEvent
 from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, \
     QStandardItemModel, QStandardItem
 from PySide6.QtWidgets import QMainWindow, QTreeWidget, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
@@ -308,6 +309,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.selectionModel().selectionChanged.connect(self.cb_story_select)
 
         self.tree_stories.installEventFilter(self)
+        self.tree_stories_official.installEventFilter(self)
+        self.tree_stories_third_party.installEventFilter(self)
 
         self.tree_stories_third_party.itemChanged.connect(self.cb_item_changed)
 
@@ -352,8 +355,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ts_drop_action(event)
                 return True
             elif event.type() == QtCore.QEvent.Resize:
-                self.cb_story_select
+                self.cb_story_select()
                 return False
+        elif obj.objectName() == "tree_stories_official":
+            if event.type() == QtCore.QEvent.Resize:
+                self.cb_story_select()
+                return False
+        elif obj.objectName() == "tree_stories_third_party":
+            if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Delete and (event.modifiers() & Qt.ShiftModifier):
+                selected_items = self.tree_stories_third_party.selectedItems()
+                if not selected_items or len(selected_items) != 1:
+                    return False
+                reply = QMessageBox.question(self.tree_stories_third_party, "Confirm", f"Delete entry '{selected_items[0].text(COL_THIRD_PARTY_NAME)}' ?",
+                    QMessageBox.Yes | QMessageBox.No)
+                if reply == QMessageBox.Yes:
+                    stories.thirdparty_db_del_story(uuid.UUID(selected_items[0].text(COL_THIRD_PARTY_UUID)))
+                    stories.local_library_db_delete(selected_items[0].text(COL_THIRD_PARTY_UUID))
+                    self.ts_update()
+                    self.cb_story_select()
+                    self.story_details.setText("")
+
+                return True
+            
+            elif event.type() == QtCore.QEvent.Resize:
+                self.cb_story_select()
+                return False
+
         return False
 
     def __set_dbg_wndSize(self):
