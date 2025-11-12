@@ -607,7 +607,7 @@
             <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
            </property>
            <property name="editTriggers">
-            <set>QAbstractItemView::EditTrigger::AllEditTriggers</set>
+            <set>QAbstractItemView::EditTrigger::DoubleClicked|QAbstractItemView::EditTrigger::EditKeyPressed</set>
            </property>
            <property name="showDropIndicator" stdset="0">
             <bool>false</bool>

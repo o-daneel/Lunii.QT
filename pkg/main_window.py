@@ -149,18 +149,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # UI init
         self.init_ui()
 
-        # refresh devices
-        self.cb_device_refresh()
-        self.ts_update()
-
-        # DEBUG : comment out this thread to allow python debug
-        # starting thread to fetch version
-        self.worker_check_version()
+        QTimer.singleShot(0, self.load_initial_content)
 
     def init_ui(self):
         self.setupUi(self)
         self.modify_widgets()
         self.setup_connections()
+
+    def load_initial_content(self):
+        self.lock_ui()
+        self.sb_update(self.tr("⌛ Checking for updates, please wait..."))
+        self.worker_check_version()
+        self.sb_update(self.tr("⌛ Loading devices, please wait..."))
+        self.cb_device_refresh()
+        self.sb_update(self.tr("⌛ Loading catalogs' content, please wait..."))
+        self.ts_update()
+        self.sb_update("" if self.audio_device is None else self.tr("No Lunii detected 😥, try File/Open"))
+        self.unlock_ui()
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
@@ -174,6 +179,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
 
         # QTreeWidget for stories
+        self.tree_stories.clear()
         self.tree_stories.setColumnWidth(COL_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories.header().setSectionResizeMode(COL_NAME, QHeaderView.Stretch)
         self.tree_stories.header().setSectionResizeMode(COL_DB, QHeaderView.Fixed)
@@ -210,7 +216,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.sortItems(COL_THIRD_PARTY_NAME, QtCore.Qt.AscendingOrder)
         self.tree_stories_third_party.setItemDelegate(ColumnEditableDelegate(editable_columns={COL_THIRD_PARTY_AGE, COL_THIRD_PARTY_NAME}))
-        self.tree_stories_third_party.setEditTriggers(QTreeWidget.AllEditTriggers)
 
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(512, 512))
@@ -363,19 +368,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return False
         elif obj.objectName() == "tree_stories_third_party":
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Delete and (event.modifiers() & Qt.ShiftModifier):
-                selected_items = self.tree_stories_third_party.selectedItems()
-                if not selected_items or len(selected_items) != 1:
+                item = self.tree_stories_third_party.currentItem()
+                if not item:
                     return False
-                reply = QMessageBox.question(self.tree_stories_third_party, "Confirm", f"Delete entry '{selected_items[0].text(COL_THIRD_PARTY_NAME)}' ?",
-                    QMessageBox.Yes | QMessageBox.No)
+                reply = QMessageBox.question(self.tree_stories_third_party, "Confirm", f"Delete entry '{item.text(COL_THIRD_PARTY_NAME)}' ?", QMessageBox.Yes | QMessageBox.No)
                 if reply == QMessageBox.Yes:
-                    stories.thirdparty_db_del_story(uuid.UUID(selected_items[0].text(COL_THIRD_PARTY_UUID)))
-                    stories.local_library_db_delete(selected_items[0].text(COL_THIRD_PARTY_UUID))
-                    self.ts_update()
-                    self.cb_story_select()
+                    stories.thirdparty_db_del_story(uuid.UUID(item.text(COL_THIRD_PARTY_UUID)))
+                    stories.local_library_db_delete(item.text(COL_THIRD_PARTY_UUID))
+                    index = self.tree_stories_third_party.indexOfTopLevelItem(item)
+                    self.tree_stories_third_party.setCurrentItem(self.tree_stories_third_party.topLevelItem(max(0, index - 1)))
+                    self.tree_stories_third_party.takeTopLevelItem(index)
+
                     self.story_details.setText("")
 
                 return True
+            elif event.type() == QEvent.KeyPress and event.key() == Qt.Key_F2:
+                item = self.tree_stories_third_party.currentItem()
+                if item:
+                    self.tree_stories_third_party.edit(self.tree_stories_third_party.indexFromItem(item, COL_THIRD_PARTY_NAME))
+                    return True 
             
             elif event.type() == QtCore.QEvent.Resize:
                 self.cb_story_select()
@@ -1148,16 +1159,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # adding items
         for story in self.audio_device.stories:
+            local_story = None if story.str_uuid not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[story.str_uuid]
+            display_name = story.name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
             # filtering
             if (le_filter and
-                not le_filter.lower() in story.name.lower() and
+                not le_filter.lower() in display_name.lower() and
                 not le_filter.lower() in story.str_uuid.lower() ):
                 continue
 
             # create and add item to treeWidget
             item = QTreeWidgetItem()
-
-            item.setText(COL_NAME, story.name)
+            item.setText(COL_NAME, display_name)
             item.setText(COL_NM, "🛏️" if story.night_mode() else "")
             item.setTextAlignment(COL_NM, Qt.AlignCenter)
 
@@ -1261,12 +1273,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if name is None or name == "":
                 continue
 
-            # files_in_local_db_by_name.append(stories.encode_name(name))
-            # files_in_local_db_by_id.append(id)
+            local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
+            display_name = name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
 
             # filtering 
             if (le_filter and
-                not le_filter.lower() in name.lower() and
+                not le_filter.lower() in display_name.lower() and
                 not le_filter.lower() in id.lower() ):
                 continue
 
@@ -1276,10 +1288,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
             item.setFlags(item.flags() | Qt.ItemIsEditable)
-            if local_story is not None and DB_LOCAL_LIBRARY_COL_NAME in local_story:
-                item.setText(COL_THIRD_PARTY_NAME, local_story[DB_LOCAL_LIBRARY_COL_NAME])
-            else:
-                item.setText(COL_THIRD_PARTY_NAME, name)
+            item.setText(COL_THIRD_PARTY_NAME, display_name)
             item.setText(COL_THIRD_PARTY_UUID, id)
             item.setFont(COL_THIRD_PARTY_UUID, console_font)
 

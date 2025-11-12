@@ -405,7 +405,7 @@ class Ui_MainWindow(object):
         self.tree_stories_third_party.setFrameShape(QFrame.Shape.NoFrame)
         self.tree_stories_third_party.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tree_stories_third_party.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
-        self.tree_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.AllEditTriggers)
+        self.tree_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.DoubleClicked|QAbstractItemView.EditTrigger.EditKeyPressed)
         self.tree_stories_third_party.setProperty(u"showDropIndicator", False)
         self.tree_stories_third_party.setDragEnabled(False)
         self.tree_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
