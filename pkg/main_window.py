@@ -27,6 +27,7 @@ from pkg.icons import SimpleLazyLoadingModel, FixedSizeDelegate
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
+from pkg.settings import Settings
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -71,6 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+        self.settings = Settings(FILE_SETTINGS)
 
         # internal resources
         self.logger = logging.getLogger(LUNII_LOGGER)
@@ -95,7 +97,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.show_unavailable_stories = True
         self.details_last_uuid = None
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
-        self.displayed_languages = []
+        if self.settings.displayed_languages is None:
+            self.settings.displayed_languages = []
 
         # actions local storage
         self.act_mv_top = None
@@ -135,10 +138,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update("" if self.audio_device is None else self.tr("No Lunii detected 😥, try File/Open"))
 
         # Populate language filter
+        filtered_languages = self.settings.displayed_languages
         for lang in sorted({list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0] for id in stories.DB_OFFICIAL}):
             combo_item = QStandardItem(lang)
             combo_item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsUserCheckable)
-            combo_item.setData(Qt.Checked if lang in self.displayed_languages else Qt.Unchecked, Qt.CheckStateRole)
+            combo_item.setData(Qt.Checked if lang in filtered_languages else Qt.Unchecked, Qt.CheckStateRole)
             self.combo_language_filter.model().appendRow(combo_item)
 
         # Switch to the Official Library tab if there is no connected device
@@ -276,7 +280,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tabWidget.currentChanged.connect(self.cb_tab_changed)
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
 
-        self.combo_language_filter.view().pressed.connect(self.cb_combo_language_changed)
+        self.combo_language_filter.model().itemChanged.connect(self.cb_combo_language_changed)
+        self.combo_language_filter.view().pressed.connect(self.cb_combo_language_pressed)
 
         # Adding delay to avoid refreshing on each filter's letters
         self.filter_timer = QTimer()
@@ -439,16 +444,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         event.accept()
 
-    def cb_combo_language_changed(self, index):
+    def cb_combo_language_pressed(self, index):
         model = self.combo_language_filter.model()
         item = model.itemFromIndex(index)
         item.setCheckState(Qt.Unchecked if item.checkState() == Qt.Checked else Qt.Checked)
-        
-        self.displayed_languages = []
-        for i in range(model.rowCount()):
-            item = model.item(i)
-            if item.checkState() == Qt.Checked:
-                self.displayed_languages.append(item.text())
+        self.cb_combo_language_changed(item)
+    
+    def cb_combo_language_changed(self, item):
+        if item.checkState() == Qt.Checked:
+            if item.text() not in self.settings.displayed_languages:
+                self.settings.displayed_languages.append(item.text())
+        elif item.text() in self.settings.displayed_languages:
+            self.settings.displayed_languages.remove(item.text())
 
         QTimer.singleShot(0, self.ts_update)
 
@@ -924,8 +931,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif act_name == "actionImportInLibrary":
             self.ts_import_in_library()
         elif act_name == "actionShow_unavailable_stories":
+            self.lock_ui()
             self.show_unavailable_stories = action.isChecked()
             self.ts_update()
+            self.unlock_ui()
         
     def cb_menu_tools(self, action: QtGui.QAction):
         act_name = action.objectName()
@@ -1200,13 +1209,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # getting filter text
         le_filter = self.le_filter.text()
+        filtered_languages = self.settings.displayed_languages
 
         # adding items
         data_list = []
         for id in stories.DB_OFFICIAL:
             name = stories.DB_OFFICIAL[id]["title"]
             lang = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
-            filter_language = len(self.displayed_languages) > 0 and lang not in self.displayed_languages
+            filter_language = len(filtered_languages) > 0 and lang not in filtered_languages
 
             # filtering 
             if (filter_language or (le_filter and not le_filter.lower() in name.lower() and not le_filter.lower() in id.lower())):
