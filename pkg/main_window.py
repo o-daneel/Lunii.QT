@@ -94,7 +94,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.debug_dialog.show() # class instance vars init self.audio_device: LuniiDevice = None self.worker: ierWorker = None self.thread: QtCore.QThread = None self.version_worker: versionWorker = None self.version_thread: QtCore.QThread = None self.app = app # app config
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
 
-        # initialize settings        
+        # initialize settings
         if self.settings.sizes_hidden is None:
             self.settings.sizes_hidden = True
         if self.settings.show_gallery is None:
@@ -105,6 +105,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.settings.displayed_languages = []
         if self.settings.current_tab_index is None:
             self.settings.current_tab_index = 0
+        if self.settings.main_window_is_maximized is None:
+            self.settings.main_window_is_maximized = False
 
         # actions local storage
         self.act_mv_top = None
@@ -125,6 +127,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # UI init
         self.init_ui()
+
+        # Restore UI based on settings
+        if self.settings.main_window_is_maximized:
+            self.showMaximized()
 
         QTimer.singleShot(0, self.load_initial_content)
 
@@ -151,10 +157,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             combo_item.setData(Qt.Checked if lang in filtered_languages else Qt.Unchecked, Qt.CheckStateRole)
             self.combo_language_filter.model().appendRow(combo_item)
 
-        # Switch last opened tab
-        self.tabWidget.setCurrentIndex(self.settings.current_tab_index)
-
         self.unlock_ui()
+
 
     # update ui elements state (enable, disable, context enu)
     def modify_widgets(self):
@@ -168,6 +172,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.pgb_total.setVisible(False)
         self.combo_language_filter.setModel(QStandardItemModel())
         self.combo_language_filter.setView(QListView())
+
+        self.tabWidget.setCurrentIndex(self.settings.current_tab_index)
 
         # QTreeWidget for stories
         self.tree_stories.clear()
@@ -190,7 +196,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_PATH, QHeaderView.Stretch)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_LANGUAGE, QHeaderView.ResizeToContents)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_INSTALLED, QHeaderView.ResizeToContents)
-        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
+        self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_official.sortItems(COL_OFFICIAL_AGE, QtCore.Qt.AscendingOrder)
         self.tree_stories_official.setVisible(not self.settings.show_gallery)
@@ -214,7 +220,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.setDragEnabled(False)
         self.list_stories_official.setAcceptDrops(False)
         self.list_stories_official.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.list_stories_official.setVisible(self.settings.show_gallery)            
+        self.list_stories_official.setVisible(self.settings.show_gallery)
         self.list_stories_third_party.setViewMode(QListView.IconMode)
         self.list_stories_third_party.setIconSize(QSize(300, 300))
         self.list_stories_third_party.setGridSize(QSize(320, 360))
@@ -223,7 +229,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_third_party.setAcceptDrops(False)
         self.list_stories_third_party.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_third_party.setVisible(self.settings.show_gallery)
-    
+
         self.story_details.setOpenExternalLinks(True)
 
         # clean progress bars
@@ -278,9 +284,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
 
-        # Setup splitter priority        
+        # Setup splitter priority
         self.splitter.setStretchFactor(0, 0)
         self.splitter.setStretchFactor(1, 1)
+        self.splitter.setSizes(self.settings.main_window_splitter_position)
 
     # connecting slots and signals
     def setup_connections(self):
@@ -302,6 +309,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_abort.clicked.connect(self.worker_abort)
         self.btn_nightmode.clicked.connect(self.cb_nm)
 
+        self.splitter_timer = QTimer()
+        self.splitter_timer.setSingleShot(True)
+        self.splitter_timer.timeout.connect(self.cb_splitter_released)
+        self.splitter.splitterMoved.connect(self.cb_splitter_moved)
         self.splitter.splitterMoved.connect(self.cb_story_select)
         self.tree_stories.selectionModel().selectionChanged.connect(self.cb_story_select)
         self.tree_stories_official.selectionModel().selectionChanged.connect(self.cb_story_select)
@@ -380,8 +391,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 item = self.tree_stories_third_party.currentItem()
                 if item:
                     self.tree_stories_third_party.edit(self.tree_stories_third_party.indexFromItem(item, COL_THIRD_PARTY_NAME))
-                    return True 
-            
+                    return True
+
             elif event.type() == QtCore.QEvent.Resize:
                 self.cb_story_select()
                 return False
@@ -410,9 +421,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def changeEvent(self, event):
         super().changeEvent(event)
         if event.type() == event.Type.WindowStateChange:
+    
+            if self.isVisible():
+                self.settings.main_window_is_maximized = self.isMaximized()
+
             if not self.debug_dialog.isVisible():
                 return
-            
+
             if self.isMinimized():
                 # Minimize the log-window when the main window is minimized
                 self.debug_dialog.showMinimized()
@@ -451,12 +466,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         event.accept()
 
+    def cb_splitter_moved(self):
+        # start a timer to avoid saving settings too much
+        self.splitter_timer.start(1000)
+
+    def cb_splitter_released(self):
+        self.settings.main_window_splitter_position = self.splitter.sizes()
+
     def cb_combo_language_pressed(self, index):
         model = self.combo_language_filter.model()
         item = model.itemFromIndex(index)
         item.setCheckState(Qt.Unchecked if item.checkState() == Qt.Checked else Qt.Checked)
         self.cb_combo_language_changed(item)
-    
+
     def cb_combo_language_changed(self, item):
         if item.checkState() == Qt.Checked:
             if item.text() not in self.settings.displayed_languages:
@@ -601,7 +623,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_install_or_remove_story_on_lunii(self):
         if not self.audio_device:
             return
-        
+
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
             if len(selection) == 1:
@@ -647,7 +669,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             elif installationPath != "":
                 self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
                 self.worker_launch(ACTION_IMPORT, [installationPath])
-                
+
         return
 
     def cb_story_select(self):
@@ -703,11 +725,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.story_details.setHtml(html)
             else:
                 self.story_details.setText("")
-        
+
         elif self.tabWidget.currentIndex() == 1:
             id = None
             if self.settings.show_gallery:
                 selection_model = self.list_stories_official.selectionModel()
+                if not selection_model:
+                    return
                 current_index = selection_model.currentIndex()
                 if current_index.isValid():
                     data = current_index.data(Qt.UserRole)
@@ -744,11 +768,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     + f"<h2>{age}{title}</h2>"
                     + f'<h3>{subtitle}</h3>'
                     + description)
-                
+
         elif self.tabWidget.currentIndex() == 2:
             id = None
             if self.settings.show_gallery:
                 selection_model = self.list_stories_third_party.selectionModel()
+                if not selection_model:
+                    return
                 current_index = selection_model.currentIndex()
                 if current_index.isValid():
                     data = current_index.data(Qt.UserRole)
@@ -770,7 +796,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
             self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
-            
+
             if id is not None and id in stories.DB_THIRD_PARTY:
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
                 title = stories.DB_THIRD_PARTY[id].get("title", "")
@@ -785,7 +811,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
         if not image_paths:
             return None
-        
+
         pixmaps = [QPixmap(p) for p in image_paths if not QPixmap(p).isNull()]
         if not pixmaps:
             return None
@@ -927,7 +953,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if act_name == "actionShow_gallery":
             self.settings.show_gallery = action.isChecked()
             self.tree_stories_official.setVisible(not self.settings.show_gallery)
-            self.list_stories_official.setVisible(self.settings.show_gallery)            
+            self.list_stories_official.setVisible(self.settings.show_gallery)
             self.tree_stories_third_party.setVisible(not self.settings.show_gallery)
             self.list_stories_third_party.setVisible(self.settings.show_gallery)
             self.story_details.setText("")
@@ -1134,10 +1160,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.menuUpdate.setTitle(self.tr("Update is available"))
                 self.act_update.setText(self.tr("Update to {}").format(last_version))
                 self.act_update.setVisible(True)
-    
+
     def cb_filter_text_changed(self):
         self.filter_timer.start()
-    
+
     def ts_update(self):
         # clear previous story list
         self.tree_stories.clear()
@@ -1145,9 +1171,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.clear()
 
         if self.list_stories_official.model() is not None:
-            self.list_stories_official.model().sourceModel().clear() 
+            self.list_stories_official.model().sourceModel().clear()
         if self.list_stories_third_party.model() is not None:
-            self.list_stories_third_party.model().sourceModel().clear() 
+            self.list_stories_third_party.model().sourceModel().clear()
 
         self.ts_populate()
         self.ts_populate_official()
@@ -1221,7 +1247,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lang = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
             filter_language = len(filtered_languages) > 0 and lang not in filtered_languages
 
-            # filtering 
+            # filtering
             if (filter_language or (le_filter and not le_filter.lower() in name.lower() and not le_filter.lower() in id.lower())):
                 continue
 
@@ -1246,12 +1272,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
             elif not self.settings.show_unavailable_stories:
                 continue
-            
+
             self.tree_stories_official.addTopLevelItem(item)
 
             local_db_path = item.text(COL_OFFICIAL_PATH)
             lunii_story_id = item.text(COL_OFFICIAL_INSTALLED)
-            
+
             display_name = item.text(COL_OFFICIAL_AGE) + "+ " + item.text(COL_OFFICIAL_NAME)
             data_list.append({"name": display_name, "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
 
@@ -1280,7 +1306,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
             display_name = name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
 
-            # filtering 
+            # filtering
             if (le_filter and
                 not le_filter.lower() in display_name.lower() and
                 not le_filter.lower() in id.lower() ):
@@ -1288,7 +1314,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
- 
+
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
             item.setFlags(item.flags() | Qt.ItemIsEditable)
@@ -1311,7 +1337,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
             self.tree_stories_third_party.addTopLevelItem(item)
-            
+
             local_db_path = item.text(COL_THIRD_PARTY_PATH)
             lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
 
@@ -1320,10 +1346,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         model = SimpleLazyLoadingModel(data_list)
         sorted_model = NaturalSortProxyModel()
         sorted_model.setSourceModel(model)
-        sorted_model.sort(0)  
+        sorted_model.sort(0)
         self.list_stories_third_party.setItemDelegate(FixedSizeDelegate())
         self.list_stories_third_party.setModel(sorted_model)
-    
+
     def sb_create(self):
         self.statusBar().showMessage("bla-bla bla")
         self.lbl_hsnu = QLabel("SNU:")
@@ -1413,7 +1439,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lbl_count.setText(f"{count_items} " + self.tr("stories"))
         else:
             self.lbl_count.setText("")
-    
+
     def cb_nm(self):
         result = self.nm_dialog.exec()
 
@@ -1431,7 +1457,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             icon_nm.addFile(u":/icon/res/mode_day.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_nightmode.setIcon(icon_nm)
-    
+
     def ts_move(self, offset):
         if self.worker or not self.audio_device:
             return
@@ -1591,7 +1617,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.hidden = not one_story.hidden
             items_to_hide.append(self.tree_stories.indexOfTopLevelItem(item))
-            
+
             # moving to hidden directory
             story_dir = os.path.join(self.audio_device.mount_point, self.audio_device.STORIES_BASEDIR)
             story_hiddendir = os.path.join(self.audio_device.mount_point, self.audio_device.HIDDEN_STORIES_BASEDIR)
@@ -1743,7 +1769,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.sb_update(self.tr("🛑 Unable to import story, missing story key for Lunii v3"))
             return
-        
+
         # getting path for dropped files
         file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
 
@@ -1753,7 +1779,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ts_clicked(self, item, column):
         if column == COL_NM:
             self.ts_nm()
-            
+
     def lock_ui(self):
         self.tree_stories.setEnabled(False)
         self.tree_stories_official.setEnabled(False)
@@ -1871,7 +1897,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.pbar_file.setVisible(False)
 
-        
+
     def slot_finished(self):
         # print("SLOT FINISHED")
         # updating UI
