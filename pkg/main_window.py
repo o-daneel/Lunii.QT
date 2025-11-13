@@ -156,6 +156,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             combo_item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsUserCheckable)
             combo_item.setData(Qt.Checked if lang in filtered_languages else Qt.Unchecked, Qt.CheckStateRole)
             self.combo_language_filter.model().appendRow(combo_item)
+        self.combo_language_update_text()
 
         self.unlock_ui()
 
@@ -485,8 +486,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.settings.displayed_languages.append(item.text())
         elif item.text() in self.settings.displayed_languages:
             self.settings.displayed_languages.remove(item.text())
-
+        
+        self.combo_language_update_text()
         QTimer.singleShot(0, self.ts_update)
+
+    def combo_language_update_text(self):
+        if len(self.settings.displayed_languages) == 0:
+            self.combo_language_filter.setPlaceholderText(self.tr("Filter Language..."))
+        elif len(self.settings.displayed_languages) > 2:
+            self.combo_language_filter.setPlaceholderText((", ".join(self.settings.displayed_languages[:2]) + "..."))
+        else:
+            self.combo_language_filter.setPlaceholderText(", ".join(self.settings.displayed_languages))
 
     def cb_item_changed(self, item, column):
         age = item.text(COL_THIRD_PARTY_AGE)
@@ -498,6 +508,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_tab_changed(self):
         self.settings.current_tab_index = self.tabWidget.currentIndex()
         self.cb_story_select()
+        self.combo_language_filter.setEnabled(self.tabWidget.currentIndex() == 1)
 
     def cb_show_context_menu(self, point):
         # change active menu based on selection
@@ -1802,7 +1813,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.setEnabled(True)
         self.add_story_button.setEnabled(True)
         self.remove_story_button.setEnabled(True)
-        self.combo_language_filter.setEnabled(True)
+        self.combo_language_filter.setEnabled(self.tabWidget.currentIndex() == 1)
 
     def worker_check_version(self):
         # version_thread.start()
