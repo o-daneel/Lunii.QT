@@ -3,6 +3,7 @@ import re
 import time
 from pathlib import WindowsPath
 import uuid
+import json
 
 import psutil
 import requests
@@ -121,6 +122,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = None
         self.act_update = None
         self.act_import_in_library = None
+        self.act_save_pack = None
+        self.act_load_pack = None
 
         # loading DB
         story_load_db(False)
@@ -256,6 +259,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_export = next(act for act in s_actions if act.objectName() == "actionExport")
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
+        self.act_save_pack = next(act for act in s_actions if act.objectName() == "actionSavePack")
+        self.act_load_pack = next(act for act in s_actions if act.objectName() == "actionLoadPack")
 
         l_actions = self.menuLibrary.actions()
         self.act_import_in_library = next(act for act in l_actions if act.objectName() == "actionImportInLibrary")
@@ -560,6 +565,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.sb_update(self.tr("No Lunii detected 😥, try File/Open"))
             self.combo_device.setPlaceholderText(self.tr("No Lunii detected 😥"))
+            self.act_load_pack.setEnabled(False)
 
 
     def cb_dev_select(self):
@@ -569,6 +575,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # updating UI for default
         self.btn_nightmode.setEnabled(False)
         self.cb_nm_update_btn()
+        self.act_load_pack.setEnabled(True)
 
         # getting current device
         dev_name = self.combo_device.currentText()
@@ -690,6 +697,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def process_story_select(self):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
+        self.act_save_pack.setEnabled(False)
 
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
@@ -734,6 +742,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     for name in names:
                         html += f"<BR/><b>{name}</b>"
                     self.story_details.setHtml(html)
+                    self.act_save_pack.setEnabled(True)
             else:
                 self.story_details.setText("")
 
@@ -958,6 +967,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_export_all()
         elif act_name == "actionRemove":
             self.ts_remove()
+        elif act_name == "actionSavePack":
+            self.ts_save_pack()
+        elif act_name == "actionLoadPack":
+            self.ts_load_pack()
 
     def cb_menu_library(self, action: QtGui.QAction):
         act_name = action.objectName()
@@ -1087,7 +1100,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_menu_story_update(self):
         # all disabled
         for action in self.menuStory.actions():
-            action.setEnabled(False)
+            if action.objectName() != "actionSavePack" and action.objectName() != "actionLoadPack":
+                action.setEnabled(False)
 
         # during download or no device selected, no action possible
         if not self.audio_device or self.worker:
@@ -1095,6 +1109,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # always possible to import in an empty device
         self.act_import.setEnabled(True)
+
         # except if not story keys are present for v3
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.act_import.setEnabled(False)
@@ -1611,6 +1626,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
         else:
             self.sb_update(self.tr("🛑 Export All cancelled"))
+
+    def ts_save_pack(self):
+        # getting selection
+        selection = self.tree_stories.selectedItems()
+        if len(selection) == 0:
+            return
+
+        (file, _) = QFileDialog.getSaveFileName(self, f'Save pack with {len(selection)} stories: {", ".join([item.text(COL_NAME) for item in self.tree_stories.selectedItems()])}', "", self.tr("Json Files (*.json);;All Files (*)"))
+        with open(file, "w", encoding="utf-8") as f:
+            data = []
+            for item in self.tree_stories.selectedItems():
+                uuid = item.text(COL_UUID)
+                name = item.text(COL_NAME)
+                if uuid in stories.DB_LOCAL_LIBRARY and DB_LOCAL_LIBRARY_COL_PATH in stories.DB_LOCAL_LIBRARY[uuid] and len(stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]) > 0:
+                    data.append([name, uuid, stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]])
+                else:
+                    self.sb_update(self.tr(f"⚠️ Local file not available for {name} - {uuid}."))
+
+            self.sb_update(self.tr(f"Pack saved to '{file}' with {len(data)} stories."))
+            json.dump(data, f, indent=4)
+
+    def ts_load_pack(self):
+        (file, _) = QFileDialog.getOpenFileName(self, f"Open a story pack", "", self.tr("Json Files (*.json);;All Files (*)"))
+        with open(file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        self.sb_update(self.tr(f"Loading pack '{file}' with {len(data)} stories:"))
+        files = []
+        for item in data:
+            story_name = item[0]
+            story_uuid = item[1]
+            story_path = item[2]
+            if os.path.isfile(story_path):
+                self.sb_update(self.tr(f"\t- {story_name} - {story_uuid} at '{story_path}'"))
+                files.append(story_path)
+            else:
+                self.sb_update(self.tr(f"⚠️ Local file not available for {story_name} - {story_uuid} at '{story_path}'."))
+
+        self.worker_launch(ACTION_IMPORT, files)
+
 
     def ts_hide(self):
         if not self.audio_device:

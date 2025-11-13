@@ -1003,6 +1003,9 @@
     <addaction name="actionExport"/>
     <addaction name="actionExport_All"/>
     <addaction name="actionRemove"/>
+    <addaction name="separator"/>
+    <addaction name="actionSavePack"/>
+    <addaction name="actionLoadPack"/>
    </widget>
    <widget class="QMenu" name="menuUpdate">
     <property name="enabled">
@@ -1111,6 +1114,16 @@
    </property>
    <property name="shortcut">
     <string notr="true">Del</string>
+   </property>
+  </action>
+  <action name="actionSavePack">
+   <property name="text">
+    <string>Save story pack</string>
+   </property>
+  </action>
+  <action name="actionLoadPack">
+   <property name="text">
+    <string>Load story pack</string>
    </property>
   </action>
   <action name="actionShow_size">
