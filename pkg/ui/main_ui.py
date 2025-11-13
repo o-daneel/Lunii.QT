@@ -237,6 +237,12 @@ class Ui_MainWindow(object):
 
         self.top_layout.addItem(self.horizontalSpacer)
 
+        self.combo_language_filter = QComboBox(self.centralwidget)
+        self.combo_language_filter.setObjectName(u"combo_language_filter")
+        self.combo_language_filter.setMinimumSize(QSize(120, 0))
+
+        self.top_layout.addWidget(self.combo_language_filter)
+
         self.le_filter = QLineEdit(self.centralwidget)
         self.le_filter.setObjectName(u"le_filter")
         self.le_filter.setClearButtonEnabled(True)
@@ -550,7 +556,7 @@ class Ui_MainWindow(object):
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
         self.menuBar.setEnabled(True)
-        self.menuBar.setGeometry(QRect(0, 0, 1024, 33))
+        self.menuBar.setGeometry(QRect(0, 0, 1024, 21))
         self.menuFile = QMenu(self.menuBar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuFile.setSeparatorsCollapsible(True)
@@ -680,6 +686,7 @@ class Ui_MainWindow(object):
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
+        self.combo_language_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Filter Language...", None))
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Story Name or UUID filter text)", None))
 #if QT_CONFIG(tooltip)
         self.btn_db.setToolTip(QCoreApplication.translate("MainWindow", u"Force official Lunii DB to be refreshed", None))

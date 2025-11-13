@@ -10,9 +10,8 @@ import base64
 
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel, QEvent
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, \
-    QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QMainWindow, QTreeWidget, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, QStandardItemModel, QStandardItem
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QListView, QAbstractItemView, QStyledItemDelegate
 
 from pkg import versionWorker
@@ -68,38 +67,6 @@ APP_VERSION = "v3.1.2"
 # TODO :
  """
 
-def natural_sort_key(s):
-    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
-
-class NaturalSortTreeWidgetItem(QTreeWidgetItem):
-    def __lt__(self, other):
-        col = self.treeWidget().sortColumn()
-        self_data = self.text(col)
-        other_data = other.text(col)
-        return natural_sort_key(self_data) < natural_sort_key(other_data)
-
-class NaturalSortProxyModel(QSortFilterProxyModel):
-    def lessThan(self, left: QModelIndex, right: QModelIndex) -> bool:
-        left_data = self.sourceModel().data(left)
-        right_data = self.sourceModel().data(right)
-        return natural_sort_key(left_data) < natural_sort_key(right_data)
-
-class ColumnEditableDelegate(QStyledItemDelegate):
-    def __init__(self, editable_columns, parent=None):
-        super().__init__(parent)
-        self.editable_columns = set(editable_columns)
-
-    def createEditor(self, parent, option, index):
-        if index.column() in self.editable_columns:
-            return super().createEditor(parent, option, index)
-        return None
-
-class VLine(QFrame):
-    def __init__(self):
-        super(VLine, self).__init__()
-        self.setFrameShape(QFrame.VLine)
-        self.setFrameShadow(QFrame.Sunken)
-        
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
@@ -128,6 +95,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.show_unavailable_stories = True
         self.details_last_uuid = None
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
+        self.displayed_languages = []
 
         # actions local storage
         self.act_mv_top = None
@@ -165,6 +133,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update(self.tr("⌛ Loading catalogs' content, please wait..."))
         self.ts_update()
         self.sb_update("" if self.audio_device is None else self.tr("No Lunii detected 😥, try File/Open"))
+
+        # Populate language filter
+        for lang in sorted({list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0] for id in stories.DB_OFFICIAL}):
+            combo_item = QStandardItem(lang)
+            combo_item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsUserCheckable)
+            combo_item.setData(Qt.Checked if lang in self.displayed_languages else Qt.Unchecked, Qt.CheckStateRole)
+            self.combo_language_filter.model().appendRow(combo_item)
+
+        # Switch to the Official Library tab if there is no connected device
+        if not self.audio_device:
+            self.tabWidget.setCurrentIndex(1)
+
         self.unlock_ui()
 
     # update ui elements state (enable, disable, context enu)
@@ -177,6 +157,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.menuUpdate.setTitle("")
 
         # self.pgb_total.setVisible(False)
+        self.combo_language_filter.setModel(QStandardItemModel())
+        self.combo_language_filter.setView(QListView())
 
         # QTreeWidget for stories
         self.tree_stories.clear()
@@ -293,6 +275,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_connections(self):
         self.tabWidget.currentChanged.connect(self.cb_tab_changed)
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
+
+        self.combo_language_filter.view().pressed.connect(self.cb_combo_language_changed)
 
         # Adding delay to avoid refreshing on each filter's letters
         self.filter_timer = QTimer()
@@ -454,6 +438,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
 
         event.accept()
+
+    def cb_combo_language_changed(self, index):
+        model = self.combo_language_filter.model()
+        item = model.itemFromIndex(index)
+        item.setCheckState(Qt.Unchecked if item.checkState() == Qt.Checked else Qt.Checked)
+        
+        self.displayed_languages = []
+        for i in range(model.rowCount()):
+            item = model.item(i)
+            if item.checkState() == Qt.Checked:
+                self.displayed_languages.append(item.text())
+
+        QTimer.singleShot(0, self.ts_update)
 
     def cb_item_changed(self, item, column):
         age = item.text(COL_THIRD_PARTY_AGE)
@@ -1208,11 +1205,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         data_list = []
         for id in stories.DB_OFFICIAL:
             name = stories.DB_OFFICIAL[id]["title"]
+            lang = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
+            filter_language = len(self.displayed_languages) > 0 and lang not in self.displayed_languages
 
             # filtering 
-            if (le_filter and
-                not le_filter.lower() in name.lower() and
-                not le_filter.lower() in id.lower() ):
+            if (filter_language or (le_filter and not le_filter.lower() in name.lower() and not le_filter.lower() in id.lower())):
                 continue
 
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
@@ -1225,7 +1222,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(COL_OFFICIAL_UUID, id)
             item.setFont(COL_OFFICIAL_UUID, console_font)
             item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
-            item.setText(COL_OFFICIAL_LANGUAGE, list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0])
+            item.setText(COL_OFFICIAL_LANGUAGE, lang)
 
             if lunii_story is not None:
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
@@ -1251,7 +1248,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         sorted_model.sort(0)
         self.list_stories_official.setItemDelegate(FixedSizeDelegate())
         self.list_stories_official.setModel(sorted_model)
-    
+
     def ts_populate_third_party(self):
         # creating font
         console_font = QFont()
@@ -1754,6 +1751,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.setEnabled(False)
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
+        self.combo_language_filter.setEnabled(False)
 
     def unlock_ui(self):
         self.tree_stories.setEnabled(True)
@@ -1765,6 +1763,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.combo_device.setEnabled(True)
         self.add_story_button.setEnabled(True)
         self.remove_story_button.setEnabled(True)
+        self.combo_language_filter.setEnabled(True)
 
     def worker_check_version(self):
         # version_thread.start()
@@ -1888,3 +1887,36 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.thread:
             self.thread.deleteLater()
             self.thread = None
+
+
+def natural_sort_key(s):
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
+
+class NaturalSortTreeWidgetItem(QTreeWidgetItem):
+    def __lt__(self, other):
+        col = self.treeWidget().sortColumn()
+        self_data = self.text(col)
+        other_data = other.text(col)
+        return natural_sort_key(self_data) < natural_sort_key(other_data)
+
+class NaturalSortProxyModel(QSortFilterProxyModel):
+    def lessThan(self, left: QModelIndex, right: QModelIndex) -> bool:
+        left_data = self.sourceModel().data(left)
+        right_data = self.sourceModel().data(right)
+        return natural_sort_key(left_data) < natural_sort_key(right_data)
+
+class ColumnEditableDelegate(QStyledItemDelegate):
+    def __init__(self, editable_columns, parent=None):
+        super().__init__(parent)
+        self.editable_columns = set(editable_columns)
+
+    def createEditor(self, parent, option, index):
+        if index.column() in self.editable_columns:
+            return super().createEditor(parent, option, index)
+        return None
+
+class VLine(QFrame):
+    def __init__(self):
+        super(VLine, self).__init__()
+        self.setFrameShape(QFrame.VLine)
+        self.setFrameShadow(QFrame.Sunken)

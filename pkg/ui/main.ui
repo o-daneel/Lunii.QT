@@ -145,6 +145,19 @@
        </spacer>
       </item>
       <item>
+       <widget class="QComboBox" name="combo_language_filter">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>Filter Language...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLineEdit" name="le_filter">
         <property name="placeholderText">
          <string>(Story Name or UUID filter text)</string>
@@ -922,7 +935,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>33</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
