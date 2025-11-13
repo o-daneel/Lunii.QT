@@ -92,13 +92,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app = app
 
         # self.debug_dialog.show() # class instance vars init self.audio_device: LuniiDevice = None self.worker: ierWorker = None self.thread: QtCore.QThread = None self.version_worker: versionWorker = None self.version_thread: QtCore.QThread = None self.app = app # app config
-        self.sizes_hidden = True
-        self.show_gallery = False
-        self.show_unavailable_stories = True
-        self.details_last_uuid = None
         self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
+
+        # initialize settings        
+        if self.settings.sizes_hidden is None:
+            self.settings.sizes_hidden = True
+        if self.settings.show_gallery is None:
+            self.settings.show_gallery = False
+        if self.settings.show_unavailable_stories is None:
+            self.settings.show_unavailable_stories = True
         if self.settings.displayed_languages is None:
             self.settings.displayed_languages = []
+        if self.settings.current_tab_index is None:
+            self.settings.current_tab_index = 0
 
         # actions local storage
         self.act_mv_top = None
@@ -145,9 +151,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             combo_item.setData(Qt.Checked if lang in filtered_languages else Qt.Unchecked, Qt.CheckStateRole)
             self.combo_language_filter.model().appendRow(combo_item)
 
-        # Switch to the Official Library tab if there is no connected device
-        if not self.audio_device:
-            self.tabWidget.setCurrentIndex(1)
+        # Switch last opened tab
+        self.tabWidget.setCurrentIndex(self.settings.current_tab_index)
 
         self.unlock_ui()
 
@@ -175,7 +180,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnWidth(COL_UUID, COL_UUID_SIZE)
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
-        self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
+        self.tree_stories.setColumnHidden(COL_SIZE, self.settings.sizes_hidden)
         self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
 
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
@@ -188,6 +193,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_UUID, QHeaderView.Fixed)  
         self.tree_stories_official.header().setSectionResizeMode(COL_OFFICIAL_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_official.sortItems(COL_OFFICIAL_AGE, QtCore.Qt.AscendingOrder)
+        self.tree_stories_official.setVisible(not self.settings.show_gallery)
+
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_UUID, COL_UUID_SIZE)
         self.tree_stories_third_party.setColumnWidth(COL_THIRD_PARTY_NAME, COL_NAME_MIN_SIZE)
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_NAME, QHeaderView.Stretch)
@@ -198,6 +205,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.header().setSectionResizeMode(COL_THIRD_PARTY_SIZE, QHeaderView.ResizeToContents)
         self.tree_stories_third_party.sortItems(COL_THIRD_PARTY_NAME, QtCore.Qt.AscendingOrder)
         self.tree_stories_third_party.setItemDelegate(ColumnEditableDelegate(editable_columns={COL_THIRD_PARTY_AGE, COL_THIRD_PARTY_NAME}))
+        self.tree_stories_third_party.setVisible(not self.settings.show_gallery)
 
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(300, 300))
@@ -206,7 +214,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.setDragEnabled(False)
         self.list_stories_official.setAcceptDrops(False)
         self.list_stories_official.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.list_stories_official.setVisible(False)
+        self.list_stories_official.setVisible(self.settings.show_gallery)            
         self.list_stories_third_party.setViewMode(QListView.IconMode)
         self.list_stories_third_party.setIconSize(QSize(300, 300))
         self.list_stories_third_party.setGridSize(QSize(320, 360))
@@ -214,8 +222,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_third_party.setDragEnabled(False)
         self.list_stories_third_party.setAcceptDrops(False)
         self.list_stories_third_party.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.list_stories_third_party.setVisible(False)
-
+        self.list_stories_third_party.setVisible(self.settings.show_gallery)
+    
         self.story_details.setOpenExternalLinks(True)
 
         # clean progress bars
@@ -242,13 +250,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
 
-
         l_actions = self.menuLibrary.actions()
         self.act_import_in_library = next(act for act in l_actions if act.objectName() == "actionImportInLibrary")
         act_gallery = next(act for act in l_actions if act.objectName() == "actionShow_gallery")
-        act_gallery.setChecked(self.show_gallery)
+        act_gallery.setChecked(self.settings.show_gallery)
         act_show_unavailable_stories = next(act for act in l_actions if act.objectName() == "actionShow_unavailable_stories")
-        act_show_unavailable_stories.setChecked(self.show_unavailable_stories)
+        act_show_unavailable_stories.setChecked(self.settings.show_unavailable_stories)
 
         # Update Menu tools based on config
         t_actions = self.menuTools.actions()
@@ -261,7 +268,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
 
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
-        act_size.setChecked(not self.sizes_hidden)
+        act_size.setChecked(not self.settings.sizes_hidden)
 
         # Help Menu
         t_actions = self.menuHelp.actions()
@@ -466,8 +473,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         stories.local_library_db_add_or_update(uuid, age= age, name= name)
 
-
     def cb_tab_changed(self):
+        self.settings.current_tab_index = self.tabWidget.currentIndex()
         self.cb_story_select()
 
     def cb_show_context_menu(self, point):
@@ -582,7 +589,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.tree_stories.setColumnHidden(COL_NM, True)
 
             # computing sizes if necessary
-            if not self.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
+            if not self.settings.sizes_hidden and any(story for story in self.audio_device.stories if story.size == -1):
                 self.worker_launch(ACTION_SIZE)
 
             # showLog window if device is a v3 without story keys
@@ -615,7 +622,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.worker_launch(ACTION_REMOVE, ids)
 
         else:
-            if self.show_gallery:
+            if self.settings.show_gallery:
                 selection_model = self.list_stories_official.selectionModel() if self.tabWidget.currentIndex() == 1 else self.list_stories_third_party.selectionModel()
                 current_index = selection_model.currentIndex()
                 name = current_index.data()
@@ -660,9 +667,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     item = selection[0]
                     uuid = item.text(COL_UUID)
 
-                    # keeping track of currently displayed story
-                    self.details_last_uuid = uuid
-
                     # feeding story image and desc
                     one_story = self.audio_device.stories.get_story(uuid)
                     if not one_story:
@@ -702,7 +706,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         elif self.tabWidget.currentIndex() == 1:
             id = None
-            if self.show_gallery:
+            if self.settings.show_gallery:
                 selection_model = self.list_stories_official.selectionModel()
                 current_index = selection_model.currentIndex()
                 if current_index.isValid():
@@ -743,7 +747,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 
         elif self.tabWidget.currentIndex() == 2:
             id = None
-            if self.show_gallery:
+            if self.settings.show_gallery:
                 selection_model = self.list_stories_third_party.selectionModel()
                 current_index = selection_model.currentIndex()
                 if current_index.isValid():
@@ -921,29 +925,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_menu_library(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionShow_gallery":
-            self.show_gallery = action.isChecked()
-            self.tree_stories_official.setVisible(not self.show_gallery)
-            self.list_stories_official.setVisible(self.show_gallery)            
-            self.tree_stories_third_party.setVisible(not self.show_gallery)
-            self.list_stories_third_party.setVisible(self.show_gallery)
+            self.settings.show_gallery = action.isChecked()
+            self.tree_stories_official.setVisible(not self.settings.show_gallery)
+            self.list_stories_official.setVisible(self.settings.show_gallery)            
+            self.tree_stories_third_party.setVisible(not self.settings.show_gallery)
+            self.list_stories_third_party.setVisible(self.settings.show_gallery)
             self.story_details.setText("")
 
         elif act_name == "actionImportInLibrary":
             self.ts_import_in_library()
         elif act_name == "actionShow_unavailable_stories":
             self.lock_ui()
-            self.show_unavailable_stories = action.isChecked()
+            self.settings.show_unavailable_stories = action.isChecked()
             self.ts_update()
             self.unlock_ui()
-        
+
     def cb_menu_tools(self, action: QtGui.QAction):
         act_name = action.objectName()
         if act_name == "actionShow_size":
-            self.sizes_hidden = not action.isChecked()
-            self.tree_stories.setColumnHidden(COL_SIZE, self.sizes_hidden)
+            self.settings.sizes_hidden = not action.isChecked()
+            self.tree_stories.setColumnHidden(COL_SIZE, self.settings.sizes_hidden)
 
             # # do we need to compute sizes ?
-            if not self.sizes_hidden:
+            if not self.settings.sizes_hidden:
                 # update sizes only if a device is selected
                 if self.audio_device:
                     self.worker_launch(ACTION_SIZE)
@@ -1145,7 +1149,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.list_stories_third_party.model() is not None:
             self.list_stories_third_party.model().sourceModel().clear() 
 
-        self.details_last_uuid = None
         self.ts_populate()
         self.ts_populate_official()
         self.ts_populate_third_party()
@@ -1241,7 +1244,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
                 item.setText(COL_OFFICIAL_PATH, path)
                 item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
-            elif not self.show_unavailable_stories:
+            elif not self.settings.show_unavailable_stories:
                 continue
             
             self.tree_stories_official.addTopLevelItem(item)
@@ -1303,7 +1306,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
                 item.setText(COL_THIRD_PARTY_PATH, path)
                 item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
-            elif not self.show_unavailable_stories:
+            elif not self.settings.show_unavailable_stories:
                 continue
 
 
@@ -1797,7 +1800,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #     return
 
         # setting up the thread
-        self.worker = ierWorker(self.audio_device, action, item_list, out_dir, not self.sizes_hidden and action == ACTION_IMPORT)
+        self.worker = ierWorker(self.audio_device, action, item_list, out_dir, not self.settings.sizes_hidden and action == ACTION_IMPORT)
         self.thread = QtCore.QThread()
         self.worker.moveToThread(self.thread)
 
