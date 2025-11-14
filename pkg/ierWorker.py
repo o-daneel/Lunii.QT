@@ -346,7 +346,6 @@ class ierWorker(QObject):
                 return
             filename = os.path.basename(file)
             age = str((lambda s: int(s) if s.isdigit() else '')(filename.split("+")[0]))
-            print(age)
             uuid = str(get_uuid_from_file(file)).upper()
             if uuid == "":
                 self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))

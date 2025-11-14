@@ -806,6 +806,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     id = data["id"]
                     local_db_path = data["local_db_path"]
                     lunii_story_id = data["lunii_story_id"]
+                    name = data["name"]
                 else:
                     self.story_details.setText("")
                     return
@@ -815,6 +816,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     id = current.text(COL_THIRD_PARTY_UUID)
                     local_db_path = current.text(COL_THIRD_PARTY_PATH)
                     lunii_story_id = current.text(COL_THIRD_PARTY_INSTALLED)
+                    name = current.text(COL_THIRD_PARTY_NAME)
                 else:
                     self.story_details.setText("")
                     return
@@ -824,10 +826,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if id is not None and id in stories.DB_THIRD_PARTY:
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
-                title = stories.DB_THIRD_PARTY[id].get("title", "")
                 url = os.path.join(CACHE_DIR, id)
                 img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
-                title_tag = "" if title is None else f'<h2>{title}</h2>'
+                title_tag = f'<h2>{name}</h2>'
                 desc_tag = "" if description is None else description
                 path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a> - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>'
 
@@ -1277,11 +1278,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         data_list = []
         for id in stories.DB_OFFICIAL:
             name = stories.DB_OFFICIAL[id]["title"]
+            age = str(stories.DB_OFFICIAL[id]["age_min"])
+            filter_name = f'{age}+ {name}'
             lang = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
             filter_language = len(filtered_languages) > 0 and lang not in filtered_languages
 
             # filtering
-            if (filter_language or (le_filter and not le_filter.lower() in name.lower() and not le_filter.lower() in id.lower())):
+            if (filter_language or (le_filter and not le_filter.lower() in filter_name.lower() and not le_filter.lower() in id.lower())):
                 continue
 
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
@@ -1293,7 +1296,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(COL_OFFICIAL_NAME, name)
             item.setText(COL_OFFICIAL_UUID, id)
             item.setFont(COL_OFFICIAL_UUID, console_font)
-            item.setText(COL_OFFICIAL_AGE, str(stories.DB_OFFICIAL[id]["age_min"]))
+            item.setText(COL_OFFICIAL_AGE, age)
             item.setText(COL_OFFICIAL_LANGUAGE, lang)
 
             if lunii_story is not None:
@@ -1337,26 +1340,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 continue
 
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
+            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
+
+            # create and add item to treeWidget
+            item = NaturalSortTreeWidgetItem()
+            item.setFlags(item.flags() | Qt.ItemIsEditable)
+            age = "" if local_story is None or DB_LOCAL_LIBRARY_COL_AGE not in local_story else local_story[DB_LOCAL_LIBRARY_COL_AGE]
+            
             display_name = name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
+            display_name = display_name if age == "" else f'{age}+ {display_name}'
 
             # filtering
             if (le_filter and
                 not le_filter.lower() in display_name.lower() and
                 not le_filter.lower() in id.lower() ):
                 continue
-
-            local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
-            lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
-
-            # create and add item to treeWidget
-            item = NaturalSortTreeWidgetItem()
-            item.setFlags(item.flags() | Qt.ItemIsEditable)
+            
             item.setText(COL_THIRD_PARTY_NAME, display_name)
             item.setText(COL_THIRD_PARTY_UUID, id)
             item.setFont(COL_THIRD_PARTY_UUID, console_font)
-
-            if local_story is not None and DB_LOCAL_LIBRARY_COL_AGE in local_story:
-                item.setText(COL_THIRD_PARTY_AGE, local_story[DB_LOCAL_LIBRARY_COL_AGE])
+            item.setText(COL_THIRD_PARTY_AGE, age)
 
             if lunii_story is not None:
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
@@ -1368,13 +1371,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             elif not self.settings.show_unavailable_stories:
                 continue
 
-
             self.tree_stories_third_party.addTopLevelItem(item)
 
             local_db_path = item.text(COL_THIRD_PARTY_PATH)
             lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
 
-            data_list.append({"name": item.text(COL_THIRD_PARTY_NAME), "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
+            data_list.append({"name": display_name, "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
 
         model = SimpleLazyLoadingModel(data_list)
         sorted_model = NaturalSortProxyModel()
