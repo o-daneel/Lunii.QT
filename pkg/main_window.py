@@ -234,7 +234,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_third_party.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.list_stories_third_party.setVisible(self.settings.show_gallery)
 
+        self.story_details.setOpenLinks(False)
         self.story_details.setOpenExternalLinks(True)
+        self.story_details.anchorClicked.connect(self.cb_story_details_open_links)
 
         # clean progress bars
         self.lbl_total.setVisible(False)
@@ -471,6 +473,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
 
         event.accept()
+
+    def cb_story_details_open_links(self, url: QUrl):
+        QDesktopServices.openUrl(url)
 
     def cb_splitter_moved(self):
         # start a timer to avoid saving settings too much
@@ -782,12 +787,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 url = os.path.join(CACHE_DIR, id)
                 width = min(self.story_details.width() - 20, QImage(url).width())
                 age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
-
+                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a> - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>'
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'
                     + f"<h2>{age}{title}</h2>"
                     + f'<h3>{subtitle}</h3>'
-                    + description)
+                    + description + path_tag)
 
         elif self.tabWidget.currentIndex() == 2:
             id = None
@@ -824,7 +829,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
                 title_tag = "" if title is None else f'<h2>{title}</h2>'
                 desc_tag = "" if description is None else description
-                self.story_details.setHtml(img_tag + title_tag + desc_tag)
+                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a> - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>'
+
+                self.story_details.setHtml(img_tag + title_tag + desc_tag + path_tag)
             else:
                 self.story_details.setText("")
 

@@ -11,7 +11,7 @@ from PySide6.QtCore import QObject, QThread
 from pkg.api import stories
 from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice, get_uuid_from_file
-from pkg.api.stories import DB_LOCAL_LIBRARY_COL_PATH, local_library_db_add_or_update, thirdparty_db_add_story, thirdparty_db_add_thumb
+from pkg.api.stories import DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_PATH, local_library_db_add_or_update, thirdparty_db_add_story, thirdparty_db_add_thumb
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
@@ -344,17 +344,22 @@ class ierWorker(QObject):
             if self.abort_process:
                 self.exit_requested()
                 return
-
+            filename = os.path.basename(file)
+            age = str((lambda s: int(s) if s.isdigit() else '')(filename.split("+")[0]))
+            print(age)
             uuid = str(get_uuid_from_file(file)).upper()
             if uuid == "":
                 self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
             else:
                 if uuid in stories.DB_LOCAL_LIBRARY:
-                    if stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file:
-                        self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden: '{}'...").format(file))
+                    if DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] \
+                            or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file \
+                            or DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] \
+                            or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age:
+                        self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden: Age={} File='{}'...").format(age, file))
                     else:
                         continue
-                local_library_db_add_or_update(uuid, file)
+                local_library_db_add_or_update(uuid, file, age)
                 self.signal_message.emit(self.tr("👍 New story imported in local Library : '{}'").format(file))
                 success += 1
             
