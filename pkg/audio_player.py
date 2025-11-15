@@ -4,6 +4,9 @@ import random
 from PySide6.QtCore import QUrl
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
 
+os.environ["QT_LOGGING_RULES"] = "*.debug=false;*.info=false;*.warning=false;*.critical=true;*.ffmpeg.*=false"
+os.environ["QT_FFMPEG_DEBUG"] = "0"
+
 class AudioPlayer:
     def __init__(self):
         self.player = QMediaPlayer()
