@@ -794,7 +794,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 url = os.path.join(CACHE_DIR, id)
                 width = min(self.story_details.width() - 20, QImage(url).width())
                 age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
-                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a> - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>'
+                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
+                    + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
+                    + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
+                    
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'
                     + f"<h2>{age}{title}</h2>"
@@ -838,7 +841,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
                 title_tag = f'<h2>{name}</h2>'
                 desc_tag = "" if description is None else description
-                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a> - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>'
+                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
+                    + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
+                    + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
 
                 self.story_details.setHtml(img_tag + title_tag + desc_tag + path_tag)
             else:

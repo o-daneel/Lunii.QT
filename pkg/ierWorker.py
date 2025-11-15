@@ -355,12 +355,13 @@ class ierWorker(QObject):
                     check_age = age != "" and (DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age)
                     if check_path or check_age:
                         self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden for {}:").format(uuid))
-                        self.signal_message.emit(f"\tAge={stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE]} => {age}")
-                        self.signal_message.emit(f"\tFile={stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]} => {file}")
+                        self.signal_message.emit(f"\tAge={'' if DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] else stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE]} => {age}")
+                        self.signal_message.emit(f"\tFile={'' if DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] else stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]} => {file}")
                     else:
+                        self.signal_message.emit(self.tr("⚠️ File already imported in DB : '{}'").format(file))
                         continue
                 local_library_db_add_or_update(uuid, file, age)
-                self.signal_message.emit(self.tr("👍 New story imported in local Library : '{}'").format(file))
+                self.signal_message.emit(self.tr("✅ New story imported in local Library : '{}'").format(file))
                 success += 1
             
             self.signal_total_progress.emit(index, len(self.items))
