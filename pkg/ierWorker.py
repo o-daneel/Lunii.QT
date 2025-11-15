@@ -1,15 +1,21 @@
 import base64
 import json
 import os
+import shutil
+import platform
+import tempfile
 import time
 import traceback
 from uuid import UUID
+import uuid
+import zipfile
 
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
+import urllib
 
 from pkg.api import constants
-from pkg.api.constants import FLAM_V1
+from pkg.api.constants import CFG_DIR, FFMPEG_BINARY, FLAM_V1, which_ffmpeg
 from pkg.api.device_lunii import LuniiDevice
 from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, story_load_db
 
@@ -22,21 +28,24 @@ ACTION_RECOVER = 6
 ACTION_CLEANUP = 7
 ACTION_FACTORY = 8
 ACTION_DB_IMPORT = 9
+ACTION_DOWNLOAD = 11
+ACTION_FFMPEG = 12
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
+    signal_file_progress = QtCore.Signal(str, int, int)
     signal_refresh = QtCore.Signal()
     signal_finished = QtCore.Signal()
     signal_message = QtCore.Signal(str)
     signal_showlog = QtCore.Signal()
 
-    def __init__(self, device: LuniiDevice, action, story_list=None, out_dir=None, update_size=False):
+    def __init__(self, device: LuniiDevice, action, item_list=None, out_dir=None, update_size=False):
         super().__init__()
 
         self.abort_process = False
         self.audio_device = device
         self.action = action
-        self.items = story_list
+        self.items = item_list
         self.out_dir = out_dir
         self.update_size = update_size      # stories size to be computed at the end of import
 
@@ -66,6 +75,12 @@ class ierWorker(QObject):
                 self._task_factory_reset()
             elif self.action == ACTION_DB_IMPORT:
                 self._task_db_import()
+            elif self.action == ACTION_DOWNLOAD:
+                self._task_download()
+            elif self.action == ACTION_FFMPEG:
+                self._task_ffmpeg()
+            else:
+                raise Exception("Unsupported command")
 
         except Exception as e:
             # Abort requested
@@ -332,3 +347,111 @@ class ierWorker(QObject):
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit(self.tr("✅ STUdio DB imported ({}/{}).").format(count, len(db_stories.keys())))
+
+    def _task_download(self, finished=True):
+        success = 0
+
+        # importing selected files
+        for index, (src, target) in enumerate(self.items):
+            if self.abort_process:
+                self.exit_requested()
+                return
+
+            self.signal_total_progress.emit(index, len(self.items))
+
+            block_size = 100 * 1024  # 100KB
+            try:
+                with urllib.request.urlopen(src) as response, open(target, 'wb') as out_file:
+                    total_size = int(response.getheader('Content-Length', 0))
+                    downloaded = 0
+                    while True:
+                        block = response.read(block_size)
+                        if not block:
+                            break
+                        out_file.write(block)
+                        downloaded += len(block)
+                        self.signal_file_progress.emit(os.path.basename(target), downloaded, total_size)
+                success += 1
+            except Exception as e:
+                self.signal_message.emit(self.tr(f"🛑 Failed to download {src}: {e}"))
+
+        if finished:
+            # done
+            self.signal_finished.emit()
+            self.signal_refresh.emit()
+            self.signal_message.emit(self.tr("✅ Downloaded {} items.").format(success))
+
+    def _task_ffmpeg(self):
+        system = platform.system().lower()
+
+        # Define platform-specific URLs (latest stable builds)
+        urls = {
+            "windows": "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-lgpl.zip",
+            "darwin": "https://evermeet.cx/ffmpeg/getrelease/zip",
+        }
+
+        if system == "Linux":
+            self.signal_message.emit(self.tr("🛑 You must rely on your Linux package manager to install FFMPEG."))
+            self.exit_requested()
+            return
+
+
+        if system not in urls:
+            self.signal_message.emit(self.tr("🛑 Unsupported OS."))
+            self.exit_requested()
+            return
+
+        url = urls[system]
+        tmp_dir = tempfile.mkdtemp(prefix="ffmpeg_download_")
+        archive_path = os.path.join(tmp_dir, os.path.basename(url))
+
+        self.signal_message.emit(self.tr("Downloading FFmpeg for {}...".format(system)))
+
+        block_size = 100 * 1024  # 100KB
+        try:
+            with urllib.request.urlopen(url) as response, open(archive_path, 'wb') as out_file:
+                total_size = int(response.getheader('Content-Length', 0))
+                downloaded = 0
+                while True:
+                    block = response.read(block_size)
+                    if not block:
+                        break
+                    out_file.write(block)
+                    downloaded += len(block)
+                    self.signal_file_progress.emit("FFMPEG", downloaded, total_size)
+        except Exception as e:
+            self.signal_message.emit(self.tr("🛑 Failed to download {}: {}".format(url, e)))
+            self.exit_requested()
+            return
+        
+        # Create unique extraction directory
+        extract_dir = CFG_DIR
+        os.makedirs(extract_dir, exist_ok=True)
+
+        # Extract only ffmpeg binary, discarding directories from zip
+        ffmpeg_path = None
+        with zipfile.ZipFile(archive_path, "r") as zipf:
+            for name in zipf.namelist():
+                base_name = os.path.basename(name)
+                if base_name in ("ffmpeg", "ffmpeg.exe"):
+                    target_path = os.path.join(extract_dir, base_name)
+                    with zipf.open(name) as source, open(target_path, "wb") as target:
+                        shutil.copyfileobj(source, target)
+                        ffmpeg_path = target_path
+                        break
+
+        if not ffmpeg_path or not os.path.exists(ffmpeg_path):
+            shutil.rmtree(extract_dir, ignore_errors=True)
+            self.signal_message.emit(self.tr("🛑 Failed to extract ffmpeg executable"))
+            self.exit_requested()
+            return
+        
+        # Normalize and make executable if needed
+        ffmpeg_path = os.path.abspath(ffmpeg_path)
+        if system != "windows":
+            os.chmod(ffmpeg_path, 0o755)
+        
+        # done
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit(self.tr("✅ FFMPEG installed."))

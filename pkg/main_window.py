@@ -19,7 +19,7 @@ from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
-from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
+from pkg.ierWorker import ACTION_DOWNLOAD, ACTION_FFMPEG, ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.nm_window import NightModeWindow
 from pkg.ui.about_ui import about_dlg
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
-        self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
+        self.ffmpeg_present = which_ffmpeg() is not None
 
         # actions local storage
         self.act_mv_top = None
@@ -165,10 +165,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
         self.act_factory = next(act for act in t_actions if act.objectName() == "actionFactory_reset")
         self.act_factory.setVisible(False)
-        act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
-        act_transcode.setChecked(self.ffmpeg_present)
-        act_transcode.setEnabled(not self.ffmpeg_present)
-        act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
+        self.act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
+        self.act_transcode.setChecked(self.ffmpeg_present)
+        self.act_transcode.setEnabled(not self.ffmpeg_present)
+        self.act_transcode.setEnabled(True)
+        self.act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (📥)")
 
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
@@ -660,9 +661,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.sb_update(self.tr("🛑 Network error..."))
 
         elif act_name == "actionTranscode":
-            website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
-            # Open the URL in the default web browser
-            QDesktopServices.openUrl(website_url)
+            self.worker_launch(ACTION_FFMPEG)
+
+            # website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
+            # # Open the URL in the default web browser
+            # QDesktopServices.openUrl(website_url)
 
         elif act_name == "actionFactory_reset":
             # TODO request confirmation before performing
@@ -741,6 +744,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw.setEnabled(device_selected)
         self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
+
+        self.act_transcode.setText("FFMPEG detected" if which_ffmpeg() else "FFMPEG is missing (📥)")
 
     def cb_menu_help_update(self, last_version):
         if last_version:
@@ -1297,6 +1302,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_device.signal_file_progress.connect(self.slot_file_progress)
             self.audio_device.signal_logger.connect(self.logger.log)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
+        self.worker.signal_file_progress.connect(self.slot_file_progress)
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
         self.worker.signal_message.connect(self.sb_update)

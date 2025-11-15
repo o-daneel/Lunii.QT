@@ -42,12 +42,18 @@ FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
 
-FFMPEG_BINARY="ffmpeg"
-if platform.system() == "Windows" :
-    FFMPEG_BINARY += ".exe"
-FFMPEG_LOCAL_BINARY  = shutil.which(os.path.join(CFG_DIR, FFMPEG_BINARY))
-FFMPEG_SYSTEM_BINARY = shutil.which(FFMPEG_BINARY)
-FFMPEG_BINARY = FFMPEG_LOCAL_BINARY if FFMPEG_LOCAL_BINARY else FFMPEG_SYSTEM_BINARY
+
+def which_ffmpeg():
+    FFMPEG_BINARY="ffmpeg"
+    if platform.system() == "Windows" :
+        FFMPEG_BINARY += ".exe"
+        
+    FFMPEG_LOCAL_BINARY  = shutil.which(os.path.join(CFG_DIR, FFMPEG_BINARY))
+    FFMPEG_SYSTEM_BINARY = shutil.which(FFMPEG_BINARY)
+    return FFMPEG_LOCAL_BINARY if FFMPEG_LOCAL_BINARY else FFMPEG_SYSTEM_BINARY
+
+FFMPEG_BINARY = which_ffmpeg()
+
 
 STORY_TRANSCODING_SUPPORTED = FFMPEG_BINARY is not None
 

@@ -7,7 +7,7 @@ from io import BytesIO
 import ffmpeg
 from mutagen.mp3 import MP3, BitrateMode, MONO
 
-from pkg.api.constants import CFG_DIR, FFMPEG_BINARY
+from pkg.api.constants import which_ffmpeg
 
 
 def tags_removal_required(audio_data):
@@ -81,7 +81,7 @@ def audio_to_mp3(audio_data):
                 id3v2_version='0'
                )
         .global_args('-threads', '0')
-        .compile(cmd=FFMPEG_BINARY)
+        .compile(cmd=which_ffmpeg())
     )
 
     current_os = platform.system()
