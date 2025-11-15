@@ -1301,6 +1301,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if os.path.isfile(path):
                     item.setText(COL_OFFICIAL_PATH, path)
                     item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+            elif not self.settings.show_unavailable_stories:
+                continue
 
             # filtering
             if (filter_language or (
@@ -1310,8 +1312,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in id.lower())):
                 continue
       
-
-
             item.setText(COL_OFFICIAL_NAME, name)
             item.setText(COL_OFFICIAL_UUID, id)
             item.setFont(COL_OFFICIAL_UUID, console_font)
@@ -1320,8 +1320,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if lunii_story is not None:
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
-            elif not self.settings.show_unavailable_stories:
-                continue
 
             self.tree_stories_official.addTopLevelItem(item)
 
@@ -1369,6 +1367,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if os.path.isfile(path):
                     item.setText(COL_THIRD_PARTY_PATH, path)
                     item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+            elif not self.settings.show_unavailable_stories:
+                continue
 
             # filtering
             if (le_filter and
@@ -1384,8 +1384,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if lunii_story is not None:
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
-            elif not self.settings.show_unavailable_stories:
-                continue
 
             self.tree_stories_third_party.addTopLevelItem(item)
 
