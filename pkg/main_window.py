@@ -1023,6 +1023,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_button_play.setVisible(self.settings.auto_play)
             self.audio_button_pause.setVisible(self.settings.auto_play)
             self.audio_button_next.setVisible(self.settings.auto_play)
+            if not self.settings.auto_play:
+                self.audio_player.stop()
+                
             self.cb_story_select()
         elif act_name == "actionSavePack":
             self.ts_save_pack()
