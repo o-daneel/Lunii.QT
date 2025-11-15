@@ -1356,11 +1356,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             age = "" if local_story is None or DB_LOCAL_LIBRARY_COL_AGE not in local_story else local_story[DB_LOCAL_LIBRARY_COL_AGE]
             
             display_name = name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
-            display_name = display_name if age == "" else f'{age}+ {display_name}'
+            display_name_with_age = display_name if age == "" else f'{age}+ {display_name}'
 
             # filtering
             if (le_filter and
-                not le_filter.lower() in display_name.lower() and
+                not le_filter.lower() in display_name_with_age.lower() and
                 not le_filter.lower() in id.lower() ):
                 continue
             
@@ -1386,7 +1386,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             local_db_path = item.text(COL_THIRD_PARTY_PATH)
             lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
 
-            data_list.append({"name": display_name, "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
+            data_list.append({"name": display_name_with_age, "id": id, "local_db_path": local_db_path, "lunii_story_id": lunii_story_id})
 
         model = SimpleLazyLoadingModel(data_list)
         sorted_model = NaturalSortProxyModel()
