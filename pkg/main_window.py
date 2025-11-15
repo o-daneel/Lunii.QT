@@ -295,7 +295,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Setup splitter priority
         self.splitter.setStretchFactor(0, 0)
         self.splitter.setStretchFactor(1, 1)
-        self.splitter.setSizes(self.settings.main_window_splitter_position)
+
+        if self.settings.main_window_splitter_position is not None:
+            self.splitter.setSizes(self.settings.main_window_splitter_position)
 
     # connecting slots and signals
     def setup_connections(self):
