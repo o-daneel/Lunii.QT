@@ -24,6 +24,7 @@ from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_NAME, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
+from pkg.audio_player import AudioPlayer
 from pkg.icons import SimpleLazyLoadingModel, FixedSizeDelegate
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
@@ -75,6 +76,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.settings = Settings(FILE_SETTINGS)
 
+        self.audio_player = AudioPlayer()
+
         # internal resources
         self.logger = logging.getLogger(LUNII_LOGGER)
 
@@ -108,6 +111,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.settings.current_tab_index = 0
         if self.settings.main_window_is_maximized is None:
             self.settings.main_window_is_maximized = False
+        if self.settings.auto_play is None:
+            self.settings.auto_play = False
 
         # actions local storage
         self.act_mv_top = None
@@ -122,6 +127,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = None
         self.act_update = None
         self.act_import_in_library = None
+        self.act_auto_play = None
         self.act_save_pack = None
         self.act_load_pack = None
 
@@ -263,6 +269,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
         self.act_save_pack = next(act for act in s_actions if act.objectName() == "actionSavePack")
         self.act_load_pack = next(act for act in s_actions if act.objectName() == "actionLoadPack")
+        self.act_auto_play = next(act for act in s_actions if act.objectName() == "actionAutoPlay")
+        self.act_auto_play.setChecked(self.settings.auto_play)
 
         l_actions = self.menuLibrary.actions()
         self.act_import_in_library = next(act for act in l_actions if act.objectName() == "actionImportInLibrary")
@@ -554,7 +562,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update("")
         self.nm_dialog.remove_audioDevice()
 
-
+        if os.path.isdir("lunii-sd/"):
+            print("Adding fake Flam from lunii-sd")
+            dev_list.append("lunii-sd/_flam_fake/")
+        
         for dev in dev_list:
             dev_name = str(dev)
             # print(dev_name)
@@ -709,6 +720,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
         self.act_save_pack.setEnabled(False)
+        self.audio_player.stop()
 
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
@@ -735,6 +747,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         + f"<h3>{one_story.subtitle}</h3>"
                         + f"<h4>{one_story.author}</h4>"
                         + one_story.desc)
+                    
+                    if self.settings.auto_play:
+                        self.audio_player.play(self.audio_device.story_dir(one_story.short_uuid))
+
                 else:
                     paths = []
                     names = []
@@ -988,6 +1004,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_export_all()
         elif act_name == "actionRemove":
             self.ts_remove()
+        elif act_name == "actionAutoPlay":
+            self.settings.auto_play = self.act_auto_play.isChecked()
+            self.cb_story_select()
         elif act_name == "actionSavePack":
             self.ts_save_pack()
         elif act_name == "actionLoadPack":
@@ -1121,7 +1140,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_menu_story_update(self):
         # all disabled
         for action in self.menuStory.actions():
-            if action.objectName() != "actionSavePack" and action.objectName() != "actionLoadPack":
+            if action.objectName() != "actionAutoPlay" and action.objectName() != "actionSavePack" and action.objectName() != "actionLoadPack":
                 action.setEnabled(False)
 
         # during download or no device selected, no action possible

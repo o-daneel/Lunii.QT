@@ -1004,6 +1004,8 @@
     <addaction name="actionExport_All"/>
     <addaction name="actionRemove"/>
     <addaction name="separator"/>
+    <addaction name="actionAutoPlay"/>   
+    <addaction name="separator"/>
     <addaction name="actionSavePack"/>
     <addaction name="actionLoadPack"/>
    </widget>
@@ -1114,6 +1116,20 @@
    </property>
    <property name="shortcut">
     <string notr="true">Del</string>
+   </property>
+  </action>
+  <action name="actionAutoPlay">
+   <property name="text">
+    <string>Auto play story randomly</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="toolTip">
+    <string>Auto play the selected story randomly by chunk</string>
    </property>
   </action>
   <action name="actionSavePack">

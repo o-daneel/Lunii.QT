@@ -133,3 +133,5 @@ dmypy.json
 .vscode
 
 ffmpeg.exe
+
+lunii-sd/_flam_fake
