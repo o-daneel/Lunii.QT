@@ -22,6 +22,7 @@ from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_cipher, xxtea_decipher
+from pkg.api.fix_zip_export import *
 
 class LuniiDevice(QtCore.QObject):
     STORIES_BASEDIR = ".content/"
