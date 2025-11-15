@@ -30,6 +30,12 @@
       <property name="spacing">
        <number>6</number>
       </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QPushButton" name="btn_refresh">
         <property name="maximumSize">
@@ -143,6 +149,105 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="audio_layout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="audio_button_previous">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaSkipBackward"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_stop">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackStop"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_play">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_pause">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackPause"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_next">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaSkipForward"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QComboBox" name="combo_language_filter">
@@ -1004,7 +1109,7 @@
     <addaction name="actionExport_All"/>
     <addaction name="actionRemove"/>
     <addaction name="separator"/>
-    <addaction name="actionAutoPlay"/>   
+    <addaction name="actionAutoPlay"/>
     <addaction name="separator"/>
     <addaction name="actionSavePack"/>
     <addaction name="actionLoadPack"/>
@@ -1119,14 +1224,14 @@
    </property>
   </action>
   <action name="actionAutoPlay">
-   <property name="text">
-    <string>Auto play story randomly</string>
-   </property>
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="enabled">
     <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Auto play story randomly</string>
    </property>
    <property name="toolTip">
     <string>Auto play the selected story randomly by chunk</string>

@@ -252,6 +252,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pbar_file.setVisible(False)
         self.btn_abort.setVisible(False)
 
+        # audio buttons
+        self.audio_button_previous.setVisible(self.settings.auto_play)
+        self.audio_button_stop.setVisible(self.settings.auto_play)
+        self.audio_button_play.setVisible(self.settings.auto_play)
+        self.audio_button_pause.setVisible(self.settings.auto_play)
+        self.audio_button_next.setVisible(self.settings.auto_play)
+
         # Update statusbar
         self.sb_create()
 
@@ -326,6 +333,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btn_db.clicked.connect(self.cb_db_refresh)
         self.btn_abort.clicked.connect(self.worker_abort)
         self.btn_nightmode.clicked.connect(self.cb_nm)
+
+        self.audio_button_previous.clicked.connect(self.audio_player.play_previous)
+        self.audio_button_stop.clicked.connect(self.audio_player.stop)
+        self.audio_button_play.clicked.connect(self.audio_player.play)
+        self.audio_button_pause.clicked.connect(self.audio_player.pause)
+        self.audio_button_next.clicked.connect(self.audio_player.play_next)
 
         self.splitter_timer = QTimer()
         self.splitter_timer.setSingleShot(True)
@@ -720,7 +733,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
         self.act_save_pack.setEnabled(False)
-        self.audio_player.stop()
 
         if self.tabWidget.currentIndex() == 0:
             selection = self.tree_stories.selectedItems()
@@ -749,7 +761,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         + one_story.desc)
                     
                     if self.settings.auto_play:
-                        self.audio_player.play(self.audio_device.story_dir(one_story.short_uuid))
+                        self.audio_player.play_story(self.audio_device.story_dir(one_story.short_uuid))
 
                 else:
                     paths = []
@@ -1006,6 +1018,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_remove()
         elif act_name == "actionAutoPlay":
             self.settings.auto_play = self.act_auto_play.isChecked()
+            self.audio_button_previous.setVisible(self.settings.auto_play)
+            self.audio_button_stop.setVisible(self.settings.auto_play)
+            self.audio_button_play.setVisible(self.settings.auto_play)
+            self.audio_button_pause.setVisible(self.settings.auto_play)
+            self.audio_button_next.setVisible(self.settings.auto_play)
             self.cb_story_select()
         elif act_name == "actionSavePack":
             self.ts_save_pack()

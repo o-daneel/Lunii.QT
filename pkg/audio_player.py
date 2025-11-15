@@ -15,7 +15,7 @@ class AudioPlayer:
 
         self.player.mediaStatusChanged.connect(self.handle_media_status)
 
-    def play(self, folder):
+    def play_story(self, folder):
         folder = os.path.join(folder, "sf", "000")
         self.files = []
         for filename in os.listdir(folder):
@@ -26,14 +26,36 @@ class AudioPlayer:
 
         self.play_next()
 
+    def play_previous(self):
+        if self.current_index > 0:
+            self.current_index -= 1
+        elif len(self.files) > 0:
+            self.current_index -= len(self.files) - 1
+        else:
+            return
+            
+        self.player.setSource(self.files[self.current_index])
+        self.player.play()
+
     def play_next(self):
         if self.current_index < len(self.files):
-            self.player.setSource(self.files[self.current_index])
-            self.player.play()
             self.current_index += 1
+        elif len(self.files) > 0:
+            self.current_index = 0
+        else:
+            return
+
+        self.player.setSource(self.files[self.current_index])
+        self.player.play()
             
     def stop(self):
         self.player.stop()
+
+    def pause(self):
+        self.player.pause()
+            
+    def play(self):
+        self.player.play()
 
     def handle_media_status(self, status):
         if status == QMediaPlayer.MediaStatus.EndOfMedia:
