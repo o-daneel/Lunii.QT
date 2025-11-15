@@ -1291,15 +1291,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lang = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
             filter_language = len(filtered_languages) > 0 and lang not in filtered_languages
 
-            # filtering
-            if (filter_language or (le_filter and not le_filter.lower() in filter_name.lower() and not le_filter.lower() in id.lower())):
-                continue
-
             local_story = None if id not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[id]
             lunii_story = None if self.audio_device is None else self.audio_device.stories.get_story(id)
-
             # create and add item to treeWidget
             item = NaturalSortTreeWidgetItem()
+
+            if local_story is not None and DB_LOCAL_LIBRARY_COL_PATH in local_story:
+                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
+                if os.path.isfile(path):
+                    item.setText(COL_OFFICIAL_PATH, path)
+                    item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+
+            # filtering
+            if (filter_language or (
+                le_filter and
+                not le_filter.lower() in item.text(COL_OFFICIAL_PATH).lower() and
+                not le_filter.lower() in filter_name.lower() and
+                not le_filter.lower() in id.lower())):
+                continue
+      
+
 
             item.setText(COL_OFFICIAL_NAME, name)
             item.setText(COL_OFFICIAL_UUID, id)
@@ -1309,11 +1320,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if lunii_story is not None:
                 item.setText(COL_OFFICIAL_INSTALLED, lunii_story.short_uuid)
-
-            if local_story is not None:
-                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
-                item.setText(COL_OFFICIAL_PATH, path)
-                item.setText(COL_OFFICIAL_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
             elif not self.settings.show_unavailable_stories:
                 continue
 
@@ -1358,8 +1364,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             display_name = name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
             display_name_with_age = display_name if age == "" else f'{age}+ {display_name}'
 
+            if local_story is not None and DB_LOCAL_LIBRARY_COL_PATH in local_story:
+                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
+                if os.path.isfile(path):
+                    item.setText(COL_THIRD_PARTY_PATH, path)
+                    item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+
             # filtering
             if (le_filter and
+                not le_filter.lower() in item.text(COL_THIRD_PARTY_PATH).lower() and
                 not le_filter.lower() in display_name_with_age.lower() and
                 not le_filter.lower() in id.lower() ):
                 continue
@@ -1371,13 +1384,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if lunii_story is not None:
                 item.setText(COL_THIRD_PARTY_INSTALLED, lunii_story.short_uuid)
-
-            if local_story is not None and DB_LOCAL_LIBRARY_COL_PATH in local_story:
-                path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
-                if os.path.isfile(path):
-                    item.setText(COL_THIRD_PARTY_PATH, path)
-                    item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
-
             elif not self.settings.show_unavailable_stories:
                 continue
 

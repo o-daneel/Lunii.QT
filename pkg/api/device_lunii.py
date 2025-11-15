@@ -1931,7 +1931,8 @@ def get_uuid_from_studio_zip(story_path):
                 return ""
 
             one_story = StudioStory(story_json)
-            if one_story.uuid not in stories.DB_THIRD_PARTY:
+            uuid = str(one_story.uuid).upper()
+            if uuid not in stories.DB_THIRD_PARTY and uuid not in stories.DB_OFFICIAL:
                 stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
             if not os.path.isfile(os.path.join(CACHE_DIR, str(one_story.uuid))):
@@ -1966,7 +1967,8 @@ def get_uuid_from_studio_7z(story_path):
                 return ""
 
             one_story = StudioStory(story_json)
-            if one_story.uuid not in stories.DB_THIRD_PARTY:
+            uuid = str(one_story.uuid).upper()
+            if uuid not in stories.DB_THIRD_PARTY and uuid not in stories.DB_OFFICIAL:
                 stories.thirdparty_db_add_story(one_story.uuid, one_story.title, one_story.description)
 
             if not os.path.isfile(os.path.join(CACHE_DIR, str(one_story.uuid))):

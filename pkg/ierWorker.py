@@ -351,11 +351,12 @@ class ierWorker(QObject):
                 self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
             else:
                 if uuid in stories.DB_LOCAL_LIBRARY:
-                    if DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] \
-                            or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file \
-                            or (age != "" and DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid]) \
-                            or (age != "" and stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age):
-                        self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden: Age={} File='{}'...").format(age, file))
+                    check_path = DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file
+                    check_age = age != "" and (DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age)
+                    if check_path or check_age:
+                        self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden for {}:").format(uuid))
+                        self.signal_message.emit(f"\tAge={stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE]} => {age}")
+                        self.signal_message.emit(f"\tFile={stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]} => {file}")
                     else:
                         continue
                 local_library_db_add_or_update(uuid, file, age)
