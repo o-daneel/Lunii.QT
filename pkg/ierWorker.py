@@ -345,7 +345,7 @@ class ierWorker(QObject):
                 self.exit_requested()
                 return
             filename = os.path.basename(file)
-            age = str((lambda s: int(s) if s.isdigit() else '')(filename.split("+")[0]))
+            age = str((lambda s: int(s) if s.isdigit() else "")(filename.split("+")[0]))
             uuid = str(get_uuid_from_file(file)).upper()
             if uuid == "":
                 self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
@@ -353,8 +353,8 @@ class ierWorker(QObject):
                 if uuid in stories.DB_LOCAL_LIBRARY:
                     if DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] \
                             or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file \
-                            or DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] \
-                            or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age:
+                            or (age != "" and DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid]) \
+                            or (age != "" and stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age):
                         self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden: Age={} File='{}'...").format(age, file))
                     else:
                         continue

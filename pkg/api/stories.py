@@ -11,6 +11,7 @@ import xxtea
 import py7zr
 import zipfile
 import requests
+import logging
 
 from PySide6.QtCore import QFile, QTextStream
 
@@ -39,8 +40,11 @@ FILE_UUID  = "uuid.bin"
 FILE_STUDIO_JSON  = "story.json"
 FILE_STUDIO_THUMB = "thumbnail.png"
 
+logger = logging.getLogger(LUNII_LOGGER)
+
 class StudioStory:
     def __init__(self, story_json=None):
+
         self.format_version = 0
         self.pack_version = 0
         self.title = ""
@@ -301,6 +305,11 @@ def story_load_db(reload=False):
         try:
             with open(FILE_LOCAL_LIBRAIRY_DB, encoding='utf-8') as fp_db:
                 DB_LOCAL_LIBRARY = json.load(fp_db)
+                for id in DB_LOCAL_LIBRARY:
+                    story = DB_LOCAL_LIBRARY[id]
+                    if DB_LOCAL_LIBRARY_COL_PATH in story and not os.path.isfile(story[DB_LOCAL_LIBRARY_COL_PATH]):
+                        logger.log(logging.WARN, f"⚠️ Local file not available for: '{story[DB_LOCAL_LIBRARY_COL_PATH]}'.")
+
         except:
             DB_LOCAL_LIBRARY = {}
 

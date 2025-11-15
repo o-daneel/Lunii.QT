@@ -388,8 +388,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     return False
                 reply = QMessageBox.question(self.tree_stories_third_party, "Confirm", f"Delete entry '{item.text(COL_THIRD_PARTY_NAME)}' ?", QMessageBox.Yes | QMessageBox.No)
                 if reply == QMessageBox.Yes:
-                    stories.thirdparty_db_del_story(uuid.UUID(item.text(COL_THIRD_PARTY_UUID)))
                     stories.local_library_db_delete(item.text(COL_THIRD_PARTY_UUID))
+                    stories.thirdparty_db_del_story(uuid.UUID(item.text(COL_THIRD_PARTY_UUID)))
                     index = self.tree_stories_third_party.indexOfTopLevelItem(item)
                     self.tree_stories_third_party.setCurrentItem(self.tree_stories_third_party.topLevelItem(max(0, index - 1)))
                     self.tree_stories_third_party.takeTopLevelItem(index)
@@ -701,6 +701,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Add asynchronous system to handle the delay on the UI
         QTimer.singleShot(0, self.process_story_select)
 
+    def check_image_in_cache(self, uuid: str):
+        if not os.path.isfile(os.path.join(CACHE_DIR, uuid)):
+            stories.get_picture(uuid)
+
     def process_story_select(self):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
@@ -721,6 +725,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         self.story_details.setHtml("")
                         return
 
+                    self.check_image_in_cache(uuid)
                     url = os.path.join(CACHE_DIR, uuid)
                     width = min(self.story_details.width() - 20, QImage(url).width())
                     age = "" if one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
@@ -735,6 +740,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     names = []
                     for i, item in enumerate(selection):
                         uuid = item.text(COL_UUID)
+                        self.check_image_in_cache(uuid)
                         one_story = self.audio_device.stories.get_story(uuid)
                         age = "" if not one_story or one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
                         paths.append(os.path.join(CACHE_DIR, uuid))
@@ -779,6 +785,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
 
             if id is not None:
+                self.check_image_in_cache(id)
+
                 locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
                 description = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("description", "")
                 title = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("title", "")
@@ -824,6 +832,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
 
             if id is not None and id in stories.DB_THIRD_PARTY:
+                self.check_image_in_cache(id)
                 description = stories.DB_THIRD_PARTY[id].get("description", "")
                 url = os.path.join(CACHE_DIR, id)
                 img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
@@ -1365,8 +1374,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if local_story is not None and DB_LOCAL_LIBRARY_COL_PATH in local_story:
                 path = local_story[DB_LOCAL_LIBRARY_COL_PATH]
-                item.setText(COL_THIRD_PARTY_PATH, path)
-                item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+                if os.path.isfile(path):
+                    item.setText(COL_THIRD_PARTY_PATH, path)
+                    item.setText(COL_THIRD_PARTY_SIZE, f"{round(os.path.getsize(path)/1024/1024, 1)}MB")
+
             elif not self.settings.show_unavailable_stories:
                 continue
 
