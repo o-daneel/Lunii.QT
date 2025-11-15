@@ -741,11 +741,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         names.append(age + item.text(COL_NAME))
 
                     data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
-                    if data_uri is None:
-                        self.story_details.setHtml("")
-                        return
+                    html = "" if data_uri is None else f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
 
-                    html = f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
                     for name in names:
                         html += f"<BR/><b>{name}</b>"
                     self.story_details.setHtml(html)
