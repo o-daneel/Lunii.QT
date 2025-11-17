@@ -761,7 +761,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         + one_story.desc)
                     
                     if self.settings.auto_play:
-                        self.audio_player.play_story(self.audio_device.story_dir(one_story.short_uuid))
+                        self.audio_player.play_story_from_device(self.audio_device.story_dir(one_story.short_uuid))
 
                 else:
                     paths = []
@@ -822,9 +822,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 url = os.path.join(CACHE_DIR, id)
                 width = min(self.story_details.width() - 20, QImage(url).width())
                 age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
-                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
-                    + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
-                    + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
+                if local_db_path != "":
+                    path_tag = f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
+                        + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
+                        + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
+                
+                    if self.settings.auto_play:
+                        self.audio_player.play_story_from_archive(local_db_path)
+                else:
+                    path_tag = ""
                     
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'
@@ -869,9 +875,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 img_tag = "" if not os.path.isfile(url) else f'<img src="{url}" width="{min(self.story_details.width() - 20, QImage(url).width())}" /><br>'
                 title_tag = f'<h2>{name}</h2>'
                 desc_tag = "" if description is None else description
-                path_tag = "" if local_db_path == "" else f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
-                    + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
-                    + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
+                if local_db_path != "":
+                    path_tag = f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
+                        + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
+                        + f' - {round(os.path.getsize(local_db_path)/1024/1024, 1)}MB' 
+                
+                    if self.settings.auto_play:
+                        self.audio_player.play_story_from_archive(local_db_path)
+                else:
+                    path_tag = ""
 
                 self.story_details.setHtml(img_tag + title_tag + desc_tag + path_tag)
             else:
@@ -1025,7 +1037,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_button_next.setVisible(self.settings.auto_play)
             if not self.settings.auto_play:
                 self.audio_player.stop()
-                
+
             self.cb_story_select()
         elif act_name == "actionSavePack":
             self.ts_save_pack()
