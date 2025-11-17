@@ -27,13 +27,21 @@ class AudioPlayer:
         self.filter_timer.timeout.connect(self._process_story_archive)
 
 
-    def play_story_from_device(self, folder):
-        folder = os.path.join(folder, "sf", "000")
+    def play_story_from_device(self, device, folder):
         self.files = []
-        for filename in os.listdir(folder):
-            self.files.append(QUrl.fromLocalFile(os.path.join(folder, filename)))
         
-        random.shuffle(self.files)
+        try:
+            si_plain = device.get_plain_data(os.path.join(folder, "si")).decode("utf-8")
+            si_plain = si_plain.rstrip('\x00')
+            si_lines = [si_plain[i:i+12] for i in range(0, len(si_plain), 12)]
+            for res in si_lines:
+                self.files.append(QUrl.fromLocalFile(os.path.join(folder, "sf", res)))
+        except:
+            folder = os.path.join(folder, "sf", "000")
+            self.files = []
+            for filename in os.listdir(folder):
+                self.files.append(QUrl.fromLocalFile(os.path.join(folder, filename)))
+            
         self.current_index = 0
         self.current_playlist = folder
         self.play_next()
@@ -106,6 +114,7 @@ class AudioPlayer:
     def extract_zip_audio_files(self, path):
         with zipfile.ZipFile(file=path) as zip_file:
             zip_contents = zip_file.namelist()
+               
             for _, file in enumerate(zip_contents):
                 if "sf/000" in file or file.endswith(('.mp3', '.ogg')):
                     out_path = os.path.join(TEMP_DIR, file.split("/")[-1])

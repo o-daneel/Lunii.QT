@@ -761,7 +761,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         + one_story.desc)
                     
                     if self.settings.auto_play:
-                        self.audio_player.play_story_from_device(self.audio_device.story_dir(one_story.short_uuid))
+                        self.audio_player.play_story_from_device(self.audio_device, os.path.join(self.audio_device.content_dir, one_story.short_uuid))
 
                 else:
                     paths = []

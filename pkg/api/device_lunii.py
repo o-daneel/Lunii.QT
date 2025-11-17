@@ -587,6 +587,9 @@ class LuniiDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
+    def get_plain_data(self, file):
+        return self.__get_plain_data(file)
+
     def __get_plain_data(self, file):
         if not os.path.isfile(file):
             return b""
