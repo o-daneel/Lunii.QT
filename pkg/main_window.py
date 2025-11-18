@@ -1,3 +1,4 @@
+import datetime
 import logging
 import re
 import time
@@ -74,7 +75,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
         self.settings = Settings(FILE_SETTINGS)
-
         self.audio_player = AudioPlayer()
 
         # internal resources
@@ -859,6 +859,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 url = os.path.join(CACHE_DIR, id)
                 width = min(self.story_details.width() - 20, QImage(url).width())
                 age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
+                creation_date = datetime.datetime.fromtimestamp(stories.DB_OFFICIAL[id].get("creation_date") / 1000)
+                modification_date = datetime.datetime.fromtimestamp(stories.DB_OFFICIAL[id].get("creation_date") / 1000)
+
+                dates_tag = f'<br><br>Ajouté en {creation_date.strftime("%B %Y")}'
+                if modification_date != creation_date:
+                    dates_tag += f'<br>Modifié en {modification_date.strftime("%B %Y")}'
+
                 if local_db_path != "":
                     path_tag = f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
                         + f' - <a href="{QUrl.fromLocalFile(local_db_path).toString()}">{os.path.basename(local_db_path)}</a>' \
@@ -873,7 +880,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     f'<img src="{url}" width="{width}" /><br>'
                     + f"<h2>{age}{title}</h2>"
                     + f'<h3>{subtitle}</h3>'
-                    + description + path_tag)
+                    + description + path_tag + dates_tag)
 
         elif self.tabWidget.currentIndex() == 2:
             (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
