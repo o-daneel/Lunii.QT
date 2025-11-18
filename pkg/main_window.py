@@ -861,10 +861,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 age = f'{stories.DB_OFFICIAL[id]["age_min"]}+ '
                 creation_date = datetime.datetime.fromtimestamp(stories.DB_OFFICIAL[id].get("creation_date") / 1000)
                 modification_date = datetime.datetime.fromtimestamp(stories.DB_OFFICIAL[id].get("creation_date") / 1000)
+                duration = int(stories.DB_OFFICIAL[id].get("duration")) / 1000
 
                 dates_tag = f'<br><br>Ajouté en {creation_date.strftime("%B %Y")}'
                 if modification_date != creation_date:
                     dates_tag += f'<br>Modifié en {modification_date.strftime("%B %Y")}'
+                dates_tag += f'<br>Durée {int(duration // 3600)}h {(int(duration % 3600) // 60)}min'
 
                 if local_db_path != "":
                     path_tag = f'<br><br><a href="{QUrl.fromLocalFile(os.path.dirname(local_db_path)).toString()}">{os.path.dirname(local_db_path)}</a>' \
