@@ -1674,15 +1674,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selected_items = self.get_multiple_selection()
         if len(selected_items) == 0:
             return
-        items_ids = [id for (id, _) in selected_items]
 
-        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {len(items_ids)} stories", "",
+        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {len(selected_items)} stories", "",
                                                    QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
 
         # if ok pressed
         if out_dir:
-            to_export = [item.text(COL_UUID) for item in items_ids]
-            self.worker_launch(ACTION_EXPORT, to_export, out_dir)
+            self.worker_launch(ACTION_EXPORT, [id for (id, _) in selected_items], out_dir)
         else:
             self.sb_update(self.tr("🛑 Export cancelled"))
 
