@@ -761,7 +761,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         + one_story.desc)
                     
                     if self.settings.auto_play:
-                        self.audio_player.play_story_from_device(self.audio_device, os.path.join(self.audio_device.content_dir, one_story.short_uuid))
+                        self.audio_player.play_story_from_device(self.audio_device, self.audio_device.story_dir(one_story))
 
                 else:
                     paths = []
@@ -1835,7 +1835,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             one_story = self.audio_device.stories.get_story(item.text(COL_UUID))
             one_story.nm = not one_story.nm
             # managing nm file for stories
-            story_nm = os.path.join(self.audio_device.story_dir(one_story.short_uuid), "nm")
+            story_nm = os.path.join(self.audio_device.story_dir(one_story), "nm")
             # if nm file exists
             if os.path.isfile(story_nm):
                 # remove it

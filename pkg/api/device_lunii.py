@@ -76,11 +76,11 @@ class LuniiDevice(QtCore.QObject):
             return "empty"
         return self.snu.hex().upper().lstrip("0")
 
-    def story_dir(self, short_uuid):
-        if short_uuid not in self.stories:
+    def story_dir(self, story):
+        if story.short_uuid not in self.stories:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "This story is not present on your storyteller"))
             return None
-        return os.path.join(self.mount_point, self.STORIES_BASEDIR, short_uuid)
+        return os.path.join(self.mount_point, self.STORIES_BASEDIR, story.short_uuid)
 
     # opens the .md file to read all information related to device
     def __feed_device(self):

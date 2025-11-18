@@ -1,6 +1,5 @@
 from glob import glob
 import json
-import os.path
 import shutil
 import time
 import zipfile
@@ -10,9 +9,7 @@ from uuid import UUID
 
 import psutil
 import py7zr
-import xxtea
 
-from Crypto.Cipher import AES
 from PySide6 import QtCore
 from PySide6.QtCore import QCoreApplication
                             
@@ -66,6 +63,16 @@ class FlamDevice(QtCore.QObject):
         # loading internal stories + pi update for duplicates filtering
         self.stories = feed_stories(self.mount_point)
         self.update_pack_index()
+
+    @property
+    def content_dir(self):
+        return os.path.join(self.mount_point, self.STORIES_BASEDIR)
+
+    def story_dir(self, story):
+        if story.uuid not in self.stories:
+            self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "This story is not present on your storyteller"))
+            return None
+        return os.path.join(self.mount_point, self.STORIES_BASEDIR, str(story.uuid))
 
     @property
     def snu_str(self):
