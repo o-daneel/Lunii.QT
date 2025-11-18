@@ -349,6 +349,7 @@ class Ui_MainWindow(object):
         self.list_stories.setProperty(u"showDropIndicator", False)
         self.list_stories.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
         self.list_stories.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.list_stories.setWordWrap(True)
 
         self.verticalLayout_tabLuniiContent.addWidget(self.list_stories)

@@ -766,32 +766,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def get_single_selection_from_listviews(self):
         if self.tabWidget.currentIndex() == 0:
-            selection_model = self.list_stories.selectionModel()
+            selection = self.list_stories.selectionModel().selectedRows()
         elif self.tabWidget.currentIndex() == 1:
-            selection_model = self.list_stories_official.selectionModel()
+            selection = self.list_stories_official.selectionModel().selectedRows()
         elif self.tabWidget.currentIndex() == 2:
-            selection_model = self.list_stories_third_party.selectionModel()
+            selection = self.list_stories_third_party.selectionModel().selectedRows()
         
-        if selection_model:
-            current_index = selection_model.currentIndex()
-            if current_index.isValid():
-                data = current_index.data(Qt.UserRole)
-                id = data["id"]
-                local_db_path = data["local_db_path"]
-                lunii_story_id = data["lunii_story_id"]
-                name = data["name"]
+        if len(selection) == 1:
+            data = selection[0].data(Qt.UserRole)
+            id = data["id"]
+            local_db_path = data["local_db_path"]
+            lunii_story_id = data["lunii_story_id"]
+            name = data["name"]
 
-                return (id, local_db_path, lunii_story_id, name)
+            return (id, local_db_path, lunii_story_id, name)
         
         return (None, None, None, None)
 
     def get_multiple_selection(self):
         result = []
         if not self.settings.show_gallery:
-            selection = self.tree_stories.selectedItems()
-            if selection is not None:
-                for item in selection:
-                    result.append((item.text(COL_UUID), item.text(COL_NAME)))
+            for item in self.tree_stories.selectedItems():
+                result.append((item.text(COL_UUID), item.text(COL_NAME)))
+        else:
+            for row in self.list_stories.selectionModel().selectedRows():
+                data = row.data(Qt.UserRole)
+                result.append((data["id"], data["name"]))
+
         return result
 
     def process_story_select(self):
@@ -1150,13 +1151,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         selected = None
         if self.settings.show_gallery:
-            selection_model = self.list_stories.selectionModel()
-            if not selection_model:
-                return
-            current_index = selection_model.currentIndex()
-            if current_index.isValid():
-                selected = True
-        else:
+            if len(self.list_stories.selectionModel().selectedRows()) > 0:
+                self.act_mv_top.setEnabled(True)
+                self.act_mv_up.setEnabled(True)
+                self.act_mv_down.setEnabled(True)
+                self.act_mv_bottom.setEnabled(True)
+                self.act_remove.setEnabled(True)
+                self.act_export.setEnabled(True)
+        elif self.tree_stories.selectedItems():
+            self.act_mv_top.setEnabled(True)
+            self.act_mv_up.setEnabled(True)
+            self.act_mv_down.setEnabled(True)
+            self.act_mv_bottom.setEnabled(True)
+            self.act_hide.setEnabled(True)
+            self.act_nm.setEnabled(True)
+            self.act_remove.setEnabled(True)
+            self.act_export.setEnabled(True)
 
             # Official story export is forbidden for Luniis (no piracy on Flam)
             if self.audio_device.device_version < LUNII_V3:
@@ -1165,6 +1175,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     one_story = self.audio_device.stories.get_story(selected[0].text(COL_UUID))
                     if one_story.is_official():
                         self.act_export.setEnabled(False)
+
 
         # pointing to an item
         if selected:
@@ -1559,10 +1570,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         working_list = [[story, index+1] for index, story in enumerate(self.audio_device.stories)]
 
         # getting selection
-        selected_items = self.tree_stories.selectedItems()
+        selected_items = self.get_multiple_selection()
         if len(selected_items) == 0:
             return
-        items_to_move = [item.text(COL_UUID) for item in selected_items]
+        
+        items_to_move = [id for (id, _) in selected_items]
 
         # computing new index for each item in working_list
         prev_index = -1
@@ -1627,16 +1639,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_remove(self):
         # getting selection
-        selection = self.tree_stories.selectedItems()
-        if len(selection) == 0:
+        selected_items = self.get_multiple_selection()
+        if len(selected_items) == 0:
             return
+        items_ids = [id for (id, _) in selected_items]
+
 
         # preparing validation window
         dlg = QMessageBox(self)
         dlg.setWindowTitle(self.tr("Delete stories"))
         message = self.tr("You are requesting to delete : \n")
-        for item in selection:
-            message += f"- {item.text(COL_NAME)}\n"
+        for (_, name) in selected_items:
+            message += f"- {name}\n"
 
         if len(message) > 512:
             message = message[:768] + "..."
@@ -1651,22 +1665,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if button != QMessageBox.Ok:
             return
 
+        self.audio_player.stop(True)
         # processing selection
-        to_remove = [item.text(COL_UUID) for item in selection]
-        self.worker_launch(ACTION_REMOVE, to_remove)
+        self.worker_launch(ACTION_REMOVE, items_ids)
 
     def ts_export(self):
         # getting selection
-        selection = self.tree_stories.selectedItems()
-        if len(selection) == 0:
+        selected_items = self.get_multiple_selection()
+        if len(selected_items) == 0:
             return
+        items_ids = [id for (id, _) in selected_items]
 
-        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {len(selection)} stories", "",
+        out_dir = QFileDialog.getExistingDirectory(self, f"Output Directory for {len(items_ids)} stories", "",
                                                    QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
 
         # if ok pressed
         if out_dir:
-            to_export = [item.text(COL_UUID) for item in selection]
+            to_export = [item.text(COL_UUID) for item in items_ids]
             self.worker_launch(ACTION_EXPORT, to_export, out_dir)
         else:
             self.sb_update(self.tr("🛑 Export cancelled"))
@@ -1691,20 +1706,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def ts_save_pack(self):
         # getting selection
-        selection = self.tree_stories.selectedItems()
-        if len(selection) == 0:
+        selected_items = self.get_multiple_selection()
+        if len(selected_items) == 0:
             return
 
-        (file, _) = QFileDialog.getSaveFileName(self, f'Save pack with {len(selection)} stories: {", ".join([item.text(COL_NAME) for item in self.tree_stories.selectedItems()])}', "", self.tr("Json Files (*.json);;All Files (*)"))
+        (file, _) = QFileDialog.getSaveFileName(self, f'Save pack with {len(selected_items)} stories: {", ".join([name for (_, name) in selected_items])}', "", self.tr("Json Files (*.json);;All Files (*)"))
         with open(file, "w", encoding="utf-8") as f:
             data = []
-            for item in self.tree_stories.selectedItems():
-                uuid = item.text(COL_UUID)
-                name = item.text(COL_NAME)
-                if uuid in stories.DB_LOCAL_LIBRARY and DB_LOCAL_LIBRARY_COL_PATH in stories.DB_LOCAL_LIBRARY[uuid] and len(stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]) > 0:
-                    data.append([name, uuid, stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]])
+            for (id, name) in selected_items:
+                if id in stories.DB_LOCAL_LIBRARY and DB_LOCAL_LIBRARY_COL_PATH in stories.DB_LOCAL_LIBRARY[id] and len(stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH]) > 0:
+                    data.append([name, id, stories.DB_LOCAL_LIBRARY[id][DB_LOCAL_LIBRARY_COL_PATH]])
                 else:
-                    self.sb_update(self.tr(f"⚠️ Local file not available for {name} - {uuid}."))
+                    self.sb_update(self.tr(f"⚠️ Local file not available for {name} - {id}."))
 
             self.sb_update(self.tr(f"Pack saved to '{file}' with {len(data)} stories."))
             json.dump(data, f, indent=4)
