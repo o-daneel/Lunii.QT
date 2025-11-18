@@ -68,8 +68,12 @@ class AudioPlayer:
         self.player.setSource(self.files[self.current_index])
         self.player.play()
             
-    def stop(self):
+    def stop(self, clean_playlist = False):
         self.player.stop()
+
+        if clean_playlist:
+            self.player.setSource(QUrl(""))
+
 
     def pause(self):
         self.player.pause()
@@ -114,8 +118,8 @@ class AudioPlayer:
     def extract_zip_audio_files(self, path):
         with zipfile.ZipFile(file=path) as zip_file:
             zip_contents = zip_file.namelist()
-               
-            for _, file in enumerate(zip_contents):
+
+            for file in zip_contents:
                 if "sf/000" in file or file.endswith(('.mp3', '.ogg')):
                     out_path = os.path.join(TEMP_DIR, file.split("/")[-1])
                     with zip_file.open(file) as src, open(out_path, "wb") as dst:
@@ -125,7 +129,7 @@ class AudioPlayer:
     def extract_7z_audio_files(self, path):
         with py7zr.SevenZipFile(file=path) as zip_file:
             contents = zip_file.readall().items()
-            for index, (fname, bio) in enumerate(contents):
+            for fname, bio in contents:
                 if "sf/000" in fname or fname.endswith(('.mp3', '.ogg')):
                     out_path = os.path.join(TEMP_DIR, fname.split("/")[-1])
                     with open(out_path, "wb") as dst:

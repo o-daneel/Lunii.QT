@@ -341,6 +341,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_tabLuniiContent.setSpacing(2)
         self.verticalLayout_tabLuniiContent.setObjectName(u"verticalLayout_tabLuniiContent")
         self.verticalLayout_tabLuniiContent.setContentsMargins(2, 2, 2, 2)
+        self.list_stories = QListView(self.tabLuniiContent)
+        self.list_stories.setObjectName(u"list_stories")
+        self.list_stories.setEnabled(True)
+        self.list_stories.setMinimumSize(QSize(600, 200))
+        self.list_stories.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories.setProperty(u"showDropIndicator", False)
+        self.list_stories.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories.setWordWrap(True)
+
+        self.verticalLayout_tabLuniiContent.addWidget(self.list_stories)
+
         self.tree_stories = QTreeWidget(self.tabLuniiContent)
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setTextAlignment(4, Qt.AlignLeading|Qt.AlignVCenter);

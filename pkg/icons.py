@@ -1,7 +1,9 @@
+import base64
+
 from collections import deque
 
-from PySide6.QtCore import QThreadPool, QRunnable, Signal, QObject, QSize
-from PySide6.QtGui import QFont, Qt, QColor, QPixmap, QPainter, QStandardItemModel, QStandardItem
+from PySide6.QtCore import QThreadPool, QRunnable, Signal, QObject, QSize, QBuffer, QIODevice, QRect
+from PySide6.QtGui import QFont, Qt, QColor, QPixmap, QPainter, QStandardItemModel, QStandardItem, QPixmap, QPainter
 from PySide6.QtWidgets import QStyledItemDelegate
 
 from pkg.api import stories
@@ -126,3 +128,55 @@ class ImageLoaderWorker(QRunnable):
         stories.get_picture(self.id_)
         self.signals.loaded.emit(self.id_, self.index)
 
+
+def create_image_stack_base64(image_paths, target_width, max_images = 5, offset_step=30):
+    if not image_paths:
+        return None
+
+    pixmaps = [QPixmap(p) for p in image_paths if not QPixmap(p).isNull()]
+    if not pixmaps:
+        return None
+    displayed_images = min(len(pixmaps), max_images)
+    scaled_pixmaps = [pixmap.scaledToWidth(target_width, Qt.SmoothTransformation) for pixmap in pixmaps[:displayed_images]]
+    max_width = max(p.width() for p in scaled_pixmaps)
+    max_height = max(p.height() for p in scaled_pixmaps)
+    width = max_width + offset_step * (displayed_images -1)
+    height = max_height + offset_step * (displayed_images -1)
+
+    final_image = QPixmap(width, height)
+    final_image.fill(Qt.transparent)
+
+    painter = QPainter(final_image)
+    x_offset = 0
+    y_offset = 0
+    for scaled_pixmap in scaled_pixmaps:
+        painter.drawPixmap(x_offset, y_offset, scaled_pixmap)
+        x_offset += offset_step
+        y_offset += offset_step
+
+    text = str(len(pixmaps))
+    padding = 8
+    font = QFont()
+    font.setBold(True)
+    font.setPointSize(32)
+    painter.setFont(font)
+    metrics = painter.fontMetrics()
+    rect_width = metrics.horizontalAdvance(text) + 4 * padding
+    rect_height = metrics.height() + 2 * padding
+    x = width - rect_width - 2 * padding
+    y = height - rect_height - 2* padding
+    painter.setRenderHint(QPainter.Antialiasing)
+    painter.setPen(Qt.NoPen)
+    painter.setBrush(QColor("white"))
+    painter.drawRoundedRect(QRect(x, y, rect_width, rect_height), padding, padding)
+    painter.setPen(QColor("black"))
+    painter.drawText(QRect(x, y, rect_width, rect_height), Qt.AlignCenter, text)
+    painter.end()
+    buffer = QBuffer()
+    buffer.open(QIODevice.WriteOnly)
+    final_image.save(buffer, "PNG")
+    buffer.close()
+
+    base64_data = base64.b64encode(buffer.data()).decode()
+    data_uri = f"data:image/png;base64,{base64_data}"
+    return data_uri

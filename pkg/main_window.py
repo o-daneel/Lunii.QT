@@ -7,11 +7,10 @@ import json
 
 import psutil
 import requests
-import base64
 
 from PySide6 import QtCore, QtGui
-from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QBuffer, QIODevice, QRect, QTimer, QModelIndex, QSortFilterProxyModel, QEvent
-from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QPixmap, QPainter, QStandardItemModel, QStandardItem
+from PySide6.QtCore import QItemSelectionModel, QUrl, QSize, QTimer, QModelIndex, QSortFilterProxyModel, QEvent
+from PySide6.QtGui import QFont, QShortcut, QKeySequence, Qt, QDesktopServices, QIcon, QGuiApplication, QColor, QImage, QStandardItemModel, QStandardItem
 from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QFileDialog, QMessageBox, QLabel, QFrame, QHeaderView, \
     QDialog, QApplication, QListView, QAbstractItemView, QStyledItemDelegate
 
@@ -25,7 +24,7 @@ from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import AGE_NOT_FOUND, DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_NAME, DB_LOCAL_LIBRARY_COL_PATH, story_load_db, StoryList
 from pkg.audio_player import AudioPlayer
-from pkg.icons import SimpleLazyLoadingModel, FixedSizeDelegate
+from pkg.icons import SimpleLazyLoadingModel, FixedSizeDelegate, create_image_stack_base64
 from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT, ACTION_IMPORT_IN_LIBRAIRY
 from pkg.nm_window import NightModeWindow
@@ -197,6 +196,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories.setColumnWidth(COL_NM, COL_NM_SIZE)
         self.tree_stories.setColumnWidth(COL_DB, COL_DB_SIZE)
         self.tree_stories.setColumnHidden(COL_SIZE, self.settings.sizes_hidden)
+        self.tree_stories.setVisible(not self.settings.show_gallery)
+
         self.splitter.setSizes([COL_NAME_MIN_SIZE + COL_UUID_SIZE + COL_NM_SIZE + COL_DB_SIZE, PREVIEW_MIN_SIZE])
 
         self.tree_stories_official.setColumnWidth(COL_OFFICIAL_UUID, COL_UUID_SIZE)
@@ -223,6 +224,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_third_party.setItemDelegate(ColumnEditableDelegate(editable_columns={COL_THIRD_PARTY_AGE, COL_THIRD_PARTY_NAME}))
         self.tree_stories_third_party.setVisible(not self.settings.show_gallery)
 
+        self.list_stories.setViewMode(QListView.IconMode)
+        self.list_stories.setIconSize(QSize(300, 300))
+        self.list_stories.setGridSize(QSize(320, 360))
+        self.list_stories.setResizeMode(QListView.Adjust)
+        self.list_stories.setDragEnabled(False)
+        self.list_stories.setAcceptDrops(False)
+        self.list_stories.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.list_stories.setVisible(self.settings.show_gallery)
         self.list_stories_official.setViewMode(QListView.IconMode)
         self.list_stories_official.setIconSize(QSize(300, 300))
         self.list_stories_official.setGridSize(QSize(320, 360))
@@ -359,6 +368,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.list_stories_official.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.tree_stories_third_party.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.list_stories_third_party.doubleClicked.connect(self.cb_install_or_remove_story_on_lunii)
+
         self.add_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
         self.remove_story_button.clicked.connect(self.cb_install_or_remove_story_on_lunii)
 
@@ -367,6 +377,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Connect the context menu
         self.tree_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.tree_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
+        self.list_stories.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.list_stories.customContextMenuRequested.connect(self.cb_show_context_menu)
         # self.tree_stories.itemClicked.connect(self.ts_clicked)
 
         # connect menu callbacks
@@ -547,7 +559,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # change active menu based on selection
         self.cb_menu_story_update()
 
-        self.menuStory.exec_(self.tree_stories.mapToGlobal(point))
+        if self.settings.show_gallery:
+            self.menuStory.exec_(self.list_stories.mapToGlobal(point))
+        else:
+            self.menuStory.exec_(self.tree_stories.mapToGlobal(point))
 
     def cb_show_log(self):
         # prepare for debug dialog to show
@@ -673,52 +688,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not self.audio_device:
             return
 
-        if self.tabWidget.currentIndex() == 0:
-            selection = self.tree_stories.selectedItems()
-            if len(selection) == 1:
-                current = selection[0]
-                name = current.text(COL_NAME)
-                installationId = self.audio_device.stories.get_story(current.text(COL_UUID)).short_uuid
-                self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
-                self.worker_launch(ACTION_REMOVE, [installationId])
-
-            elif len(selection) > 1:
-                ids = []
-                names = []
-                for _, item in enumerate(selection):
-                    ids.append(self.audio_device.stories.get_story(item.text(COL_UUID)).short_uuid)
-                    names.append(item.text(COL_NAME))
-
-                self.sb_update(self.tr(f'Removing stories "{names}"...'))
-                self.worker_launch(ACTION_REMOVE, ids)
-
-        else:
-            if self.settings.show_gallery:
-                selection_model = self.list_stories_official.selectionModel() if self.tabWidget.currentIndex() == 1 else self.list_stories_third_party.selectionModel()
-                current_index = selection_model.currentIndex()
-                name = current_index.data()
-                data = current_index.data(Qt.UserRole)
-                installationId = data["lunii_story_id"]
-                installationPath = data["local_db_path"]
+        to_remove_ids = []
+        to_remove_names = []
+        if self.tabWidget.currentIndex() == 0 and not self.settings.show_gallery:
+            multiple_selection = self.get_multiple_selection()
+            if len(multiple_selection) > 1:
+                for (id, name) in multiple_selection:
+                    to_remove_ids.append(id if self.audio_device is FlamDevice else self.audio_device.stories.get_story(id).short_uuid)
+                    to_remove_names.append(name)
             else:
-                if self.tabWidget.currentIndex() == 1:
-                    current = self.tree_stories_official.currentItem()
-                    name = current.text(COL_OFFICIAL_NAME)
-                    installationId = current.text(COL_OFFICIAL_INSTALLED)
-                    installationPath = current.text(COL_OFFICIAL_PATH)
-                else:
-                    current = self.tree_stories_third_party.currentItem()
-                    name = current.text(COL_THIRD_PARTY_NAME)
-                    installationId = current.text(COL_THIRD_PARTY_INSTALLED)
-                    installationPath = current.text(COL_THIRD_PARTY_PATH)
+                (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
+                if id is not None:
+                    to_remove_ids.append(self.audio_device.stories.get_story(id).uuid if self.audio_device is FlamDevice else self.audio_device.stories.get_story(id).short_uuid)
+                    to_remove_names.append(name)
+        else:
+            (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
 
-            if installationId != "" and installationPath != "":
-                self.sb_update(self.tr(f'Removing story "{installationId} - {name}"...'))
-                self.worker_launch(ACTION_REMOVE, [installationId])
-            elif installationPath != "":
-                self.sb_update(self.tr(f'Importing story "{name}" from "{installationPath}"...'))
-                self.worker_launch(ACTION_IMPORT, [installationPath])
+            if lunii_story_id != "" and local_db_path != "":
+                to_remove_ids.append(lunii_story_id)
+                to_remove_names.append(name)
+            elif local_db_path != "":
+                self.sb_update(self.tr(f'Importing story "{name}" from "{local_db_path}"...'))
+                self.worker_launch(ACTION_IMPORT, [local_db_path])
 
+        if len(to_remove_ids) > 0:
+            self.audio_player.stop(True)
+            self.sb_update(self.tr(f'Removing stories "{to_remove_names}"...'))
+            self.worker_launch(ACTION_REMOVE, to_remove_ids)
         return
 
     def cb_story_select(self):
@@ -729,85 +725,125 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not os.path.isfile(os.path.join(CACHE_DIR, uuid)):
             stories.get_picture(uuid)
 
+    def get_single_selection(self):
+        if self.settings.show_gallery:
+            return self.get_single_selection_from_listviews()
+        else:
+            return self.get_single_selection_from_treeview()
+
+    def get_single_selection_from_treeview(self):
+        if self.tabWidget.currentIndex() == 0:
+            selection = self.tree_stories.selectedItems()
+        elif self.tabWidget.currentIndex() == 1:
+            selection = self.tree_stories_official.selectedItems()
+        elif self.tabWidget.currentIndex() == 2:
+            selection = self.tree_stories_third_party.selectedItems()
+            
+        if selection is not None and len(selection) == 1:
+            item = selection[0]
+
+            if self.tabWidget.currentIndex() == 0:
+                id = item.text(COL_UUID)
+                local_db_path = ""
+                lunii_story_id = ""
+                name = item.text(COL_NAME)
+
+            elif self.tabWidget.currentIndex() == 1:
+                id = item.text(COL_OFFICIAL_UUID)
+                local_db_path = item.text(COL_OFFICIAL_PATH)
+                lunii_story_id = item.text(COL_OFFICIAL_INSTALLED)
+                name = item.text(COL_OFFICIAL_NAME)
+
+            elif self.tabWidget.currentIndex() == 2:
+                id = item.text(COL_THIRD_PARTY_UUID)
+                local_db_path = item.text(COL_THIRD_PARTY_PATH)
+                lunii_story_id = item.text(COL_THIRD_PARTY_INSTALLED)
+                name = item.text(COL_THIRD_PARTY_NAME)
+
+            return (id, local_db_path, lunii_story_id, name)
+
+        return (None, None, None, None)
+
+    def get_single_selection_from_listviews(self):
+        if self.tabWidget.currentIndex() == 0:
+            selection_model = self.list_stories.selectionModel()
+        elif self.tabWidget.currentIndex() == 1:
+            selection_model = self.list_stories_official.selectionModel()
+        elif self.tabWidget.currentIndex() == 2:
+            selection_model = self.list_stories_third_party.selectionModel()
+        
+        if selection_model:
+            current_index = selection_model.currentIndex()
+            if current_index.isValid():
+                data = current_index.data(Qt.UserRole)
+                id = data["id"]
+                local_db_path = data["local_db_path"]
+                lunii_story_id = data["lunii_story_id"]
+                name = data["name"]
+
+                return (id, local_db_path, lunii_story_id, name)
+        
+        return (None, None, None, None)
+
+    def get_multiple_selection(self):
+        result = []
+        if not self.settings.show_gallery:
+            selection = self.tree_stories.selectedItems()
+            if selection is not None:
+                for item in selection:
+                    result.append((item.text(COL_UUID), item.text(COL_NAME)))
+        return result
+
     def process_story_select(self):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
         self.act_save_pack.setEnabled(False)
 
         if self.tabWidget.currentIndex() == 0:
-            selection = self.tree_stories.selectedItems()
-            if selection is not None:
-                self.remove_story_button.setEnabled(True)
+            multiple_selection = self.get_multiple_selection()
+            if len(multiple_selection) > 1:
+                paths = []
+                names = []
+                for (id, name) in multiple_selection:
+                    self.check_image_in_cache(id)
+                    one_story = self.audio_device.stories.get_story(id)
+                    age = "" if not one_story or one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
+                    paths.append(os.path.join(CACHE_DIR, id))
+                    names.append(age + name)
 
-                if len(selection) == 1:
-                    item = selection[0]
-                    uuid = item.text(COL_UUID)
+                data_uri = create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
+                html = "" if data_uri is None else f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
 
-                    # feeding story image and desc
-                    one_story = self.audio_device.stories.get_story(uuid)
-                    if not one_story:
-                        self.story_details.setHtml("")
-                        return
-
-                    self.check_image_in_cache(uuid)
-                    url = os.path.join(CACHE_DIR, uuid)
-                    width = min(self.story_details.width() - 20, QImage(url).width())
-                    age = "" if one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
-                    self.story_details.setHtml(
-                        f'<img src="{url}" width="{width}" />'
-                        + f"<h2>{age}{one_story.name}</h2>"
-                        + f"<h3>{one_story.subtitle}</h3>"
-                        + f"<h4>{one_story.author}</h4>"
-                        + one_story.desc)
-                    
-                    if self.settings.auto_play:
-                        self.audio_player.play_story_from_device(self.audio_device, self.audio_device.story_dir(one_story))
-
-                else:
-                    paths = []
-                    names = []
-                    for i, item in enumerate(selection):
-                        uuid = item.text(COL_UUID)
-                        self.check_image_in_cache(uuid)
-                        one_story = self.audio_device.stories.get_story(uuid)
-                        age = "" if not one_story or one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
-                        paths.append(os.path.join(CACHE_DIR, uuid))
-                        names.append(age + item.text(COL_NAME))
-
-                    data_uri = self.create_image_stack_base64(paths, min(self.story_details.width() - 20, 512))
-                    html = "" if data_uri is None else f'<img src="{data_uri}" style="max-width:100%; height:auto;" />'
-
-                    for name in names:
-                        html += f"<BR/><b>{name}</b>"
-                    self.story_details.setHtml(html)
-                    self.act_save_pack.setEnabled(True)
-            else:
-                self.story_details.setText("")
+                for name in names:
+                    html += f"<BR/><b>{name}</b>"
+                self.story_details.setHtml(html)
+                self.act_save_pack.setEnabled(True)
+                return
+    
+            (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
+            
+            self.remove_story_button.setEnabled(True)
+            one_story = self.audio_device.stories.get_story(id)
+            if not one_story:
+                self.story_details.setHtml("")
+                return
+            
+            self.check_image_in_cache(id)
+            url = os.path.join(CACHE_DIR, id)
+            width = min(self.story_details.width() - 20, QImage(url).width())
+            age = "" if one_story.age == AGE_NOT_FOUND else str(one_story.age) + "+ "
+            self.story_details.setHtml(
+                f'<img src="{url}" width="{width}" />'
+                + f"<h2>{age}{name}</h2>"
+                + f"<h3>{one_story.subtitle}</h3>"
+                + f"<h4>{one_story.author}</h4>"
+                + one_story.desc)
+            
+            if self.settings.auto_play:
+                self.audio_player.play_story_from_device(self.audio_device, self.audio_device.story_dir(one_story))
 
         elif self.tabWidget.currentIndex() == 1:
-            id = None
-            if self.settings.show_gallery:
-                selection_model = self.list_stories_official.selectionModel()
-                if not selection_model:
-                    return
-                current_index = selection_model.currentIndex()
-                if current_index.isValid():
-                    data = current_index.data(Qt.UserRole)
-                    id = data["id"]
-                    local_db_path = data["local_db_path"]
-                    lunii_story_id = data["lunii_story_id"]
-                else:
-                    self.story_details.setText("")
-                    return
-            else:
-                current = self.tree_stories_official.currentItem()
-                if current is not None:
-                    id = current.text(COL_OFFICIAL_UUID)
-                    local_db_path = current.text(COL_OFFICIAL_PATH)
-                    lunii_story_id = current.text(COL_OFFICIAL_INSTALLED)
-                else:
-                    self.story_details.setText("")
-                    return
+            (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
 
             self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
             self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
@@ -839,31 +875,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     + description + path_tag)
 
         elif self.tabWidget.currentIndex() == 2:
-            id = None
-            if self.settings.show_gallery:
-                selection_model = self.list_stories_third_party.selectionModel()
-                if not selection_model:
-                    return
-                current_index = selection_model.currentIndex()
-                if current_index.isValid():
-                    data = current_index.data(Qt.UserRole)
-                    id = data["id"]
-                    local_db_path = data["local_db_path"]
-                    lunii_story_id = data["lunii_story_id"]
-                    name = data["name"]
-                else:
-                    self.story_details.setText("")
-                    return
-            else:
-                current = self.tree_stories_third_party.currentItem()
-                if current is not None:
-                    id = current.text(COL_THIRD_PARTY_UUID)
-                    local_db_path = current.text(COL_THIRD_PARTY_PATH)
-                    lunii_story_id = current.text(COL_THIRD_PARTY_INSTALLED)
-                    name = current.text(COL_THIRD_PARTY_NAME)
-                else:
-                    self.story_details.setText("")
-                    return
+            (id, local_db_path, lunii_story_id, name) = self.get_single_selection()
 
             self.add_story_button.setEnabled(self.audio_device is not None and local_db_path != "" and lunii_story_id == "")
             self.remove_story_button.setEnabled(self.audio_device is not None and lunii_story_id != "")
@@ -888,58 +900,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.story_details.setHtml(img_tag + title_tag + desc_tag + path_tag)
             else:
                 self.story_details.setText("")
-
-    def create_image_stack_base64(self, image_paths, target_width, max_images = 5, offset_step=30):
-        if not image_paths:
-            return None
-
-        pixmaps = [QPixmap(p) for p in image_paths if not QPixmap(p).isNull()]
-        if not pixmaps:
-            return None
-        displayed_images = min(len(pixmaps), max_images)
-        scaled_pixmaps = [pixmap.scaledToWidth(target_width, Qt.SmoothTransformation) for pixmap in pixmaps[:displayed_images]]
-        max_width = max(p.width() for p in scaled_pixmaps)
-        max_height = max(p.height() for p in scaled_pixmaps)
-        width = max_width + offset_step * (displayed_images -1)
-        height = max_height + offset_step * (displayed_images -1)
-
-        final_image = QPixmap(width, height)
-        final_image.fill(Qt.transparent)
-
-        painter = QPainter(final_image)
-        x_offset = 0
-        y_offset = 0
-        for scaled_pixmap in scaled_pixmaps:
-            painter.drawPixmap(x_offset, y_offset, scaled_pixmap)
-            x_offset += offset_step
-            y_offset += offset_step
-
-        text = str(len(pixmaps))
-        padding = 8
-        font = QFont()
-        font.setBold(True)
-        font.setPointSize(32)
-        painter.setFont(font)
-        metrics = painter.fontMetrics()
-        rect_width = metrics.horizontalAdvance(text) + 4 * padding
-        rect_height = metrics.height() + 2 * padding
-        x = width - rect_width - 2 * padding
-        y = height - rect_height - 2* padding
-        painter.setRenderHint(QPainter.Antialiasing)
-        painter.setPen(Qt.NoPen)
-        painter.setBrush(QColor("white"))
-        painter.drawRoundedRect(QRect(x, y, rect_width, rect_height), padding, padding)
-        painter.setPen(QColor("black"))
-        painter.drawText(QRect(x, y, rect_width, rect_height), Qt.AlignCenter, text)
-        painter.end()
-        buffer = QBuffer()
-        buffer.open(QIODevice.WriteOnly)
-        final_image.save(buffer, "PNG")
-        buffer.close()
-
-        base64_data = base64.b64encode(buffer.data()).decode()
-        data_uri = f"data:image/png;base64,{base64_data}"
-        return data_uri
 
     def cb_db_refresh(self):
         self.sb_update(self.tr("Fetching official Lunii DB..."))
@@ -1048,6 +1008,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_name = action.objectName()
         if act_name == "actionShow_gallery":
             self.settings.show_gallery = action.isChecked()
+            self.tree_stories.setVisible(not self.settings.show_gallery)
+            self.list_stories.setVisible(self.settings.show_gallery)
             self.tree_stories_official.setVisible(not self.settings.show_gallery)
             self.list_stories_official.setVisible(self.settings.show_gallery)
             self.tree_stories_third_party.setVisible(not self.settings.show_gallery)
@@ -1186,16 +1148,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.act_import.setEnabled(False)
 
-        # pointing to an item
-        if self.tree_stories.selectedItems():
-            self.act_mv_top.setEnabled(True)
-            self.act_mv_up.setEnabled(True)
-            self.act_mv_down.setEnabled(True)
-            self.act_mv_bottom.setEnabled(True)
-            self.act_hide.setEnabled(True)
-            self.act_nm.setEnabled(True)
-            self.act_remove.setEnabled(True)
-            self.act_export.setEnabled(True)
+        selected = None
+        if self.settings.show_gallery:
+            selection_model = self.list_stories.selectionModel()
+            if not selection_model:
+                return
+            current_index = selection_model.currentIndex()
+            if current_index.isValid():
+                selected = True
+        else:
 
             # Official story export is forbidden for Luniis (no piracy on Flam)
             if self.audio_device.device_version < LUNII_V3:
@@ -1204,6 +1165,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     one_story = self.audio_device.stories.get_story(selected[0].text(COL_UUID))
                     if one_story.is_official():
                         self.act_export.setEnabled(False)
+
+        # pointing to an item
+        if selected:
+            self.act_mv_top.setEnabled(True)
+            self.act_mv_up.setEnabled(True)
+            self.act_mv_down.setEnabled(True)
+            self.act_mv_bottom.setEnabled(True)
+            self.act_hide.setEnabled(True)
+            self.act_nm.setEnabled(True)
+            self.act_remove.setEnabled(True)
+            self.act_export.setEnabled(True)
 
         # are there story loaded ?
         if self.audio_device.stories:
@@ -1268,6 +1240,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tree_stories_official.clear()
         self.tree_stories_third_party.clear()
 
+        if self.list_stories.model() is not None:
+            self.list_stories.model().clear()       
         if self.list_stories_official.model() is not None:
             self.list_stories_official.model().sourceModel().clear()
         if self.list_stories_third_party.model() is not None:
@@ -1277,6 +1251,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ts_populate_official()
         self.ts_populate_third_party()
 
+        if self.list_stories.selectionModel() is not None:
+            self.list_stories.selectionModel().currentChanged.connect(self.cb_story_select)
         self.list_stories_official.selectionModel().currentChanged.connect(self.cb_story_select)
         self.list_stories_third_party.selectionModel().currentChanged.connect(self.cb_story_select)
 
@@ -1295,6 +1271,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         le_filter = self.le_filter.text()
 
         # adding items
+        data_list = []
         for story in self.audio_device.stories:
             local_story = None if story.str_uuid not in stories.DB_LOCAL_LIBRARY else stories.DB_LOCAL_LIBRARY[story.str_uuid]
             display_name = story.name if local_story is None or not DB_LOCAL_LIBRARY_COL_NAME in local_story else local_story[DB_LOCAL_LIBRARY_COL_NAME]
@@ -1328,6 +1305,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     item.setForeground(column, grey_color)
 
             self.tree_stories.addTopLevelItem(item)
+            path = "" if local_story is None or DB_LOCAL_LIBRARY_COL_PATH not in local_story else local_story[DB_LOCAL_LIBRARY_COL_PATH]
+            data_list.append({"name": display_name, "id": story.str_uuid, "local_db_path": path, "lunii_story_id": story.short_uuid})
+
+        model = SimpleLazyLoadingModel(data_list)
+        self.list_stories.setItemDelegate(FixedSizeDelegate())
+        self.list_stories.setModel(model)
 
     def ts_populate_official(self):
         # creating font
@@ -1927,6 +1910,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def lock_ui(self):
         self.tree_stories.setEnabled(False)
+        self.list_stories.setEnabled(False)
         self.tree_stories_official.setEnabled(False)
         self.list_stories_official.setEnabled(False)
         self.tabWidget.setEnabled(False)
@@ -1939,6 +1923,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def unlock_ui(self):
         self.tree_stories.setEnabled(True)
+        self.list_stories.setEnabled(True)
         self.tree_stories_official.setEnabled(True)
         self.list_stories_official.setEnabled(True)
         self.tabWidget.setEnabled(True)

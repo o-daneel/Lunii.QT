@@ -345,6 +345,34 @@
           <number>2</number>
          </property>
          <item>
+          <widget class="QListView" name="list_stories">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QTreeWidget" name="tree_stories">
            <property name="minimumSize">
             <size>
