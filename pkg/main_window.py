@@ -875,6 +875,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         self.audio_player.play_story_from_archive(local_db_path)
                 else:
                     path_tag = ""
+
+                    if self.settings.auto_play:
+                        self.audio_player.play_audio_from_list([OFFICIAL_DB_RESOURCES_URL + preview for preview in stories.DB_OFFICIAL[id].get("previews", [])])
                     
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'

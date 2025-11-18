@@ -36,6 +36,7 @@ lunii_generic_key = vectkey_to_bytes(raw_key_generic)
 
 OFFICIAL_TOKEN_URL = "https://server-auth-prod.lunii.com/guest/create"
 OFFICIAL_DB_URL = "https://server-data-prod.lunii.com/v2/packs"
+OFFICIAL_DB_RESOURCES_URL = "https://storage.googleapis.com/lunii-data-prod"
 
 CFG_DIR: Path = os.path.join(Path.home(), ".lunii-qt")
 CACHE_DIR = os.path.join(CFG_DIR, "cache")

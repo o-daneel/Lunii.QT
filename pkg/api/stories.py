@@ -452,7 +452,7 @@ def picture_url(uuid: str):
         locale = list(DB_OFFICIAL[uuid]["locales_available"].keys())[0]
         image = DB_OFFICIAL[uuid]["localized_infos"][locale].get("image")
         if image:
-            url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
+            url = OFFICIAL_DB_RESOURCES_URL + image.get("image_url")
             return url
     return None
 
