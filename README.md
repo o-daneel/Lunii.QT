@@ -1,5 +1,5 @@
 ![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
-[![luniiQt v3.1.1](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.1/total?label=luniiQt%20v3.1.1)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.1)
+[![luniiQt v3.1.2](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.2/total?label=luniiQt%20v3.1.2)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.2)
 [![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
 [![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
 
@@ -44,11 +44,13 @@ Les Flams <u>pourront</u> sauvegarder et restaurer leurs histoires mais ne fonct
   - [Transcodage audio](#transcodage-audio)
   - [Mise à jour du firmware](#mise-à-jour-du-firmware)
   - [Formats d'archives pris en charge](#formats-darchives-pris-en-charge)
-    - [for Lunii](#for-lunii)
-    - [for Flam](#for-flam)
+    - [pour Lunii](#pour-lunii)
+    - [pour Flam](#pour-flam)
   - [Python ? Guide Pratique](#python--guide-pratique)
     - [Préparation de l'environnement](#préparation-de-lenvironnement)
     - [Génération des UI](#génération-des-ui)
+    - [Génération des fichiers de tranduction](#génération-des-fichiers-de-tranduction)
+    - [Génération du fichier de ressource](#génération-du-fichier-de-ressource)
     - [Exécution](#exécution)
     - [Générer un exécutable GUI](#générer-un-exécutable-gui)
   - [Astuces](#astuces)
@@ -203,69 +205,77 @@ Dans l'application, le menu `Tools` affiche l'état de la détection.
 
 ## Mise à jour du firmware
 
-Lunii.QT vous offre la possibilité de sauvegarder votre Firmware. Par extension, ayant votre firmware enregistré, il est donc possible de manuellement l'installer sur votre appareil sans avoir à vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **manuelle** et **expérimentale** mais jusqu'à présent personne n'a rencontré de problème.
+Lunii.QT vous offre la possibilité de sauvegarder la dernière version du Firmware disponible sur les serveurs Lunii. Par extension, ayant le firmware enregistré, il est donc possible de manuellement l'installer sur votre appareil sans avoir à vous connecter au LuniiStore (vous ne perdrez pas vos histoires chargées non officielles). Cette procédure est **manuelle** et **expérimentale** mais jusqu'à présent personne n'a rencontré de problème.
 
-**NOTE 1:** Pensez à garder une sauvegarde de votre firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. <u>Vous serez en mesure de rétrograder.</u>  
+**NOTE 1:** Pensez à garder une sauvegarde du firmware pour Lunii v3 et FLAMs, dans le cas d'une mise à jour qui casserait l'astuce des histoires tierces. <u>Vous serez en mesure de downgrader/revenir en arrière.</u>  
 **NOTE 2:** Vous ne pouvez pas choisir la version du firmware. Vous n'obtiendrez que la **dernière version disponible** sur les serveurs de Lunii.
 
 
 ### Guide Pratique - Lunii
-1. Sélectionnez une Lunii
-2. Menu **Outils/Récupérer le firmware**
-3. Vous serez invité à vous connecter  
-<img src="./res/screenshot_login.png" width="170">
+1. Récupération du firmware
+   1. Sélectionnez une Lunii
+   2. Menu **Outils/Récupérer le firmware**
+   3. Vous serez invité à vous connecter  
+   <img src="./res/screenshot_login.png" width="170">  
 
-4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
+   4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
    Vous pouvez vérifier ce point ici  
-   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
-5. Choisissez un emplacement où sauvegarder votre firmware (deux fichiers pour une Lunii v1)
-6. Copiez-la dans le répertoire racine de votre lunii
-7. Renommez-le en `fa.bin` (et aussi `fu.bin`  pour les Lunii v1)   
-```
-- 
- |- .contents
- |- .md
- |- .pi
- |- fa.bin
- |- ... (other files)
-```
-8. Éteindre, rallumer, attendre : **TADA**  
-   (si vous reconnectez votre lunii sur votre pc, le `fa.bin` devrait avoir été supprimé)
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475  
+   
+   5. Choisissez un emplacement où sauvegarder votre firmware (deux fichiers pour une Lunii v1)
+
+2. Installation du firmware précédemment sauvegardé
+   1. Copiez-le(s) fichier(s) du firmware dans le répertoire racine de votre lunii
+   2. Renommez en `fa.bin` (et aussi `fu.bin` pour les Lunii v1)   
+    ```
+    - 
+    |- .contents
+    |- .md
+    |- .pi
+    |- fa.bin
+    |- ... (other files)
+    ```
+   3. Éteindre, rallumer, la lunii fait sa mise à jour avec le fichier détecté, attendre : **TADA**  
+   (si vous reconnectez votre lunii sur votre pc, le `fa.bin` devrait avoir été supprimé indiquant que la mise à jour est ok et évitant de la refaire au prochain démarrage de la lunii)
    
 
 ### Guide Pratique - Flam
-1. Sélectionnez votre Flam dans la liste des appareils
-2. Menu **Outils/Récupérer le firmware**
-3. Vous serez invité à vous connecter  
-<img src="./res/screenshot_login.png" width="170">
+1. Récupération du firmware
+   1. Sélectionnez votre Flam dans la liste des appareils
+   2. Menu **Outils/Récupérer le firmware**
+   3. Vous serez invité à vous connecter  
+   <img src="./res/screenshot_login.png" width="170">  
 
-4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
+   4. Entrez vos identifiants Luniistore (ils ne sont pas sauvegardés pour des raisons de sécurité).  
    Vous pouvez vérifier ce point ici  
-   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
-5. Choisissez un emplacement où sauvegarder vos firmwares (`update-main.enc` and `update-comm.enc`)
-6. Copiez-les dans le répertoire racine de votre Flam    
-```
-- 
- |- etc/
- |- str/
- |- .mdf
- |- update-main.enc
- |- update-comm.enc
- |- ... (other files)
-```
-7. Créer un fichier vide `cable_update_complete` dans /tmp
-```
-- 
- |- etc/
- |- str/
- |- .mdf
- |- update-main.enc
- |- update-comm.enc
- |- tmp/
+   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475  
+   
+   5. Choisissez un emplacement où sauvegarder vos firmwares (`update-main.enc` and `update-comm.enc`)
+
+2. Installation du firmware précédemment sauvegardé
+   1. Copiez-le(s) fichier(s) du firmware dans le répertoire racine de votre Flam    
+   ```
+   - 
+   |- etc/
+   |- str/
+   |- .mdf
+   |- update-main.enc
+   |- update-comm.enc
+   |- ... (other files)
+   ```
+   2. Créer un fichier vide `cable_update_complete` dans /tmp
+   ```
+   - 
+   |- etc/
+   |- str/
+   |- .mdf
+   |- update-main.enc
+   |- update-comm.enc
+   |- tmp/
    |- cable_update_complete
- |- ... (other files)
-```
-8. Éteindre, rallumer, attendre : **TADA**  
+   |- ... (other files)
+   ```
+   3. Éteindre, rallumer, attendre : **TADA**  
    (si vous reconnectez votre lunii sur votre pc, les `*.enc` devraient avoir été supprimés)
    
 ## Formats d'archives pris en charge
