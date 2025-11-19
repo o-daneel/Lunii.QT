@@ -166,6 +166,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.combo_language_filter.model().appendRow(combo_item)
         self.combo_language_update_text()
 
+        for min_age in sorted({stories.DB_OFFICIAL[id].get("age_min") for id in stories.DB_OFFICIAL}):
+            if min_age == -1:
+                continue
+            self.combo_age_min_filter.addItem(str(min_age))
+            self.combo_age_max_filter.addItem(str(min_age))
+
+        if self.settings.filtered_min_age:
+            self.combo_age_min_filter.setCurrentText(self.settings.filtered_min_age)
+        if self.settings.filtered_max_age:
+            self.combo_age_max_filter.setCurrentText(self.settings.filtered_max_age)
+        
         self.unlock_ui()
 
 
@@ -327,6 +338,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_connections(self):
         self.tabWidget.currentChanged.connect(self.cb_tab_changed)
         self.combo_device.currentIndexChanged.connect(self.cb_dev_select)
+        self.combo_age_min_filter.currentIndexChanged.connect(self.cb_combo_min_age_changed)
+        self.combo_age_max_filter.currentIndexChanged.connect(self.cb_combo_max_age_changed)
 
         self.combo_language_filter.model().itemChanged.connect(self.cb_combo_language_changed)
         self.combo_language_filter.view().pressed.connect(self.cb_combo_language_pressed)
@@ -519,6 +532,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def cb_splitter_released(self):
         self.settings.main_window_splitter_position = self.splitter.sizes()
 
+    def cb_combo_min_age_changed(self):
+        self.settings.filtered_min_age = self.combo_age_min_filter.currentText()
+        self.ts_update()
+        
+    def cb_combo_max_age_changed(self):
+        self.settings.filtered_max_age = self.combo_age_max_filter.currentText()
+        self.ts_update()
+
     def cb_combo_language_pressed(self, index):
         model = self.combo_language_filter.model()
         item = model.itemFromIndex(index)
@@ -554,6 +575,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings.current_tab_index = self.tabWidget.currentIndex()
         self.cb_story_select()
         self.combo_language_filter.setEnabled(self.tabWidget.currentIndex() == 1)
+        self.combo_age_min_filter.setEnabled(self.tabWidget.currentIndex() != 0)
+        self.combo_age_max_filter.setEnabled(self.tabWidget.currentIndex() != 0)
 
     def cb_show_context_menu(self, point):
         # change active menu based on selection
@@ -1373,6 +1396,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in filter_name.lower() and
                 not le_filter.lower() in id.lower())):
                 continue
+
+            if self.settings.filtered_min_age and age < self.settings.filtered_min_age:
+                continue
+            
+            if self.settings.filtered_max_age and age > self.settings.filtered_max_age:
+                continue
       
             item.setText(COL_OFFICIAL_NAME, name)
             item.setText(COL_OFFICIAL_UUID, id)
@@ -1437,6 +1466,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 not le_filter.lower() in item.text(COL_THIRD_PARTY_PATH).lower() and
                 not le_filter.lower() in display_name_with_age.lower() and
                 not le_filter.lower() in id.lower() ):
+                continue
+
+            if self.settings.filtered_min_age and age != "" and age < self.settings.filtered_min_age:
+                continue
+            
+            if self.settings.filtered_max_age and age != "" and age > self.settings.filtered_max_age:
                 continue
             
             item.setText(COL_THIRD_PARTY_NAME, display_name)
@@ -1943,6 +1978,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_story_button.setEnabled(False)
         self.remove_story_button.setEnabled(False)
         self.combo_language_filter.setEnabled(False)
+        self.combo_age_min_filter.setEnabled(False)
+        self.combo_age_max_filter.setEnabled(False)
 
     def unlock_ui(self):
         self.tree_stories.setEnabled(True)
@@ -1956,6 +1993,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_story_button.setEnabled(True)
         self.remove_story_button.setEnabled(True)
         self.combo_language_filter.setEnabled(self.tabWidget.currentIndex() == 1)
+        self.combo_age_min_filter.setEnabled(self.tabWidget.currentIndex() != 0)
+        self.combo_age_max_filter.setEnabled(self.tabWidget.currentIndex() != 0)
 
     def worker_check_version(self):
         # version_thread.start()

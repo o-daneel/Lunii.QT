@@ -299,6 +299,30 @@ class Ui_MainWindow(object):
 
         self.top_layout.addLayout(self.audio_layout)
 
+        self.label_from_min_age = QLabel(self.centralwidget)
+        self.label_from_min_age.setObjectName(u"label_from_min_age")
+
+        self.top_layout.addWidget(self.label_from_min_age)
+
+        self.combo_age_min_filter = QComboBox(self.centralwidget)
+        self.combo_age_min_filter.setObjectName(u"combo_age_min_filter")
+        self.combo_age_min_filter.setMinimumSize(QSize(40, 0))
+        self.combo_age_min_filter.setMaximumSize(QSize(40, 16777215))
+
+        self.top_layout.addWidget(self.combo_age_min_filter)
+
+        self.label_to_min_age = QLabel(self.centralwidget)
+        self.label_to_min_age.setObjectName(u"label_to_min_age")
+
+        self.top_layout.addWidget(self.label_to_min_age)
+
+        self.combo_age_max_filter = QComboBox(self.centralwidget)
+        self.combo_age_max_filter.setObjectName(u"combo_age_max_filter")
+        self.combo_age_max_filter.setMinimumSize(QSize(40, 0))
+        self.combo_age_max_filter.setMaximumSize(QSize(40, 16777215))
+
+        self.top_layout.addWidget(self.combo_age_max_filter)
+
         self.combo_language_filter = QComboBox(self.centralwidget)
         self.combo_language_filter.setObjectName(u"combo_language_filter")
         self.combo_language_filter.setMinimumSize(QSize(120, 0))
@@ -777,6 +801,10 @@ class Ui_MainWindow(object):
         self.audio_button_play.setText("")
         self.audio_button_pause.setText("")
         self.audio_button_next.setText("")
+        self.label_from_min_age.setText(QCoreApplication.translate("MainWindow", u"From", None))
+        self.combo_age_min_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.label_to_min_age.setText(QCoreApplication.translate("MainWindow", u"To", None))
+        self.combo_age_max_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"99", None))
         self.combo_language_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Filter Language...", None))
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Story Name or UUID filter text)", None))
 #if QT_CONFIG(tooltip)
