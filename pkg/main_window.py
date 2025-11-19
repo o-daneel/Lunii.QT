@@ -788,11 +788,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return (None, None, None, None)
 
     def get_single_selection_from_listviews(self):
-        if self.tabWidget.currentIndex() == 0:
+        selection = []
+        if self.tabWidget.currentIndex() == 0 and self.list_stories.selectionModel() is not None:
             selection = self.list_stories.selectionModel().selectedRows()
-        elif self.tabWidget.currentIndex() == 1:
+        elif self.tabWidget.currentIndex() == 1 and self.list_stories_official.selectionModel() is not None:
             selection = self.list_stories_official.selectionModel().selectedRows()
-        elif self.tabWidget.currentIndex() == 2:
+        elif self.tabWidget.currentIndex() == 2 and self.list_stories_third_party.selectionModel() is not None:
             selection = self.list_stories_third_party.selectionModel().selectedRows()
         
         if len(selection) == 1:
@@ -811,7 +812,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not self.settings.show_gallery:
             for item in self.tree_stories.selectedItems():
                 result.append((item.text(COL_UUID), item.text(COL_NAME)))
-        else:
+        elif self.list_stories.selectionModel() is not None:
             for row in self.list_stories.selectionModel().selectedRows():
                 data = row.data(Qt.UserRole)
                 result.append((data["id"], data["name"]))
@@ -823,7 +824,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.remove_story_button.setEnabled(False)
         self.act_save_pack.setEnabled(False)
 
-        if self.tabWidget.currentIndex() == 0:
+        if self.tabWidget.currentIndex() == 0 and self.audio_device:
             multiple_selection = self.get_multiple_selection()
             if len(multiple_selection) > 1:
                 paths = []
