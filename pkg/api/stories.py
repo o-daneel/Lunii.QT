@@ -739,14 +739,19 @@ def archive_check_zipcontent(story_path):
                 else:
                     archive_type = TYPE_LUNII_V2_ZIP
             else:
-                # no bt file, so trying to guess based on ri
-                ri_file = next(file for file in zip_contents if file.endswith("ri"))
-                ri_ciphered = zip_file.read(ri_file)
-                ri_plain = xxtea_decipher(ri_ciphered, lunii_generic_key, 0, 512)
-                if ri_plain[:4] == b"000\\":
-                    archive_type = TYPE_LUNII_V2_ZIP
+                # lunii from flam backup ?
+                key_files = [entry for entry in zip_contents if entry.endswith("key")]
+                if key_files:
+                    archive_type = TYPE_LUNII_FLAM_ZIP
                 else:
-                    archive_type = TYPE_UNK
+                    # no bt file nor key file, so trying to guess based on ri
+                    ri_file = next(file for file in zip_contents if file.endswith("ri"))
+                    ri_ciphered = zip_file.read(ri_file)
+                    ri_plain = xxtea_decipher(ri_ciphered, lunii_generic_key, 0, 512)
+                    if ri_plain[:4] == b"000\\":
+                        archive_type = TYPE_LUNII_V2_ZIP
+                    else:
+                        archive_type = TYPE_UNK
         # studio files ?
         elif story_is_studio(zip_contents):
             archive_type = TYPE_STUDIO_ZIP
