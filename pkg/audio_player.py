@@ -27,13 +27,13 @@ class AudioPlayer:
         self.filter_timer.timeout.connect(self._process_story_archive)
         
     def play_audio_from_list(self, urls):
-        if self.current_playlist == urls:
+        if len(urls) > 0 and self.current_playlist == urls[0]:
             return
 
         self.stop(True)
         self.files = [QUrl(url) for url in urls]
         self.current_index = 0
-        self.current_playlist = urls
+        self.current_playlist = urls[0]
         self.play_next()
 
     def play_story_from_device(self, device, folder):
