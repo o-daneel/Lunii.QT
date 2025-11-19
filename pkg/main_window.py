@@ -876,7 +876,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.check_image_in_cache(id)
 
                 locale = list(stories.DB_OFFICIAL[id]["locales_available"].keys())[0]
-                description = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("description", "")
+                description = re.sub(r'<link[^>]*>', '', stories.DB_OFFICIAL[id]["localized_infos"][locale].get("description", ""))
                 title = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("title", "")
                 subtitle = stories.DB_OFFICIAL[id]["localized_infos"][locale].get("subtitle", "")
                 url = os.path.join(CACHE_DIR, id)
@@ -903,7 +903,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                     if self.settings.auto_play:
                         self.audio_player.play_audio_from_list([OFFICIAL_DB_RESOURCES_URL + preview for preview in stories.DB_OFFICIAL[id].get("previews", [])])
-                    
+
                 self.story_details.setHtml(
                     f'<img src="{url}" width="{width}" /><br>'
                     + f"<h2>{age}{title}</h2>"

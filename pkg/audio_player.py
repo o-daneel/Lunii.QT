@@ -71,7 +71,7 @@ class AudioPlayer:
         self.player.play()
 
     def play_next(self):
-        if self.current_index < len(self.files):
+        if self.current_index < len(self.files) -1:
             self.current_index += 1
         elif len(self.files) > 0:
             self.current_index = 0
