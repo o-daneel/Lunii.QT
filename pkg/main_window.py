@@ -662,6 +662,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         elif act_name == "actionTranscode":
             self.worker_launch(ACTION_FFMPEG)
+            self.act_transcode.setChecked(True)
 
             # website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
             # # Open the URL in the default web browser

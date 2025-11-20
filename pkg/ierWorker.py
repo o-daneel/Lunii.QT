@@ -411,14 +411,20 @@ class ierWorker(QObject):
         try:
             with urllib.request.urlopen(url) as response, open(archive_path, 'wb') as out_file:
                 total_size = int(response.getheader('Content-Length', 0))
+                self.signal_message.emit(self.tr("Downloading {:,}MB".format(total_size)))
+
                 downloaded = 0
                 while True:
+                    # early exit ?
                     if self.abort_process:
                         raise Exception("Aborted by user")
 
+                    # reading from internet
                     block = response.read(block_size)
                     if not block:
                         break
+
+                    # writing chunk
                     out_file.write(block)
                     downloaded += len(block)
                     self.signal_file_progress.emit("FFMPEG", downloaded, total_size)
@@ -430,6 +436,8 @@ class ierWorker(QObject):
         # Create unique extraction directory
         extract_dir = CFG_DIR
         os.makedirs(extract_dir, exist_ok=True)
+
+        self.signal_message.emit(self.tr("FFmpeg archive downloaded, extracting..."))
 
         # Extract only ffmpeg binary, discarding directories from zip
         ffmpeg_path = None
