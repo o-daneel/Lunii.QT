@@ -413,6 +413,9 @@ class ierWorker(QObject):
                 total_size = int(response.getheader('Content-Length', 0))
                 downloaded = 0
                 while True:
+                    if self.abort_process:
+                        raise Exception("Aborted by user")
+
                     block = response.read(block_size)
                     if not block:
                         break

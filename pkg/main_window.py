@@ -1320,7 +1320,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # trying to abort current process
         self.worker.abort_process = True
-        self.audio_device.abort_process = True
+        if self.audio_device:
+            self.audio_device.abort_process = True
 
     def slot_total_progress(self, current, max_val):
         # updating UI
@@ -1352,8 +1353,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.pbar_file.setVisible(True)
             self.pbar_file.setRange(0, file_max_val)
             self.pbar_file.setValue(file_current if file_current < file_max_val else 0)
+            self.btn_abort.setVisible(True)
         else:
             self.pbar_file.setVisible(False)
+            self.btn_abort.setVisible(False)
 
         
     def slot_finished(self):
