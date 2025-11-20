@@ -1132,7 +1132,8 @@ class LuniiDevice(QtCore.QObject):
 
                 # Extract each zip file
                 data = zip_file.read(file)
-                target: Path = output_path.joinpath(file)
+                file_newname = self.__get_ciphered_name(file)
+                target: Path = output_path.joinpath(file_newname)
 
                 # create target directory
                 if not target.parent.exists():
