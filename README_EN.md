@@ -1,5 +1,5 @@
 ![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
-[![luniiQt v3.1.1](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.1/total?label=luniiQt%20v3.1.1)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.1)
+[![luniiQt v3.1.2](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.2/total?label=luniiQt%20v3.1.2)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.2)
 [![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
 [![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
 
@@ -42,12 +42,14 @@ Forget about all previous .md and firmware recommendations.
   - [Features](#features)
   - [Audio Transcoding](#audio-transcoding)
   - [Firmware upgrade](#firmware-upgrade)
-  - [Supported archive formats (Lunii)](#supported-archive-formats-lunii)
+  - [Supported archive formats](#supported-archive-formats)
+    - [for Lunii](#for-lunii)
+    - [for Flam](#for-flam)
   - [Python ? HowTo](#python--howto)
     - [Prepare env](#prepare-env)
     - [Build UI files](#build-ui-files)
     - [Build Translation files](#build-translation-files)
-    - [Build UI files](#build-ui-files-1)
+    - [Build resource files](#build-resource-files)
     - [Run](#run)
     - [Build GUI executable](#build-gui-executable)
   - [Tricks](#tricks)
@@ -203,69 +205,76 @@ Within the application, the Tools menu will display the status of detection.
 
 ## Firmware upgrade
 
-Lunii.QT allows you to back up your device firmware. With your firmware saved, you can manually install it on your device without connecting to LuniiStore (you will not lose your loaded unofficial stories). This procedure is **manual** and **experimental**, but so far no one has reported any issues.
+Lunii.QT allows you to backup the latest firmware version available from Lunii servers. With your firmware backed up, you can manually install it on your device without connecting to LuniiStore (you will not lose your loaded unofficial stories). This procedure is **manual** and **experimental**, but so far no one has reported any issues.
 
-**NOTE 1:** Remember to keep a backup of your firmware for Lunii v3 and FLAMs, in cas of a release that would break to third party stories trick. <u>You will be able to downgrade.</u>  
-**NOTE 2:** You cannot choose the firmware version. You'll only get the latest available from Lunii servers.
-
+**NOTE 1:** Remember to keep a backup of your firmware for Lunii v3 and FLAMs, in case a future update breaks the third-party stories workaround. <u>You will be able to downgrade.</u>  
+**NOTE 2:** You cannot choose the firmware version. You'll only get the **latest available version** from Lunii servers.
 
 ### HowTo - Lunii
-1. Select a Lunii/Flam device
-2. Menu **Tools/Get FW Update**
-3. You'll be prompted for login entry  
-<img src="./res/screenshot_login.png" width="170">
+1. Firmware retrieval  
+   1. Select a Lunii/Flam device
+   2. Menu **Tools/Get FW Update**
+   3. You'll be prompted for login entry  
+   <img src="./res/screenshot_login.png" width="170">  
 
-4. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here
-   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
-5. Pick a location where to save your firmware(s) (there are two for Lunii v1)
-6. Copy it to the root dir of your device
-7. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)   
-```
-- 
- |- .contents
- |- .md
- |- .pi
- |- fa.bin
- |- ... (other files)
-```
-8. Power OFF, Power ON, Wait : **TADA**  
+   4. Enter your Luniistore credentials (they are not saved for security purpose).  
+      You can verify this point here
+      https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475  
+      
+   5. Pick a location where to save your firmware(s) (there are two for Lunii v1)
+
+2. Installing the previously backed up firmware
+   1. Copy it to the root dir of your device
+   2. Rename it to `fa.bin` (and optionnally  `fu.bin` for Lunii v1)   
+   ```
+   - 
+   |- .contents
+   |- .md
+   |- .pi
+   |- fa.bin
+   |- ... (other files)
+   ```
+   3. Power OFF, Power ON, Wait : **TADA**  
    (if you reconnect your lunii on your pc, the `fa.bin` should have been removed)
 
 
 ### HowTo - Flam
-1. Select a Flam device
-2. Menu **Tools/Get FW** Update
-3. You'll be prompted for login entry  
-<img src="./res/screenshot_login.png" width="170">
+1. Firmware retrieval  
+   1. Select a Flam device
+   2. Menu **Tools/Get FW** Update
+   3. You'll be prompted for login entry  
+   <img src="./res/screenshot_login.png" width="170">  
 
-4. Enter your Luniistore credentials (they are not saved for security purpose).  
-   You can verify this point here
-   https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475
-5. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
-6. Copy them to the root dir of your device   
-```
-- 
- |- etc/
- |- str/
- |- .mdf
- |- update-main.enc
- |- update-comm.enc
- |- ... (other files)
-```
-7. Create an empty file `cable_update_complete` in /tmp
-```
-- 
- |- etc/
- |- str/
- |- .mdf
- |- update-main.enc
- |- update-comm.enc
- |- tmp/
+   4. Enter your Luniistore credentials (they are not saved for security purpose).  
+      You can verify this point here
+      https://github.com/o-daneel/Lunii.QT/blob/a8bd30e1864552687f235004085a417d7c6b00e6/pkg/main_window.py#L468-L475  
+      
+   5. Pick a location where to save your firmwares (`update-main.enc` and `update-comm.enc`)
+
+2. Installing the previously backed up firmware
+   1. Copy them to the root dir of your device   
+   ```
+   - 
+   |- etc/
+   |- str/
+   |- .mdf
+   |- update-main.enc
+   |- update-comm.enc
+   |- ... (other files)
+   ```
+   2. Create an empty file `cable_update_complete` in /tmp
+   ```
+   - 
+   |- etc/
+   |- str/
+   |- .mdf
+   |- update-main.enc
+   |- update-comm.enc
+   |- tmp/
    |- cable_update_complete
- |- ... (other files)
-```
-8. Eject USB from Flam device (USB cable must be kept connected) and update process will start : **TADA**  
+   |- ... (other files)
+   ```
+   3. Eject USB from Flam device (USB cable must be kept connected) and update process will start : **TADA**  
    (if you reconnect your flam on your pc, the `*.enc` should have been removed)
 
 ## Supported archive formats

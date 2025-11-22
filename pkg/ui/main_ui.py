@@ -18,17 +18,18 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QLineEdit, QMainWindow, QMenu, QMenuBar,
-    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
-    QSplitter, QStatusBar, QTextBrowser, QTreeWidget,
-    QTreeWidgetItem, QVBoxLayout, QWidget)
+    QLineEdit, QListView, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QSplitter, QStatusBar, QTabWidget,
+    QTextBrowser, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(865, 600)
+        MainWindow.resize(1024, 609)
         MainWindow.setMinimumSize(QSize(500, 0))
         icon = QIcon()
         icon.addFile(u":/icon/res/lunii.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -86,11 +87,31 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.actionRemove.setShortcut(u"Del")
 #endif // QT_CONFIG(shortcut)
+        self.actionAutoPlay = QAction(MainWindow)
+        self.actionAutoPlay.setObjectName(u"actionAutoPlay")
+        self.actionAutoPlay.setCheckable(True)
+        self.actionAutoPlay.setEnabled(True)
+        self.actionSavePack = QAction(MainWindow)
+        self.actionSavePack.setObjectName(u"actionSavePack")
+        self.actionLoadPack = QAction(MainWindow)
+        self.actionLoadPack.setObjectName(u"actionLoadPack")
         self.actionShow_size = QAction(MainWindow)
         self.actionShow_size.setObjectName(u"actionShow_size")
         self.actionShow_size.setCheckable(True)
         self.actionShow_size.setChecked(True)
         self.actionShow_size.setEnabled(True)
+        self.actionImportInLibrary = QAction(MainWindow)
+        self.actionImportInLibrary.setObjectName(u"actionImportInLibrary")
+        self.actionImportInLibrary.setIcon(icon1)
+        self.actionShow_gallery = QAction(MainWindow)
+        self.actionShow_gallery.setObjectName(u"actionShow_gallery")
+        self.actionShow_gallery.setCheckable(True)
+        self.actionShow_gallery.setChecked(False)
+        self.actionShow_gallery.setEnabled(True)
+        self.actionShow_unavailable_stories = QAction(MainWindow)
+        self.actionShow_unavailable_stories.setObjectName(u"actionShow_unavailable_stories")
+        self.actionShow_unavailable_stories.setCheckable(True)
+        self.actionShow_unavailable_stories.setChecked(True)
         self.actionGet_firmware = QAction(MainWindow)
         self.actionGet_firmware.setObjectName(u"actionGet_firmware")
         self.actionGet_firmware.setEnabled(False)
@@ -179,6 +200,7 @@ class Ui_MainWindow(object):
         self.top_layout = QHBoxLayout()
         self.top_layout.setSpacing(6)
         self.top_layout.setObjectName(u"top_layout")
+        self.top_layout.setContentsMargins(0, -1, 0, -1)
         self.btn_refresh = QPushButton(self.centralwidget)
         self.btn_refresh.setObjectName(u"btn_refresh")
         self.btn_refresh.setMaximumSize(QSize(25, 25))
@@ -224,6 +246,89 @@ class Ui_MainWindow(object):
 
         self.top_layout.addItem(self.horizontalSpacer)
 
+        self.audio_layout = QHBoxLayout()
+        self.audio_layout.setSpacing(0)
+        self.audio_layout.setObjectName(u"audio_layout")
+        self.audio_button_previous = QPushButton(self.centralwidget)
+        self.audio_button_previous.setObjectName(u"audio_button_previous")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.audio_button_previous.sizePolicy().hasHeightForWidth())
+        self.audio_button_previous.setSizePolicy(sizePolicy1)
+        self.audio_button_previous.setMaximumSize(QSize(24, 24))
+        icon16 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaSkipBackward))
+        self.audio_button_previous.setIcon(icon16)
+
+        self.audio_layout.addWidget(self.audio_button_previous)
+
+        self.audio_button_stop = QPushButton(self.centralwidget)
+        self.audio_button_stop.setObjectName(u"audio_button_stop")
+        self.audio_button_stop.setMaximumSize(QSize(24, 24))
+        icon17 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStop))
+        self.audio_button_stop.setIcon(icon17)
+
+        self.audio_layout.addWidget(self.audio_button_stop)
+
+        self.audio_button_play = QPushButton(self.centralwidget)
+        self.audio_button_play.setObjectName(u"audio_button_play")
+        self.audio_button_play.setMaximumSize(QSize(24, 24))
+        icon18 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStart))
+        self.audio_button_play.setIcon(icon18)
+
+        self.audio_layout.addWidget(self.audio_button_play)
+
+        self.audio_button_pause = QPushButton(self.centralwidget)
+        self.audio_button_pause.setObjectName(u"audio_button_pause")
+        self.audio_button_pause.setMaximumSize(QSize(24, 24))
+        icon19 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackPause))
+        self.audio_button_pause.setIcon(icon19)
+
+        self.audio_layout.addWidget(self.audio_button_pause)
+
+        self.audio_button_next = QPushButton(self.centralwidget)
+        self.audio_button_next.setObjectName(u"audio_button_next")
+        sizePolicy1.setHeightForWidth(self.audio_button_next.sizePolicy().hasHeightForWidth())
+        self.audio_button_next.setSizePolicy(sizePolicy1)
+        self.audio_button_next.setMaximumSize(QSize(24, 24))
+        icon20 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaSkipForward))
+        self.audio_button_next.setIcon(icon20)
+
+        self.audio_layout.addWidget(self.audio_button_next)
+
+
+        self.top_layout.addLayout(self.audio_layout)
+
+        self.label_from_min_age = QLabel(self.centralwidget)
+        self.label_from_min_age.setObjectName(u"label_from_min_age")
+
+        self.top_layout.addWidget(self.label_from_min_age)
+
+        self.combo_age_min_filter = QComboBox(self.centralwidget)
+        self.combo_age_min_filter.setObjectName(u"combo_age_min_filter")
+        self.combo_age_min_filter.setMinimumSize(QSize(40, 0))
+        self.combo_age_min_filter.setMaximumSize(QSize(40, 16777215))
+
+        self.top_layout.addWidget(self.combo_age_min_filter)
+
+        self.label_to_min_age = QLabel(self.centralwidget)
+        self.label_to_min_age.setObjectName(u"label_to_min_age")
+
+        self.top_layout.addWidget(self.label_to_min_age)
+
+        self.combo_age_max_filter = QComboBox(self.centralwidget)
+        self.combo_age_max_filter.setObjectName(u"combo_age_max_filter")
+        self.combo_age_max_filter.setMinimumSize(QSize(40, 0))
+        self.combo_age_max_filter.setMaximumSize(QSize(40, 16777215))
+
+        self.top_layout.addWidget(self.combo_age_max_filter)
+
+        self.combo_language_filter = QComboBox(self.centralwidget)
+        self.combo_language_filter.setObjectName(u"combo_language_filter")
+        self.combo_language_filter.setMinimumSize(QSize(120, 0))
+
+        self.top_layout.addWidget(self.combo_language_filter)
+
         self.le_filter = QLineEdit(self.centralwidget)
         self.le_filter.setObjectName(u"le_filter")
         self.le_filter.setClearButtonEnabled(True)
@@ -244,13 +349,36 @@ class Ui_MainWindow(object):
 
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.splitter.sizePolicy().hasHeightForWidth())
-        self.splitter.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.splitter.sizePolicy().hasHeightForWidth())
+        self.splitter.setSizePolicy(sizePolicy2)
         self.splitter.setOrientation(Qt.Orientation.Horizontal)
-        self.tree_stories = QTreeWidget(self.splitter)
+        self.tabWidget = QTabWidget(self.splitter)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tabLuniiContent = QWidget()
+        self.tabLuniiContent.setObjectName(u"tabLuniiContent")
+        sizePolicy2.setHeightForWidth(self.tabLuniiContent.sizePolicy().hasHeightForWidth())
+        self.tabLuniiContent.setSizePolicy(sizePolicy2)
+        self.verticalLayout_tabLuniiContent = QVBoxLayout(self.tabLuniiContent)
+        self.verticalLayout_tabLuniiContent.setSpacing(2)
+        self.verticalLayout_tabLuniiContent.setObjectName(u"verticalLayout_tabLuniiContent")
+        self.verticalLayout_tabLuniiContent.setContentsMargins(2, 2, 2, 2)
+        self.list_stories = QListView(self.tabLuniiContent)
+        self.list_stories.setObjectName(u"list_stories")
+        self.list_stories.setEnabled(True)
+        self.list_stories.setMinimumSize(QSize(600, 200))
+        self.list_stories.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories.setProperty(u"showDropIndicator", False)
+        self.list_stories.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.list_stories.setWordWrap(True)
+
+        self.verticalLayout_tabLuniiContent.addWidget(self.list_stories)
+
+        self.tree_stories = QTreeWidget(self.tabLuniiContent)
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setTextAlignment(4, Qt.AlignLeading|Qt.AlignVCenter);
         __qtreewidgetitem.setText(3, u"UUID");
@@ -298,17 +426,143 @@ class Ui_MainWindow(object):
         self.tree_stories.setRootIsDecorated(True)
         self.tree_stories.setItemsExpandable(True)
         self.tree_stories.setAllColumnsShowFocus(True)
-        self.splitter.addWidget(self.tree_stories)
         self.tree_stories.header().setStretchLastSection(False)
-        self.story_details = QTextBrowser(self.splitter)
+
+        self.verticalLayout_tabLuniiContent.addWidget(self.tree_stories)
+
+        self.tabWidget.addTab(self.tabLuniiContent, "")
+        self.tabOfficialStories = QWidget()
+        self.tabOfficialStories.setObjectName(u"tabOfficialStories")
+        self.tabOfficialStories.setEnabled(True)
+        sizePolicy2.setHeightForWidth(self.tabOfficialStories.sizePolicy().hasHeightForWidth())
+        self.tabOfficialStories.setSizePolicy(sizePolicy2)
+        self.verticalLayout_tabOfficialStories = QVBoxLayout(self.tabOfficialStories)
+        self.verticalLayout_tabOfficialStories.setObjectName(u"verticalLayout_tabOfficialStories")
+        self.list_stories_official = QListView(self.tabOfficialStories)
+        self.list_stories_official.setObjectName(u"list_stories_official")
+        self.list_stories_official.setEnabled(True)
+        self.list_stories_official.setMinimumSize(QSize(600, 200))
+        self.list_stories_official.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories_official.setProperty(u"showDropIndicator", False)
+        self.list_stories_official.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories_official.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories_official.setWordWrap(True)
+
+        self.verticalLayout_tabOfficialStories.addWidget(self.list_stories_official)
+
+        self.tree_stories_official = QTreeWidget(self.tabOfficialStories)
+        __qtreewidgetitem5 = QTreeWidgetItem()
+        __qtreewidgetitem5.setText(5, u"UUID");
+        __qtreewidgetitem5.setTextAlignment(2, Qt.AlignLeading|Qt.AlignVCenter);
+        __qtreewidgetitem5.setTextAlignment(0, Qt.AlignLeading|Qt.AlignVCenter);
+        self.tree_stories_official.setHeaderItem(__qtreewidgetitem5)
+        self.tree_stories_official.setObjectName(u"tree_stories_official")
+        sizePolicy2.setHeightForWidth(self.tree_stories_official.sizePolicy().hasHeightForWidth())
+        self.tree_stories_official.setSizePolicy(sizePolicy2)
+        self.tree_stories_official.setMinimumSize(QSize(600, 200))
+        self.tree_stories_official.setFrameShape(QFrame.Shape.NoFrame)
+        self.tree_stories_official.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.tree_stories_official.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tree_stories_official.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tree_stories_official.setProperty(u"showDropIndicator", False)
+        self.tree_stories_official.setDragEnabled(False)
+        self.tree_stories_official.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tree_stories_official.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.tree_stories_official.setAlternatingRowColors(True)
+        self.tree_stories_official.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tree_stories_official.setIndentation(20)
+        self.tree_stories_official.setRootIsDecorated(True)
+        self.tree_stories_official.setItemsExpandable(True)
+        self.tree_stories_official.setSortingEnabled(True)
+        self.tree_stories_official.setAllColumnsShowFocus(True)
+        self.tree_stories_official.setExpandsOnDoubleClick(True)
+        self.tree_stories_official.setSupportedDragActions(Qt.DropAction.IgnoreAction)
+        self.tree_stories_official.header().setStretchLastSection(False)
+
+        self.verticalLayout_tabOfficialStories.addWidget(self.tree_stories_official)
+
+        self.tabWidget.addTab(self.tabOfficialStories, "")
+        self.tabThirdPartyStories = QWidget()
+        self.tabThirdPartyStories.setObjectName(u"tabThirdPartyStories")
+        self.verticalLayout_tabThirdPartyStories = QVBoxLayout(self.tabThirdPartyStories)
+        self.verticalLayout_tabThirdPartyStories.setObjectName(u"verticalLayout_tabThirdPartyStories")
+        self.list_stories_third_party = QListView(self.tabThirdPartyStories)
+        self.list_stories_third_party.setObjectName(u"list_stories_third_party")
+        self.list_stories_third_party.setEnabled(True)
+        self.list_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.list_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.list_stories_third_party.setProperty(u"showDropIndicator", False)
+        self.list_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.list_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.list_stories_third_party.setWordWrap(True)
+
+        self.verticalLayout_tabThirdPartyStories.addWidget(self.list_stories_third_party)
+
+        self.tree_stories_third_party = QTreeWidget(self.tabThirdPartyStories)
+        __qtreewidgetitem6 = QTreeWidgetItem()
+        __qtreewidgetitem6.setText(4, u"UUID");
+        __qtreewidgetitem6.setTextAlignment(0, Qt.AlignLeading|Qt.AlignVCenter);
+        self.tree_stories_third_party.setHeaderItem(__qtreewidgetitem6)
+        self.tree_stories_third_party.setObjectName(u"tree_stories_third_party")
+        sizePolicy2.setHeightForWidth(self.tree_stories_third_party.sizePolicy().hasHeightForWidth())
+        self.tree_stories_third_party.setSizePolicy(sizePolicy2)
+        self.tree_stories_third_party.setMinimumSize(QSize(600, 200))
+        self.tree_stories_third_party.setFrameShape(QFrame.Shape.NoFrame)
+        self.tree_stories_third_party.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.tree_stories_third_party.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tree_stories_third_party.setEditTriggers(QAbstractItemView.EditTrigger.DoubleClicked|QAbstractItemView.EditTrigger.EditKeyPressed)
+        self.tree_stories_third_party.setProperty(u"showDropIndicator", False)
+        self.tree_stories_third_party.setDragEnabled(False)
+        self.tree_stories_third_party.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tree_stories_third_party.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.tree_stories_third_party.setAlternatingRowColors(True)
+        self.tree_stories_third_party.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tree_stories_third_party.setIndentation(20)
+        self.tree_stories_third_party.setRootIsDecorated(True)
+        self.tree_stories_third_party.setItemsExpandable(False)
+        self.tree_stories_third_party.setSortingEnabled(True)
+        self.tree_stories_third_party.setAllColumnsShowFocus(True)
+        self.tree_stories_third_party.setExpandsOnDoubleClick(False)
+        self.tree_stories_third_party.setSupportedDragActions(Qt.DropAction.IgnoreAction)
+        self.tree_stories_third_party.header().setStretchLastSection(False)
+
+        self.verticalLayout_tabThirdPartyStories.addWidget(self.tree_stories_third_party)
+
+        self.tabWidget.addTab(self.tabThirdPartyStories, "")
+        self.splitter.addWidget(self.tabWidget)
+        self.layoutWidget_story_details = QWidget(self.splitter)
+        self.layoutWidget_story_details.setObjectName(u"layoutWidget_story_details")
+        sizePolicy2.setHeightForWidth(self.layoutWidget_story_details.sizePolicy().hasHeightForWidth())
+        self.layoutWidget_story_details.setSizePolicy(sizePolicy2)
+        self.verticalLayout_story_details = QVBoxLayout(self.layoutWidget_story_details)
+        self.verticalLayout_story_details.setObjectName(u"verticalLayout_story_details")
+        self.verticalLayout_story_details.setContentsMargins(0, 0, 0, 0)
+        self.story_details = QTextBrowser(self.layoutWidget_story_details)
         self.story_details.setObjectName(u"story_details")
-        sizePolicy1.setHeightForWidth(self.story_details.sizePolicy().hasHeightForWidth())
-        self.story_details.setSizePolicy(sizePolicy1)
+        sizePolicy2.setHeightForWidth(self.story_details.sizePolicy().hasHeightForWidth())
+        self.story_details.setSizePolicy(sizePolicy2)
         self.story_details.setMinimumSize(QSize(300, 192))
-        self.story_details.setMaximumSize(QSize(512, 16777215))
         self.story_details.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.story_details.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
-        self.splitter.addWidget(self.story_details)
+
+        self.verticalLayout_story_details.addWidget(self.story_details)
+
+        self.horizontalLayout_add_remove_buttons = QHBoxLayout()
+        self.horizontalLayout_add_remove_buttons.setObjectName(u"horizontalLayout_add_remove_buttons")
+        self.add_story_button = QPushButton(self.layoutWidget_story_details)
+        self.add_story_button.setObjectName(u"add_story_button")
+
+        self.horizontalLayout_add_remove_buttons.addWidget(self.add_story_button)
+
+        self.remove_story_button = QPushButton(self.layoutWidget_story_details)
+        self.remove_story_button.setObjectName(u"remove_story_button")
+
+        self.horizontalLayout_add_remove_buttons.addWidget(self.remove_story_button)
+
+
+        self.verticalLayout_story_details.addLayout(self.horizontalLayout_add_remove_buttons)
+
+        self.splitter.addWidget(self.layoutWidget_story_details)
 
         self.verticalLayout_2.addWidget(self.splitter)
 
@@ -401,7 +655,7 @@ class Ui_MainWindow(object):
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
         self.menuBar.setEnabled(True)
-        self.menuBar.setGeometry(QRect(0, 0, 865, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 1024, 21))
         self.menuFile = QMenu(self.menuBar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuFile.setSeparatorsCollapsible(True)
@@ -410,6 +664,8 @@ class Ui_MainWindow(object):
         self.menuTools.setObjectName(u"menuTools")
         self.menuLost_stories = QMenu(self.menuTools)
         self.menuLost_stories.setObjectName(u"menuLost_stories")
+        self.menuLibrary = QMenu(self.menuBar)
+        self.menuLibrary.setObjectName(u"menuLibrary")
         self.menuStory = QMenu(self.menuBar)
         self.menuStory.setObjectName(u"menuStory")
         self.menuUpdate = QMenu(self.menuBar)
@@ -423,6 +679,7 @@ class Ui_MainWindow(object):
 
         self.menuBar.addAction(self.menuFile.menuAction())
         self.menuBar.addAction(self.menuStory.menuAction())
+        self.menuBar.addAction(self.menuLibrary.menuAction())
         self.menuBar.addAction(self.menuTools.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
         self.menuBar.addAction(self.menuUpdate.menuAction())
@@ -445,6 +702,10 @@ class Ui_MainWindow(object):
         self.menuLost_stories.addAction(self.actionFind_stories)
         self.menuLost_stories.addAction(self.actionRecover_stories)
         self.menuLost_stories.addAction(self.actionRemove_stories)
+        self.menuLibrary.addAction(self.actionShow_gallery)
+        self.menuLibrary.addAction(self.actionShow_unavailable_stories)
+        self.menuLibrary.addSeparator()
+        self.menuLibrary.addAction(self.actionImportInLibrary)
         self.menuStory.addAction(self.actionMove_Top)
         self.menuStory.addAction(self.actionMove_Up)
         self.menuStory.addAction(self.actionMove_Down)
@@ -457,6 +718,11 @@ class Ui_MainWindow(object):
         self.menuStory.addAction(self.actionExport)
         self.menuStory.addAction(self.actionExport_All)
         self.menuStory.addAction(self.actionRemove)
+        self.menuStory.addSeparator()
+        self.menuStory.addAction(self.actionAutoPlay)
+        self.menuStory.addSeparator()
+        self.menuStory.addAction(self.actionSavePack)
+        self.menuStory.addAction(self.actionLoadPack)
         self.menuHelp.addAction(self.actionUpdate)
         self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
@@ -464,6 +730,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.combo_device.currentIndexChanged.connect(self.tree_stories.clear)
         self.actionExit.triggered.connect(MainWindow.close)
+
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -477,9 +746,24 @@ class Ui_MainWindow(object):
         self.actionMove_Up.setText(QCoreApplication.translate("MainWindow", u"Move Up", None))
         self.actionMove_Down.setText(QCoreApplication.translate("MainWindow", u"Move Down", None))
         self.actionRemove.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.actionAutoPlay.setText(QCoreApplication.translate("MainWindow", u"Auto play story randomly", None))
+#if QT_CONFIG(tooltip)
+        self.actionAutoPlay.setToolTip(QCoreApplication.translate("MainWindow", u"Auto play the selected story randomly by chunk", None))
+#endif // QT_CONFIG(tooltip)
+        self.actionSavePack.setText(QCoreApplication.translate("MainWindow", u"Save story pack", None))
+        self.actionLoadPack.setText(QCoreApplication.translate("MainWindow", u"Load story pack", None))
         self.actionShow_size.setText(QCoreApplication.translate("MainWindow", u"Show size", None))
 #if QT_CONFIG(tooltip)
         self.actionShow_size.setToolTip(QCoreApplication.translate("MainWindow", u"Show size for each stories", None))
+#endif // QT_CONFIG(tooltip)
+        self.actionImportInLibrary.setText(QCoreApplication.translate("MainWindow", u"Import in Library", None))
+        self.actionShow_gallery.setText(QCoreApplication.translate("MainWindow", u"Show gallery", None))
+#if QT_CONFIG(tooltip)
+        self.actionShow_gallery.setToolTip(QCoreApplication.translate("MainWindow", u"Show stories in gallery or table view", None))
+#endif // QT_CONFIG(tooltip)
+        self.actionShow_unavailable_stories.setText(QCoreApplication.translate("MainWindow", u"Show unavailable stories", None))
+#if QT_CONFIG(tooltip)
+        self.actionShow_unavailable_stories.setToolTip(QCoreApplication.translate("MainWindow", u"Show stories that are not available in the local library", None))
 #endif // QT_CONFIG(tooltip)
         self.actionGet_firmware.setText(QCoreApplication.translate("MainWindow", u"Get FW Update", None))
 #if QT_CONFIG(tooltip)
@@ -512,6 +796,16 @@ class Ui_MainWindow(object):
         self.combo_device.setToolTip(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
 #endif // QT_CONFIG(tooltip)
         self.combo_device.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select your Lunii", None))
+        self.audio_button_previous.setText("")
+        self.audio_button_stop.setText("")
+        self.audio_button_play.setText("")
+        self.audio_button_pause.setText("")
+        self.audio_button_next.setText("")
+        self.label_from_min_age.setText(QCoreApplication.translate("MainWindow", u"From", None))
+        self.combo_age_min_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.label_to_min_age.setText(QCoreApplication.translate("MainWindow", u"To", None))
+        self.combo_age_max_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"99", None))
+        self.combo_language_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Filter Language...", None))
         self.le_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"(Story Name or UUID filter text)", None))
 #if QT_CONFIG(tooltip)
         self.btn_db.setToolTip(QCoreApplication.translate("MainWindow", u"Force official Lunii DB to be refreshed", None))
@@ -529,6 +823,24 @@ class Ui_MainWindow(object):
         self.tree_stories.setSortingEnabled(False)
         self.tree_stories.setSortingEnabled(__sortingEnabled)
 
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabLuniiContent), QCoreApplication.translate("MainWindow", u"My Lunii", None))
+        ___qtreewidgetitem1 = self.tree_stories_official.headerItem()
+        ___qtreewidgetitem1.setText(6, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem1.setText(4, QCoreApplication.translate("MainWindow", u"Path", None));
+        ___qtreewidgetitem1.setText(3, QCoreApplication.translate("MainWindow", u"Installation Id", None));
+        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"Language", None));
+        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
+        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOfficialStories), QCoreApplication.translate("MainWindow", u"Official Store", None))
+        ___qtreewidgetitem2 = self.tree_stories_third_party.headerItem()
+        ___qtreewidgetitem2.setText(5, QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtreewidgetitem2.setText(3, QCoreApplication.translate("MainWindow", u"Path", None));
+        ___qtreewidgetitem2.setText(2, QCoreApplication.translate("MainWindow", u"Installation Id", None));
+        ___qtreewidgetitem2.setText(1, QCoreApplication.translate("MainWindow", u"Story Name", None));
+        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Age", None));
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabThirdPartyStories), QCoreApplication.translate("MainWindow", u"Third Party Store", None))
+        self.add_story_button.setText(QCoreApplication.translate("MainWindow", u"Add Story", None))
+        self.remove_story_button.setText(QCoreApplication.translate("MainWindow", u"Remove Story", None))
         self.lbl_total.setText(QCoreApplication.translate("MainWindow", u"Total", None))
 #if QT_CONFIG(tooltip)
         self.pbar_total.setToolTip(QCoreApplication.translate("MainWindow", u"Operation progress", None))
@@ -549,6 +861,7 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
         self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"&Tools", None))
         self.menuLost_stories.setTitle(QCoreApplication.translate("MainWindow", u"Lost stories", None))
+        self.menuLibrary.setTitle(QCoreApplication.translate("MainWindow", u"&Library", None))
         self.menuStory.setTitle(QCoreApplication.translate("MainWindow", u"&Stories", None))
         self.menuUpdate.setTitle(QCoreApplication.translate("MainWindow", u"Update 2.2.X is released", None))
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>865</width>
-    <height>600</height>
+    <width>1024</width>
+    <height>609</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -29,6 +29,12 @@
      <layout class="QHBoxLayout" name="top_layout">
       <property name="spacing">
        <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
       </property>
       <item>
        <widget class="QPushButton" name="btn_refresh">
@@ -145,6 +151,170 @@
        </spacer>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="audio_layout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="audio_button_previous">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaSkipBackward"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_stop">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackStop"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_play">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_pause">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaPlaybackPause"/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="audio_button_next">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::MediaSkipForward"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_from_min_age">
+        <property name="text">
+         <string>From</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="combo_age_min_filter">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_to_min_age">
+        <property name="text">
+         <string>To</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="combo_age_max_filter">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>99</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="combo_language_filter">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>Filter Language...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLineEdit" name="le_filter">
         <property name="placeholderText">
          <string>(Story Name or UUID filter text)</string>
@@ -196,196 +366,579 @@
       <property name="orientation">
        <enum>Qt::Orientation::Horizontal</enum>
       </property>
-      <widget class="QTreeWidget" name="tree_stories">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>150</height>
-        </size>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
        </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-       </property>
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DragDropMode::DropOnly</enum>
-       </property>
-       <property name="defaultDropAction">
-        <enum>Qt::DropAction::MoveAction</enum>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="selectionMode">
-        <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
-       </property>
-       <property name="indentation">
-        <number>20</number>
-       </property>
-       <property name="rootIsDecorated">
-        <bool>true</bool>
-       </property>
-       <property name="itemsExpandable">
-        <bool>true</bool>
-       </property>
-       <property name="allColumnsShowFocus">
-        <bool>true</bool>
-       </property>
-       <attribute name="headerStretchLastSection">
-        <bool>false</bool>
-       </attribute>
-       <column>
-        <property name="text">
-         <string>Story Name</string>
+       <widget class="QWidget" name="tabLuniiContent">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </column>
-       <column>
-        <property name="text">
-         <string notr="true">NM</string>
+        <attribute name="title">
+         <string>My Lunii</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_tabLuniiContent">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QListView" name="list_stories">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="tree_stories">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="dragEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::DropOnly</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::MoveAction</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+           </property>
+           <property name="indentation">
+            <number>20</number>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>true</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Story Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true">NM</string>
+            </property>
+            <property name="toolTip">
+             <string>Night Mode</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignCenter</set>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true">DB</string>
+            </property>
+            <property name="toolTip">
+             <string>Database source (Official / Third Party)</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignCenter</set>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true">UUID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignLeading|AlignVCenter</set>
+            </property>
+           </column>
+           <item>
+            <property name="text">
+             <string notr="true">Suzanne et Gaston</string>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true">O</string>
+            </property>
+            <property name="text">
+             <string notr="true">C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
+            </property>
+            <property name="font">
+             <font>
+              <family>Consolas</family>
+             </font>
+            </property>
+            <property name="text">
+             <string notr="true">75MB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">Panique aux 6 Royaumes</string>
+            </property>
+            <property name="text">
+             <string notr="true">z</string>
+            </property>
+            <property name="text">
+             <string notr="true">O</string>
+            </property>
+            <property name="text">
+             <string notr="true">03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
+            </property>
+            <property name="font">
+             <font>
+              <family>Consolas</family>
+             </font>
+            </property>
+            <property name="text">
+             <string notr="true">65MB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">Au Pays des Loups</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="text">
+             <string notr="true">O</string>
+            </property>
+            <property name="text">
+             <string notr="true">22137B29-8646-4335-8069-4A4C9A2D7E89</string>
+            </property>
+            <property name="text">
+             <string notr="true">124MB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">Sur les bancs de l'école</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="text">
+             <string notr="true">C</string>
+            </property>
+            <property name="text">
+             <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
+            </property>
+            <property name="text">
+             <string notr="true">25MB</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabOfficialStories">
+        <property name="enabled">
+         <bool>true</bool>
         </property>
-        <property name="toolTip">
-         <string>Night Mode</string>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="textAlignment">
-         <set>AlignCenter</set>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string notr="true">DB</string>
-        </property>
-        <property name="toolTip">
-         <string>Database source (Official / Third Party)</string>
-        </property>
-        <property name="textAlignment">
-         <set>AlignCenter</set>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string notr="true">UUID</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Size</string>
-        </property>
-        <property name="textAlignment">
-         <set>AlignLeading|AlignVCenter</set>
-        </property>
-       </column>
-       <item>
-        <property name="text">
-         <string notr="true">Suzanne et Gaston</string>
-        </property>
-        <property name="text">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string notr="true">O</string>
-        </property>
-        <property name="text">
-         <string notr="true">C4139D59-872A-4D15-8CF1-76D34CDF38C6</string>
-        </property>
-        <property name="font">
-         <font>
-          <family>Consolas</family>
-         </font>
-        </property>
-        <property name="text">
-         <string notr="true">75MB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string notr="true">Panique aux 6 Royaumes</string>
-        </property>
-        <property name="text">
-         <string notr="true">z</string>
-        </property>
-        <property name="text">
-         <string notr="true">O</string>
-        </property>
-        <property name="text">
-         <string notr="true">03933BA4-4FBF-475F-9ECC-35EFB4D11DC9</string>
-        </property>
-        <property name="font">
-         <font>
-          <family>Consolas</family>
-         </font>
-        </property>
-        <property name="text">
-         <string notr="true">65MB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string notr="true">Au Pays des Loups</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="text">
-         <string notr="true">O</string>
-        </property>
-        <property name="text">
-         <string notr="true">22137B29-8646-4335-8069-4A4C9A2D7E89</string>
-        </property>
-        <property name="text">
-         <string notr="true">124MB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string notr="true">Sur les bancs de l'école</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="text">
-         <string notr="true">C</string>
-        </property>
-        <property name="text">
-         <string notr="true">29264ADF-5A9F-451A-B1EC-2AE21BBA473C</string>
-        </property>
-        <property name="text">
-         <string notr="true">25MB</string>
-        </property>
-       </item>
+        <attribute name="title">
+         <string>Official Store</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_tabOfficialStories">
+         <item>
+          <widget class="QListView" name="list_stories_official">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="tree_stories_official">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+           </property>
+           <property name="indentation">
+            <number>20</number>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>true</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <property name="expandsOnDoubleClick">
+            <bool>true</bool>
+           </property>
+           <property name="supportedDragActions">
+            <set>Qt::DropAction::IgnoreAction</set>
+           </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Age</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignLeading|AlignVCenter</set>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Story Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Language</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignLeading|AlignVCenter</set>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Installation Id</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Path</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true">UUID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabThirdPartyStories">
+        <attribute name="title">
+         <string>Third Party Store</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_tabThirdPartyStories">
+         <item>
+          <widget class="QListView" name="list_stories_third_party">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="tree_stories_third_party">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>600</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::DoubleClicked|QAbstractItemView::EditTrigger::EditKeyPressed</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::IgnoreAction</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+           </property>
+           <property name="indentation">
+            <number>20</number>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>true</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <property name="expandsOnDoubleClick">
+            <bool>false</bool>
+           </property>
+           <property name="supportedDragActions">
+            <set>Qt::DropAction::IgnoreAction</set>
+           </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Age</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignLeading|AlignVCenter</set>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Story Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Installation Id</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Path</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string notr="true">UUID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
-      <widget class="QTextBrowser" name="story_details">
+      <widget class="QWidget" name="layoutWidget_story_details">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>300</width>
-         <height>192</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>512</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_story_details">
+        <item>
+         <widget class="QTextBrowser" name="story_details">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>192</height>
+           </size>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_add_remove_buttons">
+          <item>
+           <widget class="QPushButton" name="add_story_button">
+            <property name="text">
+             <string>Add Story</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="remove_story_button">
+            <property name="text">
+             <string>Remove Story</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -569,8 +1122,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>865</width>
-     <height>22</height>
+     <width>1024</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -613,6 +1166,15 @@
     <addaction name="separator"/>
     <addaction name="actionTranscode"/>
    </widget>
+   <widget class="QMenu" name="menuLibrary">
+    <property name="title">
+     <string>&amp;Library</string>
+    </property>
+    <addaction name="actionShow_gallery"/>
+    <addaction name="actionShow_unavailable_stories"/>
+    <addaction name="separator"/>
+    <addaction name="actionImportInLibrary"/>
+   </widget>
    <widget class="QMenu" name="menuStory">
     <property name="title">
      <string>&amp;Stories</string>
@@ -629,6 +1191,11 @@
     <addaction name="actionExport"/>
     <addaction name="actionExport_All"/>
     <addaction name="actionRemove"/>
+    <addaction name="separator"/>
+    <addaction name="actionAutoPlay"/>
+    <addaction name="separator"/>
+    <addaction name="actionSavePack"/>
+    <addaction name="actionLoadPack"/>
    </widget>
    <widget class="QMenu" name="menuUpdate">
     <property name="enabled">
@@ -648,6 +1215,7 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuStory"/>
+   <addaction name="menuLibrary"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
    <addaction name="menuUpdate"/>
@@ -738,6 +1306,30 @@
     <string notr="true">Del</string>
    </property>
   </action>
+  <action name="actionAutoPlay">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Auto play story randomly</string>
+   </property>
+   <property name="toolTip">
+    <string>Auto play the selected story randomly by chunk</string>
+   </property>
+  </action>
+  <action name="actionSavePack">
+   <property name="text">
+    <string>Save story pack</string>
+   </property>
+  </action>
+  <action name="actionLoadPack">
+   <property name="text">
+    <string>Load story pack</string>
+   </property>
+  </action>
   <action name="actionShow_size">
    <property name="checkable">
     <bool>true</bool>
@@ -753,6 +1345,46 @@
    </property>
    <property name="toolTip">
     <string>Show size for each stories</string>
+   </property>
+  </action>
+  <action name="actionImportInLibrary">
+   <property name="icon">
+    <iconset resource="../../resources.qrc">
+     <normaloff>:/icon/res/import.png</normaloff>:/icon/res/import.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import in Library</string>
+   </property>
+  </action>
+  <action name="actionShow_gallery">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show gallery</string>
+   </property>
+   <property name="toolTip">
+    <string>Show stories in gallery or table view</string>
+   </property>
+  </action>
+  <action name="actionShow_unavailable_stories">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show unavailable stories</string>
+   </property>
+   <property name="toolTip">
+    <string>Show stories that are not available in the local library</string>
    </property>
   </action>
   <action name="actionGet_firmware">

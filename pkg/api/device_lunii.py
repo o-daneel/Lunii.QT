@@ -1,6 +1,5 @@
 import glob
 import json
-import os.path
 import shutil
 from string import hexdigits
 import time
@@ -22,8 +21,9 @@ from pkg.api.constants import *
 from pkg.api import stories
 from pkg.api.convert_audio import audio_to_mp3, transcoding_required, tags_removal_required, mp3_tag_cleanup
 from pkg.api.convert_image import image_to_bitmap_rle4
-from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, archive_check_zipcontent, story_is_flam, xxtea_cipher, xxtea_decipher
-
+from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, StudioStory, aes_cipher, aes_decipher, xxtea_cipher, xxtea_decipher
+from pkg.api.fix_zip_export import *
+from pkg.api.story_parser import process_archive_type
 
 class LuniiDevice(QtCore.QObject):
     STORIES_BASEDIR = ".content/"
@@ -76,11 +76,11 @@ class LuniiDevice(QtCore.QObject):
             return "empty"
         return self.snu.hex().upper().lstrip("0")
 
-    def story_dir(self, short_uuid):
-        if short_uuid not in self.stories:
+    def story_dir(self, story):
+        if story.short_uuid not in self.stories:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "This story is not present on your storyteller"))
             return None
-        return os.path.join(self.mount_point, self.STORIES_BASEDIR, short_uuid)
+        return os.path.join(self.mount_point, self.STORIES_BASEDIR, story.short_uuid)
 
     # opens the .md file to read all information related to device
     def __feed_device(self):
@@ -587,6 +587,9 @@ class LuniiDevice(QtCore.QObject):
 
         return removed, recovered_size//1024//1024
 
+    def get_plain_data(self, file):
+        return self.__get_plain_data(file)
+
     def __get_plain_data(self, file):
         if not os.path.isfile(file):
             return b""
@@ -696,7 +699,6 @@ class LuniiDevice(QtCore.QObject):
         return True
     
     def import_story(self, story_path):
-        archive_type = TYPE_UNK
 
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("LuniiDevice", "🚧 Loading {}...").format(story_path))
 
@@ -706,21 +708,8 @@ class LuniiDevice(QtCore.QObject):
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "Not enough space left on Lunii (only {}MB)").format(free_space//1024//1024))
             return False
 
-        # identifying based on filename
-        if story_path.lower().endswith(EXT_PK_PLAIN):
-            archive_type = archive_check_plain(story_path)
-        elif story_path.lower().endswith(EXT_PK_V2):
-            archive_type = TYPE_LUNII_V2_ZIP
-        elif story_path.lower().endswith(EXT_PK_V1):
-            archive_type = TYPE_LUNII_V2_ZIP
-        elif story_path.lower().endswith(EXT_ZIP):
-            archive_type = archive_check_zipcontent(story_path)
-        elif story_path.lower().endswith(EXT_7Z):
-            archive_type = archive_check_7zcontent(story_path)
-        elif story_path.lower().endswith(EXT_PK_VX):
-            archive_type = archive_check_zipcontent(story_path)
-
         # processing story
+        archive_type = process_archive_type(story_path)
         if archive_type == TYPE_LUNII_PLAIN:
             self.signal_logger.emit(logging.DEBUG, "Archive => TYPE_PLAIN")
             return self.import_lunii_plain(story_path)
@@ -1792,3 +1781,4 @@ def secure_filename(filename):
     # remove unallowed characters
     output = [c if c not in INVALID_FILE_CHARS else '_' for c in output]
     return "".join(output).encode("ASCII", "ignore").decode()
+

@@ -8,10 +8,11 @@ from uuid import UUID
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
 
-from pkg.api import constants
+from pkg.api import stories
 from pkg.api.constants import FLAM_V1
 from pkg.api.device_lunii import LuniiDevice
-from pkg.api.stories import thirdparty_db_add_story, thirdparty_db_add_thumb, story_load_db
+from pkg.api.stories import DB_LOCAL_LIBRARY_COL_AGE, DB_LOCAL_LIBRARY_COL_PATH, local_library_db_add_or_update, thirdparty_db_add_story, thirdparty_db_add_thumb
+from pkg.api.story_parser import get_uuid_from_file
 
 ACTION_IMPORT  = 1
 ACTION_EXPORT  = 2
@@ -22,6 +23,7 @@ ACTION_RECOVER = 6
 ACTION_CLEANUP = 7
 ACTION_FACTORY = 8
 ACTION_DB_IMPORT = 9
+ACTION_IMPORT_IN_LIBRAIRY = 10
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
@@ -66,6 +68,8 @@ class ierWorker(QObject):
                 self._task_factory_reset()
             elif self.action == ACTION_DB_IMPORT:
                 self._task_db_import()
+            elif self.action == ACTION_IMPORT_IN_LIBRAIRY:
+                self._task_import_in_library()
 
         except Exception as e:
             # Abort requested
@@ -332,3 +336,42 @@ class ierWorker(QObject):
         self.signal_finished.emit()
         self.signal_refresh.emit()
         self.signal_message.emit(self.tr("✅ STUdio DB imported ({}/{}).").format(count, len(db_stories.keys())))
+
+    def _task_import_in_library(self):
+        success = 0
+
+        # importing selected files
+        for index, file in enumerate(self.items):
+            if self.abort_process:
+                self.exit_requested()
+                return
+            filename = os.path.basename(file)
+            age = str((lambda s: int(s) if s.isdigit() else "")(filename.split("+")[0]))
+            uuid = str(get_uuid_from_file(file)).upper()
+            if uuid == "":
+                self.signal_message.emit(self.tr("🛑 Failed to extract UUID from : '{}'").format(file))
+            else:
+                if uuid in stories.DB_LOCAL_LIBRARY:
+                    check_path = DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] != file
+                    check_age = age != "" and (DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] or stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] != age)
+                    if check_path or check_age:
+                        self.signal_message.emit(self.tr("⚠️ Existing entry will be overridden for {}:").format(uuid))
+                        self.signal_message.emit(f"\tAge={'' if DB_LOCAL_LIBRARY_COL_AGE not in stories.DB_LOCAL_LIBRARY[uuid] else stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE]} => {age}")
+                        self.signal_message.emit(f"\tFile={'' if DB_LOCAL_LIBRARY_COL_PATH not in stories.DB_LOCAL_LIBRARY[uuid] else stories.DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH]} => {file}")
+                    else:
+                        self.signal_message.emit(self.tr("⚠️ File already imported in DB : '{}'").format(file))
+                        continue
+                local_library_db_add_or_update(uuid, file, age)
+                self.signal_message.emit(self.tr("✅ New story imported in local Library : '{}'").format(file))
+                success += 1
+            
+            self.signal_total_progress.emit(index, len(self.items))
+
+        if self.abort_process:
+            self.exit_requested()
+            return
+
+        # done
+        self.signal_finished.emit()
+        self.signal_refresh.emit()
+        self.signal_message.emit(self.tr("✅ Import in local Library done : {}/{}").format(success, len(self.items)))

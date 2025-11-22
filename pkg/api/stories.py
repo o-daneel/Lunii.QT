@@ -11,6 +11,7 @@ import xxtea
 import py7zr
 import zipfile
 import requests
+import logging
 
 from PySide6.QtCore import QFile, QTextStream
 
@@ -19,10 +20,16 @@ from pkg.api.constants import *
 STORY_UNKNOWN  = "Unknown story (maybe a User created story)..."
 DESC_NOT_FOUND = "No description found."
 AUTHOR_NOT_FOUND = "No authors."
+AGE_NOT_FOUND = "No age found."
 
 # https://server-data-prod.lunii.com/v2/packs
 DB_OFFICIAL = {}
 DB_THIRD_PARTY = {}
+DB_LOCAL_LIBRARY = {}
+
+DB_LOCAL_LIBRARY_COL_PATH = "path"
+DB_LOCAL_LIBRARY_COL_AGE = "age"
+DB_LOCAL_LIBRARY_COL_NAME = "name"
 
 NODE_SIZE = 0x2C
 NI_HEADER_SIZE = 0x200
@@ -33,8 +40,11 @@ FILE_UUID  = "uuid.bin"
 FILE_STUDIO_JSON  = "story.json"
 FILE_STUDIO_THUMB = "thumbnail.png"
 
+logger = logging.getLogger(LUNII_LOGGER)
+
 class StudioStory:
     def __init__(self, story_json=None):
+
         self.format_version = 0
         self.pack_version = 0
         self.title = ""
@@ -226,6 +236,7 @@ class StudioStory:
 def story_load_db(reload=False):
     global DB_OFFICIAL
     global DB_THIRD_PARTY
+    global DB_LOCAL_LIBRARY
     retVal = True
 
     # fetching db if necessary
@@ -289,7 +300,43 @@ def story_load_db(reload=False):
             db = Path(FILE_THIRD_PARTY_DB)
             db.unlink(FILE_THIRD_PARTY_DB)
 
+    # trying to load local library DB
+    if os.path.isfile(FILE_LOCAL_LIBRAIRY_DB):
+        try:
+            with open(FILE_LOCAL_LIBRAIRY_DB, encoding='utf-8') as fp_db:
+                DB_LOCAL_LIBRARY = json.load(fp_db)
+                for id in DB_LOCAL_LIBRARY:
+                    story = DB_LOCAL_LIBRARY[id]
+                    if DB_LOCAL_LIBRARY_COL_PATH in story and not os.path.isfile(story[DB_LOCAL_LIBRARY_COL_PATH]):
+                        logger.log(logging.WARN, f"⚠️ Local file not available for: '{story[DB_LOCAL_LIBRARY_COL_PATH]}'.")
+
+        except:
+            DB_LOCAL_LIBRARY = {}
+
     return retVal
+
+def local_library_db_delete(uuid: str):
+    if uuid in DB_LOCAL_LIBRARY:
+        del DB_LOCAL_LIBRARY[uuid]
+
+    local_library_db_save()
+
+def local_library_db_add_or_update(uuid: str, path: str = "", age: str = "", name: str = ""):
+    if uuid not in DB_LOCAL_LIBRARY:
+        DB_LOCAL_LIBRARY[uuid] = {}
+
+    if path != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_PATH] = path
+    if age != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_AGE] = age
+    if name != "":
+        DB_LOCAL_LIBRARY[uuid][DB_LOCAL_LIBRARY_COL_NAME] = name
+
+    local_library_db_save()
+
+def local_library_db_save():
+    with open(FILE_LOCAL_LIBRAIRY_DB, "w", encoding="utf-8") as f:
+        json.dump(DB_LOCAL_LIBRARY, f, indent=4)
 
 
 def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
@@ -306,6 +353,33 @@ def thirdparty_db_add_thumb(uuid: UUID, image_data: bytes):
         with open(res_file, "wb") as fp:
             fp.write(image_data)
 
+
+def thirdparty_db_del_story(uuid: UUID):
+    db_stories = dict()
+
+    # trying to load third-party DB
+    if os.path.isfile(FILE_THIRD_PARTY_DB):
+        try:
+            with open(FILE_THIRD_PARTY_DB, encoding='utf-8') as fp_db:
+                db_stories = json.load(fp_db)
+        except:
+            db = Path(FILE_THIRD_PARTY_DB)
+            db.unlink(FILE_THIRD_PARTY_DB)
+
+    # delete the entry (testing 3 uuid format)
+    if uuid.hex in db_stories:
+        del db_stories[uuid.hex]
+    if str(uuid) in db_stories:
+        del db_stories[str(uuid)]
+    if str(uuid).upper() in db_stories:
+        del db_stories[str(uuid).upper()]
+
+    # saving updated db
+    with open(FILE_THIRD_PARTY_DB, "w", encoding='utf-8') as fp_db:
+        json.dump(db_stories, fp_db)
+
+    # reloading DBs
+    story_load_db()
 
 def thirdparty_db_add_story(uuid: UUID, title: str, desc: str):
     db_stories = dict()
@@ -336,6 +410,51 @@ def _uuid_match(uuid: UUID, key_part: str):
 
     return key_part in uuid
 
+def get_picture(uuid: str, reload: bool = False):
+    image_data = None
+
+    # creating cache dir if necessary
+    if not os.path.isdir(CACHE_DIR):
+        Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
+
+    # checking if present in cache
+    res_file = os.path.join(CACHE_DIR, uuid)
+
+    if reload or not os.path.isfile(res_file):
+        # downloading the image to a file
+        one_story_imageURL = picture_url(uuid)
+        # print(f"Downloading for {uuid} to {res_file}")
+        try:
+            # Set the timeout for the request
+            response = requests.get(one_story_imageURL, timeout=2)
+            if response.status_code == 200:
+                # Load image from bytes
+                image_data = response.content
+                with open(res_file, "wb") as fp:
+                    fp.write(image_data)
+            else:
+                pass
+        except requests.exceptions.Timeout:
+            pass
+        except requests.exceptions.RequestException:
+            pass
+
+    if not image_data and os.path.isfile(res_file):
+        # print(f"in cache {res_file}")
+        # returning file content
+        with open(res_file, "rb") as fp:
+            image_data = fp.read()
+
+    return image_data
+
+def picture_url(uuid: str):
+    if uuid in DB_OFFICIAL:
+        locale = list(DB_OFFICIAL[uuid]["locales_available"].keys())[0]
+        image = DB_OFFICIAL[uuid]["localized_infos"][locale].get("image")
+        if image:
+            url = OFFICIAL_DB_RESOURCES_URL + image.get("image_url")
+            return url
+    return None
 
 class Story:
     def __init__(self, uuid: UUID, hidden: bool = False, nm = False, size: int = -1):
@@ -432,55 +551,24 @@ class Story:
                         return author
 
         return AUTHOR_NOT_FOUND
+    
+    @property
+    def age(self):
+        one_uuid = str(self.uuid).upper()
+
+        for db in [DB_OFFICIAL, DB_THIRD_PARTY]:
+            if one_uuid in db and db[one_uuid].get("age_min"):
+                return db[one_uuid].get("age_min")
+
+        return AGE_NOT_FOUND
 
     def get_picture(self, reload: bool = False):
-        image_data = None
-
-        # creating cache dir if necessary
-        if not os.path.isdir(CACHE_DIR):
-            Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
-
-        # checking if present in cache
         one_uuid = str(self.uuid).upper()
-        res_file = os.path.join(CACHE_DIR, one_uuid)
-
-        if reload or not os.path.isfile(res_file):
-            # downloading the image to a file
-            one_story_imageURL = self.picture_url()
-            # print(f"Downloading for {one_uuid} to {res_file}")
-            try:
-                # Set the timeout for the request
-                response = requests.get(one_story_imageURL, timeout=2)
-                if response.status_code == 200:
-                    # Load image from bytes
-                    image_data = response.content
-                    with open(res_file, "wb") as fp:
-                        fp.write(image_data)
-                else:
-                    pass
-            except requests.exceptions.Timeout:
-                pass
-            except requests.exceptions.RequestException:
-                pass
-
-        if not image_data and os.path.isfile(res_file):
-            # print(f"in cache {res_file}")
-            # returning file content
-            with open(res_file, "rb") as fp:
-                image_data = fp.read()
-
-        return image_data
+        return get_picture(one_uuid, reload)
 
     def picture_url(self):
-        one_uuid = str(self.uuid).upper()
+        return picture_url(self.uuid)
 
-        if one_uuid in DB_OFFICIAL:
-            locale = list(DB_OFFICIAL[one_uuid]["locales_available"].keys())[0]
-            image = DB_OFFICIAL[one_uuid]["localized_infos"][locale].get("image")
-            if image:
-                url = "https://storage.googleapis.com/lunii-data-prod" + image.get("image_url")
-                return url
-        return None
 
     def get_meta(self):
         one_uuid = self.str_uuid
@@ -651,14 +739,19 @@ def archive_check_zipcontent(story_path):
                 else:
                     archive_type = TYPE_LUNII_V2_ZIP
             else:
-                # no bt file, so trying to guess based on ri
-                ri_file = next(file for file in zip_contents if file.endswith("ri"))
-                ri_ciphered = zip_file.read(ri_file)
-                ri_plain = xxtea_decipher(ri_ciphered, lunii_generic_key, 0, 512)
-                if ri_plain[:4] == b"000\\":
-                    archive_type = TYPE_LUNII_V2_ZIP
+                # lunii from flam backup ?
+                key_files = [entry for entry in zip_contents if entry.endswith("key")]
+                if key_files:
+                    archive_type = TYPE_LUNII_FLAM_ZIP
                 else:
-                    archive_type = TYPE_UNK
+                    # no bt file nor key file, so trying to guess based on ri
+                    ri_file = next(file for file in zip_contents if file.endswith("ri"))
+                    ri_ciphered = zip_file.read(ri_file)
+                    ri_plain = xxtea_decipher(ri_ciphered, lunii_generic_key, 0, 512)
+                    if ri_plain[:4] == b"000\\":
+                        archive_type = TYPE_LUNII_V2_ZIP
+                    else:
+                        archive_type = TYPE_UNK
         # studio files ?
         elif story_is_studio(zip_contents):
             archive_type = TYPE_STUDIO_ZIP
