@@ -1,4 +1,4 @@
-name: Build for MacOs Sequoia (on Intel)
+name: Build for MacOs (on Intel)
 
 on:
   workflow_dispatch:
@@ -38,7 +38,6 @@ jobs:
         ls -al ./dist/
         echo "SIZE POST-BUILD"
         du -sh ./dist/luniiQt*
-        ls -al ./dist/luniiQt.app/Contents/MacOS/
     
     # - name: Make portable archive
     #   run: |
@@ -48,7 +47,7 @@ jobs:
     # - name: Upload Portable Artefact
     #   uses: actions/upload-artifact@v4.0.0
     #   with:
-    #     name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_Py2App
+    #     name: luniiQt-${{ github.ref_name }}-MacOs-x86_64_Py2App
     #     compression-level: 0 # no compression
     #     path: |
     #       ./dist/luniiQt-${{ github.ref_name }}.zip
@@ -71,7 +70,7 @@ jobs:
     # - name: Upload Portable Artefact
     #   uses: actions/upload-artifact@v4.0.0
     #   with:
-    #     name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_Py2App_Light
+    #     name: luniiQt-${{ github.ref_name }}-MacOs-x86_64_Py2App_Light
     #     compression-level: 0 # no compression
     #     path: |
     #       ./dist/luniiQt-${{ github.ref_name }}.zip
@@ -93,31 +92,31 @@ jobs:
           --icon "luniiQt.app" 185 185 \
           --app-drop-link 415 185 \
           --format UDZO \
-          "dist/luniiQt-${{ github.ref_name }}.dmg" \
+          "dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.dmg" \
           "dist/luniiQt.app"
         
     - name: Upload DMG Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_DMG
+        name: luniiQt-${{ github.ref_name }}-MacOs-x86_64_DMG
         compression-level: 0 # no compression
         path: |
-          ./dist/luniiQt-${{ github.ref_name }}.dmg
+          ./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.dmg
 
 # create a component package that will install the .app into /Applications
     - name: Create PKG installer
       run: |
-        pkgbuild --component "./dist/luniiQt.app" --install-location "/Applications" "./dist/luniiQt-${{ github.ref_name }}.pkg"
+        pkgbuild --component "./dist/luniiQt.app" --install-location "/Applications" "./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.pkg"
         echo "PKG SIZE"
-        du -sh ./dist/luniiQt-${{ github.ref_name }}.pkg
+        du -sh ./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.pkg
 
     - name: Upload PKG Artefact
       uses: actions/upload-artifact@v4.0.0
       with:
-        name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_PKG
+        name: luniiQt-${{ github.ref_name }}-MacOs-x86_64_PKG
         compression-level: 0 # no compression
         path: |
-          ./dist/luniiQt-${{ github.ref_name }}.pkg
+          ./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.pkg
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -125,5 +124,5 @@ jobs:
       with:
         draft: true
         files: |
-          luniiQt-${{ github.ref_name }}-MacOs15-x86_64_DMG.zip
-          luniiQt-${{ github.ref_name }}-MacOs15-x86_64_PKG.zip
+          ./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.dmg
+          ./dist/luniiQt-${{ github.ref_name }}-MacOs-x86_64.pkg
