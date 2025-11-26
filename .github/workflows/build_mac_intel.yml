@@ -1,0 +1,129 @@
+name: Build for MacOs Sequoia (on Intel)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  build_mac_intel:
+    runs-on: macos-15-intel
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.0.0
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install py2app
+        brew install create-dmg
+        
+    - name: Build Exec
+      run: |
+        pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
+        pyside6-uic ./pkg/ui/nm.ui   -o ./pkg/ui/nm_ui.py
+        pyside6-lupdate ./pkg/ui/main.ui ./pkg/ui/nm.ui ./pkg/ui/about_ui.py ./pkg/ui/debug_ui.py ./pkg/ui/login_ui.py ./pkg/nm_window.py ./pkg/main_window.py ./pkg/ierWorker.py ./pkg/versionWorker.py ./pkg/api/devices.py ./pkg/api/device_flam.py ./pkg/api/device_lunii.py -ts ./locales/fr_FR.ts
+        pyside6-lrelease ./locales/fr_FR.ts ./locales/fr_FR.qm  
+        pyside6-rcc ./resources.qrc -o ./resources_rc.py
+        python macos_setup.py py2app
+        ls -al ./dist/
+        echo "SIZE POST-BUILD"
+        du -sh ./dist/luniiQt*
+        ls -al ./dist/luniiQt.app/Contents/MacOS/
+    
+    # - name: Make portable archive
+    #   run: |
+    #     cd dist
+    #     ditto -c -k --sequesterRsrc --keepParent luniiQt.app luniiQt-${{ github.ref_name }}.zip
+
+    # - name: Upload Portable Artefact
+    #   uses: actions/upload-artifact@v4.0.0
+    #   with:
+    #     name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_Py2App
+    #     compression-level: 0 # no compression
+    #     path: |
+    #       ./dist/luniiQt-${{ github.ref_name }}.zip
+
+    # - name: Cleanup Exec
+    #   run: |
+    #     echo "SIZE PRE-CLEANUP"
+    #     du -sh ./dist/luniiQt*
+    #     python macos_cleanup.py
+    #     ls -al ./dist/
+    #     echo "SIZE POST-CLEANUP"
+    #     du -sh ./dist/luniiQt*
+    #     ls -al ./dist/luniiQt.app/Contents/MacOS/
+
+    # - name: Make Light portable archive
+    #   run: |  
+    #     cd dist
+    #     ditto -c -k --sequesterRsrc --keepParent luniiQt.app luniiQt-${{ github.ref_name }}.zip
+
+    # - name: Upload Portable Artefact
+    #   uses: actions/upload-artifact@v4.0.0
+    #   with:
+    #     name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_Py2App_Light
+    #     compression-level: 0 # no compression
+    #     path: |
+    #       ./dist/luniiQt-${{ github.ref_name }}.zip
+
+    - name: Create DMG
+      run: |
+        # create a polished DMG:
+        # - custom background with arrow graphic
+        # - volume icon (.icns)
+        # - fixed window position/size and icon sizes
+        # - app icon placed on the left, Applications link on the right
+        create-dmg \
+          --volname "luniiQt-${{ github.ref_name }} Installer" \
+          --volicon "res/dmg_icon.icns" \
+          --background "res/dmg_background.png" \
+          --window-pos 200 120 \
+          --window-size 600 425 \
+          --icon-size 70 \
+          --icon "luniiQt.app" 185 185 \
+          --app-drop-link 415 185 \
+          --format UDZO \
+          "dist/luniiQt-${{ github.ref_name }}.dmg" \
+          "dist/luniiQt.app"
+        
+    - name: Upload DMG Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_DMG
+        compression-level: 0 # no compression
+        path: |
+          ./dist/luniiQt-${{ github.ref_name }}.dmg
+
+# create a component package that will install the .app into /Applications
+    - name: Create PKG installer
+      run: |
+        pkgbuild --component "./dist/luniiQt.app" --install-location "/Applications" "./dist/luniiQt-${{ github.ref_name }}.pkg"
+        echo "PKG SIZE"
+        du -sh ./dist/luniiQt-${{ github.ref_name }}.pkg
+
+    - name: Upload PKG Artefact
+      uses: actions/upload-artifact@v4.0.0
+      with:
+        name: luniiQt-${{ github.ref_name }}-MacOs15-x86_64_PKG
+        compression-level: 0 # no compression
+        path: |
+          ./dist/luniiQt-${{ github.ref_name }}.pkg
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        draft: true
+        files: |
+          luniiQt-${{ github.ref_name }}-MacOs15-x86_64_DMG.zip
+          luniiQt-${{ github.ref_name }}-MacOs15-x86_64_PKG.zip
