@@ -52,15 +52,13 @@ jobs:
     #     path: |
     #       ./dist/luniiQt-${{ github.ref_name }}.zip
 
-    # - name: Cleanup Exec
-    #   run: |
-    #     echo "SIZE PRE-CLEANUP"
-    #     du -sh ./dist/luniiQt*
-    #     python macos_cleanup.py
-    #     ls -al ./dist/
-    #     echo "SIZE POST-CLEANUP"
-    #     du -sh ./dist/luniiQt*
-    #     ls -al ./dist/luniiQt.app/Contents/MacOS/
+    - name: Cleanup MacOs App
+      run: |
+        echo "SIZE PRE-CLEANUP"
+        du -sh ./dist/luniiQt*
+        python macos_cleanup.py
+        echo "SIZE POST-CLEANUP"
+        du -sh ./dist/luniiQt*
 
     # - name: Make Light portable archive
     #   run: |  

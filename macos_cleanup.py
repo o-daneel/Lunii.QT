@@ -15,31 +15,45 @@ framework_patterns = [
     "Assistant.app",
     "Designer.app",
     "Linguist.app",
-    "QtPdf.*",
-    "QtWebEngineCore.*",
-    "QtWebEngineWidgets.*",
-    "QtMultimedia.*",
+    "qml*",
+    "lrelease",
+    "lupdate",
+    "include",
+    "scripts",
+    # -----------------------
+    "QtDesigner*.*",
+    "QtOpenGL*.*",
+    "QtQml*.*",
+    "QtQuick*.*",
     "Qt3D*.*",
-    "Qt/lib/Qt3D*.framework",
-    "Qt/lib/QtBluetooth.framework",
-    "Qt/lib/QtCharts*.framework",
+    "QtPdf*.*",
+    "QtPrint*.*",
+    "QtSql*.*",
+    # -----------------------
+    "Qt/qml",
+    # -----------------------
+    "Qt/metatypes/qt6quick*",
+    "Qt/metatypes/qt6design*",
+    "Qt/metatypes/qt6qml*",
+    "Qt/metatypes/qt6labs*",
+    "Qt/metatypes/qt6opengl*",
+    "Qt/metatypes/qt6print*",
+    "Qt/metatypes/qt6sql*",
+    # -----------------------
     "Qt/lib/QtDesigner*.framework",
-    "Qt/lib/QtGraph*.framework",
     "Qt/lib/QtLabs*.framework",
-    "Qt/lib/QtMultimedia.framework",
     "Qt/lib/QtOpenGL*.framework",
-    "Qt/lib/QtP*.framework",
-    "Qt/lib/QtQuickC?*.framework",
+    "Qt/lib/QtPrint*.framework",
+    "Qt/lib/QtQuick*.framework",
+    "Qt/lib/QtQml*.framework",
     "Qt/lib/QtSql*.framework",
-    "Qt/lib/QtWebEngine*.framework",
-    "Qt/translations/assistant*",
-    "Qt/translations/designer*",
-    "Qt/translations/linguist*",
-    "Qt/translations/qtdecl*",
-    "Qt/translations/qt_help*",
+    # -----------------------
     "Qt/plugins/designer*",
     "Qt/plugins/qml*",
-    "Qt/qml",
+    "Qt/plugins/sql*",
+    # -----------------------
+    "Qt/translations",
+    "Qt/libexec",
 ]
 frameworks_dir = os.path.join(APP_PATH, "Resources/lib/python3.11/PySide6")
 for pattern in framework_patterns:
@@ -58,4 +72,4 @@ for pattern in framework_patterns:
 # remove(os.path.join(APP_PATH, "Resources", "translations"))
 
 # Strip binaries
-subprocess.call("find dist/luniiQt.app -type f -perm +111 -exec strip {} \\;", shell=True)
+# subprocess.call("find dist/luniiQt.app -type f -perm +111 -exec strip {} \\;", shell=True)
