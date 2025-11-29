@@ -25,7 +25,7 @@ class Ui_nightMode(object):
     def setupUi(self, nightMode):
         if not nightMode.objectName():
             nightMode.setObjectName(u"nightMode")
-        nightMode.resize(400, 499)
+        nightMode.resize(400, 540)
         nightMode.setMinimumSize(QSize(400, 0))
         nightMode.setModal(True)
         self.verticalLayout = QVBoxLayout(nightMode)
