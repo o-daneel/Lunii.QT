@@ -19,7 +19,7 @@ from pkg.api.device_lunii import LuniiDevice, is_lunii
 from pkg.api.devices import find_devices
 from pkg.api.firmware import luniistore_get_authtoken, device_fw_download, device_fw_getlist
 from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
-from pkg.ierWorker import ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
+from pkg.ierWorker import ACTION_DOWNLOAD, ACTION_FFMPEG, ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.nm_window import NightModeWindow
 from pkg.ui.about_ui import about_dlg
@@ -39,7 +39,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v3.1.3a1"
+APP_VERSION = "v3.1.3"
 
 """ 
 # TODO : 
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sizes_hidden = True
         self.details_hidden = False
         self.details_last_uuid = None
-        self.ffmpeg_present = STORY_TRANSCODING_SUPPORTED
+        self.ffmpeg_present = which_ffmpeg() is not None
 
         # actions local storage
         self.act_mv_top = None
@@ -165,10 +165,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_getfw = next(act for act in t_actions if act.objectName() == "actionGet_firmware")
         self.act_factory = next(act for act in t_actions if act.objectName() == "actionFactory_reset")
         self.act_factory.setVisible(False)
-        act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
-        act_transcode.setChecked(self.ffmpeg_present)
-        act_transcode.setEnabled(not self.ffmpeg_present)
-        act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (HowTo 🔗)")
+        self.act_transcode = next(act for act in t_actions if act.objectName() == "actionTranscode")
+        self.act_transcode.setChecked(self.ffmpeg_present)
+        self.act_transcode.setEnabled(not self.ffmpeg_present)
+        self.act_transcode.setEnabled(True)
+        self.act_transcode.setText(self.tr("FFMPEG detected") if self.ffmpeg_present else self.tr("FFMPEG is missing (📥)"))
 
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
@@ -660,9 +661,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.sb_update(self.tr("🛑 Network error..."))
 
         elif act_name == "actionTranscode":
-            website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
-            # Open the URL in the default web browser
-            QDesktopServices.openUrl(website_url)
+            self.worker_launch(ACTION_FFMPEG)
 
         elif act_name == "actionFactory_reset":
             # TODO request confirmation before performing
@@ -742,6 +741,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
 
+        self.ffmpeg_present = which_ffmpeg() is not None
+        self.act_transcode.setChecked(self.ffmpeg_present)
+        self.act_transcode.setText(self.tr("FFMPEG detected") if self.ffmpeg_present else self.tr("FFMPEG is missing (📥)"))
+
     def cb_menu_help_update(self, last_version):
         if last_version:
             self.logger.log(logging.INFO, self.tr("Latest Github release") + f" {last_version}")
@@ -761,10 +764,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             c_alpha = len(c_versions) > 1
             l_alpha = len(l_versions) > 1
 
-            # none of them are alpha (stable vs stable) : 2.7.8 2.7.9
-            # stable vs aplha : 2.7.8 2.7.9a1
-            # alpha vs stable : 2.7.9a1 2.7.9
-            # alpha vs alpha  : 2.7.9a1 2.7.9a2
+            # none of them are alpha (stable vs stable) : 2.7.8 2.7.9 : UPDATE
+            # stable vs alpha : 2.7.8 2.7.9a1    : NO UPDATE
+            # alpha vs stable : 2.7.9a1 2.7.9    : UPDATE
+            # alpha vs alpha  : 2.7.9a1 2.7.9a2  : UPDATE
             new_update = (l_versions[0] > c_versions[0]) or \
                 (c_alpha and l_alpha and l_versions[1] > c_versions[1]) or \
                 (l_versions[0] == c_versions[0] and c_alpha and not l_alpha)
@@ -1297,6 +1300,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_device.signal_file_progress.connect(self.slot_file_progress)
             self.audio_device.signal_logger.connect(self.logger.log)
         self.worker.signal_total_progress.connect(self.slot_total_progress)
+        self.worker.signal_file_progress.connect(self.slot_file_progress)
         self.worker.signal_finished.connect(self.thread.quit)
         self.worker.signal_refresh.connect(self.ts_update)
         self.worker.signal_message.connect(self.sb_update)
@@ -1314,7 +1318,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # trying to abort current process
         self.worker.abort_process = True
-        self.audio_device.abort_process = True
+        if self.audio_device:
+            self.audio_device.abort_process = True
 
     def slot_total_progress(self, current, max_val):
         # updating UI
@@ -1346,8 +1351,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.pbar_file.setVisible(True)
             self.pbar_file.setRange(0, file_max_val)
             self.pbar_file.setValue(file_current if file_current < file_max_val else 0)
+            self.btn_abort.setVisible(True)
         else:
             self.pbar_file.setVisible(False)
+            self.btn_abort.setVisible(False)
 
         
     def slot_finished(self):

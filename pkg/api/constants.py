@@ -1,4 +1,5 @@
 import os
+import platform
 import shutil
 import zlib
 from pathlib import Path
@@ -7,8 +8,6 @@ from pathlib import Path
 LUNII_LOGGER = "lunii-qt"
 REFRESH_CACHE = False
 CACHE_CRC32 = 0x0F77E60C
-
-STORY_TRANSCODING_SUPPORTED = shutil.which("ffmpeg") is not None
 
 def toggle_refresh_cache():
     global REFRESH_CACHE
@@ -42,6 +41,22 @@ CACHE_DIR = os.path.join(CFG_DIR, "cache")
 FILE_OFFICIAL_DB = os.path.join(CFG_DIR, "official.db")
 FILE_THIRD_PARTY_DB = os.path.join(CFG_DIR, "third-party.db")
 V3_KEYS = os.path.join(CFG_DIR, "v3.keys")
+
+
+def which_ffmpeg():
+    FFMPEG_BINARY="ffmpeg"
+    if platform.system() == "Windows" :
+        FFMPEG_BINARY += ".exe"
+        
+    FFMPEG_LOCAL_BINARY  = shutil.which(os.path.join(CFG_DIR, FFMPEG_BINARY))
+    FFMPEG_SYSTEM_BINARY = shutil.which(FFMPEG_BINARY)
+    return FFMPEG_LOCAL_BINARY if FFMPEG_LOCAL_BINARY else FFMPEG_SYSTEM_BINARY
+
+FFMPEG_BINARY = which_ffmpeg()
+
+
+STORY_TRANSCODING_SUPPORTED = FFMPEG_BINARY is not None
+
 
 LUNII_V1or2_UNK = 0
 LUNII_V1 = 1

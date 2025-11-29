@@ -28,13 +28,6 @@ jobs:
         pip install -r requirements.txt
         pip install cx_freeze
 
-    - name: Getting latest FFMPEG
-      run: |
-        Invoke-WebRequest https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z -OutFile ffmpeg.7z
-        &"C:/Program Files/7-Zip/7z.exe" x ffmpeg.7z -y -otools/
-        $ffmpegPath = Get-ChildItem -Path "tools/" -Filter "ffmpeg.exe" -Recurse | Select-Object -ExpandProperty FullName
-        Move-Item -Path $ffmpegPath -Destination "tools/"
-
     - name: Python generate resources
       run: |
         pyside6-uic ./pkg/ui/main.ui -o ./pkg/ui/main_ui.py
