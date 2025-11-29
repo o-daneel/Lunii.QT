@@ -8,7 +8,7 @@
 # Lunii.QT
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
-pour Windows / Linux / MacOs 11  
+pour Windows 11 / MacOs (12 => 26) / Linux   
 (compatible avec les archives STUdio, **avec** support de la conversion audio)
 > **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 
@@ -155,45 +155,22 @@ Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc 
 **ATTENTION** : le transcodage est <u>très long</u>, il faut être patient. C'est pourquoi vous devriez préférer le format [.plain.pk](#plainpk) qui utilise un format audio compatible.
 
 ### Installation
-#### Windows
+#### Windows & MacOS
 
-**NOTE :** Désormais, et par défaut, FFMPEG 6.1.1 sera inclus dans les éditions portables et MSI de l'application sous Windows  
+  **NOTE 1 :** Le binaire de FFMPEG ne sera plus inclu par défaut dans les archives.  
+  **NOTE 2 :** Vous pouvez récupérer une version plus récente en utilisant le même menu.  
   
 Procedure:
-1) récupérez votre version de ffmpeg [ici](https://www.gyan.dev/ffmpeg/builds/)
-2) renommez là en `ffmpeg.exe`
-3) copiez le fichier à côté de lunii-qt.exe   
-    ```
-    - 
-     |- lunii-qt.exe
-     |- ffmpeg.exe
-    ```
-4) redémarrez luni-qt
-
-Méthode alternative (préférée):
-1) ouvrir un terminal powershell
-2) exécutez les commandes suivantes pour installer le Scoop Package manager  
-    ```powershell
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-    ```
-3) installez ffmpeg avec   
-  `scoop install ffmpeg`
-4) redémarrez luni-qt
+1) Cliquez sur Menu "Outils" puis "FFMPEG **Absent**"
+2) luniiQt va lancer le téléchargement de FFMPEG
+3) FFMPEG sera installé dans le dossier `~/.lunii-qt`
+4) Vérifiez avec Menu Outils / FFMPEG **détecté**
+5) L'application est prête
 
 #### Linux
 1) ouvrir un terminal
 2) exécutez la commande suivante :   
 `sudo apt-get install ffmpeg`
-4) redémarrez luni-qt
-
-#### macOS
-Afin de simplifier l'installation de ffmpeg, il est recommandé d'utiliser Bew, https://brew.sh/  
-1) ouvrir un terminal
-2) exécutez la commande suivante  
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-3) à la fin de l'installation, installez ffmpeg avec:  
-`brew install ffmpeg`
 4) redémarrez luni-qt
 
 ### Vérification 

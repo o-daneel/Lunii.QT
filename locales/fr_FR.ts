@@ -467,7 +467,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <name>LuniiDevice</name>
     <message>
         <location filename="../pkg/api/device_lunii.py" line="81"/>
-        <location filename="../pkg/api/device_lunii.py" line="1649"/>
+        <location filename="../pkg/api/device_lunii.py" line="1650"/>
         <source>This story is not present on your storyteller</source>
         <translation>Cette histoire n&apos;est pas présente sur votre appareil</translation>
     </message>
@@ -548,8 +548,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <location filename="../pkg/api/device_lunii.py" line="838"/>
         <location filename="../pkg/api/device_lunii.py" line="948"/>
         <location filename="../pkg/api/device_lunii.py" line="1056"/>
-        <location filename="../pkg/api/device_lunii.py" line="1273"/>
-        <location filename="../pkg/api/device_lunii.py" line="1407"/>
+        <location filename="../pkg/api/device_lunii.py" line="1274"/>
+        <location filename="../pkg/api/device_lunii.py" line="1408"/>
         <source>Authorization file creation...</source>
         <translation>Création du fichier d&apos;autorisation...</translation>
     </message>
@@ -633,8 +633,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <location filename="../pkg/api/device_lunii.py" line="884"/>
         <location filename="../pkg/api/device_lunii.py" line="993"/>
         <location filename="../pkg/api/device_lunii.py" line="1109"/>
-        <location filename="../pkg/api/device_lunii.py" line="1186"/>
-        <location filename="../pkg/api/device_lunii.py" line="1327"/>
+        <location filename="../pkg/api/device_lunii.py" line="1187"/>
+        <location filename="../pkg/api/device_lunii.py" line="1328"/>
         <source>&apos;{}&apos; is already loaded !</source>
         <translation>&apos;{}&apos; est déjà chargée !</translation>
     </message>
@@ -643,8 +643,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <location filename="../pkg/api/device_lunii.py" line="899"/>
         <location filename="../pkg/api/device_lunii.py" line="1009"/>
         <location filename="../pkg/api/device_lunii.py" line="1124"/>
-        <location filename="../pkg/api/device_lunii.py" line="1200"/>
-        <location filename="../pkg/api/device_lunii.py" line="1342"/>
+        <location filename="../pkg/api/device_lunii.py" line="1201"/>
+        <location filename="../pkg/api/device_lunii.py" line="1343"/>
         <source>Import aborted, performing cleanup on current story...</source>
         <translation>Chargement interrompu, nettoyage en cours...</translation>
     </message>
@@ -670,9 +670,9 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <location filename="../pkg/api/device_lunii.py" line="830"/>
         <location filename="../pkg/api/device_lunii.py" line="940"/>
         <location filename="../pkg/api/device_lunii.py" line="1048"/>
-        <location filename="../pkg/api/device_lunii.py" line="1141"/>
-        <location filename="../pkg/api/device_lunii.py" line="1256"/>
-        <location filename="../pkg/api/device_lunii.py" line="1390"/>
+        <location filename="../pkg/api/device_lunii.py" line="1142"/>
+        <location filename="../pkg/api/device_lunii.py" line="1257"/>
+        <location filename="../pkg/api/device_lunii.py" line="1391"/>
         <source>File {}/{} &gt; {}</source>
         <translation>Fichier {}/{} &gt; {}</translation>
     </message>
@@ -681,62 +681,62 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Format d&apos;histoire non supporté</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1164"/>
-        <location filename="../pkg/api/device_lunii.py" line="1305"/>
+        <location filename="../pkg/api/device_lunii.py" line="1165"/>
+        <location filename="../pkg/api/device_lunii.py" line="1306"/>
         <source>plain.pk format detected ! Unable to add this story.</source>
         <translation>Format plain.pk détecté, au lieu de STUdio ! Impossible de charger cette histoire.</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1167"/>
-        <location filename="../pkg/api/device_lunii.py" line="1308"/>
+        <location filename="../pkg/api/device_lunii.py" line="1168"/>
+        <location filename="../pkg/api/device_lunii.py" line="1309"/>
         <source>missing &apos;story.json&apos;. Unable to add this story.</source>
         <translation>Fichier &apos;story.json&apos; manquant. Impossible de charger cette histoire.</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1179"/>
-        <location filename="../pkg/api/device_lunii.py" line="1230"/>
-        <location filename="../pkg/api/device_lunii.py" line="1320"/>
-        <location filename="../pkg/api/device_lunii.py" line="1370"/>
+        <location filename="../pkg/api/device_lunii.py" line="1180"/>
+        <location filename="../pkg/api/device_lunii.py" line="1231"/>
+        <location filename="../pkg/api/device_lunii.py" line="1321"/>
+        <location filename="../pkg/api/device_lunii.py" line="1371"/>
         <source>STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md</source>
         <translation>Histoire STUdio avec des audio non MP3. L&apos;outil FFMPEG est nécessaire pour ce type d&apos;histoire, consulter README.md</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1233"/>
-        <location filename="../pkg/api/device_lunii.py" line="1373"/>
+        <location filename="../pkg/api/device_lunii.py" line="1234"/>
+        <location filename="../pkg/api/device_lunii.py" line="1374"/>
         <source>⌛ Transcoding audio {} : {} KB ...</source>
         <translation>⌛ Transcodage audio {} : {} Ko ...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1241"/>
+        <location filename="../pkg/api/device_lunii.py" line="1242"/>
         <source>⌛ Removing tags from audio {}</source>
         <translation>⌛ Suppression des tags de l&apos;audio {}</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1280"/>
-        <location filename="../pkg/api/device_lunii.py" line="1414"/>
+        <location filename="../pkg/api/device_lunii.py" line="1281"/>
+        <location filename="../pkg/api/device_lunii.py" line="1415"/>
         <source>Night mode file creation...</source>
         <translation>Création du fichier Mode Nuit...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1610"/>
-        <location filename="../pkg/api/device_lunii.py" line="1654"/>
+        <location filename="../pkg/api/device_lunii.py" line="1611"/>
+        <location filename="../pkg/api/device_lunii.py" line="1655"/>
         <source>at least {} match your pattern. Try a longer UUID.</source>
         <translation>au moins {} correspondances trouvées. Essayez avec un bout d&apos;UUID plus long.</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1495"/>
-        <location filename="../pkg/api/device_lunii.py" line="1539"/>
+        <location filename="../pkg/api/device_lunii.py" line="1496"/>
+        <location filename="../pkg/api/device_lunii.py" line="1540"/>
         <source>🚧 Exporting {} - {}</source>
         <translation>🚧 Export de {} - {}</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1547"/>
+        <location filename="../pkg/api/device_lunii.py" line="1548"/>
         <source>Lunii v3 requires Device Key for genuine story export.</source>
         <translation>Une Lunii v3 nécessite des clés de l&apos;appareil pour exporter une histoire.</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1519"/>
-        <location filename="../pkg/api/device_lunii.py" line="1569"/>
+        <location filename="../pkg/api/device_lunii.py" line="1520"/>
+        <location filename="../pkg/api/device_lunii.py" line="1570"/>
         <source>&gt; Zipping story ...</source>
         <translation>&gt; Compression de l&apos;histoire ...</translation>
     </message>
@@ -751,23 +751,23 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Restauration d&apos;une sauvegarde personnelle Lunii v3...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1585"/>
+        <location filename="../pkg/api/device_lunii.py" line="1586"/>
         <source>&gt; Adding UUID ...</source>
         <translation>&gt; Ajout de l&apos;UUID ...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1590"/>
+        <location filename="../pkg/api/device_lunii.py" line="1591"/>
         <source>&gt; Adding thumbnail ...</source>
         <translation>&gt; Ajout de la vignette ...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1595"/>
+        <location filename="../pkg/api/device_lunii.py" line="1596"/>
         <source>&gt; Adding metadata ...</source>
         <translation>&gt; Ajout des metadata ...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1530"/>
-        <location filename="../pkg/api/device_lunii.py" line="1601"/>
+        <location filename="../pkg/api/device_lunii.py" line="1531"/>
+        <location filename="../pkg/api/device_lunii.py" line="1602"/>
         <source>failed to create ZIP - {}</source>
         <translation>Erreur pendant la création du ZIP - {}</translation>
     </message>
@@ -776,42 +776,42 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Une sauvegarde Lunii v3 ne peut être importée.</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1627"/>
+        <location filename="../pkg/api/device_lunii.py" line="1628"/>
         <source>Story directory not found ({})</source>
         <translation>Dossier de l&apos;histoire introuvable ({})</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1658"/>
+        <location filename="../pkg/api/device_lunii.py" line="1659"/>
         <source>🚧 Removing {} - {}...</source>
         <translation>🚧 Suppresion {} - {}...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1696"/>
+        <location filename="../pkg/api/device_lunii.py" line="1697"/>
         <source>Found duplicate story, cleaning...</source>
         <translation>Histoire dupliquée identifiée, nettoyage...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1707"/>
+        <location filename="../pkg/api/device_lunii.py" line="1708"/>
         <source>Read {} {}stories</source>
         <translation>{} histoires lues</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1721"/>
+        <location filename="../pkg/api/device_lunii.py" line="1722"/>
         <source>Reading Lunii loaded stories...</source>
         <translation>Lecture des histoires chargées dans la Lunii...</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1746"/>
+        <location filename="../pkg/api/device_lunii.py" line="1747"/>
         <source>Config file not found, using default values</source>
         <translation>Fichier de configuration manquant, utilisation des valeurs par défaut</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1752"/>
+        <location filename="../pkg/api/device_lunii.py" line="1753"/>
         <source>🛑 Unsupported config version {}, using default values</source>
         <translation>🛑 Version du fichier de configuration non supporté {}, utilisation des valeurs par défaut</translation>
     </message>
     <message>
-        <location filename="../pkg/api/device_lunii.py" line="1755"/>
+        <location filename="../pkg/api/device_lunii.py" line="1756"/>
         <source>Reading Lunii config...</source>
         <translation>Lecture de la configuration de la Lunii...</translation>
     </message>
@@ -921,6 +921,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     </message>
     <message>
         <location filename="../pkg/ui/main.ui" line="893"/>
+        <location filename="../pkg/main_window.py" line="172"/>
+        <location filename="../pkg/main_window.py" line="746"/>
         <source>FFMPEG detected</source>
         <translation>FFMPEG détecté</translation>
     </message>
@@ -972,8 +974,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/ui/main.ui" line="82"/>
         <location filename="../pkg/ui/main.ui" line="88"/>
-        <location filename="../pkg/main_window.py" line="349"/>
-        <location filename="../pkg/main_window.py" line="370"/>
+        <location filename="../pkg/main_window.py" line="350"/>
+        <location filename="../pkg/main_window.py" line="362"/>
         <source>Select your Lunii</source>
         <translation>Sélectionner votre Lunii</translation>
     </message>
@@ -1073,102 +1075,108 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="378"/>
+        <location filename="../pkg/main_window.py" line="172"/>
+        <location filename="../pkg/main_window.py" line="746"/>
+        <source>FFMPEG is missing (📥)</source>
+        <translation>FFMPEG absent (📥)</translation>
+    </message>
+    <message>
+        <location filename="../pkg/main_window.py" line="370"/>
         <source>No Lunii detected 😥, try File/Open</source>
         <translation>Aucune Lunii détectée 😥, essayer Fichier/Ouvrir</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="379"/>
+        <location filename="../pkg/main_window.py" line="371"/>
         <source>No Lunii detected 😥</source>
         <translation>Aucune Lunii détectée 😥</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="421"/>
+        <location filename="../pkg/main_window.py" line="413"/>
         <source>🛑 PermissionError : Unable to open this device</source>
         <translation>🛑 PermissionError : Impossible d&apos;ouvrir cet appareil</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="501"/>
+        <location filename="../pkg/main_window.py" line="493"/>
         <source>Failed to fetch BMP file.</source>
         <translation>Echec durant la récupération de l&apos;image.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="504"/>
+        <location filename="../pkg/main_window.py" line="496"/>
         <source>Fetching official Lunii DB...</source>
         <translation>Récupération de la base officielle Lunii...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="522"/>
+        <location filename="../pkg/main_window.py" line="514"/>
         <source>👍 Lunii DB refreshed.</source>
         <translation>👍 Lunii DB récupérée.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="524"/>
+        <location filename="../pkg/main_window.py" line="516"/>
         <source>🛑 Lunii DB failed.</source>
         <translation>🛑 Erreur Lunii DB.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="530"/>
+        <location filename="../pkg/main_window.py" line="522"/>
         <source>Device info sent to clipboard.</source>
         <translation>Information copiées dans le presse papier.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="540"/>
+        <location filename="../pkg/main_window.py" line="532"/>
         <source>Open Lunii device</source>
         <translation>Ouvrir un appareil</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="547"/>
+        <location filename="../pkg/main_window.py" line="539"/>
         <source>Not a Lunii, nor Flam or unsupported one 😥</source>
         <translation>Ni une Lunii, ni une Flam, ou alors non reconnue 😥</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="559"/>
+        <location filename="../pkg/main_window.py" line="551"/>
         <source>Open STUdio DB</source>
         <translation>Ouvrir une base STUdio</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="635"/>
+        <location filename="../pkg/main_window.py" line="627"/>
         <source>⚠️ Login failed, please check your credentials</source>
         <translation>⚠️ Echec de l&apos;identification, vérifiez vos informations</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="637"/>
+        <location filename="../pkg/main_window.py" line="629"/>
         <source>Login success...</source>
         <translation>Identifié....</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="660"/>
+        <location filename="../pkg/main_window.py" line="652"/>
         <source>✅ Firmware downloaded to</source>
         <translation>✅ Firmware téléchargé dans</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="663"/>
+        <location filename="../pkg/main_window.py" line="655"/>
         <source>🛑 Fail to download update</source>
         <translation>🛑 Echec du téléchargement de la mise à jour</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="669"/>
+        <location filename="../pkg/main_window.py" line="661"/>
         <source>🛑 Network error...</source>
         <translation>🛑 Erreur reseau...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="756"/>
+        <location filename="../pkg/main_window.py" line="750"/>
         <source>Latest Github release</source>
         <translation>Dernière mise à jour Github</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="758"/>
+        <location filename="../pkg/main_window.py" line="752"/>
         <source>🛑 Unable to fetch version from Github</source>
         <translation>🛑 Impossible de récupérer l&apos;information de la dernière version sur Github</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="782"/>
+        <location filename="../pkg/main_window.py" line="776"/>
         <source>[ Help ]</source>
         <translation>[ Aide ]</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="783"/>
+        <location filename="../pkg/main_window.py" line="777"/>
         <source>Update is available</source>
         <translation>Mise à jour disponible</translation>
     </message>
@@ -1177,7 +1185,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Mise à jour est disponible</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="784"/>
+        <location filename="../pkg/main_window.py" line="778"/>
         <source>Update to {}</source>
         <translation>Mettre à jour en {}</translation>
     </message>
@@ -1186,34 +1194,34 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Mettre à jour vers {last_version}</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="836"/>
+        <location filename="../pkg/main_window.py" line="830"/>
         <source>Story is hidden for LuniiStore synchronization</source>
         <translation>Histoire masquée pour une synchronisation LuniiStore</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="846"/>
+        <location filename="../pkg/main_window.py" line="840"/>
         <source>Free :</source>
         <translation>Libre :</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="927"/>
+        <location filename="../pkg/main_window.py" line="921"/>
         <source>stories</source>
         <translation>histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1036"/>
+        <location filename="../pkg/main_window.py" line="1030"/>
         <source>Delete stories</source>
         <translation>Supprimer les histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1037"/>
+        <location filename="../pkg/main_window.py" line="1031"/>
         <source>You are requesting to delete : 
 </source>
         <translation>Souhaitez vous supprimer : 
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1043"/>
+        <location filename="../pkg/main_window.py" line="1037"/>
         <source>
 (and too many others)
 </source>
@@ -1222,53 +1230,53 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1045"/>
+        <location filename="../pkg/main_window.py" line="1039"/>
         <source>
 Do you want to proceed ?</source>
         <translation>
 Voulez-vous continuer ?</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1072"/>
+        <location filename="../pkg/main_window.py" line="1066"/>
         <source>🛑 Export cancelled</source>
         <translation>🛑 Export annulé</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1090"/>
+        <location filename="../pkg/main_window.py" line="1084"/>
         <source>🛑 Export All cancelled</source>
         <translation>🛑 Tout exporter annulé</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1125"/>
-        <location filename="../pkg/main_window.py" line="1138"/>
-        <location filename="../pkg/main_window.py" line="1145"/>
+        <location filename="../pkg/main_window.py" line="1119"/>
+        <location filename="../pkg/main_window.py" line="1132"/>
+        <location filename="../pkg/main_window.py" line="1139"/>
         <source>🛑 Unable to update story ...</source>
         <translation>🛑 Impossible de mettre à jour l&apos;histoire...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1167"/>
-        <location filename="../pkg/main_window.py" line="1210"/>
+        <location filename="../pkg/main_window.py" line="1161"/>
+        <location filename="../pkg/main_window.py" line="1204"/>
         <source>✅ Stories updated...</source>
         <translation>✅ Histoire(s) mise(s) à jour...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1217"/>
+        <location filename="../pkg/main_window.py" line="1211"/>
         <source>Open Stories</source>
         <translation>Ouvrir une histoire</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1222"/>
-        <location filename="../pkg/main_window.py" line="1258"/>
+        <location filename="../pkg/main_window.py" line="1216"/>
+        <location filename="../pkg/main_window.py" line="1252"/>
         <source>Importing stories...</source>
         <translation>Import d&apos;histoires...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1252"/>
+        <location filename="../pkg/main_window.py" line="1246"/>
         <source>🛑 Unable to import story, missing story key for Lunii v3</source>
         <translation>🛑 Impossible d&apos;importer des histroires, pas de clés histoires pour la Lunii v3</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1322"/>
+        <location filename="../pkg/main_window.py" line="1317"/>
         <source>Abort requested, please wait...</source>
         <translation>Annulation demandée, patientez...</translation>
     </message>
@@ -1294,48 +1302,48 @@ Voulez-vous continuer ?</translation>
 <context>
     <name>ierWorker</name>
     <message>
-        <location filename="../pkg/ierWorker.py" line="85"/>
+        <location filename="../pkg/ierWorker.py" line="100"/>
         <source>🛑 Aborted</source>
         <translation>🛑 Annulé</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="73"/>
+        <location filename="../pkg/ierWorker.py" line="88"/>
         <source>🛑 Critical error : {}</source>
         <translation>🛑 Erreur critique : {}</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="74"/>
+        <location filename="../pkg/ierWorker.py" line="89"/>
         <source>Trace
 {}</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="94"/>
+        <location filename="../pkg/ierWorker.py" line="109"/>
         <source>😮‍💨 This process is veeeeeeeeery long due to Flam firmware. 😴 Be patient ...</source>
         <translation>😮‍💨 Cette opération est très loooooooongue à cause de la Flam 😴 Soyez patient ...</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="95"/>
+        <location filename="../pkg/ierWorker.py" line="110"/>
         <source>Importing stories...</source>
         <translation>Import d&apos;histoires...</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="114"/>
+        <location filename="../pkg/ierWorker.py" line="129"/>
         <source>Time to import : {}</source>
         <translation>Durée de l&apos;import : {}</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="115"/>
+        <location filename="../pkg/ierWorker.py" line="130"/>
         <source>👍 New story imported : &apos;{}&apos;</source>
         <translation>👍 Nouvelle histoire importée : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="119"/>
+        <location filename="../pkg/ierWorker.py" line="134"/>
         <source>🛑 Failed to import : &apos;{}&apos;</source>
         <translation>🛑 Echec de l&apos;import : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="134"/>
+        <location filename="../pkg/ierWorker.py" line="149"/>
         <source>✅ Import done : {}/{}</source>
         <translation>✅ Import terminé : {}/{}</translation>
     </message>
@@ -1344,72 +1352,127 @@ Voulez-vous continuer ?</translation>
         <translation type="vanished">🛑 Export interdit pour : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="156"/>
+        <location filename="../pkg/ierWorker.py" line="171"/>
         <source>👍 Story exported to &apos;{}&apos;</source>
         <translation>👍 Histoire exportée vers &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="160"/>
+        <location filename="../pkg/ierWorker.py" line="175"/>
         <source>🛑 Failed to export : &apos;{}&apos;</source>
         <translation>🛑 Echec de l&apos;export : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="170"/>
+        <location filename="../pkg/ierWorker.py" line="185"/>
         <source>✅ Export done : {}/{}</source>
         <translation>✅ Export terminé : {}/{}</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="185"/>
+        <location filename="../pkg/ierWorker.py" line="200"/>
         <source>👍 Story removed: &apos;{}&apos;</source>
         <translation>👍 Histoire supprimée : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="189"/>
+        <location filename="../pkg/ierWorker.py" line="204"/>
         <source>🛑 Failed to remove : &apos;{}&apos;</source>
         <translation>🛑 Impossible de supprimer : &apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="199"/>
+        <location filename="../pkg/ierWorker.py" line="214"/>
         <source>✅ {} stories removed</source>
         <translation>✅ {} histoires supprimées</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="243"/>
+        <location filename="../pkg/ierWorker.py" line="258"/>
         <source>✅ Stories parsed, sizes updated</source>
         <translation>✅ Histoires analysées, tailles mises à jour</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="246"/>
+        <location filename="../pkg/ierWorker.py" line="261"/>
         <source>🚧 Analyzing storage ...</source>
         <translation>🚧 En cours d&apos;analyse ...</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="254"/>
+        <location filename="../pkg/ierWorker.py" line="269"/>
         <source>✅ Storage parsed, {} lost stories {}</source>
         <translation>✅ Appareil analysé, {} histoires perdues {}</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="254"/>
+        <location filename="../pkg/ierWorker.py" line="269"/>
         <source>found (try to recover them)</source>
         <translation>trouvées (essayez de les récupérer)</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="254"/>
+        <location filename="../pkg/ierWorker.py" line="269"/>
         <source>recovered</source>
         <translation>récupérées</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="264"/>
+        <location filename="../pkg/ierWorker.py" line="279"/>
         <source>✅ Storage parsed, {} lost stories removed, {} MB recovered</source>
         <translation>✅ Appareil analysé, {} histoires perdues supprimées, {} Mo récupérés</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="334"/>
+        <location filename="../pkg/ierWorker.py" line="349"/>
         <source>✅ STUdio DB imported ({}/{}).</source>
         <translation>✅ Base STUdio importée ({}/{}).</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="258"/>
+        <source>🛑 Failed to download {src}: {e}</source>
+        <translation type="vanished">🛑 Echec du téléchargement {src}: {e}</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="382"/>
+        <source>✅ Downloaded {} items.</source>
+        <translation>✅ {} éléments téléchargés.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="394"/>
+        <source>🛑 You must rely on your Linux package manager to install FFMPEG.</source>
+        <translation>🛑 Installez FFMPEG en utilisant le gestionnaire de paquets de votre distribution Linux.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="395"/>
+        <source>e.g., on Ubuntu/Debian: sudo apt install ffmpeg</source>
+        <translation>par exemple, sur Ubuntu/Debian : sudo apt install ffmpeg</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="400"/>
+        <source>🛑 Unsupported OS.</source>
+        <translation>🛑 OS non supporté.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="408"/>
+        <source>Downloading FFmpeg for {}...</source>
+        <translation>Téléchargement de FFmpeg pour {}...</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="414"/>
+        <source>Downloading {:,}MB</source>
+        <translation>Téléchargement de {:,}Mo</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="376"/>
+        <location filename="../pkg/ierWorker.py" line="432"/>
+        <source>🛑 Failed to download {}: {}</source>
+        <translation>🛑 Echec du téléchargement {}: {}</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="440"/>
+        <source>FFmpeg archive downloaded, extracting...</source>
+        <translation>Archive de FFmpeg téléchargée, extraction...</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="456"/>
+        <source>🛑 Failed to extract ffmpeg executable</source>
+        <translation>🛑 Impossible d&apos;extraire l&apos;éxécutable ffmpeg</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="468"/>
+        <source>✅ FFMPEG installed.</source>
+        <translation>✅ FFMPEG est installé.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/ierWorker.py" line="273"/>
         <source>🚧 Cleaning storage ...</source>
         <translation>🚧 Nettoyage de l&apos;appareil ...</translation>
     </message>
@@ -1418,12 +1481,12 @@ Voulez-vous continuer ?</translation>
         <translation type="vanished">Temps pour importer : {}s</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="274"/>
+        <location filename="../pkg/ierWorker.py" line="289"/>
         <source>✅ Factory reset performed, device is empty</source>
         <translation>✅ Retour usine effectué, l&apos;appareil est désormais vide</translation>
     </message>
     <message>
-        <location filename="../pkg/ierWorker.py" line="289"/>
+        <location filename="../pkg/ierWorker.py" line="304"/>
         <source>🛑 Failed to import DB (wrong file ?)</source>
         <translation>🛑 Eched de l&apos;import de la base (mauvais fichier ?)</translation>
     </message>

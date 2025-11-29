@@ -39,7 +39,7 @@ COL_UUID_SIZE = 250
 COL_SIZE_SIZE = 90
 COL_EXTRA = 40
 
-APP_VERSION = "v3.1.3a1"
+APP_VERSION = "v3.1.3"
 
 """ 
 # TODO : 
@@ -764,10 +764,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             c_alpha = len(c_versions) > 1
             l_alpha = len(l_versions) > 1
 
-            # none of them are alpha (stable vs stable) : 2.7.8 2.7.9
-            # stable vs aplha : 2.7.8 2.7.9a1
-            # alpha vs stable : 2.7.9a1 2.7.9
-            # alpha vs alpha  : 2.7.9a1 2.7.9a2
+            # none of them are alpha (stable vs stable) : 2.7.8 2.7.9 : UPDATE
+            # stable vs alpha : 2.7.8 2.7.9a1    : NO UPDATE
+            # alpha vs stable : 2.7.9a1 2.7.9    : UPDATE
+            # alpha vs alpha  : 2.7.9a1 2.7.9a2  : UPDATE
             new_update = (l_versions[0] > c_versions[0]) or \
                 (c_alpha and l_alpha and l_versions[1] > c_versions[1]) or \
                 (l_versions[0] == c_versions[0] and c_alpha and not l_alpha)

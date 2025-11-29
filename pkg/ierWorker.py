@@ -373,7 +373,7 @@ class ierWorker(QObject):
                         self.signal_file_progress.emit(os.path.basename(target), downloaded, total_size)
                 success += 1
             except Exception as e:
-                self.signal_message.emit(self.tr(f"🛑 Failed to download {src}: {e}"))
+                self.signal_message.emit(self.tr("🛑 Failed to download {}: {}").format(src, e))
 
         if finished:
             # done
