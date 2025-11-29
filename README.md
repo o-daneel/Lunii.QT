@@ -8,7 +8,7 @@
 # Lunii.QT
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
-pour Windows 11 / MacOs (12 => 26) / Linux   
+pour Windows 11 / MacOs (13 => 26) / Linux   
 (compatible avec les archives STUdio, **avec** support de la conversion audio)
 > **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 

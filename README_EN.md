@@ -7,7 +7,7 @@
 
 # Lunii.QT
 A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **hide** / **firmware download**   
-for Windows 11 / MacOs (12 => 26) / Linux   
+for Windows 11 / MacOs (13 => 26) / Linux   
 (compatible with STUdio archive, **with** transcoding)
 
 > **FAQ :** Please refer to already asked questions on [Discussions](https://github.com/o-daneel/Lunii.QT/discussions) section, or refer to revelant [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)
