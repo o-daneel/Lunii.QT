@@ -390,11 +390,11 @@ class ierWorker(QObject):
             "darwin": "https://evermeet.cx/ffmpeg/getrelease/zip",
         }
 
-        if system == "Linux":
+        if system == "linux":
             self.signal_message.emit(self.tr("🛑 You must rely on your Linux package manager to install FFMPEG."))
+            self.signal_message.emit(self.tr("e.g., on Ubuntu/Debian: sudo apt install ffmpeg"))
             self.exit_requested()
             return
-
 
         if system not in urls:
             self.signal_message.emit(self.tr("🛑 Unsupported OS."))

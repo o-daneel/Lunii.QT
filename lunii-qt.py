@@ -1,6 +1,4 @@
-import platform
 import sys
-import time
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QTranslator, QLocale
@@ -21,15 +19,5 @@ if __name__ == "__main__":
 
     window = MainWindow(app)
     window.show()
-
-    if platform.system() != "Darwin":
-        # killing splash
-        try:
-            import pyi_splash
-            pyi_splash.update_text('Lunii.QT Ready ...')
-            time.sleep(0.5)
-            pyi_splash.close()
-        except:
-            pass
 
     sys.exit(app.exec())

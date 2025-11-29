@@ -169,7 +169,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_transcode.setChecked(self.ffmpeg_present)
         self.act_transcode.setEnabled(not self.ffmpeg_present)
         self.act_transcode.setEnabled(True)
-        self.act_transcode.setText("FFMPEG detected" if self.ffmpeg_present else "FFMPEG is missing (📥)")
+        self.act_transcode.setText(self.tr("FFMPEG detected") if self.ffmpeg_present else self.tr("FFMPEG is missing (📥)"))
 
         act_details = next(act for act in t_actions if act.objectName() == "actionShow_story_details")
         act_size = next(act for act in t_actions if act.objectName() == "actionShow_size")
@@ -662,11 +662,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         elif act_name == "actionTranscode":
             self.worker_launch(ACTION_FFMPEG)
-            self.act_transcode.setChecked(True)
-
-            # website_url = QUrl('https://github.com/o-daneel/Lunii.QT?tab=readme-ov-file#audio-transcoding')
-            # # Open the URL in the default web browser
-            # QDesktopServices.openUrl(website_url)
 
         elif act_name == "actionFactory_reset":
             # TODO request confirmation before performing
@@ -746,7 +741,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_factory.setEnabled(False)
         self.menuLost_stories.setEnabled(device_selected)
 
-        self.act_transcode.setText("FFMPEG detected" if which_ffmpeg() else "FFMPEG is missing (📥)")
+        self.ffmpeg_present = which_ffmpeg() is not None
+        self.act_transcode.setChecked(self.ffmpeg_present)
+        self.act_transcode.setText(self.tr("FFMPEG detected") if self.ffmpeg_present else self.tr("FFMPEG is missing (📥)"))
 
     def cb_menu_help_update(self, last_version):
         if last_version:
