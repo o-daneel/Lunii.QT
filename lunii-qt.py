@@ -1,7 +1,7 @@
 import sys
 
 from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import QTranslator, QLocale
+from PySide6.QtCore import QTranslator, QLocale, Qt
 
 from pkg.main_window import MainWindow
 
@@ -9,6 +9,7 @@ from pkg.main_window import MainWindow
 if __name__ == "__main__":
     app = QApplication([])
     app.setStyle("WindowsVista")   # ou "fusion", "Windows", "macos", "gtk"
+    app.setAttribute(Qt.AA_DontShowIconsInMenus, False)
 
     translator = QTranslator(app)
     locale = QLocale.system().name()  # e.g., 'fr_FR'

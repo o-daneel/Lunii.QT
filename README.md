@@ -1,5 +1,5 @@
 ![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
-[![luniiQt v3.1.3](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.3/total?label=luniiQt%20v3.1.3)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.3)
+[![luniiQt v3.1.4](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.4/total?label=luniiQt%20v3.1.4)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.4)
 [![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
 [![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
 
@@ -8,7 +8,7 @@
 # Lunii.QT
 
 Une application Python QT pour gérer sa fabrique à histoires (fah) <u>Lunii</u> et <u>Flam</u>, avec les opérations de  **organisation** / **importation** / **exportation** / **téléchargement du firmware**   
-pour Windows 11 / MacOs (13 => 26) / Linux   
+pour Windows 11 / MacOs (11 BigSur => 26 Tahoe) / Linux   
 (compatible avec les archives STUdio, **avec** support de la conversion audio)
 > **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 

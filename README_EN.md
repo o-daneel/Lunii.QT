@@ -1,5 +1,5 @@
 ![Total downloads](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/total?label=Total%20Downloads)
-[![luniiQt v3.1.3](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.3/total?label=luniiQt%20v3.1.3)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.3)
+[![luniiQt v3.1.4](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.1.4/total?label=luniiQt%20v3.1.4)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.1.4)
 [![luniiQt v3.0.0](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v3.0.0/total?label=luniiQt%20v3.0.0)](https://github.com/o-daneel/Lunii.QT/releases/tag/v3.0.0)
 [![luniiQt v2.7.6](https://img.shields.io/github/downloads/o-daneel/Lunii.QT/v2.7.6/total?label=luniiQt%20v2.7.6)](https://github.com/o-daneel/Lunii.QT/releases/tag/v2.7.6)
 
@@ -7,7 +7,7 @@
 
 # Lunii.QT
 A Python QT app to manage <u>Lunii</u> and <u>Flam</u> Storytellers, including **reorder** / **import** / **export** / **hide** / **firmware download**   
-for Windows 11 / MacOs (13 => 26) / Linux   
+for Windows 11 / MacOs (11 BigSur => 26 Tahoe) / Linux   
 (compatible with STUdio archive, **with** transcoding)
 
 > **FAQ :** Please refer to already asked questions on [Discussions](https://github.com/o-daneel/Lunii.QT/discussions) section, or refer to revelant [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22)

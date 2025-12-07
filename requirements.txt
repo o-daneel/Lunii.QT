@@ -1,4 +1,4 @@
-PySide6-Essentials~=6.10.0
+PySide6-Essentials~=6.7.3
 psutil~=7.1.3
 py7zr~=0.22.0
 xxtea~=3.6.0
