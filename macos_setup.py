@@ -1,10 +1,10 @@
 from setuptools import setup
 
 APP = ['lunii-qt.py']
-DATA_FILES = ['res/lunii.ico']
+DATA_FILES = ['res/lunii.ico', 'res/dmg_icon.icns']
 OPTIONS = {
     'argv_emulation': False,
-    'iconfile': 'res/lunii.ico',
+    'iconfile': 'res/dmg_icon.icns',
     'plist': {
         'CFBundleName': 'luniiQt',
         'CFBundleDisplayName': 'Lunii Qt',
