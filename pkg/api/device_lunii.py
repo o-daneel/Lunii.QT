@@ -1525,7 +1525,15 @@ class LuniiDevice(QtCore.QObject):
 
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
                     self.signal_logger.emit(logging.DEBUG, story_arcnames[index])
-                    zip_out.write(file, story_arcnames[index])
+                    try:
+                        zip_out.write(file, story_arcnames[index])
+                    except (OSError, ValueError) as e:
+                        # Handle files with invalid timestamps
+                        self.signal_logger.emit(logging.WARNING, QCoreApplication.translate("LuniiDevice", "⚠️ Invalid timestamp for {}, using current date").format(story_arcnames[index]))
+                        # Create ZipInfo with current date
+                        zinfo = zipfile.ZipInfo(filename=story_arcnames[index], date_time=time.localtime()[:6])
+                        with open(file, 'rb') as f:
+                            zip_out.writestr(zinfo, f.read())
 
         except PermissionError as e:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "failed to create ZIP - {}").format(e))
