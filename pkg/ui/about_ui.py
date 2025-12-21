@@ -18,7 +18,7 @@ your latest Lunii firmware (to eventually restore from a broken device).<br />
 <br />Powered by Python 3.11, PySide 6.7<br />
 <br />
 
-Icons are provided freely by <a href="www.icons8.com">icon8</a><br />
+Icons are provided freely by <a href="https://icons8.com">icon8</a><br />
  
 Logos are provided by <b>malexxx</b><br /><br />
 
