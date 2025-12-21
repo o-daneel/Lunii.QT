@@ -29,7 +29,7 @@ your latest Lunii firmware (to eventually restore from a broken device).&lt;br /
 &lt;br /&gt;Powered by Python 3.11, PySide 6.7&lt;br /&gt;
 &lt;br /&gt;
 
-Icons are provided freely by &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+Icons are provided freely by &lt;a href=&quot;https://icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
  
 Logos are provided by &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 
@@ -47,7 +47,7 @@ Fabrique à histoires Lunii, modifier l’ordre des histoires, effectuer une sau
 &lt;br /&gt;Développé avec Python 3.11, PySide 6.7&lt;br /&gt;
 &lt;br /&gt;
 
-Les icônes sont fournies gratuitement par &lt;a href=&quot;www.icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
+Les icônes sont fournies gratuitement par &lt;a href=&quot;https://icons8.com&quot;&gt;icon8&lt;/a&gt;&lt;br /&gt;
  
 Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 
