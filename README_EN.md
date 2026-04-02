@@ -160,7 +160,7 @@ Some third-party stories are using non MP3 files. Thus they can't be installed a
 Procedure:
 1) Click on the "Tools" menu, then "FFMPEG **is missing**"
 2) luniiQt will start downloading FFMPEG
-3) FFMPEG will be installed in the `~/.lunii-qt` folder
+3) FFMPEG's executable will be installed in the `~/.lunii-qt` folder
 4) Check with Tools menu / FFMPEG **Detected**
 5) App is ready
 
