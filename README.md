@@ -163,7 +163,7 @@ Certaines histoires tierces utilisent des fichiers non MP3. Ils ne peuvent donc 
 Procedure:
 1) Cliquez sur Menu "Outils" puis "FFMPEG **Absent**"
 2) luniiQt va lancer le téléchargement de FFMPEG
-3) FFMPEG sera installé dans le dossier `~/.lunii-qt`
+3) L'exécutable FFMPEG sera installé dans le dossier `~/.lunii-qt`
 4) Vérifiez avec Menu Outils / FFMPEG **détecté**
 5) L'application est prête
 
