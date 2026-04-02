@@ -27,6 +27,13 @@ from pkg.api.device_lunii import secure_filename
 from pkg.api.stories import FILE_META, FILE_STUDIO_JSON, FILE_STUDIO_THUMB, FILE_THUMB, FILE_UUID, StoryList, Story, \
     StudioStory, aes_cipher, aes_decipher, archive_check_7zcontent, archive_check_plain, story_is_flam, story_is_studio, story_is_lunii, archive_check_zipcontent, xxtea_decipher
 
+from datetime import datetime
+import os
+from pathlib import Path
+
+MIN_ZIP_YEAR = 1980
+
+
 LIB_BASEDIR = "etc/library/"
 LIB_CACHE = "usr/0/library.cache"
 
@@ -1481,202 +1488,207 @@ class FlamDevice(QtCore.QObject):
                     last_emit = now
                     last_written = written
 
+    def make_zipinfo(path_or_none, arcname):
+        """
+        Crée un ZipInfo pour arcname.
+        - Si path_or_none est un chemin existant, utilise sa mtime et ses permissions.
+        - Si path_or_none est None, utilise une date minimale valide (1980-01-01) et permissions par défaut.
+        """
+        zi = zipfile.ZipInfo(arcname)
+        if path_or_none is not None and os.path.exists(path_or_none):
+            try:
+                st = os.stat(path_or_none)
+                mtime = datetime.fromtimestamp(st.st_mtime)
+                if mtime.year < MIN_ZIP_YEAR:
+                    zi.date_time = (MIN_ZIP_YEAR, 1, 1, 0, 0, 0)
+                else:
+                    zi.date_time = (mtime.year, mtime.month, mtime.day, mtime.hour, mtime.minute, mtime.second)
+                try:
+                    zi.external_attr = (st.st_mode & 0o777) << 16
+                    zi.create_system = 3
+                except Exception:
+                    pass
+            except Exception:
+                zi.date_time = (MIN_ZIP_YEAR, 1, 1, 0, 0, 0)
+        else:
+            zi.date_time = (MIN_ZIP_YEAR, 1, 1, 0, 0, 0)
+        return zi
+    
+    
     def export_backup_story(self, one_story, out_path):
         story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.short_uuid, one_story.name))
-
-        # Preparing zip file
-        sname = one_story.name
-        sname = secure_filename(sname)
-
+    
+        sname = secure_filename(one_story.name)
         zip_path = Path(out_path).joinpath(f"{self.snu_str}.{sname}.{one_story.short_uuid}.zip")
-        # if os.path.isfile(zip_path):
-        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
-        #     return None
-
-        # preparing file list
+    
         story_flist = []
         story_arcnames = []
         for root, _, filenames in os.walk(story_path):
             for filename in filenames:
                 abs_file = os.path.join(root, filename)
                 story_flist.append(abs_file)
-
+    
                 index = abs_file.find(str(one_story.uuid))
                 story_arcnames.append(abs_file[index:])
-
+    
         try:
-            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+            with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as zip_out:
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Zipping story ..."))
                 for index, file in enumerate(story_flist):
-                    # abort requested ? early exit
                     if self.abort_process:
                         return None
-
+    
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
                     self.signal_logger.emit(logging.DEBUG, story_arcnames[index])
-                    zip_out.write(file, story_arcnames[index])
-
+    
+                    # Lecture en binaire (aucune écriture sur le fichier source)
+                    with open(file, 'rb') as fh:
+                        data = fh.read()
+    
+                    zi = make_zipinfo(file, story_arcnames[index])
+                    zip_out.writestr(zi, data)
+    
         except PermissionError as e:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "failed to create ZIP - {}").format(e))
             return None
-
+    
         return zip_path
     
     def export_flam_plainstory(self, one_story, out_path, story_key, story_iv):
         story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.uuid, one_story.name))
-
-        # Preparing zip file
-        sname = one_story.name
-        sname = secure_filename(sname)
-
+    
+        sname = secure_filename(one_story.name)
         zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.plain.pk")
-        # if os.path.isfile(zip_path):
-        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
-        #     return None
-        
-        # preparing file list
+    
         story_flist = []
         story_arcnames = []
         for root, _, filenames in os.walk(story_path):
             for filename in filenames:
-                # skipping some of them
                 if filename in ["key", "bt"]:
                     continue
-
+    
                 abs_file = os.path.join(root, filename)
-
-                # source files list
                 story_flist.append(abs_file)
-
-                # target file in zip
+    
                 file = abs_file.split(str(one_story.uuid).lower())[1]
                 while file.startswith("\\") or file.startswith("/"):
                     file = file[1:]
-
+    
                 if file.endswith(".lsf"):
                     file = file.replace(".lsf", ".lua")
                 if file.endswith("info"):
                     file += ".plain"
-                    
+    
                 story_arcnames.append(file)
-
+    
         try:
-            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+            with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as zip_out:
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Zipping story ..."))
                 for index, file in enumerate(story_flist):
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
-                    # abort requested ? early exit
                     if self.abort_process:
                         return None
-
-                    # target file 
+    
                     target_file = story_arcnames[index]
-
-                    # Extract each file to another directory
-                    # decipher if necessary (*.lsf / info)
+    
+                    # Lecture en binaire (aucune écriture sur le fichier source)
                     with open(file, "rb") as fp:
                         data = fp.read()
                     if file.endswith(".lsf") or file.endswith("info"):
                         data = aes_decipher(data, story_key, story_iv, 0, len(data))
-
-                    zip_out.writestr(target_file, data)
-
-                # adding uuid file
-                self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Adding UUID ..."))
-                zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
-
+    
+                    zi = make_zipinfo(file, target_file)
+                    zip_out.writestr(zi, data)
+    
+                # ajouter FILE_UUID (données en mémoire)
+                zi_uuid = make_zipinfo(None, FILE_UUID)
+                zip_out.writestr(zi_uuid, one_story.uuid.bytes)
+    
         except PermissionError as e:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "failed to create ZIP - {}").format(e))
             return None
-        
+    
         return zip_path
-
+    
     def export_lunii_plainstory(self, one_story, out_path, story_key, story_iv):
         story_path = os.path.join(self.mount_point, self.STORIES_BASEDIR if not one_story.hidden else self.HIDDEN_STORIES_BASEDIR, str(one_story.uuid))
         self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "🚧 Exporting {} - {}").format(one_story.uuid, one_story.name))
-
-        # Preparing zip file
-        sname = one_story.name
-        sname = secure_filename(sname)
-
+    
+        sname = secure_filename(one_story.name)
         zip_path = Path(out_path).joinpath(f"{sname}.{one_story.short_uuid}.plain.pk")
-        # if os.path.isfile(zip_path):
-        #     self.signal_logger.emit(logging.WARNING, f"Already exported")
-        #     return None
-        
-        # preparing file list
+    
         story_flist = []
         story_arcnames = []
         for root, _, filenames in os.walk(story_path):
             if "img" in root:
                 continue
-
+    
             for filename in filenames:
-                # skipping some of them
                 if filename in ["key", "bt", "info"]:
                     continue
-
+    
                 abs_file = os.path.join(root, filename)
-
-                # source files list
                 story_flist.append(abs_file)
-
-                # target file in zip
+    
                 file = abs_file.split(str(one_story.uuid).lower())[1]
                 while file.startswith("\\") or file.startswith("/"):
                     file = file[1:]
-
+    
                 if "rf/" in file or "rf\\" in file:
-                    file = file+".bmp"
+                    file = file + ".bmp"
                 if "sf/" in file or "sf\\" in file:
-                    file = file+".mp3"
+                    file = file + ".mp3"
                 if file.endswith("li") or file.endswith("ri") or file.endswith("si"):
-                    file = file+".plain"
-                    
+                    file = file + ".plain"
+    
                 story_arcnames.append(file)
-
+    
         try:
-            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+            with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as zip_out:
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Zipping story ..."))
                 for index, file in enumerate(story_flist):
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
-                    # abort requested ? early exit
                     if self.abort_process:
                         return None
-
-                    # target file 
+    
                     target_file = story_arcnames[index]
-
-                    # Extract each file to another directory
+    
+                    # Lecture en binaire (aucune écriture sur le fichier source)
                     with open(file, "rb") as fp:
                         data = fp.read()
+    
                     if target_file.endswith(".mp3") or target_file.endswith(".bmp") or target_file.endswith(".plain"):
+                        # decrypt using provided key/iv
                         data = aes_decipher(data, story_key, story_iv, 0, 0x200)
-
-                    zip_out.writestr(target_file, data)
-
+    
+                    zi = make_zipinfo(file, target_file)
+                    zip_out.writestr(zi, data)
+    
                 # adding uuid file
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Adding UUID ..."))
-                zip_out.writestr(FILE_UUID, one_story.uuid.bytes)
-
+                zi_uuid = make_zipinfo(None, FILE_UUID)
+                zip_out.writestr(zi_uuid, one_story.uuid.bytes)
+    
                 # more files to be added for thirdparty stories
                 if not one_story.is_official():
                     self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Adding thumbnail ..."))
                     pict_data = one_story.get_picture()
                     if pict_data:
-                        zip_out.writestr(FILE_THUMB, pict_data)
-
+                        zi_thumb = make_zipinfo(None, FILE_THUMB)
+                        zip_out.writestr(zi_thumb, pict_data)
+    
                     self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("FlamDevice", "> Adding metadata ..."))
                     meta = one_story.get_meta()
                     if meta:
-                        zip_out.writestr(FILE_META, meta)
-
+                        zi_meta = make_zipinfo(None, FILE_META)
+                        zip_out.writestr(zi_meta, meta)
+    
         except PermissionError as e:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "failed to create ZIP - {}").format(e))
             return None
-        
+    
         return zip_path
 
     def export_story(self, uuid, out_path):
