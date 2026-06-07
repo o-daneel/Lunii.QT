@@ -1515,7 +1515,16 @@ class FlamDevice(QtCore.QObject):
 
                     self.signal_story_progress.emit(one_story.short_uuid, index, len(story_flist))
                     self.signal_logger.emit(logging.DEBUG, story_arcnames[index])
-                    zip_out.write(file, story_arcnames[index])
+
+                    # ZIP format can't store timestamps before 1980, clamp them
+                    st = os.stat(file)
+                    date_time = time.localtime(st.st_mtime)[0:6]
+                    if date_time[0] < 1980:
+                        date_time = (1980, 1, 1, 0, 0, 0)
+                    zinfo = zipfile.ZipInfo(story_arcnames[index], date_time)
+                    zinfo.external_attr = (st.st_mode & 0xFFFF) << 16
+                    with open(file, 'rb') as src, zip_out.open(zinfo, 'w') as dst:
+                        shutil.copyfileobj(src, dst)
 
         except PermissionError as e:
             self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("FlamDevice", "failed to create ZIP - {}").format(e))
