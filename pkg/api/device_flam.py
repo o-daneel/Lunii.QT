@@ -1679,6 +1679,31 @@ class FlamDevice(QtCore.QObject):
         
         return zip_path
 
+    def __find_shared_bt(self, key_data, skip_uuid):
+        # The bt file (transcipher key + iv) is shared by every story belonging
+        # to the same owner, identified by an identical "key" file. When a story
+        # is missing its bt, look for a sibling story (same key, different uuid)
+        # that still has one and return its 32 bytes (key + iv).
+        for basedir in (self.STORIES_BASEDIR, self.HIDDEN_STORIES_BASEDIR):
+            base_path = os.path.join(self.mount_point, basedir)
+            if not os.path.isdir(base_path):
+                continue
+            for entry in os.listdir(base_path):
+                if entry == str(skip_uuid):
+                    continue
+                sibling_key = os.path.join(base_path, entry, "key")
+                sibling_bt = os.path.join(base_path, entry, "bt")
+                if not (os.path.isfile(sibling_key) and os.path.isfile(sibling_bt)):
+                    continue
+                with open(sibling_key, "rb") as fp_key:
+                    if fp_key.read() != key_data:
+                        continue
+                with open(sibling_bt, "rb") as fp_bt:
+                    bt_data = fp_bt.read(32)
+                if len(bt_data) == 32:
+                    return bt_data
+        return None
+
     def export_story(self, uuid, out_path):
         # is UUID part of existing stories
         slist = self.stories.matching_stories(uuid)
@@ -1714,6 +1739,18 @@ class FlamDevice(QtCore.QObject):
                 with open(story_btfile, "rb") as fp_bt:
                     story_key = fp_bt.read(16)
                     story_iv = fp_bt.read(16)
+
+            # bt may be missing for some stories while another story sharing the
+            # same owner (same "key" file) still carries it. The bt (transcipher
+            # key) is shared across all stories of a given owner, so we can borrow
+            # it from a sibling story to export this one as plain.
+            if not exportable and os.path.isfile(story_keyfile):
+                shared_bt = self.__find_shared_bt(story_keydata, one_story.uuid)
+                if shared_bt:
+                    exportable = True
+                    story_key = shared_bt[:16]
+                    story_iv = shared_bt[16:32]
+                    self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "Missing bt, reusing transcipher key from a sibling story"))
 
             if not exportable:
                 return self.export_backup_story(one_story, out_path)
