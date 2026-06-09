@@ -13,6 +13,8 @@ import zipfile
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
 import urllib
+import ssl
+import certifi
 
 from pkg.api import constants
 from pkg.api.constants import CFG_DIR, FFMPEG_BINARY, FLAM_V1, which_ffmpeg
@@ -30,6 +32,16 @@ ACTION_FACTORY = 8
 ACTION_DB_IMPORT = 9
 ACTION_DOWNLOAD = 11
 ACTION_FFMPEG = 12
+
+
+def _ssl_context():
+    # Use the certifi CA bundle for SSL verification. The stdlib ssl module
+    # does not read the Windows certificate store, which leads to
+    # CERTIFICATE_VERIFY_FAILED on some setups (see issue #64). The requests
+    # library used elsewhere already relies on certifi, so this keeps urlopen
+    # consistent with the rest of the app.
+    return ssl.create_default_context(cafile=certifi.where())
+
 
 class ierWorker(QObject):
     signal_total_progress = QtCore.Signal(int, int)
@@ -361,7 +373,7 @@ class ierWorker(QObject):
 
             block_size = 100 * 1024  # 100KB
             try:
-                with urllib.request.urlopen(src) as response, open(target, 'wb') as out_file:
+                with urllib.request.urlopen(src, context=_ssl_context()) as response, open(target, 'wb') as out_file:
                     total_size = int(response.getheader('Content-Length', 0))
                     downloaded = 0
                     while True:
@@ -409,7 +421,7 @@ class ierWorker(QObject):
 
         block_size = 100 * 1024  # 100KB
         try:
-            with urllib.request.urlopen(url) as response, open(archive_path, 'wb') as out_file:
+            with urllib.request.urlopen(url, context=_ssl_context()) as response, open(archive_path, 'wb') as out_file:
                 total_size = int(response.getheader('Content-Length', 0))
                 self.signal_message.emit(self.tr("Downloading {:,}MB".format(total_size)))
 
