@@ -16,6 +16,7 @@ pour Windows 11 / MacOs (11 BigSur => 26 Tahoe) / Linux
 *  😎 **Flam support** 😎  
 L'application permet désormais d'importer les histoires Lunii sur votre Flam, sous réserve qu'elle soit en firmware v2.x.x  
     > **Attention :** la Flam est TRES lente en usb. Il faut etre patient. (environ 4min pour 80Mo)
+    > **Prérequis détection :** contrairement aux Lunii v1/v2 qui se montent automatiquement, la Flam doit être passée en **mode connexion USB** depuis ses paramètres (menu de l'appareil) pour exposer son stockage. Sans cela, elle ne fait que charger et n'apparaît ni dans l'explorateur ni dans Lunii.QT.
 
 * 😎 **Lunii v3 & Firmware 3.2.x** 😎  
 Lunii.QT a été mis à jour pour prendre en charge le dernier firmware (3.2.2 et suivants). Grâce à une analyse approfondie (j’aurais dû connecter les neurones et réfléchir 10 minutes de plus à la premère analyse), une solution **stable** et **TRÈS simple** a été trouvée.  
@@ -217,6 +218,8 @@ Lunii.QT vous offre la possibilité de sauvegarder la dernière version du Firmw
    
 
 ### Guide Pratique - Flam
+> **Prérequis :** activez le **mode connexion USB** dans les paramètres de la Flam avant toute opération. Un lecteur amovible doit apparaître dans l'explorateur de fichiers ; sinon Lunii.QT ne pourra pas détecter l'appareil.
+
 1. Récupération du firmware
    1. Sélectionnez votre Flam dans la liste des appareils
    2. Menu **Outils/Récupérer le firmware**
