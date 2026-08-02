@@ -24,6 +24,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        # Force the pure-Python charset_normalizer: the default wheel is mypyc-compiled
+        # and its extensions import a hash-named top-level module (e.g.
+        # ada92cb5d92a588d1b93__mypyc) that py2app does not collect, so the bundled
+        # package fails to import and requests falls back with a warning.
+        pip install --no-binary charset_normalizer --force-reinstall charset_normalizer
         pip install py2app
         brew install create-dmg
         
@@ -59,6 +64,50 @@ jobs:
         python macos_cleanup.py
         echo "SIZE POST-CLEANUP"
         du -sh ./dist/luniiQt*
+
+    # Two fixes that must run after the cleanup and before packaging:
+    #
+    # 1. py2app's launcher stub is a universal binary (x86_64 + arm64), but the
+    #    native extension modules pip installs on this runner are arm64-only
+    #    (PIL/_imaging, psutil, xxtea, pyppmd, ...). If LaunchServices picks the
+    #    x86_64 slice, the stub aborts inside __boot__.py with "incompatible
+    #    architecture" before the main script ever runs, and the user only sees
+    #    py2app's generic "Launch error" dialog. Thinning the stub leaves
+    #    LaunchServices no wrong slice to choose.
+    #    (Launching the binary directly from a shell always picked the native
+    #    slice, which is why this did not show up in a terminal.)
+    #
+    # 2. macos_cleanup.py deletes files that py2app had already sealed into the
+    #    code signature, so the shipped bundle failed `codesign --verify` with
+    #    "a sealed resource is missing or invalid". On Apple Silicon an invalid
+    #    signature is fatal and cannot be bypassed with "Open Anyway", so the
+    #    bundle has to be re-signed once it is final.
+    - name: Force native architecture and re-sign bundle
+      run: |
+        set -e
+        ARCH=arm64
+        APP=./dist/luniiQt.app
+        for exe in lunii-qt python; do
+          p="$APP/Contents/MacOS/$exe"
+          [ -e "$p" ] || continue
+          echo "$exe: $(lipo -archs "$p")"
+          if [ "$(lipo -archs "$p")" != "$ARCH" ]; then
+            lipo -thin "$ARCH" "$p" -output "$p.$ARCH"
+            mv "$p.$ARCH" "$p"
+            echo "$exe thinned to $(lipo -archs "$p")"
+          fi
+        done
+        # Sign nested code first, then the bundle. `--deep` is deprecated by Apple
+        # and refuses to sign a bundle containing an unsigned nested dylib, which
+        # happens depending on where a wheel's bundled libraries came from.
+        find "$APP/Contents" -type f \( -name '*.dylib' -o -name '*.so' \) | while read -r f; do
+          codesign --verify "$f" >/dev/null 2>&1 || codesign --force --sign - "$f"
+        done
+        if [ -e "$APP/Contents/MacOS/python" ]; then
+          codesign --force --sign - "$APP/Contents/MacOS/python"
+        fi
+        codesign --force --sign - "$APP"
+        codesign --verify --verbose=1 "$APP"
 
     # - name: Make Light portable archive
     #   run: |  

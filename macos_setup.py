@@ -20,7 +20,15 @@ OPTIONS = {
         'CFBundleDevelopmentRegion': 'English',
         'CFBundleDocumentTypes': [],
     },
-    'packages': ['PySide6', 'shiboken6'],
+    # Copied wholesale rather than byte-compiled into the zip:
+    #  - charset_normalizer is imported lazily by requests, so py2app's dependency
+    #    scan misses it and every startup warns "Unable to find acceptable character
+    #    detection dependency". (The CI install also forces the pure-Python build --
+    #    the mypyc wheel needs a hash-named top-level module py2app cannot see.)
+    #  - backports is a namespace package, and setuptools vendors a backports.tarfile
+    #    whose __init__ shadows it in the zip. backports.zstd (py7zr -> pyzstd) then
+    #    goes missing and the app dies at startup on 'cannot import name zstd'.
+    'packages': ['PySide6', 'shiboken6', 'charset_normalizer', 'backports', 'pyzstd'],
     'excludes': ['tkinter', 'pytest', 'unittest', 'sqlite3'],
 }
 
