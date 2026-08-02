@@ -24,6 +24,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        # Force the pure-Python charset_normalizer: the default wheel is mypyc-compiled
+        # and its extensions import a hash-named top-level module (e.g.
+        # ada92cb5d92a588d1b93__mypyc) that py2app does not collect, so the bundled
+        # package fails to import and requests falls back with a warning.
+        pip install --no-binary charset_normalizer --force-reinstall charset_normalizer
         pip install py2app
         brew install create-dmg
         
@@ -90,7 +95,16 @@ jobs:
             echo "$exe thinned to $(lipo -archs "$p")"
           fi
         done
-        codesign --force --deep --sign - "$APP"
+        # Sign nested code first, then the bundle. `--deep` is deprecated by Apple
+        # and refuses to sign a bundle containing an unsigned nested dylib, which
+        # happens depending on where a wheel's bundled libraries came from.
+        find "$APP/Contents" -type f \( -name '*.dylib' -o -name '*.so' \) | while read -r f; do
+          codesign --verify "$f" >/dev/null 2>&1 || codesign --force --sign - "$f"
+        done
+        if [ -e "$APP/Contents/MacOS/python" ]; then
+          codesign --force --sign - "$APP/Contents/MacOS/python"
+        fi
+        codesign --force --sign - "$APP"
         codesign --verify --verbose=1 "$APP"
 
     # - name: Make Light portable archive
