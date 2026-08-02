@@ -20,7 +20,10 @@ OPTIONS = {
         'CFBundleDevelopmentRegion': 'English',
         'CFBundleDocumentTypes': [],
     },
-    'packages': ['PySide6', 'shiboken6'],
+    # charset_normalizer is imported lazily by requests, so py2app's dependency
+    # scan misses it and the bundle warns "Unable to find acceptable character
+    # detection dependency" at startup, degrading every requests call.
+    'packages': ['PySide6', 'shiboken6', 'charset_normalizer'],
     'excludes': ['tkinter', 'pytest', 'unittest', 'sqlite3'],
 }
 

@@ -60,6 +60,41 @@ jobs:
         echo "SIZE POST-CLEANUP"
         du -sh ./dist/luniiQt*
 
+    # Two fixes that must run after the cleanup and before packaging:
+    #
+    # 1. py2app's launcher stub is a universal binary (x86_64 + arm64), but the
+    #    native extension modules pip installs on this runner are arm64-only
+    #    (PIL/_imaging, psutil, xxtea, pyppmd, ...). If LaunchServices picks the
+    #    x86_64 slice, the stub aborts inside __boot__.py with "incompatible
+    #    architecture" before the main script ever runs, and the user only sees
+    #    py2app's generic "Launch error" dialog. Thinning the stub leaves
+    #    LaunchServices no wrong slice to choose.
+    #    (Launching the binary directly from a shell always picked the native
+    #    slice, which is why this did not show up in a terminal.)
+    #
+    # 2. macos_cleanup.py deletes files that py2app had already sealed into the
+    #    code signature, so the shipped bundle failed `codesign --verify` with
+    #    "a sealed resource is missing or invalid". On Apple Silicon an invalid
+    #    signature is fatal and cannot be bypassed with "Open Anyway", so the
+    #    bundle has to be re-signed once it is final.
+    - name: Force native architecture and re-sign bundle
+      run: |
+        set -e
+        ARCH=arm64
+        APP=./dist/luniiQt.app
+        for exe in lunii-qt python; do
+          p="$APP/Contents/MacOS/$exe"
+          [ -e "$p" ] || continue
+          echo "$exe: $(lipo -archs "$p")"
+          if [ "$(lipo -archs "$p")" != "$ARCH" ]; then
+            lipo -thin "$ARCH" "$p" -output "$p.$ARCH"
+            mv "$p.$ARCH" "$p"
+            echo "$exe thinned to $(lipo -archs "$p")"
+          fi
+        done
+        codesign --force --deep --sign - "$APP"
+        codesign --verify --verbose=1 "$APP"
+
     # - name: Make Light portable archive
     #   run: |  
     #     cd dist
