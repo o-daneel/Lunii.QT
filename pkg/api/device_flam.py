@@ -1,7 +1,6 @@
 from glob import glob
 import json
 import os.path
-import shutil
 import time
 import zipfile
 import binascii
@@ -20,6 +19,7 @@ from unidecode import unidecode
 
 from pkg.api import stories
 from pkg.api.aes_keys import reverse_bytes
+from pkg.api import fs_utils
 from pkg.api.constants import *
 from pkg.api.convert_audio import audio_to_mp3, mp3_tag_cleanup, tags_removal_required, transcoding_required
 from pkg.api.convert_image import image_to_bitmap_rle4, image_to_liff
@@ -288,11 +288,11 @@ class FlamDevice(QtCore.QObject):
 
                     # removing whole directory
                     self.signal_logger.emit(logging.INFO, QCoreApplication.translate("FlamDevice", "Deleting - {}").format(lost_story_path))
-                    shutil.rmtree(lost_story_path)
+                    fs_utils.rmtree(lost_story_path)
                     removed += 1
                 except (OSError, PermissionError) as e:
                     self.signal_logger.emit(logging.WARN, QCoreApplication.translate("FlamDevice", "Failed to delete - {}").format(lost_story_path))
-                    self.signal_logger.emit(logging.ERROR, e)
+                    self.signal_logger.emit(logging.ERROR, str(e))
 
         return removed, recovered_size//1024//1024
 
@@ -426,7 +426,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         
@@ -442,7 +442,7 @@ class FlamDevice(QtCore.QObject):
             try:
                 new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
+                self.signal_logger.emit(logging.ERROR, str(e))
                 return False
 
             # checking if UUID already loaded
@@ -533,7 +533,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         # opening zip file
@@ -548,7 +548,7 @@ class FlamDevice(QtCore.QObject):
             try:
                 new_uuid = UUID(bytes=zip_file.read(FILE_UUID))
             except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
+                self.signal_logger.emit(logging.ERROR, str(e))
                 return False
 
             # checking if UUID already loaded
@@ -618,7 +618,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         # opening zip file
@@ -725,7 +725,7 @@ class FlamDevice(QtCore.QObject):
             with py7zr.SevenZipFile(story_path, mode='r'):
                 pass  # If opening succeeds, the archive is valid
         except py7zr.exceptions.Bad7zFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         # opening zip file
@@ -850,7 +850,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
         
         # opening zip file
@@ -926,7 +926,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
         
         # opening zip file
@@ -1034,7 +1034,7 @@ class FlamDevice(QtCore.QObject):
             with py7zr.SevenZipFile(story_path, mode='r'):
                 pass  # If opening succeeds, the archive is valid
         except py7zr.exceptions.Bad7zFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         # opening zip file
@@ -1142,7 +1142,7 @@ class FlamDevice(QtCore.QObject):
             with zipfile.ZipFile(file=story_path):
                 pass  # If opening succeeds, the archive is valid
         except zipfile.BadZipFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
         
         # opening zip file
@@ -1160,7 +1160,7 @@ class FlamDevice(QtCore.QObject):
             try:
                 story_json = json.loads(zip_file.read(FILE_STUDIO_JSON))
             except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
+                self.signal_logger.emit(logging.ERROR, str(e))
                 return False
 
             studio_story = StudioStory(story_json)
@@ -1289,7 +1289,7 @@ class FlamDevice(QtCore.QObject):
             with py7zr.SevenZipFile(story_path, mode='r'):
                 pass  # If opening succeeds, the archive is valid
         except py7zr.exceptions.Bad7zFile as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
 
         # opening zip file
@@ -1307,7 +1307,7 @@ class FlamDevice(QtCore.QObject):
             try:
                 story_json = json.loads(zip_contents[FILE_STUDIO_JSON].read())
             except ValueError as e:
-                self.signal_logger.emit(logging.ERROR, e)
+                self.signal_logger.emit(logging.ERROR, str(e))
                 return False
 
             studio_story = StudioStory(story_json)
@@ -1732,14 +1732,14 @@ class FlamDevice(QtCore.QObject):
         hidden_story_dir = Path(self.mount_point).joinpath(f"{self.HIDDEN_STORIES_BASEDIR}{str(story_uuid)}")
         try:
             if os.path.isdir(story_dir):
-                shutil.rmtree(story_dir)
+                fs_utils.rmtree(story_dir)
             if os.path.isdir(hidden_story_dir):
-                shutil.rmtree(hidden_story_dir)
+                fs_utils.rmtree(hidden_story_dir)
         except OSError as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
         except PermissionError as e:
-            self.signal_logger.emit(logging.ERROR, e)
+            self.signal_logger.emit(logging.ERROR, str(e))
             return False
         return True
 
