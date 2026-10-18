@@ -1516,7 +1516,7 @@ class LuniiDevice(QtCore.QObject):
                 story_arcnames.append(str(one_story.uuid) + file)
 
         try:
-            with zipfile.ZipFile(zip_path, 'w') as zip_out:
+            with zipfile.ZipFile(zip_path, 'w', strict_timestamps=False) as zip_out:
                 self.signal_logger.emit(logging.DEBUG, QCoreApplication.translate("LuniiDevice", "> Zipping story ..."))
                 for index, file in enumerate(story_flist):
                     # abort requested ? early exit
