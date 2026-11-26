@@ -94,6 +94,314 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     </message>
 </context>
 <context>
+    <name>Audiobook</name>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="83"/>
+        <source>Chapter {}</source>
+        <translation>Chapitre {}</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="305"/>
+        <source>No chapter to convert</source>
+        <translation>Aucun chapitre à convertir</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="308"/>
+        <source>FFMPEG not found: it is required to convert the audio files.</source>
+        <translation>FFMPEG est introuvable : il est nécessaire pour convertir l&apos;audio.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="329"/>
+        <source>Creating pictures...</source>
+        <translation>Création des images…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="335"/>
+        <source>Creating voice announcements...</source>
+        <translation>Création des annonces vocales…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="361"/>
+        <location filename="../pkg/api/audiobook.py" line="377"/>
+        <source>Converting audio {}/{}...</source>
+        <translation>Conversion audio {}/{}…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="375"/>
+        <source>Unable to convert &apos;{}&apos;:</source>
+        <translation>Conversion impossible de « {} » :</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="414"/>
+        <source>Audiobook - {} chapters</source>
+        <translation>Livre audio - {} chapitres</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="415"/>
+        <source>Audiobook - 1 chapter</source>
+        <translation>Livre audio - 1 chapitre</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="425"/>
+        <source>Writing archive...</source>
+        <translation>Écriture de l&apos;archive…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/api/audiobook.py" line="432"/>
+        <source>Pack created</source>
+        <translation>Pack créé</translation>
+    </message>
+</context>
+<context>
+    <name>AudiobookDialog</name>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="77"/>
+        <source>Create an audiobook</source>
+        <translation>Créer un livre audio</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="86"/>
+        <source>Lunii - Audiobooks</source>
+        <translation>Lunii - Livres audio</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="100"/>
+        <source>Book title:</source>
+        <translation>Titre du livre :</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="102"/>
+        <source>e.g. The Little Prince</source>
+        <translation>ex : Le Petit Prince</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="105"/>
+        <source>Description:</source>
+        <translation>Description :</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="107"/>
+        <source>(optional)</source>
+        <translation>(facultatif)</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="113"/>
+        <location filename="../pkg/audiobook_window.py" line="315"/>
+        <source>No
+cover</source>
+        <translation>Aucune
+couverture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="117"/>
+        <source>Click to choose the cover picture</source>
+        <translation>Cliquez pour choisir l&apos;image de couverture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="121"/>
+        <source>Cover...</source>
+        <translation>Couverture…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="126"/>
+        <source>Remove the cover</source>
+        <translation>Retirer la couverture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="134"/>
+        <source>Chapters, in reading order</source>
+        <translation>Chapitres, dans l&apos;ordre de lecture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="137"/>
+        <source>Double-click: rename (this name is the one announced)
+Drag: reorder
+You can also drop MP3 files, a folder or a picture here</source>
+        <translation>Double-clic : renommer (c&apos;est ce nom qui sera annoncé)
+Glisser : réordonner
+Vous pouvez aussi déposer ici des MP3, un dossier ou une image</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="146"/>
+        <source>Add MP3 files...</source>
+        <translation>Ajouter des MP3…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="147"/>
+        <source>Add a folder...</source>
+        <translation>Ajouter un dossier…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="152"/>
+        <source>▲ Up</source>
+        <translation>▲ Monter</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="154"/>
+        <source>▼ Down</source>
+        <translation>▼ Descendre</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="156"/>
+        <source>Sort by file name</source>
+        <translation>Trier par nom de fichier</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="158"/>
+        <source>Remove</source>
+        <translation>Retirer</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="160"/>
+        <source>Clear all</source>
+        <translation>Tout vider</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="169"/>
+        <source>Options</source>
+        <translation>Options</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="171"/>
+        <source>Announce the title and chapter names with a synthetic voice</source>
+        <translation>Annoncer le titre et le nom des chapitres avec une voix de synthèse</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="175"/>
+        <source>Only available on Windows</source>
+        <translation>Disponible uniquement sous Windows</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="177"/>
+        <source>Enable night mode</source>
+        <translation>Activer le mode nuit</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="179"/>
+        <source>Packs folder:</source>
+        <translation>Dossier des packs :</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="197"/>
+        <source>⚠ FFMPEG is missing (see Tools menu to install it)</source>
+        <translation>⚠ FFMPEG introuvable (menu Outils pour l&apos;installer)</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="201"/>
+        <source>Create pack only</source>
+        <translation>Créer le pack seulement</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="203"/>
+        <source>Create and import</source>
+        <translation>Créer et importer</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="207"/>
+        <source>Connect and select your Lunii/Flam to import directly</source>
+        <translation>Branchez et sélectionnez votre Lunii/Flam pour importer directement</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="208"/>
+        <location filename="../pkg/audiobook_window.py" line="223"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="223"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="264"/>
+        <source>Choose the chapters</source>
+        <translation>Choisir les chapitres</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="265"/>
+        <source>Audio files</source>
+        <translation>Fichiers audio</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="265"/>
+        <source>All files</source>
+        <translation>Tous les fichiers</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="270"/>
+        <source>Choose the audiobook folder</source>
+        <translation>Choisir le dossier du livre audio</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="302"/>
+        <source>Choose the cover</source>
+        <translation>Choisir la couverture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="302"/>
+        <source>Pictures</source>
+        <translation>Images</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="319"/>
+        <source>Packs folder</source>
+        <translation>Dossier des packs</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="336"/>
+        <source>Existing pack</source>
+        <translation>Pack existant</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="337"/>
+        <source>&apos;{}&apos; already exists in this folder.
+Replace it?</source>
+        <translation>« {} » existe déjà dans ce dossier.
+Le remplacer ?</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="376"/>
+        <source>Error</source>
+        <translation>Erreur</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="376"/>
+        <source>The pack creation failed:</source>
+        <translation>La création du pack a échoué :</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="384"/>
+        <source>✅ Pack created: {}</source>
+        <translation>✅ Pack créé : {}</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="386"/>
+        <source>Pack created</source>
+        <translation>Pack créé</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="387"/>
+        <source>The pack has been created:
+{}
+
+You can import it later with Stories &gt; Import, or by dropping it on the story list.</source>
+        <translation>Le pack a été créé :
+{}
+
+Vous pourrez l&apos;importer plus tard via Histoires &gt; Importer, ou en le glissant sur la liste des histoires.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="389"/>
+        <source>Open folder</source>
+        <translation>Ouvrir le dossier</translation>
+    </message>
+    <message>
+        <location filename="../pkg/audiobook_window.py" line="398"/>
+        <source>Cancelling...</source>
+        <translation>Annulation…</translation>
+    </message>
+</context>
+<context>
     <name>DebugDialog</name>
     <message>
         <location filename="../pkg/ui/debug_ui.py" line="61"/>
@@ -448,6 +756,39 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <location filename="../pkg/api/device_flam.py" line="1822"/>
         <source>Read {} hidden stories</source>
         <translation>{} histoires cachées lues</translation>
+    </message>
+</context>
+<context>
+    <name>FlowDiagram</name>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="57"/>
+        <source>Cover</source>
+        <translation>Couverture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="57"/>
+        <source>title announced</source>
+        <translation>titre annoncé</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="58"/>
+        <source>Menu</source>
+        <translation>Menu</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="58"/>
+        <source>wheel = chapter</source>
+        <translation>molette = chapitre</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="59"/>
+        <source>Playback</source>
+        <translation>Lecture</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="59"/>
+        <source>chains the next one</source>
+        <translation>enchaîne la suite</translation>
     </message>
 </context>
 <context>
@@ -921,8 +1262,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     </message>
     <message>
         <location filename="../pkg/ui/main.ui" line="893"/>
-        <location filename="../pkg/main_window.py" line="172"/>
-        <location filename="../pkg/main_window.py" line="746"/>
+        <location filename="../pkg/main_window.py" line="185"/>
+        <location filename="../pkg/main_window.py" line="770"/>
         <source>FFMPEG detected</source>
         <translation>FFMPEG détecté</translation>
     </message>
@@ -974,8 +1315,8 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
     <message>
         <location filename="../pkg/ui/main.ui" line="82"/>
         <location filename="../pkg/ui/main.ui" line="88"/>
-        <location filename="../pkg/main_window.py" line="350"/>
-        <location filename="../pkg/main_window.py" line="362"/>
+        <location filename="../pkg/main_window.py" line="367"/>
+        <location filename="../pkg/main_window.py" line="379"/>
         <source>Select your Lunii</source>
         <translation>Sélectionner votre Lunii</translation>
     </message>
@@ -1075,108 +1416,118 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="172"/>
-        <location filename="../pkg/main_window.py" line="746"/>
+        <location filename="../pkg/main_window.py" line="168"/>
+        <source>Create an audiobook...</source>
+        <translation>Créer un livre audio…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/main_window.py" line="185"/>
+        <location filename="../pkg/main_window.py" line="770"/>
         <source>FFMPEG is missing (📥)</source>
         <translation>FFMPEG absent (📥)</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="370"/>
+        <location filename="../pkg/main_window.py" line="198"/>
+        <source>Audiobook tutorial...</source>
+        <translation>Tutoriel : livres audio…</translation>
+    </message>
+    <message>
+        <location filename="../pkg/main_window.py" line="387"/>
         <source>No Lunii detected 😥, try File/Open</source>
         <translation>Aucune Lunii détectée 😥, essayer Fichier/Ouvrir</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="371"/>
+        <location filename="../pkg/main_window.py" line="388"/>
         <source>No Lunii detected 😥</source>
         <translation>Aucune Lunii détectée 😥</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="413"/>
+        <location filename="../pkg/main_window.py" line="430"/>
         <source>🛑 PermissionError : Unable to open this device</source>
         <translation>🛑 PermissionError : Impossible d&apos;ouvrir cet appareil</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="493"/>
+        <location filename="../pkg/main_window.py" line="510"/>
         <source>Failed to fetch BMP file.</source>
         <translation>Echec durant la récupération de l&apos;image.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="496"/>
+        <location filename="../pkg/main_window.py" line="513"/>
         <source>Fetching official Lunii DB...</source>
         <translation>Récupération de la base officielle Lunii...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="514"/>
+        <location filename="../pkg/main_window.py" line="531"/>
         <source>👍 Lunii DB refreshed.</source>
         <translation>👍 Lunii DB récupérée.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="516"/>
+        <location filename="../pkg/main_window.py" line="533"/>
         <source>🛑 Lunii DB failed.</source>
         <translation>🛑 Erreur Lunii DB.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="522"/>
+        <location filename="../pkg/main_window.py" line="539"/>
         <source>Device info sent to clipboard.</source>
         <translation>Information copiées dans le presse papier.</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="532"/>
+        <location filename="../pkg/main_window.py" line="549"/>
         <source>Open Lunii device</source>
         <translation>Ouvrir un appareil</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="539"/>
+        <location filename="../pkg/main_window.py" line="556"/>
         <source>Not a Lunii, nor Flam or unsupported one 😥</source>
         <translation>Ni une Lunii, ni une Flam, ou alors non reconnue 😥</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="551"/>
+        <location filename="../pkg/main_window.py" line="568"/>
         <source>Open STUdio DB</source>
         <translation>Ouvrir une base STUdio</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="627"/>
+        <location filename="../pkg/main_window.py" line="646"/>
         <source>⚠️ Login failed, please check your credentials</source>
         <translation>⚠️ Echec de l&apos;identification, vérifiez vos informations</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="629"/>
+        <location filename="../pkg/main_window.py" line="648"/>
         <source>Login success...</source>
         <translation>Identifié....</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="652"/>
+        <location filename="../pkg/main_window.py" line="671"/>
         <source>✅ Firmware downloaded to</source>
         <translation>✅ Firmware téléchargé dans</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="655"/>
+        <location filename="../pkg/main_window.py" line="674"/>
         <source>🛑 Fail to download update</source>
         <translation>🛑 Echec du téléchargement de la mise à jour</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="661"/>
+        <location filename="../pkg/main_window.py" line="680"/>
         <source>🛑 Network error...</source>
         <translation>🛑 Erreur reseau...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="750"/>
+        <location filename="../pkg/main_window.py" line="774"/>
         <source>Latest Github release</source>
         <translation>Dernière mise à jour Github</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="752"/>
+        <location filename="../pkg/main_window.py" line="776"/>
         <source>🛑 Unable to fetch version from Github</source>
         <translation>🛑 Impossible de récupérer l&apos;information de la dernière version sur Github</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="776"/>
+        <location filename="../pkg/main_window.py" line="800"/>
         <source>[ Help ]</source>
         <translation>[ Aide ]</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="777"/>
+        <location filename="../pkg/main_window.py" line="801"/>
         <source>Update is available</source>
         <translation>Mise à jour disponible</translation>
     </message>
@@ -1185,7 +1536,7 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Mise à jour est disponible</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="778"/>
+        <location filename="../pkg/main_window.py" line="802"/>
         <source>Update to {}</source>
         <translation>Mettre à jour en {}</translation>
     </message>
@@ -1194,34 +1545,34 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
         <translation type="vanished">Mettre à jour vers {last_version}</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="830"/>
+        <location filename="../pkg/main_window.py" line="854"/>
         <source>Story is hidden for LuniiStore synchronization</source>
         <translation>Histoire masquée pour une synchronisation LuniiStore</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="840"/>
+        <location filename="../pkg/main_window.py" line="864"/>
         <source>Free :</source>
         <translation>Libre :</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="921"/>
+        <location filename="../pkg/main_window.py" line="945"/>
         <source>stories</source>
         <translation>histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1030"/>
+        <location filename="../pkg/main_window.py" line="1054"/>
         <source>Delete stories</source>
         <translation>Supprimer les histoires</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1031"/>
+        <location filename="../pkg/main_window.py" line="1055"/>
         <source>You are requesting to delete : 
 </source>
         <translation>Souhaitez vous supprimer : 
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1037"/>
+        <location filename="../pkg/main_window.py" line="1061"/>
         <source>
 (and too many others)
 </source>
@@ -1230,53 +1581,54 @@ Les logos sont fournis par &lt;b&gt;malexxx&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
 </translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1039"/>
+        <location filename="../pkg/main_window.py" line="1063"/>
         <source>
 Do you want to proceed ?</source>
         <translation>
 Voulez-vous continuer ?</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1066"/>
+        <location filename="../pkg/main_window.py" line="1090"/>
         <source>🛑 Export cancelled</source>
         <translation>🛑 Export annulé</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1084"/>
+        <location filename="../pkg/main_window.py" line="1108"/>
         <source>🛑 Export All cancelled</source>
         <translation>🛑 Tout exporter annulé</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1119"/>
-        <location filename="../pkg/main_window.py" line="1132"/>
-        <location filename="../pkg/main_window.py" line="1139"/>
+        <location filename="../pkg/main_window.py" line="1143"/>
+        <location filename="../pkg/main_window.py" line="1156"/>
+        <location filename="../pkg/main_window.py" line="1163"/>
         <source>🛑 Unable to update story ...</source>
         <translation>🛑 Impossible de mettre à jour l&apos;histoire...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1161"/>
-        <location filename="../pkg/main_window.py" line="1204"/>
+        <location filename="../pkg/main_window.py" line="1185"/>
+        <location filename="../pkg/main_window.py" line="1228"/>
         <source>✅ Stories updated...</source>
         <translation>✅ Histoire(s) mise(s) à jour...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1211"/>
+        <location filename="../pkg/main_window.py" line="1235"/>
         <source>Open Stories</source>
         <translation>Ouvrir une histoire</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1216"/>
-        <location filename="../pkg/main_window.py" line="1252"/>
+        <location filename="../pkg/main_window.py" line="1240"/>
+        <location filename="../pkg/main_window.py" line="1260"/>
+        <location filename="../pkg/main_window.py" line="1306"/>
         <source>Importing stories...</source>
         <translation>Import d&apos;histoires...</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1246"/>
+        <location filename="../pkg/main_window.py" line="1300"/>
         <source>🛑 Unable to import story, missing story key for Lunii v3</source>
         <translation>🛑 Impossible d&apos;importer des histroires, pas de clés histoires pour la Lunii v3</translation>
     </message>
     <message>
-        <location filename="../pkg/main_window.py" line="1317"/>
+        <location filename="../pkg/main_window.py" line="1371"/>
         <source>Abort requested, please wait...</source>
         <translation>Annulation demandée, patientez...</translation>
     </message>
@@ -1286,6 +1638,89 @@ Voulez-vous continuer ?</translation>
     <message>
         <source>Night mode settings</source>
         <translation type="vanished">Confguration du mode nuit</translation>
+    </message>
+</context>
+<context>
+    <name>TutorialDialog</name>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="136"/>
+        <source>Audiobooks - tutorial</source>
+        <translation>Livres audio - tutoriel</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="150"/>
+        <source>Do not show again at startup</source>
+        <translation>Ne plus afficher au démarrage</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="155"/>
+        <source>◀ Previous</source>
+        <translation>◀ Précédent</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="157"/>
+        <source>Next ▶</source>
+        <translation>Suivant ▶</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="160"/>
+        <source>Create an audiobook</source>
+        <translation>Créer un livre audio</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="162"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="172"/>
+        <source>New: your audiobooks on the Lunii / Flam</source>
+        <translation>Nouveau : vos livres audio sur la Lunii / Flam</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="173"/>
+        <source>Lunii.QT can now turn an &lt;b&gt;audiobook&lt;/b&gt; (one MP3 file per chapter) into a story for your storyteller, with a cover, a chapter menu and voice announcements.&lt;br&gt;&lt;br&gt;To start:&lt;ul&gt;&lt;li&gt;menu &lt;b&gt;Stories → Create an audiobook...&lt;/b&gt; (shortcut &lt;b&gt;Ctrl+B&lt;/b&gt;)&lt;/li&gt;&lt;li&gt;or &lt;b&gt;drop your MP3 files&lt;/b&gt; (or their folder) directly on the story list.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>Lunii.QT peut maintenant transformer un &lt;b&gt;livre audio&lt;/b&gt; (un fichier MP3 par chapitre) en histoire pour votre conteuse, avec une couverture, un menu des chapitres et des annonces vocales.&lt;br&gt;&lt;br&gt;Pour commencer :&lt;ul&gt;&lt;li&gt;menu &lt;b&gt;Histoires → Créer un livre audio…&lt;/b&gt; (raccourci &lt;b&gt;Ctrl+B&lt;/b&gt;)&lt;/li&gt;&lt;li&gt;ou &lt;b&gt;glissez vos MP3&lt;/b&gt; (ou leur dossier) directement sur la liste des histoires.&lt;/li&gt;&lt;/ul&gt;</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="178"/>
+        <source>1. Choose the chapters</source>
+        <translation>1. Choisir les chapitres</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="179"/>
+        <source>&lt;ul&gt;&lt;li&gt;&lt;b&gt;Add MP3 files...&lt;/b&gt; or &lt;b&gt;Add a folder...&lt;/b&gt;: files are sorted by name.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Drag&lt;/b&gt; the chapters to change their order, or use ▲ / ▼.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Double-click&lt;/b&gt; a chapter to rename it: this name is the one &lt;b&gt;announced&lt;/b&gt; and displayed.&lt;/li&gt;&lt;li&gt;The &lt;b&gt;title&lt;/b&gt; and the &lt;b&gt;cover&lt;/b&gt; are found automatically (MP3 tags, picture in the folder). Click on the cover to choose another one.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;ul&gt;&lt;li&gt;&lt;b&gt;Ajouter des MP3…&lt;/b&gt; ou &lt;b&gt;Ajouter un dossier…&lt;/b&gt; : les fichiers sont triés dans l&apos;ordre de leur nom.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Glissez&lt;/b&gt; les chapitres pour changer l&apos;ordre, ou utilisez ▲ / ▼.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Double-cliquez&lt;/b&gt; sur un chapitre pour le renommer : c&apos;est ce nom qui sera &lt;b&gt;annoncé&lt;/b&gt; et affiché.&lt;/li&gt;&lt;li&gt;Le &lt;b&gt;titre&lt;/b&gt; et la &lt;b&gt;couverture&lt;/b&gt; sont trouvés automatiquement (infos des MP3, image du dossier). Cliquez sur la couverture pour en choisir une autre.&lt;/li&gt;&lt;/ul&gt;</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="184"/>
+        <source>2. Options</source>
+        <translation>2. Les options</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="185"/>
+        <source>&lt;ul&gt;&lt;li&gt;&lt;b&gt;Synthetic voice&lt;/b&gt;: the book title and each chapter name are read aloud in the menu (Windows voices).&lt;/li&gt;&lt;li&gt;&lt;b&gt;Night mode&lt;/b&gt;: makes the book available in the storyteller night mode.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Packs folder&lt;/b&gt;: a copy of each book is kept there, to import it again later.&lt;/li&gt;&lt;/ul&gt;&lt;i&gt;FFMPEG is required to convert the audio. If it is missing, install it from the &lt;b&gt;Tools&lt;/b&gt; menu.&lt;/i&gt;</source>
+        <translation>&lt;ul&gt;&lt;li&gt;&lt;b&gt;Voix de synthèse&lt;/b&gt; : le titre du livre et le nom de chaque chapitre sont lus à voix haute dans le menu (voix française de Windows).&lt;/li&gt;&lt;li&gt;&lt;b&gt;Mode nuit&lt;/b&gt; : rend le livre disponible dans le mode nuit de la conteuse.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Dossier des packs&lt;/b&gt; : une copie de chaque livre y est gardée, pour pouvoir le réimporter plus tard.&lt;/li&gt;&lt;/ul&gt;&lt;i&gt;FFMPEG est nécessaire pour convertir l&apos;audio. S&apos;il manque, installez-le depuis le menu &lt;b&gt;Outils&lt;/b&gt;.&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="190"/>
+        <source>3. Import on the storyteller</source>
+        <translation>3. Importer sur la conteuse</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="191"/>
+        <source>&lt;ul&gt;&lt;li&gt;Connect your Lunii / Flam and select it at the top of the window.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Create and import&lt;/b&gt;: the book is prepared then sent directly.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Create pack only&lt;/b&gt;: to import it later (Stories → Import, or drop the .zip).&lt;/li&gt;&lt;/ul&gt;⏳ The Flam is slow over USB (about 1 minute for 35 MB): please be patient.&lt;br&gt;⚠️ The Flam must run &lt;b&gt;firmware 2.x&lt;/b&gt;. Remember to &lt;b&gt;eject&lt;/b&gt; the storyteller before unplugging it.</source>
+        <translation>&lt;ul&gt;&lt;li&gt;Branchez votre Lunii / Flam et sélectionnez-la en haut de la fenêtre.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Créer et importer&lt;/b&gt; : le livre est préparé puis envoyé directement.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Créer le pack seulement&lt;/b&gt; : pour l&apos;importer plus tard (Histoires → Importer, ou glisser le .zip).&lt;/li&gt;&lt;/ul&gt;⏳ La Flam est lente en USB (environ 1 minute pour 35 Mo) : soyez patient.&lt;br&gt;⚠️ La Flam doit être en &lt;b&gt;firmware 2.x&lt;/b&gt;. Pensez à &lt;b&gt;éjecter&lt;/b&gt; la conteuse avant de la débrancher.</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="196"/>
+        <source>4. On the storyteller</source>
+        <translation>4. Sur la conteuse</translation>
+    </message>
+    <message>
+        <location filename="../pkg/tutorial_window.py" line="197"/>
+        <source>&lt;ul&gt;&lt;li&gt;Choose the book like any story: its cover is displayed and the title is announced.&lt;/li&gt;&lt;li&gt;&lt;b&gt;OK&lt;/b&gt; opens the menu: turn the &lt;b&gt;wheel&lt;/b&gt; to choose a chapter, then &lt;b&gt;OK&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;At the end of a chapter, &lt;b&gt;the next one starts automatically&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;The &lt;b&gt;Home&lt;/b&gt; button goes back to the menu, &lt;b&gt;on the current chapter&lt;/b&gt;: handy to resume later.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;ul&gt;&lt;li&gt;Choisissez le livre comme une histoire : sa couverture s&apos;affiche et le titre est annoncé.&lt;/li&gt;&lt;li&gt;&lt;b&gt;OK&lt;/b&gt; ouvre le menu : tournez la &lt;b&gt;molette&lt;/b&gt; pour choisir un chapitre, puis &lt;b&gt;OK&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;À la fin d&apos;un chapitre, &lt;b&gt;le suivant démarre tout seul&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;Le bouton &lt;b&gt;Maison&lt;/b&gt; revient au menu, &lt;b&gt;sur le chapitre en cours&lt;/b&gt; : pratique pour reprendre plus tard.&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>

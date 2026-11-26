@@ -22,6 +22,9 @@ from pkg.api.stories import story_load_db, DESC_NOT_FOUND, StoryList
 from pkg.ierWorker import ACTION_DOWNLOAD, ACTION_FFMPEG, ierWorker, ACTION_REMOVE, ACTION_IMPORT, ACTION_EXPORT, ACTION_SIZE, ACTION_CLEANUP, \
     ACTION_FACTORY, ACTION_RECOVER, ACTION_FIND, ACTION_DB_IMPORT
 from pkg.nm_window import NightModeWindow
+from pkg.audiobook_window import AudiobookDialog
+from pkg.api.audiobook import AUDIO_EXT
+from pkg.tutorial_window import TutorialDialog, tutorial_enabled
 from pkg.ui.about_ui import about_dlg
 from pkg.ui.debug_ui import DebugDialog, LUNII_LOGGER
 from pkg.ui.login_ui import LoginDialog
@@ -106,6 +109,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # starting thread to fetch version
         self.worker_check_version()
 
+        # audiobook tutorial at startup (until "do not show again")
+        if tutorial_enabled():
+            QtCore.QTimer.singleShot(400, self.show_tutorial)
+
     def init_ui(self):
         self.setupUi(self)
         self.modify_widgets()
@@ -157,6 +164,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.act_exportall = next(act for act in s_actions if act.objectName() == "actionExport_All")
         self.act_remove = next(act for act in s_actions if act.objectName() == "actionRemove")
 
+        # audiobook creation (MP3 chapters + cover => STUdio pack => import)
+        self.act_audiobook = QtGui.QAction(self.tr("Create an audiobook..."), self)
+        self.act_audiobook.setObjectName("actionAudiobook")
+        self.act_audiobook.setShortcut(QKeySequence("Ctrl+B"))
+        self.menuStory.insertAction(self.act_export, self.act_audiobook)
+
         # Update statusbar
         self.sb_create()
 
@@ -182,6 +195,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         t_actions = self.menuHelp.actions()
         self.act_update = next(act for act in t_actions if act.objectName() == "actionUpdate")
         self.act_update.setVisible(False)
+        self.act_tutorial = QtGui.QAction(self.tr("Audiobook tutorial..."), self)
+        self.act_tutorial.setObjectName("actionAudiobookTutorial")
+        act_about = next(act for act in t_actions if act.objectName() == "actionAbout")
+        self.menuHelp.insertAction(act_about, self.act_tutorial)
 
         # Connect the main window's moveEvent to the custom slot
         self.moveEvent = self.customMoveEvent
@@ -573,6 +590,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ts_nm()
         elif act_name == "actionImport":
             self.ts_import()
+        elif act_name == "actionAudiobook":
+            self.ts_audiobook()
         elif act_name == "actionExport":
             self.ts_export()
         elif act_name == "actionExport_All":
@@ -688,6 +707,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         act_name = action.objectName()
         if act_name == "actionAbout":
             about_dlg(self)
+        elif act_name == "actionAudiobookTutorial":
+            self.show_tutorial()
         elif act_name == "actionUpdate":
             website_url = QUrl('https://github.com/o-daneel/Lunii.QT/releases/latest')
             # Open the URL in the default web browser
@@ -697,6 +718,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # all disabled
         for action in self.menuStory.actions():
             action.setEnabled(False)
+
+        # audiobook packs can be created even without a device
+        self.act_audiobook.setEnabled(not self.worker)
 
         # during download or no device selected, no action possible
         if not self.audio_device or self.worker:
@@ -1216,6 +1240,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sb_update(self.tr("Importing stories..."))
         self.worker_launch(ACTION_IMPORT, files)
 
+    def can_import(self):
+        if not self.audio_device:
+            return False
+        if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
+            return False
+        return True
+
+    def show_tutorial(self):
+        dlg = TutorialDialog(self)
+        dlg.create_requested.connect(lambda: QtCore.QTimer.singleShot(0, self.ts_audiobook))
+        dlg.exec()
+
+    def ts_audiobook(self, files=None):
+        if self.worker:
+            return
+        dlg = AudiobookDialog(self, self.can_import(), files)
+        if dlg.exec() and dlg.result_zip and self.can_import():
+            self.sb_update(self.tr("Importing stories..."))
+            self.worker_launch(ACTION_IMPORT, [dlg.result_zip])
+
     def ts_dragenter_action(self, event):
         # a Lunii must be selected
         if not self.audio_device:
@@ -1226,6 +1270,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if event.mimeData().hasUrls():
             # getting path for dropped files
             file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
+
+            # audio files / folders => audiobook creation
+            if all(os.path.isdir(f) or f.lower().endswith(AUDIO_EXT) for f in file_paths):
+                event.acceptProposedAction()
+                return
 
             # checking if dropped files are ending with expected extensions
             if self.audio_device.device_version == FLAM_V1:
@@ -1242,6 +1291,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def ts_drop_action(self, event):
+        file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
+        if all(os.path.isdir(f) or f.lower().endswith(AUDIO_EXT) for f in file_paths):
+            self.ts_audiobook(file_paths)
+            return
+
         if self.audio_device.device_version == LUNII_V3 and not self.audio_device.story_key:
             self.sb_update(self.tr("🛑 Unable to import story, missing story key for Lunii v3"))
             return
