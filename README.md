@@ -13,6 +13,16 @@ pour Windows 11 / MacOs (11 BigSur => 26 Tahoe) / Linux
 > **FAQ :** Veuillez consulter les questions déjà posées dans la section [Discussions](https://github.com/o-daneel/Lunii.QT/discussions), ou les [Issues](https://github.com/o-daneel/Lunii.QT/issues?q=is%3Aissue%20label%3A%22good%20first%20issue%22) pertinentes.
 
 # Nouveautés
+* 🎧 **Création de livres audio** 🎧  
+Transformez un livre audio (un MP3 par chapitre + une couverture) en histoire pour votre Lunii / Flam : menu `Histoires > Créer un livre audio…` (`Ctrl+B`), ou glissez vos MP3 / leur dossier sur la liste des histoires.  
+  * titre, noms des chapitres et couverture trouvés automatiquement (tags MP3, image du dossier), modifiables
+  * sur la conteuse : couverture avec titre annoncé, menu des chapitres (molette) avec annonces vocales (voix Windows), lecture enchaînée des chapitres, bouton Maison = retour au menu sur le chapitre en cours
+  * créer et importer en un clic, ou créer seulement le pack (archive STUdio `.zip`)
+  * un tutoriel s'affiche au démarrage (désactivable), disponible ensuite dans `Aide > Tutoriel : livres audio…`
+  > Nécessite [FFMPEG](#vérification) pour convertir l'audio. Pour la Flam : firmware v2.x.x.
+
+  <img src="./res/audiobook/dialog.png" width="500"> <img src="./res/audiobook/device.png" width="700">
+
 *  😎 **Flam support** 😎  
 L'application permet désormais d'importer les histoires Lunii sur votre Flam, sous réserve qu'elle soit en firmware v2.x.x  
     > **Attention :** la Flam est TRES lente en usb. Il faut etre patient. (environ 4min pour 80Mo)
