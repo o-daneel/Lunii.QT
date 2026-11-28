@@ -34,12 +34,12 @@ FILE_STUDIO_JSON  = "story.json"
 FILE_STUDIO_THUMB = "thumbnail.png"
 
 class StudioStory:
-    def __init__(self, story_json=None):
+    def __init__(self, story_json=None, factory_pack=True):
         self.format_version = 0
         self.pack_version = 0
         self.title = ""
         self.description = ""
-        self.factory_pack = 1
+        self.factory_pack = factory_pack
         self.uuid = None
         self.nm = False # night mode
 
@@ -142,7 +142,7 @@ class StudioStory:
         ni_buffer += len(self.js_snodes).to_bytes(4, byteorder='little')
         ni_buffer += len(self.ri).to_bytes(4, byteorder='little')
         ni_buffer += len(self.si).to_bytes(4, byteorder='little')
-        ni_buffer += int(1).to_bytes(1, byteorder='little')
+        ni_buffer += int(self.factory_pack).to_bytes(1, byteorder='little')
 
         # padding the header with 00
         ni_buffer += b"\x00" * (NI_HEADER_SIZE - len(ni_buffer))
