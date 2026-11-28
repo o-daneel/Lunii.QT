@@ -1175,7 +1175,7 @@ class LuniiDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
 
-            one_story = StudioStory(story_json)
+            one_story = StudioStory(story_json, factory_pack=self.device_version != LUNII_V3)
             if not one_story.compatible:
                 self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md"))
                 return False
@@ -1316,7 +1316,7 @@ class LuniiDevice(QtCore.QObject):
                 self.signal_logger.emit(logging.ERROR, e)
                 return False
 
-            one_story = StudioStory(story_json)
+            one_story = StudioStory(story_json, factory_pack=self.device_version != LUNII_V3)
             if not one_story.compatible:
                 self.signal_logger.emit(logging.ERROR, QCoreApplication.translate("LuniiDevice", "STUdio story with non MP3 audio file. You need FFMPEG tool to import such kind of story, refer to README.md"))
                 return False
